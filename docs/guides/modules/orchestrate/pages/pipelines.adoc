@@ -43,11 +43,11 @@ The pipeline and trigger options and features available to you depend on how you
 A pipeline defines a unit of work that can be run within your project. Each pipeline is defined by two key characteristics:
 
 * A config source, which is a configuration file stored in a repository. The default config source location is `.circleci/config.yml` within the same repository as your code.
-** For GitHub App and Bitbucket Data Center pipelines you can choose any file path (with extension `*.yml`) in any repository to be your config source.
+** For GitHub App, Bitbucket Data Center, and Cursor Origin pipelines you can choose any file path (with extension `*.yml`) in any repository to be your config source.
 ** GitHub OAuth pipelines require config files to be stored in the repository that gives the project its name, at `.circleci/config.yml`.
 
 * A checkout source, which determines which repository will be checked out when running a xref:reference:ROOT:configuration-reference.adoc#checkout[Checkout Step].
-** For GitHub App and Bitbucket Data Center pipelines you can choose any of your repositories as your checkout source. This model allows your CircleCI config to be stored in a different repository from your code.
+** For GitHub App, Bitbucket Data Center, and Cursor Origin pipelines you can choose any of your repositories as your checkout source. This model allows your CircleCI config to be stored in a different repository from your code.
 ** GitHub OAuth and GitLab pipelines require the same project repository for your config source and checkout source.
 
 A project can have one or more pipelines, and each pipeline can be associated with zero or more triggers.
@@ -108,14 +108,14 @@ To add or edit a pipeline, follow these steps:
 ** Give your pipeline a descriptive name, for example `Run tests and deploy`.
 ** Under Integration select the platform that matches where your project is set up (for example, GitHub App).
 +
-NOTE: If you integrate with xref:integration:github-integration.adoc[CircleCI's GitHub OAuth App] you can select GitHub App here to install the App into your org and access xref:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[improved security and new features]. This is a one-time step, which can be done by an organization admin or a user who has admin access to at least one repository in the organization. Once installed, further GitHub App pipelines can be set up without this installation step.
+NOTE: If you integrate with xref:integration:github-integration.adoc[CircleCI's GitHub OAuth App] you can select GitHub App here to install the App into your org and access xref:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[improved security and new features]. An organization admin, or a user with admin access to at least one repository, can complete this one-time installation. Once installed, further GitHub App pipelines can be set up without this installation step.
 +
-NOTE: For GitLab self-managed, you can input any instance that you have previously set up in CircleCI. If you wish to set a different feature branch or repository from a self-managed instance as a new pipeline, you will first need to add a new connection via your menu:Org[VCS Connections]. In either case, you will also need to enter your personal access token again to authorize this connection.
+NOTE: For GitLab self-managed, you can input any instance that you have previously set up in CircleCI. To use a different feature branch or repository from a self-managed instance as a new pipeline, first add a new connection via your menu:Org[VCS Connections]. In either case, you also need to enter your personal access token again to authorize the connection.
 ** Authorize your connection if this is not already showing with a check mark image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"].
 ** Define where the config file for this pipeline is stored:
 *** Select a repository from the dropdown.
 *** Enter the path to the config file.
-** Under Build Assets, select a Checkout Source for this pipeline. This is the repository that will be checked out when a xref:reference:ROOT:configuration-reference.adoc#checkout[Checkout Step] is run. If your config is stored in the same repository as your code, pick the same repository you selected for the Config Source.
+** Under Build Assets, select a Checkout Source for this pipeline. This repository will be checked out when a xref:reference:ROOT:configuration-reference.adoc#checkout[Checkout Step] is run. If your config is stored in the same repository as your code, pick the same repository you selected for the Config Source.
 . Select btn:[Save].
 
 Once you have set up a pipeline you need to set up a trigger to connect it to. Setting up a trigger is described in the following section.
@@ -136,6 +136,29 @@ To add or edit a pipeline, follow these steps:
 ** Define where the config file for this pipeline is stored:
 *** Select a repository from the dropdown.
 *** Enter the path to the config file.
+--
+Cursor Origin::
++
+--
+Before you can add a Cursor Origin pipeline, the CircleCI Origin app must be installed in your Origin codebase. Installing the app is a one-time step. You can install it from your menu:Org[VCS Connections] page, from the Cursor Origin marketplace, or as part of creating a project. See the xref:integration:set-up-vcs-connections.adoc[Set up VCS Connections] page.
+
+To add or edit a pipeline, follow these steps:
+
+include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
++
+. Select *Project Setup* in the sidebar.
+. Select btn:[Add Pipeline], or, if you wish to edit an existing pipeline select the pencil icon (icon:edit-solid[Edit icon]) to the right of the section you want to change.
+. Complete the form fields and options:
+** Give your pipeline a descriptive name, for example `Run tests and deploy`.
+** Authorize your connection if this is not already showing with a check mark image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"].
+** Select a repository to be your config source.
+** Enter your config file path. The field is automatically populated with the default path `.circleci/config.yml` but you can edit this if needed.
+** Select a checkout source for this pipeline. This repository will be checked out when a xref:reference:ROOT:configuration-reference.adoc#checkout[Checkout Step] is run. If your config is stored in the same repository as your code, pick the same repository you selected for the config source.
+. Select btn:[Save].
+
+For Cursor Origin, commit the config file to your repository yourself before your pipeline can run. See the xref:getting-started:create-project.adoc#create-a-project[Create a Project] page.
+
+Once you have set up a pipeline you need to set up a trigger to connect it to. Setting up a trigger is covered in the xref:set-up-triggers.adoc[Set up Triggers] page.
 --
 ====
 

@@ -45,6 +45,7 @@
 *** xref:orchestrate:set-up-triggers.adoc[Set up triggers]
 *** xref:orchestrate:github-trigger-event-options.adoc[GitHub trigger event options]
 *** xref:orchestrate:gitlab-trigger-options.adoc[GitLab trigger options]
+*** xref:orchestrate:cursor-origin-trigger-event-options.adoc[Cursor Origin trigger event options]
 *** xref:orchestrate:custom-webhooks.adoc[Custom webhooks]
 *** xref:orchestrate:schedule-triggers.adoc[Schedule triggers]
 *** xref:orchestrate:set-up-cross-repo-triggers-for-library-consumers.adoc[Set up cross-repo triggers for library consumers]
@@ -290,6 +291,7 @@
 * Integration
 ** xref:integration:add-ssh-key.adoc[Add SSH Keys]
 ** VCS integration
+*** xref:integration:set-up-vcs-connections.adoc[Set up VCS connections]
 *** xref:integration:version-control-system-integration-overview.adoc[VCS, pipeline types, and feature support]
 *** xref:integration:github-enterprise-server-integration.adoc[GitHub Enterprise Server integration]
 *** xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth org]

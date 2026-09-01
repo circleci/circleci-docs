@@ -20,7 +20,8 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
 [.nowrap]#Bitbucket Data Center# +
-[.nowrap]#GitLab#
+[.nowrap]#GitLab# +
+[.nowrap]#Cursor Origin#
 | String
 | A link:https://en.wikipedia.org/wiki/Universally_unique_identifier[globally unique identifier] for the pipeline.
 | [.circle-green]#**Yes**#
@@ -32,7 +33,8 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
 [.nowrap]#Bitbucket Data Center# +
-[.nowrap]#GitLab#
+[.nowrap]#GitLab# +
+[.nowrap]#Cursor Origin#
 | Integer
 | A project-scoped integer identifier for the pipeline.
 | [.circle-green]#**Yes**#
@@ -45,6 +47,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#Bitbucket Cloud# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab# +
+[.nowrap]#Cursor Origin# +
 _(except schedule workflows)_
 | String
 | The unique ID of the pipeline definition.
@@ -57,7 +60,8 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
 [.nowrap]#Bitbucket Data Center# +
-[.nowrap]#GitLab#
+[.nowrap]#GitLab# +
+[.nowrap]#Cursor Origin#
 | String
 | The URL where the current project is hosted. For example, `https://github.com/circleci/circleci-docs`.
 | [.circle-green]#**Yes**#
@@ -69,7 +73,8 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
 [.nowrap]#Bitbucket Data Center# +
-[.nowrap]#GitLab#
+[.nowrap]#GitLab# +
+[.nowrap]#Cursor Origin#
 | String
 | The lower-case name of the VCS provider, for example, `github`, `bitbucket`.
 | [.circle-green]#**Yes**#
@@ -81,7 +86,8 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
 [.nowrap]#Bitbucket Data Center# +
-[.nowrap]#GitLab#
+[.nowrap]#GitLab# +
+[.nowrap]#Cursor Origin#
 | String
 | The slug of the project the pipeline definition belongs to.
 | [.circle-green]#**Yes**#
@@ -93,6 +99,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
 [.nowrap]#Bitbucket Data Center# +
+[.nowrap]#Cursor Origin# +
 _(except schedule workflows)_
 | String
 | The name of the pipeline definition.
@@ -105,7 +112,8 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
 [.nowrap]#Bitbucket Data Center# +
-[.nowrap]#GitLab#
+[.nowrap]#GitLab# +
+[.nowrap]#Cursor Origin#
 | String
 | The pipeline type, determined by the VCS integration used to check out code. Possible values: `github_app`, `github_server`, `github`, `bitbucket`, `bitbucket_dc`, `gitlab`.
 | [.circle-green]#**Yes**#
@@ -139,7 +147,8 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
 [.nowrap]#Bitbucket Data Center# +
-[.nowrap]#GitLab#
+[.nowrap]#GitLab# +
+[.nowrap]#Cursor Origin#
 | String
 | The name of the git tag that CircleCI checks out. Empty if the pipeline checks out from a branch.
 | [.circle-green]#**Yes**#
@@ -151,7 +160,8 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
 [.nowrap]#Bitbucket Data Center# +
-[.nowrap]#GitLab#
+[.nowrap]#GitLab# +
+[.nowrap]#Cursor Origin#
 | String
 | The name of the git branch that CircleCI checks out. Empty if the pipeline checks out from a tag.
 | [.circle-green]#**Yes**#
@@ -163,7 +173,8 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
 [.nowrap]#Bitbucket Data Center# +
-[.nowrap]#GitLab#
+[.nowrap]#GitLab# +
+[.nowrap]#Cursor Origin#
 | Boolean
 | Whether CircleCI checks out the default branch.
 | [.circle-green]#**Yes**#
@@ -175,7 +186,8 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
 [.nowrap]#Bitbucket Data Center# +
-[.nowrap]#GitLab#
+[.nowrap]#GitLab# +
+[.nowrap]#Cursor Origin#
 | String
 | The long (40-character) git SHA of the commit that CircleCI checks out.
 | [.circle-green]#**Yes**#
@@ -186,7 +198,8 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
-[.nowrap]#Bitbucket Data Center#
+[.nowrap]#Bitbucket Data Center# +
+[.nowrap]#Cursor Origin#
 | String
 | The URL of the repository.
 | [.circle-green]#**Yes**#
@@ -196,7 +209,8 @@ d| [.nowrap]#GitHub App# +
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitHub OAuth# +
-[.nowrap]#Bitbucket Cloud#
+[.nowrap]#Bitbucket Cloud# +
+[.nowrap]#Cursor Origin#
 | String
 | The VCS username of the repository owner.
 | [.circle-green]#**Yes**#
@@ -206,7 +220,8 @@ d| [.nowrap]#GitHub App# +
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitHub OAuth# +
-[.nowrap]#Bitbucket Cloud#
+[.nowrap]#Bitbucket Cloud# +
+[.nowrap]#Cursor Origin#
 | String
 | The name of the repository, without the owner prefix.
 | [.circle-green]#**Yes**#
@@ -217,7 +232,8 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
-[.nowrap]#Bitbucket Data Center#
+[.nowrap]#Bitbucket Data Center# +
+[.nowrap]#Cursor Origin#
 | String
 | The unique identifier of the repository.
 | [.circle-green]#**Yes**#
@@ -230,6 +246,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#Bitbucket Cloud# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab# +
+[.nowrap]#Cursor Origin# +
 _(except schedule workflows)_
 | String
 | The URL of the checkout commit.
@@ -242,7 +259,8 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
 [.nowrap]#Bitbucket Data Center# +
-[.nowrap]#GitLab#
+[.nowrap]#GitLab# +
+[.nowrap]#Cursor Origin#
 | String
 | The subject line of the checkout commit message.
 | [.circle-green]#**Yes**#
@@ -254,7 +272,8 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
 [.nowrap]#Bitbucket Data Center# +
-[.nowrap]#GitLab#
+[.nowrap]#GitLab# +
+[.nowrap]#Cursor Origin#
 | String
 | The body of the checkout commit message.
 | [.circle-green]#**Yes**#
@@ -265,7 +284,8 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Data Center# +
-[.nowrap]#GitLab#
+[.nowrap]#GitLab# +
+[.nowrap]#Cursor Origin#
 | String
 | The VCS username of the author of the checkout commit. Not available for Bitbucket Cloud because Bitbucket has link:https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/[deprecated usernames].
 | [.circle-green]#**Yes**#
@@ -300,7 +320,8 @@ Values prefixed with `+pipeline.config.*+` describe where CircleCI fetched the c
 
 | `pipeline.config.repository.name`
 d| [.nowrap]#GitHub App# +
-[.nowrap]#GitHub App Server#
+[.nowrap]#GitHub App Server# +
+[.nowrap]#Cursor Origin#
 | String
 | The name of the repository containing the CircleCI configuration file, in the format `owner/repo-name`.
 | [.circle-green]#**Yes**#
@@ -308,7 +329,8 @@ d| [.nowrap]#GitHub App# +
 
 | `pipeline.config.repository.url`
 d| [.nowrap]#GitHub App# +
-[.nowrap]#GitHub App Server#
+[.nowrap]#GitHub App Server# +
+[.nowrap]#Cursor Origin#
 | String
 | The URL of the repository containing the CircleCI configuration file.
 | [.circle-green]#**Yes**#
@@ -316,7 +338,8 @@ d| [.nowrap]#GitHub App# +
 
 | `pipeline.config.file_path`
 d| [.nowrap]#GitHub App# +
-[.nowrap]#GitHub App Server#
+[.nowrap]#GitHub App Server# +
+[.nowrap]#Cursor Origin#
 | String
 | The file path to the CircleCI configuration file used by the pipeline.
 | [.circle-green]#**Yes**#
@@ -324,7 +347,8 @@ d| [.nowrap]#GitHub App# +
 
 | `pipeline.config.ref`
 d| [.nowrap]#GitHub App# +
-[.nowrap]#GitHub App Server#
+[.nowrap]#GitHub App Server# +
+[.nowrap]#Cursor Origin#
 | String
 | The full Git ref used to fetch the CircleCI configuration file, for example `refs/heads/main` or `refs/tags/v1.0`.
 | [.circle-green]#**Yes**#
@@ -332,7 +356,8 @@ d| [.nowrap]#GitHub App# +
 
 | `pipeline.config.sha`
 d| [.nowrap]#GitHub App# +
-[.nowrap]#GitHub App Server#
+[.nowrap]#GitHub App Server# +
+[.nowrap]#Cursor Origin#
 | String
 | The long (40-character) git SHA of the commit used to fetch the CircleCI configuration file.
 | [.circle-green]#**Yes**#
@@ -368,7 +393,8 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
 [.nowrap]#Bitbucket Data Center# +
-[.nowrap]#GitLab#
+[.nowrap]#GitLab# +
+[.nowrap]#Cursor Origin#
 | String
 | The timestamp of when the pipeline was triggered, in ISO 8601 format.
 | [.circle-green]#**Yes**#
@@ -377,7 +403,8 @@ d| [.nowrap]#GitHub App# +
 | `pipeline.trigger.id`
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
-[.nowrap]#Bitbucket Data Center#
+[.nowrap]#Bitbucket Data Center# +
+[.nowrap]#Cursor Origin#
 | String
 | The unique ID of the trigger that initiated the pipeline.
 | [.circle-green]#**Yes**#
@@ -388,7 +415,8 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
-[.nowrap]#Bitbucket Data Center#
+[.nowrap]#Bitbucket Data Center# +
+[.nowrap]#Cursor Origin#
 | String
 | The type of trigger that initiated the pipeline. Possible values: `github_app`, `github_server`, `github_oauth`, `bitbucket_cloud`, `bitbucket_dc`, `schedule`, `webhook`, `api`.
 | [.circle-green]#**Yes**#
@@ -401,7 +429,8 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
 [.nowrap]#Bitbucket Data Center# +
-[.nowrap]#GitLab#
+[.nowrap]#GitLab# +
+[.nowrap]#Cursor Origin#
 | String
 | Use `pipeline.trigger.type` instead.
 | [.circle-green]#**Yes**#
@@ -409,7 +438,8 @@ d| [.nowrap]#GitHub App# +
 
 | `pipeline.schedule.name`
 d| [.nowrap]#GitHub OAuth# +
-[.nowrap]#Bitbucket Cloud#
+[.nowrap]#Bitbucket Cloud# +
+[.nowrap]#Cursor Origin#
 | String
 | The name of the schedule trigger if the pipeline was triggered via schedule. Empty if the pipeline was not triggered via schedule.
 | [.circle-green]#**Yes**#
@@ -417,7 +447,8 @@ d| [.nowrap]#GitHub OAuth# +
 
 | `pipeline.schedule.id`
 d| [.nowrap]#GitHub OAuth# +
-[.nowrap]#Bitbucket Cloud#
+[.nowrap]#Bitbucket Cloud# +
+[.nowrap]#Cursor Origin#
 | String
 | The unique ID of the schedule if the pipeline was triggered via schedule. Empty if the pipeline was not triggered via schedule.
 | [.circle-green]#**Yes**#
@@ -427,7 +458,8 @@ d| [.nowrap]#GitHub OAuth# +
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitHub OAuth# +
-[.nowrap]#Bitbucket Cloud#
+[.nowrap]#Bitbucket Cloud# +
+[.nowrap]#Cursor Origin#
 | String
 | The name of the event that triggered the pipeline. Possible values: `custom_webhook`, `api`, `push`, `pull_request`, `schedule`.
 | [.circle-green]#**Yes**#
@@ -437,7 +469,8 @@ d| [.nowrap]#GitHub App# +
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitHub OAuth# +
-[.nowrap]#Bitbucket Cloud#
+[.nowrap]#Bitbucket Cloud# +
+[.nowrap]#Cursor Origin#
 | String
 | The action associated with the event. This value is the same as `pipeline.event.name` except for events that have an `action` subtype: link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request[GitHub `pull_request`] events and link:https://support.atlassian.com/bitbucket-cloud/docs/event-payloads/#Pull-request-events[Bitbucket Cloud `pullrequest:*`] events. Possible values: `custom_webhook`, `api`, `push`, `schedule`, `opened`, `synchronize`, `reopened`, `closed`, `ready_for_review`, `labeled`, `created`, `updated`, `fulfilled`, `rejected`. Read more about xref:guides:orchestrate:github-trigger-event-options.adoc#supported-trigger-options[GitHub Trigger Event Options].
 | [.circle-green]#**Yes**#

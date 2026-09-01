@@ -116,6 +116,8 @@ CRD
 crontab
 CTest
 Cucumber
+Cursor
+\bCursor Origin\b
 CVEs?
 Cypress
 Datacenter

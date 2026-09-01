@@ -28,6 +28,9 @@ include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration 
 image::guides:ROOT:getting-started-guide-exp/quick-start-first-step.svg[section one banner image]
 
 *Create a project, connect your new code repository, and commit a CircleCI configuration file. View your project build in the CircleCI app.*
+
+NOTE: Building a **Cursor Origin** project? The tabs below do not cover Origin. Follow the Cursor Origin tab on the xref:create-project.adoc#create-a-project[Create a Project] page instead, then return here for the rest of this guide.
+
 pass:[<!-- vale off -->]
 [tabs]
 ====
