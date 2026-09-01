@@ -6,22 +6,72 @@
 [#overview]
 == Overview
 
-The Android machine image is accessed through the xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[Linux Machine Executor], like other Linux machine images on CircleCI. The Android machine image supports nested virtualization and x86 Android emulators, so it can be used for Android UI testing. It also comes with the Android SDK pre-installed.
+You access the Android machine image through the xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[Linux Machine Executor], like other Linux machine images on CircleCI. The Android machine image supports nested virtualization and x86 Android emulators, so you can use it for Android UI testing. It also comes with the Android SDK pre-installed.
 
 [#using-the-android-machine-image]
 == Using the Android machine image
 
-It is possible to configure the use of the Android image in your configuration with xref:orbs:use:orb-intro.adoc[Orbs], as well as manually. The Android orb will simplify your configuration. More complex and custom configurations may benefit from manually configuring your usage instead of using the orb. This document will cover both use cases. Refer to the <<examples>> section below for more details.
+You can configure the Android image in your configuration using xref:orbs:use:orb-intro.adoc[Orbs], or manually. The Android orb simplifies your configuration. More complex and custom configurations may work better with manual configuration instead of the orb. This document covers both use cases. Refer to the <<examples>> section below for more details.
+
+[#available-android-resource-classes]
+== Available resource classes
+
+=== Gen1
+
+include::ROOT:partial$execution-resources/machine-resource-table.adoc[]
+
+=== Gen2
+
+include::ROOT:partial$execution-resources/machine-gen2-resource-table.adoc[]
+
+[#view-resource-usage]
+=== View resource usage
+
+include::ROOT:partial$execution-resources/resource-class-view.adoc[]
+
+[#android-generations]
+== Android machine image generations
+
+[#android-gen2-benefits]
+=== Gen2
+
+Resource classes running on gen2 infrastructure offer significant performance and cost improvements over their gen1 equivalents.
+
+[#android-gen2-performance-improvements]
+==== Performance improvements
+
+Using more modern compute, gen2 instances deliver up to 47% faster performance compared to gen1 equivalents.
+
+On a per-resource-class basis, gen2 pricing can be higher or lower than its gen1 equivalent. See our link:https://circleci.com/pricing/price-list/[Pricing Page] for details.
+
+[#using-android-gen2]
+==== Using gen2
+
+All Android gen1 resource classes are also available as gen2. To use a gen2 resource class, specify a `large.gen2` or equivalent class in your job configuration:
+
+[,yaml]
+----
+version: 2.1
+jobs:
+  build:
+    machine:
+      image: android:default
+    resource_class: large.gen2
+    steps:
+      # ... steps for your job
+----
+
+NOTE: Gen2 resource classes for the Android machine image are available on CircleCI Cloud only.
 
 [#pre-installed-software]
 == Pre-installed software
 
-View the quarterly update announcement on our link:https://discuss.circleci.com/c/ecosystem/circleci-images/[Discuss] page for a list of current pre-installed software.
+View the latest update announcement on our link:https://discuss.circleci.com/c/ecosystem/circleci-images/[Discuss] page for a list of current pre-installed software.
 
 [#examples]
 == Examples
 
-Below you will find several examples demonstrating the use of the Android machine image both with and without orbs.
+The following examples show how to use the Android machine image, both with and without orbs.
 
 [#simple-orb-usage]
 === Simple orb usage
@@ -100,7 +150,7 @@ workflows:
 [#no-orb-example]
 === No-orb example
 
-The following is an example of using the Android machine image, _without_ using the `circleci/android` link:https://circleci.com/developer/orbs/orb/circleci/android[orb]. These steps are similar to what is run when you use the link:https://circleci.com/developer/orbs/orb/circleci/android#jobs-run-ui-tests[`run-ui-tests` job] of the orb.
+The following example uses the Android machine image _without_ the `circleci/android` link:https://circleci.com/developer/orbs/orb/circleci/android[orb]. These steps match what runs when you use the link:https://circleci.com/developer/orbs/orb/circleci/android#jobs-run-ui-tests[`run-ui-tests` job] of the orb.
 
 ```yaml
 # .circleci/config.yml
@@ -180,9 +230,9 @@ workflows:
 [#using-the-android-image-on-server-v3x]
 === Using the Android image on server
 
-NOTE: Android machine images are only available on server installations on Google Cloud Platform (GCP) at this time.
+NOTE: Android machine images are only available on server installations on Google Cloud Platform (GCP).
 
-From CircleCI Server 3.4+, Android machine images are supported for installations on GCP. To use the Android image in your projects set the `image` key to `android-default` in your jobs.
+CircleCI Server 3.4+ supports Android machine images for installations on GCP. To use the Android image in your projects, set the `image` key to `android-default` in your jobs.
 
 ```yaml
 version: 2.1
@@ -195,7 +245,7 @@ jobs:
     # job steps here
 ```
 
-It is also possible to use the Android orb, as shown above, for cloud. Your server administrator will need to import the orb first. Also, you will need to define the `android-default` image for the machine executor, as shown in the example below, rather than using the default executor built into the orb. View the xref:server-admin:operator:managing-orbs.adoc[CircleCI Server Orbs] page for instructions on importing orbs.
+You can also use the Android orb, as shown above, for cloud. Your server administrator needs to import the orb first. You also need to define the `android-default` image for the machine executor, as shown in the example below, rather than using the default executor built into the orb. View the xref:server-admin:operator:managing-orbs.adoc[CircleCI Server Orbs] page for instructions on importing orbs.
 
 This example shows how you can use granular orb commands to achieve what the link:https://circleci.com/developer/orbs/orb/circleci/android#commands-start-emulator-and-run-tests[start-emulator-and-run-tests] command does.
 
