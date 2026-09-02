@@ -50,7 +50,7 @@ $ claude mcp add --transport http circleci-docs https://circleci.mcp.kapa.ai
 Claude Desktop and claude.ai::
 +
 --
-For guidance on setting up custom connectors with the CircleCI docs MCP server URL (`https://circleci.mcp.kapa.ai`), see the link:https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp[Claude Documentation].
+For guidance on setting up custom connectors with the CircleCI docs MCP server URL (`\https://circleci.mcp.kapa.ai`), see the link:https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp[Claude Documentation].
 --
 Cursor::
 +
