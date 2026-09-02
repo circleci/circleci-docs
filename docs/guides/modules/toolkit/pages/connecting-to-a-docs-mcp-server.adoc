@@ -11,11 +11,11 @@ For information about CircleCI's operational MCP servers for managing pipelines 
 
 When connected to the CircleCI docs MCP server, your AI assistant can:
 
-* Search CircleCI documentation for relevant information
-* Answer questions about CircleCI features and configuration
-* Provide accurate, up-to-date information from CircleCI's knowledge base
-* Help you write and troubleshoot CircleCI configuration
-* Provide feedback to the CircleCI documentation team
+* Search CircleCI documentation for relevant information.
+* Answer questions about CircleCI features and configuration.
+* Provide accurate, up-to-date information from CircleCI's knowledge base.
+* Help you write and troubleshoot CircleCI configuration.
+* Provide feedback to the CircleCI documentation team.
 
 This is useful when working on CircleCI configurations, debugging pipeline issues, or learning about CircleCI features without leaving your development environment.
 
@@ -23,8 +23,8 @@ This is useful when working on CircleCI configurations, debugging pipeline issue
 
 Before connecting to the CircleCI docs MCP server, ensure you have:
 
-* An AI coding assistant or MCP client that supports remote MCP servers over HTTP (such as Claude Code, Claude Desktop, or Cursor)
-* A Google or GitHub account (for authentication and rate limiting)
+* An AI coding assistant or MCP client that supports remote MCP servers over HTTP (such as Claude Code, Claude Desktop, or Cursor).
+* A Google or GitHub account (for authentication and rate limiting).
 
 NOTE: Authentication with Google or GitHub is only used for rate limiting and abuse prevention. You do not need a CircleCI account to use the docs MCP server.
 
@@ -50,12 +50,7 @@ $ claude mcp add --transport http circleci-docs https://circleci.mcp.kapa.ai
 Claude Desktop and claude.ai::
 +
 --
-For guidance on setting up custom connectors, see the link:https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp[Claude documentation].
-
-. Go to menu:Settings[Connectors].
-. Select *Add custom connector*.
-. Enter `https://circleci.mcp.kapa.ai` as the server URL.
-. Select *Add*, then sign in with Google or GitHub in your browser.
+For guidance on setting up custom connectors with the CircleCI docs MCP server URL (`https://circleci.mcp.kapa.ai`), see the link:https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp[Claude documentation].
 --
 Cursor::
 +
@@ -112,10 +107,10 @@ The CircleCI docs MCP server exposes the following tools to AI assistants:
 
 If authentication fails when connecting to the CircleCI docs MCP server:
 
-* Ensure you have a Google or GitHub account to authenticate with
-* Try disconnecting and reconnecting the MCP server in your AI assistant
-* Check that your AI assistant supports OAuth2 authentication for MCP servers
-* Clear your browser cache and try authenticating again
+* Ensure you have a Google or GitHub account to authenticate with.
+* Try disconnecting and reconnecting the MCP server in your AI assistant.
+* Check that your AI assistant supports OAuth2 authentication for MCP servers.
+* Clear your browser cache and try authenticating again.
 
 NOTE: The CircleCI docs MCP server uses Google or GitHub OAuth for authentication. This is only for rate limiting purposes. You do not see the user's email or personal information.
 
@@ -123,29 +118,17 @@ NOTE: The CircleCI docs MCP server uses Google or GitHub OAuth for authenticatio
 
 If searches return no results:
 
-* Verify the MCP server is connected in your AI assistant (check the `/mcp` command in Claude Code or your MCP settings)
-* Try rephrasing your question to be more specific
-* Check that you are asking about CircleCI features or documentation
+* Verify the MCP server is connected in your AI assistant (check the `/mcp` command in Claude Code or your MCP settings).
+* Check that you are asking about CircleCI features or documentation.
 
 === Rate limit errors
 
-The CircleCI docs MCP server has rate limits to ensure fair usage:
-
-[.table-scroll]
---
-[cols="1,1"]
-|===
-|Tool |Per-user limit
-
-|Search tool
-|300 requests per day
-|===
---
+The CircleCI docs MCP server has rate limits to ensure fair usage. The search tool is limited to 300 requests per day per user.
 
 If you consistently hit rate limits, consider:
 
-* Asking more targeted questions to reduce the number of searches
-* Using the CircleCI web documentation at link:https://circleci.com/docs[circleci.com/docs] for extended research sessions
+* Asking more targeted questions to reduce the number of searches.
+* Using the CircleCI web documentation at link:https://circleci.com/docs[circleci.com/docs] for extended research sessions.
 
 === Connection issues
 
@@ -175,4 +158,3 @@ Now that you have connected to the CircleCI docs MCP server, you can:
 * Connect to CircleCI's operational MCP servers to manage your pipelines: xref:circleci-mcp-overview.adoc[CircleCI MCP Overview]
 * Learn about the hosted CircleCI MCP server: xref:connecting-to-the-circleci-mcp-server.adoc[Connecting to the CircleCI MCP Server]
 * Explore the CircleCI CLI MCP: xref:connecting-to-the-circleci-cli-mcp.adoc[Connecting to the CircleCI CLI MCP]
-* Browse the full CircleCI documentation: link:https://circleci.com/docs[CircleCI Docs]
