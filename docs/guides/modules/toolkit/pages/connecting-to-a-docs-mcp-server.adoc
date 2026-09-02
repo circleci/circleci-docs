@@ -50,7 +50,7 @@ $ claude mcp add --transport http circleci-docs https://circleci.mcp.kapa.ai
 Claude Desktop and claude.ai::
 +
 --
-For guidance on setting up custom connectors with the CircleCI docs MCP server URL (`https://circleci.mcp.kapa.ai`), see the link:https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp[Claude documentation].
+For guidance on setting up custom connectors with the CircleCI docs MCP server URL (`https://circleci.mcp.kapa.ai`), see the link:https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp[Claude Documentation].
 --
 Cursor::
 +
@@ -134,10 +134,10 @@ If you consistently hit rate limits, consider:
 
 If your AI assistant cannot connect to the server:
 
-* Verify the server URL is correct: `https://circleci.mcp.kapa.ai`
-* Check that your AI assistant is up to date
-* Ensure your network allows HTTPS connections to external MCP servers
-* Try removing and re-adding the MCP server configuration
+* Verify the server URL is correct: `https://circleci.mcp.kapa.ai`.
+* Check that your AI assistant is up to date.
+* Ensure your network allows HTTPS connections to external MCP servers.
+* Try removing and re-adding the MCP server configuration.
 
 == Example questions
 
