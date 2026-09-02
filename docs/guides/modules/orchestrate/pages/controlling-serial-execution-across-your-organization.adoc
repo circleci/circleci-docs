@@ -51,7 +51,7 @@ CircleCI uses pipeline numbers to determine execution priority. Jobs from newer 
 
 [NOTE]
 ====
-Serial group priority is based on pipeline number, not on when a job reaches the lock. When a job attempts to acquire a serial group lock, it is skipped if a job from a higher-numbered pipeline in the same serial group is already queued or running.
+Serial group priority is based on pipeline number, not on when a job reaches the lock. When a job attempts to acquire a serial group lock, CircleCI checks for jobs from higher-numbered pipelines in the same serial group. If one is already queued or running, CircleCI skips the job.
 
 With dynamic configuration, setup workflow duration varies between pipelines, so the order in which continuation jobs reach the lock is not guaranteed to match pipeline number (that is, merge) order. A job from an older pipeline may therefore be skipped rather than queued. Do not rely on merge order to guarantee that every pipeline's serially grouped job runs.
 ====
