@@ -1354,25 +1354,6 @@ jobs:
       ... // other config
 ----
 
-[#linuxvm-gen3-execution-environment]
-[badge="Beta"]
-==== Gen3
-
-include::guides:ROOT:partial$execution-resources/machine-gen3-resource-table.adoc[]
-
-*Example:*
-
-[,yaml]
-----
-jobs:
-  build:
-    machine:
-      image: ubuntu-2604:current # recommended linux image
-    resource_class: large.gen3
-    steps:
-      ... // other config
-----
-
 '''
 
 [#macos-execution-environment]

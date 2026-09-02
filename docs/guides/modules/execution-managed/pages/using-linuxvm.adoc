@@ -58,11 +58,6 @@ include::ROOT:partial$execution-resources/machine-resource-table.adoc[]
 
 include::ROOT:partial$execution-resources/machine-gen2-resource-table.adoc[]
 
-[badge="Beta"]
-=== Gen3
-
-include::ROOT:partial$execution-resources/machine-gen3-resource-table.adoc[]
-
 [#view-resource-usage]
 === View resource usage
 
@@ -96,36 +91,6 @@ jobs:
     machine:
       image: ubuntu-2604:current
     resource_class: large.gen2
-----
-
-[#linux-vm-gen3-benefits]
-[badge="Beta"]
-=== Gen3
-
-Resource classes running on gen3 infrastructure offer further performance and cost improvements over their gen1 and gen2 equivalents. Gen3 resource classes are available on CircleCI Cloud only.
-
-NOTE: Gen3 is an Open Beta feature. See the <<gen3-beta-notice,Gen3 Beta Release Notes>> for full details.
-
-[#gen3-performance-improvements]
-==== Performance improvements
-
-Gen3 instances deliver up to 85% faster performance compared to gen1 equivalents, based on benchmarks collected during Beta across open source projects.
-
-Gen3 costs less than both its gen1 and gen2 equivalents. See our link:https://circleci.com/pricing/price-list/[Pricing Page] for details.
-
-[#using-gen3]
-==== Using gen3
-
-To use a gen3 resource class, specify a `large.gen3` or equivalent class in your job configuration:
-
-[,yaml]
-----
-version: 2.1
-jobs:
-  my-job:
-    machine:
-      image: ubuntu-2604:current
-    resource_class: large.gen3
 ----
 
 [#pre-installed-software]
