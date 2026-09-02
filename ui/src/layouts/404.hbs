@@ -12,6 +12,7 @@
     var pathName = window.location.pathname.replace("docs/", "");
     analytics.track("dd_docs_404-page", {
       fullPath: pathName,
+      attempted_url: window.location.href,
       action: "viewed",
       orgId: (typeof Cookies !== "undefined") ? Cookies.get("cci-org-analytics-id") || null : null,
       page: pathName,
