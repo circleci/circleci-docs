@@ -456,6 +456,7 @@ Content for Tab B
 13. Missing page attributes (`:page-platform:`, `:page-description:`, `:experimental:`)
 14. Not using appropriate page templates for new content
 15. Using xrefs without verifying the target file exists and path is correct
+16. **Committing without running Vale and fixing linting errors**
 
 ## AsciiDoc Validation Rules
 - Close all attribute blocks properly
@@ -467,6 +468,15 @@ Content for Tab B
 ## Linting and Validation
 
 The CircleCI docs use automated linting to enforce style rules and catch common errors. Understanding these tools helps you write docs that pass validation on the first try.
+
+**REQUIRED FOR AI AGENTS**: When creating or editing documentation pages, you MUST:
+
+1. Check for Vale linter errors before committing
+2. Fix all error-level violations (not just warnings)
+3. Verify the page passes Vale validation in CI
+4. Never commit documentation with linting errors
+
+This is not optional - Vale errors will cause CI failures and block PRs.
 
 ### Vale Linter
 
@@ -489,6 +499,17 @@ git diff --cached --name-only | grep '.adoc$' | xargs vale
 - Main config: `.vale.ini`
 - Style rules: `styles/` directory
 - Custom CircleCI rules: `styles/CircleCI/`
+
+**Checking Vale results in CI:**
+
+If Vale is not available locally, check CI results after pushing:
+
+1. Go to your PR on GitHub
+2. Scroll to the bottom and find the `ci/circleci: lint` check
+3. Click "Details" to view the Vale output in CircleCI
+4. Fix any errors shown and push updates
+
+Do not request review until all Vale errors are resolved.
 
 **Automated Vale error fixing:**
 
@@ -521,7 +542,7 @@ npm run build:docs
 
 Before committing documentation changes:
 
-1. ✅ Run Vale on your files to catch style violations
+1. ✅ **REQUIRED**: Run Vale and fix all error-level violations
 2. ✅ Preview locally to check formatting and links
 3. ✅ Verify all xrefs point to existing files
 4. ✅ Check `:page-description:` is 70-160 characters
