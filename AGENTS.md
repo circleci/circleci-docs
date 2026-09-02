@@ -471,12 +471,30 @@ The CircleCI docs use automated linting to enforce style rules and catch common 
 
 **REQUIRED FOR AI AGENTS**: When creating or editing documentation pages, you MUST:
 
-1. Check for Vale linter errors before committing
-2. Fix all error-level violations (not just warnings)
-3. Verify the page passes Vale validation in CI
-4. Never commit documentation with linting errors
+1. **Install Vale locally in your environment** if not already installed
+2. Check for Vale linter errors before committing
+3. Fix all error-level violations (not just warnings)
+4. Verify the page passes Vale validation
+5. Never commit documentation with linting errors
 
 This is not optional - Vale errors will cause CI failures and block PRs.
+
+### Installing Vale
+
+If Vale is not installed in your environment, install it before running lint checks:
+
+```bash
+# Install Vale
+wget https://github.com/errata-ai/vale/releases/download/v3.7.1/vale_3.7.1_Linux_64-bit.tar.gz -O /tmp/vale.tar.gz
+tar -xzf /tmp/vale.tar.gz -C /tmp
+sudo mv /tmp/vale /usr/local/bin/
+vale --version
+
+# Install asciidoctor (required for Vale to parse AsciiDoc files)
+sudo apt-get update && sudo apt-get install -y asciidoctor
+```
+
+Once installed, Vale is available for all subsequent documentation work in that environment.
 
 ### Vale Linter
 
