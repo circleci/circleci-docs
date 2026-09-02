@@ -3,7 +3,7 @@
 :page-description: Connect your AI assistant to CircleCI's documentation MCP server to search CircleCI docs and knowledge sources directly from your development environment.
 :experimental:
 
-The CircleCI docs MCP server gives your AI assistant direct access to CircleCI's documentation and knowledge sources. Instead of copying and pasting docs into your AI assistant, you can ask questions and the assistant will search CircleCI's documentation automatically.
+The CircleCI docs MCP server gives your AI assistant direct access to CircleCI's documentation and knowledge sources. Instead of copying and pasting docs into your AI assistant, you can ask questions, and the assistant searches CircleCI's documentation automatically.
 
 For information about CircleCI's operational MCP servers for managing pipelines and workflows, see the xref:circleci-mcp-overview.adoc[CircleCI MCP Overview] page.
 
@@ -17,7 +17,7 @@ When connected to the CircleCI docs MCP server, your AI assistant can:
 * Help you write and troubleshoot CircleCI configuration.
 * Provide feedback to the CircleCI documentation team.
 
-This is useful when working on CircleCI configurations, debugging pipeline issues, or learning about CircleCI features without leaving your development environment.
+Connecting to the CircleCI docs MCP server is useful when working on CircleCI configurations, debugging pipeline issues, or learning about CircleCI features without leaving your development environment.
 
 == Prerequisites
 
@@ -68,7 +68,7 @@ Add the following configuration to your Cursor `mcp.json` file:
 }
 ----
 
-Cursor will prompt you to authenticate when you first use the server. Sign in with Google or GitHub in your browser.
+Cursor prompts you to authenticate when you first use the server. Sign in with Google or GitHub in your browser.
 --
 ====
 
@@ -76,8 +76,8 @@ Cursor will prompt you to authenticate when you first use the server. Sign in wi
 
 After connecting your AI assistant to the CircleCI docs MCP server:
 
-. Ask a question about CircleCI, for example: "How do I configure parallelism in CircleCI?" or "What executor types does CircleCI support?"
-. The AI assistant should use the CircleCI docs MCP server to search CircleCI's documentation.
+. Ask a question about CircleCI, for example: "How do I configure parallelism in CircleCI?" or "What executor types does CircleCI support?".
+. The AI assistant uses the CircleCI docs MCP server to search CircleCI's documentation.
 . Verify the assistant receives relevant information from CircleCI docs.
 
 If the connection fails, see the <<troubleshooting>> section below.
@@ -143,13 +143,13 @@ If your AI assistant cannot connect to the server:
 
 Here are example questions you can ask your AI assistant once connected to the CircleCI docs MCP server:
 
-* "How do I set up parallelism in CircleCI?"
-* "What are the available Docker executor resource classes?"
-* "How do I configure a schedule trigger?"
-* "What is the difference between contexts and environment variables?"
-* "How do I use workspaces to share data between jobs?"
-* "What executors support Apple Silicon?"
-* "How do I configure test splitting?"
+* "How do I set up parallelism in CircleCI?".
+* "What are the available Docker executor resource classes?".
+* "How do I configure a schedule trigger?".
+* "What is the difference between contexts and environment variables?".
+* "How do I use workspaces to share data between jobs?".
+* "What executors support Apple Silicon?".
+* "How do I configure test splitting?".
 
 == Next steps
 
