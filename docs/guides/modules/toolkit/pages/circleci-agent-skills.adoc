@@ -1,0 +1,229 @@
+= CircleCI agent skills
+:page-platform: Cloud
+:page-description: Install CircleCI agent skills in Claude Code, Cursor, Codex, or Copilot to debug builds, optimize config, and onboard projects.
+:experimental:
+:page-show-readtime: true
+
+// #TODO check if this is supported for Server
+// #TODO check preview, beta, or paid-plan status for the plugin and each skill
+
+CircleCI agent skills give your AI coding agent reusable workflows for common CircleCI tasks. Install the CircleCI plugin once, then ask your agent to debug a failed build, optimize config, or onboard a project.
+
+== Introduction
+
+Skills are instruction files that your AI agent follows. They tell the agent which CircleCI commands to run, which files to inspect, and how to report results.
+
+CircleCI publishes these skills as a plugin in the link:https://github.com/CircleCI-Public/skills[CircleCI Public Skills] repository. The plugin works with Claude Code, Cursor, Codex, and GitHub Copilot.
+
+Skills are not the same as CircleCI MCP servers. MCP servers give your agent live tools for CircleCI. Skills give your agent a workflow to follow. You can use either, or both. See the xref:circleci-mcp-overview.adoc[CircleCI MCP Overview] page.
+
+The `chunk` skill in this plugin helps you set up Chunk. Chunk is CircleCI validation for agentic development. Sidecars run lightweight checks in a clean cloud environment while your agent is still working, so you catch failures before the push. See <<compare-skills-with-other-circleci-ai-tools>>.
+
+== Prerequisites
+
+Before you install CircleCI agent skills, set up the following:
+
+* An AI coding agent: Claude Code, Cursor, Codex, or GitHub Copilot.
+* A CircleCI account with access to the projects you want to work on.
+* The CircleCI CLI, installed and authenticated, for skills that run CircleCI commands. See xref:circleci-cli.adoc[The CircleCI CLI].
+
+// #TODO check which skills work without the CircleCI CLI
+// #TODO check if Server customers can use these skills
+
+== Available CircleCI agent skills
+
+The CircleCI plugin currently includes the following seven skills. Your agent picks a skill from your request, or you can invoke a skill by name.
+
+[.table-scroll]
+--
+[cols="1,2,2", options="header"]
+|===
+| Skill | What it does | Example prompt
+
+| `circleci-builds`
+| Diagnoses failing CircleCI jobs, classifies the failure, and applies a minimal fix.
+| Diagnose and fix build failures for the current branch.
+
+| `circleci-cli`
+| Runs the day-to-day CLI loop: validate config, watch a run, read logs, and rerun jobs.
+| Watch the CircleCI run for my current branch and report the results.
+
+| `circleci-config`
+| Optimizes `.circleci/config.yml` for speed, reliability, and maintainability.
+| Review the CircleCI configuration for this project and suggest improvements.
+
+| `onboarding`
+| Walks through account, org, GitHub App, project, and pipeline setup for a new repo.
+| Onboard my project to CircleCI.
+
+| `chunk`
+| Sets up Chunk sidecars and tasks so your agent can validate changes before you push.
+| Set up Chunk sidecars for this project.
+
+| `circleci-testsuite`
+| Adds `.circleci/test-suites.yml` and switches tests to `circleci testsuite run`.
+| Set up a testsuite for this project.
+
+| `circleci-smarter-testing`
+| Enables test impact analysis, dynamic test splitting, and auto-rerun of failed tests.
+| Set up CircleCI Smarter Testing for running tests in this project.
+|===
+--
+
+// #TODO check preview, beta, or paid-plan status for circleci-testsuite and circleci-smarter-testing
+
+`circleci-smarter-testing` requires a doctor-clean testsuite. Use `circleci-testsuite` first if `.circleci/test-suites.yml` does not exist.
+
+For Smarter Testing product docs, see the xref:guides:test:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] page.
+
+== Install CircleCI agent skills
+
+CircleCI distributes the skills as the `circleci` plugin in the `CircleCI-Public/skills` marketplace. Add the marketplace, then install the plugin.
+
+[tabs]
+====
+Claude Code::
++
+--
+. In Claude Code, add the CircleCI marketplace:
++
+[source]
+----
+/plugin marketplace add CircleCI-Public/skills
+----
+. Install the CircleCI plugin:
++
+[source]
+----
+/plugin install circleci@circleci-public-skills
+----
+. Reload plugins if Claude Code prompts you to, then start a new session.
+
+For more information on plugin marketplaces, see the link:https://code.claude.com/docs/en/discover-plugins[Claude Code plugin documentation].
+--
+Cursor::
++
+--
+// #TODO confirm whether CircleCI is listed on the Cursor Marketplace
+// #TODO confirm whether Import from Repo works without .cursor-plugin/marketplace.json
+
+Cursor supports agent plugins and skills. CircleCI does not yet publish a Cursor-specific marketplace manifest.
+
+Use one of these options:
+
+. *Cursor Marketplace.* Open *Customize* in the sidebar and search for CircleCI. Install the plugin if it appears.
+. *Team marketplace.* On a Cursor Teams or Enterprise plan, import `https://github.com/CircleCI-Public/skills` from *Dashboard > Plugins*. Then install the CircleCI plugin from *Customize*.
+. *Copy the skill folders.* Use this option when the plugin is not listed, or when a team marketplace is not available:
++
+[source,console]
+----
+$ git clone https://github.com/CircleCI-Public/skills.git
+$ mkdir -p ~/.cursor/skills
+$ cp -R skills/plugins/circleci/skills/* ~/.cursor/skills/
+----
++
+To limit the skills to one project, copy the folders into `.cursor/skills/` in that repository instead.
+. Restart Cursor, or run *Developer: Reload Window*. Open *Customize* and confirm the CircleCI skills appear.
+
+For more information, see the link:https://cursor.com/docs/plugins[Cursor plugin documentation].
+--
+Codex::
++
+--
+// #TODO confirm the marketplace name Codex assigns after add (expected: circleci-skills)
+
+. Add the CircleCI marketplace:
++
+[source,console]
+----
+$ codex plugin marketplace add CircleCI-Public/skills
+----
+. Install the CircleCI plugin:
++
+[source,console]
+----
+$ codex plugin add circleci@circleci-skills
+----
+. Restart Codex, or open `/plugins` and confirm the CircleCI plugin appears.
+
+The CircleCI repository includes a Codex marketplace at `.agents/plugins/marketplace.json`.
+--
+GitHub Copilot::
++
+--
+// #TODO confirm Copilot CLI reads .claude-plugin/marketplace.json
+// #TODO confirm install steps for GitHub Copilot in VS Code, not only Copilot CLI
+
+. Add the CircleCI marketplace to Copilot CLI:
++
+[source,console]
+----
+$ copilot plugin marketplace add CircleCI-Public/skills
+----
+. Install the CircleCI plugin:
++
+[source,console]
+----
+$ copilot plugin install circleci@circleci-public-skills
+----
+. Start a new Copilot CLI session and confirm the skills are available.
+
+For more information, see the link:https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-finding-installing[GitHub Copilot CLI plugin documentation].
+--
+====
+
+== Use CircleCI agent skills
+
+After install, ask your agent for the outcome you want. Name the branch, project, or file when you can. The agent selects the matching skill.
+
+You can also invoke a skill by name:
+
+* Claude Code and Cursor: `/circleci-builds`
+* Codex: `$circleci-builds`
+* Copilot CLI: use `/skills` to list installed skills, then invoke by name.
+
+Example requests:
+
+* Diagnose and fix build failures for the current branch.
+* Watch the CircleCI run for my current branch and report the results.
+* Review the CircleCI configuration for this project and suggest improvements.
+* Onboard my project to CircleCI.
+* Set up Chunk sidecars for this project.
+* Set up a testsuite for this project.
+* Set up CircleCI Smarter Testing for running tests in this project.
+
+[#compare-skills-with-other-circleci-ai-tools]
+== Compare skills with other CircleCI AI tools
+
+CircleCI agent skills, MCP servers, and Chunk work together in an agentic CI/CD loop. Use this page to install the plugin skills. Use the pages below for live CircleCI tools and for Chunk validation.
+
+[.table-scroll]
+--
+[cols="1,2,2", options="header"]
+|===
+| Tool | What it is | Where to start
+
+| CircleCI agent skills
+| Workflows your coding agent follows for CircleCI tasks.
+| This page.
+
+| CircleCI MCP servers
+| Live tools your agent can call to inspect and act on CircleCI runs.
+| xref:circleci-mcp-overview.adoc[CircleCI MCP Overview]
+
+| Chunk
+| Validation that keeps up with your agents. Sidecars run lightweight checks in a clean cloud environment while your agent works. Chunk Tasks monitors and repairs CI in the outer loop.
+| xref:chunk-setup-and-overview.adoc[Chunk Overview and Setup]
+|===
+--
+
+The `chunk` skill in this plugin walks your agent through Chunk setup. After setup, `chunk skill install` adds sidecar and review skills such as `chunk-sidecar` and `chunk-review`. Those skills keep your agent on the rails with hooks and deterministic feedback. See the xref:install-and-configure-the-chunk-cli.adoc#install-skills[Install and Configure the Chunk CLI] page.
+
+== Next steps
+
+* xref:circleci-mcp-overview.adoc[CircleCI MCP Overview]
+* xref:connecting-to-the-circleci-mcp-server.adoc[Connecting to the CircleCI MCP Server]
+* xref:chunk-setup-and-overview.adoc[Chunk Overview and Setup]
+* xref:install-and-configure-the-chunk-cli.adoc[Install and Configure the Chunk CLI]
+* xref:guides:test:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing]
+* link:https://github.com/CircleCI-Public/skills[CircleCI Public Skills repository]
