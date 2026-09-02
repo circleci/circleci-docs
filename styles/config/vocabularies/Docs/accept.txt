@@ -238,7 +238,6 @@ LLMOps
 macOS
 \bMac\b
 manpage
-MCP server
 MFEs?
 [Mm]iddleware
 minitest

@@ -456,6 +456,7 @@ Content for Tab B
 13. Missing page attributes (`:page-platform:`, `:page-description:`, `:experimental:`)
 14. Not using appropriate page templates for new content
 15. Using xrefs without verifying the target file exists and path is correct
+16. **Committing without running Vale and fixing linting errors**
 
 ## AsciiDoc Validation Rules
 - Close all attribute blocks properly
@@ -468,11 +469,49 @@ Content for Tab B
 
 The CircleCI docs use automated linting to enforce style rules and catch common errors. Understanding these tools helps you write docs that pass validation on the first try.
 
+**REQUIRED FOR AI AGENTS**: When creating or editing documentation pages, you MUST:
+
+1. **Run Vale locally before committing** (recommended for both cloud and local agents)
+2. Fix all error-level violations (not just warnings)
+3. Verify the page passes Vale validation
+4. Never commit documentation with linting errors
+
+This is not optional - Vale errors will cause CI failures and block PRs.
+
+### Agent Environment Context
+
+AI agents run in two types of environments:
+
+- **Cloud Agents** (started via `@cursor` in Linear/GitHub): Run in isolated cloud VMs without access to your local tools, credentials, or CircleCI CLI. Must install Vale locally (see below).
+
+- **Local Agents** (started via Cursor Desktop or Claude Code CLI): Run on your local machine with access to CircleCI CLI, MCP servers, and local credentials. Can use CircleCI CLI for checking runs, but running Vale locally is still recommended.
+
+**Best Practice**: Regardless of environment, install and run Vale locally before pushing changes. This catches errors immediately without waiting for CI.
+
+### Installing Vale
+
+If Vale is not installed in your environment, install it before running lint checks:
+
+```bash
+# Install Vale
+wget https://github.com/errata-ai/vale/releases/download/v3.7.1/vale_3.7.1_Linux_64-bit.tar.gz -O /tmp/vale.tar.gz
+tar -xzf /tmp/vale.tar.gz -C /tmp
+sudo mv /tmp/vale /usr/local/bin/
+vale --version
+
+# Install asciidoctor (required for Vale to parse AsciiDoc files)
+sudo apt-get update && sudo apt-get install -y asciidoctor
+```
+
+Once installed, Vale is available for all subsequent documentation work in that environment.
+
 ### Vale Linter
 
 Vale is a syntax-aware linter that enforces style rules defined in the `styles/` directory. It checks for grammar, style violations, and CircleCI-specific conventions.
 
 **Running Vale locally:**
+
+If you have Vale installed:
 
 ```bash
 # Check a specific file
@@ -485,10 +524,46 @@ vale docs/guides/modules/toolkit/pages/
 git diff --cached --name-only | grep '.adoc$' | xargs vale
 ```
 
+If Vale is not installed, use the CircleCI CLI method below instead.
+
 **Vale configuration location:**
 - Main config: `.vale.ini`
 - Style rules: `styles/` directory
 - Custom CircleCI rules: `styles/CircleCI/`
+
+**Running Vale locally with CircleCI CLI:**
+
+Local agents with CircleCI CLI access can check Vale errors from recent pipeline runs as an alternative:
+
+```bash
+# Get the latest run for your current branch
+circleci run get
+
+# Watch a running pipeline in real-time
+circleci run watch
+
+# Get job output from the vale/lint job
+# First, get the run to find the job UUID, then:
+circleci job output get <job-uuid>
+
+# Or find the lint job and get its output in one command:
+circleci run get --json --jq '.workflows[].jobs[] | select(.name | contains("lint")) | .id' | xargs -I {} circleci job output get {}
+```
+
+**Note**: This requires CircleCI CLI authentication and is only available in local agent environments. Vale local validation is still preferred as it catches errors before pushing to CI.
+
+For more CircleCI CLI commands, see the link:https://cli.circleci.com/reference/[CircleCI CLI Reference].
+
+**Checking Vale results in CI:**
+
+If you prefer to check CI results after pushing:
+
+1. Go to your PR on GitHub
+2. Scroll to the bottom and find the `ci/circleci: lint` check
+3. Click "Details" to view the Vale output in CircleCI
+4. Fix any errors shown and push updates
+
+Do not request review until all Vale errors are resolved.
 
 **Automated Vale error fixing:**
 
@@ -521,12 +596,14 @@ npm run build:docs
 
 Before committing documentation changes:
 
-1. ✅ Run Vale on your files to catch style violations
+1. ✅ **REQUIRED**: Run Vale locally and fix all error-level violations (recommended for all agents)
 2. ✅ Preview locally to check formatting and links
 3. ✅ Verify all xrefs point to existing files
 4. ✅ Check `:page-description:` is 70-160 characters
 5. ✅ Ensure link text uses title case
 6. ✅ Confirm page is added to `nav.adoc` if new
+
+**Alternative for local agents**: If CircleCI CLI is available and authenticated, you can also check Vale errors from CI runs using `circleci run get` and `circleci job output get`, but running Vale locally is still the recommended approach.
 
 ## Documentation Architecture
 
