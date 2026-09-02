@@ -471,13 +471,22 @@ The CircleCI docs use automated linting to enforce style rules and catch common 
 
 **REQUIRED FOR AI AGENTS**: When creating or editing documentation pages, you MUST:
 
-1. **Install Vale locally in your environment** if not already installed
-2. Check for Vale linter errors before committing
-3. Fix all error-level violations (not just warnings)
-4. Verify the page passes Vale validation
-5. Never commit documentation with linting errors
+1. **Run Vale locally before committing** (recommended for both cloud and local agents)
+2. Fix all error-level violations (not just warnings)
+3. Verify the page passes Vale validation
+4. Never commit documentation with linting errors
 
 This is not optional - Vale errors will cause CI failures and block PRs.
+
+### Agent Environment Context
+
+AI agents run in two types of environments:
+
+- **Cloud Agents** (started via `@cursor` in Linear/GitHub): Run in isolated cloud VMs without access to your local tools, credentials, or CircleCI CLI. Must install Vale locally (see below).
+
+- **Local Agents** (started via Cursor Desktop or Claude Code CLI): Run on your local machine with access to CircleCI CLI, MCP servers, and local credentials. Can use CircleCI CLI for checking runs, but running Vale locally is still recommended.
+
+**Best Practice**: Regardless of environment, install and run Vale locally before pushing changes. This catches errors immediately without waiting for CI.
 
 ### Installing Vale
 
@@ -524,7 +533,7 @@ If Vale is not installed, use the CircleCI CLI method below instead.
 
 **Running Vale locally with CircleCI CLI:**
 
-You can use the CircleCI CLI to check Vale errors without pushing by examining recent pipeline runs:
+Local agents with CircleCI CLI access can check Vale errors from recent pipeline runs as an alternative:
 
 ```bash
 # Get the latest run for your current branch
@@ -541,7 +550,7 @@ circleci job output get <job-uuid>
 circleci run get --json --jq '.workflows[].jobs[] | select(.name | contains("lint")) | .id' | xargs -I {} circleci job output get {}
 ```
 
-The CircleCI CLI is the recommended approach for checking Vale results locally.
+**Note**: This requires CircleCI CLI authentication and is only available in local agent environments. Vale local validation is still preferred as it catches errors before pushing to CI.
 
 For more CircleCI CLI commands, see the link:https://cli.circleci.com/reference/[CircleCI CLI Reference].
 
@@ -587,12 +596,14 @@ npm run build:docs
 
 Before committing documentation changes:
 
-1. ✅ **REQUIRED**: Run Vale and fix all error-level violations
+1. ✅ **REQUIRED**: Run Vale locally and fix all error-level violations (recommended for all agents)
 2. ✅ Preview locally to check formatting and links
 3. ✅ Verify all xrefs point to existing files
 4. ✅ Check `:page-description:` is 70-160 characters
 5. ✅ Ensure link text uses title case
 6. ✅ Confirm page is added to `nav.adoc` if new
+
+**Alternative for local agents**: If CircleCI CLI is available and authenticated, you can also check Vale errors from CI runs using `circleci run get` and `circleci job output get`, but running Vale locally is still the recommended approach.
 
 ## Documentation Architecture
 
