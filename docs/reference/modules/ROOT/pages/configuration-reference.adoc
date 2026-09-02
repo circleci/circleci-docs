@@ -1098,10 +1098,12 @@ version: 2.1
 jobs:
   build:
     machine:
-      image: android:2024.11.1
+      image: android:default
 ----
 
 The Android image can also be accessed using the link:https://circleci.com/developer/orbs/orb/circleci/android[Android orb].
+
+Gen2 resource classes (for example, `large.gen2`) are also available for the Android machine image on CircleCI Cloud. See the xref:guides:execution-managed:android-machine-image.adoc#android-generations[Android Machine Image Generations] section for details.
 
 For examples, refer to the xref:guides:execution-managed:android-machine-image.adoc#[Using Android Images With the Machine Executor] page.
 
