@@ -484,6 +484,8 @@ Vale is a syntax-aware linter that enforces style rules defined in the `styles/`
 
 **Running Vale locally:**
 
+If you have Vale installed:
+
 ```bash
 # Check a specific file
 vale docs/guides/modules/toolkit/pages/your-file.adoc
@@ -495,14 +497,39 @@ vale docs/guides/modules/toolkit/pages/
 git diff --cached --name-only | grep '.adoc$' | xargs vale
 ```
 
+If Vale is not installed, use the CircleCI CLI method below instead.
+
 **Vale configuration location:**
 - Main config: `.vale.ini`
 - Style rules: `styles/` directory
 - Custom CircleCI rules: `styles/CircleCI/`
 
+**Running Vale locally with CircleCI CLI:**
+
+You can use the CircleCI CLI to check Vale errors without pushing by examining recent pipeline runs:
+
+```bash
+# Get the latest run for your current branch
+circleci run get
+
+# Watch a running pipeline in real-time
+circleci run watch
+
+# Get job output from the vale/lint job
+# First, get the run to find the job UUID, then:
+circleci job output get <job-uuid>
+
+# Or find the lint job and get its output in one command:
+circleci run get --json --jq '.workflows[].jobs[] | select(.name | contains("lint")) | .id' | xargs -I {} circleci job output get {}
+```
+
+The CircleCI CLI is the recommended approach for checking Vale results locally.
+
+For more CircleCI CLI commands, see the link:https://cli.circleci.com/reference/[CircleCI CLI Reference].
+
 **Checking Vale results in CI:**
 
-If Vale is not available locally, check CI results after pushing:
+If you prefer to check CI results after pushing:
 
 1. Go to your PR on GitHub
 2. Scroll to the bottom and find the `ci/circleci: lint` check
