@@ -4,7 +4,6 @@
 :experimental:
 :page-show-readtime: true
 
-#TODO: check if this is supported for Server#
 #TODO: check preview, beta, or paid-plan status for the plugin and each skill#
 
 CircleCI agent skills give your AI coding agent reusable workflows for common CircleCI tasks. Install the CircleCI plugin once, then ask your agent to debug a failed build, optimize config, or onboard a project.
@@ -28,7 +27,6 @@ Before you install CircleCI agent skills, set up the following:
 * The CircleCI CLI, installed and authenticated, for skills that run CircleCI commands. See xref:circleci-cli.adoc[The CircleCI CLI].
 
 #TODO: check which skills work without the CircleCI CLI#
-#TODO: check if Server customers can use these skills#
 
 == Available CircleCI agent skills
 
@@ -49,7 +47,7 @@ The CircleCI plugin currently includes the following seven skills. Your agent pi
 | Watch the CircleCI run for my current branch and report the results.
 
 | `circleci-config`
-| Optimizes your CircleCI config YAML for speed, reliability, and maintainability. Config files must be `.yml`. For some integrations they can have any name and live anywhere in the repo.
+| Optimizes your CircleCI config YAML for speed, reliability, and maintainability.
 | Review the CircleCI configuration for this project and suggest improvements.
 
 | `onboarding`
@@ -100,8 +98,6 @@ Cursor::
 +
 --
 The CircleCI listing on the link:https://cursor.com/marketplace/circleci[Cursor Marketplace] is a different plugin. That plugin, from the link:https://github.com/CircleCI-Public/cursor-plugin[CircleCI Public Cursor Plugin] repository, connects Cursor to the hosted CircleCI MCP server. It does not install the agent skills from the CircleCI Public Skills repository.
-
-You can use the marketplace MCP plugin alongside these skills. For MCP setup, see xref:connecting-to-the-circleci-mcp-server.adoc[Connecting to the CircleCI MCP Server].
 
 To install CircleCI agent skills in Cursor, copy the skill folders into your Cursor skills directory:
 
