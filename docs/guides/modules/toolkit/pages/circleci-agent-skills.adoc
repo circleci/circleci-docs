@@ -4,8 +4,8 @@
 :experimental:
 :page-show-readtime: true
 
-// #TODO check if this is supported for Server
-// #TODO check preview, beta, or paid-plan status for the plugin and each skill
+#TODO: check if this is supported for Server#
+#TODO: check preview, beta, or paid-plan status for the plugin and each skill#
 
 CircleCI agent skills give your AI coding agent reusable workflows for common CircleCI tasks. Install the CircleCI plugin once, then ask your agent to debug a failed build, optimize config, or onboard a project.
 
@@ -27,8 +27,8 @@ Before you install CircleCI agent skills, set up the following:
 * A CircleCI account with access to the projects you want to work on.
 * The CircleCI CLI, installed and authenticated, for skills that run CircleCI commands. See xref:circleci-cli.adoc[The CircleCI CLI].
 
-// #TODO check which skills work without the CircleCI CLI
-// #TODO check if Server customers can use these skills
+#TODO: check which skills work without the CircleCI CLI#
+#TODO: check if Server customers can use these skills#
 
 == Available CircleCI agent skills
 
@@ -49,11 +49,11 @@ The CircleCI plugin currently includes the following seven skills. Your agent pi
 | Watch the CircleCI run for my current branch and report the results.
 
 | `circleci-config`
-| Optimizes `.circleci/config.yml` for speed, reliability, and maintainability.
+| Optimizes your CircleCI config YAML for speed, reliability, and maintainability. Config files must be `.yml`. For some integrations they can have any name and live anywhere in the repo.
 | Review the CircleCI configuration for this project and suggest improvements.
 
 | `onboarding`
-| Walks through account, org, GitHub App, project, and pipeline setup for a new repo.
+| Walks through first-time CircleCI setup for a new repo, including the GitHub App and pipeline.
 | Onboard my project to CircleCI.
 
 | `chunk`
@@ -65,14 +65,14 @@ The CircleCI plugin currently includes the following seven skills. Your agent pi
 | Set up a testsuite for this project.
 
 | `circleci-smarter-testing`
-| Enables test impact analysis, dynamic test splitting, and auto-rerun of failed tests.
+| Enables test impact analysis, dynamic test splitting, and auto-rerun of failed tests. Smarter Testing is in beta.
 | Set up CircleCI Smarter Testing for running tests in this project.
 |===
 --
 
-// #TODO check preview, beta, or paid-plan status for circleci-testsuite and circleci-smarter-testing
+include::ROOT:partial$notes/smarter-testing-beta.adoc[]
 
-`circleci-smarter-testing` requires a doctor-clean testsuite. Use `circleci-testsuite` first if `.circleci/test-suites.yml` does not exist.
+`circleci-smarter-testing` requires a testsuite that already passes `circleci testsuite doctor`. Use `circleci-testsuite` first if `.circleci/test-suites.yml` does not exist, or if doctor still reports failed checks.
 
 For Smarter Testing product docs, see the xref:guides:test:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] page.
 
@@ -104,8 +104,8 @@ For more information on plugin marketplaces, see the link:https://code.claude.co
 Cursor::
 +
 --
-// #TODO confirm whether CircleCI is listed on the Cursor Marketplace
-// #TODO confirm whether Import from Repo works without .cursor-plugin/marketplace.json
+#TODO: confirm whether CircleCI is listed on the Cursor Marketplace#
+#TODO: confirm whether Import from Repo works without a Cursor plugin marketplace manifest#
 
 Cursor supports agent plugins and skills. CircleCI does not yet publish a Cursor-specific marketplace manifest.
 
@@ -130,7 +130,7 @@ For more information, see the link:https://cursor.com/docs/plugins[Cursor plugin
 Codex::
 +
 --
-// #TODO confirm the marketplace name Codex assigns after add (expected: circleci-skills)
+#TODO: confirm the marketplace name Codex assigns after add (expected: CircleCI skills)#
 
 . Add the CircleCI marketplace:
 +
@@ -151,8 +151,8 @@ The CircleCI repository includes a Codex marketplace at `.agents/plugins/marketp
 GitHub Copilot::
 +
 --
-// #TODO confirm Copilot CLI reads .claude-plugin/marketplace.json
-// #TODO confirm install steps for GitHub Copilot in VS Code, not only Copilot CLI
+#TODO: confirm Copilot CLI reads the Claude plugin marketplace manifest#
+#TODO: confirm install steps for GitHub Copilot in VS Code, not only Copilot CLI#
 
 . Add the CircleCI marketplace to Copilot CLI:
 +
