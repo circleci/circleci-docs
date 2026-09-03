@@ -17,11 +17,13 @@ NOTE: Regular CircleCI pipelines execute each step in a non-interactive shell. S
 [#steps]
 == Steps to access a job with SSH
 
-NOTE: **Using self-hosted runners?** To use SSH reruns with CircleCI runners you will first need to enable the SSH rerun feature. Refer to the xref:execution-runner:machine-runner-3-configuration-reference.adoc#runner-ssh-advertise-addr[Machine Runner 3] or xref:execution-runner:container-runner-installation.adoc#enable-rerun-job-with-ssh[Container Runner] pages for steps.
+NOTE: **Using self-hosted runners?** To use SSH reruns with CircleCI runners you will first need to enable the SSH rerun feature. Refer to the xref:execution-runner:machine-runner-3-configuration-reference.adoc#runner-ssh-advertise-addr[Machine Runner 3], xref:execution-runner:container-runner-installation.adoc#enable-rerun-job-with-ssh[Container Runner], or xref:execution-runner:runner-provisioner.adoc#enable-rerun-job-with-ssh[Runner Provisioner] pages for steps.
 
-. If you have not already done so, add an SSH key to your link:https://app.circleci.com/settings/user/job-ssh-keys[User Settings]. This key will be used to connect to container or virtual machine (VM) that is running your job.
+. If you have not already done so, add an SSH key to your link:https://app.circleci.com/settings/user/job-ssh-keys[User Settings].
 +
-NOTE: If you are using a GitHub or Bitbucket organization, you can add an SSH key to your VCS account (https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/[GitHub] or https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html[Bitbucket]) rather than in the CircleCI app under https://app.circleci.com/settings/user/job-ssh-keys[User Settings] if you prefer. For more on organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
+This key connects to the container or virtual machine (VM) that is running your job.
++
+NOTE: If you are using a GitHub or Bitbucket organization, you can add an SSH key to your VCS account instead of CircleCI user settings. See the https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/[GitHub] or https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html[Bitbucket] docs. For organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
 
 include::guides:ROOT:partial$app-navigation/steps-to-job.adoc[]
 . To start a job with SSH enabled, select the *Rerun job with SSH* option from the *Rerun* dropdown menu.
@@ -38,7 +40,9 @@ NOTE: After clicking btn:[Rerun Job With SSH], if your job does not populate the
 .Screenshot showing SSH connection details in the Enable SSH section
 image::guides:ROOT:rerun-job-connect.png[Screenshot showing SSH connection details in the Enable SSH section]
 
-. Run the connection command given in the job output and follow the instructions to SSH into the running job (using the same SSH key that you use for GitHub or Bitbucket) to perform whatever troubleshooting you need to.
+. Run the connection command given in the job output.
++
+Follow the instructions to SSH into the running job, using the same SSH key that you use for GitHub or Bitbucket.
 +
 NOTE: If you are using the Windows executor, you will need to pass in the shell you want to use when using SSH. For example, to run  `powershell` in your build you would run: `ssh -p <remote_ip> -- powershell.exe`.
 
