@@ -70,7 +70,6 @@ The CircleCI plugin currently includes the following seven skills. Your agent pi
 |===
 --
 
-include::ROOT:partial$notes/smarter-testing-beta.adoc[]
 
 == Install CircleCI agent skills
 
