@@ -1,0 +1,5 @@
+. Choose a repo for your pipeline. CircleCI checks out the code from this repo when your pipeline runs.
++
+If you *already have a connection*, select your repo from the list. To connect an additional provider, select btn:[+ Add] and then choose its tile.
++
+If you have *no connection* yet, select your provider's tile and follow that provider's instructions. Granting access applies to any project in your organization, and you can update repo access at any time.

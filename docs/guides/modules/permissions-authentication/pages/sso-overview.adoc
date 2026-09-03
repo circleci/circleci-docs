@@ -4,8 +4,7 @@
 :experimental:
 
 NOTE: SAML single sign-on for CircleCI is available for Scale Plan customers. See xref:sso-overview.adoc#prerequisites-and-limitations[Prerequisites and Limitations]
-for further details. Submit feedback on our link:https://circleci.canny.io/identities-permissions/p/single-sign-on-sso[Ideas board].
-
+for further details.
 Single sign-on (SSO) for CircleCI allows organization administrators to control access for their CircleCI organization using an Identity Provider (IdP).
 
 [#introduction]
@@ -65,4 +64,4 @@ SSO for CircleCI currently has the following limitations:
 [#next-steps]
 == Next steps
 * xref:set-up-sso.adoc[Set up SAML SSO]
-* xref:sign-in-to-an-sso-enabled-organization.adoc[Sign in to an SSO-enabled organization]
+* xref:sign-in-to-an-sso-enabled-organization.adoc[Sign in to an SSO-Enabled Organization]

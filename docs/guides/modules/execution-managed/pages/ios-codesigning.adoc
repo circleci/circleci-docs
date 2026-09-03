@@ -115,14 +115,14 @@ build. CircleCI installs the referenced bundles onto the executor.
 * `<your-xcode-scheme>`: The name of the specific build scheme you want to archive (for example, `MyApp` or `Runner`). Found in Xcode under *Product > Scheme*, or by running `xcodebuild -list`.
 
 
-[,yaml]
+[,yaml,subs=attributes+]
 ----
 version: 2.1
 
 jobs:
   build-and-sign:
     macos:
-      xcode: 15.2.0
+      xcode: {xcodeversion}
       # List the signing bundles to install from your organization
       code_signing:
         - <signing-bundle-name>
@@ -331,21 +331,21 @@ After you have configured Match and added its invocation into the appropriate
 lane, you can run that lane on CircleCI. The following `config.yml` will
 create an Ad-hoc build every time you push to the `development` branch:
 
-[,yaml]
+[,yaml,subs=attributes+]
 ----
 # .circleci/config.yml
 version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 14.2.0
+      xcode: {xcodeversion}
     steps:
       # ...
       - run: bundle exec fastlane test
 
   adhoc:
     macos:
-      xcode: 14.2.0
+      xcode: {xcodeversion}
     steps:
       # ...
       - run: bundle exec fastlane adhoc
@@ -388,14 +388,14 @@ platform :ios do
 end
 ----
 
-[,yaml]
+[,yaml,subs=attributes+]
 ----
 # .circleci/config.yml
 version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 14.2.0
+      xcode: {xcodeversion}
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: test
@@ -412,7 +412,7 @@ jobs:
 
   adhoc:
     macos:
-      xcode: 14.2.0
+      xcode: {xcodeversion}
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: adhoc

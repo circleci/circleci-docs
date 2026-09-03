@@ -10,12 +10,14 @@ If you are using Kubernetes, you can also enable rollback functionality by using
 
 == Introduction
 
-CircleCI rollbacks support two methods:
+CircleCI rollbacks support two methods of rolling back manually:
 
 * <<rollback-using-a-rollback-pipeline,Rollback by running a custom rollback pipeline>>.
 * <<rollback-by-workflow-re-run,Rollback by workflow re-run>>.
 
-Each method has appropriate use cases, advantages, and disadvantages, as follows:
+CircleCI can also roll back for you, without anyone triggering it. See the <<automatic-rollback-on-validation-failure,Automatic Rollback on Validation Failure>> section.
+
+Each manual method has appropriate use cases, advantages, and disadvantages, as follows:
 
 [.table-scroll]
 --
@@ -110,6 +112,20 @@ If you have a rollback pipeline set up for your project, workflow rollbacks are 
 . Select the rollback icon icon:rebuild[rollback icon].
 . Select btn:[Rerun deploy workflow from start].
 . Type `ROLLBACK` when prompted to confirm and then select btn:[ROLLBACK].
+
+[#automatic-rollback-on-validation-failure]
+== Automatic rollback on validation failure
+
+Both methods above are manual: someone notices a problem and triggers the rollback. With release validation configured, CircleCI can detect the problem and roll back on its own.
+
+After a deploy completes, CircleCI opens an evaluation window and listens for alerts from your monitoring tool. If a validation check fails, CircleCI marks the release as failed and triggers your rollback pipeline to return the component to the last healthy version. No manual step is involved.
+
+Automatic rollback needs a configured rollback pipeline, so set that up first using the xref:set-up-rollbacks.adoc[Set up Rollbacks] guide. Note the following behavior:
+
+* A rollback that fails does not trigger another automatic rollback, even when your rollback pipeline includes validation of its own.
+* CircleCI skips the rollback when there is no prior successful release to return to.
+
+To get set up, see the xref:set-up-smart-deployments.adoc[Set up Smart Deployments] guide.
 
 
 

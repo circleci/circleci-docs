@@ -21,7 +21,7 @@ First, you will need to ensure your source code is located in either GitHub, Bit
 Following are the steps required for using the git command line tool to import your code into GitHub Enterprise:
 
 . Create an empty repository on your GitHub Enterprise instance.
-. Create a bare clone of your external repository on your local machine, fetching all remote tags (refs/tags/\*) and copying all remote branch heads (refs/heads/\*) directly to their corresponding local branch heads.
+. Create a bare clone of your external repository on your local machine, fetching all remote tags (`refs/tags/\*`) and branch heads (`refs/heads/\*`).
 +
 ```shell
 git clone https://external-host.com/extuser/repo.git --bare
@@ -180,7 +180,7 @@ steps:
 ----
 
 a|
-[source,yaml]
+[source,yaml,subs=attributes+]
 ----
 jobs:
   ubuntuJob:
@@ -191,7 +191,7 @@ jobs:
       - run: echo "Hello, $USER!"
   osxJob:
     macos:
-      xcode: 14.2.0
+      xcode: {xcodeversion}
     steps:
       - checkout
       - run: echo "Hello, $USER!"
@@ -205,5 +205,5 @@ For larger and more complex build files, we recommend moving over the build step
 . link:https://circleci.com/docs/workflows/[Workflows]
 . link:https://circleci.com/docs/artifacts/[Artifacts]
 . link:https://circleci.com/docs/caching/[Caching]
-. link:https://circleci.com/docs/triggers/#section=jobs[Triggers]
+. xref:orchestrate:triggers-overview.adoc[Triggers]
 . link:https://circleci.com/docs/optimizations/#section=projects[Performance options]

@@ -21,7 +21,7 @@ If you are using AWS CodeCommit, you will first need to migrate your source code
 Following are the steps required for using the git command line tool to import your code into GitHub Enterprise:
 
 . Create an empty repository on your GitHub Enterprise instance.
-. Create a bare clone of your external repository on your local machine, fetching all remote tags (refs/tags/\*) and copying all remote branch heads (refs/heads/\*) directly to their corresponding local branch heads.
+. Create a bare clone of your external repository on your local machine, fetching all remote tags (`refs/tags/\*`) and branch heads (`refs/heads/\*`).
 +
 ```shell
 git clone https://external-host.com/extuser/repo.git --bare
@@ -167,7 +167,7 @@ workflows:
           - job3
 ----
 
-2+| Execute jobs on multiple platforms. An AWS CodePipeline project can target a single platform only. If you are targeting multiple platforms, you’re probably using CodePipeline and multiple CodeBuild projects. CircleCI provides executors for Docker, Linux and macOS that can be combined in a single build definition.
+2+| Execute jobs on multiple platforms. An AWS CodePipeline project can target a single platform only. If you are targeting multiple platforms, you are probably using CodePipeline and multiple CodeBuild projects. CircleCI provides executors for Docker, Linux and macOS that can be combined in a single build definition.
 
 a|
 [source,yaml]
@@ -191,7 +191,7 @@ a|
 ----
 
 a|
-[source,yaml]
+[source,yaml,subs=attributes+]
 ----
 jobs:
   ubuntuJob:
@@ -202,7 +202,7 @@ jobs:
       - run: echo "Hello, $USER!"
   osxJob:
     macos:
-      xcode: 14.2.0
+      xcode: {xcodeversion}
     steps:
       - checkout
       - run: echo "Hello, $USER!"
@@ -254,5 +254,5 @@ For larger and more complex build files, we recommend moving over the build step
 . https://circleci.com/docs/workflows/[Workflows]
 . https://circleci.com/docs/artifacts/[Artifacts]
 . https://circleci.com/docs/caching/[Caching]
-. https://circleci.com/docs/triggers/#section=jobs[Triggers]
+. xref:orchestrate:triggers-overview.adoc[Triggers]
 . https://circleci.com/docs/optimizations/#section=projects[Performance options]

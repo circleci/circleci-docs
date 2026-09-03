@@ -10,7 +10,7 @@ To use the CircleCI API or view details about your pipelines, you will need API 
 
 In CircleCI you can create personal and project API tokens:
 
-*Personal API tokens*:: These tokens are used to interact with the CircleCI APIs (v1 and v2), and grant full read and write permissions.
+*Personal API tokens*:: These tokens are used to interact with the CircleCI APIs (v1 and v2). Tokens created manually through the web app grant full read and write permissions. Manually-created tokens expire on a date you set when you create them. An expired token stops working, so you must replace it with a new token. Tokens created through the xref:oauth-dynamic-client-registration.adoc[OAuth 2.0 Dynamic Client Registration] flow are scoped to the access level (Read, Write, or Admin) chosen by the user during authorization.
 *Project API tokens*:: These tokens allow you to read/write information for specific projects. Project tokens have three scope options: _Status_, _Read Only_, and _Admin_.
 * _Status_ tokens grant read access to the project's build statuses. Used for xref:integration:status-badges.adoc[Embedding Status Badges].
 * _Read Only_ tokens grant read only access to the project's API (v1 only).
@@ -25,11 +25,14 @@ NOTE: API tokens cannot be modified after they have been created. The only way t
 . Select link:https://app.circleci.com/settings/user/tokens[Personal API Tokens].
 . Select btn:[Create New Token] button.
 . In the *Token name* field, type a memorable name for the token.
+. Set an expiry date for the token. You must choose a date no more than one year in the future.
 . Select btn:[Add API Token] button.
 . After the token appears, copy and paste it to another location. You will not be able to view the token again.
 
+CircleCI emails you before a personal API token expires. For details, see the <<personal-api-token-expiry-notifications,Personal API Token Expiry Notifications>> section.
+
 .Personal API tokens available in user settings
-image::guides:ROOT:personal-api-tokens.png[screenshot showing where to find your personal API token settings]
+image::guides:ROOT:personal-api-tokens.png[screenshot of the personal API tokens page, showing the name, created, last used, and expires columns for each token]
 
 To delete a personal API token, click the X in the *Remove* column and confirm
 your deletion in the dialog window.
@@ -37,7 +40,7 @@ your deletion in the dialog window.
 [#creating-a-project-api-token]
 === Create a project API token
 
-. In the CircleCI application, go to your project's settings. There are various ways to get there. One way is to select *Projects* in the sidebar, then the ellipsis (`+...+`) next to your project and select *Project Settings*.
+include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 . Select *API Permissions*.
 . Select btn:[Add API Token].
 . Choose a scope from the dropdown menu. These are described in the <<overview,Overview>> section above.
@@ -66,13 +69,14 @@ employee leaves the company or when a token has been considered leaked.
 . Select the *X* in the *Remove* column for the token you wish to replace and confirm your deletion.
 . Select btn:[Create New Token].
 . In the *Token name* field, type a new name for the old token you are rotating. It can be the same name given to the old token.
+. Set an expiry date for the token.
 . Select btn:[Add API Token].
 . After the token appears, copy and paste it to another location. You will not be able to view the token again.
 
 [#rotating-a-project-api-token]
 ==== Rotating a project API token
 
-. In the CircleCI application, go to your project's settings. There are various ways to get there. One way is to select *Projects* in the sidebar, then the ellipsis (`+...+`) next to your project and select *Project Settings*.
+include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 . Select *API Permissions*.
 . Select the *X* in the *Remove* column for the token you wish to replace.
 When the confirmation window appears, enter the text `DELETE` in the form and click the *Delete API Token* button.
@@ -80,6 +84,13 @@ When the confirmation window appears, enter the text `DELETE` in the form and cl
 . Choose the same scope used for the old token from the dropdown menu.
 . In the *Label* field, type a label for the token. It can be the same name given to the old token.
 . Select btn:[Add API Token].
+
+[#personal-api-token-expiry-notifications]
+=== Personal API token expiry notifications
+
+CircleCI emails you when a personal API token is approaching its expiry date. You receive an email 30 days, 15 days, seven days, and one day before the token expires.
+
+NOTE: Expiry notifications are mandatory communications, so you cannot opt out of them. To stop the emails for a token you no longer need, delete the token as described in the <<rotating-a-personal-api-token,Rotating a Personal API Token>> section.
 
 [#next-steps]
 == Next steps

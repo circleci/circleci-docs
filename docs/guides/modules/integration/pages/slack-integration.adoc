@@ -1,6 +1,5 @@
 = Slack integration
 :page-platform: Cloud
-:page-badge: Beta
 :page-description: Install the CircleCI Slack app and configure project-level Slack notifications for workflow status updates.
 :experimental:
 
@@ -12,6 +11,17 @@ This guide explains how to:
 * Link a project to a Slack channel.
 * Update notification preferences for a project.
 * Link your Slack identity to receive personal notifications.
+
+== Benefits
+
+The Slack integration is the recommended way to set up workflow notifications in Slack for projects on CircleCI Cloud. The Slack integration offers several advantages over configuring notifications manually:
+
+* Install the Slack app once at the organization level, then turn it on per project. No app setup needed for every new project.
+* Notifications work without changes to your CircleCI config file. You do not need to add an orb or extra steps to your pipelines.
+* You do not need to create a Slack app or store OAuth tokens in a context or environment variable.
+* Link projects to channels and manage notification preferences from your project settings in the web app. Any organization member with write access to a project can configure it.
+* Receive notifications as direct messages. After you <<link-your-slack-identity,link your Slack identity>>, CircleCI can send workflow notifications to you directly, not only to shared channels.
+* Get tagged directly in notifications. Once your identity is linked, CircleCI mentions you in the Slack notifications for workflows you trigger.
 
 == Limitations
 
@@ -122,14 +132,21 @@ Organization administrators and contributors can manage the Slack integration fr
 +
 WARNING: Deleting the Slack app stops all project notifications across the organization. You must reinstall the app to resume notifications.
 
-[badge="Beta"]
+[#link-your-slack-identity]
 == Link your Slack identity
 
 Linking your Slack identity connects your CircleCI user account to your identity in a Slack workspace that has the CircleCI Slack app installed. Linking your identity enables direct message notifications, actor tagging, and interactivity such as approving a held workflow directly from Slack.
 
-Linking is scoped by Slack workspace. If you belong to multiple organizations that each have their own connected Slack workspace, link your identity separately for each one.
+Each Slack identity link applies to a single Slack workspace. If you belong to multiple organizations that each have their own connected Slack workspace, link your identity separately for each one.
 
-NOTE: A Slack identity can be linked to only one CircleCI user account at a time. If you try to link a Slack identity that is already linked to a different CircleCI account, the link attempt fails. Unlink the Slack identity from the other account, then try again.
+NOTE: You can link a Slack identity to only one CircleCI user account at a time. If you try to link a Slack identity that is already linked to a different CircleCI account, the link attempt fails. Unlink the Slack identity from the other account, then try again.
+
+[#receive-dms-for-workflows-you-trigger]
+=== Receive DMs for workflows you trigger
+
+When you link your Slack identity, CircleCI delivers your xref:integration:notifications.adoc#my-work[My Work] notifications as Slack direct messages. You can set different status filters for Slack and email. This includes xref:integration:notifications.adoc#approval-job-notifications[Approval Job Notifications] for workflows you trigger.
+
+Update your preferences in menu:User Settings[Notifications].
 
 === Get tagged in notifications
 
@@ -138,7 +155,7 @@ When you link your Slack identity, CircleCI tags you in a project's Slack notifi
 === Prerequisites
 
 * Your organization must have the CircleCI Slack app installed. See <<install-the-slack-app,Install the Slack app>> above.
-* Your Slack workspace must allow **Sign in with Slack**. A Slack workspace admin can confirm or enable this from **Admin** > **Apps and workflows** > **App Management Settings** in Slack. If your organization has an Apps organization policy set at the Slack org level, an Org Owner may also need to approve the CircleCI app's use of the Sign in with Slack identity scope.
+* Your Slack workspace must allow **Sign in with Slack**. A Slack workspace admin can confirm or enable this from **Admin** > **Apps and workflows** > **App Management Settings** in Slack. Some organizations set an Apps organization policy at the Slack org level. In that case, an Org Owner may also need to approve the CircleCI app's use of the Sign in with Slack identity scope.
 
 === How Slack identity linking works
 

@@ -1,8 +1,11 @@
 = CircleCI MCP overview
 :page-platform: Cloud
+:page-badge: Preview
 :page-description: An overview of CircleCI's MCP offerings for AI coding assistants, how they work, best practices, and troubleshooting steps.
 :experimental:
 :page-aliases: using-the-circleci-mcp-server.adoc
+
+NOTE: The CircleCI hosted and CLI MCP servers are currently in preview. You can expect changes to the available tools during this phase. If you have any issues, questions, or feedback, post on our link:https://discuss.circleci.com/t/hosted-and-cli-mcp-server-feedback/54827[community forum].
 
 CircleCI's MCP servers enable you to diagnose build failures, fix issues, and manage CI pipelines through natural language commands without leaving your development environment.
 
@@ -28,7 +31,7 @@ Both MCP servers provide the following benefits:
 
 CircleCI exposes CircleCI to AI assistants through MCP in two ways:
 
-* *The hosted MCP server*, available at `https://mcp.circleci.com/v1/mcp`. CircleCI runs it, so there is nothing to install locally. Your AI assistant connects to it over HTTPS, authenticating with OAuth2 or a personal API token. See xref:connecting-to-the-circleci-mcp-server.adoc[Connecting to the Hosted CircleCI MCP].
+* *The hosted MCP server*, available at `\https://mcp.circleci.com/v1/mcp`. CircleCI runs it, so there is nothing to install locally. Your AI assistant connects to it over HTTPS, authenticating with OAuth2 or a personal API token. See xref:connecting-to-the-circleci-mcp-server.adoc[Connecting to the Hosted CircleCI MCP].
 * *The CircleCI CLI MCP*, built into the link:https://cli.circleci.com/reference/#circleci-mcp[CircleCI CLI]. It runs as a local process on your machine, and uses the credentials from `circleci auth login` or the `CIRCLE_TOKEN` environment variable. See xref:connecting-to-the-circleci-cli-mcp.adoc[Connecting to the CircleCI CLI MCP].
 
 The two MCP servers differ in scope as well as in how they run.

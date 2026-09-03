@@ -1,0 +1,390 @@
+= OAuth 2.0 API access with Dynamic Client Registration
+:page-show-readtime: true
+:page-platform: Cloud
+:page-description: Register OAuth 2.0 clients dynamically and use the authorization code flow with PKCE to obtain a CircleCI personal API token.
+:experimental:
+
+This guide is for you if you are building a tool or integration that needs to access the CircleCI API on behalf of a user.
+
+CircleCI supports the OAuth 2.0 authorization code flow with mandatory PKCE (Proof Key for Code Exchange) and Dynamic Client Registration (DCR). Use this guide to get your tool a personal API token on behalf of a user. No pre-shared client secret or manual token creation in the CircleCI web app is needed.
+
+Using Dynamic Client Registration has the following benefits:
+
+* No long-lived secrets stored in your tool's configuration. PKCE secures the flow instead of a client secret.
+* User-controlled access scopes. The user chooses the permission level (Read, Write, or Admin) at authorization time.
+* Tokens are visible to and revocable by the user from their CircleCI Personal API Tokens page.
+
+The resulting token is a standard 90-day CircleCI personal API token and works with the API v3 and v2 endpoints.
+
+TIP: For background on CircleCI API tokens, refer to xref:managing-api-tokens.adoc[Managing API Tokens]. For general API usage, refer to the xref:api-developers-guide.adoc[CircleCI API Developer's Guide].
+
+[#how-the-oauth-flow-works]
+== How the OAuth flow works
+
+The OAuth flow consists of four high-level stages:
+
+*Register*:: Your tool registers itself once as an OAuth client using the Dynamic Client Registration endpoint. No authentication is required, and no client secret is issued.
+*Authorize*:: A user opens an authorization URL in a browser, selects an access level, and clicks *Allow*. CircleCI redirects to a loopback address with a short-lived authorization code.
+*Exchange*:: Your tool exchanges the code, plus the PKCE verifier, for a 90-day personal API token.
+*Use*:: The token is passed as a standard Bearer header on any CircleCI API v3 or v2 call.
+
+[#prerequisites]
+== Prerequisites
+
+* A CircleCI account. You must be a member of an organization. See xref:getting-started:first-steps.adoc[Sign up and Try CircleCI] for more information.
+* The following tools installed:
+** `curl` installed.
+** `python3` installed. Used for the local redirect listener in <<step-2-start-a-local-redirect-listener,Step 2>>.
+** `jq` installed (optional). Used in the examples to format JSON output.
+
+[#step-1-register-your-client]
+== 1. Register your client
+
+Perform client registration once per tool. Send a POST request to the registration endpoint with a JSON body describing your client. No authentication header is required.
+
+Replace `<your-tool-name>` with the name of your tool. You can also change the port (`9090`) and path (`/callback`) in the redirect URI to any values that suit your tool. The `grant_types` and `response_types` fields must remain as shown.
+
+IMPORTANT: The `redirect_uri` must be a loopback address (`127.0.0.1`, `::1`, or `localhost`) with a port in the range 1025–65535 and no query parameters. Use the same value in Steps 3 and 4.
+
+[,shell]
+----
+curl -s -X POST https://app.circleci.com/oauth/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "client_name": "<your-tool-name>",
+    "redirect_uris": ["http://127.0.0.1:9090/callback"],
+    "grant_types": ["authorization_code"],
+    "response_types": ["code"]
+  }' | jq .
+----
+
+A successful registration returns a JSON object containing your `client_id`, with a `201 Created` status code:
+
+[,json]
+----
+{
+  "client_id": "019847ab-1234-7def-89ab-cdef01234567",
+  "client_id_issued_at": 1722124800,
+  "client_name": "My Tool",
+  "redirect_uris": ["http://127.0.0.1:9090/callback"],
+  "grant_types": ["authorization_code"],
+  "response_types": ["code"],
+  "token_endpoint_auth_method": "none"
+}
+----
+
+Save the `client_id` as a shell variable. Use it for every subsequent authorization request. Because no client secret is issued, this value does not need to be treated as sensitive. PKCE protects the flow instead.
+
+[,shell]
+----
+CLIENT_ID="<your-client-id>"
+----
+
+TIP: Register only once per tool. Store the `client_id` alongside your tool's configuration, and reuse it for all future authorizations. Re-registering creates a new, separate client.
+
+[#advanced-pushed-authorization-requests]
+=== Advanced: pushed authorization requests
+
+CircleCI also supports link:https://datatracker.ietf.org/doc/html/rfc9126[RFC 9126 Pushed Authorization Requests] (PAR) via `POST /oauth/par`. PAR sends the authorization parameters directly to the server before the browser redirect, which provides an additional layer of request integrity. It is optional. The standard front-channel authorization URL described in <<step-3-open-the-authorization-url,Step 3>> is validated with the same rules.
+
+[#step-2-start-a-local-redirect-listener]
+== 2. Start a local redirect listener
+
+The listener below generates the PKCE values, prints them, then waits for CircleCI to redirect the browser to `\http://127.0.0.1:9090/callback` with the authorization code.
+
+. Run the following Python code in a separate terminal:
++
+.Start the listener in a separate terminal
+[,python]
+----
+python3 -c "
+import http.server, urllib.parse, threading, secrets, hashlib, base64
+
+code_verifier = secrets.token_urlsafe(48)
+code_challenge = base64.urlsafe_b64encode(
+    hashlib.sha256(code_verifier.encode()).digest()
+).rstrip(b'=').decode()
+state = secrets.token_urlsafe(16)
+
+print('verifier :', code_verifier)
+print('challenge:', code_challenge)
+print('state    :', state)
+print()
+
+class Handler(http.server.BaseHTTPRequestHandler):
+    def do_GET(self):
+        params = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
+        code  = params.get('code',  [''])[0]
+        state = params.get('state', [''])[0]
+        error = params.get('error', [''])[0]
+        print()
+        if error:
+            print('ERROR:', error)
+            print('description:', params.get('error_description', [''])[0])
+        else:
+            print('CODE :', code)
+            print('STATE:', state)
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(b'You can close this tab.')
+        threading.Thread(target=self.server.shutdown, daemon=True).start()
+    def log_message(self, *args):
+        pass
+
+with http.server.HTTPServer(('127.0.0.1', 9090), Handler) as s:
+    print('Listening on http://127.0.0.1:9090 ...')
+    s.serve_forever()
+"
+----
+
+. Once the listener is running, copy the printed values into your other terminal:
+
+.Copy the printed values
+[,shell]
+----
+CODE_VERIFIER="<paste verifier>"
+CODE_CHALLENGE="<paste challenge>"
+STATE="<paste state>"
+----
+
+[#understanding-pkce-values]
+=== Understanding PKCE values
+
+PKCE replaces the client secret. CircleCI requires the S256 challenge method — plain code challenges are not accepted. The listener generates all three values automatically using S256. The following table describes each value — useful if you are implementing the flow in your own language rather than using the listener directly.
+
+[.table-scroll]
+--
+[cols="1,3", options="header"]
+|===
+| Value
+| Description
+
+| `code_verifier`
+| A random, URL-safe string between 43 and 128 characters. Keep this secret. It is sent only to the token endpoint.
+
+| `code_challenge`
+| `base64url(sha256(code_verifier))`, sent in the authorization URL so the server can verify the exchange later.
+
+| `state`
+| A random value used to prevent CSRF attacks. Verify that the state returned in the redirect matches what you sent.
+|===
+--
+
+The following shell commands show how the values are derived:
+
+[,shell]
+----
+# 43-128 character URL-safe random string
+CODE_VERIFIER=$(openssl rand -base64 48 | tr -d '=\n' | tr '+/' '-_')
+
+# S256 challenge = base64url(sha256(verifier))
+CODE_CHALLENGE=$(printf '%s' "$CODE_VERIFIER" | openssl dgst -sha256 -binary | \
+  openssl base64 | tr -d '=\n' | tr '+/' '-_')
+
+# Random state for CSRF protection
+STATE=$(openssl rand -base64 16 | tr -d '=\n' | tr '+/' '-_')
+----
+
+[#step-3-open-the-authorization-url]
+== 3. Open the authorization URL
+
+. To construct the authorization URL using your `client_id` from <<step-1-register-your-client,Step 1>> and the PKCE values from <<step-2-start-a-local-redirect-listener,Step 2>>, run the following shell command. The `state` parameter is required. Omitting it returns a 400 error:
++
+[,shell]
+----
+REDIRECT_URI="http://127.0.0.1:9090/callback"
+
+printf 'https://app.circleci.com/oauth/authorize?response_type=code&client_id=%s&redirect_uri=%s&code_challenge=%s&code_challenge_method=S256&state=%s\n' \
+  "$CLIENT_ID" \
+  "$(python3 -c "import urllib.parse; print(urllib.parse.quote('$REDIRECT_URI', safe=''))")" \
+  "$CODE_CHALLENGE" \
+  "$STATE"
+----
+
+. The printed URL contains the following parameters:
++
+* `response_type=code`: Requests an authorization code.
+* `client_id`: Your registered client ID from Step 1.
+* `redirect_uri`: The loopback address where CircleCI sends the authorization code.
+* `code_challenge` and `code_challenge_method=S256`: The PKCE challenge generated in Step 2.
+* `state`: The CSRF protection value generated in Step 2.
++
+Open the printed URL in a browser. If you are not already logged in to CircleCI, you are redirected to the login page first, then returned to the consent screen.
+
+. On the consent screen select the access level to grant the tool. Choose the minimum level your tool requires.
++
+[.table-scroll]
+--
+[cols="1,3", options="header"]
+|===
+| Access level
+| Permissions
+
+| Read
+| Read-only access to all resources the authorizing user can read.
+
+| Write
+| Read and write access to all resources the authorizing user can read and write.
+
+| Admin
+| Full access to all permissions the authorizing user holds, which may include org management and billing settings for organizations where the user is an admin.
+|===
+--
++
+These access levels are a ceiling on the token, not a grant of new permissions. They cannot grant more access than the authorizing user already holds in CircleCI, based on that user's organization and project role. See the xref:permissions-authentication:roles-and-permissions-overview.adoc[Roles and Permissions Overview] page for role definitions:
++
+* A user with the _Viewer_ role who selects Admin still receives a token limited to Viewer-level (read-only) actions.
+* A user with the _Contributor_ role who selects Admin receives a token limited to Contributor-level actions. Org management and billing actions still require the _Organization Admin_ role.
+* Only a user with the _Organization Admin_ role (or the _Project Admin_ role, for project-scoped actions) receives the full Admin permissions described above.
++
+NOTE: Personal API tokens created manually through the web app always carry the user's full permissions. Tokens created through this OAuth flow are scoped to the access level the user selects during authorization.
+
+. If you belong to SSO-enabled organizations, an SSO organizations section appears below the access level selector, listing each org individually:
++
+* Select *Authorize* next to an org to include that org's resources in the token's scope, subject to the access level chosen above.
+* Leaving an org unauthorized does not fail the flow. The token is still issued, but it cannot access that org's resources.
+* An org's resources stay inaccessible to the token until that org is explicitly authorized. This follows the same per-organization model used for xref:permissions-authentication:sso-overview.adoc#personal-api-tokens-with-sso[Personal API Tokens With SSO].
+* SSO org access can be granted or revoked for an existing token from the *OAuth Clients* page in user settings, without repeating the full authorization flow.
+. Select *Allow* to approve, or select *Deny* to cancel the flow.
+
+. CircleCI redirects the browser to your listener, which prints:
++
+[,text]
+----
+CODE : 5fa2b3c1d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9
+STATE: rAnDoMsTaTe12345
+----
++
+CAUTION: Before proceeding, verify that the `STATE` value printed by the listener matches the `STATE` value you sent in the authorization URL. A mismatch indicates a possible CSRF attack. If the values do not match, abort the flow.
+
+. Copy the code into a shell variable in your working terminal:
++
+[,shell]
+----
+CODE="5fa2b3c1d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9"
+----
+
+[#step-4-exchange-the-code-for-a-token]
+== 4. Exchange the code for a token
+
+The authorization code is single-use and short-lived. Exchange it before it expires.
+
+. Run the following curl command to exchange the code for a token:
++
+[,shell]
+----
+curl -s -X POST https://app.circleci.com/oauth/token \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "grant_type=authorization_code" \
+  -d "code=$CODE" \
+  -d "client_id=$CLIENT_ID" \
+  -d "redirect_uri=$REDIRECT_URI" \
+  -d "code_verifier=$CODE_VERIFIER" | jq .
+----
+
+A successful exchange returns `200 OK`:
+
+[,json]
+----
+{
+  "access_token": "ccipat_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "token_type": "Bearer",
+  "expires_in": 7776000
+}
+----
+
+`expires_in` is 7,776,000 seconds (90 days). This flow does not issue refresh tokens. See <<token-lifecycle,Manage your token's expiry and rotation>> for details.
+
+CAUTION: Store the `access_token` securely. Treat it with the same care as a password.
+
+[#step-5-use-the-token]
+== 5. Use the token
+
+The `access_token` is a standard CircleCI personal API token. Pass it as a Bearer token on any API v3 or v2 call:
+
+[,shell]
+----
+TOKEN="ccipat_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+curl -s https://circleci.com/api/v3/orgs \
+  -H "Authorization: Bearer $TOKEN" | jq .
+----
+
+For API v2, the token is also accepted as a `Circle-Token` header for compatibility with existing integrations:
+
+[,shell]
+----
+curl -s https://circleci.com/api/v2/me \
+  -H "Circle-Token: $TOKEN" | jq .
+----
+
+See the link:https://circleci.com/docs/api/v3[API v3 Reference] and link:https://circleci.com/docs/api/v2/[API v2 Reference] for the full list of available endpoints.
+
+[#token-lifecycle]
+== Manage your token's expiry and rotation
+
+Tokens issued through this flow are standard 90-day CircleCI personal API tokens. The following sections describe how expiry, rotation, and manual revocation work.
+
+[#expiry]
+=== Expiry
+
+Tokens expire after 90 days (7,776,000 seconds). This flow does not issue refresh tokens. Re-run the authorization flow from <<step-2-start-a-local-redirect-listener,Step 2>> to get a new token when yours expires.
+
+[#rotation]
+=== Rotation
+
+Re-running the authorization flow for an existing `client_id` and user pairing atomically revokes the previous token and issues a new one. You do not need to manually delete the old token before starting a new flow. This behavior makes scheduled rotation straightforward: run the flow on a cadence shorter than 90 days to maintain uninterrupted access.
+
+[#manual-revocation]
+=== Manual revocation
+
+Tokens issued through OAuth appear on the user's Personal API Tokens page, and can be deleted from there at any time. See xref:managing-api-tokens.adoc[Managing API Tokens] for details.
+
+[#error-reference]
+== Error reference
+
+The following table describes the error responses you may encounter at each stage of the flow.
+
+[.table-scroll]
+--
+[cols="1,2,3", options="header"]
+|===
+| Stage
+| Scenario
+| Response
+
+| Registration
+| `redirect_uri` is not a loopback address, or port is out of range 1025-65535
+| `400 {"message": "invalid redirect_uri"}`
+
+| Authorization
+| `state` parameter omitted
+| `400 {"message": "state is required"}`
+
+| Authorization
+| `code_challenge_method` is not `S256`
+| `400 {"message": "code_challenge_method must be S256"}`
+
+| Authorization
+| Unknown `client_id`
+| `400 {"message": "unknown client_id"}`
+
+| Authorization
+| User clicks Deny
+| Redirect to `redirect_uri` with `?error=access_denied&error_description=the+user+denied+the+request&state=...`
+
+| Token exchange
+| Code already used, expired, or `code_verifier` does not match
+| `400 {"error": "invalid_grant"}` (RFC 6749 standard error body)
+|===
+--
+
+For general API error codes, refer to the link:https://circleci.com/docs/api/v3[API v3 Reference] and link:https://circleci.com/docs/api/v2/[API v2 Reference].
+
+[#next-steps]
+== Next steps
+
+* xref:api-developers-guide.adoc[CircleCI API Developer's Guide] - authenticate, paginate results, and make common API calls.
+* link:https://circleci.com/docs/api/v3[API v3 Reference] - full endpoint documentation.
+* link:https://circleci.com/docs/api/v2/[API v2 Reference] - full endpoint documentation.
+</content>

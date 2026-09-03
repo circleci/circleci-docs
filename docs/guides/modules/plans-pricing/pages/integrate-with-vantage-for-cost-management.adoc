@@ -39,6 +39,7 @@ To connect Vantage to CircleCI, you need to create a personal API token.
 . Select **Personal API Tokens**.
 . Select btn:[Create new token].
 . Provide a descriptive name for the token (for example, "Vantage Integration").
+. Set an expiry date for the token. You must choose a date no more than one year in the future.
 . Select **Add API Token**.
 . Copy the token right away, as you cannot view it again.
 
@@ -117,7 +118,7 @@ Virtual Tags allow you to:
 * Group costs by team, department, or business unit.
 * Track spending across multiple projects and organizations.
 
-Refer to the link:https://docs.vantage.sh/virtual_tags[Vantage Virtual Tags documentation] for detailed configuration instructions.
+Refer to the link:https://docs.vantage.sh/tagging[Vantage Virtual Tags documentation] for detailed configuration instructions.
 
 [#next-steps]
 == Next steps

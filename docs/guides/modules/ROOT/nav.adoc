@@ -8,7 +8,8 @@
 * Getting started
 ** First steps
 *** xref:getting-started:first-steps.adoc[Sign up and try CircleCI]
-*** xref:getting-started:invite-your-team.adoc[Join teammates on CircleCI]
+*** xref:getting-started:create-an-organization.adoc[Create an organization]
+*** xref:getting-started:invite-your-team.adoc[Invite your team]
 *** xref:getting-started:create-project.adoc[Create a project]
 *** xref:getting-started:getting-started.adoc[Quickstart guide]
 ** How-to guides
@@ -18,7 +19,6 @@
 *** xref:getting-started:language-javascript.adoc[Node.js quickstart]
 *** xref:getting-started:language-python.adoc[Python quickstart]
 *** xref:getting-started:language-go.adoc[Go quickstart]
-*** xref:getting-started:create-an-organization.adoc[Create an organization]
 ** Tutorials
 *** xref:getting-started:config-intro.adoc[Configuration intro]
 
@@ -45,6 +45,7 @@
 *** xref:orchestrate:set-up-triggers.adoc[Set up triggers]
 *** xref:orchestrate:github-trigger-event-options.adoc[GitHub trigger event options]
 *** xref:orchestrate:gitlab-trigger-options.adoc[GitLab trigger options]
+*** xref:orchestrate:cursor-origin-trigger-event-options.adoc[Cursor Origin trigger event options]
 *** xref:orchestrate:custom-webhooks.adoc[Custom webhooks]
 *** xref:orchestrate:schedule-triggers.adoc[Schedule triggers]
 *** xref:orchestrate:set-up-cross-repo-triggers-for-library-consumers.adoc[Set up cross-repo triggers for library consumers]
@@ -117,7 +118,7 @@
 ** xref:execution-runner:runner-concepts.adoc[Self-hosted runner concepts]
 ** xref:execution-runner:runner-feature-comparison-matrix.adoc[Runner feature comparison matrix]
 ** Runner provisioner
-*** xref:execution-runner:runner-provisioner.adoc[Runner provisioner overview - Preview]
+*** xref:execution-runner:runner-provisioner.adoc[Runner provisioner overview - Beta]
 
 ** Container runner
 *** xref:execution-runner:container-runner-installation.adoc[Container runner installation]
@@ -168,13 +169,19 @@
 *** xref:test:testing-macos.adoc[Testing macOS applications]
 
 * Deploy with CircleCI
-** xref:deploy:deployment-overview.adoc[Deployment and deploy management]
+** Deployment management
+*** xref:deploy:deployment-overview.adoc[Overview]
+*** xref:deploy:configure-deploy-markers.adoc[Configure deploy markers]
+** Smart Deployments
+*** xref:deploy:smart-deployments-overview.adoc[Smart Deployments overview]
+*** xref:deploy:set-up-smart-deployments.adoc[Set up Smart Deployments]
+*** xref:deploy:set-up-release-validation-manually.adoc[Set up release validation manually]
+*** xref:deploy:release-validation-reference.adoc[Release validation configuration reference]
 ** Deploys and rollbacks
 *** xref:deploy:set-up-rollbacks.adoc[Set up a rollback pipeline]
 *** xref:deploy:set-up-deploys.adoc[Set up a deploy pipeline]
 *** xref:deploy:deploy-a-component.adoc[Deploy a component]
 *** xref:deploy:rollback-a-deployment.adoc[Rollback a deployment]
-*** xref:deploy:configure-deploy-markers.adoc[Configure deploy markers]
 *** xref:deploy:environment-hierarchy-and-version-promotion.adoc[Environment hierarchy and version promotion]
 ** Release agent setup
 *** xref:deploy:release-agent-overview.adoc[Release agent overview]
@@ -284,6 +291,7 @@
 * Integration
 ** xref:integration:add-ssh-key.adoc[Add SSH Keys]
 ** VCS integration
+*** xref:integration:set-up-vcs-connections.adoc[Set up VCS connections]
 *** xref:integration:version-control-system-integration-overview.adoc[VCS, pipeline types, and feature support]
 *** xref:integration:github-enterprise-server-integration.adoc[GitHub Enterprise Server integration]
 *** xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth org]
@@ -330,6 +338,7 @@
 *** xref:toolkit:circleci-mcp-overview.adoc[CircleCI MCP overview]
 *** xref:toolkit:connecting-to-the-circleci-mcp-server.adoc[Connecting to the CircleCI MCP server]
 *** xref:toolkit:connecting-to-the-circleci-cli-mcp.adoc[Connecting to the CircleCI CLI MCP]
+*** xref:toolkit:connecting-to-a-docs-mcp-server.adoc[Connecting to the CircleCI Docs MCP Server]
 
 ** AI-powered features
 *** xref:guides:toolkit:enable-ai-powered-features.adoc[Enable AI-powered features]
@@ -340,6 +349,7 @@
 *** xref:toolkit:api-intro.adoc[API v2 intro]
 *** xref:toolkit:api-developers-guide.adoc[API v2 developers guide]
 *** xref:toolkit:managing-api-tokens.adoc[Managing API tokens]
+*** xref:toolkit:oauth-dynamic-client-registration.adoc[OAuth 2.0 API access with Dynamic Client Registration]
 ** IDE tools
 *** xref:toolkit:vs-code-extension-overview.adoc[VS Code extension overview]
 *** xref:toolkit:get-started-with-the-vs-code-extension.adoc[Get started with the VS Code extension]

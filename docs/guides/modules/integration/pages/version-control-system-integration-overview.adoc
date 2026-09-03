@@ -10,11 +10,14 @@ CircleCI supports various pipeline types which map directly to the version contr
 * GitHub OAuth
 * GitHub OAuth (Server)
 * GitLab
-* GitLab Self-managed
+* GitLab self-managed
 * Bitbucket
 * Bitbucket Data Center
+* Cursor Origin
 
 This guide provides an overview of the VCS options, organization types, and pipeline types supported by CircleCI and the features available to each.
+
+NOTE: The Cursor Origin integration is in beta. Cursor Origin is available on CircleCI Cloud, for `circleci` type organizations only.
 
 == Which version control systems are supported?
 
@@ -27,6 +30,7 @@ link:https://circleci.com/pricing/[CircleCI Cloud] pipelines can be integrated w
 * GitLab self-managed
 * Bitbucket Cloud
 * Bitbucket Data Center
+* Cursor Origin
 
 link:https://circleci.com/pricing/server/[CircleCI Server] supports the following:
 
@@ -46,6 +50,7 @@ For a full guide to organization types, see the xref:permissions-authentication:
 * GitLab
 * GitLab self-managed
 * Bitbucket Data Center
+* Cursor Origin
 
 `github` type organizations can be integrated with:
 
@@ -68,13 +73,13 @@ The following table shows feature support for each pipeline type.
 
 For an overview of users, orgs, and pipeline types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
 
-NOTE: The table below is not a full list of CircleCI features. Only features where the pipeline type is relevant to support are included. If a feature is not in this table, it is supported for all pipeline types.
+The table below is not a full list of CircleCI features. Only features where the pipeline type is relevant to support are included. If a feature is not in this table, it is supported for all pipeline types.
 
 [.table-scroll]
 --
-[.datatable,cols="10*", options="header"]
+[.datatable,cols="11*", options="header"]
 |===
-| Feature | Category | GitHub App | GitHub App Server (Preview) | GitHub OAuth | GitHub OAuth on Server | GitLab.com | GitLab self-managed | Bitbucket Cloud | Bitbucket Data Center
+| Feature | Category | GitHub App | GitHub App Server (Preview) | GitHub OAuth | GitHub OAuth on Server | GitLab.com | GitLab self-managed | Bitbucket Cloud | Bitbucket Data Center | Cursor Origin (beta)
 
 | *The method used to check out your code when using the `checkout` step in your configuration file. See more in the xref:reference:ROOT:configuration-reference.adoc#checkout[Configuration Reference].*
 | Code checkout
@@ -86,6 +91,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | SSH
 | SSH
 | SSH
+| HTTPS
 
 | *Deploy key required for code checkout. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#how-circleci-checks-out-your-code[Users, Organizations, and Integrations] guide for more information.*
 | Code checkout
@@ -96,6 +102,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
 | [.circle-red]#**No**#
 
 | *Fine-grained permissions when integrating with CircleCI. Select a subset of repositories to be used with CircleCI.*
@@ -108,6 +115,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
 
 | *Custom configuration file path. If _No_ then CircleCI config is stored at `.circleci/config.yml` in the repository.*
 | Configuration
@@ -118,6 +126,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
 | *Centralized configuration management and job overrides. Read more in the xref:orchestrate:how-to-override-config.adoc[How to Override Config] guide.*
@@ -130,6 +139,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
 
 | xref:toolkit:vs-code-extension-overview.adoc#test-run-your-config-from-vs-code[Test Run Config From VS Code]
 | Configuration
@@ -140,6 +150,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
 | [.circle-red]#**No**#
 
 | *View your configuration file in the CircleCI web app*
@@ -152,6 +163,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
 
 | *Edit your configuration file in the CircleCI web app*
 | Configuration
@@ -162,6 +174,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
 | [.circle-red]#**No**#
 
 | *xref:enable-checks.adoc[GitHub Checks] to track the status of your pipeline in the GitHub UI*
@@ -174,9 +187,11 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
+| [.circle-red]#**No**#
 
 | *xref:outbound-webhooks.adoc[Outbound Webhooks]. Send real-time information about your pipelines to external services. Payload varies depending on pipeline type.*
 | Notifications
+| [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
@@ -196,6 +211,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
 
 | *xref:orchestrate:custom-webhooks.adoc[Custom Webhook Triggers]. Trigger pipelines from external services.*
 | Triggers
@@ -207,6 +223,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
 
 | *xref:orchestrate:schedule-triggers.adoc[Schedule Triggers]. Trigger pipelines based on a schedule.*
 | Triggers
@@ -218,6 +235,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
 
 | *xref:orchestrate:workflows.adoc#scheduling-a-workflow[Scheduled Workflows]. Schedules defined in the `config.yml` file.*
 | Triggers
@@ -229,6 +247,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
+| [.circle-red]#**No**#
 
 | *link:https://circleci.com/docs/api/v2/#operation/triggerPipeline[API Triggers]. Trigger pipelines via the API.*
 | Triggers
@@ -238,6 +257,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -251,6 +271,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
 
 | *Pull request event triggers. See more in the xref:orchestrate:triggers-overview.adoc#run-a-pipeline-on-commit-to-your-code-repository[Triggers Overview].*
 | Triggers
@@ -262,6 +283,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-green]#**No**#
+| [.circle-green]#**Yes**#
 
 | *Only build on push to pull/merge requests. See more in the xref:oss.adoc#only-build-pull-requests[Open Source Support] guide.*
 | Triggers
@@ -273,6 +295,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
 
 | xref:test:rerun-failed-tests.adoc[Rerun Failed Tests].
 | Testing
@@ -280,6 +303,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
@@ -295,12 +319,14 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
 
 | *Set up xref:deploy:set-up-rollbacks.adoc[Rollback Pipelines] to manually revert your application to a previous stable version directly from the CircleCI web app*
 | Deployment
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
@@ -317,6 +343,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
+| [.circle-red]#**No**#
 
 | xref:oss.adoc#build-pull-requests-from-forked-repositories[Build Pull Requests From Forked Repositories]
 | Open source support
@@ -327,6 +354,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
 | [.circle-red]#**No**#
 
 | xref:oss.adoc#pass-secrets-to-builds-from-forked-pull-requests[Pass Secrets to Builds From Forked Pull Requests]
@@ -339,12 +367,14 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
+| [.circle-red]#**No**#
 
 | *Chunk, CircleCI's AI CI/CD agent. Learn more in the xref:toolkit:chunk-setup-and-overview.adoc[Chunk Setup Guide]*
 | Agentic support
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**# with GitHub App installed
+| [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
@@ -358,6 +388,8 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 The following table shows feature support for each organization type. This list does not include all CircleCI features. Only features where the organization type is relevant are included.
 
 For a guide to organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
+
+NOTE: Cursor Origin organizations are `circleci` type organizations, so the **CircleCI** column applies to them.
 
 [.table-scroll]
 --

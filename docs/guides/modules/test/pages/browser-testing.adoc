@@ -24,7 +24,7 @@ Refer to the xref:execution-managed:circleci-images.adoc[Pre-Built CircleCI Conv
 
 Automation tools used for browser tests often use Selenium WebDriver, a widely-adopted browser driving standard.
 
-Selenium WebDriver provides a common API for programmatically driving browsers implemented in several popular languages, including Java, Python, and Ruby. Because Selenium WebDriver provides a unified interface for these browsers, you only need to write your browser tests once. These tests will work across all browsers and platforms. See the link:https://www.seleniumhq.org/docs/03_webdriver.jsp#setting-up-a-selenium-webdriver-project[Selenium documentation] for details on setup. Refer to the link:https://www.xfree86.org/4.0.1/Xvfb.1.html[Xvfb man page] for virtual framebuffer X Server documentation.
+Selenium WebDriver provides a common API for programmatically driving browsers implemented in several popular languages, including Java, Python, and Ruby. Because Selenium WebDriver provides a unified interface for these browsers, you only need to write your browser tests once. These tests will work across all browsers and platforms. See the link:https://www.selenium.dev/documentation/webdriver/getting_started/[Selenium documentation] for details on setup. Refer to the link:https://www.xfree86.org/4.0.1/Xvfb.1.html[Xvfb man page] for virtual framebuffer X Server documentation.
 
 WebDriver can operate in two modes, local or remote:
 
@@ -157,7 +157,7 @@ Configure CircleCI to collect xref:optimize:artifacts.adoc[Build Artifacts] and 
 
 Saving screenshots is supported by most test suites, and is a built-in feature in WebKit and Selenium:
 
-* link:https://docs.seleniumhq.org/docs/04_webdriver_advanced.jsp#remotewebdriver[Manually, using Selenium directly]
+* link:https://www.selenium.dev/documentation/webdriver/drivers/remote_webdriver/[Manually, using Selenium directly]
 * link:https://github.com/mattheworiordan/capybara-screenshot[Automatically on failure, using Cucumber]
 * link:https://gist.github.com/michalochman/3175175[Automatically on failure, using Behat and Mink]
 
@@ -182,7 +182,7 @@ NOTE: Update `8080` to be the port you are running on the CircleCI container.
 ssh -p 64625 ubuntu@54.221.135.43 -L 3000:localhost:8080
 ----
 
-. Then, open your browser on your local machine and navigate to `+http://localhost:3000+` to send requests directly to the server running on port `8080` on the CircleCI container. You can also manually start the test server on the CircleCI container (if it is not already running), and you can access the running test server from the browser on your development machine.
+. Then, open your browser on your local machine and navigate to `+http://localhost:3000+` to send requests directly to the server running on port `8080` on the CircleCI container. You can also manually start the test server on the CircleCI container if it is not already running, then access it from your local browser.
 
 The steps described here are a good way to debug when setting up Selenium tests.
 

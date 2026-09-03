@@ -19,6 +19,24 @@ IgnoreURLs:
   - "github\\.com/circleci/circleci-docs/commit/" # Per-page "last updated" commit links — require GitHub login
   - "github\\.com/circleci/circleci-docs/edit/"   # Per-page "propose changes" edit links — require GitHub login
   - "^https://support\\.circleci\\.com"  # Support site returns 403 to automated checkers; links are valid
+  # Domains that return 403 to automated checkers (anti-bot / auth walls) but links are valid:
+  - "^https://www\\.npmjs\\.com"
+  - "^https://stackoverflow\\.com"
+  - "^https://softwareengineering\\.stackexchange\\.com"
+  - "^https://platform\\.openai\\.com"
+  - "^https://help\\.openai\\.com"
+  - "^https://auth\\.openai\\.com"
+  - "^https://www\\.realvnc\\.com"
+  - "^https://www\\.computerhope\\.com"
+  - "^https://levelup\\.gitconnected\\.com"
+  - "^https://blog\\.coinbase\\.com"
+  - "^https://gitlab\\.com/-/user_settings"
+  # Domains that return 429 (rate-limited) to automated checkers; links are valid:
+  - "^https://argo-rollouts\\.readthedocs\\.io"
+  - "^https://coverage\\.readthedocs\\.io"
+  - "^https://bats-core\\.readthedocs\\.io"
+  - "^https://docs\\.pytest\\.org"
+  - "^https://diataxis\\.fr"
 IgnoreDirs:
   - "api"
 OutputDir: ".htmltest"

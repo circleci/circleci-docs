@@ -162,9 +162,9 @@ https://raw.githubusercontent.com/<org>/<repo>/<branch>/platform-tools.yml
 
 If you choose another hosting option, the raw URL will be different. For example:
 
-* **GitLab**: `https://gitlab.com/<org>/<repo>/-/raw/<branch>/<file>.yml`
-* **Bitbucket**: `https://bitbucket.org/<org>/<repo>/raw/<branch>/<file>.yml`
-* **AWS S3**: `https://s3.amazonaws.com/<bucket>/<path>/<file>.yml`
+* **GitLab**: `\https://gitlab.com/<org>/<repo>/-/raw/<branch>/<file>.yml`
+* **Bitbucket**: `\https://bitbucket.org/<org>/<repo>/raw/<branch>/<file>.yml`
+* **AWS S3**: `\https://s3.amazonaws.com/<bucket>/<path>/<file>.yml`
 * **Other object storage**: Any HTTPS-accessible location.
 
 [#step-3-configure-allow-list]
@@ -181,7 +181,7 @@ https://raw.githubusercontent.com/my-org/orbs/main/platform-tools.yml
 ----
 
 
-The allow-list entry should include the prefix:
+The allow-list entry must include the prefix:
 
 .Example URL prefix for a URL orb in a GitHub repository
 [,shell]
@@ -397,7 +397,7 @@ For full details, see xref:use:managing-url-orbs-allow-lists.adoc#limitations-an
 
 * xref:use:managing-url-orbs-allow-lists.adoc[Managing URL Orbs Allow Lists].
 * xref:use:orb-concepts.adoc#orb-types-comparison[Orb Types Comparison] for comparing URL orbs with inline and registry orbs.
-* xref:author:create-an-inline-orb.adoc[Create an Inline Orb] if you're considering starting with inline orbs.
+* xref:author:create-an-inline-orb.adoc[Create an Inline Orb] if you are considering starting with inline orbs.
 * xref:orb-author.adoc[Introduction to Authoring Orbs] for general orb authoring guidance.
 * xref:use:orb-concepts.adoc[Orb Concepts] for understanding orb configuration elements.
 * xref:reference:ROOT:reusing-config.adoc[Reusable Configuration Reference] for examples of reusable configuration.

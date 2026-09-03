@@ -42,6 +42,7 @@ Appium
 Arm
 Artifactory
 [Aa]rchitected
+Alertmanager
 Arweave
 Asciidoctor
 Atlassian
@@ -115,6 +116,8 @@ CRD
 crontab
 CTest
 Cucumber
+Cursor
+\bCursor Origin\b
 CVEs?
 Cypress
 Datacenter
@@ -228,13 +231,13 @@ Leiningen
 Likert
 Linux
 [Ll]iveness
+[Ll]oopback
 LLMs?
 LLMOps
 [Ll]ockfiles?
 macOS
 \bMac\b
 manpage
-MCP server
 MFEs?
 [Mm]iddleware
 minitest
@@ -252,6 +255,9 @@ NUnit
 OAuth
 OIDC
 OIDC Identity Provider
+PKCE
+DCR
+PAR
 Okta
 OOM
 OPA
@@ -331,9 +337,11 @@ SemVer
 SELinux
 [Ss]erverless
 \b[Ss]hellchecking\b
+SHAs?
 [Ss]harded
 \b[Ss]ingle sign-on\b
 SLAs?
+SLOs?
 Slanger
 [Ss]ignup
 SKUs?
@@ -427,3 +435,4 @@ LangSmith
 [Tt]estsuite
 containerDisk
 routable
+DMs

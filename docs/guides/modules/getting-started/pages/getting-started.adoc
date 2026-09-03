@@ -28,6 +28,9 @@ include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration 
 image::guides:ROOT:getting-started-guide-exp/quick-start-first-step.svg[section one banner image]
 
 *Create a project, connect your new code repository, and commit a CircleCI configuration file. View your project build in the CircleCI app.*
+
+NOTE: Building a **Cursor Origin** project? The tabs below do not cover Origin. Follow the Cursor Origin tab on the xref:create-project.adoc#create-a-project[Create a Project] page instead, then return here for the rest of this guide.
+
 pass:[<!-- vale off -->]
 [tabs]
 ====
@@ -83,7 +86,7 @@ If you do not see the org selector in the top left corner, navigate back to your
 image:guides:ROOT:getting-started-guide-exp/select-config-gitlab.png[float=right]
 [%hardbreaks]
 *Select a config.yml*
-In the "Select your link:https://circleci.com/docs/config-start/[config.yml] file" modal, select *Fast*, then give your project a name, and select *Create Project*. If you are authenticated through the GitHub App, you also need to set up SSH access for your project at this point.
+In the "Select your `config.yml` file" modal, select *Fast*, then give your project a name, and select *Create Project*. If you are authenticated through the GitHub App, you also need to set up SSH access for your project at this point.
 
 {empty} +
 

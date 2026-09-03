@@ -139,13 +139,13 @@ options:
   test-impact-analysis: true
 ----
 
-== 2. Run locally
+== 2. Run
 
-Use `--doctor` locally to validate the `test-suites.yml` is set up correctly. The CLI runs additional analysis checks when test impact analysis is enabled. If any results look incorrect, action items are provided to resolve them.
+Use the `doctor` command to validate the `test-suites.yml` is set up correctly. The CLI runs additional analysis checks when test impact analysis is enabled. If any results look incorrect, action items are provided to resolve them.
 
 [source,console]
 ----
-$ circleci testsuite "ci tests" --doctor
+$ circleci testsuite doctor "ci tests"
 ----
 
 Follow the steps until all checks pass.
@@ -155,8 +155,6 @@ include::ROOT:partial$tips/testsuite-working-directory.adoc[]
 Once all checks pass, follow the "Next steps" from the doctor output to generate initial impact data locally and send it to CircleCI.
 
 NOTE: Depending on the test runner, the first run of analysis can take a long time because every test atom needs to run analysis.
-
-== 3. Run in CI
 
 Commit the `.circleci/test-suites.yml` changes to your feature branch and push to your VCS. Follow your usual process to merge to your default branch.
 
@@ -294,7 +292,7 @@ jobs:
     steps:
       - setup
       # Disable analysis, run all tests on default branches, impacted tests on feature branches.
-      - run: circleci testsuite "ci tests" --analyze-tests="none"
+      - run: circleci testsuite run "ci tests" --analyze-tests="none"
       - store_test_results:
           path: test-reports
 
@@ -303,7 +301,7 @@ jobs:
     steps:
       - setup
       # Disable running tests, default will analyze impacted tests on main.
-      - run: circleci testsuite "ci tests" --run-tests="none"
+      - run: circleci testsuite run "ci tests" --run-tests="none"
 
   deploy:
     executor: my-executor
@@ -343,7 +341,7 @@ jobs:
       - setup
       # Disable analysis.
       # (Default) Run all tests on default branches, run impacted tests on feature branches.
-      - run: circleci testsuite "ci tests" --analyze-tests="none"
+      - run: circleci testsuite run "ci tests" --analyze-tests="none"
       - store_test_results:
           path: test-reports
 
@@ -353,7 +351,7 @@ jobs:
       - setup
       # Disable running tests.
       # Default will analyze impacted tests on main.
-      - run: circleci testsuite "ci tests" --run-tests="none"
+      - run: circleci testsuite run "ci tests" --run-tests="none"
 
   deploy:
     executor: my-executor
@@ -395,7 +393,92 @@ jobs:
       - setup
       # Analyze impacted tests on "develop" branch, otherwise disable.
       # (Default) Run all tests on default branches, run impacted tests on feature branches.
-      - run: circleci testsuite "ci tests" --analyze-tests=<< pipeline.git.branch == "develop" and "impacted" or "none" >>
+      - run: circleci testsuite run "ci tests" --analyze-tests=<< pipeline.git.branch == "develop" and "impacted" or "none" >>
       - store_test_results:
           path: test-reports
 ----
+
+[#dynamic-parallelism]
+=== Set parallelism from the number of selected tests
+
+Use the `circleci testsuite list-tests` command in a setup workflow to count the selected test atoms, then pass a parallelism value to the continued workflow as a pipeline parameter. This approach requires xref:orchestrate:dynamic-config.adoc[Dynamic Configuration] to be enabled for your project.
+
+The `list-tests` command prints the selected test atoms to stdout, one per line, without running them. It applies the same selection rules as `circleci testsuite run`, so the count reflects what the test job runs. The `--run-tests` and `--analyze-tests` flags accept the same values as `run`. If your test job passes either flag, pass the same flags to `list-tests` so the count matches.
+
+.Setup configuration that counts the selected test atoms
+[source,yaml]
+----
+# .circleci/config.yml
+version: 2.1
+setup: true
+
+orbs:
+  continuation: circleci/continuation@1
+
+jobs:
+  set-parallelism:
+    executor: my-executor
+    steps:
+      # Check out the code and install the dependencies the discover command needs.
+      - setup
+      - run:
+          name: Count selected test atoms
+          command: |
+            TESTS_PER_NODE=20
+            MAX_PARALLELISM=10
+
+            # List the test atoms that would be selected, without running them.
+            TEST_COUNT=$(circleci testsuite list-tests "ci tests" | wc -l)
+
+            # Round up to the next whole node, then clamp to the range 1-MAX_PARALLELISM.
+            PARALLELISM=$(( (TEST_COUNT + TESTS_PER_NODE - 1) / TESTS_PER_NODE ))
+            if [ "$PARALLELISM" -lt 1 ]; then
+              PARALLELISM=1
+            fi
+            if [ "$PARALLELISM" -gt "$MAX_PARALLELISM" ]; then
+              PARALLELISM=$MAX_PARALLELISM
+            fi
+
+            echo "Selected ${TEST_COUNT} test atoms, continuing with parallelism ${PARALLELISM}"
+            echo "{\"test_parallelism\": ${PARALLELISM}}" > /tmp/parameters.json
+      - continuation/continue:
+          configuration_path: .circleci/continue-config.yml
+          parameters: /tmp/parameters.json
+
+workflows:
+  setup-workflow:
+    jobs:
+      - set-parallelism
+----
+
+.Continue configuration that sets parallelism from the pipeline parameter
+[source,yaml]
+----
+# .circleci/continue-config.yml
+version: 2.1
+
+parameters:
+  test_parallelism:
+    type: integer
+    default: 1
+
+jobs:
+  test:
+    executor: my-executor
+    parallelism: << pipeline.parameters.test_parallelism >>
+    steps:
+      - setup
+      - run: circleci testsuite run "ci tests"
+      - store_test_results:
+          path: test-reports
+
+workflows:
+  test-workflow:
+    jobs:
+      - test
+----
+
+[TIP]
+====
+The setup job runs your `discover` command, so it needs a checkout and any dependencies that command relies on.
+====

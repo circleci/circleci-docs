@@ -71,9 +71,9 @@ The orb development kit refers to a suite of tools that work together to simplif
 The orb development kit is made up of the following components:
 
 * link:https://github.com/CircleCI-Public/Orb-Template[Orb Template].
-* link:https://circleci-public.github.io/circleci-cli/[CircleCI CLI].
-** link:https://circleci-public.github.io/circleci-cli/circleci_orb_pack.html[Orb Pack Command].
-** link:https://circleci-public.github.io/circleci-cli/circleci_orb_init.html[Orb Init Command].
+* link:https://cli.circleci.com/[CircleCI CLI].
+** link:https://cli.circleci.com/reference/[Orb Pack Command].
+** link:https://cli.circleci.com/reference/[Orb Init Command].
 * link:https://circleci.com/developer/orbs/orb/circleci/orb-tools[Orb Tools Orb].
 
 The *orb template* is a repository with CircleCI's orb project template, which is automatically ingested and modified by the `orb init` command.
@@ -136,7 +136,7 @@ To list xref:use:orb-intro.adoc#public-or-private[Private] orbs:
 circleci orb list <my-namespace> --private
 ----
 
-For more information on how to use the `circleci orb` command, see the CLI link:https://circleci-public.github.io/circleci-cli/circleci_orb.html[documentation].
+For more information on how to use the `circleci orb` command, see the CLI link:https://cli.circleci.com/reference/[documentation].
 
 [#categorizing-your-orb]
 === Categorizing your orb
@@ -169,7 +169,7 @@ You can select up to two categories for your orb. These are the available catego
 * Security
 * Testing
 
-The list of categories can also be obtained by running the `circleci orb list-categories` CLI command. You can view the detailed docs for this command link:https://circleci-public.github.io/circleci-cli/circleci_orb_list-categories.html[in the CLI documentation].
+The list of categories can also be obtained by running the `circleci orb list-categories` CLI command. You can view the detailed docs for this command link:https://cli.circleci.com/reference/[in the CLI documentation].
 
 [#add-an-orb-to-a-category]
 ==== Add an orb to a category
@@ -177,7 +177,7 @@ The list of categories can also be obtained by running the `circleci orb list-ca
 .Adding an orb category
 image::guides:ROOT:orb-categories-add-to-category.png[Adding an orb category]
 
-Add your orb to your chosen category by running `circleci orb add-to-category <namespace>/<orb> "<category-name>"`. You can view the detailed docs for this command link:https://circleci-public.github.io/circleci-cli/circleci_orb_add-to-category.html[in the CLI documentation].
+Add your orb to your chosen category by running `circleci orb add-to-category <namespace>/<orb> "<category-name>"`. You can view the detailed docs for this command link:https://cli.circleci.com/reference/[in the CLI documentation].
 
 [#remove-an-orb-from-a-category]
 ==== Remove an orb from a category
@@ -185,7 +185,7 @@ Add your orb to your chosen category by running `circleci orb add-to-category <n
 .Removing an orb from a category
 image::guides:ROOT:orb-categories-remove-from-category.png[Removing an orb from a category]
 
-Remove an orb from a category by running `circleci orb remove-from-category <namespace>/<orb> "<category-name>"`. You can view the detailed docs for this command link:https://circleci-public.github.io/circleci-cli/circleci_orb_remove-from-category.html[in the CLI documentation].
+Remove an orb from a category by running `circleci orb remove-from-category <namespace>/<orb> "<category-name>"`. You can view the detailed docs for this command link:https://cli.circleci.com/reference/[in the CLI documentation].
 
 [#viewing-an-orbs-categorizations]
 ==== Viewing an orb's categorizations
@@ -193,7 +193,7 @@ Remove an orb from a category by running `circleci orb remove-from-category <nam
 .Show which categorizations have been added to an orb
 image::guides:ROOT:orb-categories-orb-info.png[Show which categorizations have been added to an orb]
 
-To see which categorizations have been applied to an orb, check the output of `circleci orb info <namespace>/<orb>` for a list. You can view the detailed docs for this command link:https://circleci-public.github.io/circleci-cli/circleci_orb_info.html[in the CLI documentation].
+To see which categorizations have been applied to an orb, check the output of `circleci orb info <namespace>/<orb>` for a list. You can view the detailed docs for this command link:https://cli.circleci.com/reference/[in the CLI documentation].
 
 
 

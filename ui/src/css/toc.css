@@ -31,15 +31,6 @@
   margin-bottom: 1.2rem;
 }
 
-/* The embedded TOC is shown the whole way up to the 1200px sidebar reflow, so
-   its heading spacing must cover that range too — previously this stopped at
-   1024px, leaving the heading cramped against the links in the 1024–1199 band. */
-@media screen and (max-width: 1199.5px) {
-  .toc.embedded .toc-menu h3 {
-    margin-bottom: 1.25rem;
-  }
-}
-
 .toc .toc-menu ul {
   font-size: calc(15 / var(--rem-base) * 1rem);
   line-height: var(--toc-line-height);
@@ -92,14 +83,15 @@
   color: inherit;
   border-left: 1px solid var(--toc-border-color);
   display: inline-block;
-  padding: 0.6rem 0 0.6rem 0.8rem;
+  /* Inter-item spacing is 2x this vertical padding (li margin is 0); 0.45rem -> 12px gap. */
+  padding: 0.45rem 0 0.45rem 0.8rem;
   text-decoration: none;
   transition: border-left-color 0.3s ease, border-left-width 0.3s ease;
 }
 
-/* The embedded TOC (shown below the 1200px sidebar reflow) uses link-blue for its
-   items on both mobile and tablet — previously this stopped at 768px, leaving the
-   tablet links grey. The sidebar TOC at 1200px+ keeps its own grey styling. */
+/* Below the 1200px sidebar reflow the page TOC appears only in the floating
+   dropdown panel; colour its links link-blue. The sidebar TOC at 1200px+ keeps
+   its own grey styling. */
 @media screen and (max-width: 1199.5px) {
   .toc .toc-menu a {
     color: var(--link-font-color);
@@ -111,7 +103,7 @@
   outline: none;
 }
 
-.toc.embedded .toc-menu a {
+.toc-float-panel .toc-menu a {
   display: block;
 }
 
@@ -187,4 +179,85 @@
 /* Hide subsection badges in TOC */
 .toc .subsection-badge {
   display: none;
+}
+
+/* === Floating "On this page" button + dropdown ===
+   Shown below the 1200px sidebar reflow (replaces the old embedded link list at
+   the top of the article). The sidebar TOC owns >= 1200px. Built in
+   js/02-on-this-page.js and appended to <body> so it floats over the content. */
+.toc-float {
+  display: none;
+}
+
+@media screen and (max-width: 1199.5px) {
+  .toc-float {
+    display: block;
+    position: fixed;
+    top: calc(var(--header-height) + 1.5rem); /* 24px below the header */
+    right: 1.5rem;
+    z-index: 40;
+  }
+}
+
+/* The mobile header has no component-nav row, so it is shorter than
+   --header-height; sit the button closer to the top. */
+@media screen and (max-width: 767.5px) {
+  .toc-float {
+    top: 8rem; /* ~24px below the shorter mobile header */
+    right: 1rem;
+  }
+}
+
+.toc-float-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  color: var(--toc-heading-font-color);
+  background: var(--body-background); /* opaque page bg: reads as "no fill" but no content bleeds through */
+  border: 1px solid var(--toc-border-color); /* vapor #D4D4D4 */
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+/* Active (panel open) and hover: filled with fog-60 (#EDEDED; dark #2E3C52). */
+.toc-float-btn:hover,
+.toc-float-btn[aria-expanded="true"] {
+  background: var(--color-fog);
+}
+
+.toc-float-btn:focus-visible {
+  outline: 2px solid var(--link-font-color);
+  outline-offset: 2px;
+}
+
+.toc-float-panel {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  width: max-content;
+  min-width: 220px;
+  max-width: min(320px, calc(100vw - 2rem));
+  max-height: calc(100vh - var(--header-height) - 3rem);
+  overflow-y: auto;
+  padding: 1rem 1.25rem;
+  background: var(--body-background);
+  border: 1px solid var(--toc-border-color);
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 16%);
+}
+
+.toc-float-panel[hidden] {
+  display: none;
+}
+
+.toc-float-panel .toc-menu {
+  margin: 0;
+}
+
+.toc-float-panel .toc-menu h3 {
+  margin-bottom: 0.5rem;
 }

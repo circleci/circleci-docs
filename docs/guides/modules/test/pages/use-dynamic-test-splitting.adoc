@@ -73,20 +73,18 @@ options:
   dynamic-test-splitting: true
 ----
 
-== 2. Run locally
+== 2. Run
 
-Use `--doctor` locally to validate that your `test-suites.yml` is set up correctly. The CLI runs additional checks when dynamic test splitting is enabled. If any results look incorrect, an action item is provided to resolve it.
+Use the `doctor` command to validate that your `test-suites.yml` is set up correctly. The CLI runs additional checks when dynamic test splitting is enabled. If any results look incorrect, an action item is provided to resolve it.
 
 [source,console]
 ----
-$ circleci testsuite "ci tests" --doctor
+$ circleci testsuite doctor "ci tests"
 ----
 
 Follow the steps until all checks pass.
 
 include::ROOT:partial$tips/testsuite-working-directory.adoc[]
-
-== 3. Run in CI
 
 Commit `.circleci/test-suites.yml` to your feature branch and push to your VCS.
 

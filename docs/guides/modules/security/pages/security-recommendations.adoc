@@ -12,9 +12,9 @@ Unix and Linux shells can expose sensitive data in several ways. It is important
 
 * *Command history*: If you include a secret in a command's parameters, such as `export MY_SECRET="value"` or `curl --header "authorization: Basic TOKEN"`, that value could be written into your shell's history file, such as `.bash_history`. Anyone with access to that file could then retrieve the secret.
 * *Process arguments*: While a process is running, any user on the same system can view the command that started it. The easiest way to see this is by running `ps -ef`, but there are other methods as well. Critically, this information is exposed after environment variables have been interpreted, so that when running `mycommand "$MYVAR"`, `ps` will show `mycommand <value of MYVAR>`. On some older variants of Unix, such as AIX, it is also possible for all users to see all environment variables for any process.
-* *System logs*: Many systems log all commands executed using `sudo` for auditing. There are many auditing services that record all commands. Such services could potentially export those logs into systems that are not designed to keep secret data safe.
+* *System logs*: Many systems log all commands executed using `sudo` for auditing. Many auditing services record all commands. Such services could potentially export those logs into systems that are not designed to keep secret data safe.
 * *Console output*: Depending on your threat model and what kind of console is in use, printing a secret to the console could carry risk. For example, use of screen-sharing tools for activities like pair-programming can lead to accidental, persistent exposure of secrets transited through untrusted videoconferencing providers, possibly even in video recordings. It is best to choose tools that print secrets to the console only when necessary and explicitly told to do so by the user.
-* *Persistent, unencrypted secrets on disk*: Although it is common practice for command-line tools to store and use secrets stored in files in your home directory, such files' availability to all processes and persistence over time may be a significant risk.
+* *Persistent, unencrypted secrets on disk*: Although command-line tools commonly store secrets in home directory files, those files are accessible to all processes and persist over time, posing a risk.
 
 [#mitigation-techniques]
 == Mitigation techniques
@@ -78,7 +78,7 @@ Using the `<<<` construct is more reliable than using `echo` or `printf`, which 
 
 When calling the CircleCI API with `curl` commands, you need to provide an API token. Several ways you can mitigate risk while supplying tokens are as follows:
 
-* Use a `.netrc` file: The link:https://everything.curl.dev/usingcurl/netrc[`.netrc` file format], which is supported by several different tools, allows you to provide HTTP basic auth credentials in a file, rather than at the command-line.
+* Use a `.netrc` file: The link:https://everything.curl.dev/usingcurl/netrc.html[`.netrc` file format], which is supported by several different tools, allows you to provide HTTP basic auth credentials in a file, rather than at the command-line.
 ** Create a file at a location of your choosing. The default used by some tools is `~/.netrc`. Be sure to `chmod 0600` this file before adding the secret, to prevent other users from viewing its contents.
 ** Add a line in the following format: `machine circleci.com login <your token> password`
 ** When invoking `curl` commands, tell it to look in your `.netrc` file for credentials: `curl --netrc-file ~/.netrc`

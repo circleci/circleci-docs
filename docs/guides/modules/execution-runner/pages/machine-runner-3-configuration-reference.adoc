@@ -40,7 +40,7 @@ The token is used to identify the machine runner to CircleCI and can be generate
 
 `$CIRCLECI_RUNNER_API_URL`
 
-The URL points to `https://runner.circleci.com` by default. Do not modify it unless you have a CircleCI Server installation. In that case, set it to the URL of your Server installation.
+The URL points to `\https://runner.circleci.com` by default. Do not modify it unless you have a CircleCI Server installation. In that case, set it to the URL of your Server installation.
 
 ---
 
@@ -367,7 +367,7 @@ Task-agent runs an embedded SSH server and agent on a dedicated port when the â€
 * The host port used by the SSH server is currently fixed to `*54782*`. Ensure this port is unblocked and available for SSH connections. A port conflict can occur if multiple machine runners are installed on the same host.
 * The SSH server will inherit the same user privileges and associated access authorizations as the task-agent, defined by the <<#runner-command-prefix,runner.command_prefix parameter>>.
 * The SSH server is configured for public key authentication. Anyone with permission to initiate a job can rerun it with SSH. However, only the user who initiated the rerun will have their SSH public keys added to the server for the duration of the SSH session.
-* Rerunning a job with SSH will hold the job open for *two hours* if a connection is made to the SSH server, or *ten minutes* if no connection is made, unless cancelled. While in this state, the job is counted against an organization's concurrency limit, and the task-agent will be unavailable to handle other jobs.
+* Rerunning a job with SSH holds the job open for *two hours* if a connection is made to the SSH server. If no connection is made the job is held open for *ten minutes* unless cancelled. While in this state, the job is counted against an organization's concurrency limit, and the task-agent will be unavailable to handle other jobs.
 * Cancel an SSH rerun job explicitly (through the web UI or CLI) when you finish debugging.
 
 ---

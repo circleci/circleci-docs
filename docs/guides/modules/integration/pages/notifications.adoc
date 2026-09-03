@@ -20,6 +20,7 @@ CircleCI uses your "default" email address to send mandatory communications, whi
 * System and security messages.
 * Billing and account updates.
 * Deprecation notices.
+* Personal API token expiry notifications.
 
 To set or change your default email address, follow these steps:
 
@@ -71,6 +72,8 @@ image::guides:ROOT:notification-email-success.png[Example success email notifica
 .Failure email
 image::guides:ROOT:notification-email-failure.png[Example failure email notification]
 
+If you link your Slack identity, CircleCI also delivers My Work notifications as Slack direct messages. You can set different status filters for Slack and email. See xref:integration:slack-integration.adoc#receive-dms-for-workflows-you-trigger[Receive DMs for Workflows You Trigger] in the Slack Integration guide to set this up.
+
 ==== Deployment notifications
 
 If you use the CircleCI release agent for deployments, you can receive notifications when a deployment is inconclusive. This helps you catch deployment issues early and investigate problems before they affect production. An inconclusive deployment typically means the release agent could not determine whether the deployment succeeded or failed.
@@ -107,6 +110,13 @@ image::guides:ROOT:chunk/chunk-notification-settings.png[Chunk notification sett
 
 For a full guide to setting up and using Chunk, including the email digest, see the xref:guides:toolkit:chunk-setup-and-overview.adoc#email-digest[Email Digest] section of the Chunk Overview and Setup guide.
 
+[#personal-api-token-expiry-notifications]
+=== Personal API token expiry notifications
+
+CircleCI emails you 30 days, 15 days, seven days, and one day before a personal API token expires.
+
+Expiry notifications are mandatory communications rather than a notification category, so you cannot opt out of them. To stop the emails for a token you no longer need, delete the token. For help creating, rotating, and deleting tokens, see the xref:toolkit:managing-api-tokens.adoc[Managing API Tokens] guide.
+
 [badge="Beta"]
 == Slack notifications
 
@@ -127,6 +137,7 @@ Approval job notifications are delivered through the same categories as your oth
 * *Email* to the user who triggered the pipeline, through the xref:integration:notifications.adoc#my-work[My Work] category.
 * *Email* to followers of the project, through the xref:integration:notifications.adoc#followed-projects[Followed Projects] category. Followers can enable these emails in their user notification settings.
 * *Slack* to the project's configured Slack channel, through xref:integration:notifications.adoc#slack-notifications[Slack Notifications]. This requires an active xref:integration:slack-integration.adoc[Slack Integration] for your organization.
+* *Slack direct message* to the user who triggered the pipeline, if they have linked their Slack identity. See xref:integration:slack-integration.adoc#link-your-slack-identity[Link Your Slack Identity] and xref:integration:slack-integration.adoc#receive-dms-for-workflows-you-trigger[Receive DMs for Workflows You Trigger] for details.
 
 === Approve or cancel an on-hold workflow
 
