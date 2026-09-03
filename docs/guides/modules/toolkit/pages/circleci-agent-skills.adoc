@@ -26,8 +26,6 @@ Before you install CircleCI agent skills, set up the following:
 * A CircleCI account with access to the projects you want to work on.
 * The CircleCI CLI, installed and authenticated, for skills that run CircleCI commands. See xref:circleci-cli.adoc[The CircleCI CLI].
 
-#TODO: check which skills work without the CircleCI CLI#
-
 == Available CircleCI agent skills
 
 The CircleCI plugin currently includes the following seven skills. Your agent picks a skill from your request, or you can invoke a skill by name.
