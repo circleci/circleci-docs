@@ -61,20 +61,16 @@ The CircleCI plugin currently includes the following seven skills. Your agent pi
 | Set up Chunk sidecars for this project.
 
 | `circleci-testsuite`
-| Adds `.circleci/test-suites.yml` and switches tests to `circleci testsuite run`.
+| Adds `.circleci/test-suites.yml` and switches tests to `circleci testsuite run`. This skill gets your project set up to use Smarter Testing features. The manual setup is described on the xref:guides:test:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] page.
 | Set up a testsuite for this project.
 
 | `circleci-smarter-testing`
-| Enables test impact analysis, dynamic test splitting, and auto-rerun of failed tests. Smarter Testing is in beta.
+| Enables Smarter Testing features: test impact analysis, dynamic test splitting, and auto-rerun of failed tests. Smarter Testing is in beta. Using this skill, your agent asks you to confirm which of the Smarter Testing features you want to set up.
 | Set up CircleCI Smarter Testing for running tests in this project.
 |===
 --
 
 include::ROOT:partial$notes/smarter-testing-beta.adoc[]
-
-`circleci-smarter-testing` requires a testsuite that already passes `circleci testsuite doctor`. Use `circleci-testsuite` first if `.circleci/test-suites.yml` does not exist, or if doctor still reports failed checks.
-
-For Smarter Testing product docs, see the xref:guides:test:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] page.
 
 == Install CircleCI agent skills
 
