@@ -169,7 +169,7 @@ Use GitHub Copilot's plugin update workflow. For current commands, see the link:
 
 After install, ask your agent for the outcome you want. Name the branch, project, or file when you can. The agent selects the matching skill.
 
-You can also invoke a skill by name. In Claude Code and Cursor, type `/circleci-builds`. In Codex and GitHub Copilot, use each product's skill invocation flow. See the Codex and Copilot tabs in <<install-circleci-agent-skills>>.
+You can also invoke a skill by name. In Claude Code and Cursor, type `circleci-builds`. In Codex and GitHub Copilot, use each product's skill invocation flow. See the Codex and Copilot tabs in <<install-circleci-agent-skills>>.
 
 Example requests:
 
