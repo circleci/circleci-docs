@@ -99,28 +99,25 @@ For more information on plugin marketplaces, see the link:https://code.claude.co
 Cursor::
 +
 --
-#TODO: confirm whether CircleCI is listed on the Cursor Marketplace#
-#TODO: confirm whether Import from Repo works without a Cursor plugin marketplace manifest#
+The CircleCI listing on the link:https://cursor.com/marketplace/circleci[Cursor Marketplace] is a different plugin. That plugin, from the link:https://github.com/CircleCI-Public/cursor-plugin[CircleCI Public Cursor Plugin] repository, connects Cursor to the hosted CircleCI MCP server. It does not install the agent skills from the CircleCI Public Skills repository.
 
-Cursor supports agent plugins and skills. CircleCI does not yet publish a Cursor-specific marketplace manifest.
+You can use the marketplace MCP plugin alongside these skills. For MCP setup, see xref:connecting-to-the-circleci-mcp-server.adoc[Connecting to the CircleCI MCP Server].
 
-Use one of these options:
+To install CircleCI agent skills in Cursor, copy the skill folders into your Cursor skills directory:
 
-. *Cursor Marketplace.* Open *Customize* in the sidebar and search for CircleCI. Install the plugin if it appears.
-. *Team marketplace.* On a Cursor Teams or Enterprise plan, import `https://github.com/CircleCI-Public/skills` from *Dashboard > Plugins*. Then install the CircleCI plugin from *Customize*.
-. *Copy the skill folders.* Use this option when the plugin is not listed, or when a team marketplace is not available:
-+
 [source,console]
 ----
 $ git clone https://github.com/CircleCI-Public/skills.git
 $ mkdir -p ~/.cursor/skills
 $ cp -R skills/plugins/circleci/skills/* ~/.cursor/skills/
 ----
-+
-To limit the skills to one project, copy the folders into `.cursor/skills/` in that repository instead.
-. Restart Cursor, or run *Developer: Reload Window*. Open *Customize* and confirm the CircleCI skills appear.
 
-For more information, see the link:https://cursor.com/docs/plugins[Cursor plugin documentation].
+To limit the skills to one project, copy the folders into `.cursor/skills/` in that repository instead.
+
+. Restart Cursor, or run *Developer: Reload Window*.
+. Open *Customize* and confirm the CircleCI skills appear.
+
+For more information on Cursor skills, see the link:https://cursor.com/docs/plugins[Cursor plugin documentation].
 --
 Codex::
 +
