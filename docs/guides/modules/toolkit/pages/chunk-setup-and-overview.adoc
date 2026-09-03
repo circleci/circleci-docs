@@ -292,14 +292,14 @@ NOTE: **After setup is complete**, clicking any fix button opens the Chunk task 
 To improve verification success, create an "agent environment" CircleCI YAML file. Copy the environment setup sections from your existing CircleCI configuration file into a dedicated file for Chunk.
 
 * Name the file `cci-agent-setup.yml` and save it to your `.circleci` directory on your default branch.
-* The file needs to include a single workflow with a single job named `cci-agent-setup`. The `cci-agent-setup` job needs to set up your environment for Chunk to use. You do not need to include steps to run tests. This file is purely for environment setup.
+* The file needs a single workflow named `cci-agent-setup` that runs a single job also named `cci-agent-setup`. Name both the workflow and the job `cci-agent-setup`. Using a different workflow name (for example `main`) causes Chunk's follow-up pipeline to fail config compilation after setup. The `cci-agent-setup` job needs to set up your environment for Chunk to use. You do not need to include steps to run tests. This file is purely for environment setup.
 
 .Example cci-agent-setup.yml
 [source,yaml]
 ----
 version: 2.1
 workflows:
-  main:
+  cci-agent-setup:
     jobs:
       - cci-agent-setup
 jobs:
