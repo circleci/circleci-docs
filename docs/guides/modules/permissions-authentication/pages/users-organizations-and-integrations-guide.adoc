@@ -666,7 +666,7 @@ If you need additional SSH keys in your builds, follow these steps:
 GitHub::
 +
 --
-In this example you will create a deploy key with write access to a GitHub repository. The GitHub repository is `https://github.com/you/test-repo`, and the CircleCI project is `https://app.circleci.com/pipelines/github/you/test-repo`.
+In this example you will create a deploy key with write access to a GitHub repository. The GitHub repository is `\https://github.com/you/test-repo`, and the CircleCI project is `\https://app.circleci.com/pipelines/github/you/test-repo`.
 
 . Create an SSH key-pair by following the link:https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/[GitHub instructions]. When prompted to enter a passphrase, do **not** enter one (below is one example command to generate a key on macOS):
 +
@@ -675,7 +675,7 @@ In this example you will create a deploy key with write access to a GitHub repos
 $ ssh-keygen -t ed25519 -C "your_email@example.com"
 ----
 
-. Go to `https://github.com/you/test-repo/settings/keys`, and select **Add Deploy Key**. Enter a title in the "Title" field, then copy and paste the public key you created in step 1. Check **Allow write access**, then select **Add key**.
+. Go to `\https://github.com/you/test-repo/settings/keys`, and select **Add Deploy Key**. Enter a title in the "Title" field, then copy and paste the public key you created in step 1. Check **Allow write access**, then select **Add key**.
 
 . Go to your project settings in the CircleCI app, select **SSH Keys**, and **Add SSH key**. In the "hostname" field, enter `github.com` and add the private key you created in step 1. Then select **Add SSH Key**.
 
@@ -705,7 +705,7 @@ In this example, the Bitbucket Cloud repository is `https://bitbucket.org/you/te
   ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 
-. Go to `https://bitbucket.org/you/test-repo/admin/access-keys/`, and select **Add key**. Enter a label in the "Label" field, then copy and paste the public key you created in step 1. Select **Add SSH key**.
+. Go to `\https://bitbucket.org/you/test-repo/admin/access-keys/`, and select **Add key**. Enter a label in the "Label" field, then copy and paste the public key you created in step 1. Select **Add SSH key**.
 
 . Go to your project settings in the CircleCI app, select **SSH Keys**, and **Add SSH key**. In the "Hostname" field, enter `bitbucket.com` and add the private key you created in step 1. Then select **Add SSH Key**.
 

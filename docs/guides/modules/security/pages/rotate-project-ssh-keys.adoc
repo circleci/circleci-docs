@@ -24,7 +24,7 @@ This section is only relevant to projects in a `github` type organization:
 . Add a new deploy key by clicking **Add Deploy Key**.
 . Go to GitHub's repository project settings to delete the matching public key.
 +
-The GitHub URL is typically `https://github.com/<org>/<project>/settings/keys`, or you may already have the page open if you clicked on the key name in step 1. The keys are named `CircleCI`. Remove any key titled `CircleCI` created before the rotation. The new public SSH key will be automatically added once the old key is deleted.
+The GitHub URL is typically `\https://github.com/<org>/<project>/settings/keys`, or you may already have the page open if you clicked on the key name in step 1. The keys are named `CircleCI`. Remove any key titled `CircleCI` created before the rotation. The new public SSH key will be automatically added once the old key is deleted.
 
 [#rotate-a-user-key-github-oauth-app]
 === Rotate a user key
@@ -69,7 +69,7 @@ Go to **Project Settings > SSH Keys** to view SSH keys set up for your project.
 . Add a new deploy key by clicking **Add Deploy Key**.
 . Go to Bitbucket's project admin access-key settings to delete the matching public key.
 +
-The Bitbucket URL is typically `https://bitbucket.org/<org>/<project>/admin/access-keys/`. The keys are named `CircleCI`. Since the fingerprint hash is not shown, remove any key titled `CircleCI` created before the rotation. The new public SSH key will be automatically added once the old key is deleted (page may need to be refreshed to view the key).
+The Bitbucket URL is typically `\https://bitbucket.org/<org>/<project>/admin/access-keys/`. The keys are named `CircleCI`. Since the fingerprint hash is not shown, remove any key titled `CircleCI` created before the rotation. The new public SSH key will be automatically added once the old key is deleted (page may need to be refreshed to view the key).
 
 
 [#rotate-a-user-key-bitbucket]
@@ -80,7 +80,7 @@ The Bitbucket URL is typically `https://bitbucket.org/<org>/<project>/admin/acce
 . Add a new user key following the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#create-a-user-key[Create a User Key] instructions.
 . Go to Bitbucket's user account settings to delete the matching public key.
 +
-The Bitbucket URL is typically `https://bitbucket.org/account/settings/ssh-keys/`. The user names the keys, therefore, CircleCI does not know if the key name contains the string `CircleCI`. Remove any key created before the rotation.
+The Bitbucket URL is typically `\https://bitbucket.org/account/settings/ssh-keys/`. The user names the keys, therefore, CircleCI does not know if the key name contains the string `CircleCI`. Remove any key created before the rotation.
 
 [#rotate-an-additional-SSH-key-bitbucket]
 === Rotate an additional SSH key

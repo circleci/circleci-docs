@@ -62,6 +62,7 @@ version: 2.1
 orbs:
   <orb-name>: <namespace>/<orb-name>@x.y.z
 ----
+
 --
 ====
 
@@ -101,7 +102,7 @@ A URL orb is a single YAML file that contains the shared configuration you need.
 
 To use a URL orb in your configuration, add the orb to the `orbs` section of your configuration file using the `https` URL of the orb repository. The URL must point to a repository that is accessible to CircleCI and must be allowed by the organization's allow list.
 
-The following example shows how to import a URL orb named `platform` into your configuration file. To use this orb, the `https://raw.githubusercontent.com/my-org/` prefix must exist in your org's allow list.
+The following example shows how to import a URL orb named `platform` into your configuration file. To use this orb, the `\https://raw.githubusercontent.com/my-org/` prefix must exist in your org's allow list.
 
 [,yaml]
 ----
