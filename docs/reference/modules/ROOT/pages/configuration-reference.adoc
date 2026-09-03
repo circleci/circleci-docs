@@ -3730,7 +3730,13 @@ workflows:
 
 == Using expressions in your configuration
 
-CircleCI configuration supports expressions for dynamic value evaluation. Expressions can include pipeline values, pipeline parameters, literals, and operators such as `and`, `or`, and comparison operators.
+CircleCI supports limited dynamic expressions in its configuration through a custom templating framework. These config template expressions appear between `<<` and `>>`.
+
+Use this templating syntax to:
+
+* Insert pipeline values, pipeline parameters, and literals.
+* Apply operators such as `and`, `or`, and comparison operators.
+* Set dynamic configuration fields.
 
 [#expressions-in-config-fields]
 === Expressions in configuration fields
