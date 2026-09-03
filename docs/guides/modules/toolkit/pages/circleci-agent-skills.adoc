@@ -71,7 +71,6 @@ The CircleCI plugin currently includes the following seven skills. Your agent pi
 --
 
 
-[#install-circleci-agent-skills]
 == Install CircleCI agent skills
 
 CircleCI distributes the skills as the `circleci` plugin in the `CircleCI-Public/skills` marketplace. Add the marketplace, then install the plugin.
