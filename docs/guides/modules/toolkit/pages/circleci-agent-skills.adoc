@@ -135,6 +135,45 @@ Install that plugin with GitHub Copilot's marketplace and plugin workflow. For s
 --
 ====
 
+== Keep CircleCI agent skills up to date
+
+CircleCI publishes skill updates in the link:https://github.com/CircleCI-Public/skills[CircleCI Public Skills] repository. How you pick up those updates depends on how you installed the skills.
+
+[tabs]
+====
+Claude Code::
++
+--
+Claude Code caches the marketplace catalog. Refresh it, then load the new plugin version:
+
+[source]
+----
+/plugin marketplace update circleci-public-skills
+----
+
+Third-party marketplaces do not auto-update by default. To have Claude Code refresh this marketplace and its installed plugins in the background, run `/plugin`, open *Marketplaces*, select the CircleCI marketplace, and enable auto-update.
+
+Reload plugins when Claude Code prompts you, or start a new session. For more information, see the link:https://code.claude.com/docs/en/discover-plugins#configure-auto-updates[Claude Code auto-update documentation].
+--
+Cursor::
++
+--
+Copied Cursor skills are a snapshot of the repository at install time. Cursor does not update them for you.
+
+To refresh them, copy the skill folders again from `CircleCI-Public/skills`, then restart Cursor or run *Developer: Reload Window*.
+--
+Codex::
++
+--
+Use Codex's marketplace and plugin update workflow. For current commands, see the link:https://developers.openai.com/codex/plugins[Codex plugin documentation].
+--
+GitHub Copilot::
++
+--
+Use GitHub Copilot's plugin update workflow. For current commands, see the link:https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-finding-installing[GitHub Copilot CLI plugin documentation].
+--
+====
+
 == Use CircleCI agent skills
 
 After install, ask your agent for the outcome you want. Name the branch, project, or file when you can. The agent selects the matching skill.
