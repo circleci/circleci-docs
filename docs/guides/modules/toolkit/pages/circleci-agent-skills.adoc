@@ -4,8 +4,6 @@
 :experimental:
 :page-show-readtime: true
 
-#TODO: check preview, beta, or paid-plan status for the plugin and each skill#
-
 CircleCI agent skills give your AI coding agent reusable workflows for common CircleCI tasks. Install the CircleCI plugin once, then ask your agent to debug a failed build, optimize config, or onboard a project.
 
 == Introduction
