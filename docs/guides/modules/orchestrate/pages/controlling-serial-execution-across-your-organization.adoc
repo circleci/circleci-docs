@@ -49,6 +49,13 @@ CircleCI uses a distributed locking system to control execution order. When a jo
 
 CircleCI uses pipeline numbers to determine execution priority. Jobs from newer pipelines (higher pipeline numbers) take precedence over jobs from older pipelines within the same project. If a job from an older pipeline tries to run while a newer pipeline's job is waiting or running, the older job is automatically skipped.
 
+[NOTE]
+====
+Serial group priority is based on pipeline number, not on when a job reaches the lock. When a job attempts to acquire a serial group lock, CircleCI checks for jobs from higher-numbered pipelines in the same serial group. If one is already queued or running, CircleCI skips the job.
+
+With dynamic configuration, setup workflow duration varies between pipelines, so the order in which continuation jobs reach the lock is not guaranteed to match pipeline number (that is, merge) order. A job from an older pipeline may therefore be skipped rather than queued. Do not rely on merge order to guarantee that every pipeline's serially grouped job runs.
+====
+
 === Job state transitions
 
 Jobs in a serial group move through several states:
