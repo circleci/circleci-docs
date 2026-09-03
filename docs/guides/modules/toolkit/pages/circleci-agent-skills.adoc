@@ -122,45 +122,16 @@ For more information on Cursor skills, see the link:https://cursor.com/docs/plug
 Codex::
 +
 --
-#TODO: confirm the marketplace name Codex assigns after add (expected: CircleCI skills)#
+CircleCI publishes the skills as a plugin in the link:https://github.com/CircleCI-Public/skills[CircleCI Public Skills] repository.
 
-. Add the CircleCI marketplace:
-+
-[source,console]
-----
-$ codex plugin marketplace add CircleCI-Public/skills
-----
-. Install the CircleCI plugin:
-+
-[source,console]
-----
-$ codex plugin add circleci@circleci-skills
-----
-. Restart Codex, or open `/plugins` and confirm the CircleCI plugin appears.
-
-The CircleCI repository includes a Codex marketplace at `.agents/plugins/marketplace.json`.
+Install that plugin with Codex's marketplace and plugin workflow. For setup steps, see the link:https://developers.openai.com/codex/plugins[Codex plugin documentation] and the link:https://developers.openai.com/codex/skills[Codex skills documentation].
 --
 GitHub Copilot::
 +
 --
-#TODO: confirm Copilot CLI reads the Claude plugin marketplace manifest#
-#TODO: confirm install steps for GitHub Copilot in VS Code, not only Copilot CLI#
+CircleCI publishes the skills as a plugin in the link:https://github.com/CircleCI-Public/skills[CircleCI Public Skills] repository.
 
-. Add the CircleCI marketplace to Copilot CLI:
-+
-[source,console]
-----
-$ copilot plugin marketplace add CircleCI-Public/skills
-----
-. Install the CircleCI plugin:
-+
-[source,console]
-----
-$ copilot plugin install circleci@circleci-public-skills
-----
-. Start a new Copilot CLI session and confirm the skills are available.
-
-For more information, see the link:https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-finding-installing[GitHub Copilot CLI plugin documentation].
+Install that plugin with GitHub Copilot's marketplace and plugin workflow. For setup steps, see the link:https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-finding-installing[GitHub Copilot CLI plugin documentation].
 --
 ====
 
@@ -168,11 +139,7 @@ For more information, see the link:https://docs.github.com/en/copilot/how-tos/co
 
 After install, ask your agent for the outcome you want. Name the branch, project, or file when you can. The agent selects the matching skill.
 
-You can also invoke a skill by name:
-
-* Claude Code and Cursor: `/circleci-builds`
-* Codex: `$circleci-builds`
-* Copilot CLI: use `/skills` to list installed skills, then invoke by name.
+You can also invoke a skill by name. In Claude Code and Cursor, type `/circleci-builds`. In Codex and GitHub Copilot, use each product's skill invocation flow. See the Codex and Copilot tabs in <<_install_circleci_agent_skills>>.
 
 Example requests:
 
