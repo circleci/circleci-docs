@@ -97,7 +97,6 @@ For more information on plugin marketplaces, see the link:https://code.claude.co
 Cursor::
 +
 --
-The CircleCI listing on the link:https://cursor.com/marketplace/circleci[Cursor Marketplace] is a different plugin. That plugin, from the link:https://github.com/CircleCI-Public/cursor-plugin[CircleCI Public Cursor Plugin] repository, connects Cursor to the hosted CircleCI MCP server. It does not install the agent skills from the CircleCI Public Skills repository.
 
 To install CircleCI agent skills in Cursor, copy the skill folders into your Cursor skills directory:
 
