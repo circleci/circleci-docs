@@ -162,9 +162,9 @@ https://raw.githubusercontent.com/<org>/<repo>/<branch>/platform-tools.yml
 
 If you choose another hosting option, the raw URL will be different. For example:
 
-* **GitLab**: `https://gitlab.com/<org>/<repo>/-/raw/<branch>/<file>.yml`
-* **Bitbucket**: `https://bitbucket.org/<org>/<repo>/raw/<branch>/<file>.yml`
-* **AWS S3**: `https://s3.amazonaws.com/<bucket>/<path>/<file>.yml`
+* **GitLab**: `\https://gitlab.com/<org>/<repo>/-/raw/<branch>/<file>.yml`
+* **Bitbucket**: `\https://bitbucket.org/<org>/<repo>/raw/<branch>/<file>.yml`
+* **AWS S3**: `\https://s3.amazonaws.com/<bucket>/<path>/<file>.yml`
 * **Other object storage**: Any HTTPS-accessible location.
 
 [#step-3-configure-allow-list]
