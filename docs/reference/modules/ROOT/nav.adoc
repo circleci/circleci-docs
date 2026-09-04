@@ -8,6 +8,9 @@
 
 * API
 ** xref:api-homepage.adoc[API v1 and v2 reference]
+** xref:guides:toolkit:api-intro.adoc[API intro]
+** xref:guides:toolkit:api-v3-developers-guide.adoc[API v3 developers guide]
+** xref:guides:toolkit:api-developers-guide.adoc[API v2 developers guide]
 ** xref:guides:execution-runner:runner-api.adoc[Runner API reference]
 
 * General
