@@ -47,7 +47,7 @@ To add an API token, perform the steps listed below:
 +
 [,shell]
 ----
-export CIRCLE_TOKEN={your_api_token}
+export CIRCLE_TOKEN=\{your_api_token}
 
 # using bearer authentication (recommended):
 curl https://circleci.com/api/v3/users?filter[user_id]=me \
@@ -164,11 +164,11 @@ API v3 uses opaque cursor pagination. The `page.next` and `page.prev` values are
 [,shell]
 ----
 # First page
-curl "https://circleci.com/api/v3/workflows?filter[run_id]={run-id}&page[limit]=10" \
+curl "https://circleci.com/api/v3/workflows?filter[run_id]=\{run-id}&page[limit]=10" \
   --header "Authorization: Bearer $CIRCLE_TOKEN"
 
 # Next page (using cursor from previous response)
-curl "https://circleci.com/api/v3/workflows?filter[run_id]={run-id}&page[limit]=10&page[cursor]={cursor}" \
+curl "https://circleci.com/api/v3/workflows?filter[run_id]=\{run-id}&page[limit]=10&page[cursor]=\{cursor}" \
   --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
 
@@ -252,13 +252,13 @@ Responses include an `ETag` and `Cache-Control` directive. Send the `ETag` back 
 [,shell]
 ----
 # First request
-curl -i "https://circleci.com/api/v3/workflows/{id}" \
+curl -i "https://circleci.com/api/v3/workflows/\{id}" \
   --header "Authorization: Bearer $CIRCLE_TOKEN"
 
 # Returns ETag: "abc123def"
 
 # Conditional request
-curl "https://circleci.com/api/v3/workflows/{id}" \
+curl "https://circleci.com/api/v3/workflows/\{id}" \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header 'If-None-Match: "abc123def"'
 
@@ -289,7 +289,7 @@ API v3 requires UUIDs for most operations. Here is how to find common resource I
 
 [,shell]
 ----
-curl "https://circleci.com/api/v3/orgs?filter[slug]={org-slug}" \
+curl "https://circleci.com/api/v3/orgs?filter[slug]=\{org-slug}" \
   --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
 
@@ -298,7 +298,7 @@ curl "https://circleci.com/api/v3/orgs?filter[slug]={org-slug}" \
 
 [,shell]
 ----
-curl "https://circleci.com/api/v3/projects?filter[slug]={project-slug}" \
+curl "https://circleci.com/api/v3/projects?filter[slug]=\{project-slug}" \
   --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
 
@@ -322,14 +322,14 @@ This section walks through a complete API v3 workflow: finding a project, listin
 +
 [,shell]
 ----
-export CIRCLE_TOKEN={your_api_token}
+export CIRCLE_TOKEN=\{your_api_token}
 ----
 
-. Find your project ID. Replace `{org-slug}` and `{project-name}` with your values:
+. Find your project ID. Replace `\{org-slug}` and `\{project-name}` with your values:
 +
 [,shell]
 ----
-curl "https://circleci.com/api/v3/projects?filter[org_id]={org-id}" \
+curl "https://circleci.com/api/v3/projects?filter[org_id]=\{org-id}" \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Accept: application/json"
 ----
@@ -340,7 +340,7 @@ This returns a list of projects. Find your project in the response and note its 
 +
 [,shell]
 ----
-curl "https://circleci.com/api/v3/pipelines?filter[project_id]={project-id}&page[limit]=10" \
+curl "https://circleci.com/api/v3/pipelines?filter[project_id]=\{project-id}&page[limit]=10" \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Accept: application/json"
 ----
@@ -353,7 +353,7 @@ curl -X POST "https://circleci.com/api/v3/runs" \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
   --data '{
-    "pipeline_id": "{pipeline-id}",
+    "pipeline_id": "\{pipeline-id}",
     "parameters": {
       "branch": "main",
       "custom-param": "value"
@@ -367,7 +367,7 @@ This returns a run object with an `id` that you can use to track the run's progr
 +
 [,shell]
 ----
-curl "https://circleci.com/api/v3/runs/{run-id}" \
+curl "https://circleci.com/api/v3/runs/\{run-id}" \
   --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
 
@@ -379,7 +379,7 @@ curl "https://circleci.com/api/v3/runs/{run-id}" \
 
 [,shell]
 ----
-curl "https://circleci.com/api/v3/workflows?filter[run_id]={run-id}" \
+curl "https://circleci.com/api/v3/workflows?filter[run_id]=\{run-id}" \
   --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
 
@@ -388,7 +388,7 @@ curl "https://circleci.com/api/v3/workflows?filter[run_id]={run-id}" \
 
 [,shell]
 ----
-curl "https://circleci.com/api/v3/jobs?filter[workflow_id]={workflow-id}" \
+curl "https://circleci.com/api/v3/jobs?filter[workflow_id]=\{workflow-id}" \
   --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
 
@@ -397,7 +397,7 @@ curl "https://circleci.com/api/v3/jobs?filter[workflow_id]={workflow-id}" \
 
 [,shell]
 ----
-curl "https://circleci.com/api/v3/jobs/{job-id}" \
+curl "https://circleci.com/api/v3/jobs/\{job-id}" \
   --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
 
@@ -408,7 +408,7 @@ The response includes steps, parallel executions, and other job metadata.
 
 [,shell]
 ----
-curl "https://circleci.com/api/v3/jobs/{job-id}/artifacts" \
+curl "https://circleci.com/api/v3/jobs/\{job-id}/artifacts" \
   --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
 
@@ -419,7 +419,7 @@ curl "https://circleci.com/api/v3/jobs/{job-id}/artifacts" \
 +
 [,shell]
 ----
-curl "https://circleci.com/api/v3/jobs/{job-id}/artifacts" \
+curl "https://circleci.com/api/v3/jobs/\{job-id}/artifacts" \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   | grep -o '"url":"[^"]*"' \
   | sed 's/"url":"//;s/"$//' \
@@ -440,7 +440,7 @@ done < artifact-urls.txt
 
 [,shell]
 ----
-curl -X POST "https://circleci.com/api/v3/workflows/{workflow-id}/cancel" \
+curl -X POST "https://circleci.com/api/v3/workflows/\{workflow-id}/cancel" \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json"
 ----
@@ -450,7 +450,7 @@ curl -X POST "https://circleci.com/api/v3/workflows/{workflow-id}/cancel" \
 
 [,shell]
 ----
-curl -X POST "https://circleci.com/api/v3/workflows/{workflow-id}/rerun" \
+curl -X POST "https://circleci.com/api/v3/workflows/\{workflow-id}/rerun" \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json"
 ----
@@ -462,7 +462,7 @@ curl -X POST "https://circleci.com/api/v3/workflows/{workflow-id}/rerun" \
 
 [,shell]
 ----
-curl "https://circleci.com/api/v3/contexts?filter[org_id]={org-id}" \
+curl "https://circleci.com/api/v3/contexts?filter[org_id]=\{org-id}" \
   --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
 
@@ -474,7 +474,7 @@ curl -X POST "https://circleci.com/api/v3/contexts" \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
   --data '{
-    "org_id": "{org-id}",
+    "org_id": "\{org-id}",
     "name": "my-context"
   }'
 ----
@@ -483,7 +483,7 @@ curl -X POST "https://circleci.com/api/v3/contexts" \
 
 [,shell]
 ----
-curl -X POST "https://circleci.com/api/v3/contexts/{context-id}/env-vars/set" \
+curl -X POST "https://circleci.com/api/v3/contexts/\{context-id}/env-vars/set" \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
   --data '{
@@ -505,7 +505,7 @@ curl -X POST "https://circleci.com/api/v3/analysis/jobs" \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
   --data '{
-    "project_id": "{project-id}",
+    "project_id": "\{project-id}",
     "from": "2024-01-01T00:00:00Z",
     "to": "2024-01-31T23:59:59Z"
   }'
@@ -519,7 +519,7 @@ curl -X POST "https://circleci.com/api/v3/analysis/charges" \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
   --data '{
-    "project_id": "{project-id}",
+    "project_id": "\{project-id}",
     "from": "2024-01-01T00:00:00Z",
     "to": "2024-01-31T23:59:59Z"
   }'
@@ -537,7 +537,7 @@ API v3 provides comprehensive orb management capabilities:
 
 [,shell]
 ----
-curl "https://circleci.com/api/v3/orb/packages?filter[namespace_id]={namespace-id}" \
+curl "https://circleci.com/api/v3/orb/packages?filter[namespace_id]=\{namespace-id}" \
   --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
 
@@ -549,7 +549,7 @@ curl -X POST "https://circleci.com/api/v3/orb/versions" \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
   --data '{
-    "package_id": "{package-id}",
+    "package_id": "\{package-id}",
     "version": "1.0.0",
     "source": "version: 2.1\n..."
   }'
@@ -564,7 +564,7 @@ Manage self-hosted runners through the API:
 
 [,shell]
 ----
-curl "https://circleci.com/api/v3/runner/resource-classes?filter[org_id]={org-id}" \
+curl "https://circleci.com/api/v3/runner/resource-classes?filter[org_id]=\{org-id}" \
   --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
 
@@ -576,7 +576,7 @@ curl -X POST "https://circleci.com/api/v3/runner/tokens" \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
   --data '{
-    "resource_class_id": "{resource-class-id}",
+    "resource_class_id": "\{resource-class-id}",
     "name": "my-runner-token"
   }'
 ----
@@ -592,7 +592,7 @@ Always check the HTTP status code and handle errors appropriately:
 [,shell]
 ----
 response=$(curl -s -w "\n%{http_code}" \
-  "https://circleci.com/api/v3/workflows/{workflow-id}" \
+  "https://circleci.com/api/v3/workflows/\{workflow-id}" \
   --header "Authorization: Bearer $CIRCLE_TOKEN")
 
 http_code=$(echo "$response" | tail -n1)
