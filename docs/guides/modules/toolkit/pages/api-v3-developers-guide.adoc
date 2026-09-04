@@ -3,7 +3,7 @@
 :page-description: API v3 guide for internal and external CircleCI developers
 :experimental:
 
-This guide assists developers in making API calls to CircleCI services using API v3 to return detailed information about users, pipelines, projects, workflows, and more. The API v3 specification may be viewed in the link:https://circleci.com/docs/api/v3/[API v3 Reference documentation].
+This guide assists developers in making API calls to CircleCI services using API v3. Use the API to return detailed information about users, pipelines, projects, workflows, and more. View the API v3 specification in the link:https://circleci.com/docs/api/v3/[API v3 Reference documentation].
 
 include::ROOT:partial$notes/server-api-examples.adoc[]
 
@@ -14,12 +14,12 @@ API v3 is CircleCI's current API version and all new development uses v3. It pro
 
 **Key differences from v2:**
 
-* UUID-based resource identification instead of slugs
-* Opaque cursor pagination instead of token-based pagination
-* Comprehensive error objects with optional fields
-* Standard rate limiting headers (IETF draft)
-* Support for ETags and conditional requests
-* Explicit idempotency guarantees where applicable
+* UUID-based resource identification instead of slugs.
+* Opaque cursor pagination instead of token-based pagination.
+* Comprehensive error objects with optional fields.
+* Standard rate limiting headers (IETF draft).
+* Support for entity tags (ETags) and conditional requests.
+* Explicit idempotent operation guarantees where applicable.
 
 [#api-v3-conventions]
 == API v3 conventions
@@ -124,7 +124,7 @@ When retrieving a single resource, the response contains a `data` object with `i
 }
 ----
 
-The `references` object contains related resource IDs and may include denormalized fields for convenience. Check the operation's schema to see which fields are denormalized.
+The `references` object contains related resource IDs and may include embedded fields for convenience. Check the operation's schema to see which fields the endpoint embeds inline.
 
 [#collection-resources]
 ==== Collection resources
@@ -154,10 +154,10 @@ API v3 uses opaque cursor pagination. The `page.next` and `page.prev` values are
 
 **Important pagination rules:**
 
-* Send cursor values unmodified
-* Stop when `page.next` is `null`
-* `page[limit]` bounds are per-operation and out-of-range values return 400
-* Do not attempt to parse or modify cursor values
+* Send cursor values unmodified.
+* Stop when `page.next` is `null`.
+* `page[limit]` bounds are per-operation and out-of-range values return 400.
+* Do not attempt to parse or change cursor values.
 
 **Example: Paginating through results**
 
@@ -177,31 +177,31 @@ curl "https://circleci.com/api/v3/workflows?filter[run_id]=\{run-id}&page[limit]
 
 Most list operations require a scope filter and return 400 without it. Common filters include:
 
-* `filter[org_id]` - Scope to an organization
-* `filter[project_id]` - Scope to a project
-* `filter[run_id]` - Scope to a run
-* `filter[workflow_id]` - Scope to a workflow
+* `filter[org_id]` - Scope to an organization.
+* `filter[project_id]` - Scope to a project.
+* `filter[run_id]` - Scope to a run.
+* `filter[workflow_id]` - Scope to a workflow.
 
 Always check the operation's required parameters before making a request.
 
 [#http-methods]
-=== HTTP methods
+=== Http methods
 
 API v3 follows RESTful conventions:
 
-* `GET` - Read operations
-* `POST` - Create, actions, and partial updates
-* `PUT` - Replace a resource in full
-* `DELETE` - Remove a resource
+* `GET` - Read operations.
+* `POST` - Create, actions, and partial updates.
+* `PUT` - Replace a resource in full.
+* `DELETE` - Remove a resource.
 
 Note: There is no `PATCH` method. Use `POST` for partial updates.
 
 [#idempotency]
-=== Idempotency
+=== Idempotent operations
 
 `GET`, `PUT`, and `DELETE` operations are idempotent. `POST` operations may be idempotent depending on the specific endpoint.
 
-**Important:** Do not assume a `POST` is replayable. Retrying a timed-out `POST` can create duplicate resources or fire an action twice. Only retry a `POST` if its documentation explicitly states it is idempotent.
+**Important:** Do not assume a `POST` is safe to retry. Retrying a timed-out `POST` can create duplicate resources or fire an action twice. Only retry a `POST` if its documentation explicitly states it is idempotent.
 
 [#error-handling]
 === Error handling
@@ -225,20 +225,20 @@ Errors return a single `error` object (never an array):
 
 **Error handling best practices:**
 
-* Branch on the HTTP status code
-* Use `error.type` to distinguish between causes within the same status
-* Never branch on `title` or `detail` text
-* Quote `error.id` in support requests
-* Invalid input is always 400, never 422
+* Branch on the HTTP status code.
+* Use `error.type` to distinguish between causes within the same status.
+* Never branch on `title` or `detail` text.
+* Quote `error.id` in support requests.
+* Invalid input is always 400, never 422.
 
 [#rate-limits]
 === Rate limits
 
 On 429 responses, wait the `Retry-After` seconds, then back off exponentially. Responses include:
 
-* `RateLimit-Policy` - The rate limit policy
-* `RateLimit` - Current state against the policy
-* `Retry-After` - Seconds to wait before retrying
+* `RateLimit-Policy` - The rate limit policy.
+* `RateLimit` - Current state against the policy.
+* `Retry-After` - Seconds to wait before retrying.
 
 Rate limits are per-route and not published. Read the headers rather than assuming a figure.
 
@@ -270,9 +270,9 @@ curl "https://circleci.com/api/v3/workflows/\{id}" \
 
 Deprecated operations are marked `deprecated: true` and responses include:
 
-* `Deprecation: true` (RFC 9745)
-* `Sunset` - HTTP-date when the endpoint will be removed (RFC 8594)
-* `Link` with `rel="deprecation"` - Points to migration documentation (RFC 8288)
+* `Deprecation: true` (RFC 9745).
+* `Sunset` - HTTP-date when the endpoint is removed (RFC 8594).
+* `Link` with `rel="deprecation"` - Points to migration documentation (RFC 8288).
 
 Migrate before the `Sunset` date. Removed routes return 410 permanently.
 
@@ -312,8 +312,8 @@ This section walks through a complete API v3 workflow: finding a project, listin
 [#prerequisites]
 === Prerequisites
 
-* A GitHub, Bitbucket, or GitLab account with a repository set up with CircleCI
-* A valid CircleCI personal API token
+* A GitHub, Bitbucket, or GitLab account with a repository set up with CircleCI.
+* A valid CircleCI personal API token.
 
 [#steps]
 === Steps
@@ -585,7 +585,7 @@ curl -X POST "https://circleci.com/api/v3/runner/tokens" \
 == Best practices
 
 [#handle-errors-gracefully]
-=== Handle errors gracefully
+=== Handle errors appropriately
 
 Always check the HTTP status code and handle errors appropriately:
 
@@ -612,35 +612,35 @@ fi
 [#respect-rate-limits]
 === Respect rate limits
 
-Implement exponential backoff when you receive 429 responses:
+Use exponential backoff when you receive 429 responses:
 
-. Wait the duration specified in the `Retry-After` header
-. If subsequent requests also return 429, double your wait time
-. Continue doubling until the request succeeds
+. Wait the duration specified in the `Retry-After` header.
+. If subsequent requests also return 429, double your wait time.
+. Continue doubling until the request succeeds.
 
 [#use-etags-for-efficiency]
-=== Use ETags for efficiency
+=== Use entity tags for efficiency
 
 Use conditional requests to reduce bandwidth and improve performance:
 
-. Store the `ETag` from initial requests
-. Send `If-None-Match` headers on subsequent requests
-. Handle 304 responses by using cached data
+. Store the `ETag` from initial requests.
+. Send `If-None-Match` headers on subsequent requests.
+. Handle 304 responses by using cached data.
 
 [#paginate-efficiently]
 === Paginate efficiently
 
 When retrieving large datasets:
 
-. Set an appropriate `page[limit]` for your use case
-. Store and reuse cursor values
-. Stop when `page.next` is `null`
-. Do not attempt to parse cursor values
+. Set an appropriate `page[limit]` for your use case.
+. Store and reuse cursor values.
+. Stop when `page.next` is `null`.
+. Do not attempt to parse cursor values.
 
 [#reference]
 == Reference
 
-* Refer to xref:api-intro.adoc[API Overview] for high-level information about all CircleCI API versions
-* Refer to link:https://circleci.com/docs/api/v3/[API v3 Reference] for detailed endpoint documentation
-* Refer to xref:managing-api-tokens.adoc[Managing API Tokens] for information on creating and managing tokens
-* Refer to xref:how-to-find-ids.adoc[How to Find IDs] for help locating resource identifiers
+* Refer to xref:api-intro.adoc[API Overview] for high-level information about all CircleCI API versions.
+* Refer to link:https://circleci.com/docs/api/v3/[API v3 Reference] for detailed endpoint documentation.
+* Refer to xref:managing-api-tokens.adoc[Managing API Tokens] for information on creating and managing tokens.
+* Refer to xref:how-to-find-ids.adoc[How to Find IDs] for help locating resource identifiers.
