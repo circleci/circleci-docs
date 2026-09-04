@@ -134,6 +134,32 @@ Policy names must be unique. Two policies cannot have the same name within an or
 
 The `policy_name` must be declared using a partial rule and declare the name as a `rego key`: `policy_name["NAME"]`.
 
+[#rego-v0-vs-v1-syntax]
+=== Rego v0 vs v1 syntax
+
+CircleCI config policies support two Rego language syntax versions: **v0** (the legacy syntax) and **v1** (the syntax introduced with link:https://www.openpolicyagent.org/docs/v0-upgrade[OPA 1.0]). CircleCI parses policy files as v0 by default. This is why the examples on this page, such as `policy_name["unique_policy_name"]`, use the legacy bracket syntax.
+
+To opt in to v1 syntax, add `import rego.v1` to the top of your policy file. You can mix v0-style and v1-style files within the same policy bundle. The most common difference you will encounter is how partial rules like `policy_name` and `enable_hard`/`enable_soft` are declared:
+
+[.table-scroll]
+--
+[cols="1,1", options="header"]
+|===
+| v0 (default) | v1 (with `import rego.v1`)
+
+| `policy_name["unique_policy_name"]`
+| `policy_name contains "unique_policy_name"`
+
+| `enable_hard["check_version"]`
+| `enable_hard contains "check_version"`
+
+| `check_version = reason { ... }`
+| `check_version := reason if { ... }`
+|===
+--
+
+NOTE: If you use `if`, `contains`, or other v1 keywords without adding `import rego.v1` to your file, the policy will fail to parse with an error similar to `` `contains` keyword is required for partial set rules ``.
+
 [#rules]
 === Rules
 
