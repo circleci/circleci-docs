@@ -14,7 +14,7 @@ CircleCI publishes these skills as a plugin in the link:https://github.com/Circl
 
 Skills are not the same as CircleCI MCP servers. MCP servers give your agent live tools for CircleCI. Skills give your agent a workflow to follow. You can use either, or both. See the xref:circleci-mcp-overview.adoc[CircleCI MCP Overview] page.
 
-The `chunk` skill in this plugin helps you set up Chunk. Chunk is CircleCI validation for agentic development. Sidecars run lightweight checks in a clean cloud environment while your agent is still working, so you catch failures before the push. See <<compare-skills-with-other-circleci-ai-tools>>.
+The `chunk` skill in this plugin helps you set up Chunk. Chunk is CircleCI validation for agentic development. Sidecars run lightweight checks in a clean cloud environment while your agent is still working, so you catch failures before the push. See <<compare-skills-with-other-ai-tools>>.
 
 == Prerequisites
 
@@ -75,13 +75,13 @@ Claude Code::
 --
 . In Claude Code, add the CircleCI marketplace:
 +
-[source]
+[source,shell]
 ----
 /plugin marketplace add CircleCI-Public/skills
 ----
 . Install the CircleCI plugin:
 +
-[source]
+[source,shell]
 ----
 /plugin install circleci@circleci-public-skills
 ----
@@ -136,7 +136,7 @@ Claude Code::
 --
 Claude Code caches the marketplace catalog. Refresh it, then load the new plugin version:
 
-[source]
+[source,shell]
 ----
 /plugin marketplace update circleci-public-skills
 ----
@@ -168,7 +168,7 @@ Use GitHub Copilot's plugin update workflow. For current commands, see the link:
 
 After install, ask your agent for the outcome you want. Name the branch, project, or file when you can. The agent selects the matching skill.
 
-You can also invoke a skill by name. In Claude Code and Cursor, type `circleci-builds`. In Codex and GitHub Copilot, use each product's skill invocation flow. See the Codex and Copilot tabs in <<install-circleci-agent-skills>>.
+You can also invoke a skill by name. In Claude Code and Cursor, type `circleci-builds`. In Codex and GitHub Copilot, use each product's skill invocation flow.
 
 Example requests:
 
@@ -180,7 +180,7 @@ Example requests:
 * Set up a testsuite for this project.
 * Set up CircleCI Smarter Testing for running tests in this project.
 
-[#compare-skills-with-other-circleci-ai-tools]
+[#compare-skills-with-other-ai-tools]
 == Compare skills with other CircleCI AI tools
 
 CircleCI agent skills, MCP servers, and Chunk work together in an agentic CI/CD loop. Use this page to install the plugin skills. Use the pages below for live CircleCI tools and for Chunk validation.
