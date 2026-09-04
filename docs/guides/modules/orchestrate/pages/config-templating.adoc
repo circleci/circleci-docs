@@ -1,0 +1,97 @@
+= Config templating
+:page-platform: Cloud, Server v4+
+:page-description: Use compile-time config templating to insert pipeline values and parameters into your CircleCI configuration.
+:experimental:
+
+CircleCI can update your `.circleci/config.yml` at compile time using pipeline values and parameters. This config templating lets you insert values, check conditions, and optionally include or omit blocks of YAML.
+
+Config templating is not the same as xref:dynamic-config.adoc[Dynamic Configuration]. Dynamic configuration generates or continues a pipeline with a different config at runtime.
+
+[#insert-a-pipeline-value]
+== Insert a pipeline value
+
+Wrap a pipeline value or pipeline parameter in `<<` and `>>` to insert it into a string or field:
+
+.Insert a pipeline value into a job step
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - run: echo "This pipeline is on << pipeline.git.branch >>"
+----
+
+For the full list of values you can insert, see the xref:pipeline-variables.adoc[Pipeline Values and Parameters] page.
+
+The YAML merge key `<<:` is a different feature. See xref:getting-started:introduction-to-yaml-configurations.adoc#merging-maps[Merging Maps] in the YAML introduction.
+
+[#add-logic-with-expressions]
+== Add logic with expressions
+
+Expressions add comparison and logic operators to this templating syntax. Use them to set a field from a condition, or to decide whether a job or workflow runs.
+
+Some fields accept an expression directly, including job `filters` and workflow `when` or `unless` clauses. For other fields, wrap the expression in `<<` and `>>`.
+
+.Direct expression in a job filter
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - checkout
+
+workflows:
+  my-workflow:
+    jobs:
+      - build:
+          filters: pipeline.git.branch == "main" or pipeline.git.branch starts-with "release/"
+----
+
+For operators and more examples, see xref:reference:ROOT:configuration-reference.adoc#using-expressions-in-your-configuration[Using Expressions in Your Configuration].
+
+[#include-or-omit-a-block]
+== Include or omit a YAML block
+
+You can include or omit a block of YAML when a pipeline value or parameter is truthy:
+
+.Include a step only when a pipeline parameter is true
+[source,yaml]
+----
+version: 2.1
+
+parameters:
+  run_e2e:
+    type: boolean
+    default: false
+
+jobs:
+  test:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - checkout
+      <<# pipeline.parameters.run_e2e >>
+      - run: npm run e2e
+      <</ pipeline.parameters.run_e2e >>
+----
+
+[#config-templating-vs-dynamic-configuration]
+== How this differs from dynamic configuration
+
+Config templating edits the config you already have, before CircleCI assembles the pipeline. xref:dynamic-config.adoc[Dynamic Configuration] uses a setup workflow to generate or continue with a different config at runtime.
+
+[#next-steps]
+== Next steps
+
+* xref:pipeline-variables.adoc[Pipeline Values and Parameters]
+* xref:reference:ROOT:configuration-reference.adoc#using-expressions-in-your-configuration[Using Expressions in Your Configuration]
+* xref:using-branch-filters.adoc[Branch and Tag Filtering]
+* xref:dynamic-config.adoc[Dynamic Configuration Overview]

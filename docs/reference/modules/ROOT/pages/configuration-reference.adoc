@@ -3711,7 +3711,11 @@ workflows:
 
 == Using expressions in your configuration
 
-CircleCI configuration supports expressions for dynamic value evaluation. Expressions can include pipeline values, pipeline parameters, literals, and operators such as `and`, `or`, and comparison operators.
+CircleCI configuration supports expressions for dynamic value evaluation. Expressions can include pipeline values, pipeline parameters, and literals. They also support operators such as `and`, `or`, and comparison operators.
+
+Some fields accept an expression directly, including job filters and workflow `when` or `unless` clauses. For other fields, wrap the expression in `<<` and `>>`.
+
+To insert a pipeline value without logic, or for an overview of compile-time config templating, see the xref:guides:orchestrate:config-templating.adoc[Config Templating] page.
 
 [#expressions-in-config-fields]
 === Expressions in configuration fields

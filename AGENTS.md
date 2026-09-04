@@ -12,6 +12,22 @@ For a comprehensive overview of the CircleCI documentation structure, see the au
 
 This guide focuses on **how to write documentation**. The llms.txt file tells you **what documentation exists and where**.
 
+## Git worktrees
+
+Always create a git worktree for your work in:
+
+```
+../circleci-docs-worktrees/<issue-id>-<short-description>
+```
+
+For example:
+
+```
+git worktree add ../circleci-docs-worktrees/LIN-123-fix-nav -b LIN-123-fix-nav
+```
+
+Do all work in that directory, not in the main circleci-docs checkout. If there is no issue ID, use a short description only.
+
 ## Creating New Documentation Pages
 
 **IMPORTANT**: When creating new documentation pages, always start with the appropriate page template from `docs/contributors/modules/templates/pages/`:
