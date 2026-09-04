@@ -18,7 +18,7 @@ API v3 is CircleCI's current API version and all new development uses v3. It pro
 * Opaque cursor pagination instead of token-based pagination.
 * Comprehensive error objects with optional fields.
 * Standard rate limiting headers (IETF draft).
-* Support for entity tags (ETag) and conditional requests.
+* Support for entity tags (`ETag`) and conditional requests.
 * Explicit idempotent operation guarantees where applicable.
 
 [#api-v3-conventions]
