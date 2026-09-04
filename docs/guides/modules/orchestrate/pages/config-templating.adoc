@@ -36,7 +36,26 @@ Expressions add comparison and logic operators to this templating syntax. Use th
 
 Some fields accept an expression directly, including job `filters` and workflow `when` or `unless` clauses. For other fields, wrap the expression in `<<` and `>>`.
 
-For operators and examples, see xref:reference:ROOT:configuration-reference.adoc#using-expressions-in-your-configuration[Using Expressions in Your Configuration].
+.Direct expression in a job filter
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - checkout
+
+workflows:
+  my-workflow:
+    jobs:
+      - build:
+          filters: pipeline.git.branch == "main" or pipeline.git.branch starts-with "release/"
+----
+
+For operators and more examples, see xref:reference:ROOT:configuration-reference.adoc#using-expressions-in-your-configuration[Using Expressions in Your Configuration].
 
 [#include-or-omit-a-block]
 == Include or omit a YAML block
@@ -63,8 +82,6 @@ jobs:
       - run: npm run e2e
       <</ pipeline.parameters.run_e2e >>
 ----
-
-Prefer a workflow `when` clause, job `filters`, or a `when` step when you can. Those options keep the source file valid YAML before compilation. Use a templated block when you need a key or list item to be absent from the compiled config.
 
 [#config-templating-vs-dynamic-configuration]
 == How this differs from dynamic configuration
