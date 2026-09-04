@@ -59,6 +59,7 @@ Before enabling dynamic test splitting, ensure you have completed the xref:getti
 * Verified your tests run successfully with the `testsuite` command.
 * Set parallelism greater than 1 for the test jobs that you want to split. See the xref:reference:ROOT:configuration-reference.adoc#parallelism[Configuration Reference] for more information.
 
+TIP: You can use the xref:guides:toolkit:circleci-agent-skills.adoc[CircleCI agent skills] get Smarter Testing set up. Install the link:https://github.com/CircleCI-Public/skills[CircleCI Public Skills] plugin to your AI coding agent and ask your agent to get set up for Smarter Testing.
 
 == 1. Enable dynamic test splitting in your test-suites.yml file
 

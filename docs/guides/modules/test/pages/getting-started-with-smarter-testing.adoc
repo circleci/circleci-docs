@@ -23,7 +23,9 @@ This guide walks you through the foundational setup that all three features buil
 
 You need a repository with an existing test suite. The following setup process guides you through configuring JUnit XML output and running tests.
 
-NOTE: You can complete local steps (setup and run locally) without a CircleCI account. A CircleCI account with a project connected to your VCS is only required when you run tests in CI.
+You can complete local steps (setup and run locally) without a CircleCI account. A CircleCI account with a project connected to your VCS is only required when you run tests in CI.
+
+TIP: You can use the xref:guides:toolkit:circleci-agent-skills.adoc[CircleCI agent skills] to get set up for Smarter Testing. Install the link:https://github.com/CircleCI-Public/skills[CircleCI Public Skills] plugin to your AI coding agent and ask your agent to get set up for Smarter Testing.
 
 === Terminology
 

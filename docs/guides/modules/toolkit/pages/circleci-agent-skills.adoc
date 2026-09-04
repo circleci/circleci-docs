@@ -10,7 +10,7 @@ CircleCI agent skills give your AI coding agent reusable workflows for common Ci
 
 Skills are instruction files that your AI agent follows. They tell the agent which CircleCI commands to run, which files to inspect, and how to report results.
 
-CircleCI publishes these skills as a plugin in the link:https://github.com/CircleCI-Public/skills[CircleCI Public Skills] repository. The plugin works with Claude Code, Cursor, Codex, and GitHub Copilot.
+CircleCI publishes these skills as a plugin in the link:https://github.com/CircleCI-Public/skills[CircleCI Public Skills] repository.
 
 Skills are not the same as CircleCI MCP servers. MCP servers give your agent live tools for CircleCI. Skills give your agent a workflow to follow. You can use either, or both. See the xref:circleci-mcp-overview.adoc[CircleCI MCP Overview] page.
 
@@ -20,9 +20,9 @@ The `chunk` skill in this plugin helps you set up Chunk. Chunk is CircleCI valid
 
 Before you install CircleCI agent skills, set up the following:
 
-* An AI coding agent: Claude Code, Cursor, Codex, or GitHub Copilot.
-* A CircleCI account with access to the projects you want to work on.
-* The CircleCI CLI, installed and authenticated, for skills that run CircleCI commands. See xref:circleci-cli.adoc[The CircleCI CLI].
+* An AI coding agent, for example, Claude Code, Cursor, Codex, or GitHub Copilot.
+* A CircleCI account with access to the projects you want to work on. You can sign up for a free account at link:https://circleci.com/signup[CircleCI].
+* It is a good idea to install the CircleCI CLI, and authenticate for your CircleCI account. See xref:circleci-cli.adoc[The CircleCI CLI]. This is optional but most skills do make use of the CLI.
 
 == Available CircleCI agent skills
 
@@ -47,15 +47,15 @@ The CircleCI plugin currently includes the following seven skills. Your agent pi
 | Review the CircleCI configuration for this project and suggest improvements.
 
 | `onboarding`
-| Walks through first-time CircleCI setup for a new repo, including the GitHub App and pipeline.
+| Walks through first-time CircleCI setup for a new repository.
 | Onboard my project to CircleCI.
 
 | `chunk`
-| Sets up Chunk sidecars and tasks so your agent can validate changes before you push.
+| Sets up either/or/both Chunk for the CircleCI web app (cloud based CI/CD assistant) or the Chunk CLI (local CI/CD development tooling). For more information on Chunk, see the xref:chunk-setup-and-overview.adoc[Chunk Overview and Setup] page and the xref:install-and-configure-the-chunk-cli.adoc[Install and Configure the Chunk CLI] page.
 | Set up Chunk sidecars for this project.
 
 | `circleci-testsuite`
-| Adds `.circleci/test-suites.yml` and switches tests to `circleci testsuite run`. This skill gets your project set up to use Smarter Testing features. The manual setup is described on the xref:guides:test:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] page.
+| Get set up for Smarter Testing by using `.circleci/test-suites.yml` and switch tests to `circleci testsuite run`. The manual setup is described on the xref:guides:test:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] page.
 | Set up a testsuite for this project.
 
 | `circleci-smarter-testing`
@@ -63,7 +63,6 @@ The CircleCI plugin currently includes the following seven skills. Your agent pi
 | Set up CircleCI Smarter Testing for running tests in this project.
 |===
 --
-
 
 == Install CircleCI agent skills
 
@@ -201,12 +200,10 @@ CircleCI agent skills, MCP servers, and Chunk work together in an agentic CI/CD 
 | xref:circleci-mcp-overview.adoc[CircleCI MCP Overview]
 
 | Chunk
-| Validation that keeps up with your agents. Sidecars run lightweight checks in a clean cloud environment while your agent works. Chunk Tasks monitors and repairs CI in the outer loop.
-| xref:chunk-setup-and-overview.adoc[Chunk Overview and Setup]
+| Validation that keeps up with your agents. Sidecars run lightweight checks in a clean cloud environment while your agent works. Chunk Tasks monitors and repairs CI.
+| xref:chunk-setup-and-overview.adoc[Chunk Overview and Setup] and xref:install-and-configure-the-chunk-cli.adoc[Install and Configure the Chunk CLI]
 |===
 --
-
-The `chunk` skill in this plugin walks your agent through Chunk setup. After setup, `chunk skill install` adds sidecar and review skills such as `chunk-sidecar` and `chunk-review`. Those skills keep your agent on the rails with hooks and deterministic feedback. See the xref:install-and-configure-the-chunk-cli.adoc#install-skills[Install and Configure the Chunk CLI] page.
 
 == Next steps
 
