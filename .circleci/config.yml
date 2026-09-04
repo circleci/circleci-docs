@@ -20,7 +20,7 @@ executors:
 
   go_executor:
     docker:
-      - image: cimg/go:1.26
+      - image: cimg/go:1.27
     working_directory: ~/project
 
 commands:
