@@ -162,6 +162,14 @@ xref:guides:integration:github-integration.adoc#user-keys-and-deploy-keys[User K
   - **Good**: `xref:guides:orchestrate:schedule-triggers.adoc[Schedule Triggers]`
   - **Bad**: `xref:guides:orchestrate:schedule-triggers.adoc[schedule triggers]`
 - Always verify xrefs before using them. Check that the page you are referencing exists in the location you are using to create the resource ID
+- **Heading hashes are lowercase kebab-case of the heading text.** The playbook sets `idprefix: ""` and `idseparator: "-"`, so `== Install CircleCI agent skills` becomes `#install-circleci-agent-skills`. Do not use AsciiDoc's default underscore IDs (`#_install_circleci_agent_skills`). `validate-html` fails when a hash does not exist on the built page.
+- Add an explicit `[#custom-id]` only when the hash must differ from that kebab-case heading. Otherwise link to the generated ID:
+```adoc
+== Install CircleCI agent skills
+
+See the Codex and Copilot tabs in <<install-circleci-agent-skills>>.
+```
+- For cross-page section links: `xref:guides:toolkit:circleci-agent-skills.adoc#install-circleci-agent-skills[Install CircleCI Agent Skills]`
 
 Before adding any xref to a document, you must verify the target file exists and the path is correct:
 
@@ -457,6 +465,7 @@ Content for Tab B
 14. Not using appropriate page templates for new content
 15. Using xrefs without verifying the target file exists and path is correct
 16. **Committing without running Vale and fixing linting errors**
+17. Using AsciiDoc underscore heading IDs (`<<_install_circleci_agent_skills>>`) instead of the site kebab-case ID (`<<install-circleci-agent-skills>>`)
 
 ## AsciiDoc Validation Rules
 - Close all attribute blocks properly
@@ -598,7 +607,7 @@ Before committing documentation changes:
 
 1. ✅ **REQUIRED**: Run Vale locally and fix all error-level violations (recommended for all agents)
 2. ✅ Preview locally to check formatting and links
-3. ✅ Verify all xrefs point to existing files
+3. ✅ Verify all xrefs point to existing files, and that heading hashes use kebab-case of the heading (not `_underscore_ids`)
 4. ✅ Check `:page-description:` is 70-160 characters
 5. ✅ Ensure link text uses title case
 6. ✅ Confirm page is added to `nav.adoc` if new

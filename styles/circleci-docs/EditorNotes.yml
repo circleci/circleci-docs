@@ -8,9 +8,11 @@ script: |
   text := import("text")
   matches := []
 
-  // Match notes like #TBC#, #TODO something#, or #Do we need this?# but not [.class]#text#
-  // Two patterns: 1) specific keywords alone 2) any text with spaces
-  note_pattern := "#(?:TBC|TODO|FIXME|NOTE|REVIEW|CHECKME|VERIFY|HACK|XXX|TEMP)#|#\\w+\\s+[^#]+#"
+  // Match notes like #TBC#, #TODO something#, #TODO: something#, or #Do we need this?#
+  // but not AsciiDoc highlight spans like [.class]#text#.
+  // 1) keyword with optional ": text" or " text"
+  // 2) any #word rest# editor note
+  note_pattern := "#(?:TBC|TODO|FIXME|NOTE|REVIEW|CHECKME|VERIFY|HACK|XXX|TEMP)(?::)?(?:\\s+[^#]+)?#|#\\w+\\s+[^#]+#"
 
   for line in text.split(scope, "\n") {
     if text.re_match(note_pattern, line) {
