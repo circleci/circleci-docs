@@ -22,7 +22,7 @@ Before you install CircleCI agent skills, set up the following:
 
 * An AI coding agent, for example, Claude Code, Cursor, Codex, or GitHub Copilot.
 * A CircleCI account with access to the projects you want to work on. You can sign up for a free account at link:https://circleci.com/signup[CircleCI].
-* It is a good idea to install the CircleCI CLI, and authenticate for your CircleCI account. See xref:circleci-cli.adoc[The CircleCI CLI]. This is optional but most skills do make use of the CLI.
+* It is a good idea to install the CircleCI CLI, and authenticate for your CircleCI account. See xref:circleci-cli.adoc[The CircleCI CLI]. Installing the CLI is optional, but most skills make use of it.
 
 == Available CircleCI agent skills
 
