@@ -57,7 +57,7 @@ Some constraints on continuing pipelines from a `setup: true` configuration are 
 ** Use logic conditions to ensure only one workflow is run for each pipeline.
 - A pipeline can only be continued once. A pipeline cannot be continued with another setup configuration. Workflow reruns will fail as part of this restriction. Rather than rerun a setup workflow you can trigger a new pipeline.
 - A pipeline can only be continued within six hours of its creation.
-- If you declare a pipeline parameter with the same name and type in both the setup and continuation configuration files, but with different default values, the default values apply respectively to each configuration.
+- You can declare a pipeline parameter with the same name and type in both the setup and continuation configuration files. If the default values differ, each configuration uses its own default.
 - You can set the value of a pipeline parameter declared in the continuation configuration to a value other than the default. To do so, specify the parameter's name and value when calling the `continue` job or command from the link:https://circleci.com/developer/orbs/orb/circleci/continuation[continuation orb] using the `parameters` parameter.
 - The `continue` job/command will fail with the error {"message":"Conflicting pipeline parameters."} when all three of these conditions occur:
 
@@ -70,7 +70,7 @@ Some constraints on continuing pipelines from a `setup: true` configuration are 
 
 CircleCI's dynamic configuration is made up of the following resources, which can be used together to fit a variety of use cases:
 
-* The xref:reference:ROOT:configuration-reference.adoc#setup[`setup` config field] allows you to designate a configuration file as _dynamic_, allowing the use of dynamic configuration features. When a configuration is dynamic (`setup: true`) the `CIRCLE_CONTINUATION_KEY` environment variable is available, which is a secret, unique-per-pipeline key that is automatically injected into the build environment for jobs that run in a _setup_ configuration.
+* The xref:reference:ROOT:configuration-reference.adoc#setup[`setup` config field] allows you to designate a configuration file as _dynamic_, allowing the use of dynamic configuration features. When a configuration is dynamic (`setup: true`) the `CIRCLE_CONTINUATION_KEY` environment variable is available. `CIRCLE_CONTINUATION_KEY` is a secret, unique-per-pipeline key. CircleCI injects it into the build environment for jobs that run in a _setup_ configuration.
 +
 The `CIRCLE_CONTINUATION_KEY` environment variable is required to authorize the continuation of one configuration to another via the link:https://circleci.com/docs/api/v2/index.html#operation/continuePipeline[continue a pipeline] API v2 endpoint. The API also accepts a configuration string, as well as a set of pipeline parameters.
 +
@@ -82,7 +82,7 @@ A _setup_ configuration:
 
 * Use the API v2 link:https://circleci.com/docs/api/v2/index.html#operation/continuePipeline[continue a pipeline] endpoint to continue a pipeline from one configuration to another. This endpoint can be used directly or via one of the dynamic configuration orbs described next.
 
-* Use the link:https://circleci.com/developer/orbs/orb/circleci/path-filtering[path filtering orb] to map file paths, pipelines parameters, and configuration files to determine the work that is done when a change happens in a specific location in a repository.
+* Use the link:https://circleci.com/developer/orbs/orb/circleci/path-filtering[path filtering orb] to map file paths, pipeline parameters, and configuration files. This determines the work that runs when a change happens in a specific location in a repository.
 
 * Use the link:https://circleci.com/developer/orbs/orb/circleci/continuation[continuation orb] to continue one configuration to another and set up any required pipeline parameters.
 
