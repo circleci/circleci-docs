@@ -3734,6 +3734,8 @@ CircleCI supports limited dynamic expressions in its configuration through a cus
 
 Some fields accept a config template expression directly, including job filters and workflow `when` or `unless` clauses. For other fields, wrap the expression in `<<` and `>>`.
 
+For value insertion and an overview of compile-time templating, see the xref:guides:orchestrate:config-templating.adoc[Config Templating] page.
+
 [#expressions-in-config-fields]
 === Expressions in configuration fields
 

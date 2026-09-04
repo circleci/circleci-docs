@@ -40,6 +40,7 @@
 *** xref:orchestrate:jobs-steps.adoc[Jobs and steps overview]
 *** xref:orchestrate:workflows.adoc[Workflow orchestration]
 *** xref:orchestrate:pipeline-variables.adoc[Pipeline values and parameters]
+*** xref:orchestrate:config-templating.adoc[Config templating]
 ** Trigger and schedule pipelines
 *** xref:orchestrate:triggers-overview.adoc[Trigger options]
 *** xref:orchestrate:set-up-triggers.adoc[Set up triggers]

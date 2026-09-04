@@ -5,6 +5,8 @@
 
 Dynamic configuration in CircleCI is the process of describing a pipeline in which the work done is dynamically determined. Dynamic configuration is flexible. The features described in this guide allow you to create a configuration to match the requirements of your specific project.
 
+To insert pipeline values into a single `config.yml` at compile time, see the xref:config-templating.adoc[Config Templating] page. This page covers generating or assembling configuration at runtime.
+
 Dynamic configuration can mean:
 
 * The work is determined by values passed in at runtime as _pipeline parameters_.
@@ -167,6 +169,7 @@ include::ROOT:partial$faq/dynamic-configuration-faq-snip.adoc[]
 [#what-to-read-next]
 == Next steps
 
+- xref:config-templating.adoc[Config Templating] for compile-time value insertion
 - A how-to guide for xref:using-dynamic-configuration.adoc[Using Dynamic Configuration]
 - The link:https://circleci.com/developer/orbs/orb/circleci/continuation[continuation orb]
 - The link:https://circleci.com/docs/api/v2/#operation/continuePipeline[Continue a pipeline API endpoint]
