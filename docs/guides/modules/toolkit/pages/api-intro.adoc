@@ -23,7 +23,7 @@ API v3 is the current version and all new development uses this API. It provides
 * Opaque cursor pagination for efficient large dataset handling.
 * Consistent error handling with detailed error objects.
 * Idempotent operations where applicable.
-* Entity tags (ETags) for caching and conditional requests.
+* Entity tags (ETag) for caching and conditional requests.
 * Rate limiting with standard headers.
 * Comprehensive endpoints for workflows, jobs, pipelines, and analytics.
 
