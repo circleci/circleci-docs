@@ -348,6 +348,7 @@
 ** APIs
 *** xref:toolkit:api-intro.adoc[API v2 intro]
 *** xref:toolkit:api-developers-guide.adoc[API v2 developers guide]
+*** xref:toolkit:api-availability-on-circleci-server.adoc[API availability on CircleCI Server]
 *** xref:toolkit:managing-api-tokens.adoc[Managing API tokens]
 *** xref:toolkit:oauth-dynamic-client-registration.adoc[OAuth 2.0 API access with Dynamic Client Registration]
 ** IDE tools

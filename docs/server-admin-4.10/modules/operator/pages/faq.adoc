@@ -11,3 +11,6 @@ Full control of the certificates, all the way down to mTLS for Nomad.
 
 ## Is it possible to change or disable the polling time which checks for health status?
 No, this is not customizable.
+
+## Which API endpoints are available on Server?
+The Cloud API reference lists endpoints that are not part of Server. See xref:guides:toolkit:api-availability-on-circleci-server.adoc[API Availability on CircleCI Server].

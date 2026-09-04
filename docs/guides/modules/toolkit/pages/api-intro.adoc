@@ -8,6 +8,8 @@ The CircleCI API may be used to make API calls to interact with your pipelines, 
 * link:../../../api/v1/[API v1.1 Reference]
 * link:../../../api/v2/[API v2 Reference]
 
+The API v2 reference describes Cloud. For Server 4.7 through 4.10, see xref:api-availability-on-circleci-server.adoc[API Availability on CircleCI Server].
+
 API v2 includes several powerful features (for example, support for pipelines and pipeline parameters) that are unavailable in API v1.1. It is recommended that CircleCI users migrate their scripts to API v2 stable endpoints as soon as possible.
 
 CircleCI API v1.1 and v2 are supported and generally available. CircleCI expects to eventually End-Of-Life (EOL) API v1.1 in favor of API v2. Further guidance on when CircleCI API v1.1 will be discontinued will be communicated at a future date.
@@ -47,3 +49,4 @@ With API v2, several endpoints from v1 have been deprecated, which are listed in
 == Next steps
 
 * Review the xref:api-developers-guide.adoc[API Developer's Guide] for a detailed walkthrough on authenticating as well as example API requests.
+* Check xref:api-availability-on-circleci-server.adoc[API Availability on CircleCI Server] before you call a Cloud endpoint on Server.
