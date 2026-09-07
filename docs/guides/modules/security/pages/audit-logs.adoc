@@ -274,7 +274,7 @@ image::guides:ROOT:setup-s3-compatible-audit-logs.png[Set up S3-compatible stora
 .. **Region**: Optional. S3-compatible providers often default to `us-east-1` if not set.
 .. **S3 Bucket Name**: The exact name of the bucket you created.
 .. **Role ARN**: The role identifier recognized by your provider (for example, a provider-specific role ID/ARN).
-.. **Endpoint**: The HTTPS endpoint of your S3-compatible API (for example, `https://s3.<region>.<provider-domain>` or your custom host and port).
+.. **Endpoint**: The HTTPS endpoint of your S3-compatible API (for example, `\https://s3.<region>.<provider-domain>` or your custom host and port).
 . The configuration form appears as follows:
 +
 .Connect CircleCI to S3-compatible storage
