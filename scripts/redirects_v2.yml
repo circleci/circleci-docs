@@ -1,6 +1,6 @@
 # Generated redirects from Jekyll to Antora
 # Format: old (Jekyll) -> new (Antora)
-# Total redirects: 502
+# Total redirects: 513
 
 - old: /2.0/testing-ios/
   new: /guides/test/testing-ios/
