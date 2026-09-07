@@ -1,6 +1,45 @@
 # Generated redirects from Jekyll to Antora
 # Format: old (Jekyll) -> new (Antora)
-# Total redirects: 502
+# Total redirects: 513
+
+- old: /2.0/testing-ios/
+  new: /guides/test/testing-ios/
+
+- old: /2.0/getting-started/
+  new: /guides/getting-started/getting-started/
+
+- old: /release/manage-releases/
+  new: /guides/deploy/manage-releases/
+
+- old: /api/
+  new: /reference/api-homepage/
+
+- old: /2.0/orb-intro/
+  new: /orbs/use/orb-intro/
+
+- old: /orb-author-intro/
+  new: /orbs/author/orb-author/
+
+- old: /2.0/oss/
+  new: /guides/integration/oss/
+
+- old: /server-3-whats-new/
+  new: /server-admin/latest/overview/release-notes/
+
+- old: /2.0/
+  new: /
+
+- old: /release/releases-overview/
+  new: /guides/deploy/deployment-overview/
+
+- old: /2.0/workflows/
+  new: /guides/orchestrate/workflows/
+
+- old: /projects/
+  new: /guides/getting-started/create-project/
+
+- old: /2.0/env-vars/
+  new: /guides/security/env-vars/
 
 - old: /2.0/configuration-reference/
   new: /reference/configuration-reference/
