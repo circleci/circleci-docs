@@ -254,10 +254,10 @@ When setting up the OIDC Identity Provider to trust CircleCI, use these paramete
 **Validation and network requirements**:
 
 * **Server Endpoint Connectivity:**
-    The **AWS S3 compatible server**, acting as the token validator, **must be able to reach** the CircleCI OIDC Provider endpoint to fetch the public keys required to **validate the token's cryptographic signature**.
+    The **AWS S3 compatible server** acts as the token validator. It must reach the CircleCI OIDC Provider endpoint to fetch the public keys needed to **validate the token's cryptographic signature**.
 
 * **Provider Validation:**
-    Set up your OIDC provider configuration to accept and validate CircleCI's OIDC tokens for the configured **role or principal** you intend to grant access to within your storage solution.
+    Set up your OIDC provider configuration to accept and validate CircleCI's OIDC tokens. Use the **role or principal** you intend to grant access to within your storage solution.
 
 NOTE: Ensure your **AWS S3 compatible server's** network configuration allows necessary outgoing connections to the internet, specifically to `oidc.circleci.com`, for token validation to succeed.
 
@@ -274,7 +274,7 @@ image::guides:ROOT:setup-s3-compatible-audit-logs.png[Set up S3-compatible stora
 .. **Region**: Optional. S3-compatible providers often default to `us-east-1` if not set.
 .. **S3 Bucket Name**: The exact name of the bucket you created.
 .. **Role ARN**: The role identifier recognized by your provider (for example, a provider-specific role ID/ARN).
-.. **Endpoint**: The HTTPS endpoint of your S3-compatible API (for example, `https://s3.<region>.<provider-domain>` or your custom host and port).
+.. **Endpoint**: The HTTPS endpoint of your S3-compatible API (for example, `\https://s3.<region>.<provider-domain>` or your custom host and port).
 . The configuration form appears as follows:
 +
 .Connect CircleCI to S3-compatible storage
@@ -410,7 +410,7 @@ The following list shows common and important events found in the audit log. Thi
 | `organization` | The organization for this action. This data is a JSON blob that always contains `id` and `type` and usually contains `name`.
 | `account` | The account for this action. This data is a JSON blob that always contains `id` and `type` and usually contains `name`.
 | `success` | A flag that shows if the action was successful.
-| `request` | If an external request triggers this event, this field is populated and connects events that originate from the same external request. The format is a JSON blob containing: `id` (the unique ID CircleCI assigns to this request), `ip_address` (the originating IP address in IPv4 dotted notation, for example `127.0.0.1`), and `client_trace_id` (the value of the `X-Client-Trace-Id` HTTP header from the original request, if present).
+| `request` | If an external request triggers this event, this field is populated and connects events that originate from the same external request. The format is a JSON blob. It contains `id`, `ip_address`, and `client_trace_id`. `id` is the unique ID CircleCI assigns to this request. `ip_address` is the originating IP address in IPv4 dotted notation, for example `127.0.0.1`. `client_trace_id` is the value of the `X-Client-Trace-Id` HTTP header from the original request, if present.
 | `common_fields` | A set of fields mapped to commonly used names in SIEM providers. Contains: `outcome` (mapped from `success`, either `success` or `failure`), `source_ip` (mapped from `request.ip_address`), `status` (a placeholder value of `info`), and `timestamp` (mapped from `occurred_at`).
 |===
 --

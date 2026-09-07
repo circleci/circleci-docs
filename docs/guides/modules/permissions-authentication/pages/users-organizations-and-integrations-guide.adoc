@@ -697,7 +697,7 @@ When you push to your GitHub repository from a job, CircleCI will use the SSH ke
 Bitbucket::
 +
 --
-In this example, the Bitbucket Cloud repository is `https://bitbucket.org/you/test-repo/src/main/`, and the CircleCI project is `https://app.circleci.com/pipelines/bitbucket/you/test-repo`.
+In this example, the Bitbucket Cloud repository is `\https://bitbucket.org/you/test-repo/src/main/`, and the CircleCI project is `https://app.circleci.com/pipelines/bitbucket/you/test-repo`.
 
 . Create an SSH key-pair by following the link:https://support.atlassian.com/bitbucket-cloud/docs/configure-ssh-and-two-step-verification/[Bitbucket instructions]. When prompted to enter a passphrase, do **not** enter one (below is one example command to generate a key on macOS):
 +
