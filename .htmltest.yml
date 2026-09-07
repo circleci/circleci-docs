@@ -37,6 +37,22 @@ IgnoreURLs:
   - "^https://bats-core\\.readthedocs\\.io"
   - "^https://docs\\.pytest\\.org"
   - "^https://diataxis\\.fr"
+  # htmltest strips query strings by default (StripQueryString), which 404s these
+  # destinations. The full URLs are valid:
+  - "marketplace\\.visualstudio\\.com"
+  - "youtube\\.com/playlist"
+  # Microsoft Learn returns 404 to automated checkers for some pages; links are valid:
+  - "learn\\.microsoft\\.com/.*/save-project-data"
+  # Auth-walled app pages return non-OK status when unauthenticated; links are valid:
+  - "^https://app\\.circleci\\.com/settings/plan/usage"
+  - "^https://bitbucket\\.org/account/settings/app-authorizations"
+  # Example / placeholder hosts used in docs (not real destinations):
+  - "test-gitlab\\.circleci\\.com"
+  - "bitbucket\\.org/you/test-repo"
+  - "s3\\.<region>\\.<provider-domain>"
+  # MCP server endpoints reject unauthenticated GET (401/405) but URLs are valid:
+  - "^https://circleci\\.mcp\\.kapa\\.ai"
+  - "^https://mcp\\.circleci\\.com"
 IgnoreDirs:
   - "api"
 OutputDir: ".htmltest"
