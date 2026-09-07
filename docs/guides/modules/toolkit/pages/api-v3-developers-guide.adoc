@@ -14,12 +14,12 @@ API v3 is CircleCI's current API version and all new development uses v3. It pro
 
 **Key differences from v2:**
 
-* UUID-based resource identification instead of slugs.
-* Opaque cursor pagination instead of token-based pagination.
-* Comprehensive error objects with optional fields.
-* Standard rate limiting headers (IETF draft).
-* Support for entity tags (`ETag`) and conditional requests.
-* Explicit idempotent operation guarantees where applicable.
+* UUID-based resource identification instead of slugs. Resources use unique IDs like `abc-123-def` rather than names like `gh/myorg/myrepo`.
+* Opaque cursor pagination instead of token-based pagination. Page through results using server-provided cursors you cannot decode or predict.
+* Comprehensive error objects with optional fields. Errors include detailed type, ID, and source information to help with debugging.
+* Standard rate limiting headers (IETF draft). Rate limit information uses industry-standard headers that tools can understand automatically.
+* Support for entity tags (`ETag`) and conditional requests. Check if data changed without downloading it again, saving bandwidth.
+* Explicit idempotent operation guarantees where applicable. Know which operations are safe to retry without causing duplicates or side effects.
 
 [#api-v3-conventions]
 == API v3 conventions
