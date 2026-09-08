@@ -30,7 +30,7 @@ The `save_cache`/`restore_cache` steps take an *eager, bulk* approach: each writ
 This distinction matters more as a cache grows:
 
 * With a small cache, bulk caching can perform just as well, since there is only one archive to transfer.
-* As a cache grows to hold more entries, granular caching pulls ahead, because bulk caching keeps writing new copies of the same large cache that are nearly identical to the previous one.
+* As a cache grows to hold more entries, granular caching pulls ahead. Bulk caching keeps writing new copies of the same large cache that are nearly identical to the previous one.
 
 Two practical benefits follow from this:
 

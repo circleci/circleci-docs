@@ -264,7 +264,7 @@ CircleCI does not impose a cache size limit, but larger caches take longer to re
 For most dependency caches (under 300 MB) restore time is well within that threshold. For large caches (Conda environments, large Gradle repositories, or binary assets), measure the following:
 
 * If your P50 restore time exceeds 15 seconds, time a cold install for comparison.
-* If the cache restore is comparable to or slower than a cold install, consider alternatives: a custom Docker image with dependencies pre-installed, or splitting one large cache into separate per-language caches.
+* If the cache restore is comparable to or slower than a cold install, consider alternatives. Use a custom Docker image with dependencies pre-installed, or split one large cache into separate per-language caches.
 
 The expansion step (decompression and file extraction) is typically the bottleneck, not download. Large caches have a proportionally higher restore time penalty.
 
@@ -332,7 +332,7 @@ jobs:
           key: bazel-disk-cache-v1-{{ .Branch }}-{{ checksum "WORKSPACE" }}
 ----
 
-NOTE: Because caches are immutable per key, this pattern only captures whichever run first writes the cache for a given `WORKSPACE` checksum; later runs restore that same snapshot rather than growing it further. See <<clearing-cache>> if you need to force a fresh capture. Bazel's own remote cache does not have this limitation — entries accumulate continuously as builds run. CircleCI can host that remote cache for you automatically; see xref:build-tool-cache.adoc[Build Tool Cache].
+NOTE: Because caches are immutable per key, this pattern only captures whichever run first writes the cache for a given `WORKSPACE` checksum. Later runs restore that same snapshot rather than growing it further. See <<clearing-cache>> if you need to force a fresh capture. Bazel's own remote cache does not have this limitation — entries accumulate continuously as builds run. CircleCI can host that remote cache for you automatically; see xref:build-tool-cache.adoc[Build Tool Cache].
 
 [#bundler-ruby]
 === Bundler (Ruby)
@@ -392,7 +392,7 @@ jobs:
 
 NOTE: If you use Gradle dependency locking, replace `build.gradle` with the path to your lock file (for example, `gradle/dependency-locks/compileClasspath.lockfile`). Using a lock file produces a more precise cache key.
 
-NOTE: This pattern caches only what Gradle downloads. Gradle also maintains a separate *build cache* that stores task outputs (compiled classes, test results, and so on) so it can skip redoing work — a feature most teams never turn on in CI. CircleCI can host that build cache for you automatically; see xref:build-tool-cache.adoc[Build Tool Cache].
+NOTE: This pattern caches only what Gradle downloads. Gradle also maintains a separate *build cache* that stores task outputs (compiled classes, test results, and so on) so it can skip redoing work. Most teams never turn this on in CI. CircleCI can host that build cache for you automatically; see xref:build-tool-cache.adoc[Build Tool Cache].
 
 [#maven-java-and-leiningen-clojure]
 === Maven (Java) and Leiningen (Clojure)
@@ -450,7 +450,7 @@ jobs:
           key: turbo-cache-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
 ----
 
-NOTE: Because caches are immutable per key, this pattern only captures whichever run first writes the cache for a given `package-lock.json` checksum; later runs restore that same snapshot rather than growing it further. See <<clearing-cache>> if you need to force a fresh capture. Turborepo's own remote cache does not have this limitation — entries accumulate continuously as tasks run. CircleCI can host that remote cache for you automatically; see xref:build-tool-cache.adoc[Build Tool Cache].
+NOTE: Because caches are immutable per key, this pattern only captures whichever run first writes the cache for a given `package-lock.json` checksum. Later runs restore that same snapshot rather than growing it further. See <<clearing-cache>> if you need to force a fresh capture. Turborepo's own remote cache does not have this limitation — entries accumulate continuously as tasks run. CircleCI can host that remote cache for you automatically; see xref:build-tool-cache.adoc[Build Tool Cache].
 
 [#npm-node]
 === npm (Node)
@@ -848,7 +848,17 @@ Do this when:
 
 Incrementing the version creates a new cache going forward but does not delete the old one. Old caches expire after your configured retention period. If you rebase commits that predate the key change, those jobs may write under the old key again.
 
-NOTE: Use only `[a-zA-Z0-9-_]` characters in cache key prefixes. Special characters (`:`, `?`, `&`, `=`, `/`, `#`) may cause issues with your build.
+[NOTE]
+====
+Use only `[a-zA-Z0-9-_]` characters in cache key prefixes. Special characters may cause issues with your build, including:
+
+* `:`
+* `?`
+* `&`
+* `=`
+* `/`
+* `#`
+====
 
 [#cache-size]
 === Viewing cache size and storage usage
