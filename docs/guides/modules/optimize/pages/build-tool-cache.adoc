@@ -1,0 +1,149 @@
+= Build tool cache
+:page-badge: Beta
+:page-platform: Cloud
+:page-description: Use with_tool_cache to transparently back Gradle, Bazel, Turborepo, and Xcode build caches with a CircleCI-managed remote cache.
+:experimental:
+
+CAUTION: Build tool cache is in open beta on CircleCI Cloud. The feature is still evolving, so you may encounter bugs or changes to behavior. There is no additional cost to use it beyond standard xref:persist-data.adoc#managing-network-and-storage-usage[Cache Storage Usage].
+
+Use the xref:reference:ROOT:configuration-reference.adoc#withtoolcache[`with_tool_cache`] step to back a build tool's own remote cache (for example, Gradle's build cache or Bazel's remote cache) with a CircleCI-managed cache backend. This removes the need to hand-roll a xref:caching.adoc[`save_cache`/`restore_cache`] pair for tool-specific build outputs, and works the same way across executors.
+
+[#how-it-works]
+== How it works
+
+`with_tool_cache` wraps the steps you give it and automatically sets up and tears down a remote cache for the named `tool`:
+
+. Starts a local cache server in the background.
+. Configures `tool` to point at that cache server as its remote cache.
+. Runs your wrapped steps.
+. Stops the cache server, regardless of whether your steps passed or failed.
+
+You do not need to install or configure anything else. The cache server and per-tool configuration are already available on CircleCI's execution environments.
+
+[#eager-vs-lazy-caching]
+== How this differs from save_cache/restore_cache
+
+The `save_cache`/`restore_cache` steps take an *eager, bulk* approach: each write saves an entire directory as a single immutable blob under a key. If a single file in that directory changes, the next run saves the whole directory again under a new key. Successive caches end up nearly identical to each other.
+
+`with_tool_cache` takes a *lazy, granular* approach instead. The build tool's remote cache stores and fetches individual entries as needed. A small change adds only a small amount of new data instead of duplicating the entire cache.
+
+This distinction matters more as a cache grows:
+
+* With a small cache, bulk caching can perform just as well, since there is only one archive to transfer.
+* As a cache grows to hold more entries, granular caching pulls ahead, because bulk caching keeps writing new copies of the same large cache that are nearly identical to the previous one.
+
+Two practical benefits follow from this:
+
+* **Reduced storage use**: A small change adds a small new entry to the remote cache instead of duplicating the whole cache under a new key. Bulk caching, by contrast, tends to accumulate multiple large caches that are nearly identical to each other and use storage until they expire.
+* **Less configuration**: `with_tool_cache` requires no cache key design, checksum templates, or key rotation. You do not choose what to cache, build a key, or bump a version prefix to force a clean cache.
+
+NOTE: In internal benchmarks, a clean build using `with_tool_cache` completed about 90% faster than the same build with no cache at all. Actual results depend on the size of your build's cache and how often it changes.
+
+[#supported-tools]
+== Supported tools
+
+`with_tool_cache` currently supports the following values for `tool`:
+
+[.table-scroll]
+--
+[cols="1,3", options="header"]
+|===
+| Tool | What gets cached
+
+| `gradle`
+| Gradle's remote build cache (task outputs). You still manage the module/dependency cache separately with xref:caching.adoc#gradle-java[`save_cache`/`restore_cache`].
+
+| `bazel`
+| Bazel's remote cache.
+
+| `turborepo`
+| Turborepo's remote cache.
+
+| `xcode`
+| Xcode's build cache.
+|===
+--
+
+[#quickstart]
+== Quickstart
+
+The following examples show `with_tool_cache` for each supported tool. `with_tool_cache` works on any executor; put `checkout` before the `with_tool_cache` step, not inside it.
+
+[tabs]
+====
+Gradle::
++
+--
+[,yaml]
+----
+jobs:
+  build:
+    steps:
+      - checkout
+      - with_tool_cache:
+          tool: gradle
+          steps:
+            - run: ./gradlew build
+----
+--
+Bazel::
++
+--
+[,yaml]
+----
+jobs:
+  build:
+    steps:
+      - checkout
+      - with_tool_cache:
+          tool: bazel
+          steps:
+            - run: bazel build //...
+----
+--
+Turborepo::
++
+--
+[,yaml]
+----
+jobs:
+  build:
+    steps:
+      - checkout
+      - with_tool_cache:
+          tool: turborepo
+          steps:
+            - run: turbo run build
+----
+--
+Xcode::
++
+--
+[,yaml,subs=attributes+]
+----
+jobs:
+  build:
+    macos:
+      xcode: {xcodeversion}
+    steps:
+      - checkout
+      - with_tool_cache:
+          tool: xcode
+          steps:
+            - run: xcodebuild build
+----
+--
+====
+
+[#use-with-dependency-caching]
+== Use with dependency caching
+
+`with_tool_cache` only manages the build tool's own remote/task-output cache. It does not replace dependency caching. For example, with Gradle, `with_tool_cache` handles the Gradle build cache, but a separate xref:caching.adoc#gradle-java[`save_cache`/`restore_cache`] pair still caches `~/.gradle/caches/modules-2` (the downloaded dependencies). The two mechanisms are complementary: one caches what Gradle downloads, the other caches what Gradle builds.
+
+[#see-also]
+== See also
+
+* xref:reference:ROOT:configuration-reference.adoc#withtoolcache[`with_tool_cache` Configuration Reference]
+* xref:caching.adoc[Caching Dependencies]
+* xref:docker-layer-caching.adoc[Docker Layer Caching]
+* xref:optimizations.adoc[Optimization Reference]

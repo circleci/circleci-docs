@@ -2276,6 +2276,103 @@ A path does not need to be specified here because CircleCI restores the cache to
 
 '''
 
+[#withtoolcache]
+=== *`with_tool_cache`*
+
+NOTE: `with_tool_cache` is in open beta.
+
+Wraps a sequence of steps and configures the named build tool to use a CircleCI-managed remote cache for its own build outputs. See <<savecache,`save_cache`>> and <<restorecache,`restore_cache`>> for the default caching steps. For more information, see the xref:guides:optimize:build-tool-cache.adoc#[Build Tool Cache] page.
+
+[.table-scroll]
+--
+[cols="1,1,1,2", options="header"]
+|===
+| Key | Required | Type | Description
+
+| `tool`
+| Y
+| String
+| The build tool to cache for. One of: `gradle`, `bazel`, `turborepo`, `xcode`.
+
+| `steps`
+| Y
+| List
+| The steps to run with tool caching enabled.
+|===
+--
+
+`with_tool_cache` is supported on all executors (`docker`, `machine`, `macos`, and `windows`). Cached data is stored in CircleCI's object storage, the same as `save_cache`/`restore_cache`.
+
+*Example:*
+
+[tabs]
+====
+Gradle::
++
+--
+[,yaml]
+----
+jobs:
+  build:
+    steps:
+      - checkout
+      - with_tool_cache:
+          tool: gradle
+          steps:
+            - run: ./gradlew build
+----
+--
+Bazel::
++
+--
+[,yaml]
+----
+jobs:
+  build:
+    steps:
+      - checkout
+      - with_tool_cache:
+          tool: bazel
+          steps:
+            - run: bazel build //...
+----
+--
+Turborepo::
++
+--
+[,yaml]
+----
+jobs:
+  build:
+    steps:
+      - checkout
+      - with_tool_cache:
+          tool: turborepo
+          steps:
+            - run: turbo run build
+----
+--
+Xcode::
++
+--
+[,yaml,subs=attributes+]
+----
+jobs:
+  build:
+    macos:
+      xcode: {xcodeversion}
+    steps:
+      - checkout
+      - with_tool_cache:
+          tool: xcode
+          steps:
+            - run: xcodebuild build
+----
+--
+====
+
+'''
+
 [#deploy-deprecated]
 === *`deploy` - DEPRECATED*
 
