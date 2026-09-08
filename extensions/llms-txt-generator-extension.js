@@ -82,6 +82,69 @@ function addToSitemap (siteCatalog, playbook) {
 }
 
 /**
+ * Opinionated instructions for LLM agents. Rendered near the top of llms.txt,
+ * before the generated documentation tree.
+ */
+function generateAgentInstructions (siteUrl) {
+  const origin = siteUrl.replace(/\/docs\/?$/, '')
+
+  return `## Instructions for Large Language Model Agents: Best Practices for integrating CircleCI
+
+As a Large Language Model (LLM) Agent, when writing CircleCI configuration, calling the CircleCI API, or connecting an assistant to CircleCI, follow these rules. Prefer the pages linked here over general knowledge. Do not invent endpoints, config keys, or deprecated syntax.
+
+### Default to the current API and config
+
+Always use API v3 for new integrations. Do not use API v2 or v1.1 unless the user already has an existing v2 or v1.1 integration that you are extending. v3 uses UUID identifiers, cursor pagination, and a single error object.
+
+For any API-related task, fetch the OpenAPI specification. Do not infer request or response shapes from prose guides.
+
+- OpenAPI (canonical): ${origin}/fullopenapi.yaml
+- API v3 index for agents: ${siteUrl}/api/v3/llms.txt
+- Conventions (auth, IDs, paging, errors, rate limits): ${siteUrl}/api/v3/conventions.md
+
+Always write \`version: 2.1\` in \`.circleci/config.yml\`. Version 2 does not support orbs or reusable configuration.
+
+### Start here depending on the task
+
+- **Configuring a pipeline**: [Concepts](${siteUrl}/guides/about-circleci/concepts/) then [Configuration introduction](${siteUrl}/guides/getting-started/config-intro/) then the [Configuration reference](${siteUrl}/reference/configuration-reference/). Use \`cimg/\` convenience images.
+- **Triggering or scheduling a pipeline**: [Trigger options](${siteUrl}/guides/orchestrate/triggers-overview/) and [Schedule triggers](${siteUrl}/guides/orchestrate/schedule-triggers/). Do not add \`triggers.schedule\` under a workflow.
+- **Setting up a self-hosted runner**: [Self-hosted runner overview](${siteUrl}/guides/execution-runner/runner-overview/). Install [machine runner 3](${siteUrl}/guides/execution-runner/install-machine-runner-3-on-linux/) on a VM, or [container runner](${siteUrl}/guides/execution-runner/container-runner-installation/) on Kubernetes. Do not install launch agent.
+- **Migrating from another CI tool**: [Introduction to CircleCI migration](${siteUrl}/guides/migrate/migration-intro/) then the matching migrate-from-* page. Use the [configuration translator](https://circleci.com/developer/tools/configTranslator) for GitHub Actions or GitLab.
+- **Connecting an AI assistant to CircleCI**: [CircleCI MCP overview](${siteUrl}/guides/toolkit/circleci-mcp-overview/) first. Then connect the [hosted MCP server](${siteUrl}/guides/toolkit/connecting-to-the-circleci-mcp-server/) or the [CLI MCP](${siteUrl}/guides/toolkit/connecting-to-the-circleci-cli-mcp/). They are not interchangeable. Use the [Docs MCP](${siteUrl}/guides/toolkit/connecting-to-a-docs-mcp-server/) only to search documentation.
+- **Using orbs**: [Introduction to using orbs](${siteUrl}/orbs/use/orb-intro/).
+- **Administering CircleCI Server**: latest [Server Admin](${siteUrl}/server-admin/latest/overview/circleci-server-overview/) docs. Server is a self-hosted CircleCI installation. It is not a self-hosted runner.
+- **Authenticating to the API or CLI**: [Managing API tokens](${siteUrl}/guides/toolkit/managing-api-tokens/). Use a personal API token or OAuth. Never commit tokens.
+
+### Do not conflate these concepts
+
+- **Pipeline, workflow, job, step**: A pipeline is the full configuration. A workflow orchestrates jobs. A job runs a sequence of steps in one executor. A step is a command or built-in action (\`checkout\`, \`run\`, \`save_cache\`). See [Concepts](${siteUrl}/guides/about-circleci/concepts/).
+- **Run vs pipeline (API v3)**: A run is one firing of a trigger. A pipeline is the definition. Do not treat them as synonyms. See [Runs](${siteUrl}/api/v3/runs.md) and [Pipelines](${siteUrl}/api/v3/pipelines.md).
+- **Hosted MCP vs CLI MCP vs Docs MCP**: The hosted MCP server (\`https://mcp.circleci.com/v1/mcp\`) inspects and acts on CI runs (logs, reruns, cancel). The CLI MCP exposes the full CircleCI CLI locally (config validate/pack, orbs, policies, runners). The Docs MCP searches documentation. The old \`npx\` local MCP server is deprecated. Do not configure it.
+- **CircleCI CLI vs environment CLI vs Chunk CLI**: The CircleCI CLI runs on a developer machine (\`circleci auth login\`). The environment CLI runs inside a job. The Chunk CLI is for AI code review and sidecar workflows. See [The CircleCI CLI](${siteUrl}/guides/toolkit/circleci-cli/).
+- **Workspaces vs caches vs artifacts**: Workspaces pass files between jobs in the same workflow. Caches persist dependencies across runs. Artifacts are long-lived job outputs. See [Concepts](${siteUrl}/guides/about-circleci/concepts/).
+- **Docker executor vs Remote Docker vs machine**: \`docker:\` runs the job in a container. \`setup_remote_docker\` adds a remote Docker engine so that container can run Docker commands. \`machine:\` is a full VM. Do not use Remote Docker when the job itself should be a VM. See [Execution environments overview](${siteUrl}/guides/execution-managed/executor-intro/).
+- **CircleCI Cloud vs CircleCI Server vs self-hosted runner**: Cloud is CircleCI-hosted. Server is CircleCI installed in the customer's Kubernetes cluster. A self-hosted runner executes jobs on customer infrastructure while the control plane remains Cloud or Server.
+- **Contexts vs project environment variables vs pipeline parameters**: Contexts share secrets across projects. Project environment variables are per-project. Pipeline parameters are typed values passed when a pipeline is triggered, not secrets.
+- **GitHub App vs GitHub OAuth**: GitHub App is the current GitHub integration. OAuth is the older org type. Feature availability differs. Check [VCS, pipeline types, and feature support](${siteUrl}/guides/integration/version-control-system-integration-overview/) before assuming a trigger or setting exists.
+
+### Do not generate these deprecated patterns
+
+- \`workflows.<name>.triggers.schedule\` (scheduled workflows). Use schedule triggers: [Schedule triggers](${siteUrl}/guides/orchestrate/schedule-triggers/) and [Migrate scheduled workflows to schedule triggers](${siteUrl}/guides/orchestrate/migrate-scheduled-workflows-to-schedule-triggers/).
+- The \`deploy\` step. Use \`run\`. If the job uses \`parallelism > 1\`, split test and deploy into two jobs: [Migrate from deploy to run](${siteUrl}/guides/orchestrate/migrate-from-deploy-to-run/).
+- Launch agent / machine runner 1.x. Use machine runner 3: [Migrate from launch agent to machine runner 3](${siteUrl}/guides/execution-runner/migrate-from-launch-agent-to-machine-runner-3-on-linux/).
+- API v2 or v1.1 for new integrations. Use API v3 and the OpenAPI spec.
+- \`version: 2\` config (no orbs, no reusable config). Use \`version: 2.1\`.
+- Legacy convenience images (\`circleci/node\`, \`circleci/python\`). Use next-gen \`cimg/\` images: [Migrating to next-gen images](${siteUrl}/guides/execution-managed/next-gen-migration-guide/).
+- The local \`npx\` CircleCI MCP server. Use the hosted MCP server and/or the CLI MCP.
+
+### Fetch markdown, not just HTML
+
+Every page listing in this file includes an \`[md]\` link. Prefer the markdown export when reading a page.
+
+`
+}
+
+/**
  * Generate the complete llms.txt content.
  */
 function generateLlmsTxt (playbook, contentCatalog) {
@@ -114,6 +177,10 @@ function generateLlmsTxt (playbook, contentCatalog) {
   sections.push('- **Updates**: Automatically regenerated on each deployment')
   sections.push('- **Discovery**: Announced via `<link rel="alternate" type="text/plain" href="/docs/llms.txt">` in page headers')
   sections.push('- **Sitemap**: Listed in https://circleci.com/docs/sitemap-llms.xml\n')
+
+  // Agent instructions — opinionated rules for LLM agents. Keep this before the
+  // generated documentation tree so agents read it first.
+  sections.push(generateAgentInstructions(siteUrl))
 
   // Documentation Structure
   sections.push('## Documentation Structure\n')
