@@ -6,6 +6,7 @@
 ** xref:about-circleci:open-source.adoc[Open source acknowledgements]
 
 * Getting started
+** xref:getting-started:how-to-use-these-docs.adoc[How to use these docs]
 ** First steps
 *** xref:getting-started:first-steps.adoc[Sign up and try CircleCI]
 *** xref:getting-started:create-an-organization.adoc[Create an organization]
