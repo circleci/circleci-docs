@@ -656,7 +656,7 @@ jobs:
       - run: xcodebuild build -clonedSourcePackagesDirPath SourcePackages
 ----
 
-NOTE: Xcode's own build cache (DerivedData) is large, tied to absolute build paths, and a poor fit for `save_cache`/`restore_cache`. Xcode still tracks build products so it can skip recompiling unchanged code, a feature that is simple to overlook if you have only ever cached CocoaPods or SPM dependencies. CircleCI can host a remote cache for Xcode's build products for you automatically; see xref:build-tool-cache.adoc[Build Tool Cache].
+NOTE: Xcode's own build cache (DerivedData) is large, tied to absolute build paths, and a poor fit for `save_cache`/`restore_cache`.
 
 [#yarn-node]
 === Yarn (Node)

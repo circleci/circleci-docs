@@ -2292,7 +2292,7 @@ Wraps a sequence of steps and configures the named build tool to use a CircleCI-
 | `tool`
 | Y
 | String
-| The build tool to cache for. One of: `gradle`, `bazel`, `turborepo`, `xcode`.
+| The build tool to cache for. One of: `gradle`, `bazel`, `turborepo`.
 
 | `steps`
 | Y
@@ -2350,23 +2350,6 @@ jobs:
           tool: turborepo
           steps:
             - run: turbo run build
-----
---
-Xcode::
-+
---
-[,yaml,subs=attributes+]
-----
-jobs:
-  build:
-    macos:
-      xcode: {xcodeversion}
-    steps:
-      - checkout
-      - with_tool_cache:
-          tool: xcode
-          steps:
-            - run: xcodebuild build
 ----
 --
 ====
