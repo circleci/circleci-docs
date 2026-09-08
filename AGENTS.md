@@ -10,7 +10,7 @@ For a comprehensive overview of the CircleCI documentation structure, see the au
 - Content statistics and URL patterns
 - Technical stack information
 
-This guide focuses on **how to write documentation**. The llms.txt file tells you **what documentation exists and where**.
+This guide focuses on **how to write documentation**. The llms.txt file tells you **what documentation exists and where**. The xref-equivalent live page for current defaults and wayfinding is `docs/guides/modules/getting-started/pages/how-to-use-these-docs.adoc` (How to use these docs). Update that page when you change API versioning, MCP offerings, runner install paths, or a deprecated pattern.
 
 ## Git worktrees
 
