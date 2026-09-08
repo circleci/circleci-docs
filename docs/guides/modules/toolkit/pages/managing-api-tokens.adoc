@@ -21,18 +21,7 @@ NOTE: API tokens cannot be modified after they have been created. The only way t
 [#creating-a-personal-api-token]
 === Create a personal API token
 
-. In the CircleCI application, go to your link:https://app.circleci.com/settings/user[User settings].
-. Select link:https://app.circleci.com/settings/user/tokens[Personal API Tokens].
-. Select btn:[Create New Token] button.
-. In the *Token name* field, type a memorable name for the token.
-. Set an expiry date for the token. You must choose a date no more than one year in the future.
-. Select btn:[Add API Token] button.
-. After the token appears, copy and paste it to another location. You will not be able to view the token again.
-
-CircleCI emails you before a personal API token expires. For details, see the <<personal-api-token-expiry-notifications,Personal API Token Expiry Notifications>> section.
-
-.Personal API tokens available in user settings
-image::guides:ROOT:personal-api-tokens.png[screenshot of the personal API tokens page, showing the name, created, last used, and expires columns for each token]
+include::guides:ROOT:partial$shared-sections/create-a-personal-api-token.adoc[]
 
 To delete a personal API token, click the X in the *Remove* column and confirm
 your deletion in the dialog window.
