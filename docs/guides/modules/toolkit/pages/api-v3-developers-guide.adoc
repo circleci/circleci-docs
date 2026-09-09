@@ -488,16 +488,14 @@ Create, list, and configure contexts to share environment variables across jobs.
 
 link:https://circleci.com/docs/api/v3#tag/contexts[Contexts API reference]
 
-**List contexts:**
-
+.List contexts
 [,shell]
 ----
 curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=<your-org-id>" \
   --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
 
-**Create a context:**
-
+.Create a context
 [,shell]
 ----
 curl -X POST "https://circleci.com/api/v3/contexts" \
@@ -509,8 +507,7 @@ curl -X POST "https://circleci.com/api/v3/contexts" \
   }'
 ----
 
-**Set an environment variable in a context:**
-
+.Set an environment variable in a context
 [,shell]
 ----
 curl -X POST "https://circleci.com/api/v3/contexts/<your-context-id>/env-vars/set" \
