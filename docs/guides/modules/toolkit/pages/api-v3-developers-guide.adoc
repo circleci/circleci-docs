@@ -603,15 +603,6 @@ else
 fi
 ----
 
-[#respect-rate-limits]
-=== Respect rate limits
-
-Use exponential backoff when you receive 429 responses:
-
-. Wait the duration specified in the `Retry-After` header.
-. If subsequent requests also return 429, double your wait time.
-. Continue doubling until the request succeeds.
-
 [#optional-response-caching]
 === Optional response caching
 
