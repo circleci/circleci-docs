@@ -23,7 +23,6 @@ API v3 is the current version and all new development uses this API. It provides
 * Opaque cursor pagination for efficient large dataset handling. Page through results using server-provided cursors.
 * Consistent error handling with detailed error objects. Errors include type, ID, and source information for debugging.
 * Idempotent operations where applicable. Know which operations are safe to retry.
-* Entity tags (`ETag`) for caching and conditional requests. Check if data changed without re-downloading.
 * Rate limiting with standard headers. Rate limit information uses industry-standard headers.
 * Comprehensive endpoints for workflows, jobs, pipelines, and analytics. Access detailed data across all CircleCI resources.
 

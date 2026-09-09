@@ -18,7 +18,6 @@ API v3 is CircleCI's current API version and all new development uses v3. It pro
 * Opaque cursor pagination instead of token-based pagination. Page through results using server-provided cursors you cannot decode or predict.
 * Comprehensive error objects with optional fields. Errors include detailed type, ID, and source information to help with debugging.
 * Standard rate limiting headers. Rate limit information uses industry-standard headers that tools can understand automatically.
-* Support for entity tags (`ETag`) and conditional requests. Check if data changed without downloading it again, saving bandwidth.
 * Explicit idempotent operation guarantees where applicable. Know which operations are safe to retry without causing duplicates or side effects.
 
 [#api-v3-conventions]
@@ -272,29 +271,6 @@ Some best practices for rate limits are as follows:
 * The `Retry-After` header tells you the number of seconds to wait before making another request.
 
 * Each API endpoint has its own rate limit and the figures are provided in response headers. Always read the rate limit headers in responses rather than hard-coding assumed limits in your code. The limits can vary by endpoint and may change over time.
-
-[#caching-and-conditional-requests]
-=== Caching and conditional requests
-
-Responses include an `ETag` and `Cache-Control` directive. Send the `ETag` back as `If-None-Match` to make the request conditional and receive a 304 when nothing has changed.
-
-**Example:**
-
-[,shell]
-----
-# First request
-curl -i "https://circleci.com/api/v3/workflows/<your-workflow-id>" \
-  --header "Authorization: Bearer $CIRCLE_TOKEN"
-
-# Returns ETag: "abc123def"
-
-# Conditional request
-curl "https://circleci.com/api/v3/workflows/<your-workflow-id>" \
-  --header "Authorization: Bearer $CIRCLE_TOKEN" \
-  --header 'If-None-Match: "abc123def"'
-
-# Returns 304 Not Modified if unchanged
-----
 
 [#deprecation]
 === Deprecation
@@ -649,14 +625,10 @@ Use exponential backoff when you receive 429 responses:
 . If subsequent requests also return 429, double your wait time.
 . Continue doubling until the request succeeds.
 
-[#use-etags-for-efficiency]
-=== Use entity tags for efficiency
+[#optional-response-caching]
+=== Optional: Response caching
 
-Use conditional requests to reduce bandwidth and improve performance:
-
-. Store the `ETag` from initial requests.
-. Send `If-None-Match` headers on subsequent requests.
-. Handle 304 responses by using cached data.
+Some API v3 endpoints return `Cache-Control` headers for intermediate infrastructure and browser caching. Certain job-related endpoints (stdout, stderr, tests, resource-usage) include these headers. Client applications can implement their own local caching strategies as an optimization, but this is not required for normal API usage.
 
 [#paginate-efficiently]
 === Paginate efficiently
