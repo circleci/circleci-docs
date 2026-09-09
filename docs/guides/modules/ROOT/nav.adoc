@@ -321,28 +321,29 @@
 ** Project management
 *** xref:integration:jira-plugin.adoc[Connect With Jira]
 
+* Working with agents
+** xref:toolkit:circleci-agent-skills.adoc[CircleCI Agent Skills]
+** MCP
+*** xref:toolkit:circleci-mcp-overview.adoc[CircleCI MCP overview]
+*** xref:toolkit:connecting-to-the-circleci-mcp-server.adoc[Connecting to the CircleCI MCP server]
+*** xref:toolkit:connecting-to-the-circleci-cli-mcp.adoc[Connecting to the CircleCI CLI MCP]
+*** xref:toolkit:connecting-to-a-docs-mcp-server.adoc[Connecting to the CircleCI Docs MCP Server]
+** Chunk
+*** xref:guides:toolkit:chunk-setup-and-overview.adoc[Chunk Setup and Overview]
+*** xref:toolkit:install-and-configure-the-chunk-cli.adoc[Install and configure the Chunk CLI]
+*** xref:toolkit:how-to-use-chunk-cli.adoc[How to use the Chunk CLI]
+
 * Developer toolkit
 ** xref:toolkit:how-to-find-ids.adoc[How to find IDs]
 ** CircleCI CLI
 *** xref:toolkit:circleci-cli.adoc[The CircleCI CLI]
 *** xref:toolkit:cli-migration-guide.adoc[CLI migration guide]
 
-** Chunk CLI
-*** xref:toolkit:install-and-configure-the-chunk-cli.adoc[Install and configure the Chunk CLI]
-*** xref:toolkit:how-to-use-chunk-cli.adoc[How to use the Chunk CLI]
-
 ** Environment CLI
 *** xref:toolkit:environment-cli-usage-guide.adoc[CircleCI environment CLI usage guide]
 
-** MCP
-*** xref:toolkit:circleci-mcp-overview.adoc[CircleCI MCP overview]
-*** xref:toolkit:connecting-to-the-circleci-mcp-server.adoc[Connecting to the CircleCI MCP server]
-*** xref:toolkit:connecting-to-the-circleci-cli-mcp.adoc[Connecting to the CircleCI CLI MCP]
-*** xref:toolkit:connecting-to-a-docs-mcp-server.adoc[Connecting to the CircleCI Docs MCP Server]
-
-** AI-powered features
+** In-app AI features
 *** xref:guides:toolkit:enable-ai-powered-features.adoc[Enable AI-powered features]
-*** xref:guides:toolkit:chunk-setup-and-overview.adoc[Chunk Setup and Overview]
 *** xref:toolkit:intelligent-summaries.adoc[Intelligent summaries]
 
 ** APIs
