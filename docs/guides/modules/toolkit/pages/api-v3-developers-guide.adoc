@@ -372,8 +372,14 @@ curl -g 'https://circleci.com/api/v3/workflows/<your-workflow-id>' \
 [#common-use-cases]
 == Common use cases
 
+This section shows practical examples for common API v3 operations. Each example includes a working curl command and links to the full endpoint reference documentation.
+
 [#list-workflows-in-a-run]
 === List workflows in a run
+
+Retrieve all workflows triggered by a specific run.
+
+link:https://circleci.com/docs/api/v3#tag/workflows/GET/api/v3/workflows[Workflows API reference]
 
 [,shell]
 ----
@@ -384,6 +390,10 @@ curl -g "https://circleci.com/api/v3/workflows?filter[run_id]=<your-run-id>" \
 [#list-jobs-in-a-workflow]
 === List jobs in a workflow
 
+Retrieve all jobs within a specific workflow.
+
+link:https://circleci.com/docs/api/v3#tag/jobs/GET/api/v3/jobs[Jobs API reference]
+
 [,shell]
 ----
 curl -g "https://circleci.com/api/v3/jobs?filter[workflow_id]=<your-workflow-id>" \
@@ -393,16 +403,22 @@ curl -g "https://circleci.com/api/v3/jobs?filter[workflow_id]=<your-workflow-id>
 [#get-job-details]
 === Get job details
 
+Fetch detailed information about a specific job, including steps, parallel executions, and metadata.
+
+link:https://circleci.com/docs/api/v3#tag/jobs/GET/api/v3/jobs/%7Bid%7D[Get job by ID API reference]
+
 [,shell]
 ----
 curl "https://circleci.com/api/v3/jobs/<your-job-id>" \
   --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
 
-The response includes steps, parallel executions, and other job metadata.
-
 [#get-job-artifacts]
 === Get job artifacts
+
+List all artifacts produced by a job.
+
+link:https://circleci.com/docs/api/v3#tag/jobs/GET/api/v3/jobs/%7Bid%7D/artifacts[Get job artifacts API reference]
 
 [,shell]
 ----
@@ -412,6 +428,10 @@ curl "https://circleci.com/api/v3/jobs/<your-job-id>/artifacts" \
 
 [#download-artifacts]
 === Download artifacts
+
+Extract artifact URLs from a job and download them to your local machine.
+
+link:https://circleci.com/docs/api/v3#tag/jobs/GET/api/v3/jobs/%7Bid%7D/artifacts[Get job artifacts API reference]
 
 . Get artifact URLs for a job:
 +
@@ -436,6 +456,10 @@ done < artifact-urls.txt
 [#cancel-a-workflow]
 === Cancel a workflow
 
+Stop a running workflow. The cancellation is processed asynchronously.
+
+link:https://circleci.com/docs/api/v3#tag/workflows/POST/api/v3/workflows/%7Bid%7D/cancel[Cancel workflow API reference]
+
 [,shell]
 ----
 curl -X POST "https://circleci.com/api/v3/workflows/<your-workflow-id>/cancel" \
@@ -446,6 +470,10 @@ curl -X POST "https://circleci.com/api/v3/workflows/<your-workflow-id>/cancel" \
 [#rerun-a-workflow]
 === Rerun a workflow
 
+Create a new workflow run from an existing workflow. By default, all jobs are rerun.
+
+link:https://circleci.com/docs/api/v3#tag/workflows/POST/api/v3/workflows/%7Bid%7D/rerun[Rerun workflow API reference]
+
 [,shell]
 ----
 curl -X POST "https://circleci.com/api/v3/workflows/<your-workflow-id>/rerun" \
@@ -455,6 +483,10 @@ curl -X POST "https://circleci.com/api/v3/workflows/<your-workflow-id>/rerun" \
 
 [#manage-contexts]
 === Manage contexts
+
+Create, list, and configure contexts to share environment variables across jobs.
+
+link:https://circleci.com/docs/api/v3#tag/contexts[Contexts API reference]
 
 **List contexts:**
 
