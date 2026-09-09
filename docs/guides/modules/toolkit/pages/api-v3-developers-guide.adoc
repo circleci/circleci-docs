@@ -386,7 +386,7 @@ curl -g "https://circleci.com/api/v3/workflows?filter[run_id]=<your-run-id>" \
 
 [,shell]
 ----
-curl -g "https://circleci.com/api/v3/jobs?filter[workflow_id]=\{workflow-id}" \
+curl -g "https://circleci.com/api/v3/jobs?filter[workflow_id]=<your-workflow-id>" \
   --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
 
@@ -395,7 +395,7 @@ curl -g "https://circleci.com/api/v3/jobs?filter[workflow_id]=\{workflow-id}" \
 
 [,shell]
 ----
-curl "https://circleci.com/api/v3/jobs/\{job-id}" \
+curl "https://circleci.com/api/v3/jobs/<your-job-id>" \
   --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
 
@@ -406,7 +406,7 @@ The response includes steps, parallel executions, and other job metadata.
 
 [,shell]
 ----
-curl "https://circleci.com/api/v3/jobs/\{job-id}/artifacts" \
+curl "https://circleci.com/api/v3/jobs/<your-job-id>/artifacts" \
   --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
 
@@ -417,7 +417,7 @@ curl "https://circleci.com/api/v3/jobs/\{job-id}/artifacts" \
 +
 [,shell]
 ----
-curl "https://circleci.com/api/v3/jobs/\{job-id}/artifacts" \
+curl "https://circleci.com/api/v3/jobs/<your-job-id>/artifacts" \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   | jq -r '.data[].url' > artifact-urls.txt
 ----
@@ -438,7 +438,7 @@ done < artifact-urls.txt
 
 [,shell]
 ----
-curl -X POST "https://circleci.com/api/v3/workflows/\{workflow-id}/cancel" \
+curl -X POST "https://circleci.com/api/v3/workflows/<your-workflow-id>/cancel" \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json"
 ----
@@ -448,7 +448,7 @@ curl -X POST "https://circleci.com/api/v3/workflows/\{workflow-id}/cancel" \
 
 [,shell]
 ----
-curl -X POST "https://circleci.com/api/v3/workflows/\{workflow-id}/rerun" \
+curl -X POST "https://circleci.com/api/v3/workflows/<your-workflow-id>/rerun" \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json"
 ----
@@ -460,7 +460,7 @@ curl -X POST "https://circleci.com/api/v3/workflows/\{workflow-id}/rerun" \
 
 [,shell]
 ----
-curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=\{org-id}" \
+curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=<your-org-id>" \
   --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
 
@@ -472,7 +472,7 @@ curl -X POST "https://circleci.com/api/v3/contexts" \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
   --data '{
-    "org_id": "\{org-id}",
+    "org_id": "<your-org-id>",
     "name": "my-context"
   }'
 ----
@@ -481,7 +481,7 @@ curl -X POST "https://circleci.com/api/v3/contexts" \
 
 [,shell]
 ----
-curl -X POST "https://circleci.com/api/v3/contexts/\{context-id}/env-vars/set" \
+curl -X POST "https://circleci.com/api/v3/contexts/<your-context-id>/env-vars/set" \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
   --data '{
@@ -502,7 +502,7 @@ API v3 provides comprehensive orb management capabilities:
 
 [,shell]
 ----
-curl -g "https://circleci.com/api/v3/orb/packages?filter[namespace_id]=\{namespace-id}" \
+curl -g "https://circleci.com/api/v3/orb/packages?filter[namespace_id]=<your-namespace-id>" \
   --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
 
@@ -514,7 +514,7 @@ curl -X POST "https://circleci.com/api/v3/orb/versions" \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
   --data '{
-    "package_id": "\{package-id}",
+    "package_id": "<your-package-id>",
     "version": "1.0.0",
     "source": "version: 2.1\n..."
   }'
@@ -529,7 +529,7 @@ Manage self-hosted runners through the API:
 
 [,shell]
 ----
-curl -g "https://circleci.com/api/v3/runner/resource-classes?filter[org_id]=\{org-id}" \
+curl -g "https://circleci.com/api/v3/runner/resource-classes?filter[org_id]=<your-org-id>" \
   --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
 
@@ -541,7 +541,7 @@ curl -X POST "https://circleci.com/api/v3/runner/tokens" \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
   --data '{
-    "resource_class_id": "\{resource-class-id}",
+    "resource_class_id": "<your-resource-class-id>",
     "name": "my-runner-token"
   }'
 ----
@@ -557,7 +557,7 @@ Always check the HTTP status code and handle errors appropriately:
 [,shell]
 ----
 response=$(curl -s -w "\n%{http_code}" \
-  "https://circleci.com/api/v3/workflows/\{workflow-id}" \
+  "https://circleci.com/api/v3/workflows/<your-workflow-id>" \
   --header "Authorization: Bearer $CIRCLE_TOKEN")
 
 http_code=$(echo "$response" | tail -n1)
