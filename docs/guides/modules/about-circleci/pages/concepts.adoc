@@ -245,7 +245,14 @@ See the xref:orchestrate:dynamic-config.adoc[Dynamic Configuration] page for mor
 [#events]
 == Events
 
-An event is the inbound occurrence that prompts CircleCI to act — a push to a branch, a pull request opened, a scheduled time, or an API call. Events are the starting point of the entity chain: when CircleCI receives an event, it checks whether any <<triggers,triggers>> match and, if so, initiates a <<runs,run>>.
+An event is the inbound occurrence that prompts CircleCI to act, for example: 
+
+* A push to a branch.
+* A pull request opened
+* A scheduled time
+* An API call. 
+
+Events are the starting point of the entity chain. When CircleCI receives an event, it checks whether any <<triggers,triggers>> match and, if so, initiates a <<runs,run>>.
 
 See the xref:orchestrate:triggers-overview.adoc[Triggers Overview] page for more information.
 
@@ -541,13 +548,9 @@ For full details on both uses of resource classes, see the xref:execution-manage
 [#runs]
 == Runs
 
-A run is the instance produced when an <<events,event>> matches a <<triggers,trigger>>. It is what you investigate when something passes or fails: a run records the outcome of the attempt and groups any <<workflows,workflows>> that executed, including errors that occurred before workflows could start.
+A run is the instance produced when an <<events,event>> matches a <<triggers,trigger>>. It is what you investigate when something passes or fails. A run records the outcome of the attempt and groups any <<workflows,workflows>> that executed, including errors that occurred before workflows could start.
 
-A run is created on every trigger match — even if a configuration error prevents any workflows from starting. In that case, the run records the error rather than leaving no trace.
-
-You can enable auto-cancel in *Advanced* project settings in the web app to automatically terminate an in-progress run when a new one is triggered on the same branch.
-
-NOTE: Consider the impact of enabling auto-cancel if you have configured automated deployment jobs on non-default branches.
+A run is created on every trigger match, even if a configuration error prevents any workflows from starting. In that case, the run records the error rather than leaving no trace.
 
 See the xref:orchestrate:pipelines.adoc[Pipelines Overview] page for more information.
 
@@ -581,7 +584,7 @@ See the xref:orchestrate:jobs-steps.adoc[Jobs and Steps] page for more informati
 
 A trigger is a matching rule that watches for <<events,events>> and, when matched, uses the configured <<pipelines,pipeline>> to initiate a <<runs,run>>. You configure triggers in the CircleCI web app.
 
-Triggers can respond to events from VCS activity such as pushes and pull requests, scheduled times, API calls, or actions in the web app or CLI. You can also initiate a run programmatically using the link:https://circleci.com/docs/api/v2/#operation/triggerPipeline[trigger a pipeline] API endpoint.
+Triggers can respond to events from VCS activity such as pushes and pull requests, scheduled times, API calls, or actions in the web app or CLI.
 
 See the xref:orchestrate:triggers-overview.adoc[Triggers Overview] page for more information.
 
