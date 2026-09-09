@@ -50,7 +50,7 @@ To add an API token, follow these steps:
 
 CircleCI emails you before a personal API token expires. For details, see the <<personal-api-token-expiry-notifications,Personal API Token Expiry Notifications>> section.
 
-To test your token, call the API using the command below. Set your API token as an environment variable before making a cURL call. The examples pipe the response through `jq` to format the JSON output; install it from the https://jqlang.org/download/[jq download page] if you do not already have it, or remove `| jq .` from the command to see the raw response.
+To test your token, call the API using the command below. Set your API token as an environment variable before making a cURL call. The examples pipe the response through `jq` to format the JSON output. Install `jq` from the https://jqlang.org/download/[jq download page] if needed, or remove `| jq .` from the command to see the raw response.
 
 .Example: Testing your token
 [,shell]
@@ -171,7 +171,7 @@ When retrieving a single resource, the response contains a `data` object with `i
 }
 ----
 
-The `references` object contains related resource IDs and may include embedded fields for convenience. In the example above you get the projecty a nd workflow IDs for each job. Check the operation's schema to see which fields the endpoint embeds inline.
+The `references` object contains related resource IDs and may include embedded fields for convenience. In the example above you get the project and workflow IDs for each job. Check the operation's schema to see which fields the endpoint embeds inline.
 
 [#collection-resources]
 ==== Collection resources
@@ -203,7 +203,6 @@ Some important pagination rules are as follows:
 
 * Send cursor values unmodified. Do not attempt to parse or change cursor values.
 * Stop when `page.next` is `null`.
-* `page[limit]` bounds are per-operation and out-of-range values return 400. #Check this is correct and work out what to suggest because without values this is useless info really#
 
 .Example: Paginating through results
 [,shell]
@@ -627,9 +626,9 @@ Use exponential backoff when you receive 429 responses:
 . Continue doubling until the request succeeds.
 
 [#optional-response-caching]
-=== Optional: Response caching
+=== Optional response caching
 
-Some API v3 endpoints return `Cache-Control` headers for intermediate infrastructure and browser caching. Certain job-related endpoints (stdout, stderr, tests, resource-usage) include these headers. Client applications can implement their own local caching strategies as an optimization, but this is not required for normal API usage.
+Some API v3 endpoints return `Cache-Control` headers for intermediate infrastructure and browser caching. Certain job-related endpoints (stdout, stderr, tests, resource-usage) include these headers. Client applications can use their own local caching strategies as an optimization, but this is not required for normal API usage.
 
 [#paginate-efficiently]
 === Paginate efficiently
