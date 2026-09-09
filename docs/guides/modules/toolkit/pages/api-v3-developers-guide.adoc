@@ -93,23 +93,45 @@ CircleCI encourages security best practices when using cURL with the API. Visit 
 [#resource-identification]
 === Resource identification
 
-API v3 uses UUIDs to identify resources. When you need to reference a project, organization, workflow, run, or other resource, use its UUID.
+API v3 uses UUIDs to identify resources. When working with the API, you typically need to discover resource IDs by querying collections. Here is the standard discovery flow:
 
-.Example: Fetch a project by UUID
+. **List your organizations** to get organization IDs:
++
 [,shell]
 ----
-curl -g 'https://circleci.com/api/v3/projects/<your-project-uuid>' \
-  --header "Authorization: Bearer $CIRCLE_TOKEN"
+curl -g 'https://circleci.com/api/v3/orgs' \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
 ----
++
+This returns all organizations you have access to. Note the `id` field for the org you want to work with.
 
-Some collections allow you to resolve a name or slug to a UUID using filters like `filter[slug]` or `filter[name]`.
-
-.Example: Finding a project by slug
+. **List projects** in an organization to get project IDs:
++
 [,shell]
 ----
-curl -g 'https://circleci.com/api/v3/projects?filter[slug]=gh/myorg/myrepo' \
-  --header "Authorization: Bearer $CIRCLE_TOKEN"
+curl -g 'https://circleci.com/api/v3/projects?filter[org_id]=<your-org-id>' \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
 ----
++
+This returns all projects in the organization. Note the `id` field for your project.
+
+. **List runs** for a project to get run IDs:
++
+[,shell]
+----
+curl -g 'https://circleci.com/api/v3/runs?filter[project_id]=<your-project-id>&page[limit]=10' \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
+----
+
+. **List workflows** for a run to get workflow IDs:
++
+[,shell]
+----
+curl -g 'https://circleci.com/api/v3/workflows?filter[run_id]=<your-run-id>' \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
+----
+
+You can also find IDs in the CircleCI web app, from environment variables in your jobs, or from webhook payloads.
 
 [#response-structure]
 === Response structure
@@ -286,35 +308,12 @@ Migrate before the `Sunset` date. Removed routes return 410 permanently.
 [#getting-started-with-api-v3]
 == Getting started with API v3
 
-[#finding-resource-ids]
-=== Finding resource IDs
-
-API v3 requires UUIDs for most operations. Here is how to find common resource IDs:
-
-[#find-organization-id]
-==== Find organization ID
-
-[,shell]
-----
-curl -g "https://circleci.com/api/v3/orgs?filter[slug]=\{org-slug}" \
-  --header "Authorization: Bearer $CIRCLE_TOKEN"
-----
-
-[#find-project-id]
-==== Find project ID
-
-[,shell]
-----
-curl -g "https://circleci.com/api/v3/projects?filter[slug]=\{project-slug}" \
-  --header "Authorization: Bearer $CIRCLE_TOKEN"
-----
-
-For more information, see xref:how-to-find-ids.adoc[How to Find IDs].
+For additional ways to find resource IDs, see xref:how-to-find-ids.adoc[How to Find IDs].
 
 [#example-end-to-end-api-request]
 == Example end-to-end API request
 
-This section walks through a complete API v3 workflow: finding a project, listing its pipelines, and triggering a new run.
+This section walks through a complete API v3 workflow starting from your API token: discovering your organizations and projects, listing recent runs, and retrieving workflow details.
 
 [#prerequisites]
 === Prerequisites
@@ -329,53 +328,55 @@ This section walks through a complete API v3 workflow: finding a project, listin
 +
 [,shell]
 ----
-export CIRCLE_TOKEN=\{your_api_token}
+export CIRCLE_TOKEN=<your-api-token>
 ----
 
-. Find your project ID. Replace `\{org-slug}` and `\{project-name}` with your values:
+. List your organizations to find the one you want to work with:
 +
 [,shell]
 ----
-curl -g "https://circleci.com/api/v3/projects?filter[org_id]=\{org-id}" \
-  --header "Authorization: Bearer $CIRCLE_TOKEN" \
-  --header "Accept: application/json"
+curl -g 'https://circleci.com/api/v3/orgs' \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq '.data[] | {id, name, slug}'
 ----
 +
-This returns a list of projects. Find your project in the response and note its `id`.
+This returns all organizations you have access to. Note the `id` for your organization.
 
-. List pipelines for your project:
+. List projects in your organization:
 +
 [,shell]
 ----
-curl -g "https://circleci.com/api/v3/pipelines?filter[project_id]=\{project-id}&page[limit]=10" \
-  --header "Authorization: Bearer $CIRCLE_TOKEN" \
-  --header "Accept: application/json"
+curl -g 'https://circleci.com/api/v3/projects?filter[org_id]=<your-org-id>' \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq '.data[] | {id, name, slug: .attributes.slug}'
 ----
++
+This returns all projects in the organization. Note the `id` for your project.
 
-. Trigger a new run with parameters. First, you need a pipeline ID:
+. List recent runs for your project:
 +
 [,shell]
 ----
-curl -X POST "https://circleci.com/api/v3/runs" \
-  --header "Authorization: Bearer $CIRCLE_TOKEN" \
-  --header "Content-Type: application/json" \
-  --data '{
-    "pipeline_id": "\{pipeline-id}",
-    "parameters": {
-      "branch": "main",
-      "custom-param": "value"
-    }
-  }'
+curl -g 'https://circleci.com/api/v3/runs?filter[project_id]=<your-project-id>&page[limit]=10' \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq '.data[] | {id, number, phase: .attributes.phase}'
 ----
 +
-This returns a run object with an `id` that you can use to track the run's progress.
+This returns the 10 most recent runs. Note a `id` to explore further.
 
-. Get details about the run:
+. List workflows in a run:
 +
 [,shell]
 ----
-curl "https://circleci.com/api/v3/runs/\{run-id}" \
-  --header "Authorization: Bearer $CIRCLE_TOKEN"
+curl -g 'https://circleci.com/api/v3/workflows?filter[run_id]=<your-run-id>' \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq '.data[] | {id, name: .attributes.name, status: .attributes.status}'
+----
++
+This returns all workflows for the run.
+
+. Get detailed information about a workflow:
++
+[,shell]
+----
+curl -g 'https://circleci.com/api/v3/workflows/<your-workflow-id>' \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
 ----
 
 [#common-use-cases]
