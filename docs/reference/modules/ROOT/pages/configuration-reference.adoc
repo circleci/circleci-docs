@@ -1826,7 +1826,7 @@ NOTE: Some steps, such as `store_artifacts` and `store_test_results`, always run
 
 The `teardown` attribute attaches a list of steps to a `run` step. CircleCI runs these steps when the job ends, including when the job fails, is canceled, or reaches its runtime timeout.
 
-Use `teardown` for work that must happen however the job ends, such as saving a cache or storing diagnostic output. Because the steps are declared on the step they belong to, a `save_cache` can sit alongside its matching `restore_cache` instead of at the end of the job.
+Use `teardown` for work that must happen whether the job succeeds or fails, such as saving a cache or storing diagnostic output. Because the steps are declared on the step they belong to, a `save_cache` can sit alongside its matching `restore_cache` instead of at the end of the job.
 
 The following steps are supported inside `teardown`:
 
@@ -1836,7 +1836,7 @@ The following steps are supported inside `teardown`:
 * `store_test_results`
 * `persist_to_workspace`
 
-`restore_cache` and `attach_workspace` are not supported. Use them as ordinary steps in the body of the job instead.
+`restore_cache` and `attach_workspace` are not supported. Use them as ordinary steps in the job's `steps` list instead.
 
 A teardown step cannot run in the background, cannot set `max_auto_reruns` or `auto_rerun_delay`, and cannot declare `teardown` steps of its own.
 
