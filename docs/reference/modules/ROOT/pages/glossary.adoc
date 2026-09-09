@@ -300,7 +300,7 @@ Reverting an application to a previous stable version when an issue is detected,
 
 == Run
 
-The instance produced when an <<event>> matches a <<trigger>>. A run records the outcome of the attempt and groups any <<workflow,workflows>> that executed, including errors that occurred before workflows could start.
+The instance produced when an <<event>> matches a <<trigger>>. A run records the outcome of the attempt and groups any <<workflow,workflows>> that executed, including errors that occurred before workflows could start. Labeled as "Pipeline run" in the CircleCI web app.
 
 == Schedule trigger
 
