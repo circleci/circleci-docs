@@ -335,7 +335,7 @@ export CIRCLE_TOKEN=<your-api-token>
 [,shell]
 ----
 curl -g 'https://circleci.com/api/v3/orgs' \
-  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq '.data[] | {id, name, slug}'
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
 ----
 +
 This returns all organizations you have access to. Note the `id` for your organization.
@@ -345,7 +345,7 @@ This returns all organizations you have access to. Note the `id` for your organi
 [,shell]
 ----
 curl -g 'https://circleci.com/api/v3/projects?filter[org_id]=<your-org-id>' \
-  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq '.data[] | {id, name, slug: .attributes.slug}'
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
 ----
 +
 This returns all projects in the organization. Note the `id` for your project.
@@ -355,7 +355,7 @@ This returns all projects in the organization. Note the `id` for your project.
 [,shell]
 ----
 curl -g 'https://circleci.com/api/v3/runs?filter[project_id]=<your-project-id>&page[limit]=10' \
-  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq '.data[] | {id, number, phase: .attributes.phase}'
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
 ----
 +
 This returns the 10 most recent runs. Note a `id` to explore further.
@@ -365,7 +365,7 @@ This returns the 10 most recent runs. Note a `id` to explore further.
 [,shell]
 ----
 curl -g 'https://circleci.com/api/v3/workflows?filter[run_id]=<your-run-id>' \
-  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq '.data[] | {id, name: .attributes.name, status: .attributes.status}'
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
 ----
 +
 This returns all workflows for the run.
@@ -496,39 +496,6 @@ curl -X POST "https://circleci.com/api/v3/contexts/\{context-id}/env-vars/set" \
   --data '{
     "name": "MY_VAR",
     "value": "my-value"
-  }'
-----
-
-[#insights-and-analytics]
-=== Insights and analytics
-
-API v3 provides powerful analytics endpoints for aggregating data across jobs, workflows, and pipelines.
-
-**Get workflow insights:**
-
-[,shell]
-----
-curl -X POST "https://circleci.com/api/v3/analysis/jobs" \
-  --header "Authorization: Bearer $CIRCLE_TOKEN" \
-  --header "Content-Type: application/json" \
-  --data '{
-    "project_id": "\{project-id}",
-    "from": "2024-01-01T00:00:00Z",
-    "to": "2024-01-31T23:59:59Z"
-  }'
-----
-
-**Get credit usage:**
-
-[,shell]
-----
-curl -X POST "https://circleci.com/api/v3/analysis/charges" \
-  --header "Authorization: Bearer $CIRCLE_TOKEN" \
-  --header "Content-Type: application/json" \
-  --data '{
-    "project_id": "\{project-id}",
-    "from": "2024-01-01T00:00:00Z",
-    "to": "2024-01-31T23:59:59Z"
   }'
 ----
 
