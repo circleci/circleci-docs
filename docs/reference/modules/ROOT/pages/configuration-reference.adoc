@@ -1658,6 +1658,11 @@ NOTE: The `run` step replaces the deprecated `deploy` step. If your job has a pa
 | String
 | The delay between reruns of the step if it fails. This delay can only be set along with `max_auto_reruns`. The string is a decimal with unit suffix using either seconds `s` or minutes `m` up to a maximum of 10 minutes, such as "10s", "2m".
 
+| `teardown`
+| N
+| List
+| <<teardown,Steps to run when the job ends>>, including on failure, cancellation, or timeout.
+
 |===
 --
 
@@ -1802,7 +1807,7 @@ The `when` attribute accepts the following values:
 
 `on_fail`:: The step runs only if one of the preceding steps failed (returns a non-zero exit code). Common uses of `on_fail` include storing diagnostic data to debug test failures, or running custom notifications about the failure, such as sending emails or triggering alerts.
 
-NOTE: Some steps, such as `store_artifacts` and `store_test_results`, always run, even if a *step has failed* (returned a non-zero exit code) previously. However, `store_artifacts`, `store_test_results`, and the `when` attribute are not run if the job has been *killed* by a cancel request or has reached the runtime timeout limit.
+NOTE: Some steps, such as `store_artifacts` and `store_test_results`, always run, even if a *step has failed* (returned a non-zero exit code) previously. However, `store_artifacts`, `store_test_results`, and the `when` attribute are not run if the job has been *killed* by a cancel request or has reached the runtime timeout limit. To run steps when a job is canceled or times out, use the <<teardown,`teardown` attribute>>.
 
 *Example:*
 
@@ -1813,6 +1818,76 @@ NOTE: Some steps, such as `store_artifacts` and `store_test_results`, always run
     command: bash <(curl -s https://codecov.io/bash) -F unittests
     when: always # Uploads code coverage results, pass or fail
 ----
+
+'''
+
+[#teardown]
+==== The `teardown` attribute
+
+The `teardown` attribute attaches a list of steps to a `run` step. CircleCI runs these steps when the job ends, including when the job fails, is canceled, or reaches its runtime timeout.
+
+Use `teardown` for work that must happen however the job ends, such as saving a cache or storing diagnostic output. Because the steps are declared on the step they belong to, a `save_cache` can sit alongside its matching `restore_cache` instead of at the end of the job.
+
+The following steps are supported inside `teardown`:
+
+* `run`
+* `save_cache`
+* `store_artifacts`
+* `store_test_results`
+* `persist_to_workspace`
+
+`restore_cache` and `attach_workspace` are not supported. Use them as ordinary steps in the body of the job instead.
+
+A teardown step cannot run in the background, cannot set `max_auto_reruns` or `auto_rerun_delay`, and cannot declare `teardown` steps of its own.
+
+NOTE: `teardown` takes a list of steps. Use list syntax even for a single step.
+
+.Save a build cache even if the job is canceled
+[,yml]
+----
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/go:1.24
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-build-{{ checksum "go.sum" }}
+      - run:
+          name: Build
+          command: make build
+          teardown:
+            - save_cache: # runs even if the job is canceled or times out
+                key: v1-build-{{ checksum "go.sum" }}
+                paths:
+                  - ~/.cache/go-build
+
+workflows:
+  build-workflow:
+    jobs:
+      - build
+----
+
+[#teardown-order]
+===== Registration and order
+
+A step registers its teardown steps when it starts, before its command runs, so the teardown steps still run if the job is canceled part way through the step. A step that CircleCI skips, for example because of its <<the-when-attribute,`when` attribute>>, never reaches registration and therefore registers nothing. A step that is retried through `max_auto_reruns` registers its teardown steps once, not once per attempt.
+
+Teardown steps run in reverse order of registration across the whole job, in the manner of Go's `defer`: the most recently registered teardown step runs first. A teardown step can itself register another teardown step, which runs before the remaining ones.
+
+CircleCI allows 10 minutes in total for all of a job's teardown steps, not 10 minutes each. Teardown steps that have not run when that time is up do not run.
+
+[#teardown-when]
+===== Conditions and failures
+
+Steps inside `teardown` accept the <<the-when-attribute,`when` attribute>>, and default to `always` rather than `on_success`. This includes `store_artifacts` and `store_test_results`, which do not accept `when` as ordinary steps.
+
+Inside `teardown`, `when` is evaluated against the state of the job, not the result of the step the teardown is attached to. A teardown step with `when: on_fail` runs when the job has failed, even if its own parent step succeeded.
+
+If a teardown step fails, the job fails.
 
 '''
 
