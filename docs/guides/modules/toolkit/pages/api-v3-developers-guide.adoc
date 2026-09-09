@@ -422,23 +422,23 @@ curl "https://circleci.com/api/v3/jobs/\{job-id}/artifacts" \
 [#download-artifacts]
 === Download artifacts
 
-. List artifacts for a job:
+. Get artifact URLs for a job:
 +
 [,shell]
 ----
 curl "https://circleci.com/api/v3/jobs/\{job-id}/artifacts" \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
-  | grep -o '"url":"[^"]*"' \
-  | sed 's/"url":"//;s/"$//' \
-  > artifact-urls.txt
+  | jq -r '.data[].url' > artifact-urls.txt
 ----
++
+This extracts all artifact URLs from the response and saves them to a file.
 
 . Download all artifacts:
 +
 [,shell]
 ----
-while read url; do
-  wget --header="Authorization: Bearer $CIRCLE_TOKEN" "$url"
+while read -r url; do
+  curl -O --header "Authorization: Bearer $CIRCLE_TOKEN" "$url"
 done < artifact-urls.txt
 ----
 
