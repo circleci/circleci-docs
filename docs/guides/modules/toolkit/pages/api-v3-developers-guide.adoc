@@ -1,18 +1,17 @@
 = CircleCI API v3 developer's guide
-:page-platform: Cloud, Server v4+
+:page-platform: Cloud
 :page-description: API v3 guide for internal and external CircleCI developers
 :experimental:
 
 This guide assists developers in making API calls to CircleCI services using API v3. Use the API to return detailed information about users, pipelines, projects, workflows, and more. View the API v3 specification in the link:https://circleci.com/docs/api/v3/[API v3 Reference documentation].
 
-include::ROOT:partial$notes/server-api-examples.adoc[]
+CAUTION: *Using CircleCI Server?* Use the legacy API v2. See link:https://circleci.com/docs/api/v2/[API v2 Reference documentation] for more information.
 
-[#about-api-v3]
 == About API v3
 
 API v3 is CircleCI's current API version and all new development uses v3. It provides a modern, efficient interface with consistent conventions across all endpoints.
 
-**Key differences from v2:**
+Some key features of API v3 are as follows:
 
 * UUID-based resource identification instead of slugs. Resources use unique IDs like `abc-123-def` rather than names like `gh/myorg/myrepo`.
 * Opaque cursor pagination instead of token-based pagination. Page through results using server-provided cursors you cannot decode or predict.
@@ -20,23 +19,20 @@ API v3 is CircleCI's current API version and all new development uses v3. It pro
 * Standard rate limiting headers. Rate limit information uses industry-standard headers that tools can understand automatically.
 * Explicit idempotent operation guarantees where applicable. Know which operations are safe to retry without causing duplicates or side effects.
 
-[#api-v3-conventions]
 == API v3 conventions
 
 Understanding these conventions helps you work effectively with the API v3.
 
-[#authentication-and-authorization]
 === Authentication and authorization
 
 API v3 uses token-based authentication to manage access to the API server and validate that you have permission to make requests.
 
 The following authentication methods are supported:
 
-* **Bearer Authentication** (recommended): Industry-standard (RFC 6750). Pass the token as a Bearer token in the `Authorization` header.
+* **Bearer Authentication** (recommended): Pass the token as a Bearer token in the `Authorization` header.
 * **Circle-Token header**: CircleCI-specific header, widely used in existing integrations. Pass the token in the `Circle-Token` header.
 
-[#add-an-api-token]
-==== Add an API token
+==== Create an API token
 
 To add an API token, follow these steps:
 
@@ -131,7 +127,7 @@ curl -g 'https://circleci.com/api/v3/workflows?filter[run_id]=<your-run-id>' \
   --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
 ----
 
-You can also find IDs in the CircleCI web app, from environment variables in your jobs, or from webhook payloads.
+You can also find IDs in the CircleCI web app, from environment variables in your jobs, or from webhook payloads. For additional ways to find resource IDs, see xref:how-to-find-ids.adoc[How to Find IDs].
 
 [#response-structure]
 === Response structure
@@ -307,18 +303,13 @@ Migrate before the `Sunset` date. Removed routes return 410 permanently.
 [#getting-started-with-api-v3]
 == Getting started with API v3
 
-For additional ways to find resource IDs, see xref:how-to-find-ids.adoc[How to Find IDs].
-
-[#example-end-to-end-api-request]
-== Example end-to-end API request
-
 This section walks through a complete API v3 workflow starting from your API token: discovering your organizations and projects, listing recent runs, and retrieving workflow details.
 
 [#prerequisites]
 === Prerequisites
 
-* A GitHub, Bitbucket, or GitLab account with a repository set up with CircleCI.
-* A valid CircleCI personal API token.
+* A GitHub, Bitbucket, GitLab or Cursor Origin account with a repository set up with CircleCI.
+* A valid CircleCI personal API token. See <<authentication-and-authorization>> for instructions on how to add an API token.
 
 [#steps]
 === Steps
@@ -386,7 +377,7 @@ curl -g 'https://circleci.com/api/v3/workflows/<your-workflow-id>' \
 
 [,shell]
 ----
-curl -g "https://circleci.com/api/v3/workflows?filter[run_id]=\{run-id}" \
+curl -g "https://circleci.com/api/v3/workflows?filter[run_id]=<your-run-id>" \
   --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
 
