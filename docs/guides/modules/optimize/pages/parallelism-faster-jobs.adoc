@@ -12,6 +12,8 @@ Use parallelism and test splitting to:
 
 If you are interested to read about concurrent job runs, see the xref:concurrency.adoc[Concurrency Overview] page.
 
+NOTE: This page covers test splitting with the legacy `circleci tests` command family. CircleCI's preferred way to split tests is now `circleci testsuite`, which supports the same splitting capabilities plus dynamic test splitting. See xref:test:test.adoc#smarter-testing[Get started with Smarter Testing].
+
 [#introduction]
 == Introduction
 

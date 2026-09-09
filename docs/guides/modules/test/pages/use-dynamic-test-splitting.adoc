@@ -1,10 +1,7 @@
 = Use dynamic test splitting
-:page-badge: Beta
 :page-platform: Cloud
 :experimental:
 :page-description: Evenly distribute tests across parallel execution nodes
-
-include::ROOT:partial$notes/smarter-testing-beta.adoc[]
 
 Dynamic test splitting reduces overall pipeline time by distributing test atoms across parallel nodes so all nodes finish at the same time. Unlike static test splitting, which pre-assigns tests upfront, dynamic test splitting redistributes work to nodes that are ready. Dynamic test splitting prevents nodes from sitting idle while others finish late.
 

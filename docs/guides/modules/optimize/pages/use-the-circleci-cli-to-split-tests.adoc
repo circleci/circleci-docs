@@ -11,6 +11,8 @@ NOTE: The `circleci tests` commands are part of the environment CLI as they requ
 
 NOTE: xref:execution-runner:runner-overview.adoc[Self-Hosted Runners] can invoke `circleci-agent` directly instead of using the CLI to split tests. This is because the xref:execution-runner:runner-overview.adoc#circleci-self-hosted-runner-operation[task-agent] already exists on the `$PATH`, removing an additional dependency when splitting tests.
 
+NOTE: `circleci tests glob`/`run`/`split` are legacy commands. CircleCI's preferred way to run and split tests is now `circleci testsuite`. See xref:test:test.adoc#smarter-testing[Get started with Smarter Testing].
+
 [#prerequisites]
 == Prerequisites
 

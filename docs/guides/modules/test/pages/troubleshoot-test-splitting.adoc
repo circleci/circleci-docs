@@ -3,6 +3,8 @@
 :page-description: Tips and common errors to help troubleshoot your CircleCI test splitting implementation.
 :experimental:
 
+NOTE: This page covers troubleshooting the legacy `circleci tests` command family. CircleCI's preferred way to run and split tests is now `circleci testsuite`. See xref:test.adoc#smarter-testing[Get started with Smarter Testing].
+
 [#using-test-splitting-with-python-django-tests]
 == Using test splitting with Python Django tests
 
