@@ -788,7 +788,7 @@ Configure a job to use the Docker execution environment using the `docker` key w
 | Key | Required | Type | Description
 
 | `image`
-| Y
+| N
 | String
 | The name of a custom Docker image to use. The first `image` listed under a job defines the job's own primary container image where all steps will run.
 
