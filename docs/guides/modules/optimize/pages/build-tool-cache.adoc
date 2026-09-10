@@ -1,12 +1,12 @@
 = Build tool cache
 :page-badge: Beta
 :page-platform: Cloud
-:page-description: Use with_tool_cache to transparently back Gradle, Bazel, and Turborepo build caches with a CircleCI-managed remote cache.
+:page-description: Use with_tool_cache to transparently back Gradle, Bazel, Turborepo, and Xcode build caches with a CircleCI-managed remote cache.
 :experimental:
 
 NOTE: Build tool caching is in beta on CircleCI Cloud. The feature is still evolving, so you may encounter bugs or changes to behavior. There is no additional cost to use it beyond standard xref:persist-data.adoc#managing-network-and-storage-usage[Cache Storage Usage].
 
-Use the xref:reference:ROOT:configuration-reference.adoc#withtoolcache[`with_tool_cache`] step to back a build tool's own remote cache (for example, Gradle's build cache or Bazel's remote cache) with a CircleCI-managed cache backend. This removes the need to hand-roll a xref:caching.adoc[`save_cache`/`restore_cache`] pair for tool-specific build outputs, and works the same way across executors.
+Use the xref:reference:ROOT:configuration-reference.adoc#withtoolcache[`with_tool_cache`] step to back a build tool's own remote cache (for example, Gradle's build cache, Bazel's remote cache, or Xcode's Swift/Clang compilation cache) with a CircleCI-managed cache backend. This removes the need to hand-roll a xref:caching.adoc[`save_cache`/`restore_cache`] pair for tool-specific build outputs, and works the same way across executors.
 
 [#how-it-works]
 == How it works
@@ -39,6 +39,8 @@ Two practical benefits follow from this:
 
 NOTE: In internal benchmarks, a clean build using `with_tool_cache` completed about 90% faster than the same build with no cache at all. Actual results depend on the size of your build's cache and how often it changes.
 
+NOTE: In a separate benchmark of a large, real-world iOS codebase (WordPress-iOS) built with Xcode, `with_tool_cache` with `tool: xcode` produced a median clean-build time about 29% faster than an uncached build. Xcode's compilation cache is object-level (compiler outputs keyed on source content), rather than task-level like Gradle's or Bazel's, so the speedup is more modest but still substantial for large native codebases.
+
 [#supported-tools]
 == Supported tools
 
@@ -58,6 +60,9 @@ NOTE: In internal benchmarks, a clean build using `with_tool_cache` completed ab
 
 | `turborepo`
 | Turborepo's remote cache.
+
+| `xcode`
+| Xcode's Swift/Clang compilation cache (object-level compiler outputs), enabled by pointing `xcodebuild`'s compilation cache build settings at the cache server. You still manage CocoaPods/Swift Package Manager dependency caches separately with xref:caching.adoc#xcode[`save_cache`/`restore_cache`].
 |===
 --
 
@@ -121,12 +126,51 @@ jobs:
             - run: turbo run build
 ----
 --
+Xcode::
++
+--
+`with_tool_cache` starts a compilation cache server and exposes its address to your steps as `COMPILATION_CACHE_REMOTE_SERVICE_PATH` (a `unix://` socket URL). Pass the socket path, stripped of its `unix://` prefix, to `xcodebuild` along with the compilation cache build settings:
+
+[,yaml,subs=attributes+]
+----
+jobs:
+  build:
+    macos:
+      xcode: {xcodeversion}
+    steps:
+      - checkout
+      - with_tool_cache:
+          tool: xcode
+          steps:
+            - run:
+                name: xcodebuild build
+                command: |
+                  sock="${COMPILATION_CACHE_REMOTE_SERVICE_PATH#unix://}"
+                  xcodebuild build \
+                    -workspace MyApp.xcworkspace \
+                    -scheme "MyApp" \
+                    -destination 'generic/platform=iOS Simulator' \
+                    COMPILATION_CACHE_REMOTE_SERVICE_PATH="$sock" \
+                    COMPILATION_CACHE_ENABLE_PLUGIN=YES \
+                    SWIFT_ENABLE_COMPILE_CACHE=YES \
+                    CLANG_ENABLE_COMPILE_CACHE=YES \
+                    SWIFT_ENABLE_EXPLICIT_MODULES=YES \
+                    SWIFT_USE_INTEGRATED_DRIVER=YES \
+                    CLANG_ENABLE_MODULES=YES \
+                    COMPILATION_CACHE_ENABLE_INTEGRATED_QUERIES=YES \
+                    COMPILATION_CACHE_ENABLE_DETACHED_KEY_QUERIES=YES
+----
+
+NOTE: Compilation caching requires Xcode's Swift/Clang compile cache support. Check that your Xcode version and toolchain support the `SWIFT_ENABLE_COMPILE_CACHE` and `CLANG_ENABLE_COMPILE_CACHE` build settings before adopting this in CI.
+--
 ====
 
 [#use-with-dependency-caching]
 == Use with dependency caching
 
 The `with_tool_cache` step only manages the build tool's own remote/task-output cache. It does not replace dependency caching. For example, with Gradle, `with_tool_cache` handles the Gradle build cache, but a separate xref:caching.adoc#gradle-java[`save_cache`/`restore_cache`] pair still caches `~/.gradle/caches/modules-2` (the downloaded dependencies). The two mechanisms are complementary: one caches what Gradle downloads, the other caches what Gradle builds.
+
+The same applies to Xcode: `with_tool_cache` with `tool: xcode` handles the compilation cache, but you still need a separate xref:caching.adoc#xcode[`save_cache`/`restore_cache`] pair (or equivalent) for CocoaPods' or Swift Package Manager's downloaded dependencies.
 
 [#see-also]
 == See also

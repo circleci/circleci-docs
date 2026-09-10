@@ -656,7 +656,7 @@ jobs:
       - run: xcodebuild build -clonedSourcePackagesDirPath SourcePackages
 ----
 
-NOTE: Xcode's own build cache (DerivedData) is large, tied to absolute build paths, and a poor fit for `save_cache`/`restore_cache`.
+NOTE: Xcode's own build cache (DerivedData) is large, tied to absolute build paths, and a poor fit for `save_cache`/`restore_cache`. To cache Xcode's Swift/Clang compilation cache instead, use xref:build-tool-cache.adoc[`with_tool_cache` with `tool: xcode`].
 
 [#yarn-node]
 === Yarn (Node)

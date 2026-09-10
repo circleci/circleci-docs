@@ -54,7 +54,7 @@ Caching is one of the first optimizations to consider for your jobs. If a job fe
 [#build-tool-cache]
 === Build tool cache
 
-Some build tools (Gradle, Bazel, and Turborepo) have their own built-in remote caching mechanisms for build outputs, separate from dependency caching. Use the `with_tool_cache` step to back these with a CircleCI-managed remote cache instead of hand-rolling `save_cache`/`restore_cache` steps for tool-specific build outputs.
+Some build tools (Gradle, Bazel, Turborepo, and Xcode) have their own built-in remote caching mechanisms for build outputs, separate from dependency caching. Use the `with_tool_cache` step to back these with a CircleCI-managed remote cache instead of hand-rolling `save_cache`/`restore_cache` steps for tool-specific build outputs.
 
 * Read more on the xref:build-tool-cache.adoc[Build Tool Cache] page.
 

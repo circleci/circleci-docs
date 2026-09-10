@@ -2293,7 +2293,7 @@ Wraps a sequence of steps and configures the named build tool to use a CircleCI-
 | `tool`
 | Y
 | String
-| The build tool to cache for. One of: `gradle`, `bazel`, `turborepo`.
+| The build tool to cache for. One of: `gradle`, `bazel`, `turborepo`, `xcode`.
 
 | `steps`
 | Y
@@ -2357,6 +2357,39 @@ jobs:
           tool: turborepo
           steps:
             - run: turbo run build
+----
+--
+Xcode::
++
+--
+[,yaml,subs=attributes+]
+----
+jobs:
+  build:
+    macos:
+      xcode: {xcodeversion}
+    steps:
+      - checkout
+      - with_tool_cache:
+          tool: xcode
+          steps:
+            - run:
+                name: xcodebuild build
+                command: |
+                  sock="${COMPILATION_CACHE_REMOTE_SERVICE_PATH#unix://}"
+                  xcodebuild build \
+                    -workspace MyApp.xcworkspace \
+                    -scheme "MyApp" \
+                    -destination 'generic/platform=iOS Simulator' \
+                    COMPILATION_CACHE_REMOTE_SERVICE_PATH="$sock" \
+                    COMPILATION_CACHE_ENABLE_PLUGIN=YES \
+                    SWIFT_ENABLE_COMPILE_CACHE=YES \
+                    CLANG_ENABLE_COMPILE_CACHE=YES \
+                    SWIFT_ENABLE_EXPLICIT_MODULES=YES \
+                    SWIFT_USE_INTEGRATED_DRIVER=YES \
+                    CLANG_ENABLE_MODULES=YES \
+                    COMPILATION_CACHE_ENABLE_INTEGRATED_QUERIES=YES \
+                    COMPILATION_CACHE_ENABLE_DETACHED_KEY_QUERIES=YES
 ----
 --
 ====
