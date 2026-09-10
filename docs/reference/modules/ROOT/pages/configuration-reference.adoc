@@ -1838,7 +1838,9 @@ The following steps are supported inside `teardown`:
 
 `restore_cache` and `attach_workspace` are not supported. Use them as ordinary steps in the job's `steps` list instead.
 
-A teardown step cannot run in the background, cannot set `max_auto_reruns` or `auto_rerun_delay`, and cannot declare `teardown` steps of its own.
+A teardown step cannot run in the background, cannot set `max_auto_reruns` or `auto_rerun_delay`, and cannot nest another `teardown` key, which is rejected when your config is validated.
+
+The `teardown` attribute works on a `run` step inside a xref:reusing-config.adoc#authoring-reusable-commands[Reusable Command] definition.
 
 NOTE: `teardown` takes a list of steps. Use list syntax even for a single step.
 
@@ -1874,11 +1876,11 @@ workflows:
 [#teardown-order]
 ===== Registration and order
 
-A step registers its teardown steps when it starts, before its command runs, so the teardown steps still run if the job is canceled part way through the step. A step that CircleCI skips, for example because of its <<the-when-attribute,`when` attribute>>, never reaches registration and therefore registers nothing. A step that is retried through `max_auto_reruns` registers its teardown steps once, not once per attempt.
+A step registers its teardown steps when it starts, before its command runs, so the teardown steps still run if the job is canceled part way through the step. A step that CircleCI skips, for example because of its <<the-when-attribute,`when` attribute>>, never reaches registration and registers nothing. A step that is retried through `max_auto_reruns` registers its teardown steps once, not once per attempt.
 
-Teardown steps run in reverse order of registration across the whole job, in the manner of Go's `defer`: the most recently registered teardown step runs first. A teardown step can itself register another teardown step, which runs before the remaining ones.
+Teardown steps run in reverse order of registration across the whole job, in the manner of Go's `defer`: the most recently registered teardown step runs first. A teardown step can register additional teardown steps at runtime; those run before the remaining ones.
 
-CircleCI allows 10 minutes in total for all of a job's teardown steps, not 10 minutes each. Teardown steps that have not run when that time is up do not run.
+CircleCI allows 10 minutes in total for a job's teardown steps, not 10 minutes each. Teardown steps that have not run when that time is up do not run.
 
 [#teardown-when]
 ===== Conditions and failures
