@@ -98,8 +98,7 @@ API v3 uses token-based authentication to manage access to the API server and va
 
 The following authentication methods are supported:
 
-* **Bearer Authentication** (recommended): Pass the token as a Bearer token in the `Authorization` header.
-* **Circle-Token header**: CircleCI-specific header, widely used in existing integrations. Pass the token in the `Circle-Token` header.
+API v3 uses Bearer Authentication. Pass your token in the `Authorization` header.
 
 ==== Create an API token
 
@@ -114,13 +113,8 @@ To test your token, call the API using the command below. Set your API token as 
 ----
 export CIRCLE_TOKEN=<your-api-token>
 
-# using bearer authentication (recommended):
 curl -g 'https://circleci.com/api/v3/users?filter[user_id]=me' \
   --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
-
-# or, using Circle-Token header:
-curl -g 'https://circleci.com/api/v3/users?filter[user_id]=me' \
-  --header "Circle-Token: $CIRCLE_TOKEN" | jq .
 ----
 
 You will see a JSON response similar to the example shown below.
@@ -521,8 +515,16 @@ curl -X POST "https://circleci.com/api/v3/contexts" \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
   --data '{
-    "org_id": "<your-org-id>",
-    "name": "my-context"
+    "data": {
+      "attributes": {
+        "name": "my-context"
+      },
+      "references": {
+        "org": {
+          "id": "<your-org-id>"
+        }
+      }
+    }
   }'
 ----
 
@@ -557,9 +559,13 @@ curl -X POST "https://circleci.com/api/v3/orb/versions" \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
   --data '{
-    "package_id": "<your-package-id>",
-    "version": "1.0.0",
-    "source": "version: 2.1\n..."
+    "data": {
+      "attributes": {
+        "orb_id": "<your-orb-id>",
+        "version": "1.0.0",
+        "yaml": "version: 2.1\n..."
+      }
+    }
   }'
 ----
 
@@ -582,8 +588,16 @@ curl -X POST "https://circleci.com/api/v3/runner/tokens" \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
   --data '{
-    "resource_class_id": "<your-resource-class-id>",
-    "name": "my-runner-token"
+    "data": {
+      "attributes": {
+        "nickname": "my-runner-token"
+      },
+      "references": {
+        "resource_class": {
+          "id": "<your-resource-class-id>"
+        }
+      }
+    }
   }'
 ----
 

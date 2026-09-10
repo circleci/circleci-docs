@@ -10,9 +10,6 @@
 - old: /release/manage-releases/
   new: /guides/deploy/manage-releases/
 
-- old: /api/
-  new: /reference/api-homepage/
-
 - old: /2.0/orb-intro/
   new: /orbs/use/orb-intro/
 
