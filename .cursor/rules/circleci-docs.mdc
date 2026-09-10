@@ -8,6 +8,7 @@ alwaysApply: true
 When working on CircleCI documentation, read and follow all guidelines in @AGENTS.md at the root of this repository.
 
 The @AGENTS.md file contains the complete style guide including:
+- Git worktree workflow
 - Voice and style requirements
 - AsciiDoc formatting rules
 - CircleCI-specific terminology

@@ -62,6 +62,7 @@ Azure Container Registry
 [Bb]ackfilling
 backoff
 [Bb]anlist?
+Bazel
 Bash
 Behat
 Bioconda
@@ -382,12 +383,14 @@ TLS
 [Tt]olerations
 [Tt]oolchains?
 Travis CI
+Turborepo
 [Tt]ruthy
 \btrx2junit\b
 TypeScript
 Ubuntu
 UI
 UIDs?
+\buv\b
 [Uu]int
 [Uu]ncheck
 [Uu]nchecked
