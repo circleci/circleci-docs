@@ -64,7 +64,9 @@ NOTE: In internal benchmarks, a clean build using `with_tool_cache` completed ab
 [#quickstart]
 == Quickstart
 
-The following examples show `with_tool_cache` for each supported tool. `with_tool_cache` works on any executor; put `checkout` before the `with_tool_cache` step, not inside it.
+The following examples show how to use the `with_tool_cache` step for each supported tool.
+
+TIP: The `with_tool_cache` works on all executors. Put `checkout` before the `with_tool_cache` step, not inside it.
 
 [tabs]
 ====
