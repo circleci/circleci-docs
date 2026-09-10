@@ -26,6 +26,9 @@ Runs the Vale prose linter on CircleCI documentation files to identify and fix s
 ### monthly-docs-report
 A skill the CircleCI docs team use to create a newsletter each month to showcase notable additions and improvements.
 
+### partials
+Discovers, previews, and inserts reusable AsciiDoc partials with the correct `include::` syntax. Use when writing or editing docs that need shared navigation steps, notes, FAQs, resource tables, or other repeated content. Other docs-authoring skills should follow this skill instead of copying reusable content.
+
 ## Installation (Claude Code)
 
 Skills need to be installed in Claude Code's skills directory to be recognized.
@@ -45,6 +48,7 @@ If you're actively developing skills, symlink them so changes sync automatically
 # From the repository root
 ln -s "$(pwd)/skills/content-review" ~/.claude/skills/content-review
 ln -s "$(pwd)/skills/vale-linter" ~/.claude/skills/vale-linter
+ln -s "$(pwd)/skills/partials" ~/.claude/skills/partials
 ```
 
 ## Usage
@@ -79,6 +83,26 @@ The skill will:
 ```
 /vale-linter docs/path/to/file.adoc
 ```
+
+### partials
+
+**Automatic triggering:**
+- "Is there a partial for project settings?"
+- "Use a partial for the Docker auth note"
+- Writing or editing a page that needs shared nav steps, notes, FAQs, or resource tables
+
+**Explicit invocation:**
+```
+/partials
+/partials navigation
+/partials search project settings
+```
+
+The skill will:
+1. Scan `docs/guides/modules/ROOT/partials/` (not a memorized list)
+2. Preview matching partials
+3. Insert the correct `include::ROOT:partial$...` or `include::guides:ROOT:partial$...` line
+4. Call out page attributes or `leveloffset` when the partial needs them
 
 ## Using Skills with Other AI Agents
 
