@@ -2317,6 +2317,8 @@ Gradle::
 ----
 jobs:
   build:
+    docker:
+      - image: cimg/base:current # use any image with Gradle installed
     steps:
       - checkout
       - with_tool_cache:
@@ -2332,6 +2334,8 @@ Bazel::
 ----
 jobs:
   build:
+    docker:
+      - image: cimg/base:current # use any image with Bazel installed
     steps:
       - checkout
       - with_tool_cache:
@@ -2347,6 +2351,8 @@ Turborepo::
 ----
 jobs:
   build:
+    docker:
+      - image: cimg/base:current # use any image with Turborepo installed
     steps:
       - checkout
       - with_tool_cache:
