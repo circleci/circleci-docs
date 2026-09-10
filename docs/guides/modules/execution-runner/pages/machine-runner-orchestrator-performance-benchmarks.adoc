@@ -1,0 +1,379 @@
+= Machine runner orchestrator performance benchmarks
+:page-platform: Cloud, Server v4+
+:page-description: Performance benchmarks for machine runner orchestrator under increasing load, covering VM provisioning queue times and throughput across resource classes.
+:experimental:
+
+Machine runner orchestrator (MRO) auto-scales KubeVirt virtual machines to serve CircleCI self-hosted runner jobs.
+Its scaling behavior is directly affected by how you configure `maxReplicas`, node capacity, and resource class sizing.
+
+By publishing these benchmarks, CircleCI can show the measurable performance characteristics of MRO under realistic load and help operators choose configurations that meet their throughput and latency goals.
+For an overview of machine runner orchestrator concepts and setup, see xref:execution-runner:runner-provisioner.adoc[Machine Runner Orchestrator Overview].
+
+NOTE: These benchmarks reflect a specific test cluster configuration described below.
+Actual results vary depending on your node types, autoscaler settings, and resource class definitions.
+
+[#test-environment]
+== Test environment
+
+All three experiments ran against the same Kubernetes cluster.
+Nodes used the c8i.12xlarge instance type (48 vCPU / 96 GiB RAM), with a cluster autoscaler ASG of 2–6 nodes and KubeVirt enabled on all nodes.
+
+The experiments used two resource classes:
+
+[.table-scroll]
+--
+[cols="4", options="header"]
+|===
+| Resource class | VM size | `minReplicas` | `maxReplicas`
+
+| `circleci-runner/rp-stress-high`
+| 8 vCPU / 32 GiB
+| 2
+| 9
+
+| `circleci-runner/rp-stress-low`
+| 2 vCPU / 8 GiB
+| 2
+| 34
+|===
+--
+
+Both resource classes shared the same node group.
+The high-class `maxReplicas` value of 9 reflects a memory constraint.
+The shared node group has 344 GiB total allocatable memory, and 9 × 32 GiB high-class VMs consume most of it.
+
+[#test-method]
+== Test method
+
+Each experiment triggered 130 jobs in four escalating steps:
+
+[.table-scroll]
+--
+[cols="4", options="header"]
+|===
+| Step | Trigger rate | Jobs in step | Hold duration
+
+| 0
+| 1 job/min
+| 10
+| 600 s
+
+| 1
+| 2 jobs/min
+| 20
+| 600 s
+
+| 2
+| 4 jobs/min
+| 40
+| 600 s
+
+| 3
+| 6 jobs/min
+| 60
+| 600 s
+|===
+--
+
+Every job ran `sleep 300` (5 minutes of actual work), so:
+
+----
+total duration = queue time + 300 s
+----
+
+The test ran three experiments:
+
+* *High-only*: all 130 jobs used the high resource class.
+* *Low-only*: all 130 jobs used the low resource class.
+* *Mixed*: the test randomly assigned each job to either the high or low resource class.
+
+The tables below report queue time and total job duration at the 50th and 90th percentiles (p50/p90) for each step.
+*Saturated* indicates that queue times grew consistently across the step, meaning the scaler did not provision VMs fast enough to match the arrival rate.
+
+[#results]
+== Results
+
+[#high-resource-class]
+=== High resource class (high-only run)
+
+Resource class: `circleci-runner/rp-stress-high` — 8 vCPU / 32 GiB, `maxReplicas`=9
+
+[.table-scroll]
+--
+[cols="7", options="header"]
+|===
+| Step | Rate (jobs/min) | Jobs | Queue p50 (s) | Queue p90 (s) | Total p50 (s) | Total p90 (s)
+
+| 0
+| 1
+| 10
+| 35
+| 106
+| 336
+| 407
+
+| 1
+| 2
+| 20
+| 49
+| 82
+| 349
+| 382
+
+| 2
+| 4
+| 40
+| 304
+| 518
+| 605
+| 819
+
+| 3
+| 6
+| 60
+| 1140
+| 1574
+| 1441
+| 1874
+|===
+--
+
+The system handled steps 0 and 1 (up to 2 jobs/min) without saturation.
+At step 2 (4 jobs/min), queue p90 jumped from 82 s to 518 s.
+At step 3 (6 jobs/min), queue p90 reached 1574 s (26 minutes).
+All 130 jobs completed with zero errors, but wait times at steps 2 and 3 make these rates unsuitable for latency-sensitive workloads.
+
+The bottleneck is `maxReplicas`=9.
+When arrival rate exceeds what 9 running VMs can turn over, the queue grows until enough VMs finish and free capacity.
+
+[#low-resource-class]
+=== Low resource class (low-only run)
+
+Resource class: `circleci-runner/rp-stress-low` — 2 vCPU / 8 GiB, `maxReplicas`=34
+
+[.table-scroll]
+--
+[cols="7", options="header"]
+|===
+| Step | Rate (jobs/min) | Jobs | Queue p50 (s) | Queue p90 (s) | Total p50 (s) | Total p90 (s)
+
+| 0
+| 1
+| 10
+| 3
+| 4
+| 304
+| 305
+
+| 1
+| 2
+| 20
+| 37
+| 53
+| 338
+| 354
+
+| 2
+| 4
+| 40
+| 43
+| 86
+| 343
+| 387
+
+| 3
+| 6
+| 60
+| 45
+| 54
+| 345
+| 355
+|===
+--
+
+NOTE: Step 1 raised a transient saturation flag internally, but queue times remained low and stabilized at steps 2 and 3 as the scaler caught up with demand.
+
+The low resource class handled all four steps comfortably.
+Queue p90 never exceeded 86 s across all 60 jobs at the highest rate.
+The higher `maxReplicas` ceiling (34 vs. 9) is the primary reason: more VMs can run concurrently, so the scaler has room to absorb bursts without queue buildup.
+All runs completed with zero errors.
+
+[#mixed-workload]
+=== Mixed workload
+
+The test randomly assigned jobs to either the high or low resource class.
+Step totals vary due to random assignment but land near 50/50.
+
+*High-class jobs in the mixed run:*
+
+[.table-scroll]
+--
+[cols="7", options="header"]
+|===
+| Step | Rate (jobs/min) | Jobs | Queue p50 (s) | Queue p90 (s) | Total p50 (s) | Total p90 (s)
+
+| 0
+| 1
+| 5
+| 35
+| 47
+| 335
+| 348
+
+| 1
+| 2
+| 11
+| 74
+| 115
+| 374
+| 415
+
+| 2
+| 4
+| 25
+| 95
+| 170
+| 395
+| 471
+
+| 3
+| 6
+| 31
+| 327
+| 417
+| 627
+| 718
+|===
+--
+
+*Low-class jobs in the mixed run:*
+
+[.table-scroll]
+--
+[cols="7", options="header"]
+|===
+| Step | Rate (jobs/min) | Jobs | Queue p50 (s) | Queue p90 (s) | Total p50 (s) | Total p90 (s)
+
+| 0
+| 1
+| 5
+| 31
+| 35
+| 332
+| 336
+
+| 1
+| 2
+| 9
+| 33
+| 50
+| 334
+| 351
+
+| 2
+| 4
+| 15
+| 33
+| 36
+| 334
+| 336
+
+| 3
+| 6
+| 29
+| 36
+| 57
+| 336
+| 358
+|===
+--
+
+Mixing resource classes reduced queue times for high-class jobs.
+At step 3 (6 jobs/min), high-class queue p90 dropped from 1574 s in the high-only run to 417 s in the mixed run—a 73% reduction.
+Half the jobs competed for the 9 high-class replica slots at any given time, leaving more headroom before saturation.
+
+Low-class jobs queued little in all cases (queue p90 ≤ 57 s at every step), consistent with the low-only results.
+
+[#cross-run-summary]
+=== Summary across all runs
+
+[.table-scroll]
+--
+[cols="4", options="header"]
+|===
+| Experiment | Resource class | Max queue p90 (s) | Saturation at any step
+
+| High-only
+| High (8 vCPU / 32 GiB, `maxReplicas`=9)
+| 1574
+| Yes (steps 2 and 3)
+
+| Low-only
+| Low (2 vCPU / 8 GiB, `maxReplicas`=34)
+| 86
+| No
+
+| Mixed
+| High (8 vCPU / 32 GiB, `maxReplicas`=9)
+| 417
+| Yes (steps 1 and 3)
+
+| Mixed
+| Low (2 vCPU / 8 GiB, `maxReplicas`=34)
+| 57
+| No
+|===
+--
+
+All three experiments completed with zero job errors.
+
+[#configuration-recommendations]
+== Configuration recommendations
+
+[#set-the-replica-limit-for-the-expected-peak]
+=== Set the replica limit for the expected peak
+
+The `maxReplicas` limit is the most direct lever for queue time.
+In the high-only run, the 9-replica cap meant that jobs arriving at 4–6/min stacked up behind the fixed pool of VMs.
+A higher `maxReplicas` allows more VMs to run concurrently, reducing queue buildup.
+
+When sizing `maxReplicas` for a resource class, calculate the number of VMs that fit on your node group at peak capacity:
+
+----
+maxReplicas ≤ floor(total allocatable memory / VM memory)
+----
+
+Subtract a buffer for the OS and Kubernetes system pods.
+
+[#account-for-shared-node-groups]
+=== Account for shared node groups
+
+When multiple resource classes share a node group, each class competes for the same physical memory.
+The sum of `maxReplicas × VM memory` across all resource classes must not exceed the node group's total allocatable memory.
+If one class has a generous `maxReplicas`, it may starve the other.
+
+[#use-mixed-resource-classes-to-reduce-peak-pressure]
+=== Use mixed resource classes to reduce peak pressure
+
+Routing traffic across resource classes of different sizes reduces queue times for the larger class.
+If your workload includes jobs with different resource requirements, define appropriately sized resource classes for each job type rather than routing everything through a single large class.
+
+[#add-headroom-for-burst-traffic]
+=== Add headroom for burst traffic
+
+MRO supports a `headroom` configuration that provisions extra VMs beyond the current task count.
+Setting headroom ensures idle VMs are available when a burst of jobs arrives, reducing the delay from VM cold-start.
+Headroom is most effective for large resource classes where VM provisioning time adds noticeably to queue latency.
+
+[#troubleshooting]
+== Troubleshooting
+
+Refer to xref:execution-runner:troubleshoot-self-hosted-runner.adoc[Troubleshoot Self-Hosted Runner] if you encounter issues with machine runner orchestrator.
+
+[#additional-resources]
+== Additional resources
+
+* xref:execution-runner:runner-provisioner.adoc[Machine Runner Orchestrator Overview]
+* xref:execution-runner:container-runner-performance-benchmarks.adoc[Container Runner Performance Benchmarks]
+* xref:execution-runner:runner-concepts.adoc[Self-Hosted Runner Concepts]
+* xref:execution-runner:runner-faqs.adoc[Self-Hosted Runner FAQ]
