@@ -266,7 +266,8 @@ API v3 uses opaque cursor pagination. The `page.next` and `page.prev` values are
 
 Some important pagination rules are as follows:
 
-* Send cursor values unmodified. Do not attempt to parse or change cursor values.
+* Set an appropriate `page[limit]` for your use case.
+* Store and reuse cursor values. Send them back unmodified. Do not attempt to parse or change them.
 * Stop when `page.next` is `null`.
 
 .Example: Paginating through results
@@ -344,6 +345,27 @@ Error handling best practices are as follows:
 
 * Invalid input always returns `400 Bad Request`, never `422 Unprocessable Entity`. If you are checking for validation errors, only look for `400` status codes. Do not write code expecting `422`.
 
+.Example: Handling errors in a script
+[,shell]
+----
+response=$(curl -s -w "\n%{http_code}" \
+  "https://circleci.com/api/v3/workflows/<your-workflow-id>" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN")
+
+http_code=$(echo "$response" | tail -n1)
+body=$(echo "$response" | sed '$d')
+
+if [ "$http_code" -eq 200 ]; then
+  echo "Success: $body"
+elif [ "$http_code" -eq 404 ]; then
+  echo "Workflow not found"
+elif [ "$http_code" -eq 429 ]; then
+  echo "Rate limited, please wait and retry"
+else
+  echo "Error $http_code: $body"
+fi
+----
+
 [#rate-limits]
 === Rate limits
 Some best practices for rate limits are as follows:
@@ -357,6 +379,11 @@ Some best practices for rate limits are as follows:
 * The `Retry-After` header tells you the number of seconds to wait before making another request.
 
 * Each API endpoint has its own rate limit and the figures are provided in response headers. Always read the rate limit headers in responses rather than hard-coding assumed limits in your code. The limits can vary by endpoint and may change over time.
+
+[#response-caching]
+=== Response caching
+
+Some API v3 endpoints return `Cache-Control` headers for intermediate infrastructure and browser caching. Certain job-related endpoints (stdout, stderr, tests, resource-usage) include these headers. Client applications can use their own local caching strategies as an optimization, but this is not required for normal API usage.
 
 [#deprecation]
 === Deprecation
@@ -520,7 +547,7 @@ curl -X POST "https://circleci.com/api/v3/contexts/<your-context-id>/env-vars/se
 ----
 
 [#working-with-orbs]
-== Working with orbs
+=== Working with orbs
 
 API v3 provides comprehensive orb management capabilities:
 
@@ -545,7 +572,7 @@ curl -X POST "https://circleci.com/api/v3/orb/versions" \
 ----
 
 [#runner-management]
-== Runner management
+=== Runner management
 
 Manage self-hosted runners through the API:
 
@@ -567,49 +594,6 @@ curl -X POST "https://circleci.com/api/v3/runner/tokens" \
     "name": "my-runner-token"
   }'
 ----
-
-[#best-practices]
-== Best practices
-
-[#handle-errors-gracefully]
-=== Handle errors appropriately
-
-Always check the HTTP status code and handle errors appropriately:
-
-[,shell]
-----
-response=$(curl -s -w "\n%{http_code}" \
-  "https://circleci.com/api/v3/workflows/<your-workflow-id>" \
-  --header "Authorization: Bearer $CIRCLE_TOKEN")
-
-http_code=$(echo "$response" | tail -n1)
-body=$(echo "$response" | sed '$d')
-
-if [ "$http_code" -eq 200 ]; then
-  echo "Success: $body"
-elif [ "$http_code" -eq 404 ]; then
-  echo "Workflow not found"
-elif [ "$http_code" -eq 429 ]; then
-  echo "Rate limited, please wait and retry"
-else
-  echo "Error $http_code: $body"
-fi
-----
-
-[#optional-response-caching]
-=== Optional response caching
-
-Some API v3 endpoints return `Cache-Control` headers for intermediate infrastructure and browser caching. Certain job-related endpoints (stdout, stderr, tests, resource-usage) include these headers. Client applications can use their own local caching strategies as an optimization, but this is not required for normal API usage.
-
-[#paginate-efficiently]
-=== Paginate efficiently
-
-When retrieving large datasets:
-
-. Set an appropriate `page[limit]` for your use case.
-. Store and reuse cursor values.
-. Stop when `page.next` is `null`.
-. Do not attempt to parse cursor values.
 
 [#reference]
 == Reference
