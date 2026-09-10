@@ -5,13 +5,15 @@
 
 CircleCI can update your `.circleci/config.yml` at compile time using pipeline values and parameters. This config templating lets you insert values and check conditions.
 
-Config templating is not the same as xref:dynamic-config.adoc[Dynamic Configuration]. Dynamic configuration generates or continues a pipeline with a different config at runtime.
-
-[#insert-a-pipeline-value]
 == Insert a pipeline value
 
 Wrap a pipeline value or pipeline parameter in `<<` and `>>` to insert it into a string or field:
 
+[tabs]
+====
+Pipeline value::
++
+--
 .Insert a pipeline value into a job step
 [source,yaml]
 ----
@@ -24,18 +26,45 @@ jobs:
     steps:
       - run: echo "This pipeline is on << pipeline.git.branch >>"
 ----
+--
+Pipeline parameter::
++
+--
+.Insert a pipeline parameter into a job image
+[source,yaml]
+----
+version: 2.1
+
+parameters:
+  image-tag:
+    type: string
+    default: "current"
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:<< pipeline.parameters.image-tag >>
+    steps:
+      - checkout
+----
+--
+====
 
 For the full list of values you can insert, see the xref:pipeline-variables.adoc[Pipeline Values and Parameters] page.
 
-The YAML merge key `<<:` is a different feature. See xref:getting-started:introduction-to-yaml-configurations.adoc#merging-maps[Merging Maps] in the YAML introduction.
+NOTE: The YAML merge key `<<:` is a different feature. See xref:getting-started:introduction-to-yaml-configurations.adoc#merging-maps[Merging Maps] in the YAML introduction.
 
-[#add-logic-with-expressions]
 == Add logic with expressions
 
 Expressions add comparison and logic operators to this templating syntax. Use them to set a field from a condition, or to decide whether a job or workflow runs.
 
 The job `filters`, and workflow `when` and `unless` fields accept expressions directly. For other fields wrap the expression in `<<` and `>>`.
 
+[tabs]
+====
+Job filters::
++
+--
 .Direct expression in a job filter
 [source,yaml]
 ----
@@ -54,16 +83,77 @@ workflows:
       - build:
           filters: pipeline.git.branch == "main" or pipeline.git.branch starts-with "release/"
 ----
+--
+Workflow when::
++
+--
+.Direct expression in a workflow `when` clause
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  deploy:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - checkout
+
+workflows:
+  deploy-workflow:
+    when: pipeline.git.tag starts-with "v" and pipeline.trigger_source == "webhook"
+    jobs:
+      - deploy
+----
+--
+Workflow unless::
++
+--
+.Direct expression in a workflow `unless` clause
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - checkout
+
+workflows:
+  feature-workflow:
+    unless: pipeline.git.branch == "main"
+    jobs:
+      - build
+----
+--
+Other fields::
++
+--
+.Expression wrapped in `<<` and `>>`
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: cimg/base:current
+    parallelism: << pipeline.git.branch == "main" and 10 or 1 >>
+    steps:
+      - checkout
+----
+--
+====
 
 For operators and more examples, see xref:reference:ROOT:configuration-reference.adoc#using-expressions-in-your-configuration[Using Expressions in Your Configuration].
-
 
 [#config-templating-vs-dynamic-configuration]
 == How this differs from dynamic configuration
 
 Config templating edits the config you already have, before CircleCI assembles the pipeline. xref:dynamic-config.adoc[Dynamic Configuration] uses a setup workflow to generate or continue with a different config at runtime.
 
-[#next-steps]
 == Next steps
 
 * xref:pipeline-variables.adoc[Pipeline Values and Parameters]
