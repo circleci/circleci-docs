@@ -3,7 +3,7 @@
 :page-description: Use compile-time config templating to insert pipeline values and parameters into your CircleCI configuration.
 :experimental:
 
-CircleCI can update your `.circleci/config.yml` at compile time using pipeline values and parameters. This config templating lets you insert values, check conditions, and optionally include or omit blocks of YAML.
+CircleCI can update your `.circleci/config.yml` at compile time using pipeline values and parameters. This config templating lets you insert values and check conditions.
 
 Config templating is not the same as xref:dynamic-config.adoc[Dynamic Configuration]. Dynamic configuration generates or continues a pipeline with a different config at runtime.
 
