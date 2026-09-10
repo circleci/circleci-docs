@@ -6,4 +6,4 @@
 . Select btn:[Add API Token] button.
 . After the token appears, copy and paste it to another location. You will not be able to view the token again.
 
-CircleCI emails you before a personal API token expires. For details, see the <<personal-api-token-expiry-notifications,Personal API Token Expiry Notifications>> section.
+CircleCI emails you before a personal API token expires. For details, see the xref:managing-api-tokens.adoc#personal-api-token-expiry-notifications[Personal API Token Expiry Notifications] section.

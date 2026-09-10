@@ -1,6 +1,6 @@
 # Generated redirects from Jekyll to Antora
 # Format: old (Jekyll) -> new (Antora)
-# Total redirects: 502
+# Total redirects: 503
 
 - old: /2.0/configuration-reference/
   new: /reference/configuration-reference/
@@ -21,6 +21,9 @@
   new: /guides/toolkit/api-developers-guide/
 
 - old: /api-intro/
+  new: /guides/toolkit/api-intro/
+
+- old: /api/
   new: /guides/toolkit/api-intro/
 
 - old: /artifacts/

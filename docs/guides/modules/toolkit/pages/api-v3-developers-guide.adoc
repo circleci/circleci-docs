@@ -105,15 +105,7 @@ The following authentication methods are supported:
 
 To add an API token, follow these steps:
 
-. In the CircleCI application, go to your link:https://app.circleci.com/settings/user[User settings].
-. Select link:https://app.circleci.com/settings/user/tokens[Personal API Tokens].
-. Select btn:[Create New Token] button.
-. In the *Token name* field, type a memorable name for the token.
-. Set an expiry date for the token. You must choose a date no more than one year in the future.
-. Select btn:[Add API Token] button.
-. After the token appears, copy and paste it to another location. You will not be able to view the token again.
-
-CircleCI emails you before a personal API token expires. For details, see the <<personal-api-token-expiry-notifications,Personal API Token Expiry Notifications>> section.
+include::guides:ROOT:partial$shared-sections/create-a-personal-api-token.adoc[]
 
 To test your token, call the API using the command below. Set your API token as an environment variable before making a cURL call. The examples pipe the response through `jq` to format the JSON output. Install `jq` from the https://jqlang.org/download/[jq download page] if needed, or remove `| jq .` from the command to see the raw response.
 
