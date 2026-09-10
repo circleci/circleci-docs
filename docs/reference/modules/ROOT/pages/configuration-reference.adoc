@@ -2278,11 +2278,11 @@ A path does not need to be specified here because CircleCI restores the cache to
 
 '''
 
-[badge="Beta"]
 [#withtoolcache]
+[badge="Beta"]
 === *`with_tool_cache`*
 
-NOTE: Build tool caching is in beta on CircleCI Cloud. The feature is still evolving, so you may encounter bugs or changes to behavior. There is no additional cost to use it beyond standard xref:persist-data.adoc#managing-network-and-storage-usage[Cache Storage Usage].
+NOTE: Build tool caching is in beta on CircleCI Cloud. The feature is still evolving, so you may encounter bugs or changes to behavior. There is no additional cost to use it beyond standard xref:guides:optimize:persist-data.adoc#managing-network-and-storage-usage[Cache Storage Usage].
 
 Wraps a sequence of steps and configures the named build tool to use a CircleCI-managed remote cache for its own build outputs. See <<savecache,`save_cache`>> and <<restorecache,`restore_cache`>> for the default caching steps. For more information, see the xref:guides:optimize:build-tool-cache.adoc#[Build Tool Cache] page.
 
