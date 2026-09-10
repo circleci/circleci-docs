@@ -997,8 +997,6 @@ jobs:
 [#machine]
 === *`machine`*
 
-NOTE: *Using CircleCI Cloud?* The use of `machine: true` is deprecated. You must specify an image to use.
-
 The machine executor is configured using the `machine` key, which takes a map:
 
 [.table-scroll]
