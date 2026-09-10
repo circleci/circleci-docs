@@ -2276,6 +2276,7 @@ A path does not need to be specified here because CircleCI restores the cache to
 
 '''
 
+[badge="Beta"]
 [#withtoolcache]
 === *`with_tool_cache`*
 
