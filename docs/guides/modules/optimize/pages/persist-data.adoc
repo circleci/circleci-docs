@@ -44,7 +44,7 @@ Because caches are global within a project, a cache saved on one branch will be 
 [#build-tool-cache]
 === Build tool cache
 
-Dependency caching and build tool cache both use CircleCI's cache storage, but they cache different things. Dependency caching (above) saves what your package manager downloads. Build tool cache saves what your build tool itself produces: task or build outputs for tools such as Gradle, Bazel, and Turborepo. Use the `with_tool_cache` step instead of a `save_cache`/`restore_cache` pair when you want to cache one of these tools' own build outputs.
+Dependency caching and build tool cache both use CircleCI's cache storage, but they cache different things. Dependency caching (above) saves what your package manager downloads. Build tool cache saves what your build tool itself produces: task or build outputs for tools such as Gradle, Bazel, Turborepo, and Xcode. Use the `with_tool_cache` step instead of a `save_cache`/`restore_cache` pair when you want to cache one of these tools' own build outputs.
 
 * For more information, see the xref:build-tool-cache.adoc[Build Tool Cache] page.
 
