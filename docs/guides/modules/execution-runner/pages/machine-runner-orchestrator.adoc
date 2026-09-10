@@ -1,4 +1,4 @@
-= Machine Runner Orchestrator
+= Machine runner orchestrator
 :page-platform: Cloud, Server v4+
 :page-badge: Beta
 :page-description: Install and configure Machine Runner Orchestrator to scale CircleCI runner VMs with KubeVirt, including optional rerun job with SSH.

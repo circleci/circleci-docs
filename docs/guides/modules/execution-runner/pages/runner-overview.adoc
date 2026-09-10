@@ -89,7 +89,7 @@ If you do not use Kubernetes but still want to run your CI job in a container on
 Machine runner is not compatible with CircleCI's Convenience Images or custom Docker images.
 
 [#machine-runner-orchestrator-use-case]
-=== Machine Runner Orchestrator (beta)
+=== Machine runner orchestrator (beta)
 
 Machine Runner Orchestrator is a Kubernetes controller that automatically scales CircleCI runner VMs using KubeVirt. Rather than running jobs in containers, each job runs inside a full virtual machine that is provisioned on demand and shut down after the job completes. This approach provides stronger isolation than container runner. It is suited for workloads that require a full OS environment, hardware-level isolation, or privileged access that is impractical inside a container.
 
