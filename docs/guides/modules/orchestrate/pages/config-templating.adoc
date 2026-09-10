@@ -9,11 +9,6 @@ CircleCI can update your `.circleci/config.yml` at compile time using pipeline v
 
 Wrap a pipeline value or pipeline parameter in `<<` and `>>` to insert it into a string or field:
 
-[tabs]
-====
-Pipeline value::
-+
---
 .Insert a pipeline value into a job step
 [source,yaml]
 ----
@@ -26,10 +21,7 @@ jobs:
     steps:
       - run: echo "This pipeline is on << pipeline.git.branch >>"
 ----
---
-Pipeline parameter::
-+
---
+
 .Insert a pipeline parameter into a job image
 [source,yaml]
 ----
@@ -47,8 +39,6 @@ jobs:
     steps:
       - checkout
 ----
---
-====
 
 For the full list of values you can insert, see the xref:pipeline-variables.adoc[Pipeline Values and Parameters] page.
 
@@ -60,11 +50,6 @@ Expressions add comparison and logic operators to this templating syntax. Use th
 
 The job `filters`, and workflow `when` and `unless` fields accept expressions directly. For other fields wrap the expression in `<<` and `>>`.
 
-[tabs]
-====
-Job filters::
-+
---
 .Direct expression in a job filter
 [source,yaml]
 ----
@@ -83,10 +68,7 @@ workflows:
       - build:
           filters: pipeline.git.branch == "main" or pipeline.git.branch starts-with "release/"
 ----
---
-Workflow when::
-+
---
+
 .Direct expression in a workflow `when` clause
 [source,yaml]
 ----
@@ -105,10 +87,7 @@ workflows:
     jobs:
       - deploy
 ----
---
-Workflow unless::
-+
---
+
 .Direct expression in a workflow `unless` clause
 [source,yaml]
 ----
@@ -127,10 +106,7 @@ workflows:
     jobs:
       - build
 ----
---
-Other fields::
-+
---
+
 .Expression wrapped in `<<` and `>>`
 [source,yaml]
 ----
@@ -144,8 +120,6 @@ jobs:
     steps:
       - checkout
 ----
---
-====
 
 For operators and more examples, see xref:reference:ROOT:configuration-reference.adoc#using-expressions-in-your-configuration[Using Expressions in Your Configuration].
 
