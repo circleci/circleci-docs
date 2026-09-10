@@ -7,7 +7,7 @@
 [#introduction]
 == Introduction
 
-Pipeline values and parameters can be used to create reusable pipeline configurations.
+Pipeline values and parameters can be used to create reusable pipeline configurations. To insert them into `config.yml` at compile time, see the xref:config-templating.adoc[Config Templating] page.
 
 - *Pipeline values* represent pipeline metadata that can be used throughout the configuration.
 - *Pipeline parameters* are typed pipeline variables that are declared in the `parameters` key at the top level of a configuration. Users can pass `parameters` into their pipelines when triggering a new run of a pipeline through the API or web app.
