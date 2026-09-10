@@ -1,23 +1,92 @@
 = CircleCI API v3 developer's guide
 :page-platform: Cloud
-:page-description: API v3 guide for internal and external CircleCI developers
+:page-description: CircleCI API v3 guide for developers. Learn how to use the API to return detailed information about users, pipelines, projects, workflows, and more.
 :experimental:
 
-This guide assists developers in making API calls to CircleCI services using API v3. Use the API to return detailed information about users, pipelines, projects, workflows, and more. View the API v3 specification in the link:https://circleci.com/docs/api/v3/[API v3 Reference documentation].
+This guide walk through getting set up to use the CircleCI API v3 to make API calls to CircleCI services. Use the API to return detailed information about users, runs, pipelines, projects, workflows, and more. View the API v3 specification in the link:https://circleci.com/docs/api/v3/[API v3 Reference documentation].
 
 CAUTION: *Using CircleCI Server?* Use the legacy API v2. See link:https://circleci.com/docs/api/v2/[API v2 Reference documentation] for more information.
 
 == About API v3
 
-API v3 is CircleCI's current API version and all new development uses v3. It provides a modern, efficient interface with consistent conventions across all endpoints.
+API v3 is CircleCI's current API version and all new development uses v3. API v3 provides a modern, efficient interface with consistent conventions across all endpoints.
 
 Some key features of API v3 are as follows:
 
-* UUID-based resource identification instead of slugs. Resources use unique IDs like `abc-123-def` rather than names like `gh/myorg/myrepo`.
-* Opaque cursor pagination instead of token-based pagination. Page through results using server-provided cursors you cannot decode or predict.
+* UUID-based resource identification instead of slugs. Resources use unique IDs like `c6e2e2cd-d0ee-4253-be29-d076f9555602` rather than names like `gh/myorg/myrepo`.
+* Opaque cursor pagination instead of token-based pagination. Page through results using server-provided cursors.
 * Comprehensive error objects with optional fields. Errors include detailed type, ID, and source information to help with debugging.
 * Standard rate limiting headers. Rate limit information uses industry-standard headers that tools can understand automatically.
 * Explicit idempotent operation guarantees where applicable. Know which operations are safe to retry without causing duplicates or side effects.
+
+[#getting-started-with-api-v3]
+== Getting started with API v3
+
+This section walks through a complete API v3 workflow starting from your API token: discovering your organizations and projects, listing recent runs, and retrieving workflow details.
+
+[#prerequisites]
+=== Prerequisites
+
+* A GitHub, Bitbucket, GitLab or Cursor Origin account with a repository set up with CircleCI.
+* A valid CircleCI personal API token. See <<authentication-and-authorization>> for instructions on how to add an API token.
+
+[#steps]
+=== Steps
+
+. Set your API token as an environment variable:
++
+[,shell]
+----
+export CIRCLE_TOKEN=<your-api-token>
+----
+
+. List your organizations to find the one you want to work with:
++
+[,shell]
+----
+curl -g 'https://circleci.com/api/v3/orgs' \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
+----
++
+This returns all organizations you have access to. Note the `id` for your organization.
+
+. List projects in your organization:
++
+[,shell]
+----
+curl -g 'https://circleci.com/api/v3/projects?filter[org_id]=<your-org-id>' \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
+----
++
+This returns all projects in the organization. Note the `id` for your project.
+
+. List recent runs for your project:
++
+[,shell]
+----
+curl -g 'https://circleci.com/api/v3/runs?filter[project_id]=<your-project-id>&page[limit]=10' \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
+----
++
+This returns the 10 most recent runs. Note a `id` to explore further.
+
+. List workflows in a run:
++
+[,shell]
+----
+curl -g 'https://circleci.com/api/v3/workflows?filter[run_id]=<your-run-id>' \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
+----
++
+This returns all workflows for the run.
+
+. Get detailed information about a workflow:
++
+[,shell]
+----
+curl -g 'https://circleci.com/api/v3/workflows/<your-workflow-id>' \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
+----
 
 == API v3 conventions
 
@@ -300,75 +369,6 @@ Deprecated operations are marked `deprecated: true` and responses include:
 
 Migrate before the `Sunset` date. Removed routes return 410 permanently.
 
-[#getting-started-with-api-v3]
-== Getting started with API v3
-
-This section walks through a complete API v3 workflow starting from your API token: discovering your organizations and projects, listing recent runs, and retrieving workflow details.
-
-[#prerequisites]
-=== Prerequisites
-
-* A GitHub, Bitbucket, GitLab or Cursor Origin account with a repository set up with CircleCI.
-* A valid CircleCI personal API token. See <<authentication-and-authorization>> for instructions on how to add an API token.
-
-[#steps]
-=== Steps
-
-. Set your API token as an environment variable:
-+
-[,shell]
-----
-export CIRCLE_TOKEN=<your-api-token>
-----
-
-. List your organizations to find the one you want to work with:
-+
-[,shell]
-----
-curl -g 'https://circleci.com/api/v3/orgs' \
-  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
-----
-+
-This returns all organizations you have access to. Note the `id` for your organization.
-
-. List projects in your organization:
-+
-[,shell]
-----
-curl -g 'https://circleci.com/api/v3/projects?filter[org_id]=<your-org-id>' \
-  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
-----
-+
-This returns all projects in the organization. Note the `id` for your project.
-
-. List recent runs for your project:
-+
-[,shell]
-----
-curl -g 'https://circleci.com/api/v3/runs?filter[project_id]=<your-project-id>&page[limit]=10' \
-  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
-----
-+
-This returns the 10 most recent runs. Note a `id` to explore further.
-
-. List workflows in a run:
-+
-[,shell]
-----
-curl -g 'https://circleci.com/api/v3/workflows?filter[run_id]=<your-run-id>' \
-  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
-----
-+
-This returns all workflows for the run.
-
-. Get detailed information about a workflow:
-+
-[,shell]
-----
-curl -g 'https://circleci.com/api/v3/workflows/<your-workflow-id>' \
-  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
-----
-
 [#common-use-cases]
 == Common use cases
 
@@ -519,24 +519,19 @@ curl -X POST "https://circleci.com/api/v3/contexts/<your-context-id>/env-vars/se
   }'
 ----
 
-[#advanced-topics]
-== Advanced topics
-
 [#working-with-orbs]
-=== Working with orbs
+== Working with orbs
 
 API v3 provides comprehensive orb management capabilities:
 
-**List orb packages:**
-
+.List orb packages
 [,shell]
 ----
 curl -g "https://circleci.com/api/v3/orb/packages?filter[namespace_id]=<your-namespace-id>" \
   --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
 
-**Create an orb version:**
-
+.Create an orb version
 [,shell]
 ----
 curl -X POST "https://circleci.com/api/v3/orb/versions" \
@@ -550,20 +545,18 @@ curl -X POST "https://circleci.com/api/v3/orb/versions" \
 ----
 
 [#runner-management]
-=== Runner management
+== Runner management
 
 Manage self-hosted runners through the API:
 
-**List runner resource classes:**
-
+.List runner resource classes
 [,shell]
 ----
 curl -g "https://circleci.com/api/v3/runner/resource-classes?filter[org_id]=<your-org-id>" \
   --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
 
-**Create a runner token:**
-
+.Create a runner token
 [,shell]
 ----
 curl -X POST "https://circleci.com/api/v3/runner/tokens" \

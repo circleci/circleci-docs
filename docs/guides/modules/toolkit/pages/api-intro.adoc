@@ -1,12 +1,12 @@
 = CircleCI APIs overview
 :page-platform: Cloud, Server v4+
-:page-description: Introduction to the CircleCI API versions and their capabilities
+:page-description: Introduction to the CircleCI API versions and their capabilities including a how to choose the right API version for your use case.
 :page-aliases: reference:ROOT:api-homepage.adoc
 :experimental:
 
 The CircleCI API enables you to interact with your pipelines, projects, and organizations programmatically. Use the API to retrieve detailed information about users, jobs, workflows, and pipelines. You can also trigger pipelines and manage resources. CircleCI currently supports three API versions, plus a separate API for self-hosted runners:
 
-* link:../../../api/v3/[API v3 Reference] (Current)
+* link:https://circleci.com/api/v3/[API v3 Reference] (Current)
 * link:../../../api/v2/[API v2 Reference] (Legacy)
 * link:../../../api/v1/[API v1.1 Reference] (Legacy)
 * xref:execution-runner:runner-api.adoc[Runner API Reference] (Self-hosted runners)
@@ -16,44 +16,45 @@ The CircleCI API enables you to interact with your pipelines, projects, and orga
 
 [.table-scroll]
 --
-[cols="12,18,40,30", options="header"]
+[cols=4*, options="header"]
 |===
 | Version | Status | Key features | When to use
 
 | API v3
 | Current
-| UUID-based resource IDs +
-Opaque cursor pagination +
-Detailed, consistent error objects +
-Idempotent operations where applicable +
-Standard rate-limit headers +
-Endpoints for workflows, jobs, pipelines, and analytics
-| All new integrations and scripts +
-Applications requiring modern API patterns +
-Projects needing analysis endpoints, deploy management, or notification configuration
+a| * UUID-based resource IDs.
+* Opaque cursor pagination.
+* Detailed, consistent error objects.
+* Idempotent operations where applicable.
+* Standard rate-limit headers.
+* Endpoints for workflows, jobs, pipelines, and analytics.
+a| * All new integrations and scripts.
+* Applications requiring modern API patterns.
+* Projects needing analysis endpoints, deploy management, or notification configuration.
 
 | API v2
 | Legacy (supported)
-| Token-based pagination +
-Pipeline triggering with parameters +
-Insights endpoints +
-Workflow and job management
-| Existing integrations that have not yet migrated to v3 +
-Scripts and tools that depend on v2-specific behavior
+a| * Token-based pagination.
+* Pipeline triggering with parameters.
+* Insights endpoints.
+* Workflow and job management.
+a| * Existing integrations that have not yet migrated to v3.
+* Scripts and tools that depend on v2-specific behavior.
 
 | API v1.1
 | Legacy (EOL planned)
-| Basic pipeline, job, and project endpoints
-| Maintaining existing integrations that you have not yet updated +
-Specific legacy use cases
+| Basic pipeline, job, and project endpoints.
+a| * Maintaining existing integrations that you have not yet updated.
+* Specific legacy use cases.
 
 | xref:execution-runner:runner-api.adoc[Runner API]
 | Specialized (separate API)
-| Hosted separately at `runner.circleci.com` +
-Manages and executes self-hosted runner tasks +
-Supports Circle-Token, Bearer, and resource class token authentication
-| Managing self-hosted runner resource classes and tasks +
-Building custom self-hosted runner integrations
+a| * Hosted separately at `runner.circleci.com`
+* Manages and executes self-hosted runner tasks.
+* Supports Circle-Token, Bearer, and resource class token authentication.
+a| * Managing self-hosted runner resource classes and tasks.
+* Building custom self-hosted runner integrations.
+
 |===
 --
 
