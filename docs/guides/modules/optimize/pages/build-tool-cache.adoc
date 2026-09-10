@@ -6,7 +6,7 @@
 
 NOTE: Build tool caching is in beta on CircleCI Cloud. The feature is still evolving, so you may encounter bugs or changes to behavior. There is no additional cost to use it beyond standard xref:persist-data.adoc#managing-network-and-storage-usage[Cache Storage Usage].
 
-Use the xref:reference:ROOT:configuration-reference.adoc#withtoolcache[`with_tool_cache`] step to back a build tool's own remote cache (for example, Gradle's build cache, Bazel's remote cache, or Xcode's Swift/Clang compilation cache) with a CircleCI-managed cache backend. This removes the need to hand-roll a xref:caching.adoc[`save_cache`/`restore_cache`] pair for tool-specific build outputs, and works the same way across executors.
+Use the xref:reference:ROOT:configuration-reference.adoc#withtoolcache[`with_tool_cache`] step to back a build tool's own remote cache with a CircleCI-managed cache backend. For example, this can back Gradle's build cache, Bazel's remote cache, or Xcode's Swift/Clang compilation cache. This removes the need to hand-roll a xref:caching.adoc[`save_cache`/`restore_cache`] pair for tool-specific build outputs, and works the same way across executors.
 
 [#how-it-works]
 == How it works
@@ -39,7 +39,7 @@ Two practical benefits follow from this:
 
 NOTE: In internal benchmarks, a clean build using `with_tool_cache` completed about 90% faster than the same build with no cache at all. Actual results depend on the size of your build's cache and how often it changes.
 
-NOTE: In a separate benchmark of a large, real-world iOS codebase (WordPress-iOS) built with Xcode, `with_tool_cache` with `tool: xcode` produced a median clean-build time about 29% faster than an uncached build. Xcode's compilation cache is object-level (compiler outputs keyed on source content), rather than task-level like Gradle's or Bazel's, so the speedup is more modest but still substantial for large native codebases.
+NOTE: In a separate benchmark on a large, real-world iOS codebase (WordPress-iOS), `with_tool_cache` with `tool: xcode` cut median clean-build time by about 29% versus a build with no cache. Xcode's compilation cache is object-level (compiler outputs keyed on source content), not task-level like Gradle's or Bazel's. The speedup is smaller as a result, but still meaningful for large native codebases.
 
 [#supported-tools]
 == Supported tools
