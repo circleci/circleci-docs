@@ -2302,7 +2302,7 @@ Wraps a sequence of steps and configures the named build tool to use a CircleCI-
 |===
 --
 
-`with_tool_cache` is supported on all executors (`docker`, `machine`, `macos`, and `windows`). Cached data is stored in CircleCI's object storage, the same as `save_cache`/`restore_cache`.
+The `with_tool_cache` step is supported on all executors (`docker`, `machine`, `macos`, and `windows`). Cached data is stored in CircleCI's object storage, the same as when using the default caching steps `save_cache` and `restore_cache`.
 
 *Example:*
 
