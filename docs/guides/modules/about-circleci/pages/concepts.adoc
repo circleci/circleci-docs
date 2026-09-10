@@ -472,7 +472,7 @@ A pipeline is a definition that specifies where your CircleCI configuration is s
 
 Pipelines are distinct from the work they produce. When an <<events,event>> matches a trigger, CircleCI uses the pipeline definition to fetch your configuration and create a run. That run then executes the <<workflows,workflows>>, <<jobs,jobs>>, and <<steps,steps>> defined in your configuration file.
 
-You can use xref:orchestrate:pipeline-variables.adoc#conditional-workflows[pipeline parameters] to control which workflows run when a run is initiated.
+You can use xref:orchestrate:pipeline-variables.adoc#conditional-workflows[Pipeline Parameters] to control which workflows run when a run is initiated.
 
 See the xref:orchestrate:pipelines.adoc[Pipelines Overview] page for more information.
 
