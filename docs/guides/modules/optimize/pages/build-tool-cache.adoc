@@ -118,7 +118,7 @@ jobs:
 [#use-with-dependency-caching]
 == Use with dependency caching
 
-`with_tool_cache` only manages the build tool's own remote/task-output cache. It does not replace dependency caching. For example, with Gradle, `with_tool_cache` handles the Gradle build cache, but a separate xref:caching.adoc#gradle-java[`save_cache`/`restore_cache`] pair still caches `~/.gradle/caches/modules-2` (the downloaded dependencies). The two mechanisms are complementary: one caches what Gradle downloads, the other caches what Gradle builds.
+The `with_tool_cache` step only manages the build tool's own remote/task-output cache. It does not replace dependency caching. For example, with Gradle, `with_tool_cache` handles the Gradle build cache, but a separate xref:caching.adoc#gradle-java[`save_cache`/`restore_cache`] pair still caches `~/.gradle/caches/modules-2` (the downloaded dependencies). The two mechanisms are complementary: one caches what Gradle downloads, the other caches what Gradle builds.
 
 [#see-also]
 == See also
