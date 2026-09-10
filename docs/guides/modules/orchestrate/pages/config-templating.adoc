@@ -51,41 +51,15 @@ Expressions add comparison and logic operators to this templating syntax. Use th
 The job `filters`, and workflow `when` and `unless` fields accept expressions directly. For other fields wrap the expression in `<<` and `>>`.
 
 .Direct expression in a job filter
-[source,yaml]
+[,yaml]
 ----
-version: 2.1
-
-jobs:
-  build:
-    docker:
-      - image: cimg/base:current
-    steps:
-      - checkout
-
-workflows:
-  my-workflow:
-    jobs:
-      - build:
-          filters: pipeline.git.branch == "main" or pipeline.git.branch starts-with "release/"
+include::ROOT:example$expression-examples/job-filters/multiple-or.yml[]
 ----
 
 .Direct expression in a workflow `when` clause
-[source,yaml]
+[,yaml]
 ----
-version: 2.1
-
-jobs:
-  deploy:
-    docker:
-      - image: cimg/base:current
-    steps:
-      - checkout
-
-workflows:
-  deploy-workflow:
-    when: pipeline.git.tag starts-with "v" and pipeline.trigger_source == "webhook"
-    jobs:
-      - deploy
+include::ROOT:example$expression-examples/workflow-when/or-equal-dynamic.yml[]
 ----
 
 .Direct expression in a workflow `unless` clause
