@@ -5,6 +5,8 @@
 
 Use rerun failed tests to only rerun a subset of tests, instead of an entire test suite, when a transient test failure arises.
 
+NOTE: This page covers rerunning failed tests with the legacy `circleci tests run` command. CircleCI's preferred way to rerun failed tests is now `circleci testsuite`'s xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] feature.
+
 [#introduction]
 == Introduction
 

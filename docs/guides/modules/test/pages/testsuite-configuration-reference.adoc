@@ -1,11 +1,8 @@
 = Testsuite configuration reference
-:page-badge: Beta
 :page-platform: Cloud
 :experimental:
 :page-description: Reference for .circleci/test-suites.yml
 :page-show-readtime: true
-
-include::ROOT:partial$notes/smarter-testing-beta.adoc[]
 
 This document is a reference for the CircleCI Smarter Testing test suite configuration keys used in the `.circleci/test-suites.yml` file.
 

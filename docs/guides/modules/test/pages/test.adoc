@@ -1,6 +1,6 @@
 = Automated testing in CircleCI
 :page-platform: Cloud, Server v4+
-:page-description: An overview of setting up testing automation, integration, and analytics.
+:page-description: An overview of setting up testing automation, integration, and analytics with Smarter Testing.
 :experimental:
 
 [#introduction]
@@ -9,6 +9,14 @@
 CircleCI allows you to automatically test your code before changes are merged. You can integrate testing tools and frameworks such as Jest, Mocha, `pytest`, JUnit, Selenium, XCTest, and more.
 
 When you integrate your tests into your CircleCI pipelines, you deliver software to your users more reliably and efficiently, and get faster feedback. This also means you can fix issues and failed tests faster. Test output data becomes available in CircleCI to help debug failed tests. If you save your test data in CircleCI, you can also take advantage of Test Insights as well as parallelism features to identify opportunities to further optimize your pipelines.
+
+<<basics,Basics>> below covers running your test suite using your native test library and the `run` step, which works with any test runner. `circleci testsuite` is CircleCI's preferred way to run that test command, for all customers: it supports the same test discovery, running, and splitting capabilities as the legacy `circleci tests` command family, plus additional commands (such as `list-tests`, for introspecting which tests will run) and three features unique to link:https://circleci.com/blog/smarter-testing-stop-running-tests-that-dont-matter/[Smarter Testing], each usable on its own:
+
+* *Test impact analysis* -- skip tests that your code changes can't have affected, based on real coverage data rather than heuristics.
+* *Dynamic test splitting* -- keep parallel execution nodes evenly loaded by pulling tests from a shared queue as work becomes available, instead of assigning a fixed split up front.
+* *Auto rerun failed tests* -- automatically retry failed tests to absorb flaky failures without manual re-runs.
+
+See <<smarter-testing,Get started with Smarter Testing>> below to switch, or <<legacy-test-command,Legacy: `circleci tests` command>> if you're on Server or not ready to move yet.
 
 [#basics]
 == Basics
@@ -41,6 +49,8 @@ Depending on your requirements, you might have more complex workflows that orche
 For a more in-depth look at workflows functionality, visit the xref:orchestrate:workflows.adoc[Workflows] page. You can also refer to the xref:toolkit:sample-config.adoc[Sample configuration] page for more workflow examples.
 
 If you need to restrict the connections allowed in your test jobs, consider enabling xref:security:ip-ranges.adoc[IP Ranges]. This enables CircleCI jobs to go through a set of well-defined IP address ranges.
+
+This gets your tests running with your native test library, directly through the `run` step -- the same approach the legacy `circleci tests` command family uses. `circleci testsuite` uses this same `run` step and is CircleCI's preferred way to run it going forward: it matches `circleci tests` feature for feature, and adds test impact analysis, dynamic test splitting, and auto rerun failed tests on top -- see <<smarter-testing,Get started with Smarter Testing>> below.
 
 [#orbs]
 == Use orbs to simplify testing
@@ -106,19 +116,105 @@ When test results are stored, test analytics also become available on the *Tests
 
 More information is available on the xref:insights:insights-tests.adoc[Test Insights] page.
 
-[#rerun-failed-tests-only]
-== Re-run failed tests only (`circleci tests run`)
+[#smarter-testing]
+== Get started with Smarter Testing (`circleci testsuite`)
 
-You can configure jobs to re-run failed tests only. Using this option, when a transient test failure arises, only a subset of tests are re-run instead of the entire test suite. Also, only failed tests from the same commit are re-run, not new ones.
+`circleci testsuite` is CircleCI's preferred way to run tests, for all customers. It supports the same test discovery, running, and splitting capabilities as the legacy `circleci tests` command family, plus additional commands and the Smarter Testing features described below. It's currently available in Cloud only; Server projects should continue to use the <<legacy-test-command,legacy `circleci tests` commands>> for now.
 
-More information on how to use this option is available on the xref:rerun-failed-tests.adoc[Rerun Failed Tests Overview] page.  This functionality uses a command called `circleci tests run`.
+`circleci testsuite` is driven by a single command and a `.circleci/test-suites.yml` configuration file that describes how to discover and run your tests. Setup has two parts:
 
-Historically, when your testing job in a workflow has flaky tests, the only option to get to a successful workflow was to re-run your workflow from failed. This type of re-run executes all tests from your testing job, including tests that passed, which prolongs time-to-feedback and consumes credits unnecessarily.
+. Configure `.circleci/test-suites.yml` to discover and run your tests.
+. Replace your existing test command with `circleci testsuite run`.
+
+To validate your setup locally, ensure the link:https://cli.circleci.com/[latest CircleCI CLI, window=_blank] is installed. The CLI is already available in CI, so no install is needed there.
+
+Use the `doctor` command to set up and validate `test-suites.yml` for a new project:
+
+[,shell]
+----
+circleci testsuite doctor "ci tests"
+----
+
+Then, in the job you built in <<basics,Basics>>, replace `command: npm test` with `circleci testsuite run`, keeping the rest of the job the same:
+
+[,yaml]
+----
+jobs:
+  build-and-test:
+    docker:
+      - image: cimg/node:16.10
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - run:
+          name: Run tests
+          command: circleci testsuite run "ci tests"
+      - store_test_results:
+          # Must match outputs.junit in test-suites.yml
+          path: test-reports
+----
+
+Once a project runs tests through `circleci testsuite`, each feature can be turned on independently with an `options` block in `test-suites.yml`:
+
+[,yaml]
+----
+test-suites:
+  ci tests:
+    options:
+      test-impact-analysis: true
+      dynamic-test-splitting: true
+      max-auto-rerun: 3
+----
+
+[#test-impact-analysis]
+=== Test impact analysis
+
+Test impact analysis uses code coverage data to map which tests exercise which source files. On a feature branch, it starts with your full test suite selected, then conservatively deselects only the tests proven to be unaffected by the files you changed -- routinely skipping a large share of tests without reducing test confidence, since deselection is based on measured coverage rather than guesswork. A full run against your default branch keeps the underlying coverage baseline up to date.
+
+Full setup instructions, including coverage requirements per test runner, are on the xref:set-up-test-impact-analysis.adoc[Set up Test Impact Analysis] page.
+
+[#dynamic-test-splitting]
+=== Dynamic test splitting
+
+`circleci testsuite run` already splits tests across parallel nodes when `parallelism` is set on your job, using the durations reported in your JUnit results. This static split misses fixed costs like runner startup and per-node setup, so nodes can still finish at noticeably different times. Enabling `dynamic-test-splitting` replaces that fixed, up-front split with a shared queue that nodes pull from as they become available, learning the gap between reported and actual runtime as it runs.
+
+See the xref:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting] page to configure it for your project.
+
+[#auto-rerun-failed-tests]
+=== Auto rerun failed tests
+
+Auto rerun failed tests retries a failing test immediately, without human intervention, up to `max-auto-rerun` times or until `auto-rerun-duration` is reached. If a test eventually passes, its earlier failure is suppressed and the job succeeds; a test that fails consistently still exhausts its retries and fails the job. This is intended for intermittent, flaky failures, not for masking genuine regressions -- it pairs well with test impact analysis, since a smaller, more targeted test selection makes flakiness easier to spot.
+
+See the xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] page for configuration details.
+
+For the full set of configuration keys available in `test-suites.yml`, refer to the xref:testsuite-configuration-reference.adoc[Test suite Config Reference].
 
 [#next-steps]
 == Next steps
 
-* Further optimize your pipelines with xref:optimize:parallelism-faster-jobs.adoc[Parallelism and Test Splitting].
+* Get started with xref:getting-started-with-smarter-testing.adoc[Smarter Testing] end to end.
 * Integrate tests for xref:testing-macos.adoc[macOS] or xref:testing-ios.adoc[iOS] apps.
 * Read our xref:browser-testing.adoc[Browser Testing] guide to common methods for running and debugging browser tests in CircleCI.
 * To get event-based notifications in Slack about your pipelines (for example, if a job passes or fails), try our xref:getting-started:slack-orb-tutorial.adoc[Slack Orb] tutorial.
+
+[#legacy-test-command]
+== Legacy: `circleci tests` command
+
+`circleci tests` (`glob`, `run`, `split`) is CircleCI's original test command family, wired up as individual steps in your job to discover, run, split, and rerun tests. `circleci testsuite` now supports the same capabilities, plus additional functionality, and is CircleCI's preferred solution for all customers going forward. `circleci tests` is considered legacy, but remains fully supported, and is currently required for Server projects, since `circleci testsuite` is Cloud only.
+
+[#legacy-test-splitting]
+=== Test splitting and parallelism (`circleci tests split`)
+
+Splitting your test suite across parallel execution nodes reduces the time it takes to run your tests. `circleci testsuite run` already does this using static, timing-based assignment when `parallelism` is set on your job, with <<dynamic-test-splitting,dynamic test splitting>> available as a further improvement. Without `circleci testsuite`, splitting is handled by the `circleci tests split` command instead.
+
+See xref:optimize:parallelism-faster-jobs.adoc[Test splitting and parallelism] and xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the environment CLI to split tests] for setup details.
+
+[#legacy-rerun-failed-tests]
+=== Re-run failed tests only (`circleci tests run`)
+
+You can configure jobs to re-run failed tests only. Using this option, when a transient test failure arises, only a subset of tests are re-run instead of the entire test suite. Also, only failed tests from the same commit are re-run, not new ones.
+
+More information on how to use this option is available on the xref:rerun-failed-tests.adoc[Rerun Failed Tests Overview] page. This functionality uses a command called `circleci tests run`, which Smarter Testing's <<smarter-testing,auto rerun failed tests>> feature supersedes for projects on `circleci testsuite`.
+
+Historically, when your testing job in a workflow has flaky tests, the only option to get to a successful workflow was to re-run your workflow from failed. This type of re-run executes all tests from your testing job, including tests that passed, which prolongs time-to-feedback and consumes credits unnecessarily.

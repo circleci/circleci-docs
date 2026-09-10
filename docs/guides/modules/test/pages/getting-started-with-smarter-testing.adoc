@@ -1,12 +1,9 @@
 = Getting started with Smarter Testing
 :page-description: Install and configure Smarter Testing for your project
-:page-badge: Beta
 :page-platform: Cloud
 :experimental:
 :page-show-readtime: true
 :tabs-sync-option:
-
-include::ROOT:partial$notes/smarter-testing-beta.adoc[]
 
 Smarter Testing reduces test execution time while maintaining test confidence. It provides three independent features you can enable incrementally:
 

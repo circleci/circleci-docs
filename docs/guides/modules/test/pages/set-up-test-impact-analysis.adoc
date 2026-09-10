@@ -1,10 +1,7 @@
 = Set up test impact analysis
 :page-description: Run only the tests impacted by your code changes
-:page-badge: Beta
 :page-platform: Cloud
 :experimental:
-
-include::ROOT:partial$notes/smarter-testing-beta.adoc[]
 
 Test impact analysis speeds up CI by running only the tests affected by your code changes. CircleCI tracks which tests exercise which source files, then skips tests that cover unchanged source files.
 
