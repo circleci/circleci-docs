@@ -9,29 +9,26 @@ Its scaling behavior is directly affected by how you configure `maxReplicas`, no
 By publishing these benchmarks, CircleCI can show the measurable performance characteristics of MRO under realistic load and help operators choose configurations that meet their throughput and latency goals.
 For an overview of machine runner orchestrator concepts and setup, see xref:execution-runner:runner-provisioner.adoc[Machine Runner Orchestrator Overview].
 
-NOTE: These benchmarks reflect a specific test cluster configuration described below.
-Actual results vary depending on your node types, autoscaler settings, and resource class definitions.
+[#test-setup]
+== Test setup
 
-[#test-environment]
-== Test environment
+Benchmarks ran on a Kubernetes cluster using c8i.12xlarge nodes (48 vCPU / 96 GiB RAM) with KubeVirt enabled and a cluster autoscaler ASG of 2–6 nodes.
+Each test triggered jobs at four increasing rates: 1, 2, 4, and 6 jobs/min. Every job performed 5 minutes of work.
 
-All three experiments ran against the same Kubernetes cluster.
-Nodes used the c8i.12xlarge instance type (48 vCPU / 96 GiB RAM), with a cluster autoscaler ASG of 2–6 nodes and KubeVirt enabled on all nodes.
-
-The experiments used two resource classes:
+The tests used two resource classes — the names and VM sizes in the table are examples.
 
 [.table-scroll]
 --
 [cols="4", options="header"]
 |===
-| Resource class | VM size | `minReplicas` | `maxReplicas`
+| Resource class (example) | VM size | `minReplicas` | `maxReplicas`
 
-| `circleci-runner/rp-stress-high`
+| `my-org/runner-large`
 | 8 vCPU / 32 GiB
 | 2
 | 9
 
-| `circleci-runner/rp-stress-low`
+| `my-org/runner-small`
 | 2 vCPU / 8 GiB
 | 2
 | 34
@@ -39,64 +36,16 @@ The experiments used two resource classes:
 --
 
 Both resource classes shared the same node group.
-The high-class `maxReplicas` value of 9 reflects a memory constraint.
-The shared node group has 344 GiB total allocatable memory, and 9 × 32 GiB high-class VMs consume most of it.
 
-[#test-method]
-== Test method
-
-Each experiment triggered 130 jobs in four escalating steps:
-
-[.table-scroll]
---
-[cols="4", options="header"]
-|===
-| Step | Trigger rate | Jobs in step | Hold duration
-
-| 0
-| 1 job/min
-| 10
-| 600 s
-
-| 1
-| 2 jobs/min
-| 20
-| 600 s
-
-| 2
-| 4 jobs/min
-| 40
-| 600 s
-
-| 3
-| 6 jobs/min
-| 60
-| 600 s
-|===
---
-
-Every job ran `sleep 300` (5 minutes of actual work), so:
-
-----
-total duration = queue time + 300 s
-----
-
-The test ran three experiments:
-
-* *High-only*: all 130 jobs used the high resource class.
-* *Low-only*: all 130 jobs used the low resource class.
-* *Mixed*: the test randomly assigned each job to either the high or low resource class.
-
-The tables below report queue time and total job duration at the 50th and 90th percentiles (p50/p90) for each step.
-*Saturated* indicates that queue times grew consistently across the step, meaning the scaler did not provision VMs fast enough to match the arrival rate.
+The tables below report queue time and total job duration at the 50th and 90th percentiles (p50/p90) for each trigger rate.
 
 [#results]
 == Results
 
 [#high-resource-class]
-=== High resource class (high-only run)
+=== Large resource class (high-only run)
 
-Resource class: `circleci-runner/rp-stress-high` — 8 vCPU / 32 GiB, `maxReplicas`=9
+Resource class: `my-org/runner-large` — 8 vCPU / 32 GiB, `maxReplicas`=9
 
 [.table-scroll]
 --
@@ -138,18 +87,17 @@ Resource class: `circleci-runner/rp-stress-high` — 8 vCPU / 32 GiB, `maxReplic
 |===
 --
 
-The system handled steps 0 and 1 (up to 2 jobs/min) without saturation.
+The system handled steps 0 and 1 (up to 2 jobs/min) with low queue times.
 At step 2 (4 jobs/min), queue p90 jumped from 82 s to 518 s.
 At step 3 (6 jobs/min), queue p90 reached 1574 s (26 minutes).
 All 130 jobs completed with zero errors, but wait times at steps 2 and 3 make these rates unsuitable for latency-sensitive workloads.
 
-The bottleneck is `maxReplicas`=9.
-When arrival rate exceeds what 9 running VMs can turn over, the queue grows until enough VMs finish and free capacity.
+When arrival rate exceeds what the `maxReplicas` pool can turn over, the queue grows until enough VMs finish and free capacity.
 
 [#low-resource-class]
-=== Low resource class (low-only run)
+=== Small resource class (low-only run)
 
-Resource class: `circleci-runner/rp-stress-low` — 2 vCPU / 8 GiB, `maxReplicas`=34
+Resource class: `my-org/runner-small` — 2 vCPU / 8 GiB, `maxReplicas`=34
 
 [.table-scroll]
 --
@@ -191,9 +139,7 @@ Resource class: `circleci-runner/rp-stress-low` — 2 vCPU / 8 GiB, `maxReplicas
 |===
 --
 
-NOTE: Step 1 raised a transient saturation flag internally, but queue times remained low and stabilized at steps 2 and 3 as the scaler caught up with demand.
-
-The low resource class handled all four steps comfortably.
+The small resource class handled all four steps comfortably.
 Queue p90 never exceeded 86 s across all 60 jobs at the highest rate.
 The higher `maxReplicas` ceiling (34 vs. 9) is the primary reason: more VMs can run concurrently, so the scaler has room to absorb bursts without queue buildup.
 All runs completed with zero errors.
@@ -201,10 +147,10 @@ All runs completed with zero errors.
 [#mixed-workload]
 === Mixed workload
 
-The test randomly assigned jobs to either the high or low resource class.
+The test randomly assigned jobs to either the large or small resource class.
 Step totals vary due to random assignment but land near 50/50.
 
-*High-class jobs in the mixed run:*
+*Large-class jobs in the mixed run:*
 
 [.table-scroll]
 --
@@ -246,7 +192,7 @@ Step totals vary due to random assignment but land near 50/50.
 |===
 --
 
-*Low-class jobs in the mixed run:*
+*Small-class jobs in the mixed run:*
 
 [.table-scroll]
 --
@@ -288,40 +234,36 @@ Step totals vary due to random assignment but land near 50/50.
 |===
 --
 
-Mixing resource classes reduced queue times for high-class jobs.
-At step 3 (6 jobs/min), high-class queue p90 dropped from 1574 s in the high-only run to 417 s in the mixed run—a 73% reduction.
-Half the jobs competed for the 9 high-class replica slots at any given time, leaving more headroom before saturation.
+Mixing resource classes reduced queue times for large-class jobs.
+At step 3 (6 jobs/min), large-class queue p90 dropped from 1574 s in the large-only run to 417 s in the mixed run—a 73% reduction.
+Half the jobs competed for the large-class replica slots at any given time, leaving more headroom in the pool.
 
-Low-class jobs queued little in all cases (queue p90 ≤ 57 s at every step), consistent with the low-only results.
+Small-class jobs queued little in all cases (queue p90 ≤ 57 s at every step), consistent with the small-only results.
 
 [#cross-run-summary]
 === Summary across all runs
 
 [.table-scroll]
 --
-[cols="4", options="header"]
+[cols="3", options="header"]
 |===
-| Experiment | Resource class | Max queue p90 (s) | Saturation at any step
+| Experiment | Resource class | Max queue p90 (s)
 
-| High-only
-| High (8 vCPU / 32 GiB, `maxReplicas`=9)
+| Large-only
+| Large (8 vCPU / 32 GiB, `maxReplicas`=9)
 | 1574
-| Yes (steps 2 and 3)
 
-| Low-only
-| Low (2 vCPU / 8 GiB, `maxReplicas`=34)
+| Small-only
+| Small (2 vCPU / 8 GiB, `maxReplicas`=34)
 | 86
-| No
 
 | Mixed
-| High (8 vCPU / 32 GiB, `maxReplicas`=9)
+| Large (8 vCPU / 32 GiB, `maxReplicas`=9)
 | 417
-| Yes (steps 1 and 3)
 
 | Mixed
-| Low (2 vCPU / 8 GiB, `maxReplicas`=34)
+| Small (2 vCPU / 8 GiB, `maxReplicas`=34)
 | 57
-| No
 |===
 --
 
@@ -334,16 +276,8 @@ All three experiments completed with zero job errors.
 === Set the replica limit for the expected peak
 
 The `maxReplicas` limit is the most direct lever for queue time.
-In the high-only run, the 9-replica cap meant that jobs arriving at 4–6/min stacked up behind the fixed pool of VMs.
-A higher `maxReplicas` allows more VMs to run concurrently, reducing queue buildup.
-
-When sizing `maxReplicas` for a resource class, calculate the number of VMs that fit on your node group at peak capacity:
-
-----
-maxReplicas ≤ floor(total allocatable memory / VM memory)
-----
-
-Subtract a buffer for the OS and Kubernetes system pods.
+Once arrival rate exceeds what the running VM pool can turn over, the queue grows.
+Set `maxReplicas` based on your node group's available memory divided by the VM size for that resource class, minus a buffer for OS and Kubernetes system pods.
 
 [#account-for-shared-node-groups]
 === Account for shared node groups
