@@ -4,7 +4,7 @@
 :page-description: Use with_tool_cache to transparently back Gradle, Bazel, and Turborepo build caches with a CircleCI-managed remote cache.
 :experimental:
 
-CAUTION: Build tool cache is in open beta on CircleCI Cloud. The feature is still evolving, so you may encounter bugs or changes to behavior. There is no additional cost to use it beyond standard xref:persist-data.adoc#managing-network-and-storage-usage[Cache Storage Usage].
+NOTE: Build tool caching is in beta on CircleCI Cloud. The feature is still evolving, so you may encounter bugs or changes to behavior. There is no additional cost to use it beyond standard xref:persist-data.adoc#managing-network-and-storage-usage[Cache Storage Usage].
 
 Use the xref:reference:ROOT:configuration-reference.adoc#withtoolcache[`with_tool_cache`] step to back a build tool's own remote cache (for example, Gradle's build cache or Bazel's remote cache) with a CircleCI-managed cache backend. This removes the need to hand-roll a xref:caching.adoc[`save_cache`/`restore_cache`] pair for tool-specific build outputs, and works the same way across executors.
 
