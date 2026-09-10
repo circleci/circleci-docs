@@ -282,7 +282,7 @@ some code
 
 ### Reusable Partials
 
-When discovering, inserting, or creating partials, follow the partials skill at `skills/partials/SKILL.md`. That skill is the workflow for browsing categories, searching, suggesting from page context, and writing the correct `include::` syntax. Other docs-authoring skills should reference it instead of copying reusable content.
+When discovering, inserting, or creating partials, follow the partials skill at `skills/partials/SKILL.md`. That skill is the workflow for browsing categories, searching, suggesting from page context, proposing extractions, and writing the correct `include::` syntax. Other docs-authoring skills should reference it instead of copying reusable content.
 
 CircleCI docs use reusable partials to maintain consistency and reduce duplication. Partials are AsciiDoc snippets that can be included in multiple pages.
 

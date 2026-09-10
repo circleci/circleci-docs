@@ -2,11 +2,13 @@
 name: partials
 description: >
   Discover, preview, and insert CircleCI docs AsciiDoc partials with the correct
-  include syntax. Use this skill whenever the user mentions partials, includes,
-  reusable snippets, or /partials, and whenever you are writing or editing .adoc
-  pages that need shared navigation steps, notes, tips, FAQs, troubleshooting,
-  resource tables, runner setup, or other repeated content. Other docs-authoring
-  skills must follow this skill instead of copying reusable content by hand.
+  include syntax. Propose when new or existing content should become a shared
+  partial, then create it and replace duplicates after confirmation. Use this
+  skill whenever the user mentions partials, includes, reusable snippets, or
+  /partials, and whenever you are writing or editing .adoc pages that need
+  shared navigation steps, notes, tips, FAQs, troubleshooting, resource tables,
+  runner setup, or other repeated content. Other docs-authoring skills must
+  follow this skill instead of copying reusable content by hand.
 ---
 
 # CircleCI Docs Partials
@@ -20,7 +22,7 @@ If another skill is writing or editing docs content:
 1. Read this file before drafting reusable steps, notes, FAQs, tables, or troubleshooting.
 2. Follow **Suggest from context** for the page you are writing.
 3. Insert an `include::` line. Never paste the body of a partial into a page.
-4. If no partial fits, write the content inline unless it will be reused on two or more pages. Then follow **Create a partial**.
+4. If the page restates an existing partial, or the same new chunk will appear on two or more pages, follow **Propose extraction**. Do not extract and replace across pages until the user confirms.
 
 ## Source of truth
 
@@ -91,7 +93,7 @@ Use the directory name to browse. Confirm the file still exists before inserting
 
 ## Workflows
 
-Decide which workflow the user asked for. A write-docs skill usually wants **Suggest from context**, then **Insert**.
+Decide which workflow the user asked for. A write-docs skill usually wants **Suggest from context**, then **Insert**. When content is duplicated or clearly reusable, follow **Propose extraction** before writing a second copy.
 
 ### Browse (`/partials`, `/partials navigation`)
 
@@ -132,7 +134,7 @@ Use this when writing or editing a page, even if the user did not say "partial".
 6. If a page has a **shortened** version of a standard nav partial, offer the full partial for that shared prefix and keep the page-specific steps that follow. Do not auto-insert if the reader is clearly already mid-flow (for example, already on the Projects page).
 7. If one candidate is a clear match, insert it and tell the user which partial you used.
 8. If several could work, show the options and ask.
-9. If none fit, write the content inline. Offer a new partial only when a second page will need the same text.
+9. If none fit, write the content inline. If the same chunk already exists on another page, or will be needed on a second page, follow **Propose extraction**.
 
 Common starting points (still verify by reading the file):
 
@@ -163,16 +165,45 @@ Common starting points (still verify by reading the file):
 9. Add an author comment in brackets when that file is already included that way elsewhere, or when the comment helps a human scan the source. Copy an existing comment when one is established (`standalone-unsupported`, `steps-to-project-settings`, `steps-up-to-pipeline`).
 10. Tell the user the path you included and why.
 
+### Propose extraction
+
+Use this when existing page content should become a shared partial, or when you are about to write the same chunk in a second place.
+
+**Extract when all of these are true:**
+
+- The same steps, note, table, or FAQ will appear on **two or more** pages, or already does
+- The wording can stay synchronized. Callers do not need different facts, audiences, or mid-flow shortcuts
+- The chunk is a complete reusable unit (nav prefix, caveat, table), not a whole page
+
+**Do not extract when:**
+
+- The content is page-specific or only used once
+- A shortened nav path is intentional because the reader is already mid-flow
+- Wrapping or tone would not fit the other pages (`****` sidebar vs bare list vs `NOTE:`)
+- Replacing would drop unique follow-on steps or change meaning
+
+**Propose, then wait.** Do not create a file or rewrite other pages until the user confirms.
+
+1. Search existing partials first. If one already covers this, propose **replacing** the inline copies with that include. Do not create a duplicate partial.
+2. Grep pages (not just `partials/`) for distinctive phrases from the chunk. Read each match. Drop false positives.
+3. Show the proposal:
+   - Reuse an existing partial, or create `docs/guides/modules/ROOT/partials/<category>/<filename>.adoc`
+   - Why it should be shared
+   - Every page you would change, with a short before/after (inline block → `include::` line)
+   - Anything you would **not** replace, and why
+4. After the user confirms, follow **Create a partial** if needed, then **Insert** on each agreed page. Replace only the shared prefix. Leave page-specific steps in place.
+5. Report the new or reused path and the list of updated pages. Remind the user that later edits to the partial change all of those pages.
+
 ### Create a partial
 
-Create a new partial only when the content will appear on two or more pages, or the user asked for one.
+Create a new partial only after **Propose extraction** is confirmed, or the user asked for one.
 
 1. Search existing partials first. Extend one if the topic already has a home.
 2. Choose a category directory from the map above. Add a new directory only when none of the existing ones fit.
 3. Name the file descriptively, ending in `.adoc`. Use `-snip.adoc` for FAQ and troubleshooting snippets.
 4. Write content that works in more than one page. No `:page-platform:`, `:page-description:`, or other page-only attributes.
 5. Keep the partial focused on one concept or one set of related steps.
-6. Replace the duplicated page content with includes. Grep for similar wording and offer to switch those pages too.
+6. Replace the duplicated page content with includes on the pages the user confirmed.
 7. Mention that later edits to this file change every page that includes it.
 
 ### Edit a partial
@@ -203,6 +234,7 @@ When a partial uses `ifdef::`, tell the user which attributes they must set. Sug
 
 - Invent a partial path or guess a filename without Glob/Grep.
 - Copy a partial's body into a page "to make it clearer".
+- Extract and replace across pages without listing the consumers and getting confirmation.
 - Use `ui/src/partials/` files in docs pages.
 - Edit a guides partial to fix one page if that would break the others.
 - Include a Server Admin `installation/` partial from a Cloud guides page.
@@ -215,4 +247,6 @@ When a partial uses `ifdef::`, tell the user which attributes they must set. Sug
 /partials search project settings
 Use a partial for the Docker auth note
 Is there a partial for checking org type?
+Should this note be a shared partial?
+This project-settings walkthrough is copied on three pages. Extract it.
 ```
