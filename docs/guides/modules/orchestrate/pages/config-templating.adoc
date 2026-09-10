@@ -34,7 +34,7 @@ The YAML merge key `<<:` is a different feature. See xref:getting-started:introd
 
 Expressions add comparison and logic operators to this templating syntax. Use them to set a field from a condition, or to decide whether a job or workflow runs.
 
-Some fields accept an expression directly, including job `filters` and workflow `when` or `unless` clauses. For other fields, wrap the expression in `<<` and `>>`.
+The job `filters`, and workflow `when` and `unless` fields accept expressions directly. For other fields wrap the expression in `<<` and `>>`.
 
 .Direct expression in a job filter
 [source,yaml]
@@ -57,31 +57,6 @@ workflows:
 
 For operators and more examples, see xref:reference:ROOT:configuration-reference.adoc#using-expressions-in-your-configuration[Using Expressions in Your Configuration].
 
-[#include-or-omit-a-block]
-== Include or omit a YAML block
-
-You can include or omit a block of YAML when a pipeline value or parameter is truthy:
-
-.Include a step only when a pipeline parameter is true
-[source,yaml]
-----
-version: 2.1
-
-parameters:
-  run_e2e:
-    type: boolean
-    default: false
-
-jobs:
-  test:
-    docker:
-      - image: cimg/base:current
-    steps:
-      - checkout
-      <<# pipeline.parameters.run_e2e >>
-      - run: npm run e2e
-      <</ pipeline.parameters.run_e2e >>
-----
 
 [#config-templating-vs-dynamic-configuration]
 == How this differs from dynamic configuration
