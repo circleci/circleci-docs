@@ -85,7 +85,7 @@ NOTE: If you use both CircleCI's Bitbucket Data Center and GitLab self-managed i
 *Configure*: Set up an integration with your GitLab self-managed instance from menu:Org[VCS Connections] as follows:
 
 . Select btn:[Set Up Integration] next to GitLab self-managed.
-. Enter your GitLab self-managed instance URL, for example, `https://test-gitlab.circleci.com`.
+. Enter your GitLab self-managed instance URL, for example, `\https://test-gitlab.circleci.com`.
 +
 Your self-managed instance must already contain at least one GitLab project — the authorization attempt fails if your instance has no projects. The self-managed instance must also be accessible via the public internet. If it is behind a firewall, see link:https://discuss.circleci.com/t/gitlab-self-managed-support-on-circleci-is-now-here/47726/3?u=sebastian-lerner[a suggested workaround].
 

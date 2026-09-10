@@ -1,11 +1,11 @@
 ---
 name: vale-linter
-description: Run the Vale prose linter on CircleCI documentation files to identify and fix style errors, then create pull requests for review. Use this skill when the user explicitly asks to "run vale", "fix vale errors", "lint docs with vale", or mentions vale linting. This skill processes documentation files, fixes error-level Vale issues, and creates individual PRs per file for easier review.
+description: Run the Vale prose linter on CircleCI documentation files to identify and fix style errors. Use this skill when the user explicitly asks to "run vale", "fix vale errors", "lint docs with vale", or mentions vale linting. Always clarifies scope and delivery method with the user before making changes — it does not assume per-file PRs.
 ---
 
 # Vale Linter Skill
 
-This skill automates the process of running Vale prose linter on CircleCI documentation, fixing errors, and creating pull requests for review.
+This skill runs Vale prose linter on CircleCI documentation, fixes error-level issues, and delivers the fixes the way the user actually wants.
 
 ## When to Use This Skill
 
@@ -18,24 +18,32 @@ Use this skill when the user:
 
 Do NOT trigger this skill automatically just because .adoc files are being edited.
 
+## Step 1: Clarify the Task First
+
+Never assume scope or delivery method. Before running Vale, ask the user (a single combined question is fine if the intent is already partly clear from their request):
+
+1. **Which files?**
+   - Files changed on the current branch (`git diff --name-only main...HEAD` or against whatever the base branch is) — this is the common case when clearing a CI lint check before merge
+   - A specific file or list of files
+   - A directory or glob pattern
+   - The whole docs tree
+
+2. **What should happen with the fixes?**
+   - **Push straight to the current branch** — fix in place, commit, and push to the branch that's already open (e.g., to clear a failing CI/lint job on an existing PR). No new branch.
+   - **Create a new branch + PR** — for one file, for all files together, or one PR per file (ask which grouping if this option is picked)
+   - **Just show me the fixes / don't commit anything** — dry run, edits left in the working tree uncommitted
+
+Do not default to "one PR per file" — that's only one of several valid outcomes. If the user's request already answers both questions (e.g., "fix vale errors on my current branch and push"), skip the question and confirm briefly instead of re-asking.
+
 ## Prerequisites
 
 Verify these requirements before proceeding:
 1. Vale is installed (`vale --version`)
 2. A `.vale.ini` configuration file exists in the repo root
-3. The current branch is clean or user confirms it's okay to create new branches
-4. User has specified which files to process
+3. For the "push to current branch" path: the branch is a real feature branch (not `main`), and any pre-existing local changes are the user's own in-progress work — check `git status` and don't clobber it
+4. For any path that creates branches/PRs: confirm with the user before creating new branches, per the git safety rules — don't create branches or push without saying so first
 
-## Workflow
-
-### Step 1: Identify Files to Process
-
-Ask the user which files to check if not already specified:
-- Specific files: `docs/guides/modules/toolkit/pages/install-cli.adoc`
-- Directory: `docs/guides/modules/toolkit/pages/`
-- Pattern: `docs/**/*.adoc`
-
-### Step 2: Run Vale to Identify Errors
+## Step 2: Run Vale to Identify Errors
 
 Run Vale with JSON output to get structured error information:
 
@@ -55,106 +63,112 @@ vale --output=JSON file.adoc | jq 'to_entries | map(select(.value[] | .Severity 
 
 If no errors are found, inform the user and exit.
 
-### Step 3: Process Each File (One PR Per File)
+## Step 3: Fix Errors
 
-For each file with errors, process it independently:
+For each file with errors:
 
-1. **Create a new branch** using this naming convention:
-   ```bash
-   git checkout -b vale-fix-{filename-without-extension}-{short-hash}
-   ```
-   Example: `vale-fix-install-cli-a7f3b2`
-
-2. **Read the file** and understand its structure
-
-3. **Analyze each error** from Vale output:
+1. **Read the file** and understand its structure
+2. **Analyze each error** from Vale output:
    - Error location (line number)
    - Rule violated (e.g., `circleci-docs.OxfordComma`)
    - Error message explaining what's wrong
    - Suggested fix if available
-
-4. **Apply fixes** to address each error:
-   - Use the Edit tool to make precise changes
+3. **Apply fixes** using the Edit tool:
    - Preserve AsciiDoc formatting and structure
    - Maintain existing line breaks and whitespace where possible
    - Fix only the specific issues Vale reported
-
-5. **Re-run Vale** on the fixed file to verify errors are resolved:
+   - Apply all fixes on a line in a single edit when multiple errors occur on the same line
+4. **Re-run Vale** on the fixed file to verify errors are resolved:
    ```bash
    vale --output=JSON fixed-file.adoc
    ```
    - If errors remain, attempt additional fixes
-   - If errors cannot be fixed automatically, note them in the PR description
+   - If errors cannot be fixed automatically, note them clearly in the summary — do not force a fix that would harm accuracy or meaning
 
-6. **Commit changes**:
+## Step 4: Deliver the Fixes
+
+Follow whichever path the user chose in Step 1.
+
+### Path A: Push to the current branch
+
+Use this for the "clear the pipeline for merge" case — fixing lint errors on a branch that already has an open PR.
+
+1. Confirm the current branch isn't `main`/the default branch.
+2. Stage only the files that were fixed:
    ```bash
-   git add <file>
-   git commit -m "Fix Vale errors in <filename>
+   git add <file1> <file2> ...
+   ```
+3. Commit with a plain, factual message (say what the commit does, not the diagnosis that led to it):
+   ```bash
+   git commit -m "$(cat <<'EOF'
+   Fix Vale errors in <file1>, <file2>, ...
 
-   Resolved the following Vale errors:
-   - [List specific errors fixed]
-
-   Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>"
+   Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+   EOF
+   )"
+   ```
+4. Confirm with the user before pushing, then:
+   ```bash
+   git push
    ```
 
-7. **Create PR**:
+### Path B: New branch + PR
+
+Only take this path if the user asked for it.
+
+1. Create a branch:
    ```bash
-   gh pr create --title "Fix Vale errors in <filename>" --body "$(cat <<'EOF'
+   git checkout -b vale-fix-{scope}-{short-hash}
+   ```
+2. Commit and push as above.
+3. Create the PR:
+   ```bash
+   gh pr create --title "Fix Vale errors in <scope>" --body "$(cat <<'EOF'
    ## Summary
-   This PR fixes Vale error-level issues in `<filename>`.
+   Fixes Vale error-level issues in <scope>.
 
-   ## Errors Fixed
+   ## Errors fixed
    - **Line X**: [Rule name] - [Description]
-   - **Line Y**: [Rule name] - [Description]
-
-   ## Verification
-   Ran Vale after fixes:
-   ```
-   vale <filename>
-   ```
-
-   [Result: No errors remaining / X errors could not be auto-fixed]
 
    ## Notes
-   - Only error-level issues were addressed
-   - Warnings and suggestions were left for human review
-   - Changes preserve existing AsciiDoc structure
+   - Only error-level issues were addressed; warnings and suggestions were left for human review
 
    🤖 Generated with [Claude Code](https://claude.com/claude-code)
    EOF
    )"
    ```
+4. If the user asked for one PR per file, repeat per file with its own branch. If they asked for a single PR covering all files, use one branch/commit/PR for the whole batch.
 
-### Step 4: Summary Report
+### Path C: Dry run
 
-After processing all files, provide a summary:
+Apply the edits to the working tree and stop. Do not stage, commit, or push. Tell the user what changed and let them review with `git diff`.
+
+## Step 5: Summary Report
+
+Regardless of path, report clearly:
 
 ```
 Vale Error Fixing Summary
 ========================
 
 Files processed: 3
-PRs created: 2
+Files with errors fixed: 2
 Files with no errors: 1
 
-Pull Requests:
-1. PR #123: Fix Vale errors in install-cli.adoc
-   - Branch: vale-fix-install-cli-a7f3b2
-   - Errors fixed: 5
-   - URL: https://github.com/org/repo/pull/123
+Fixed:
+- docs/guides/modules/toolkit/pages/install-cli.adoc (5 errors fixed)
+- docs/guides/modules/toolkit/pages/config-reference.adoc (3 errors fixed)
 
-2. PR #124: Fix Vale errors in config-reference.adoc
-   - Branch: vale-fix-config-reference-d9e1f4
-   - Errors fixed: 3
-   - URL: https://github.com/org/repo/pull/124
-
-Files with no errors:
+No errors found:
 - docs/guides/modules/toolkit/pages/troubleshooting.adoc
+
+Delivery: <pushed to branch X / PR #123 created / left uncommitted for review>
+
+Unresolved (needs human review):
+- <file>:<line> — <rule> — <why it wasn't auto-fixed>
 ```
 
 ## Error Fixing Guidelines
-
-When fixing Vale errors, follow these principles:
 
 ### Common Vale Errors and How to Fix Them
 
@@ -195,11 +209,8 @@ When fixing Vale errors, follow these principles:
 Some errors require judgment:
 
 1. **Sentence restructuring**: If fixing an error requires rewriting the sentence, preserve the original meaning while improving clarity
-
-2. **Technical accuracy**: Never sacrifice technical accuracy for style. If a fix would make documentation incorrect, note it in the PR for human review
-
-3. **Context-dependent fixes**: Some rules have exceptions. If you're unsure, include a note in the PR description explaining the decision
-
+2. **Technical accuracy**: Never sacrifice technical accuracy for style. If a fix would make documentation incorrect, note it for human review instead of forcing it
+3. **Context-dependent fixes**: Some rules have exceptions. If unsure, flag it in the summary rather than guessing
 4. **Multiple fixes per line**: Apply all fixes in a single edit when multiple errors occur on the same line
 
 ## Edge Cases and Error Handling
@@ -209,36 +220,19 @@ Some errors require judgment:
 - Verify `.vale.ini` exists and is valid
 - Report the error to the user
 
-**If a file cannot be fixed**:
-- Create PR anyway with available fixes
-- Document unfixable errors in PR description
+**If a file cannot be fully fixed**:
+- Apply the fixes that are safe to make
+- Document unfixable errors in the summary
 - Suggest human review
 
 **If git operations fail**:
 - Check that the working directory is clean
 - Ensure user has write permissions
-- Verify `gh` CLI is authenticated
-
-**If multiple files have identical names** (in different directories):
-- Use partial path in branch name: `vale-fix-toolkit-install-cli-a7f3b2`
-
-## Best Practices
-
-1. **Batch efficiently**: Process multiple files, but keep PRs separate for easier review
-
-2. **Verify fixes**: Always re-run Vale after making changes
-
-3. **Preserve formatting**: Maintain AsciiDoc structure, indentation, and line breaks
-
-4. **Be specific**: List exact errors fixed in commit messages and PR descriptions
-
-5. **Stay focused**: Only fix Vale errors; don't make unrelated improvements
-
-6. **Handle errors gracefully**: If automatic fixing fails, document why and suggest manual review
+- Verify `gh` CLI is authenticated (only needed for Path B)
 
 ## Notes
 
 - This skill only fixes error-level issues. Warnings and suggestions are left for humans.
-- Each file gets its own PR to make review easier and allow independent merging.
 - Vale rules are defined in `styles/circleci-docs/` and configured in `.vale.ini`.
 - All fixes should align with the CircleCI documentation style guide in `AGENTS.md`.
+- Stay focused: only fix Vale errors reported by the tool; don't make unrelated improvements.
