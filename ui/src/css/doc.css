@@ -406,6 +406,14 @@
   margin-top: 0;
 }
 
+/* Lists inside table cells inherit the same 2rem indent as body lists,
+   which stacks with the cell's own padding and reads as too much
+   left-hand whitespace before the bullet. Tighten it for cell context only. */
+.doc td.tableblock .ulist ul,
+.doc td.tableblock .olist ol {
+  padding-left: 1.25rem;
+}
+
 .doc table.tableblock th,
 .doc table.tableblock td {
   padding: 1rem;
@@ -1233,7 +1241,7 @@
 }
 
 .doc .dlist dt {
-  font-style: italic;
+  font-weight: bold;
 }
 
 .doc .dlist dd {

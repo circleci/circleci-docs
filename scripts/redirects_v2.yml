@@ -1,6 +1,5 @@
 # Generated redirects from Jekyll to Antora
 # Format: old (Jekyll) -> new (Antora)
-# Total redirects: 513
 
 - old: /2.0/testing-ios/
   new: /guides/test/testing-ios/
@@ -10,9 +9,6 @@
 
 - old: /release/manage-releases/
   new: /guides/deploy/manage-releases/
-
-- old: /api/
-  new: /reference/api-homepage/
 
 - old: /2.0/orb-intro/
   new: /orbs/use/orb-intro/
@@ -60,6 +56,9 @@
   new: /guides/toolkit/api-developers-guide/
 
 - old: /api-intro/
+  new: /guides/toolkit/api-intro/
+
+- old: /api/
   new: /guides/toolkit/api-intro/
 
 - old: /artifacts/

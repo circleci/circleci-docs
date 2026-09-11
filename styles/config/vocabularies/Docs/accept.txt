@@ -117,7 +117,7 @@ CRD
 crontab
 CTest
 Cucumber
-Cursor
+[Cc]ursor
 \bCursor Origin\b
 CVEs?
 Cypress
@@ -193,6 +193,7 @@ Homebrew
 [Hh]ostname
 HPA
 HPAs?
+HTTP
 IAM
 /bIdentity Provider/b
 IdP

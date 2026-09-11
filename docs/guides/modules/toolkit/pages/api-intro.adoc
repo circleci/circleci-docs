@@ -1,49 +1,114 @@
-= API v2 introduction
+= CircleCI APIs overview
 :page-platform: Cloud, Server v4+
-:page-description: Introduction to the CircleCI API
+:page-description: Introduction to the CircleCI API versions and their capabilities including a how to choose the right API version for your use case.
+:page-aliases: reference:ROOT:api-homepage.adoc
 :experimental:
 
-The CircleCI API may be used to make API calls to interact with your pipelines, projects, and orgs. This includes retrieving detailed information about users, jobs, workflows, and pipelines, as well as triggering pipelines. CircleCI currently supports two API versions:
+The CircleCI API enables you to interact with your pipelines, projects, and organizations programmatically. Use the API to retrieve detailed information about users, jobs, workflows, and pipelines. You can also trigger pipelines and manage resources. CircleCI currently supports three API versions, plus a separate API for self-hosted runners:
 
-* link:../../../api/v1/[API v1.1 Reference]
-* link:../../../api/v2/[API v2 Reference]
+* link:https://circleci.com/api/v3/[API v3 Reference] (Current)
+* link:../../../api/v2/[API v2 Reference] (Legacy)
+* link:../../../api/v1/[API v1.1 Reference] (Legacy)
+* xref:execution-runner:runner-api.adoc[Runner API Reference] (Self-hosted runners)
 
-API v2 includes several powerful features (for example, support for pipelines and pipeline parameters) that are unavailable in API v1.1. It is recommended that CircleCI users migrate their scripts to API v2 stable endpoints as soon as possible.
-
-CircleCI API v1.1 and v2 are supported and generally available. CircleCI expects to eventually End-Of-Life (EOL) API v1.1 in favor of API v2. Further guidance on when CircleCI API v1.1 will be discontinued will be communicated at a future date.
-
-To get started with the API v2, see the xref:api-developers-guide.adoc[API Developers Guide].
-
-[#changes-in-endpoints]
-== Changes in endpoints
-
-The CircleCI API v2 release includes several new endpoints, and deprecates some others. The sections below list the endpoints added for this release, in addition to the endpoints that have been removed.
-
-Refer to the link:../../../api/v2/[API v2 Reference Guide] for a complete list of all API v2 endpoints. The guide contains a detailed description of each individual endpoint, including required and optional parameters, HTTP status and error codes, and code samples.
-
-[#deprecated-endpoints]
-=== Deprecated endpoints
-
-With API v2, several endpoints from v1 have been deprecated, which are listed in the table below.
+[#api-version-overview]
+== API overview
 
 [.table-scroll]
 --
-[cols=2*, options="header"]
+[cols=4*, options="header"]
 |===
-| Endpoint | Description
+| Version | Status | Key features | When to use
 
-| `POST /project/:vcs-type/:username/:project`
-| This endpoint allowed users to trigger a new build.
+| API v3
+| Current
+a| * UUID-based resource IDs.
+* Opaque cursor pagination.
+* Detailed, consistent error objects.
+* Idempotent operations where applicable.
+* Standard rate-limit headers.
+* Endpoints for workflows, jobs, pipelines, and analytics.
+a| * All new integrations and scripts.
+* Applications requiring modern API patterns.
+* Projects needing analysis endpoints, deploy management, or notification configuration.
 
-| `POST /project/:vcs-type/:username/:project/build`
-| This endpoint enabled users to trigger a new build by project.
+| API v2
+| Legacy (supported)
+a| * Token-based pagination.
+* Pipeline triggering with parameters.
+* Insights endpoints.
+* Workflow and job management.
+a| * Existing integrations that have not yet migrated to v3.
+* Scripts and tools that depend on v2-specific behavior.
 
-| `GET /recent-builds`
-| This endpoint enabled users to retrieve an array of recent builds.
+| API v1.1
+| Legacy (EOL planned)
+| Basic pipeline, job, and project endpoints.
+a| * Maintaining existing integrations that you have not yet updated.
+* Specific legacy use cases.
+
+| xref:execution-runner:runner-api.adoc[Runner API]
+| Specialized (separate API)
+a| * Hosted separately at `runner.circleci.com`
+* Manages and executes self-hosted runner tasks.
+* Supports Circle-Token, Bearer, and resource class token authentication.
+a| * Managing self-hosted runner resource classes and tasks.
+* Building custom self-hosted runner integrations.
+
 |===
 --
+
+NOTE: CircleCI recommends migrating to API v3 for all new work. API v1.1 is planned for End-Of-Life (EOL); CircleCI will communicate the discontinuation date in the future.
+
+To get started, see the xref:api-v3-developers-guide.adoc[API V3 Developers Guide], the xref:api-developers-guide.adoc[API V2 Developers Guide], or the xref:execution-runner:runner-api.adoc[Runner API Reference].
+
+[#authentication]
+== Authentication
+
+All CircleCI API versions use token-based authentication. You need a personal API token to authenticate your requests.
+
+.Supported authentication methods
+[.table-scroll]
+--
+[cols=4*, options="header"]
+|===
+| API version | Bearer Authentication | Circle-Token header | Basic Authentication
+
+| API v3
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+
+| API v2
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+| API v1.1
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+| Runner API
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+|===
+--
+
+Bearer Authentication:: Pass the token as a Bearer token in the `Authorization` header.
+Circle-Token header:: Pass the token in the `Circle-Token` header.
+Basic Authentication:: Use the token as the username (Base64-encoded).
+
+See the xref:managing-api-tokens.adoc[Managing API Tokens] guide for information on creating and managing tokens.
+
+NOTE: The xref:execution-runner:runner-api.adoc[Runner API] accepts these same personal token methods, plus a resource class token used exclusively by self-hosted runner agents. See the Runner API reference for details.
 
 [#next-steps]
 == Next steps
 
-* Review the xref:api-developers-guide.adoc[API Developer's Guide] for a detailed walkthrough on authenticating as well as example API requests.
+* Review the xref:api-v3-developers-guide.adoc[API V3 Developers Guide] for a detailed walkthrough on using the current API version.
+* Review the xref:api-developers-guide.adoc[API V2 Developers Guide] for information on the legacy v2 API.
+* Explore the link:../../../api/v3/[API V3 Reference] for complete endpoint documentation.
+* See the xref:execution-runner:runner-api.adoc[Runner API Reference] for self-hosted runner endpoints.
