@@ -119,7 +119,7 @@
 ** xref:execution-runner:runner-concepts.adoc[Self-hosted runner concepts]
 ** xref:execution-runner:runner-feature-comparison-matrix.adoc[Runner feature comparison matrix]
 ** Machine Runner Orchestrator
-*** xref:execution-runner:machine-runner-orchestrator.adoc[Machine Runner Orchestrator overview - Beta]
+*** xref:execution-runner:machine-runner-orchestrator.adoc[Machine Runner Orchestrator overview]
 
 ** Container runner
 *** xref:execution-runner:container-runner-installation.adoc[Container runner installation]
