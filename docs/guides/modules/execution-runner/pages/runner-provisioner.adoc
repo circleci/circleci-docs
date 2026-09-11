@@ -1,7 +1,7 @@
 = Runner provisioner
 :page-platform: Cloud, Server v4+
 :page-badge: Beta
-:page-description: Learn how to install and configure Runner Provisioner to automatically scale CircleCI runner VMs using KubeVirt on Kubernetes.
+:page-description: Install and configure Runner Provisioner to scale CircleCI runner VMs with KubeVirt, including optional rerun job with SSH.
 :experimental:
 
 [NOTE]
@@ -11,7 +11,7 @@
 
 Runner Provisioner is a Kubernetes controller that automatically scales CircleCI runner VMs using link:https://github.com/kubevirt/kubevirt[KubeVirt]. Runner Provisioner polls the CircleCI API for pending and running tasks, then adjusts a `VirtualMachinePool` replica count to match demand.
 
-The current beta version is `0.1.2`.
+The current beta version is `0.1.3`.
 
 == Getting access
 
@@ -32,10 +32,11 @@ Open a link:https://support.circleci.com/hc/en-us/requests/new[support ticket] f
 
 == Prerequisites
 
-* A Kubernetes cluster with KubeVirt installed. Refer to the link:https://github.com/kubevirt/kubevirt/blob/main/docs/kubernetes-compatibility.md[KubeVirt compatibility matrix] for the appropriate version for your cluster. Runner Provisioner has been tested with v1.8.
+* A Kubernetes cluster with KubeVirt installed. The chart does not install KubeVirt. Refer to the link:https://github.com/kubevirt/kubevirt/blob/main/docs/kubernetes-compatibility.md[KubeVirt compatibility matrix] for the appropriate version for your cluster. Runner Provisioner has been tested with v1.8.
 * `kubectl` configured against your cluster.
 * `helm` v3+.
-* A CircleCI API token with permission to query runner tasks. This may be a personal API token or a project API token with read-only access. See the xref:toolkit:managing-api-tokens.adoc[Managing API Tokens] page for more information.
+* A CircleCI resource class token for each class you provision.
+* On CircleCI Cloud, chart `0.1.3` polls task counts with that resource class token. `provisioner.circleToken` (a personal API token) is optional. Keep it only when you need the legacy `/tasks` endpoints. See the xref:toolkit:managing-api-tokens.adoc[Managing API Tokens] page.
 
 === Cluster requirements
 
@@ -288,13 +289,14 @@ Create a `my-values.yaml` file. Resource classes are configured under `provision
 [source,yaml]
 ----
 provisioner:
-  # CircleCI API token for querying unclaimed/running tasks
-  circleToken: "your-circle-api-token"
+  # Optional on Cloud. Leave empty to poll scale with each resource class token.
+  # Set circleToken only for the legacy PAT-based /tasks endpoints.
+  # circleToken: "your-circle-api-token"
 
   resourceClasses:
     # Keyed by resource class in "namespace/name" format
     "my-org/my-runner":
-      # Runner token for this resource class
+      # Resource class token. Chart 0.1.3 also uses this token to poll scale.
       token: "your-runner-token"
       scaling:
         minReplicas: 3
@@ -312,6 +314,7 @@ $ helm repo add circleci_runner-provisioner https://packagecloud.io/circleci/run
 $ helm repo update
 $ helm install runner-provisioner circleci_runner-provisioner/runner-provisioner \
   --namespace runner-provisioner \
+  --version 0.1.3 \
   --values my-values.yaml
 ----
 
@@ -325,6 +328,133 @@ $ kubectl get virtualmachinepool -n runner-provisioner
 $ kubectl logs -n runner-provisioner deployment/runner-provisioner -f
 ----
 
+[#runner-provisioner-configuration-example]
+=== 6. Add a job to your config
+
+Jobs on Runner Provisioner use the machine executor and your self-hosted resource class. Do not use CircleCI-hosted `machine.image` aliases.
+
+The fields you must set are:
+
+* `machine: true`
+* `resource_class: <namespace>/<name>`
+
+.Example `.circleci/config.yml` job for Runner Provisioner
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  build:
+    machine: true
+    resource_class: <namespace>/<name>
+    steps:
+      - checkout
+      - run: echo "Hi I'm on Runner Provisioner!"
+
+workflows:
+  build-workflow:
+    jobs:
+      - build
+----
+
+[#enable-rerun-job-with-ssh]
+== Enable rerun job with SSH (optional)
+
+Rerun job with SSH lets you inspect the KubeVirt VM that ran a job. This path matches container runner: a Gateway API `TCPRoute` sends traffic to an Envoy load balancer, then to a sidecar on the VM's `virt-launcher` pod. It is not machine runner 3 `advertise_addr` on a guest IP.
+
+SSH is off by default (`ssh.enabled: false`). Enabling it requires a Gateway API implementation that supports `TCPRoute`. CircleCI has tested link:https://gateway.envoyproxy.io/[Envoy Gateway]. HTTP-only Gateway API installs, including `Traefik` HTTP `CRDs`, are not enough. Helm fails if `ssh.enabled` is true and the `TCPRoute` CRD (`gateway.networking.k8s.io/v1`) is missing. That CRD ships with Gateway API v1.6.0 or later.
+
+Install Envoy Gateway first. Then set `ssh.enabled: true`. Then roll the sidecar-injector webhook. Then recycle VMs. Existing VMs created before SSH and Envoy do not get the sidecar. The mutating webhook injects the sidecar when a `virt-launcher` pod is created. It does not patch the `VirtualMachinePool` template.
+
+Clients must reach the Gateway load-balancer address on the SSH port range. That range is `ssh.startPort` plus `ssh.numPorts` (defaults `54782` and 30 ports). A private or LAN load balancer works if SSH clients can route to it. Firewalls and ZTNA products that allow HTTPS can still block those ports.
+
+If TCP reaches Envoy but no sidecar or SSH session is live, the proxy accepts then closes. The client often shows `kex_exchange_identification: Connection closed by remote host`. That is not the same as "SSH disabled" in the CircleCI web app.
+
+For hold times, public-key auth, and how to start a rerun from the web app, see the xref:execution-managed:ssh-access-jobs.adoc[Debug Jobs With SSH] page. The same product caveats as container runner apply.
+
+****
+**Retry with SSH considerations**
+
+- Task-agent runs an embedded SSH server on a dedicated port when you select *Rerun job with SSH*. This does not change other SSH servers on the cluster.
+
+- The SSH server uses public key authentication. Anyone who can initiate a job can rerun it with SSH. Only the user who started the rerun has their SSH public keys added for the session.
+
+- A job rerun with SSH stays open for *two hours* if a client connects, or *ten minutes* if no one connects, unless you cancel it. That job counts against organization concurrency, and the VM cannot claim another job until it ends. Cancel the SSH rerun from the web app or CLI when you finish debugging.
+
+- `ssh.numPorts` limits concurrent SSH sessions, not pool size. A Gateway accepts at most 64 listeners. On AWS keep `numPorts` at or below 48 because a Network Load Balancer caps at 50 listeners.
+****
+
+****
+**Supported Gateway API implementations:**
+CircleCI has tested, and currently supports, link:https://gateway.envoyproxy.io/[Envoy Gateway] as an implementation for the link:https://gateway-api.sigs.k8s.io/[Gateway API]. Other link:https://gateway-api.sigs.k8s.io/implementations/[Gateway API implementations] that support `TCPRoute` resources can work, but CircleCI has not tested every implementation. Use Envoy Gateway unless you have a tested alternative. Envoy Gateway is currently in beta and is under development.
+****
+
+=== Install Envoy Gateway
+
+. Install the Gateway API `CRDs` and Envoy Gateway as defined in the link:https://gateway.envoyproxy.io/latest/install/install-helm/[Envoy Gateway Helm installation] document. Confirm the install includes `TCPRoute`.
+. Replace `<version>` with the link:https://gateway.envoyproxy.io/news/releases/matrix/[most recent stable release] compatible with your cluster, then run:
++
+[source,console]
+----
+$ helm install eg oci://docker.io/envoyproxy/gateway-helm --version <version> -n envoy-gateway-system --create-namespace
+----
+. Wait for Envoy Gateway to become available:
++
+[source,console]
+----
+$ kubectl wait --timeout=5m -n envoy-gateway-system deployment/envoy-gateway --for=condition=Available
+----
+
+=== Enable SSH in Helm values
+
+. After Gateway API prerequisites are installed and available, add SSH settings to `my-values.yaml`. SSH requires the sidecar (`sidecar.enabled` defaults to `true`):
++
+.`my-values.yaml`
+[source,yaml]
+----
+sidecar:
+  enabled: true
+ssh:
+  enabled: true
+  # startPort: 54782
+  # numPorts: 30
+  # Optional. Override the host advertised in the job SSH command.
+  # host: ""
+----
+
+. Upgrade the chart:
++
+[source,console]
+----
+$ helm upgrade runner-provisioner circleci_runner-provisioner/runner-provisioner \
+  --namespace runner-provisioner \
+  --version 0.1.3 \
+  --values my-values.yaml
+----
+
+. Wait for the SSH link:https://gateway-api.sigs.k8s.io/reference/api-types/gateway/#gateway[Gateway] to be programmed:
++
+[source,console]
+----
+$ kubectl wait gateway --timeout=5m --all --for=condition=Programmed -n runner-provisioner
+----
+
+. Roll the sidecar-injector webhook if you enabled SSH after the first install. Helm rolls the provisioner deployment on upgrade. Restart it if the webhook still serves the old config:
++
+[source,console]
+----
+$ kubectl rollout restart deployment/runner-provisioner -n runner-provisioner
+----
+
+. Recycle existing VMs so new `virt-launcher` pods receive the sidecar. VMs created before SSH and Envoy do not get the sidecar:
++
+[source,console]
+----
+$ kubectl delete vm -n runner-provisioner --all
+----
++
+Set `idleTimeout` first if you need a graceful drain. See <<upgrading,Upgrading>>.
+
 [#multiple-resource-classes]
 == Multiple resource classes
 
@@ -334,7 +464,8 @@ $ kubectl logs -n runner-provisioner deployment/runner-provisioner -f
 [source,yaml]
 ----
 provisioner:
-  circleToken: "your-circle-api-token"
+  # Optional on Cloud when each class has a resource class token.
+  # circleToken: "your-circle-api-token"
   resourceClassDefaults:
     # Runner and base spec shared by every class (see the configuration reference)
     spec:
@@ -409,7 +540,7 @@ NOTE: Configuration field names and defaults may change before general availabil
 | Image pull policy.
 
 | `image.tag`
-| Chart `appVersion` (currently `0.1.2`)
+| Chart `appVersion` (currently `0.1.3`)
 | Image tag. Overridden by `image.digest` when set.
 
 | `image.digest`
@@ -440,9 +571,9 @@ NOTE: Configuration field names and defaults may change before general availabil
 | `[]`
 | Topology spread constraints for the provisioner pod, for example to spread replicas across nodes or zones.
 
-| `tokenProxy.enabled`
+| `sidecar.enabled`
 | `true`
-| Inject the token-proxy sidecar into each pool VM. See <<token-proxy,Token Proxy>>.
+| Inject the token-proxy sidecar into each pool VM's `virt-launcher` pod. See <<sidecar,Sidecar>>. Chart `0.1.3` renamed this from `tokenProxy`. Helm fails if `tokenProxy` is still set. Use `sidecar.enabled`.
 |===
 --
 
@@ -474,7 +605,7 @@ When enabled, the provisioner attaches a containerDisk that ships the `circleci-
 | Bundle image pull policy
 
 | `image.tag`
-| Chart `appVersion` (currently `0.1.2`)
+| Chart `appVersion` (currently `0.1.3`)
 | Bundle image tag (overridden by `runnerBundle.image.digest` when set)
 
 | `image.digest`
@@ -484,6 +615,49 @@ When enabled, the provisioner attaches a containerDisk that ships the `circleci-
 | `imagePullSecrets`
 | `[]`
 | Pull secrets for the bundle image, falling back to the top-level `imagePullSecrets`. Only the first is used (KubeVirt allows one per disk).
+|===
+--
+
+[#ssh-values]
+=== `ssh.*` values
+
+SSH is off by default. Enabling it requires Envoy Gateway (or another `TCPRoute` implementation) and `sidecar.enabled: true`. See <<enable-rerun-job-with-ssh,Enable Rerun Job With SSH>>.
+
+[.table-scroll]
+--
+[cols="2,2,3", options="header"]
+|===
+| Key
+| Default
+| Description
+
+| `ssh.enabled`
+| `false`
+| Enable rerun job with SSH for pool VMs. Requires `sidecar.enabled: true` and the Gateway API `TCPRoute` CRD.
+
+| `ssh.host`
+| `""`
+| Host advertised to SSH clients. Empty uses the Gateway external address.
+
+| `ssh.startPort`
+| `54782`
+| First port in the SSH range. Clients must reach the Gateway load balancer on this range.
+
+| `ssh.numPorts`
+| `30`
+| Number of SSH ports. Limits concurrent SSH sessions, not pool size. A Gateway accepts at most 64 listeners. On AWS keep this at or below 48.
+
+| `ssh.controllerName`
+| `gateway.envoyproxy.io/gatewayclass-controller`
+| Gateway controller name. Must support TCP routing.
+
+| `ssh.existingGatewayClassName`
+| `""`
+| Use an existing cluster-scoped `GatewayClass` instead of creating one.
+
+| `ssh.parametersRef`
+| `{}`
+| Controller-specific `GatewayClass` parameters.
 |===
 --
 
@@ -504,11 +678,11 @@ When enabled, the provisioner attaches a containerDisk that ships the `circleci-
 
 | `circleToken`
 | `""`
-| CircleCI API token for polling unclaimed and running tasks. Required unless `existingSecret` is set.
+| Optional, deprecated personal API token. When set, task polling uses the legacy `/tasks` endpoints. Leave empty on Cloud so the provisioner polls `/api/v3/runner/scale` with each class's resource class `token`. Existing `circleToken` values keep working.
 
 | `existingSecret`
 | `""`
-| Name of a pre-existing Secret holding the tokens. See <<config-and-secrets,Config and Secrets>>.
+| Name of a pre-existing Secret holding the tokens. See <<config-and-secrets,Config and Secrets>>. `circle-token` in that Secret is optional when you poll with resource class tokens.
 
 | `existingConfigMap`
 | `""`
@@ -611,7 +785,7 @@ By default the runner agent runs as a dedicated `circleci-runner` user and steps
 
 Set `runner.grantSudo: true` (on a class or in `resourceClassDefaults`) to give the `circleci` task user root access without a password. It applies to jobs run under the default `commandPrefix` step-down. A custom `commandPrefix` is responsible for its own privileges.
 
-`grantSudo` requires `tokenProxy.enabled: true`, since otherwise a root job could read the resource-class token from the VM. The chart rejects `grantSudo: true` when the token proxy is disabled. Everything else on the VM is still exposed to the job, so use this setting with care.
+`grantSudo` requires `sidecar.enabled: true`, since otherwise a root job could read the resource-class token from the VM. The chart rejects `grantSudo: true` when the sidecar is disabled. Everything else on the VM is still exposed to the job, so use this setting with care.
 
 [#empty-disk-mounts]
 === Mounting extra disks
@@ -645,17 +819,19 @@ provisioner:
 
 `serial` must be alphanumeric and at most 20 characters, and it must match a virtio-bus `emptyDisk` in `spec`. `fsType` is optional and defaults to `ext4` (`ext2`, `ext3`, `ext4`, and `xfs` are supported). The disk is a sparse ceiling rather than a reservation, so it only uses node storage as it fills.
 
-[#token-proxy]
-=== Token proxy
+[#sidecar]
+=== Sidecar
 
-By default the chart injects a token-proxy sidecar into each pool VM. The guest's `circleci-runner` talks to the proxy instead of the CircleCI API. The proxy attaches the real resource-class token only on the task-claim call, and every later call uses the task-scoped token returned by that response. The resource-class token itself never reaches the guest, so a job cannot read it from the VM it runs on.
+By default the chart injects a sidecar into each pool VM's `virt-launcher` pod. The guest's `circleci-runner` talks to the proxy instead of the CircleCI API. The proxy attaches the real resource-class token only on the task-claim call, and every later call uses the task-scoped token returned by that response. The resource-class token itself never reaches the guest, so a job cannot read it from the VM it runs on.
 
-The sidecar is injected through a mutating webhook the chart installs, and it reuses the provisioner image. The proxy is enabled by default and optional. Set `tokenProxy.enabled: false` to turn it off, though that hands the resource-class token to the VM and rules out `grantSudo`.
+The sidecar is injected through a mutating webhook the chart installs (`<release>-sidecar-injector`). The webhook mutates `virt-launcher` pods at create time. It does not add the sidecar to the `VirtualMachinePool` template. The proxy reuses the provisioner image. The sidecar is enabled by default and optional. Set `sidecar.enabled: false` to turn it off, though that hands the resource-class token to the VM and rules out `grantSudo` and SSH.
+
+Chart `0.1.3` renamed this setting from `tokenProxy` to `sidecar`. Helm fails with `tokenProxy has been renamed to sidecar; use sidecar.enabled` until you update your values.
 
 [#config-and-secrets]
 === Config and secrets
 
-The chart splits configuration in two. Non-secret resource-class settings (the `resourceClasses` keys, `scaling`, `runner`, and `spec`) are rendered into a generated ConfigMap, mounted at `/etc/runner-provisioner/config.yaml`. Secrets (the CircleCI API token, and each class's runner `token` and `userData`) are rendered into a generated Secret, mounted at `/etc/runner-provisioner-secrets/secrets.yaml`.
+The chart splits configuration in two. Non-secret resource-class settings (the `resourceClasses` keys, `scaling`, `runner`, and `spec`) are rendered into a generated ConfigMap, mounted at `/etc/runner-provisioner/config.yaml`. Secrets (each class's runner `token` and `userData`, and an optional `circleToken`) are rendered into a generated Secret, mounted at `/etc/runner-provisioner-secrets/secrets.yaml`.
 
 You can supply either or both from pre-existing resources instead. For example, manage secrets through Vault or Sealed Secrets, or keep a large multi-class config out of Helm values.
 
@@ -663,10 +839,10 @@ You can supply either or both from pre-existing resources instead. For example, 
 
 Set `provisioner.existingSecret` to the name of a pre-existing Kubernetes Secret. When set, no Secret is created, and `circleToken` and each class's `token`/`userData` in values are ignored. The non-secret config (the `resourceClasses` keys, `scaling`, and `spec`) is still taken from values, so you must still set it.
 
-The Secret needs two keys:
+The Secret needs a `secrets.yaml` key. The `circle-token` key is optional on Cloud when you poll scale with resource class tokens. Include `circle-token` only if you still use the legacy PAT path.
 
-* `circle-token`. The CircleCI API token for task polling.
 * `secrets.yaml`. The per-class credentials, keyed by class name.
+* `circle-token` (optional). A personal API token for the legacy `/tasks` endpoints.
 
 .`secrets.yaml`
 [source,yaml]
@@ -684,7 +860,6 @@ Create it with:
 ----
 $ kubectl create secret generic my-secret \
   --namespace runner-provisioner \
-  --from-literal=circle-token="your-circleci-api-token" \
   --from-file=secrets.yaml=./secrets.yaml
 ----
 
@@ -1039,7 +1214,7 @@ A healthy active state (jobs queued, scaler responding):
 
 If `desired_vms` is not changing in response to queued jobs, check the following:
 
-* If `unclaimed_tasks` is always 0, the `CIRCLE_TOKEN` may be invalid or pointing at the wrong resource class.
+* If `unclaimed_tasks` is always 0, the resource class token may be invalid or pointing at the wrong class. If you still set `circleToken`, that PAT may be invalid.
 * If `desired_vms` is not increasing past a fixed number, the scaler is hitting `maxReplicas`.
 
 Scaler errors appear as log entries with messages like `failed to get unclaimed tasks` or `failed to get running tasks`, indicating the provisioner cannot reach the CircleCI API.
@@ -1098,7 +1273,7 @@ $ kubectl logs -n runner-provisioner deployment/runner-provisioner
 
 Common causes:
 
-* *Missing secret keys*: If using `existingSecret`, confirm the Secret contains both `circle-token` and `secrets.yaml` keys.
+* *Missing secret keys*: If using `existingSecret`, confirm the Secret contains `secrets.yaml`. Add `circle-token` only if you still use the legacy PAT path.
 * *Invalid config*: A malformed `config.yaml` or `secrets.yaml`, or a resource class missing its `token`, will cause the provisioner to exit on startup.
 
 [#vms-not-being-created]
@@ -1186,7 +1361,8 @@ $ kubectl logs -n runner-provisioner deployment/runner-provisioner -f
 
 The provisioner logs the unclaimed and running task counts each poll cycle. If counts are always 0 when jobs are queued:
 
-* *Wrong `CIRCLE_TOKEN`*: The API token does not have permission to query runner tasks for the configured resource class, or it belongs to the wrong org.
+* *Wrong resource class token*: The class `token` does not have permission to query runner tasks, or it belongs to the wrong org.
+* *Wrong `circleToken`*: If you still set a PAT for the legacy `/tasks` endpoints, that token may lack permission or belong to the wrong org.
 * *Wrong `circleciAPIAddr`*: For CircleCI Server, confirm the API address points to your instance.
 * *Resource class name mismatch*: The provisioner queries tasks for each configured class. Confirm the `resourceClasses` keys match the resource classes your jobs target exactly.
 
@@ -1201,6 +1377,25 @@ $ kubectl delete vm -n runner-provisioner --all
 ----
 
 New VMs created by the pool boot with the updated spec. Set `idleTimeout` to cycle them out gracefully instead.
+
+[#ssh-rerun-fails]
+=== Rerun job with SSH fails or never connects
+
+Confirm Envoy Gateway is available and the provisioner Gateway is programmed:
+
+[source,console]
+----
+$ kubectl get gateway,tcproute -n runner-provisioner
+$ kubectl wait gateway --timeout=5m --all --for=condition=Programmed -n runner-provisioner
+----
+
+Common causes:
+
+* *Gateway not Programmed*: Envoy Gateway (or another `TCPRoute` controller) is missing, or the Gateway has no address. Install Envoy first, then enable `ssh.enabled`.
+* *Missing `TCPRoute` CRD*: Helm fails at install or upgrade if `ssh.enabled` is true and `gateway.networking.k8s.io/v1` `TCPRoute` is absent. HTTP Gateway API `CRDs` alone are not enough.
+* *Firewall or ZTNA blocking the load balancer*: Clients must reach the Gateway load-balancer address on `ssh.startPort` (`54782` by default) through `startPort + numPorts - 1`. HTTPS access to the cluster is not a substitute.
+* *VMs created before SSH*: Recycle VMs after you enable SSH and roll the sidecar-injector webhook. The webhook injects the sidecar only when a `virt-launcher` pod is created.
+* *Connection closed during SSH handshake*: `kex_exchange_identification: Connection closed by remote host` means TCP reached Envoy, then the proxy closed because no sidecar or live SSH session was available. Recycle VMs and confirm the sidecar container is on the `virt-launcher` pod.
 
 [#kubevirt-operator-pods-not-scheduling]
 === KubeVirt operator pods are not scheduling
@@ -1245,3 +1440,14 @@ Two factors can push latency toward the higher end or cause provisioning to fail
 
 * *Package downloads*: With the runner bundle enabled (the default), `circleci-runner` is installed from the bundled containerDisk and there is no boot-time download from packagecloud.io. If you disable `runnerBundle`, the cloud-init script downloads `circleci-runner` from packagecloud.io at boot, and slow or unavailable package repositories will delay or prevent the runner from starting.
 * *Cold image pulls*: The first time a VM is scheduled on a node, KubeVirt must pull the full container disk image. Subsequent VMs on the same node use the cached image and are significantly faster.
+
+[#additional-resources]
+== Additional resources
+
+* link:https://github.com/kubevirt/kubevirt/blob/main/docs/kubernetes-compatibility.md[KubeVirt Kubernetes Compatibility Matrix]
+* link:https://kubevirt.io/user-guide/[KubeVirt User Guide]
+* link:https://gateway.envoyproxy.io/latest/install/install-helm/[Envoy Gateway Helm Installation]
+* link:https://gateway-api.sigs.k8s.io/guides/tcp/[Gateway API TCPRoute]
+* xref:container-runner-installation.adoc#enable-rerun-job-with-ssh[Enable Rerun Job With SSH] on container runner
+* xref:execution-managed:ssh-access-jobs.adoc[Debug Jobs With SSH]
+* xref:machine-runner-3-configuration-reference.adoc[Machine Runner 3 Configuration Reference]
