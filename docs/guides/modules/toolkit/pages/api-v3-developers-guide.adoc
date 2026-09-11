@@ -197,28 +197,21 @@ When retrieving a single resource, the response contains a `data` object with `i
 [,json]
 ----
 {
-  "data": [
-    {
-      "attributes": {
-        "ended_at": null,
-        "name": "string",
-        "number": 1,
-        "outcome": null,
-        "phase": "string",
-        "started_at": null,
-        "type": "string"
-      },
-      "id": "123e4567-e89b-12d3-a456-426614174000",
-      "references": {
-        "project": {
-          "id": "123e4567-e89b-12d3-a456-426614174000"
-        },
-        "workflow": {
-          "id": "123e4567-e89b-12d3-a456-426614174000"
-        }
-      }
+  "data": {
+    "id": "123e4567-e89b-12d3-a456-426614174000",
+    "attributes": {
+      "name": "build",
+      "type": "build",
+      "phase": "ended",
+      "outcome": "succeeded",
+      "started_at": "2026-01-15T10:00:00Z",
+      "ended_at": "2026-01-15T10:04:12Z"
+    },
+    "references": {
+      "project": { "id": "123e4567-e89b-12d3-a456-426614174000" },
+      "workflow": { "id": "123e4567-e89b-12d3-a456-426614174000" }
     }
-  ]
+  }
 }
 ----
 
@@ -446,25 +439,30 @@ Extract artifact URLs from a job and download them to your local machine.
 
 link:https://circleci.com/docs/api/v3#tag/jobs/GET/api/v3/jobs/%7Bid%7D/artifacts[Get job artifacts API reference]
 
-. Get artifact URLs for a job:
+. Get artifact paths and URLs for a job:
 +
 [,shell]
 ----
 curl "https://circleci.com/api/v3/jobs/<your-job-id>/artifacts" \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
-  | jq -r '.data[].url' > artifact-urls.txt
+  | jq -r '.data[] | [.attributes.path, .attributes.url] | @tsv' > artifacts.tsv
 ----
 +
-This extracts all artifact URLs from the response and saves them to a file.
+This saves each artifact's original path and download URL, tab-separated, to a file.
 
-. Download all artifacts:
+. Download all artifacts, preserving their original directory structure:
 +
 [,shell]
 ----
-while read -r url; do
-  curl -O --header "Authorization: Bearer $CIRCLE_TOKEN" "$url"
-done < artifact-urls.txt
+while IFS=$'\t' read -r artifact_path url; do
+  mkdir -p "artifacts/$(dirname "$artifact_path")"
+  curl -o "artifacts/$artifact_path" "$url"
+done < artifacts.tsv
 ----
++
+Artifact URLs are pre-authenticated, so no `Authorization` header is needed for the download itself. Using each artifact's path under a dedicated `artifacts/` directory avoids collisions when multiple artifacts share a filename in different directories.
++
+CAUTION: Don't name the loop variable `path` in zsh — zsh ties the lowercase `path` array to `$PATH`, so assigning to it overwrites your shell's `PATH` and breaks every command until you open a new shell.
 
 [#cancel-a-workflow]
 === Cancel a workflow
