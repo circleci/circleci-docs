@@ -1,0 +1,567 @@
+= Machine Runner Orchestrator performance benchmarks
+:page-platform: Cloud, Server v4+
+:page-description: Performance benchmarks for the Machine Runner Orchestrator under increasing and burst load, covering queue times and throughput across resource classes.
+:experimental:
+
+Machine Runner Orchestrator (MRO) auto-scales KubeVirt virtual machines to serve CircleCI self-hosted runner jobs.
+Its scaling behavior is directly affected by how you configure `maxReplicas`, node capacity, and resource class sizing.
+
+By publishing these benchmarks, CircleCI can show the measurable performance characteristics of MRO under realistic load and help operators choose configurations that meet their throughput and latency goals.
+For an overview of Machine Runner Orchestrator concepts and setup, see xref:execution-runner:runner-provisioner.adoc[Machine Runner Orchestrator Overview].
+
+[#test-setup]
+== Test setup
+
+Benchmarks ran on an AWS Elastic Kubernetes Service (EKS) cluster using `c8i.12xlarge` nodes (48 vCPU / 96 GiB RAM) with KubeVirt enabled and a cluster autoscaler ASG of 2–6 nodes.
+Each test triggered jobs at four increasing rates: 1, 2, 4, and 6 jobs/min. Every job performed 5 minutes of work.
+
+The tests used two resource classes — the names and VM sizes in the table are examples.
+
+[.table-scroll]
+--
+[cols="4", options="header"]
+|===
+| Resource class (example) | VM size | `minReplicas` | `maxReplicas`
+
+| `my-org/runner-large`
+| 8 vCPU / 32 GiB
+| 2
+| 9
+
+| `my-org/runner-small`
+| 2 vCPU / 8 GiB
+| 2
+| 34
+|===
+--
+
+Both resource classes shared the same node group.
+
+The tables below report queue time and total job duration at the 50th and 90th percentiles (p50/p90) for each trigger rate.
+
+[#increasing-load-results]
+== Increasing-load results
+
+[#high-resource-class]
+=== Large resource class
+
+Resource class: `my-org/runner-large` — 8 vCPU / 32 GiB, `maxReplicas`=9
+
+[.table-scroll]
+--
+[cols="7", options="header"]
+|===
+| Step | Rate (jobs/min) | Jobs | Queue p50 (s) | Queue p90 (s) | Total p50 (s) | Total p90 (s)
+
+| 0
+| 1
+| 10
+| 35
+| 106
+| 336
+| 407
+
+| 1
+| 2
+| 20
+| 49
+| 82
+| 349
+| 382
+
+| 2
+| 4
+| 40
+| 304
+| 518
+| 605
+| 819
+
+| 3
+| 6
+| 60
+| 1140
+| 1574
+| 1441
+| 1874
+|===
+--
+
+Steps 0 and 1 (up to 2 jobs/min) kept queue p90 at or below 106 seconds.
+At step 2 (4 jobs/min), queue p90 jumped from 82 s to 518 s.
+At step 3 (6 jobs/min), queue p90 reached 1574 s (26 minutes).
+All 130 jobs completed with zero errors, but wait times at steps 2 and 3 make these rates unsuitable for latency-sensitive workloads.
+
+When arrival rate exceeds the `maxReplicas` ceiling, MRO queues incoming jobs until enough VMs finish and free capacity — saturation causes queue growth, not job failures.
+
+[#low-resource-class]
+=== Small resource class
+
+Resource class: `my-org/runner-small` — 2 vCPU / 8 GiB, `maxReplicas`=34
+
+[.table-scroll]
+--
+[cols="7", options="header"]
+|===
+| Step | Rate (jobs/min) | Jobs | Queue p50 (s) | Queue p90 (s) | Total p50 (s) | Total p90 (s)
+
+| 0
+| 1
+| 10
+| 3
+| 4
+| 304
+| 305
+
+| 1
+| 2
+| 20
+| 37
+| 53
+| 338
+| 354
+
+| 2
+| 4
+| 40
+| 43
+| 86
+| 343
+| 387
+
+| 3
+| 6
+| 60
+| 45
+| 54
+| 345
+| 355
+|===
+--
+
+Queue p90 never exceeded 86 s across all four steps, even at 60 jobs and 6 jobs/min.
+The higher `maxReplicas` ceiling (34 vs. 9) is the primary reason: more VMs can run concurrently, so the scaler has room to absorb bursts without queue buildup.
+All runs completed with zero errors.
+
+[#mixed-workload]
+=== Mixed workload
+
+The test randomly assigned jobs to either the large or small resource class.
+Step totals vary due to random assignment but land near 50/50.
+
+*Large-class jobs in the mixed run:*
+
+[.table-scroll]
+--
+[cols="7", options="header"]
+|===
+| Step | Rate (jobs/min) | Jobs | Queue p50 (s) | Queue p90 (s) | Total p50 (s) | Total p90 (s)
+
+| 0
+| 1
+| 5
+| 35
+| 47
+| 335
+| 348
+
+| 1
+| 2
+| 11
+| 74
+| 115
+| 374
+| 415
+
+| 2
+| 4
+| 25
+| 95
+| 170
+| 395
+| 471
+
+| 3
+| 6
+| 31
+| 327
+| 417
+| 627
+| 718
+|===
+--
+
+*Small-class jobs in the mixed run:*
+
+[.table-scroll]
+--
+[cols="7", options="header"]
+|===
+| Step | Rate (jobs/min) | Jobs | Queue p50 (s) | Queue p90 (s) | Total p50 (s) | Total p90 (s)
+
+| 0
+| 1
+| 5
+| 31
+| 35
+| 332
+| 336
+
+| 1
+| 2
+| 9
+| 33
+| 50
+| 334
+| 351
+
+| 2
+| 4
+| 15
+| 33
+| 36
+| 334
+| 336
+
+| 3
+| 6
+| 29
+| 36
+| 57
+| 336
+| 358
+|===
+--
+
+Mixing resource classes reduced queue times for large-class jobs.
+At step 3 (6 jobs/min), large-class queue p90 dropped from 1574 s in the large-only run to 417 s in the mixed run—a 73% reduction.
+Half the jobs competed for the large-class replica slots at any given time, leaving more headroom in the pool.
+
+Small-class jobs queued little in all cases (queue p90 ≤ 57 s at every step), consistent with the small-only results.
+All jobs in the mixed run completed with zero errors, confirming that MRO keeps pace with demand given the available resources.
+
+[#cross-run-summary]
+=== Summary across increasing-load runs
+
+[.table-scroll]
+--
+[cols="3", options="header"]
+|===
+| Experiment | Resource class | Max queue p90 (s)
+
+| Large-only
+| Large (8 vCPU / 32 GiB, `maxReplicas`=9)
+| 1574
+
+| Small-only
+| Small (2 vCPU / 8 GiB, `maxReplicas`=34)
+| 86
+
+| Mixed
+| Large (8 vCPU / 32 GiB, `maxReplicas`=9)
+| 417
+
+| Mixed
+| Small (2 vCPU / 8 GiB, `maxReplicas`=34)
+| 57
+|===
+--
+
+All three experiments completed with zero job errors.
+
+[#burst-load-results]
+== Burst-load results
+
+Burst-load tests measure how the system responds to a sudden spike in job arrivals followed by a recovery period.
+Each run followed a three-phase profile: warmup (1 job/min for 60 seconds), burst (high rate for 60 seconds), and cooldown (one job every two minutes for 30 minutes).
+All jobs slept 300 seconds, so total runtime equals queue time plus 300 seconds.
+
+NOTE: These runs used `maxReplicas=12` for the large class and `maxReplicas=48` for the small class — larger limits than the increasing-load tests — reflecting configuration adjustments made between experiment phases.
+
+The burst tables report queue time and total job duration at the 50th, 90th, and 99th percentiles (p50/p90/p99).
+These tables add p99 because tail latency during and after a burst reveals how long the slowest jobs wait as the VM pool catches up.
+
+[#burst-test-setup]
+=== Test setup
+
+[.table-scroll]
+--
+[cols="4", options="header"]
+|===
+| Resource class (example) | VM size | `minReplicas` | `maxReplicas`
+
+| `my-org/runner-large`
+| 8 vCPU / 32 GiB
+| 2
+| 12
+
+| `my-org/runner-small`
+| 2 vCPU / 8 GiB
+| 2
+| 48
+|===
+--
+
+Both resource classes shared the same node group (ASG 2–6, `c8i.12xlarge`).
+
+[#burst-large-resource-class]
+=== Large resource class (burst)
+
+Resource class: `my-org/runner-large` — 8 vCPU / 32 GiB, `maxReplicas`=12
+Burst rate: 12 jobs in 60 seconds.
+
+[.table-scroll]
+--
+[cols="9", options="header"]
+|===
+| Phase | Rate (jobs/min) | Jobs | Queue p50 (s) | Queue p90 (s) | Queue p99 (s) | Total p50 (s) | Total p90 (s) | Total p99 (s)
+
+| Warmup
+| 1
+| 1
+| 5
+| 5
+| 5
+| 306
+| 306
+| 306
+
+| Burst
+| 12
+| 12
+| 153
+| 157
+| 255
+| 454
+| 457
+| 556
+
+| Cooldown
+| 0.5
+| 15
+| 32
+| 181
+| 305
+| 333
+| 481
+| 605
+|===
+--
+
+The burst saturated the pool: queue p50 jumped from five seconds at warmup to 153 seconds during the burst.
+After the burst window ended, the system continued draining the backlog through the cooldown phase.
+Cooldown queue p90 reached 181 seconds and p99 reached 305 seconds.
+The large class takes significant time to clear a backlogged queue after a sudden spike, even at a low ongoing trigger rate.
+All 28 jobs completed with zero errors.
+
+[#burst-small-resource-class]
+=== Small resource class (burst)
+
+Resource class: `my-org/runner-small` — 2 vCPU / 8 GiB, `maxReplicas`=48
+Burst rate: 49 jobs in 60 seconds.
+
+[.table-scroll]
+--
+[cols="9", options="header"]
+|===
+| Phase | Rate (jobs/min) | Jobs | Queue p50 (s) | Queue p90 (s) | Queue p99 (s) | Total p50 (s) | Total p90 (s) | Total p99 (s)
+
+| Warmup
+| 1
+| 1
+| 6
+| 6
+| 6
+| 307
+| 307
+| 307
+
+| Burst
+| 49
+| 49
+| 171
+| 198
+| 209
+| 472
+| 499
+| 509
+
+| Cooldown
+| 0.5
+| 15
+| 4
+| 34
+| 128
+| 304
+| 335
+| 429
+|===
+--
+
+A burst of 49 jobs in 60 seconds exceeded the pool's immediate capacity: queue p50 rose from six to 171 seconds.
+Despite the larger burst size compared to the large-class run, the small class recovered faster in cooldown — queue p90 dropped to 34 seconds and p99 to 128 seconds.
+The higher `maxReplicas` ceiling (48 vs. 12) allowed more VMs to run concurrently, draining the backlog faster.
+All 65 jobs completed with zero errors.
+
+[#burst-mixed-workload]
+=== Mixed workload (burst)
+
+The burst mixed test randomly assigned jobs to either the large or small resource class.
+The burst rate was 20 jobs per minute for 60 seconds, producing 12 large-class and eight small-class jobs during the burst phase.
+Random assignment sent the single warmup job to the small class.
+
+*Large-class jobs in the mixed burst run:*
+
+[.table-scroll]
+--
+[cols="9", options="header"]
+|===
+| Phase | Rate (jobs/min) | Jobs | Queue p50 (s) | Queue p90 (s) | Queue p99 (s) | Total p50 (s) | Total p90 (s) | Total p99 (s)
+
+| Burst
+| 20 (mixed)
+| 12
+| 151
+| 156
+| 287
+| 451
+| 457
+| 587
+
+| Cooldown
+| 0.5 (mixed)
+| 5
+| 3
+| 31
+| 32
+| 304
+| 332
+| 333
+|===
+--
+
+*Small-class jobs in the mixed burst run:*
+
+[.table-scroll]
+--
+[cols="9", options="header"]
+|===
+| Phase | Rate (jobs/min) | Jobs | Queue p50 (s) | Queue p90 (s) | Queue p99 (s) | Total p50 (s) | Total p90 (s) | Total p99 (s)
+
+| Warmup
+| 1
+| 1
+| 6
+| 6
+| 6
+| 307
+| 307
+| 307
+
+| Burst
+| 20 (mixed)
+| 8
+| 34
+| 63
+| 122
+| 335
+| 364
+| 422
+
+| Cooldown
+| 0.5 (mixed)
+| 10
+| 8
+| 44
+| 111
+| 308
+| 344
+| 411
+|===
+--
+
+In the mixed run, large-class burst queue p90 reached 156 seconds — close to the 157 seconds in the large-only run.
+The pool received a similar number of large-class jobs during the burst window.
+Large-class cooldown recovered far faster in the mixed run: cooldown queue p90 dropped to 31 seconds.
+That is down from 181 seconds in the large-only run, where more large-class jobs remained in the queue at the burst's end.
+Small-class jobs queued little at the burst peak (queue p90 = 63 seconds) despite competing for the same node group.
+All jobs completed with zero errors.
+
+[#burst-cross-run-summary]
+=== Summary across burst runs
+
+[.table-scroll]
+--
+[cols="3", options="header"]
+|===
+| Experiment | Resource class | Max queue p90 (s)
+
+| Burst large-only
+| Large (8 vCPU / 32 GiB, `maxReplicas`=12)
+| 181 (cooldown)
+
+| Burst small-only
+| Small (2 vCPU / 8 GiB, `maxReplicas`=48)
+| 198 (burst)
+
+| Burst mixed
+| Large (8 vCPU / 32 GiB, `maxReplicas`=12)
+| 156 (burst)
+
+| Burst mixed
+| Small (2 vCPU / 8 GiB, `maxReplicas`=48)
+| 63 (burst)
+|===
+--
+
+All three burst experiments completed with zero job errors.
+The large class shows its highest queue p90 during cooldown (181 seconds), not during the burst itself.
+A low ongoing arrival rate in cooldown limits throughput, so the backlog clears across the full cooldown window.
+The small class peaks during the burst (198 seconds at 49/min) and recovers in cooldown (queue p90 = 34 seconds), reflecting its larger replica pool.
+
+[#configuration-recommendations]
+== Configuration recommendations
+
+[#set-the-replica-limit-for-the-expected-peak]
+=== Set the replica limit for the expected peak
+
+The `maxReplicas` limit is the most direct lever for queue time.
+Once arrival rate exceeds what the running VM pool can turn over, the queue grows.
+Set `maxReplicas` based on your node group's available memory divided by the VM size for that resource class, minus a buffer for OS and Kubernetes system pods.
+For example, with 96 GiB nodes and 32 GiB VMs, a single node can host `floor(96 / 32) = 3` VMs.
+For a six-node group, the theoretical ceiling is 18 — subtract a buffer for system pods to arrive at a safe `maxReplicas`.
+
+[#account-for-shared-node-groups]
+=== Account for shared node groups
+
+When multiple resource classes share a node group, each class competes for the same physical memory.
+The sum of `maxReplicas × VM memory` across all resource classes must not exceed the node group's total allocatable memory.
+If one class has a generous `maxReplicas`, it may starve the other.
+
+[#use-mixed-resource-classes-to-reduce-peak-pressure]
+=== Use mixed resource classes to reduce peak pressure
+
+Routing traffic across resource classes of different sizes reduces queue times for the larger class.
+If your workload includes jobs with different resource requirements, define appropriately sized resource classes for each job type rather than routing everything through a single large class.
+
+[#add-headroom-for-burst-traffic]
+=== Add headroom for burst traffic
+
+MRO supports a `headroom` configuration that provisions extra VMs beyond the current task count.
+Setting headroom ensures idle VMs are available when a burst of jobs arrives, reducing the delay from VM cold-start.
+Headroom is most effective for large resource classes where VM provisioning time adds noticeably to queue latency.
+The burst experiments show that after a sudden spike, the large class can take several minutes to drain the backlog — even at a low ongoing trigger rate.
+Headroom reduces this by keeping pre-warmed VMs available at the start of the burst.
+
+[#troubleshooting]
+== Troubleshooting
+
+Refer to xref:execution-runner:troubleshoot-self-hosted-runner.adoc[Troubleshoot Self-Hosted Runner] if you encounter issues with Machine Runner Orchestrator.
+
+[#additional-resources]
+== Additional resources
+
+* xref:execution-runner:runner-provisioner.adoc[Machine Runner Orchestrator Overview]
+* xref:execution-runner:container-runner-performance-benchmarks.adoc[Container Runner Performance Benchmarks]
+* xref:execution-runner:runner-concepts.adoc[Self-Hosted Runner Concepts]
+* xref:execution-runner:runner-faqs.adoc[Self-Hosted Runner FAQ]
