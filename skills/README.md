@@ -17,6 +17,7 @@ Reviews CircleCI documentation pages for quality, clarity, and adherence to styl
 - Consistency (internal and with related docs)
 - Repetition and flow
 - Value proposition
+- Partial and example reuse (hand-written content that should use, or become, a shared partial or example)
 
 **Output:** Saves a markdown report to the repository root as `content-review-[page-name].md`
 
@@ -68,10 +69,11 @@ Once installed, Claude Code will automatically trigger skills when relevant, or 
 ```
 
 The skill will:
-1. Analyze the page across 10 quality dimensions
+1. Analyze the page across 11 quality dimensions
 2. Check 3-5 related pages for consistency
-3. Generate a prioritized report
-4. Save the report as `content-review-[page-name].md` in the repo root
+3. Flag hand-written content that should use, or become, a shared partial or example (see the partials skill below)
+4. Generate a prioritized report
+5. Save the report as `content-review-[page-name].md` in the repo root
 
 ### vale-linter
 
