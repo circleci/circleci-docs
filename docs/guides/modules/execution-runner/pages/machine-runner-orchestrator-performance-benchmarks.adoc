@@ -1,6 +1,6 @@
 = Machine runner orchestrator performance benchmarks
 :page-platform: Cloud, Server v4+
-:page-description: Performance benchmarks for machine runner orchestrator under increasing load, covering VM provisioning queue times and throughput across resource classes.
+:page-description: Performance benchmarks for the Machine Runner Orchestrator under increasing load, covering VM provisioning queue times and throughput across resource classes.
 :experimental:
 
 Machine runner orchestrator (MRO) auto-scales KubeVirt virtual machines to serve CircleCI self-hosted runner jobs.
