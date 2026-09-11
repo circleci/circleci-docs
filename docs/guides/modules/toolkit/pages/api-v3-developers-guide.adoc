@@ -598,6 +598,8 @@ curl -X POST "https://circleci.com/api/v3/runner/tokens" \
     }
   }'
 ----
++
+CAUTION: The `201` response includes the raw token value once. Save it immediately. The API does not return the raw value again, and you cannot recover it if you lose it.
 
 [#reference]
 == Reference

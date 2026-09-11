@@ -67,11 +67,39 @@ To get started, see the xref:api-v3-developers-guide.adoc[API V3 Developers Guid
 
 All CircleCI API versions use token-based authentication. You need a personal API token to authenticate your requests.
 
-**Supported authentication methods:**
+.Supported authentication methods
+[.table-scroll]
+--
+[cols=4*, options="header"]
+|===
+| API version | Bearer Authentication | Circle-Token header | Basic Authentication
 
-* **Bearer Authentication** (recommended): Pass the token as a Bearer token in the `Authorization` header.
-* **Circle-Token header**: Pass the token in the `Circle-Token` header.
-* **Basic Authentication**: Use the token as the username (Base64-encoded).
+| API v3
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+
+| API v2
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+| API v1.1
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+| Runner API
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+|===
+--
+
+Bearer Authentication:: Pass the token as a Bearer token in the `Authorization` header.
+Circle-Token header:: Pass the token in the `Circle-Token` header.
+Basic Authentication:: Use the token as the username (Base64-encoded).
 
 See the xref:managing-api-tokens.adoc[Managing API Tokens] guide for information on creating and managing tokens.
 

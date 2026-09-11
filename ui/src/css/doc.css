@@ -1241,7 +1241,7 @@
 }
 
 .doc .dlist dt {
-  font-style: italic;
+  font-weight: bold;
 }
 
 .doc .dlist dd {
