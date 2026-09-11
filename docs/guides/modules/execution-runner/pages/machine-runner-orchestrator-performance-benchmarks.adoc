@@ -12,7 +12,7 @@ For an overview of machine runner orchestrator concepts and setup, see xref:exec
 [#test-setup]
 == Test setup
 
-Benchmarks ran on a Kubernetes cluster using c8i.12xlarge nodes (48 vCPU / 96 GiB RAM) with KubeVirt enabled and a cluster autoscaler ASG of 2–6 nodes.
+Benchmarks ran on an AWS Elastic Kubernetes Service (EKS) cluster using `c8i.12xlarge` nodes (48 vCPU / 96 GiB RAM) with KubeVirt enabled and a cluster autoscaler ASG of 2–6 nodes.
 Each test triggered jobs at four increasing rates: 1, 2, 4, and 6 jobs/min. Every job performed 5 minutes of work.
 
 The tests used two resource classes — the names and VM sizes in the table are examples.
