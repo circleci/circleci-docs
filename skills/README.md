@@ -17,6 +17,7 @@ Reviews CircleCI documentation pages for quality, clarity, and adherence to styl
 - Consistency (internal and with related docs)
 - Repetition and flow
 - Value proposition
+- Partial and example reuse (hand-written content that should use, or become, a shared partial or example)
 
 **Output:** Saves a markdown report to the repository root as `content-review-[page-name].md`
 
@@ -25,6 +26,9 @@ Runs the Vale prose linter on CircleCI documentation files to identify and fix s
 
 ### monthly-docs-report
 A skill the CircleCI docs team use to create a newsletter each month to showcase notable additions and improvements.
+
+### partials
+Discovers, previews, and inserts reusable AsciiDoc partials and shared code examples with the correct `include::` syntax. Also proposes when new or existing content should become a shared partial or example, then creates it and replaces duplicates after confirmation. Use when writing or editing docs that need shared navigation steps, notes, FAQs, resource tables, config snippets, or other repeated content. Other docs-authoring skills should follow this skill instead of copying reusable content.
 
 ## Installation (Claude Code)
 
@@ -45,6 +49,7 @@ If you're actively developing skills, symlink them so changes sync automatically
 # From the repository root
 ln -s "$(pwd)/skills/content-review" ~/.claude/skills/content-review
 ln -s "$(pwd)/skills/vale-linter" ~/.claude/skills/vale-linter
+ln -s "$(pwd)/skills/partials" ~/.claude/skills/partials
 ```
 
 ## Usage
@@ -64,10 +69,11 @@ Once installed, Claude Code will automatically trigger skills when relevant, or 
 ```
 
 The skill will:
-1. Analyze the page across 10 quality dimensions
+1. Analyze the page across 11 quality dimensions
 2. Check 3-5 related pages for consistency
-3. Generate a prioritized report
-4. Save the report as `content-review-[page-name].md` in the repo root
+3. Flag hand-written content that should use, or become, a shared partial or example (see the partials skill below)
+4. Generate a prioritized report
+5. Save the report as `content-review-[page-name].md` in the repo root
 
 ### vale-linter
 
@@ -79,6 +85,32 @@ The skill will:
 ```
 /vale-linter docs/path/to/file.adoc
 ```
+
+### partials
+
+**Automatic triggering:**
+- "Is there a partial for project settings?"
+- "Use a partial for the Docker auth note"
+- "Should this be a shared partial?"
+- "Is there a shared example for serial groups?"
+- Writing or editing a page that needs shared nav steps, notes, FAQs, resource tables, or config snippets
+
+**Explicit invocation:**
+```
+/partials
+/partials navigation
+/partials search project settings
+/examples
+/examples orchestration
+/examples search job-group
+```
+
+The skill will:
+1. Scan `docs/guides/modules/ROOT/partials/` or `docs/guides/modules/ROOT/examples/` (not a memorized list)
+2. Preview matching files
+3. Insert the correct `include::ROOT:partial$...` or `include::ROOT:example$...` line (examples go inside a source block)
+4. Call out page attributes or `leveloffset` when a partial needs them
+5. Propose extracting duplicated or reusable content, then replace the copies after you confirm
 
 ## Using Skills with Other AI Agents
 
