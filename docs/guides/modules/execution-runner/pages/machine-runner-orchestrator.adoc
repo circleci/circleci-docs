@@ -329,17 +329,17 @@ $ kubectl get virtualmachinepool -n machine-runner-orchestrator
 $ kubectl logs -n machine-runner-orchestrator deployment/machine-runner-orchestrator -f
 ----
 
-[#runner-provisioner-configuration-example]
+[#machine-runner-orchestrator-configuration-example]
 === 6. Add a job to your config
 
-Jobs on Runner Provisioner use the machine executor and your self-hosted resource class. Do not use CircleCI-hosted `machine.image` aliases.
+Jobs on Machine Runner Orchestrator use the machine executor and your self-hosted resource class. Do not use CircleCI-hosted `machine.image` aliases.
 
 The fields you must set are:
 
 * `machine: true`
 * `resource_class: <namespace>/<name>`
 
-.Example `.circleci/config.yml` job for Runner Provisioner
+.Example `.circleci/config.yml` job for Machine Runner Orchestrator
 [source,yaml]
 ----
 version: 2.1
@@ -350,7 +350,7 @@ jobs:
     resource_class: <namespace>/<name>
     steps:
       - checkout
-      - run: echo "Hi I'm on Runner Provisioner!"
+      - run: echo "Hi I'm on Machine Runner Orchestrator!"
 
 workflows:
   build-workflow:
@@ -427,8 +427,8 @@ ssh:
 +
 [source,console]
 ----
-$ helm upgrade runner-provisioner circleci_runner-provisioner/runner-provisioner \
-  --namespace runner-provisioner \
+$ helm upgrade machine-runner-orchestrator circleci_machine-runner-orchestrator/machine-runner-orchestrator \
+  --namespace machine-runner-orchestrator \
   --version 0.1.3 \
   --values my-values.yaml
 ----
@@ -437,21 +437,21 @@ $ helm upgrade runner-provisioner circleci_runner-provisioner/runner-provisioner
 +
 [source,console]
 ----
-$ kubectl wait gateway --timeout=5m --all --for=condition=Programmed -n runner-provisioner
+$ kubectl wait gateway --timeout=5m --all --for=condition=Programmed -n machine-runner-orchestrator
 ----
 
 . Roll the sidecar-injector webhook if you enabled SSH after the first install. Helm rolls the provisioner deployment on upgrade. Restart it if the webhook still serves the old config:
 +
 [source,console]
 ----
-$ kubectl rollout restart deployment/runner-provisioner -n runner-provisioner
+$ kubectl rollout restart deployment/machine-runner-orchestrator -n machine-runner-orchestrator
 ----
 
 . Recycle existing VMs so new `virt-launcher` pods receive the sidecar. VMs created before SSH and Envoy do not get the sidecar:
 +
 [source,console]
 ----
-$ kubectl delete vm -n runner-provisioner --all
+$ kubectl delete vm -n machine-runner-orchestrator --all
 ----
 +
 Set `idleTimeout` first if you need a graceful drain. See <<upgrading,Upgrading>>.
@@ -1386,8 +1386,8 @@ Confirm Envoy Gateway is available and the provisioner Gateway is programmed:
 
 [source,console]
 ----
-$ kubectl get gateway,tcproute -n runner-provisioner
-$ kubectl wait gateway --timeout=5m --all --for=condition=Programmed -n runner-provisioner
+$ kubectl get gateway,tcproute -n machine-runner-orchestrator
+$ kubectl wait gateway --timeout=5m --all --for=condition=Programmed -n machine-runner-orchestrator
 ----
 
 Common causes:
