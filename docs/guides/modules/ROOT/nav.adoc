@@ -120,6 +120,7 @@
 ** xref:execution-runner:runner-feature-comparison-matrix.adoc[Runner feature comparison matrix]
 ** Machine Runner Orchestrator
 *** xref:execution-runner:machine-runner-orchestrator.adoc[Machine Runner Orchestrator overview]
+*** xref:execution-runner:machine-runner-orchestrator-performance-benchmarks.adoc[Machine Runner Orchestrator performance benchmarks]
 
 ** Container runner
 *** xref:execution-runner:container-runner-installation.adoc[Container runner installation]
