@@ -205,6 +205,7 @@ link:https://circleci.com[CircleCI]
 - Links must have descriptive link text (not "click here", "here", or "this")
 
 ### Code Samples
+- **Reuse shared snippets** from `docs/guides/modules/ROOT/examples/` when the same config already exists. Include them with `example$` inside a source block. Follow `skills/partials/SKILL.md` to discover, insert, or extract examples.
 - **Provide working examples**: Code should be tested and valid
 - Readers should copy-paste with minimal changes
 - **Specify language** for syntax highlighting:
@@ -282,7 +283,7 @@ some code
 
 ### Reusable Partials
 
-When discovering, inserting, or creating partials, follow the partials skill at `skills/partials/SKILL.md`. That skill is the workflow for browsing categories, searching, suggesting from page context, proposing extractions, and writing the correct `include::` syntax. Other docs-authoring skills should reference it instead of copying reusable content.
+When discovering, inserting, or creating partials or shared code examples, follow the partials skill at `skills/partials/SKILL.md`. That skill covers both `partials/` (AsciiDoc prose) and `examples/` (shared config snippets). It is the workflow for browsing categories, searching, suggesting from page context, proposing extractions, and writing the correct `include::` syntax. Other docs-authoring skills should reference it instead of copying reusable content.
 
 CircleCI docs use reusable partials to maintain consistency and reduce duplication. Partials are AsciiDoc snippets that can be included in multiple pages.
 
@@ -397,6 +398,20 @@ When creating a new partial:
 - Document partials that accept custom text parameters
 - Update all pages when modifying a partial (partials affect multiple pages)
 - Use meaningful filenames that describe the content
+
+### Reusable Examples
+
+Shared code snippets live in `docs/guides/modules/ROOT/examples/`, next to `partials/`. Include them with `example$` **inside** a source block. Do not paste the snippet into the page.
+
+```adoc
+.Optional title for the snippet
+[source,yaml]
+----
+include::ROOT:example$orchestration-examples/job-group.yml[]
+----
+```
+
+From another component, use `include::guides:ROOT:example$path.yml[]`. Current categories: `expression-examples/` (current expression syntax), `logic-statement-examples/` (legacy logic statements), `orchestration-examples/` (job groups, serial groups, `override-with`). Follow `skills/partials/SKILL.md` to browse, search, insert, or extract examples.
 
 ### Images
 - **Always include descriptive alt text**:

@@ -27,7 +27,7 @@ Runs the Vale prose linter on CircleCI documentation files to identify and fix s
 A skill the CircleCI docs team use to create a newsletter each month to showcase notable additions and improvements.
 
 ### partials
-Discovers, previews, and inserts reusable AsciiDoc partials with the correct `include::` syntax. Also proposes when new or existing content should become a shared partial, then creates it and replaces duplicates after confirmation. Use when writing or editing docs that need shared navigation steps, notes, FAQs, resource tables, or other repeated content. Other docs-authoring skills should follow this skill instead of copying reusable content.
+Discovers, previews, and inserts reusable AsciiDoc partials and shared code examples with the correct `include::` syntax. Also proposes when new or existing content should become a shared partial or example, then creates it and replaces duplicates after confirmation. Use when writing or editing docs that need shared navigation steps, notes, FAQs, resource tables, config snippets, or other repeated content. Other docs-authoring skills should follow this skill instead of copying reusable content.
 
 ## Installation (Claude Code)
 
@@ -90,21 +90,25 @@ The skill will:
 - "Is there a partial for project settings?"
 - "Use a partial for the Docker auth note"
 - "Should this be a shared partial?"
-- Writing or editing a page that needs shared nav steps, notes, FAQs, or resource tables
+- "Is there a shared example for serial groups?"
+- Writing or editing a page that needs shared nav steps, notes, FAQs, resource tables, or config snippets
 
 **Explicit invocation:**
 ```
 /partials
 /partials navigation
 /partials search project settings
+/examples
+/examples orchestration
+/examples search job-group
 ```
 
 The skill will:
-1. Scan `docs/guides/modules/ROOT/partials/` (not a memorized list)
-2. Preview matching partials
-3. Insert the correct `include::ROOT:partial$...` or `include::guides:ROOT:partial$...` line
-4. Call out page attributes or `leveloffset` when the partial needs them
-5. Propose extracting duplicated or reusable content into a partial, then replace the copies after you confirm
+1. Scan `docs/guides/modules/ROOT/partials/` or `docs/guides/modules/ROOT/examples/` (not a memorized list)
+2. Preview matching files
+3. Insert the correct `include::ROOT:partial$...` or `include::ROOT:example$...` line (examples go inside a source block)
+4. Call out page attributes or `leveloffset` when a partial needs them
+5. Propose extracting duplicated or reusable content, then replace the copies after you confirm
 
 ## Using Skills with Other AI Agents
 
