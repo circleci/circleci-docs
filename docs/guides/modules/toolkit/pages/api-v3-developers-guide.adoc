@@ -461,8 +461,6 @@ done < artifacts.tsv
 ----
 +
 Artifact URLs are pre-authenticated, so no `Authorization` header is needed for the download itself. Using each artifact's path under a dedicated `artifacts/` directory avoids collisions when multiple artifacts share a filename in different directories.
-+
-CAUTION: Don't name the loop variable `path` in zsh — zsh ties the lowercase `path` array to `$PATH`, so assigning to it overwrites your shell's `PATH` and breaks every command until you open a new shell.
 
 [#cancel-a-workflow]
 === Cancel a workflow
