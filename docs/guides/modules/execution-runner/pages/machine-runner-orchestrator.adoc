@@ -1,26 +1,27 @@
-= Runner provisioner
+= Machine runner orchestrator
 :page-platform: Cloud, Server v4+
 :page-badge: Beta
-:page-description: Install and configure Runner Provisioner to scale CircleCI runner VMs with KubeVirt, including optional rerun job with SSH.
+:page-description: Install and configure Machine Runner Orchestrator to scale CircleCI runner VMs with KubeVirt, including optional rerun job with SSH.
 :experimental:
+:page-aliases: runner-provisioner.adoc
 
 [NOTE]
 ====
-*Runner Provisioner* is available in beta. This means the product is in early stages. You may encounter bugs, unexpected behavior, or incomplete features. The product, its configuration schema, and its APIs are subject to change before general availability. It is not recommended for critical workloads. If you encounter issues or have feedback, see <<feedback-and-support,Feedback and Support>>.
+*Machine Runner Orchestrator* is available in beta. This means the product is in early stages. You may encounter bugs, unexpected behavior, or incomplete features. The product, its configuration schema, and its APIs are subject to change before general availability. It is not recommended for critical workloads. If you encounter issues or have feedback, see <<feedback-and-support,Feedback and Support>>.
 ====
 
-Runner Provisioner is a Kubernetes controller that automatically scales CircleCI runner VMs using link:https://github.com/kubevirt/kubevirt[KubeVirt]. Runner Provisioner polls the CircleCI API for pending and running tasks, then adjusts a `VirtualMachinePool` replica count to match demand.
+Machine Runner Orchestrator is a Kubernetes controller that automatically scales CircleCI runner VMs using link:https://github.com/kubevirt/kubevirt[KubeVirt]. Machine Runner Orchestrator polls the CircleCI API for pending and running tasks, then adjusts a `VirtualMachinePool` replica count to match demand.
 
 The current beta version is `0.1.3`.
 
 == Getting access
 
-The Runner Provisioner image and Helm chart are publicly available. No registry credentials or invitation are required to install and use Runner Provisioner.
+The Machine Runner Orchestrator image and Helm chart are publicly available. No registry credentials or invitation are required to install and use Machine Runner Orchestrator.
 
 [#feedback-and-support]
 == Feedback and support
 
-Runner Provisioner is beta software. Expect bugs and missing features. Runner Provisioner is early-stage software and sharp edges are normal.
+Machine Runner Orchestrator is beta software. Expect bugs and missing features. Machine Runner Orchestrator is early-stage software and sharp edges are normal.
 
 Detailed feedback during the beta is welcome. Your input directly shapes what gets built before general availability.
 
@@ -32,7 +33,7 @@ Open a link:https://support.circleci.com/hc/en-us/requests/new[support ticket] f
 
 == Prerequisites
 
-* A Kubernetes cluster with KubeVirt installed. The chart does not install KubeVirt. Refer to the link:https://github.com/kubevirt/kubevirt/blob/main/docs/kubernetes-compatibility.md[KubeVirt compatibility matrix] for the appropriate version for your cluster. Runner Provisioner has been tested with v1.8.
+* A Kubernetes cluster with KubeVirt installed. The chart does not install KubeVirt. Refer to the link:https://github.com/kubevirt/kubevirt/blob/main/docs/kubernetes-compatibility.md[KubeVirt compatibility matrix] for the appropriate version for your cluster. Machine Runner Orchestrator has been tested with v1.8.
 * `kubectl` configured against your cluster.
 * `helm` v3+.
 * A CircleCI resource class token for each class you provision.
@@ -40,7 +41,7 @@ Open a link:https://support.circleci.com/hc/en-us/requests/new[support ticket] f
 
 === Cluster requirements
 
-The following sections cover the cluster requirements for running Runner Provisioner on a Kubernetes cluster.
+The following sections cover the cluster requirements for running Machine Runner Orchestrator on a Kubernetes cluster.
 
 [#nested-virtualization]
 ==== Nested virtualization
@@ -277,7 +278,7 @@ include::ROOT:partial$runner/install-with-cli-steps.adoc[]
 
 [source,console]
 ----
-$ kubectl create namespace runner-provisioner
+$ kubectl create namespace machine-runner-orchestrator
 ----
 
 [#configure-values]
@@ -310,10 +311,10 @@ The chart ships a default VM `spec` (2 GiB memory, 1 CPU). It boots the CircleCI
 
 [source,console]
 ----
-$ helm repo add circleci_runner-provisioner https://packagecloud.io/circleci/runner-provisioner/helm
+$ helm repo add circleci_machine-runner-orchestrator https://packagecloud.io/circleci/machine-runner-orchestrator/helm
 $ helm repo update
-$ helm install runner-provisioner circleci_runner-provisioner/runner-provisioner \
-  --namespace runner-provisioner \
+$ helm install machine-runner-orchestrator circleci_machine-runner-orchestrator/machine-runner-orchestrator \
+  --namespace machine-runner-orchestrator \
   --version 0.1.3 \
   --values my-values.yaml
 ----
@@ -323,22 +324,22 @@ $ helm install runner-provisioner circleci_runner-provisioner/runner-provisioner
 
 [source,console]
 ----
-$ kubectl get deployment -n runner-provisioner
-$ kubectl get virtualmachinepool -n runner-provisioner
-$ kubectl logs -n runner-provisioner deployment/runner-provisioner -f
+$ kubectl get deployment -n machine-runner-orchestrator
+$ kubectl get virtualmachinepool -n machine-runner-orchestrator
+$ kubectl logs -n machine-runner-orchestrator deployment/machine-runner-orchestrator -f
 ----
 
-[#runner-provisioner-configuration-example]
+[#machine-runner-orchestrator-configuration-example]
 === 6. Add a job to your config
 
-Jobs on Runner Provisioner use the machine executor and your self-hosted resource class. Do not use CircleCI-hosted `machine.image` aliases.
+Jobs on Machine Runner Orchestrator use the machine executor and your self-hosted resource class. Do not use CircleCI-hosted `machine.image` aliases.
 
 The fields you must set are:
 
 * `machine: true`
 * `resource_class: <namespace>/<name>`
 
-.Example `.circleci/config.yml` job for Runner Provisioner
+.Example `.circleci/config.yml` job for Machine Runner Orchestrator
 [source,yaml]
 ----
 version: 2.1
@@ -349,7 +350,7 @@ jobs:
     resource_class: <namespace>/<name>
     steps:
       - checkout
-      - run: echo "Hi I'm on Runner Provisioner!"
+      - run: echo "Hi I'm on Machine Runner Orchestrator!"
 
 workflows:
   build-workflow:
@@ -426,8 +427,8 @@ ssh:
 +
 [source,console]
 ----
-$ helm upgrade runner-provisioner circleci_runner-provisioner/runner-provisioner \
-  --namespace runner-provisioner \
+$ helm upgrade machine-runner-orchestrator circleci_machine-runner-orchestrator/machine-runner-orchestrator \
+  --namespace machine-runner-orchestrator \
   --version 0.1.3 \
   --values my-values.yaml
 ----
@@ -436,21 +437,21 @@ $ helm upgrade runner-provisioner circleci_runner-provisioner/runner-provisioner
 +
 [source,console]
 ----
-$ kubectl wait gateway --timeout=5m --all --for=condition=Programmed -n runner-provisioner
+$ kubectl wait gateway --timeout=5m --all --for=condition=Programmed -n machine-runner-orchestrator
 ----
 
 . Roll the sidecar-injector webhook if you enabled SSH after the first install. Helm rolls the provisioner deployment on upgrade. Restart it if the webhook still serves the old config:
 +
 [source,console]
 ----
-$ kubectl rollout restart deployment/runner-provisioner -n runner-provisioner
+$ kubectl rollout restart deployment/machine-runner-orchestrator -n machine-runner-orchestrator
 ----
 
 . Recycle existing VMs so new `virt-launcher` pods receive the sidecar. VMs created before SSH and Envoy do not get the sidecar:
 +
 [source,console]
 ----
-$ kubectl delete vm -n runner-provisioner --all
+$ kubectl delete vm -n machine-runner-orchestrator --all
 ----
 +
 Set `idleTimeout` first if you need a graceful drain. See <<upgrading,Upgrading>>.
@@ -497,7 +498,7 @@ The merge is by field, so the `large` class above inherits everything except mem
 [#connecting-to-server]
 == Connecting to a CircleCI Server instance
 
-By default, Runner Provisioner connects to the CircleCI Cloud API at `\https://runner.circleci.com`. If you are running a self-hosted CircleCI Server instance, set `provisioner.circleciAPIAddr` to your server's hostname in `my-values.yaml`:
+By default, Machine Runner Orchestrator connects to the CircleCI Cloud API at `\https://runner.circleci.com`. If you are running a self-hosted CircleCI Server instance, set `provisioner.circleciAPIAddr` to your server's hostname in `my-values.yaml`:
 
 .`my-values.yaml`
 [source,yaml]
@@ -532,7 +533,7 @@ NOTE: Configuration field names and defaults may change before general availabil
 | Number of provisioner replicas. Replicas coordinate via a `coordination.k8s.io` Lease, electing one leader with the rest on standby. Set greater than `1` for high availability.
 
 | `image.repository`
-| `circleci/runner-provisioner`
+| `circleci/machine-runner-orchestrator`
 | Container image repository.
 
 | `image.pullPolicy`
@@ -831,7 +832,7 @@ Chart `0.1.3` renamed this setting from `tokenProxy` to `sidecar`. Helm fails wi
 [#config-and-secrets]
 === Config and secrets
 
-The chart splits configuration in two. Non-secret resource-class settings (the `resourceClasses` keys, `scaling`, `runner`, and `spec`) are rendered into a generated ConfigMap, mounted at `/etc/runner-provisioner/config.yaml`. Secrets (each class's runner `token` and `userData`, and an optional `circleToken`) are rendered into a generated Secret, mounted at `/etc/runner-provisioner-secrets/secrets.yaml`.
+The chart splits configuration in two. Non-secret resource-class settings (the `resourceClasses` keys, `scaling`, `runner`, and `spec`) are rendered into a generated ConfigMap, mounted at `/etc/machine-runner-orchestrator/config.yaml`. Secrets (each class's runner `token` and `userData`, and an optional `circleToken`) are rendered into a generated Secret, mounted at `/etc/machine-runner-orchestrator-secrets/secrets.yaml`.
 
 You can supply either or both from pre-existing resources instead. For example, manage secrets through Vault or Sealed Secrets, or keep a large multi-class config out of Helm values.
 
@@ -859,7 +860,7 @@ Create it with:
 [source,console]
 ----
 $ kubectl create secret generic my-secret \
-  --namespace runner-provisioner \
+  --namespace machine-runner-orchestrator \
   --from-file=secrets.yaml=./secrets.yaml
 ----
 
@@ -904,7 +905,7 @@ Create it with:
 [source,console]
 ----
 $ kubectl create configmap my-config \
-  --namespace runner-provisioner \
+  --namespace machine-runner-orchestrator \
   --from-file=config.yaml=./config.yaml
 ----
 
@@ -1226,8 +1227,8 @@ Update your `my-values.yaml` and run:
 
 [source,console]
 ----
-$ helm upgrade runner-provisioner ./chart \
-  --namespace runner-provisioner \
+$ helm upgrade machine-runner-orchestrator ./chart \
+  --namespace machine-runner-orchestrator \
   --values my-values.yaml
 ----
 
@@ -1243,7 +1244,7 @@ Per-VM settings are different. The VM `spec` and `userData` are baked into each 
 +
 [source,console]
 ----
-$ kubectl delete vm -n runner-provisioner --all
+$ kubectl delete vm -n machine-runner-orchestrator --all
 ----
 
 == Uninstalling
@@ -1252,7 +1253,7 @@ Uninstall the Helm release with:
 
 [source,console]
 ----
-$ helm uninstall runner-provisioner --namespace runner-provisioner
+$ helm uninstall machine-runner-orchestrator --namespace machine-runner-orchestrator
 ----
 
 Uninstalling scales the VM pool down to zero before deleting the release, so runner VMs are cleaned up automatically.
@@ -1266,9 +1267,9 @@ Check the deployment status and pod logs:
 
 [source,console]
 ----
-$ kubectl get pods -n runner-provisioner
-$ kubectl describe pod -n runner-provisioner <pod-name>
-$ kubectl logs -n runner-provisioner deployment/runner-provisioner
+$ kubectl get pods -n machine-runner-orchestrator
+$ kubectl describe pod -n machine-runner-orchestrator <pod-name>
+$ kubectl logs -n machine-runner-orchestrator deployment/machine-runner-orchestrator
 ----
 
 Common causes:
@@ -1283,9 +1284,9 @@ If the provisioner is running but no VMs appear:
 
 [source,console]
 ----
-$ kubectl get virtualmachinepool -n runner-provisioner
-$ kubectl describe virtualmachinepool -n runner-provisioner <pool-name>
-$ kubectl get vm -n runner-provisioner
+$ kubectl get virtualmachinepool -n machine-runner-orchestrator
+$ kubectl describe virtualmachinepool -n machine-runner-orchestrator <pool-name>
+$ kubectl get vm -n machine-runner-orchestrator
 ----
 
 Common causes:
@@ -1299,8 +1300,8 @@ Common causes:
 
 [source,console]
 ----
-$ kubectl get vmi -n runner-provisioner
-$ kubectl describe vmi -n runner-provisioner <vmi-name>
+$ kubectl get vmi -n machine-runner-orchestrator
+$ kubectl describe vmi -n machine-runner-orchestrator <vmi-name>
 ----
 
 Common causes:
@@ -1317,16 +1318,16 @@ Runner logs are forwarded to each VM's serial console, so runner output is visib
 
 [source,console]
 ----
-$ kubectl get pods -n runner-provisioner -l kubevirt.io=virt-launcher
-$ kubectl logs <virt-launcher-pod> -c guest-console-log -n runner-provisioner -f
+$ kubectl get pods -n machine-runner-orchestrator -l kubevirt.io=virt-launcher
+$ kubectl logs <virt-launcher-pod> -c guest-console-log -n machine-runner-orchestrator -f
 ----
 
 To inspect the runner service directly, connect to the VM console instead:
 
 [source,console]
 ----
-$ kubectl get vmi -n runner-provisioner
-$ virtctl console -n runner-provisioner <vmi-name>
+$ kubectl get vmi -n machine-runner-orchestrator
+$ virtctl console -n machine-runner-orchestrator <vmi-name>
 ----
 
 Then, inside the VM:
@@ -1342,7 +1343,7 @@ Common causes:
 * *Wrong runner token*: The resource class token in your values does not match the token in CircleCI. Regenerate the token in the CircleCI web app under **Self-Hosted Runners** and update your Helm values.
 * *Wrong resource class name*: Each key under `resourceClasses` must match a resource class your jobs target, in `namespace/name` format.
 * *CircleCI Server not reachable*: If using a self-hosted server, confirm `circleciAPIAddr` is set and that the VM can reach that address. Check runner agent logs for connection errors.
-* *Cloud-init did not run*: If the VM booted from a cached image state, cloud-init may have been skipped. Delete the VM and let the pool recreate it: `kubectl delete vm -n runner-provisioner <vm-name>`.
+* *Cloud-init did not run*: If the VM booted from a cached image state, cloud-init may have been skipped. Delete the VM and let the pool recreate it: `kubectl delete vm -n machine-runner-orchestrator <vm-name>`.
 
 [#disk-full-during-install]
 === Package installs fail with a disk full error
@@ -1356,7 +1357,7 @@ Check what the provisioner sees from the CircleCI API:
 
 [source,console]
 ----
-$ kubectl logs -n runner-provisioner deployment/runner-provisioner -f
+$ kubectl logs -n machine-runner-orchestrator deployment/machine-runner-orchestrator -f
 ----
 
 The provisioner logs the unclaimed and running task counts each poll cycle. If counts are always 0 when jobs are queued:
@@ -1373,7 +1374,7 @@ Resource-class config and secrets (scaling, tokens, and the set of classes) hot-
 
 [source,console]
 ----
-$ kubectl delete vm -n runner-provisioner --all
+$ kubectl delete vm -n machine-runner-orchestrator --all
 ----
 
 New VMs created by the pool boot with the updated spec. Set `idleTimeout` to cycle them out gracefully instead.
@@ -1385,8 +1386,8 @@ Confirm Envoy Gateway is available and the provisioner Gateway is programmed:
 
 [source,console]
 ----
-$ kubectl get gateway,tcproute -n runner-provisioner
-$ kubectl wait gateway --timeout=5m --all --for=condition=Programmed -n runner-provisioner
+$ kubectl get gateway,tcproute -n machine-runner-orchestrator
+$ kubectl wait gateway --timeout=5m --all --for=condition=Programmed -n machine-runner-orchestrator
 ----
 
 Common causes:

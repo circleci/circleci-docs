@@ -17,7 +17,7 @@ NOTE: Regular CircleCI pipelines execute each step in a non-interactive shell. S
 [#steps]
 == Steps to access a job with SSH
 
-NOTE: **Using self-hosted runners?** To use SSH reruns with CircleCI runners you will first need to enable the SSH rerun feature. Refer to the xref:execution-runner:machine-runner-3-configuration-reference.adoc#runner-ssh-advertise-addr[Machine Runner 3], xref:execution-runner:container-runner-installation.adoc#enable-rerun-job-with-ssh[Container Runner], or xref:execution-runner:runner-provisioner.adoc#enable-rerun-job-with-ssh[Runner Provisioner] pages for steps.
+NOTE: **Using self-hosted runners?** To use SSH reruns with CircleCI runners you will first need to enable the SSH rerun feature. Refer to the xref:execution-runner:machine-runner-3-configuration-reference.adoc#runner-ssh-advertise-addr[Machine Runner 3], xref:execution-runner:container-runner-installation.adoc#enable-rerun-job-with-ssh[Container Runner], or xref:execution-runner:machine-runner-orchestrator.adoc#enable-rerun-job-with-ssh[Machine Runner Orchestrator] pages for steps.
 
 . If you have not already done so, add an SSH key to your link:https://app.circleci.com/settings/user/job-ssh-keys[User Settings].
 +
