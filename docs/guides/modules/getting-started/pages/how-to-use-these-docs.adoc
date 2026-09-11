@@ -1,0 +1,96 @@
+= How to use these docs
+:page-platform: Cloud, Server v4+
+:page-description: Find the right CircleCI guide for your task, follow current defaults, and read docs as markdown or OpenAPI.
+:experimental:
+
+Use this page to pick the right CircleCI guide, follow current defaults, and avoid deprecated patterns. The xref:getting-started.adoc[Quickstart Guide] walks you through creating a project. This page tells you where to go next.
+
+== Find the right starting point
+
+Match your task to a starting page. Then follow links from that page. Do not skip to a reference page until you know which feature you need.
+
+[.table-scroll]
+--
+[cols="1,2", options="header"]
+|===
+| What you want to do
+| Start here
+
+| Create an account and run a first pipeline
+| xref:first-steps.adoc[Sign up and Try CircleCI], then the xref:getting-started.adoc[Quickstart Guide]
+
+| Write or edit `.circleci/config.yml`
+| xref:about-circleci:concepts.adoc[Concepts], then xref:config-intro.adoc[Configuration Introduction], then the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference]
+
+| Trigger or schedule a pipeline
+| xref:orchestrate:triggers-overview.adoc[Trigger Options] and xref:orchestrate:schedule-triggers.adoc[Schedule Triggers]
+
+| Install a self-hosted runner
+| xref:execution-runner:runner-overview.adoc[Self-hosted Runner Overview]. Then install xref:execution-runner:install-machine-runner-3-on-linux.adoc[Machine Runner 3] on a VM, or xref:execution-runner:container-runner-installation.adoc[Container Runner] on Kubernetes.
+
+| Move from another CI tool
+| xref:migrate:migration-intro.adoc[Introduction to CircleCI Migration], then the matching migrate-from page. Use the link:https://circleci.com/developer/tools/configTranslator[CircleCI configuration translator] for GitHub Actions or GitLab.
+
+| Connect an AI assistant to CircleCI
+| xref:toolkit:circleci-mcp-overview.adoc[CircleCI MCP Overview] first. Then connect the xref:toolkit:connecting-to-the-circleci-mcp-server.adoc[Hosted MCP Server] or the xref:toolkit:connecting-to-the-circleci-cli-mcp.adoc[CLI MCP]. Use the xref:toolkit:connecting-to-a-docs-mcp-server.adoc[Docs MCP] only to search documentation.
+
+| Use or author orbs
+| xref:orbs:use:orb-intro.adoc[Introduction to Using Orbs]
+
+| Install or operate CircleCI Server
+| xref:server-admin:overview:circleci-server-overview.adoc[CircleCI Server Overview]. Server is a self-hosted CircleCI installation. It is not a self-hosted runner.
+
+| Call the CircleCI API
+| link:https://circleci.com/docs/api/v3/[API v3 reference] and the link:https://circleci.com/fullopenapi.yaml[OpenAPI specification]. Use API v3 for all new integrations.
+
+| Authenticate to the API or CLI
+| xref:toolkit:managing-api-tokens.adoc[Managing API Tokens]
+|===
+--
+
+== Follow current defaults
+
+Use these defaults unless you are extending an existing integration that already depends on something older:
+
+* Write `version: 2.1` in `.circleci/config.yml`. Version 2 does not support orbs or reusable configuration.
+* Use API v3 for new API work. v3 uses UUID identifiers, next-page tokens, and a single error object.
+* Use `cimg/` convenience images, not legacy `circleci/` images.
+* Schedule pipelines with xref:orchestrate:schedule-triggers.adoc[Schedule Triggers], not a `triggers.schedule` block under a workflow.
+* Install xref:execution-runner:install-machine-runner-3-on-linux.adoc[Machine Runner 3] for machine runners. Do not install launch agent.
+* Prefer the GitHub App integration over GitHub OAuth. Feature availability differs. See xref:integration:version-control-system-integration-overview.adoc[VCS, Pipeline Types, and Feature Support].
+
+== Avoid mixing up these concepts
+
+* **Pipeline, workflow, job, step.** A pipeline is the full configuration. A workflow orchestrates jobs. A job runs steps in one executor. A step is a command or built-in action such as `checkout`, `run`, or `save_cache`. See xref:about-circleci:concepts.adoc[Concepts].
+* **Run vs pipeline in API v3.** A run records one trigger firing. A pipeline is the definition. Do not treat them as synonyms. See the link:https://circleci.com/docs/api/v3/runs.md[Runs] and link:https://circleci.com/docs/api/v3/pipelines.md[Pipelines] API pages.
+* **Hosted MCP vs CLI MCP vs Docs MCP.** The hosted MCP server inspects and acts on CI runs. The CLI MCP exposes the CircleCI CLI on your machine. The Docs MCP searches documentation. Do not configure the old `npx` local MCP server.
+* **CircleCI CLI vs environment CLI vs Chunk CLI.** The CircleCI CLI runs on a developer machine. The environment CLI runs inside a job. The Chunk CLI is for AI code review and sidecar workflows. See xref:toolkit:circleci-cli.adoc[The CircleCI CLI].
+* **Workspaces vs caches vs artifacts.** Workspaces pass files between jobs in the same workflow. Caches persist dependencies across runs. Artifacts are long-lived job outputs. See xref:about-circleci:concepts.adoc[Concepts].
+* **Docker executor vs Remote Docker vs machine.** `docker:` runs the job in a container. `setup_remote_docker` adds a remote Docker engine so that container can run Docker commands. `machine:` is a full VM. See xref:execution-managed:executor-intro.adoc[Execution Environments Overview].
+* **CircleCI Cloud vs CircleCI Server vs self-hosted runner.** Cloud is CircleCI-hosted. Server is CircleCI installed in your Kubernetes cluster. A self-hosted runner executes jobs on your infrastructure. The control plane stays Cloud or Server.
+* **Contexts vs project environment variables vs pipeline parameters.** Contexts share secrets across projects. Project environment variables are per-project. Pipeline parameters pass typed values when you trigger a pipeline. They are not secrets.
+
+== Skip these deprecated patterns
+
+Do not add these to new configuration or integrations:
+
+* `workflows.<name>.triggers.schedule` (scheduled workflows). Use xref:orchestrate:schedule-triggers.adoc[Schedule Triggers]. To convert existing schedules, see xref:orchestrate:migrate-scheduled-workflows-to-schedule-triggers.adoc[Migrate Scheduled Workflows to Schedule Triggers].
+* The `deploy` step. Use `run`. If the job uses `parallelism` greater than one, split test and deploy into two jobs. See xref:orchestrate:migrate-from-deploy-to-run.adoc[Migrate From Deploy to Run].
+* Launch agent, also called machine runner 1.x. Use xref:execution-runner:migrate-from-launch-agent-to-machine-runner-3-on-linux.adoc[Migrate From Launch Agent to Machine Runner 3].
+* API v2 or v1.1 for new integrations. Use API v3 and the link:https://circleci.com/fullopenapi.yaml[OpenAPI specification].
+* `version: 2` configuration. Use `version: 2.1`.
+* Legacy convenience images such as `circleci/node` or `circleci/python`. Use `cimg/` images. See xref:execution-managed:next-gen-migration-guide.adoc[Migrating to Next-gen Images].
+* The local `npx` CircleCI MCP server. Use the hosted MCP server, the CLI MCP, or both.
+
+== Read docs as markdown or OpenAPI
+
+Every docs page has a markdown export. Replace the page URL with `/index.md`, or select **Copy markdown** on the page.
+
+* Example HTML: `https://circleci.com/docs/guides/getting-started/how-to-use-these-docs/`
+* Example markdown: `https://circleci.com/docs/guides/getting-started/how-to-use-these-docs/index.md`
+
+The site also publishes a machine-readable index at link:https://circleci.com/docs/llms.txt[`llms.txt`]. That file lists every page with a markdown link.
+
+For API work, fetch the link:https://circleci.com/fullopenapi.yaml[OpenAPI specification]. Do not infer request or response shapes from prose guides. The link:https://circleci.com/docs/api/v3/llms.txt[API v3 index] lists every entity.
+
+To search docs from an AI assistant, connect the xref:toolkit:connecting-to-a-docs-mcp-server.adoc[Docs MCP].
