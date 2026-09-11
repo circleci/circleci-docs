@@ -43,7 +43,7 @@ The tables below report queue time and total job duration at the 50th and 90th p
 == Results
 
 [#high-resource-class]
-=== Large resource class (high-only run)
+=== Large resource class
 
 Resource class: `my-org/runner-large` — 8 vCPU / 32 GiB, `maxReplicas`=9
 
@@ -95,7 +95,7 @@ All 130 jobs completed with zero errors, but wait times at steps 2 and 3 make th
 When arrival rate exceeds what the `maxReplicas` pool can turn over, the queue grows until enough VMs finish and free capacity.
 
 [#low-resource-class]
-=== Small resource class (low-only run)
+=== Small resource class
 
 Resource class: `my-org/runner-small` — 2 vCPU / 8 GiB, `maxReplicas`=34
 
