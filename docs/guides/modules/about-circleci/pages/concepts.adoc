@@ -248,9 +248,9 @@ See the xref:orchestrate:dynamic-config.adoc[Dynamic Configuration] page for mor
 An event is the inbound occurrence that prompts CircleCI to act, for example: 
 
 * A push to a branch.
-* A pull request opened
-* A scheduled time
-* An API call. 
+* A pull request opened.
+* A scheduled time.
+* An API call.
 
 Events are the starting point of the entity chain. When CircleCI receives an event, it checks whether any <<triggers,triggers>> match and, if so, initiates a <<runs,run>>.
 
