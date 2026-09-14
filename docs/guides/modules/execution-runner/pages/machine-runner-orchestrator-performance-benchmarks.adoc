@@ -39,7 +39,8 @@ The tests used two resource classes — the names and VM sizes in the table are 
 
 Both resource classes shared the same node group.
 
-The tables below report queue time and total job duration at the 50th and 90th percentiles (p50/p90) for each trigger rate.
+The tables below report queue time and total job duration at three percentiles for each trigger rate.
+p50 is the median; p90 means 90% of jobs finished within that time; p99 captures the slowest 1%.
 
 [#increasing-load-results]
 == Increasing-load results
@@ -284,8 +285,8 @@ All jobs slept 300 seconds, so total runtime equals queue time plus 300 seconds.
 
 NOTE: These runs used `maxReplicas=12` for the large class and `maxReplicas=48` for the small class — larger limits than the increasing-load tests — reflecting configuration adjustments made between experiment phases.
 
-The burst tables report queue time and total job duration at the 50th, 90th, and 99th percentiles (p50/p90/p99).
-These tables add p99 because tail latency during and after a burst reveals how long the slowest jobs wait as the VM pool catches up.
+The burst tables report queue time and total job duration at p50, p90, and p99.
+These tables add p99 — unlike the increasing-load tables — because tail latency during and after a burst reveals how long the slowest jobs wait as the VM pool catches up.
 
 [#burst-test-setup]
 === Test setup
