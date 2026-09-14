@@ -5,9 +5,11 @@
 
 Machine Runner Orchestrator (MRO) auto-scales KubeVirt virtual machines to serve CircleCI self-hosted runner jobs.
 Its scaling behavior is directly affected by how you configure `maxReplicas`, node capacity, and resource class sizing.
+For a full description of scaling parameters, see the xref:execution-runner:machine-runner-orchestrator.adoc#scaling-behavior[Scaling Behavior] section of the Machine Runner Orchestrator overview.
+These experiments varied only `minReplicas` and `maxReplicas`; all other scaling parameters used their defaults.
 
-By publishing these benchmarks, CircleCI can show the measurable performance characteristics of MRO under realistic load and help operators choose configurations that meet their throughput and latency goals.
-For an overview of Machine Runner Orchestrator concepts and setup, see xref:execution-runner:runner-provisioner.adoc[Machine Runner Orchestrator Overview].
+Use these benchmarks to understand MRO performance under realistic load and choose configurations that meet your throughput and latency goals.
+For an overview of Machine Runner Orchestrator concepts and setup, including full scaling configuration options, see xref:execution-runner:machine-runner-orchestrator.adoc[Machine Runner Orchestrator Overview].
 
 [#test-setup]
 == Test setup
@@ -92,7 +94,9 @@ At step 2 (4 jobs/min), queue p90 jumped from 82 s to 518 s.
 At step 3 (6 jobs/min), queue p90 reached 1574 s (26 minutes).
 All 130 jobs completed with zero errors, but wait times at steps 2 and 3 make these rates unsuitable for latency-sensitive workloads.
 
-When arrival rate exceeds the `maxReplicas` ceiling, MRO queues incoming jobs until enough VMs finish and free capacity — saturation causes queue growth, not job failures.
+`maxReplicas` is a capacity ceiling you set explicitly.
+When sustained arrival rate exceeds what that ceiling can drain, MRO queues incoming jobs until running VMs finish and free capacity.
+The key result: MRO completes every job — the workload waits, but nothing drops.
 
 [#low-resource-class]
 === Small resource class
@@ -139,8 +143,9 @@ Resource class: `my-org/runner-small` — 2 vCPU / 8 GiB, `maxReplicas`=34
 |===
 --
 
-Queue p90 never exceeded 86 s across all four steps, even at 60 jobs and 6 jobs/min.
-The higher `maxReplicas` ceiling (34 vs. 9) is the primary reason: more VMs can run concurrently, so the scaler has room to absorb bursts without queue buildup.
+Queue p90 stayed at or below 86 seconds across every step, even at 60 jobs and 6 jobs/min.
+`maxReplicas`=34 (versus 9 in the large-class run) lets the pool sustain a high enough concurrent VM count to drain 5-minute jobs without queue buildup.
+Queue times stay low when `maxReplicas` exceeds the peak arrival rate — the pool has enough concurrent capacity to drain jobs as they arrive.
 All runs completed with zero errors.
 
 [#mixed-workload]
@@ -234,11 +239,12 @@ Step totals vary due to random assignment but land near 50/50.
 --
 
 Mixing resource classes reduced queue times for large-class jobs.
-At step 3 (6 jobs/min), large-class queue p90 dropped from 1574 s in the large-only run to 417 s in the mixed run—a 73% reduction.
-Half the jobs competed for the large-class replica slots at any given time, leaving more headroom in the pool.
+At step 3 (6 jobs/min), large-class queue p90 dropped from 1574 s in the large-only run to 417 s in the mixed run — a 73% reduction.
+In the large-only run, all 60 jobs at step 3 competed for the same nine replica slots.
+In the mixed run, only around half the jobs targeted the large class, so the nine-replica pool had lower concurrent demand and cleared the queue faster.
 
 Small-class jobs queued little in all cases (queue p90 ≤ 57 s at every step), consistent with the small-only results.
-All jobs in the mixed run completed with zero errors, confirming that MRO keeps pace with demand given the available resources.
+All jobs in the mixed run completed with zero errors.
 
 [#cross-run-summary]
 === Summary across increasing-load runs
@@ -398,7 +404,7 @@ Burst rate: 49 jobs in 60 seconds.
 |===
 --
 
-A burst of 49 jobs in 60 seconds exceeded the pool's immediate capacity: queue p50 rose from six to 171 seconds.
+A burst of 49 jobs in 60 seconds exceeded the pool's immediate capacity: queue p50 rose from 6 to 171 seconds.
 Despite the larger burst size compared to the large-class run, the small class recovered faster in cooldown — queue p90 dropped to 34 seconds and p99 to 128 seconds.
 The higher `maxReplicas` ceiling (48 vs. 12) allowed more VMs to run concurrently, draining the backlog faster.
 All 65 jobs completed with zero errors.
@@ -561,7 +567,7 @@ Refer to xref:execution-runner:troubleshoot-self-hosted-runner.adoc[Troubleshoot
 [#additional-resources]
 == Additional resources
 
-* xref:execution-runner:runner-provisioner.adoc[Machine Runner Orchestrator Overview]
+* xref:execution-runner:machine-runner-orchestrator.adoc[Machine Runner Orchestrator Overview]
 * xref:execution-runner:container-runner-performance-benchmarks.adoc[Container Runner Performance Benchmarks]
 * xref:execution-runner:runner-concepts.adoc[Self-Hosted Runner Concepts]
 * xref:execution-runner:runner-faqs.adoc[Self-Hosted Runner FAQ]
