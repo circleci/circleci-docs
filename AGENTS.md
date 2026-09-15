@@ -10,7 +10,12 @@ For a comprehensive overview of the CircleCI documentation structure, see the au
 - Content statistics and URL patterns
 - Technical stack information
 
-This guide focuses on **how to write documentation**. The llms.txt file tells you **what documentation exists and where**. The xref-equivalent live page for current defaults and wayfinding is `docs/guides/modules/getting-started/pages/how-to-use-these-docs.adoc` (How to use these docs). Update that page when you change API versioning, MCP offerings, runner install paths, or a deprecated pattern.
+This guide focuses on **how to write documentation**. The llms.txt file tells you **what documentation exists and where**.
+
+Two other files serve different audiences and must not be confused with this one:
+
+- `docs/guides/modules/getting-started/pages/how-to-use-these-docs.adoc` (How to use these docs) is a human-facing page that helps a reader pick the right guide. It intentionally does not carry defaults, deprecations, or dos/don'ts lists.
+- `docs/agent-guide.md` is published verbatim as `AGENTS.md` at the site root (`https://circleci.com/docs/AGENTS.md`), for AI agents and humans using the CircleCI product. It carries current defaults, deprecated patterns, and Cloud/Server differences. Update it, not this file, when you change API versioning, MCP offerings, runner install paths, or a deprecated pattern.
 
 ## Creating New Documentation Pages
 

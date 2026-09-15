@@ -82,18 +82,20 @@ function addToSitemap (siteCatalog, playbook) {
 }
 
 /**
- * Point agents at the live How to use these docs page. Keep this short so
- * defaults and deprecations live in AsciiDoc, not in this generator.
+ * Point agents at AGENTS.md and humans at the How to use these docs page.
+ * Keep this short so defaults and deprecations live in docs/agent-guide.md
+ * (published as AGENTS.md), not in this generator.
  */
 function generateDocsOrientation (siteUrl) {
   const origin = siteUrl.replace(/\/docs\/?$/, '')
   const guide = `${siteUrl}/guides/getting-started/how-to-use-these-docs/`
+  const agentsMd = `${siteUrl}/AGENTS.md`
 
   return `## How to use these docs
 
-Start with [How to use these docs](${guide}) [md](${guide}index.md).
+If you are an AI agent, read [AGENTS.md](${agentsMd}) first. It has current defaults, deprecated patterns, and the differences between Cloud and Server.
 
-That page is the source of truth for current defaults, which guide to open first, and which patterns to avoid.
+For humans, or for which guide to open first, start with [How to use these docs](${guide}) [md](${guide}index.md).
 
 For API work, fetch the OpenAPI specification. Do not infer request or response shapes from prose guides.
 
