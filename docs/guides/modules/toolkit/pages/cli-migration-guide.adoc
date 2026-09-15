@@ -1,10 +1,7 @@
 = CLI command migration guide
 :page-platform: Cloud
-:page-badge: Preview
 :page-description: A mapping of legacy CircleCI CLI commands to their equivalents in CircleCI CLI v1.
 :experimental:
-
-NOTE: The CircleCI CLI v1 is currently in preview. You can expect changes to the available commands and features during this phase. If you have any feedback or suggestions for the CircleCI CLI, or to report an issue, open an link:https://github.com/CircleCI-Public/circleci-cli/issues[Issue] on the GitHub repository.
 
 This guide covers CircleCI CLI commands that changed between the legacy CLI (v0.1.x) and link:https://cli.circleci.com/[CLI v1], plus capabilities that are new in v1. Commands not listed here are unchanged. Use it as a reference when updating scripts or workflows that use the legacy CLI.
 
