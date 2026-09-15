@@ -140,7 +140,7 @@ NOTE: The `circleci run release` commands are part of the CircleCI environment C
 
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
 * A CircleCI project with a workflow configured to deploy your code.
-* Any supported version control provider, not only GitHub. This includes GitLab, GitLab self-managed, Bitbucket Cloud, and Cursor Origin.
+* Any supported version control provider: GitHub GitLab, GitLab self-managed, Bitbucket Cloud, and Cursor Origin.
 
 [#deploy-markers-with-status-updates]
 === Deploy markers with status updates
