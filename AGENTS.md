@@ -73,6 +73,29 @@ All pages require standard attributes (`:page-platform:`, `:page-description:`, 
   - Read the setup guide …
   - Set up your account …
 
+## Punctuation
+
+### Semicolons
+- **Avoid semicolons**. Prefer a new sentence, or use commas and periods.
+- Use a semicolon only sparingly, and only in these cases:
+  - When joining two closely related independent clauses where a period or a comma is not as effective.
+    - Recommended: Start with a smaller resource class; if the job fails due to memory limits, increase the class.
+  - When preceding a conjunctive adverb (like *therefore*) or a phrase (like *that is*) that joins two independent clauses.
+    - Recommended: The workflow skips the deploy job on feature branches; therefore, only the test jobs run.
+    - Recommended: Set the executor at the job level; that is, declare `docker`, `machine`, or `macos` under the job, not under the workflow.
+  - When separating a series of long or complex items that contain their own punctuation.
+    - Recommended: Review the page one more time, checking for the following: present tense and active voice; typos, punctuation, and grammar; and whether you can shorten anything.
+
+### Dashes
+- **Avoid dashes** (en or em) to split sentences. Prefer a new sentence, or use commas and periods.
+- If you use an em dash (—) to indicate a break in a sentence, do not put a space before or after it. Do not use an en dash or a hyphen in place of an em dash.
+- **Do not use en dashes** (–). Use a hyphen or the word "to" instead.
+  - Recommended: Server v4.0 to v4.8
+  - Not recommended: Server v4.0–v4.8
+- Do not use a dash to separate an item and its description. Use a colon or a period.
+  - Recommended: Resource class: The compute size assigned to a job.
+  - Not recommended: Resource class - The compute size assigned to a job.
+
 ## AsciiDoc Formatting
 
 ### Text Styling
@@ -499,6 +522,8 @@ Content for Tab B
 15. Using xrefs without verifying the target file exists and path is correct
 16. **Committing without running Vale and fixing linting errors**
 17. Using AsciiDoc underscore heading IDs (`<<_install_circleci_agent_skills>>`) instead of the site kebab-case ID (`<<install-circleci-agent-skills>>`)
+18. Unnecessary semicolons (prefer a period or a comma)
+19. En dashes, or dashes used to separate an item and its description
 
 ## AsciiDoc Validation Rules
 - Close all attribute blocks properly
