@@ -55,7 +55,56 @@ Assume technical competence but explain concepts clearly and simply. Some concep
 * Do not use the abbreviations "e.g." or "i.e.". Instead, use "for example" and "that is", respectively.
 
 == Punctuation
-* Avoid semicolons and dashes (en or em) to split sentences. Instead, add a new sentence, or use commas and periods.
+Use punctuation to keep sentences short and easy to scan. Prefer periods and commas over semicolons and dashes.
+
+=== Semicolons
+
+Avoid semicolons. Prefer a new sentence, or use commas and periods. Use a semicolon only sparingly, and only in the following cases:
+
+* When joining two closely related independent clauses where a period or a comma is not as effective.
++
+Recommended: Start with a smaller resource class; if the job fails due to memory limits, increase the class.
+* When preceding a conjunctive adverb (like _therefore_) or a phrase (like _that is_) that joins two independent clauses.
++
+Recommended: The workflow skips the deploy job on feature branches; therefore, only the test jobs run.
++
+Recommended: Set the executor at the job level; that is, declare `docker`, `machine`, or `macos` under the job, not under the workflow.
+* When separating a series of long or complex items that contain their own punctuation.
++
+Recommended: When you have limited time, focus on the changes that will have the greatest benefit: what matters most to your users; what is most important to fix; and what is feasible to fix in the available time.
++
+Recommended: Review the page one more time, checking for the following: present tense and active voice; typos, punctuation, and grammar; and whether you can shorten anything.
++
+Notice that in the final example, the second item in the list is itself a list.
+
+=== Dashes
+
+Avoid dashes (en or em) to split sentences. Prefer a new sentence, or use commas and periods.
+
+* If you use an em dash (—) to indicate a break in the flow of a sentence, do not put a space before or after it. Do not use an en dash or a hyphen in place of an em dash.
++
+Recommended: Caching speeds up the job unless the cache key changes on every commit.
++
+If you use an em dash: Caching speeds up the job—unless the cache key changes on every commit.
++
+Not recommended: Caching speeds up the job - unless the cache key changes on every commit.
+* Do not use an en dash (–). Use a hyphen or the word "to" instead.
++
+Recommended: Server v4.0 to v4.8
++
+Not recommended: Server v4.0–v4.8
+* Do not use a dash to separate an item and its description. Use a colon or a period. For a series of items and descriptions, use a description list.
++
+Recommended: Resource class: The compute size assigned to a job.
++
+Not recommended: Resource class - The compute size assigned to a job.
++
+Recommended: Appendix A: Configuration reference
++
+Not recommended: Appendix A—Configuration reference
+
+=== Other punctuation
+
 * Do not use ampersands (&) as a substitute for the word "and". The ampersand is used in logical notation for the binary operator AND.
 * Do not put a period at the end of a sentence if the sentence ends with a URL, code sample or command. People are likely to copy and paste and could end up copying the period too.
 * We use the oxford comma. For example: “Please bring me a pencil, eraser, and notebook.” The comma after “eraser” is the oxford comma.
