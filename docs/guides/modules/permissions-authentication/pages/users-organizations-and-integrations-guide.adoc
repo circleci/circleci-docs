@@ -354,7 +354,7 @@ The trigger options available to you depend on your pipeline type. These options
 ^| One
 ^|[.circle-red]#*No*#
 ^|Zero, one, many
-^|Zero, one, many
+^|[.circle-red]#*No*#
 ^|[.circle-red]#*No*#
 ^|[.circle-red]#*No*#
 ^|[.circle-red]#*No*#

@@ -34,10 +34,10 @@ TIP: *Consider using Smart Deployments instead of this guide.* The Smart Deploym
 
 You can set up deploy markers in two ways:
 
-* <<set-up-deploy-markers-for-multiple-projects,Set up deploy markers from the web app>>: Use the CircleCI web app to set up deploy marker configuration for a single project or multiple projects at once.
+* <<set-up-deploy-markers-for-multiple-projects,Set up deploy markers from the web app>>: Use the CircleCI web app to set up deploy marker configuration for a single project or multiple projects at once. This route requires a GitHub repository and the CircleCI GitHub App.
 ** With AI features enabled, CircleCI generates the configuration for you.
 ** Without AI features you receive a configuration template to apply manually.
-* <<set-up-deploy-markers-manually,Set up deploy markers manually>>: Edit your CircleCI configuration file directly to add deploy markers. You can choose to configure deploy markers <<deploy-markers-with-status-updates,with status updates>> or <<deploy-marker-logs-without-status-updates,without status updates>>.
+* <<set-up-deploy-markers-manually,Set up deploy markers manually>>: Edit your CircleCI configuration file directly to add deploy markers. This route also works with GitLab, GitLab self-managed, Bitbucket Cloud, and Cursor Origin. You can choose to configure deploy markers <<deploy-markers-with-status-updates,with status updates>> or <<deploy-marker-logs-without-status-updates,without status updates>>.
 
 You can also set up deploy markers using AI as part of the rollback or deploy pipeline guided setup process. See the xref:set-up-rollbacks.adoc[Set up Rollbacks] or xref:set-up-deploys.adoc[Set up Deploys] guides for more details.
 
@@ -140,6 +140,7 @@ NOTE: The `circleci run release` commands are part of the CircleCI environment C
 
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
 * A CircleCI project with a workflow configured to deploy your code.
+* Any supported version control provider: GitHub GitLab, GitLab self-managed, Bitbucket Cloud, and Cursor Origin.
 
 [#deploy-markers-with-status-updates]
 === Deploy markers with status updates

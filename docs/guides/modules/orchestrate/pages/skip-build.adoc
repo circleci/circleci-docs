@@ -16,7 +16,7 @@ All methods are described below.
 [#skip-jobs]
 == Skip CI for a specific push
 
-If you have a trigger configured to run a pipeline on push events, you can skip it. Add one of the following tags within the first 250 characters of the body or title of the **latest commit** you push:
+If you have a trigger configured to run a pipeline on push events, you can skip it. Add one of the following tags anywhere in the title or body of the **latest commit** you push:
 
 * `[ci skip]`
 * `[skip ci]`
@@ -25,7 +25,7 @@ Adding one of these tags skips pipeline execution for all the commits included i
 
 === The skip CI process
 
-When you include `[ci skip]` or `[skip ci]` in the first 250 characters of the body or title of a commit, CircleCI uses this information to decide not to build your project.
+When you include `[ci skip]` or `[skip ci]` anywhere in the title or body of a commit, CircleCI uses this information to decide not to build your project.
 
 A skipped pipeline will not show on the pipelines page, and no pipeline will be returned for a skipped commit using the API.
 
@@ -35,6 +35,7 @@ A skipped pipeline will not show on the pipelines page, and no pipeline will be 
 A few points to note regarding the scope of the `ci skip` feature:
 
 * If you push multiple commits at once, and the latest commit includes a `[ci skip]` or `[skip ci]` tag, it will skip the pipeline execution for all commits in that push.
+* The entire commit message is checked, including the title and body. If you squash commits when merging, your VCS provider may concatenate all individual commit messages into the body of the squashed commit. If any of the original commit messages contain a skip tag, the resulting pipeline will be skipped. Review your squashed commit message before merging.
 * This feature is not supported for fork PRs. Scheduled workflows will run even if you push a commit with `[ci skip]` message. Changing the config file is the way to upgrade the current schedule.
 * For GitHub OAuth and Bitbucket Cloud pipelines, this functionality applies also when the pipeline is triggered via API, manually via the web app, or via schedule.
 * GitHub App pipelines triggered via Custom webhook, schedule or API are never skipped.

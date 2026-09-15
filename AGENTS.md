@@ -12,6 +12,22 @@ For a comprehensive overview of the CircleCI documentation structure, see the au
 
 This guide focuses on **how to write documentation**. The llms.txt file tells you **what documentation exists and where**.
 
+## Git worktrees
+
+Always create a git worktree for your work in:
+
+```
+../circleci-docs-worktrees/<issue-id>-<short-description>
+```
+
+For example:
+
+```
+git worktree add ../circleci-docs-worktrees/LIN-123-fix-nav -b LIN-123-fix-nav
+```
+
+Do all work in that directory, not in the main circleci-docs checkout. If there is no issue ID, use a short description only.
+
 ## Creating New Documentation Pages
 
 **IMPORTANT**: When creating new documentation pages, always start with the appropriate page template from `docs/contributors/modules/templates/pages/`:
@@ -162,6 +178,14 @@ xref:guides:integration:github-integration.adoc#user-keys-and-deploy-keys[User K
   - **Good**: `xref:guides:orchestrate:schedule-triggers.adoc[Schedule Triggers]`
   - **Bad**: `xref:guides:orchestrate:schedule-triggers.adoc[schedule triggers]`
 - Always verify xrefs before using them. Check that the page you are referencing exists in the location you are using to create the resource ID
+- **Heading hashes are lowercase kebab-case of the heading text.** The playbook sets `idprefix: ""` and `idseparator: "-"`, so `== Install CircleCI agent skills` becomes `#install-circleci-agent-skills`. Do not use AsciiDoc's default underscore IDs (`#_install_circleci_agent_skills`). `validate-html` fails when a hash does not exist on the built page.
+- Add an explicit `[#custom-id]` only when the hash must differ from that kebab-case heading. Otherwise link to the generated ID:
+```adoc
+== Install CircleCI agent skills
+
+See the Codex and Copilot tabs in <<install-circleci-agent-skills>>.
+```
+- For cross-page section links: `xref:guides:toolkit:circleci-agent-skills.adoc#install-circleci-agent-skills[Install CircleCI Agent Skills]`
 
 Before adding any xref to a document, you must verify the target file exists and the path is correct:
 
@@ -197,6 +221,7 @@ link:https://circleci.com[CircleCI]
 - Links must have descriptive link text (not "click here", "here", or "this")
 
 ### Code Samples
+- **Reuse shared snippets** from `docs/guides/modules/ROOT/examples/` when the same config already exists. Include them with `example$` inside a source block. Follow `skills/partials/SKILL.md` to discover, insert, or extract examples.
 - **Provide working examples**: Code should be tested and valid
 - Readers should copy-paste with minimal changes
 - **Specify language** for syntax highlighting:
@@ -273,6 +298,8 @@ some code
 ```
 
 ### Reusable Partials
+
+When discovering, inserting, or creating partials or shared code examples, follow the partials skill at `skills/partials/SKILL.md`. That skill covers both `partials/` (AsciiDoc prose) and `examples/` (shared config snippets). It is the workflow for browsing categories, searching, suggesting from page context, proposing extractions, and writing the correct `include::` syntax. Other docs-authoring skills should reference it instead of copying reusable content.
 
 CircleCI docs use reusable partials to maintain consistency and reduce duplication. Partials are AsciiDoc snippets that can be included in multiple pages.
 
@@ -388,6 +415,20 @@ When creating a new partial:
 - Update all pages when modifying a partial (partials affect multiple pages)
 - Use meaningful filenames that describe the content
 
+### Reusable Examples
+
+Shared code snippets live in `docs/guides/modules/ROOT/examples/`, next to `partials/`. Include them with `example$` **inside** a source block. Do not paste the snippet into the page.
+
+```adoc
+.Optional title for the snippet
+[source,yaml]
+----
+include::ROOT:example$orchestration-examples/job-group.yml[]
+----
+```
+
+From another component, use `include::guides:ROOT:example$path.yml[]`. Current categories: `expression-examples/` (current expression syntax), `logic-statement-examples/` (legacy logic statements), `orchestration-examples/` (job groups, serial groups, `override-with`). Follow `skills/partials/SKILL.md` to browse, search, insert, or extract examples.
+
 ### Images
 - **Always include descriptive alt text**:
 ```adoc
@@ -457,6 +498,7 @@ Content for Tab B
 14. Not using appropriate page templates for new content
 15. Using xrefs without verifying the target file exists and path is correct
 16. **Committing without running Vale and fixing linting errors**
+17. Using AsciiDoc underscore heading IDs (`<<_install_circleci_agent_skills>>`) instead of the site kebab-case ID (`<<install-circleci-agent-skills>>`)
 
 ## AsciiDoc Validation Rules
 - Close all attribute blocks properly
@@ -598,7 +640,7 @@ Before committing documentation changes:
 
 1. ✅ **REQUIRED**: Run Vale locally and fix all error-level violations (recommended for all agents)
 2. ✅ Preview locally to check formatting and links
-3. ✅ Verify all xrefs point to existing files
+3. ✅ Verify all xrefs point to existing files, and that heading hashes use kebab-case of the heading (not `_underscore_ids`)
 4. ✅ Check `:page-description:` is 70-160 characters
 5. ✅ Ensure link text uses title case
 6. ✅ Confirm page is added to `nav.adoc` if new
