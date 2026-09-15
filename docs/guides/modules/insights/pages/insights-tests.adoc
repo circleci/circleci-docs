@@ -3,7 +3,7 @@
 :page-description: Analyze your test performance using test Insights.
 :experimental:
 
-include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
+include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab or GitHub App]
 
 [#overview]
 == Overview

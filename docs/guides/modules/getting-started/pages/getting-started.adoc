@@ -73,7 +73,7 @@ In the next sections we will cover ways to modify and debug your config.
 {empty} +
 {empty} +
 --
-GitLab & Bitbucket Data Center::
+GitLab::
 +
 --
 image:guides:ROOT:getting-started-guide-exp/create-project.png[float=right]

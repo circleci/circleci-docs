@@ -34,7 +34,7 @@ Check the tab for your provider below before removing a connection. To delete an
 
 The following tabs describe your options for each integration type. Select the tab for the provider you want to connect.
 
-How you start depends on the provider. GitLab self-managed and Bitbucket Data Center use a btn:[Set up integration] button, while other providers are shown as cards under "Available Providers".
+How you start depends on the provider. GitLab self-managed uses a btn:[Set up integration] button, while other providers are shown as cards under "Available Providers".
 
 [tabs]
 ====
@@ -77,9 +77,6 @@ GitLab::
 GitLab self-managed::
 +
 --
-
-NOTE: If you use both CircleCI's Bitbucket Data Center and GitLab self-managed integrations, be aware of a known bug in menu:Org[VCS Connections]. Adding a `known_hosts` value to one integration also populates the `known_hosts` field for the other integration. To use both integrations in the same CircleCI organization, add both `known_hosts` values to the single input field, separated by a new line.
-
 *Availability*: A GitLab self-managed integration is installed into a `circleci` type organization.
 
 *Configure*: Set up an integration with your GitLab self-managed instance from menu:Org[VCS Connections] as follows:
@@ -116,46 +113,6 @@ You cannot currently edit or delete existing GitLab self-managed integrations.
 *View*: Currently, there is no method to manage the connection with GitLab self-managed outside of the project setup, trigger, and configuration settings.
 
 *Disconnect*: Currently, there is no method to disconnect GitLab self-managed from your organization. You can delete projects that are connected to GitLab self-managed and delete the CircleCI webhooks in GitLab to achieve this. See the xref:security:delete-organizations-and-projects.adoc[Delete Organizations and Projects] page for more information.
---
-Bitbucket Data Center::
-+
---
-NOTE: If you use both CircleCI's Bitbucket Data Center and GitLab self-managed integrations, be aware of a known bug in menu:Org[VCS Connections]. Adding a `known_hosts` value to one integration also populates the `known_hosts` field for the other integration. To use both integrations in the same CircleCI organization, add both `known_hosts` values to the single input field, separated by a new line.
-
-*Availability*: A Bitbucket Data Center integration is installed into a `circleci` type organization.
-
-*Configure*: Set up an integration with your Bitbucket Data Center instance from menu:Org[VCS Connections] as follows:
-
-. Select btn:[Set up integration] next to Bitbucket Data Center.
-. In the modal enter your Bitbucket Data Center instance URL and your `known_hosts`:
-+
-Integrating CircleCI with your Bitbucket Data Center instance requires that you store a public SSH host key within the CircleCI organization that will be accessing the Bitbucket Data Center instance.
-+
-To get the required SSH host key, run `ssh-keyscan` with the hostname and port of your Bitbucket Data Center instance. For example:
-+
-TIP: Replace the port with the correct port for your instance, and the hostname with your Bitbucket Data Center hostname.
-+
-[,shell]
-----
-ssh-keyscan -p 1234 bitbucket-datacenter.example.com
-----
-+
-The output will look something like the following:
-+
-[,shell]
-----
-[bitbucket-datacenter.example.com]:1234 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAA//NF6iU86j0hfGxn8ncjgwvmk9tMKzhFqrRLaltP0TGt760PhfWk070raKLHS3L6H0BdN9qNVsTk63czziFDmtBehE82/XXX+59MuppY0DHG3brNvw4REPmzZkQNIR6Cs8b15iFbwnIL51IH9kBVMztWQaRDPkPPxihM6e0n/vo5n3uEIPCTZiwLgKRcpeks2LsfbsW0NN5Q7J1Irp/ACstfrsFWSntranbjMe6cIwELNY6FhvYmETzH0cY0=
-----
-+
-Copy the full output from the `ssh-keyscan` command and enter it into the "known hosts" text box when setting up your integration in the CircleCI web app under menu:Org[VCS Connections].
-
-. Select btn:[Set Up Integration].
-
-To set up Bitbucket data center pipelines you will need to create a project HTTP access token with the project admin scope. Create this under Projects in Bitbucket. For more information, see the link:https://confluence.atlassian.com/bitbucketserver/http-access-tokens-939515499.html[Bitbucket docs]. Copy the token somewhere safe, you will need to enter it when creating pipelines and triggers in CircleCI.
-
-*View*: Currently, there is no method to manage the connection with Bitbucket Data Center outside of the project setup, trigger, and configuration settings.
-
-*Disconnect*: Currently, there is no method to disconnect Bitbucket Data Center from your organization. You can delete projects that are connected to Bitbucket Data Center and delete the CircleCI webhooks in Bitbucket Data Center to achieve this. See the xref:security:delete-organizations-and-projects.adoc[Delete Organizations and Projects] page for more information.
 --
 Cursor Origin::
 +

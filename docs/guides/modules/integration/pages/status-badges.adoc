@@ -39,7 +39,7 @@ include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 
 If your project is integrated with CircleCI through GitHub OAuth or Bitbucket Cloud, you can manually generate a status badge for your project. To check which method of GitHub authorization you have, see the xref:github-integration.adoc[GitHub integration] guide.
 
-The manual steps in this section will not work if your project is integrated with GitHub App, GitLab, or Bitbucket Data Center.
+The manual steps in this section will not work if your project is integrated with GitHub App or GitLab.
 
 [#generating-a-status-badge]
 === Generate a status badge

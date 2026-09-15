@@ -37,8 +37,6 @@ Open source projects have significantly more commits than private projects, so b
 
 You can modify this behaviour by restricting builds to branches that have pull requests.
 
-NOTE: This feature *is not supported* for orgs that use the Bitbucket Data Center integration.
-
 [tabs]
 ====
 GitHub App::
@@ -93,7 +91,7 @@ image::guides:ROOT:triggers/gitlab-self-managed-trigger-filter-only-mr.png[Set t
 [#build-pull-requests-from-forked-repositories]
 === Build pull requests from forked repositories
 
-include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
+include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab or GitHub App]
 
 Many open source projects accept PRs from forked repositories. Building these PRs is an effective way to catch bugs before manually reviewing changes.
 
@@ -104,7 +102,7 @@ If a user submits a pull request to your repository from a fork, but no pipeline
 [#pass-secrets-to-builds-from-forked-pull-requests]
 === Pass secrets to builds from forked pull requests
 
-include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
+include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab or GitHub App]
 
 Running an unrestricted build in a parent repository can be dangerous. Projects often contain sensitive information, and this information is freely available to anyone who can push code that triggers a build.
 
