@@ -1,11 +1,8 @@
 = The CircleCI CLI
-:page-badge: Preview
 :page-platform: Cloud
 :page-description: A guide to the CircleCI CLI with links to setup guides, a ful reference and how-to guides for common tasks.
 :experimental:
 :page-aliases: local-cli.adoc, how-to-use-the-circleci-local-cli.adoc
-
-NOTE: The CircleCI CLI v1 is currently in preview. You can expect changes to the available commands and features during this phase. If you have any feedback or suggestions for the CircleCI CLI, or to report an issue, open an link:https://github.com/CircleCI-Public/circleci-cli/issues[Issue] on the GitHub repository.
 
 The link:https://cli.circleci.com/[CircleCI command line interface (CLI)] brings CircleCI's tooling to your terminal.
 
@@ -15,7 +12,7 @@ Follow these steps to authenticate and connect the CLI to your CircleCI project.
 
 . *Install the CircleCI CLI:* Visit the link:https://cli.circleci.com/[CircleCI CLI] page for installation instructions.
 +
-If you currently have the legacy stable release installed (v0.1.x) you must uninstall this before installing the new preview version. For example, `brew uninstall circleci` or the appropriate command for your operating system and/or package manager. You can check your current version with `circleci --version`.
+If you currently have the legacy stable release installed (v0.1.x) you must uninstall this before installing CLI v1. For example, `brew uninstall circleci` or the appropriate command for your operating system and/or package manager. You can check your current version with `circleci --version`.
 
 . *Log in to CircleCI:*
 +

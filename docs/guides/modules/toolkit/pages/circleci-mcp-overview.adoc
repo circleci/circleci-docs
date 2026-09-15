@@ -4,8 +4,6 @@
 :experimental:
 :page-aliases: using-the-circleci-mcp-server.adoc
 
-NOTE: The CircleCI CLI MCP server is currently in preview. See xref:connecting-to-the-circleci-cli-mcp.adoc[Connecting to the CircleCI CLI MCP].
-
 CircleCI's MCP servers enable you to diagnose build failures, fix issues, and manage CI pipelines through natural language commands without leaving your development environment.
 
 [NOTE]
