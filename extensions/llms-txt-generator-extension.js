@@ -82,6 +82,29 @@ function addToSitemap (siteCatalog, playbook) {
 }
 
 /**
+ * Point agents at the live How to use these docs page. Keep this short so
+ * defaults and deprecations live in AsciiDoc, not in this generator.
+ */
+function generateDocsOrientation (siteUrl) {
+  const origin = siteUrl.replace(/\/docs\/?$/, '')
+  const guide = `${siteUrl}/guides/getting-started/how-to-use-these-docs/`
+
+  return `## How to use these docs
+
+Start with [How to use these docs](${guide}) [md](${guide}index.md).
+
+That page is the source of truth for current defaults, which guide to open first, and which patterns to avoid.
+
+For API work, fetch the OpenAPI specification. Do not infer request or response shapes from prose guides.
+
+- OpenAPI (canonical): ${origin}/fullopenapi.yaml
+- API v3 index: ${siteUrl}/api/v3/llms.txt
+- Conventions: ${siteUrl}/api/v3/conventions.md
+
+`
+}
+
+/**
  * Generate the complete llms.txt content.
  */
 function generateLlmsTxt (playbook, contentCatalog) {
@@ -114,6 +137,9 @@ function generateLlmsTxt (playbook, contentCatalog) {
   sections.push('- **Updates**: Automatically regenerated on each deployment')
   sections.push('- **Discovery**: Announced via `<link rel="alternate" type="text/plain" href="/docs/llms.txt">` in page headers')
   sections.push('- **Sitemap**: Listed in https://circleci.com/docs/sitemap-llms.xml\n')
+
+  // Point at the live How to use these docs page before the generated tree.
+  sections.push(generateDocsOrientation(siteUrl))
 
   // Documentation Structure
   sections.push('## Documentation Structure\n')
