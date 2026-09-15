@@ -10,13 +10,13 @@ CircleCI allows you to automatically test your code before changes are merged. Y
 
 When you integrate your tests into your CircleCI pipelines, you deliver software to your users more reliably and efficiently, and get faster feedback. This also means you can fix issues and failed tests faster. Test output data becomes available in CircleCI to help debug failed tests. If you save your test data in CircleCI, you can also take advantage of Test Insights as well as parallelism features to identify opportunities to further optimize your pipelines.
 
-<<basics,Basics>> below covers running your test suite using your native test library and the `run` step, which works with any test runner. `circleci testsuite` is CircleCI's preferred way to run that test command, for all customers: it supports the same test discovery, running, and splitting capabilities as the legacy `circleci tests` command family, plus additional commands (such as `list-tests`, for introspecting which tests will run) and three features unique to link:https://circleci.com/blog/smarter-testing-stop-running-tests-that-dont-matter/[Smarter Testing], each usable on its own:
+<<basics,Basics>> below covers running your test suite using your native test library and the `run` step, which works with any test runner. `circleci testsuite` is CircleCI's preferred way to run that test command, for all customers. It supports the same test discovery, running, and splitting capabilities as the legacy `circleci tests` command family, plus additional commands, such as `list-tests` for introspecting which tests will run. It also adds three features unique to link:https://circleci.com/blog/smarter-testing-stop-running-tests-that-dont-matter/[Smarter Testing], each usable on its own:
 
-* *Test impact analysis* -- skip tests that your code changes can't have affected, based on real coverage data rather than heuristics.
+* *Test impact analysis* -- skip tests that your code changes cannot have affected, based on real coverage data rather than heuristics.
 * *Dynamic test splitting* -- keep parallel execution nodes evenly loaded by pulling tests from a shared queue as work becomes available, instead of assigning a fixed split up front.
 * *Auto rerun failed tests* -- automatically retry failed tests to absorb flaky failures without manual re-runs.
 
-See <<smarter-testing,Get started with Smarter Testing>> below to switch, or <<legacy-test-command,Legacy: `circleci tests` command>> if you're on Server or not ready to move yet.
+See <<smarter-testing,Get started with Smarter Testing>> below to switch, or <<legacy-test-command,Legacy: `circleci tests` command>> if you are on Server or not ready to move yet.
 
 [#basics]
 == Basics
@@ -50,7 +50,7 @@ For a more in-depth look at workflows functionality, visit the xref:orchestrate:
 
 If you need to restrict the connections allowed in your test jobs, consider enabling xref:security:ip-ranges.adoc[IP Ranges]. This enables CircleCI jobs to go through a set of well-defined IP address ranges.
 
-This gets your tests running with your native test library, directly through the `run` step -- the same approach the legacy `circleci tests` command family uses. `circleci testsuite` uses this same `run` step and is CircleCI's preferred way to run it going forward: it matches `circleci tests` feature for feature, and adds test impact analysis, dynamic test splitting, and auto rerun failed tests on top -- see <<smarter-testing,Get started with Smarter Testing>> below.
+This gets your tests running with your native test library, directly through the `run` step -- the same approach the legacy `circleci tests` command family uses. `circleci testsuite` uses this same `run` step and is CircleCI's preferred way to run it going forward. It matches `circleci tests` feature for feature, and adds test impact analysis, dynamic test splitting, and auto rerun failed tests on top -- see <<smarter-testing,Get started with Smarter Testing>> below.
 
 [#orbs]
 == Use orbs to simplify testing
@@ -119,7 +119,7 @@ More information is available on the xref:insights:insights-tests.adoc[Test Insi
 [#smarter-testing]
 == Get started with Smarter Testing (`circleci testsuite`)
 
-`circleci testsuite` is CircleCI's preferred way to run tests, for all customers. It supports the same test discovery, running, and splitting capabilities as the legacy `circleci tests` command family, plus additional commands and the Smarter Testing features described below. It's currently available in Cloud only; Server projects should continue to use the <<legacy-test-command,legacy `circleci tests` commands>> for now.
+`circleci testsuite` is CircleCI's preferred way to run tests, for all customers. It supports the same test discovery, running, and splitting capabilities as the legacy `circleci tests` command family, plus additional commands and the Smarter Testing features described below. It is currently available in Cloud only; Server projects continue to use the <<legacy-test-command,legacy `circleci tests` commands>> for now.
 
 `circleci testsuite` is driven by a single command and a `.circleci/test-suites.yml` configuration file that describes how to discover and run your tests. Setup has two parts:
 
@@ -170,7 +170,7 @@ test-suites:
 [#test-impact-analysis]
 === Test impact analysis
 
-Test impact analysis uses code coverage data to map which tests exercise which source files. On a feature branch, it starts with your full test suite selected, then conservatively deselects only the tests proven to be unaffected by the files you changed -- routinely skipping a large share of tests without reducing test confidence, since deselection is based on measured coverage rather than guesswork. A full run against your default branch keeps the underlying coverage baseline up to date.
+Test impact analysis uses code coverage data to map which tests exercise which source files. On a feature branch, it starts with your full test suite selected, then conservatively deselects only the tests proven unaffected by the files you changed. This routinely skips a large share of tests without reducing test confidence, since deselection is based on measured coverage rather than guesswork. A full run against your default branch keeps the underlying coverage baseline up to date.
 
 Full setup instructions, including coverage requirements per test runner, are on the xref:set-up-test-impact-analysis.adoc[Set up Test Impact Analysis] page.
 
@@ -184,11 +184,11 @@ See the xref:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting] page to
 [#auto-rerun-failed-tests]
 === Auto rerun failed tests
 
-Auto rerun failed tests retries a failing test immediately, without human intervention, up to `max-auto-rerun` times or until `auto-rerun-duration` is reached. If a test eventually passes, its earlier failure is suppressed and the job succeeds; a test that fails consistently still exhausts its retries and fails the job. This is intended for intermittent, flaky failures, not for masking genuine regressions -- it pairs well with test impact analysis, since a smaller, more targeted test selection makes flakiness easier to spot.
+Auto rerun failed tests retries a failing test immediately, without human intervention, up to `max-auto-rerun` times or until `auto-rerun-duration` is reached. If a test eventually passes, its earlier failure is suppressed and the job succeeds; a test that fails consistently still exhausts its retries and fails the job. This is intended for intermittent, flaky failures, not for masking genuine regressions. It pairs well with test impact analysis, since a smaller, more targeted test selection makes flakiness easier to spot.
 
 See the xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] page for configuration details.
 
-For the full set of configuration keys available in `test-suites.yml`, refer to the xref:testsuite-configuration-reference.adoc[Test suite Config Reference].
+For the full set of configuration keys available in `test-suites.yml`, refer to the xref:testsuite-configuration-reference.adoc[Test Suite Config Reference].
 
 [#next-steps]
 == Next steps
@@ -208,7 +208,7 @@ For the full set of configuration keys available in `test-suites.yml`, refer to 
 
 Splitting your test suite across parallel execution nodes reduces the time it takes to run your tests. `circleci testsuite run` already does this using static, timing-based assignment when `parallelism` is set on your job, with <<dynamic-test-splitting,dynamic test splitting>> available as a further improvement. Without `circleci testsuite`, splitting is handled by the `circleci tests split` command instead.
 
-See xref:optimize:parallelism-faster-jobs.adoc[Test splitting and parallelism] and xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the environment CLI to split tests] for setup details.
+See xref:optimize:parallelism-faster-jobs.adoc[Test Splitting and Parallelism] and xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the Environment CLI to Split Tests] for setup details.
 
 [#legacy-rerun-failed-tests]
 === Re-run failed tests only (`circleci tests run`)

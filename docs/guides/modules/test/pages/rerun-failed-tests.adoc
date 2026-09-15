@@ -5,7 +5,7 @@
 
 Use rerun failed tests to only rerun a subset of tests, instead of an entire test suite, when a transient test failure arises.
 
-NOTE: This page covers rerunning failed tests with the legacy `circleci tests run` command. CircleCI's preferred way to rerun failed tests is now `circleci testsuite`'s xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] feature.
+NOTE: This page covers rerunning failed tests with the legacy `circleci tests run` command. CircleCI's preferred way to rerun failed tests is now the xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] feature of `circleci testsuite`.
 
 [#introduction]
 == Introduction
@@ -578,7 +578,7 @@ Example:
 [#known-limitations]
 == Known limitations
 
-* If your testing job uses parallelism and test splitting, the job will spin up the number of containers/virtual machines (VMs) that are specified with the `parallelism` key. However, the step that runs tests for each of those parallel containers/VMs will only run a subset of tests, or no tests, after the tests are split across the total number of parallel containers/VMs.
+* If your testing job uses parallelism and test splitting, the job will spin up the number of containers/virtual machines (VMs) that are specified with the `parallelism` key. However, the step that runs tests for each of those parallel containers/VMs only runs a subset of tests, or no tests. This happens because the tests are split across the total number of parallel containers/VMs.
 +
 For example, if parallelism is set to eight, there may only be enough tests after the test splitting occurs to "fill" the first parallel container/VM. The remaining seven containers/VMs will still start up, but they will not run any tests when they get to the test execution step.
 +
@@ -613,7 +613,7 @@ See <<parallel-rerun-failure>> for a workaround to avoid failures if you are als
 NOTE: The `halt` command will execute the rest of the _current_ step, regardless of whether `tests.txt` has content or not. Make sure to place the command to execute tests in the _following_ step.
 
 * Orbs that run tests may not work with this new functionality at this time.
-* If a shell script is invoked to run tests, `circleci tests run` must be placed **in the shell script** itself, and not `.circleci/config.yml`. Alternatively, see the <<output-test-files-only,section above>> to pipe the list of test files to be run to a `.txt` file and then pass the list of test file names to your shell script.
+* If a shell script is invoked to run tests, `circleci tests run` must be placed **in the shell script** itself, and not `.circleci/config.yml`. Alternatively, see the <<output-test-files-only,section above>> to pipe the list of test files to a `.txt` file. Then pass the list of test file names to your shell script.
 * Jobs that are older than the xref:optimize:persist-data.adoc#custom-storage-usage[Retention Period] for workspaces for the organization cannot be rerun with "Rerun failed tests".
 * Jobs that upload code coverage reports:
 +
