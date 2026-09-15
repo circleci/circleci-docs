@@ -4,7 +4,7 @@
 :experimental:
 :page-aliases: migrate-scheduled-workflows-to-scheduled-pipelines.adoc
 
-NOTE: This feature is not supported for GitLab or Bitbucket Data Center pipelines.
+NOTE: This feature is not supported for GitLab pipelines.
 
 Schedule workflows have some limitations that make them less convenient than schedule triggers:
 

@@ -68,7 +68,7 @@ Prefer the short `ROOT:partial$` form inside guides. Use the full `guides:ROOT:p
 **Optional author comment** (does not change rendered content; common on well-known notes and nav steps):
 
 ```adoc
-include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
+include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab or GitHub App]
 ```
 
 **AsciiDoc include attributes** (do change rendering). Use `leveloffset` when the partial starts with section headings that must nest under the current heading:

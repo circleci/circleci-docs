@@ -359,7 +359,7 @@ Deploying a specific <<component>> version to the next <<environment>> in an <<e
 [#vcs]
 == Version control system (VCS)
 
-The platform where your code is stored and that CircleCI integrates with, such as GitHub, GitHub Enterprise, GitLab, GitLab self-managed, Bitbucket Cloud, or Bitbucket Data Center. See the xref:guides:integration:version-control-system-integration-overview.adoc[VCS Integration Overview] page.
+The platform where your code is stored and that CircleCI integrates with, such as GitHub, GitHub Enterprise, GitLab, GitLab self-managed, or Bitbucket Cloud. See the xref:guides:integration:version-control-system-integration-overview.adoc[VCS Integration Overview] page.
 
 [#outbound-webhook]
 == Webhook (outbound)

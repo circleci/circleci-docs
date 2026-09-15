@@ -118,9 +118,9 @@ The `project_slug` is also included in the response payload when looking up a li
 === GitHub OAuth and Bitbucket Cloud
 If you integrate your code via the GitHub OAuth app or Bitbucket Cloud, your project slug is in a human readable format: `vcs_type/org_name/repo_name` (VCS type can be `github`/`bitbucket` or `gh`/`bb`).
 
-=== GitHub App, GitLab and Bitbucket Data Center
+=== GitHub App and GitLab
 
-For GitHub App, GitLab and Bitbucket Data Center project, the project slug is made up of org and project identifiers as opaque, for example: `circleci/43G3kM5RtfFE7v5sa4nWAU/44n9pujWcTnVZ2b5S8Fnat`. A project slug must be treated as an opaque string. To retrieve project and organization IDs or names, use the entire slug to fetch <<get-project-details,project details>> or organization details. The IDs and names are included in the payload.
+For GitHub App and GitLab projects, the project slug is made up of org and project identifiers as opaque, for example: `circleci/43G3kM5RtfFE7v5sa4nWAU/44n9pujWcTnVZ2b5S8Fnat`. A project slug must be treated as an opaque string. To retrieve project and organization IDs or names, use the entire slug to fetch <<get-project-details,project details>> or organization details. The IDs and names are included in the payload.
 
 [#rate-limits]
 == Rate limits
@@ -341,7 +341,7 @@ You will likely receive a long string of unformatted JSON. After formatting, it 
 
 . One of the benefits of the CircleCI API v2 is the ability to remotely trigger pipelines with parameters. The following code snippet triggers a pipeline via `curl` without any body parameters:
 +
-CAUTION: For GitHub App, GitLab or Bitbucket Data Center pipelines, use the link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/triggerPipelineRun[Trigger a new pipeline endpoint] rather than the endpoint used in this example.
+CAUTION: For GitHub App or GitLab pipelines, use the link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/triggerPipelineRun[Trigger a new pipeline endpoint] rather than the endpoint used in this example.
 +
 [,shell]
 ----
