@@ -4041,7 +4041,7 @@ The following configuration file builds, tests, and deploys a Node.js service. I
 * Reusable <<orbs,orbs>>, <<executors,executors>>, and <<commands,commands>>.
 * A <<parameters-pipeline,pipeline parameter>> that sets the deployment target when you trigger the pipeline.
 * Service containers, dependency caching, workspaces, artifacts, and test results.
-* <<parallelism,Test splitting>> across four parallel execution environments, and a <<matrix,matrix>> that runs the test job once per suite.
+* <<parallelism,Parallelism>> with Smarter Testing to split each suite across four execution environments, and a <<matrix,matrix>> that runs the test job once per suite. See the xref:guides:test:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] guide.
 * <<expression-based-job-filters,Expression-based job filters>>, an <<type,approval job>>, and a <<serial-group,serial group>> so only one deployment runs at a time across your organization.
 * Deploy markers that log each deployment in the CircleCI web app. See the xref:guides:deploy:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
 
@@ -4109,7 +4109,7 @@ jobs:
 
   test:
     executor: node-service
-    # Run this job in four execution environments at the same time.
+    # Smarter Testing splits the suite across these four execution environments.
     parallelism: 4
     # Delete this job's cache data after seven days.
     retention:
@@ -4121,13 +4121,13 @@ jobs:
       - install-dependencies
       - attach_workspace:
           at: ~/app
+      # Each suite name matches a suite in .circleci/test-suites.yml.
       - run:
           name: Run the << parameters.suite >> tests
-          command: |
-            circleci tests glob "test/<< parameters.suite >>/**/*.test.js" |
-              circleci tests run --command="xargs npm run test:ci --" --split-by=timings
+          command: circleci testsuite run "<< parameters.suite >> tests"
       - store_test_results:
-          path: test-results
+          # This path must match the outputs.junit path in test-suites.yml.
+          path: test-reports
       - store_artifacts:
           path: coverage
           destination: coverage
@@ -4228,3 +4228,31 @@ workflows:
                 - canceled
           filters: pipeline.git.branch == "main"
 ----
+
+The `test` job runs the two suites named in a companion `.circleci/test-suites.yml` file:
+
+[,yaml]
+----
+---
+name: unit tests
+discover: vitest list --filesOnly test/unit
+run: vitest run --reporter=junit --outputFile="<< outputs.junit >>" << test.atoms >>
+outputs:
+  junit: test-reports/junit.xml
+options:
+  impact-key: unit
+  dynamic-test-splitting: true
+---
+name: integration tests
+discover: vitest list --filesOnly test/integration
+run: vitest run --reporter=junit --outputFile="<< outputs.junit >>" << test.atoms >>
+outputs:
+  junit: test-reports/junit.xml
+options:
+  impact-key: integration
+  dynamic-test-splitting: true
+  # Rerun a failed test up to twice before the job fails.
+  max-auto-rerun: 2
+----
+
+For every key you can set in this file, see the xref:guides:test:testsuite-configuration-reference.adoc[Testsuite Configuration Reference] page.
