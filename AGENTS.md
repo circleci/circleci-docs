@@ -344,7 +344,7 @@ include::ROOT:partial$category/filename.adoc[]
 
 **Include with custom text or comment:**
 ```adoc
-include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
+include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab or GitHub App]
 ```
 
 **Partial categories and locations:**

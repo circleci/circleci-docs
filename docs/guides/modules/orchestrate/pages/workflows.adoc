@@ -446,7 +446,7 @@ Scheduled workflows allow you to run jobs at specific times rather than on every
 
 By default, a workflow runs on every push, or based on the event rules you have set up for your trigger (menu:Project settings[Triggers] or menu:Project settings[Project Setup]). To trigger a workflow on a schedule, add the `triggers` key to the workflow and specify a `schedule` including cron syntax and branch filters. Scheduled workflows use the `cron` syntax to represent Coordinated Universal Time (UTC). See <<nightly-example>> for an basic example.
 
-Scheduled workflows are *not* available for GitHub App, GitLab or Bitbucket Data Center pipelines.
+Scheduled workflows are *not* available for GitHub App or GitLab pipelines.
 
 [#nightly-example]
 === Example: Build every night
@@ -847,7 +847,7 @@ image::guides:ROOT:orchestrate-and-trigger/rerun-from-failed-workflows-page.png[
 --
 ====
 
-NOTE: If you rerun a workflow containing a job that was previously re-run with SSH, the new workflow runs with SSH enabled for that job, even after SSH capability is disabled at the project level.
+NOTE: If you rerun a workflow containing a job that was previously re-run with SSH, the new workflow runs with SSH enabled for that job. This applies even after SSH capability is disabled at the project level.
 
 [#rerun-limit]
 === Rerun limit

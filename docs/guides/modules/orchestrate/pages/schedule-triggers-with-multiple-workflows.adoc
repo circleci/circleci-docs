@@ -4,7 +4,7 @@
 :experimental:
 :page-aliases: schedule-pipelines-with-multiple-workflows.adoc
 
-NOTE: Schedule triggers are not currently available for GitLab and Bitbucket Data Center projects.
+NOTE: Schedule triggers are not currently available for GitLab projects.
 
 By default, when a pipeline is triggered via schedule trigger each of its workflows will run. You can filter workflows in your `.circleci/config.yml` file with conditionals. The conditionals you set will control which workflows will run when a pipeline is triggered via schedule. These conditions can be set with built-in pipeline values, or through custom pipeline parameters. The examples below demonstrate various ways to set conditionals in your `.circleci/config.yml` file.
 

@@ -110,28 +110,6 @@ For guidance on creating a `config.yml` file, see the following pages:
 * xref:reference:ROOT:configuration-reference.adoc[Configuration Reference]
 ****
 --
-Bitbucket Data Center::
-+
---
-Before creating a project that you want to integrate with code in a Bitbucket Data Center instance, you need to set up an integration with your Bitbucket Data Center instance. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#vcs-integration[Bitbucket Data Center Integration Setup] page for more information.
-
-include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
-
-include::ROOT:partial$create-project/choose-a-repo.adoc[]
-+
-Select the **Bitbucket Data Center** tile to authorise access to your instance.
-
-. To set up your project you will need to create a project HTTP access token with the project admin scope. Create this under Projects in Bitbucket. For more information, see the link:https://confluence.atlassian.com/bitbucketserver/http-access-tokens-939515499.html[Bitbucket docs]. Copy the token somewhere safe, you will need to enter it when creating pipelines and triggers in CircleCI.
-+
-****
-If you set up your Bitbucket Data Center instance you will see your instance URL and known_hosts. If not see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#vcs-integration[Integration Instructions].
-****
-
-** Use the repository dropdown menu to tell CircleCI where your code is stored.
-** Use the Branch dropdown to tell CircleCI which branch to use for your pipeline.
-** Select **Save**. You will then be redirected to the Pipelines page.
-** The express CircleCI configuration setup is not currently available for Bitbucket Data Center projects. You will need to add a `.circleci/config.yml` file in your repository. If the repository you selected already contains a `.circleci/config.yml`, push a commit to see your pipeline on the dashboard.
---
 Cursor Origin::
 +
 --
@@ -297,13 +275,11 @@ CAUTION: Disabling GitLab CI/CD in the GitLab UI is not a substitute for removin
 [#self-managed-connection-problems]
 === Self-managed instance connection problems
 
-For GitLab self-managed and Bitbucket Data Center integrations, if you encounter connection issues:
+For GitLab self-managed integrations, if you encounter connection issues:
 
 . **Verify instance URL and known_hosts**: Ensure your self-managed instance URL and known_hosts are correctly configured. If these are not visible during project creation, complete the integration setup first. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#vcs-integration[Integration Setup] page for more information.
 
 . **Check personal access token**: For GitLab self-managed, verify your personal access token has the `api` scope and has not expired. You may need to generate a new token in your GitLab instance.
-
-. **Check HTTP access token**: For Bitbucket Data Center, verify your HTTP access token has the project admin scope and has not expired. Generate tokens under Projects in your Bitbucket Data Center instance.
 
 . **Verify network connectivity**: Ensure CircleCI can reach your self-managed instance. Check firewall rules, network policies, and any VPN requirements that may block the connection.
 

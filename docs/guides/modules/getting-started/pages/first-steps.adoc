@@ -18,13 +18,13 @@ TIP: Your sign-in method determines which kind of organization you get. To learn
 
 Choose one of the following:
 
-* <<github-gitlab-bitbucket-data-center>>
+* <<github-gitlab-cursor-origin>>
 * <<bitbucket-cloud>>
 
-[#github-gitlab-bitbucket-data-center]
-=== Sign up to build GitHub, GitLab, Bitbucket Data Center, or Cursor Origin projects
+[#github-gitlab-cursor-origin]
+=== Sign up to build GitHub, GitLab, or Cursor Origin projects
 
-If you want to build mainly **GitHub**, **GitLab**, **Bitbucket Data Center**, or **Cursor Origin** projects, sign up with your email address to create an account.
+If you want to build mainly **GitHub**, **GitLab**, or **Cursor Origin** projects, sign up with your email address to create an account.
 
 NOTE: The Cursor Origin integration is in beta.
 
@@ -114,7 +114,6 @@ Your sign-in method and VCS provider together determine what kind of CircleCI or
 * If you sign up with **email and password** you can add the following integrations between CircleCI and your code repositories:
 ** **GitHub**
 ** **GitLab**
-** **Bitbucket Data Center**
 ** **Cursor Origin**
 +
 Set up integrations from menu:Org[VCS Connections]. For steps, see the xref:integration:set-up-vcs-connections.adoc[Set up VCS Connections] page. You can also set up VCS repository integrations when _creating a project_. You authenticate with your VCS provider as part of that setup. For steps see the xref:create-project.adoc[Create a Project] page.

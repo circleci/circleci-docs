@@ -14,7 +14,7 @@ For how this option fits with **Block all new work**, cancelling running workflo
 
 CAUTION: The **Stop Building** option does not automatically remove all project data from the CircleCI databases. To remove all project data from CircleCI, see the xref:security:delete-organizations-and-projects.adoc#delete-a-project[Delete a Project] documentation.
 
-include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
+include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab or GitHub App]
 
 NOTE: **Stop Building** removes all project followers, cancels all running workflows in the background, and removes VCS integration (webhook and deploy key). If you only want to prevent **new** pipelines while keeping the project connected and letting in-progress workflows finish, use xref:orchestrate:skip-build.adoc#enable-block-new-work-for-a-project[Block All New Work] in Advanced project settings instead.
 
