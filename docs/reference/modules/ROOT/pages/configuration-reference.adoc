@@ -4121,7 +4121,7 @@ jobs:
       - install-dependencies
       - attach_workspace:
           at: ~/app
-      # Each suite name matches a suite in .circleci/test-suites.yml.
+      # Resolves to a suite named in .circleci/test-suites.yml, such as "unit tests".
       - run:
           name: Run the << parameters.suite >> tests
           command: circleci testsuite run "<< parameters.suite >> tests"
