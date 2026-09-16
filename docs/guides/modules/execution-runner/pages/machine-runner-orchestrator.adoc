@@ -92,6 +92,15 @@ $ kubectl patch kubevirt kubevirt -n kubevirt --type=merge -p='{
 
 Use this patch command in the cloud provider examples below.
 
+NOTE: The node counts in the following examples (`min`/`desired`, and `max`) are illustrative only. Size the node pool to your actual workload.
+
+Node pool sizing depends on two things: how many VMs you need running at once, and how many VMs fit on a single node.
+
+* *Number of VMs*: driven by `scaling.minReplicas` and `scaling.maxReplicas` for the resource class (see <<scaling-behavior,Scaling Behavior>>). `minReplicas` is the pre-warmed floor that must always be schedulable, so set the node pool's `min`/`desired` count to at least enough nodes to host that many VMs. Set the pool's `max` to enough nodes to host `maxReplicas` VMs, since the autoscaler will not exceed it.
+* *VMs per node*: determined by the VM `spec.domain.resources.requests` (see <<vm-specification-notes,VM Specification Notes>>) against the node's allocatable CPU and memory. A node only fits as many VMs as its allocatable resources allow; oversized VM requests relative to node capacity waste the remainder.
+
+Set `min-nodes`/`num-nodes` (and the equivalent EKS/AKS fields) only as high as needed to host `minReplicas` VMs at your chosen VM size, and raise `max-nodes` to cover `maxReplicas`.
+
 [#example-gke]
 ==== Example: GKE
 
@@ -104,9 +113,9 @@ $ gcloud container node-pools create kubevirt-pool \
   --zone=<your-zone> \
   --project=<your-project> \
   --machine-type=n2-standard-4 \
-  --num-nodes=3 \
+  --num-nodes=1 \
   --enable-autoscaling \
-  --min-nodes=3 \
+  --min-nodes=1 \
   --max-nodes=10 \
   --enable-nested-virtualization \
   --node-labels=kubevirt.io/schedulable=true \
@@ -128,9 +137,9 @@ $ az aks nodepool add \
   --cluster-name <your-cluster-name> \
   --resource-group <your-resource-group> \
   --name kubevirtpool \
-  --node-count 3 \
+  --node-count 1 \
   --enable-cluster-autoscaler \
-  --min-count 3 \
+  --min-count 1 \
   --max-count 10 \
   --node-vm-size Standard_D4s_v3 \
   --node-taints kubevirt=true:NoSchedule \
@@ -181,9 +190,9 @@ managedNodeGroups:
     amiFamily: AmazonLinux2023
     launchTemplate:
       id: <launch-template-id>
-    minSize: 3
+    minSize: 1
     maxSize: 10
-    desiredCapacity: 3
+    desiredCapacity: 1
     labels:
       kubevirt.io/schedulable: "true"
     taints:
