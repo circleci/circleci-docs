@@ -9,6 +9,14 @@
 | VM Software Manifest
 | Release Notes
 
+| `27.2`
+| Xcode 27.2 (27B5019j)
+| 26.6.2
+a| `m4pro.medium` +
+   `m4pro.large`
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v19494/manifest.txt[Installed software]
+| link:https://circleci.com/changelog/xcode-27-2-beta-available/[Release Notes]
+
 | `27.0`
 | Xcode 27.0 (27A266a)
 | 26.6.2
