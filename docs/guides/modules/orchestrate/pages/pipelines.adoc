@@ -45,6 +45,7 @@ A pipeline defines a unit of work that can be run within your project. Each pipe
 * A config source, which is a configuration file stored in a repository. The default config source location is `.circleci/config.yml` within the same repository as your code.
 ** For GitHub App and Cursor Origin pipelines you can choose any file path (with extension `*.yml`) in any repository to be your config source.
 ** GitHub OAuth pipelines require config files to be stored in the repository that gives the project its name, at `.circleci/config.yml`.
+** GitHub App and Cursor Origin pipelines can also use an existing GitHub Actions workflow file as the config source, instead of a CircleCI configuration file. See the xref:orchestrate:use-a-github-actions-workflow-file-as-your-pipeline-configuration.adoc[Use a GitHub Actions Workflow File as Your Pipeline Configuration] page.
 
 * A checkout source, which determines which repository will be checked out when running a xref:reference:ROOT:configuration-reference.adoc#checkout[Checkout Step].
 ** For GitHub App and Cursor Origin pipelines you can choose any of your repositories as your checkout source. This model allows your CircleCI config to be stored in a different repository from your code.
@@ -83,6 +84,8 @@ NOTE: If you have not yet installed the CircleCI GitHub App into your GitHub org
 ** Authorize your connection if this is not already showing with a check mark image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"].
 ** Select a repository to be your config source.
 ** Enter your config file path. The field is automatically populated with the default path `.circleci/config.yml` but you can edit this if needed.
++
+To run an existing GitHub Actions workflow instead of a CircleCI configuration file, select the **GitHub Actions workflow file** checkbox and enter the path to your workflow file. See the xref:orchestrate:use-a-github-actions-workflow-file-as-your-pipeline-configuration.adoc[Use a GitHub Actions Workflow File as Your Pipeline Configuration] page.
 ** Select a checkout source for this pipeline. This repository will be checked out when a xref:reference:ROOT:configuration-reference.adoc#checkout[Checkout Step] is run. If your config is stored in the same repository as your code, pick the same repository you selected for the config source.
 . Select btn:[Save].
 
