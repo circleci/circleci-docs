@@ -12,7 +12,7 @@ CircleCI deploy pipelines allow you to deploy a specific version of your compone
 
 == Prerequisites
 
-To deploy a component using a deploy pipeline, ensure you have set up deploy markers and a deploy pipeline, as described in the xref:set-up-deploys.adoc[Set up a Deploy Pipeline] guide.
+To deploy a component using a deploy pipeline, ensure you have set up deploy markers and a deploy pipeline, as described in the xref:set-up-deploys.adoc[Set Up a Deploy Pipeline] guide.
 
 == Deploy using a deploy pipeline
 

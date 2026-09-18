@@ -32,7 +32,7 @@ For progressive delivery, the release agent supports link:https://argoproj.githu
 
 To get started with the release agent, refer to the following guides:
 
-* xref:set-up-the-circleci-release-agent.adoc[Set up the CircleCI Release Agent]
+* xref:set-up-the-circleci-release-agent.adoc[Set Up the CircleCI Release Agent]
 * xref:configure-your-kubernetes-components.adoc[Configure Your Kubernetes Components]
 * xref:manage-releases.adoc[How-To: Manage Releases]
 

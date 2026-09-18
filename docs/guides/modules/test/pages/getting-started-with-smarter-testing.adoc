@@ -135,6 +135,6 @@ After your pipeline runs, verify the test job behaves as expected before merging
 
 All of your tests now run locally and in CI using the `testsuite` command. Next, enable the Smarter Testing features that fit your needs. Each feature can be enabled independently:
 
-* xref:set-up-test-impact-analysis.adoc[Set up Test Impact Analysis] to run only impacted tests based on code changes.
+* xref:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis] to run only impacted tests based on code changes.
 * xref:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting] to evenly split tests across parallel nodes.
 * xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] to automatically retry flaky tests.

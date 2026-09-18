@@ -281,7 +281,7 @@ You do not need to navigate to the Chunk page first.
 . The Chunk intro modal appears.
   Select **Get Started**.
 . Follow the on-screen steps to install the CircleCI GitHub App and enter your AI model provider API key.
-  See xref:guides:toolkit:chunk-setup-and-overview.adoc#set-up-chunk[Set up Chunk] for details on prerequisites and API key requirements.
+  See xref:guides:toolkit:chunk-setup-and-overview.adoc#set-up-chunk[Set Up Chunk] for details on prerequisites and API key requirements.
 . Select **Next** to complete setup.
   The Chunk task drawer opens with the failure context from the button you clicked.
 

@@ -97,5 +97,5 @@ Verify dynamic test splitting is working as expected in CI by looking at the "ti
 
 == Next steps
 
-* xref:set-up-test-impact-analysis.adoc[Set up Test Impact Analysis] to run only impacted tests based on code changes.
+* xref:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis] to run only impacted tests based on code changes.
 * xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] to automatically retry flaky tests.

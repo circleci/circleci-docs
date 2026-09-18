@@ -111,7 +111,7 @@ CircleCI provides deployment tracking and management through the features outlin
 
 |CircleCI deploys and rollbacks
 |CircleCI deploy markers generate a log of all deployments in one place. This deploy log provides a clear overview of what has changed, without the need to search through your CI/CD pipelines. Deploy markers enable rollback and deploy pipelines so you can deploy and rollback your projects from the CircleCI web app.
-|All CircleCI projects can use the deploy and rollback features. These are also the baseline that Smart Deployments builds on. See the xref:set-up-rollbacks.adoc[Set up Rollbacks] and xref:configure-deploy-markers.adoc[Configure Deploy Markers] guides.
+|All CircleCI projects can use the deploy and rollback features. These are also the baseline that Smart Deployments builds on. See the xref:set-up-rollbacks.adoc[Set Up Rollbacks] and xref:configure-deploy-markers.adoc[Configure Deploy Markers] guides.
 
 |CircleCI release agent
 |The CircleCI release agent is a tool that you install in your Kubernetes cluster to enable you to manage your deployments through CircleCI. The release agent supports Argo Rollouts for progressive delivery.
@@ -129,7 +129,7 @@ Once you have deploy markers configured you can set up and use the following fea
 
 * *Rollback pipelines* to manually revert your application to a previous stable version directly from the CircleCI web app.
 * *Deploy pipelines* to automatically deploy your application to a target environment directly from the CircleCI web app.
-* *Release validation* to evaluate signals from your monitoring tool after each deploy, and roll back automatically when a signal fails. See the xref:set-up-smart-deployments.adoc[Set up Smart Deployments] guide.
+* *Release validation* to evaluate signals from your monitoring tool after each deploy, and roll back automatically when a signal fails. See the xref:set-up-smart-deployments.adoc[Set Up Smart Deployments] guide.
 * *Environment hierarchy and version promotion* to define ordered promotion paths and promote versions through each stage. See the xref:environment-hierarchy-and-version-promotion.adoc[Environment Hierarchy and Version Promotion] guide.
 
 .Rollback guided setup
@@ -139,16 +139,16 @@ image::guides:ROOT:deploy/rollback-guided-setup.png[Rollback guided setup]
 
 Smart Deployments configures deploy markers, rollback and deploy pipelines, release validation, and automatic rollback together. Start with the xref:smart-deployments-overview.adoc[Smart Deployments Overview] page, then choose a setup route:
 
-* xref:set-up-smart-deployments.adoc[Set up Smart Deployments]: Use the guided setup in the web app. See the xref:set-up-smart-deployments.adoc#setup-routes[Setup routes] section for what the wizard generates with and without the GitHub App and AI features.
-* xref:set-up-release-validation-manually.adoc[Set up Release Validation Manually]: Write the configuration yourself and connect your monitoring tool. Use this route when you prefer to edit YAML directly.
+* xref:set-up-smart-deployments.adoc[Set Up Smart Deployments]: Use the guided setup in the web app. See the xref:set-up-smart-deployments.adoc#setup-routes[Setup routes] section for what the wizard generates with and without the GitHub App and AI features.
+* xref:set-up-release-validation-manually.adoc[Set Up Release Validation Manually]: Write the configuration yourself and connect your monitoring tool. Use this route when you prefer to edit YAML directly.
 
 ==== Get set up feature by feature
 
 To add one feature at a time, use the following guides:
 
 * xref:configure-deploy-markers.adoc[Configure Deploy Markers]: Configure deploy markers manually, or use the multi-project setup to generate and commit deploy marker configuration for multiple projects at once.
-* xref:set-up-rollbacks.adoc[Set up Rollbacks]: Set up a rollback pipeline for your project. You will be guided to set up deploy markers too if you have not already done so.
-* xref:set-up-deploys.adoc[Set up Deploys]: Set up a deploy pipeline for your project. You will be guided to set up deploy markers too if you have not already done so.
+* xref:set-up-rollbacks.adoc[Set Up Rollbacks]: Set up a rollback pipeline for your project. You will be guided to set up deploy markers too if you have not already done so.
+* xref:set-up-deploys.adoc[Set Up Deploys]: Set up a deploy pipeline for your project. You will be guided to set up deploy markers too if you have not already done so.
 
 === CircleCI release agent
 
@@ -163,7 +163,7 @@ image::guides:ROOT:releases/releases-architecture.png[Diagram showing the archit
 
 To get started with the release agent see the following guides:
 
-* The xref:set-up-the-circleci-release-agent.adoc[Set up the CircleCI Release Agent] guide.
+* The xref:set-up-the-circleci-release-agent.adoc[Set Up the CircleCI Release Agent] guide.
 * The xref:configure-your-kubernetes-components.adoc[Configure Your Kubernetes Components] guide.
 * The xref:manage-releases.adoc[Manage Releases] guide.
 

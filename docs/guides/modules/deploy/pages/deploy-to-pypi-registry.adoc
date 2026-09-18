@@ -24,7 +24,7 @@ NOTE: PyPI also supports a _pending publisher_ for projects that do not exist ye
 [#prerequisites]
 == Prerequisites
 
-* A CircleCI Cloud account integrated with a supported VCS. See xref:getting-started:first-steps.adoc[Sign up and Try CircleCI] for more information.
+* A CircleCI Cloud account integrated with a supported VCS. See xref:getting-started:first-steps.adoc[Sign Up and Try CircleCI] for more information.
 * A project on CircleCI that builds your Python package.
 * A PyPI account with two-factor authentication enabled.
 * Owner access to the PyPI project, or permission to create a pending publisher for a new project name.

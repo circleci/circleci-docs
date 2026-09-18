@@ -619,7 +619,7 @@ If you want to conditionally run workflows based on trigger event types, conside
 
 For further details see the following guides:
 
-* xref:set-up-multiple-configuration-files-for-a-project.adoc[Set up Multiple Configuration Files for a Project].
+* xref:set-up-multiple-configuration-files-for-a-project.adoc[Set Up Multiple Configuration Files for a Project].
 * xref:github-trigger-event-options.adoc[GitHub Trigger Event Options].
 ****
 

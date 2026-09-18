@@ -557,11 +557,21 @@ AI agents run in two types of environments:
 
 ### Installing Vale
 
-If Vale is not installed in your environment, install it before running lint checks:
+**Match the version CI uses.** The `lint` job runs the `jdkato/vale:latest` Docker image, so CI tracks the newest Vale release. Install the latest version locally rather than pinning an old one.
+
+macOS:
 
 ```bash
-# Install Vale
-wget https://github.com/errata-ai/vale/releases/download/v3.7.1/vale_3.7.1_Linux_64-bit.tar.gz -O /tmp/vale.tar.gz
+brew install vale        # or: brew upgrade vale
+vale --version
+```
+
+Linux, including cloud agents:
+
+```bash
+# Install the latest Vale release, matching CI
+VALE_VERSION=$(curl -sL https://api.github.com/repos/vale-cli/vale/releases/latest | grep -o '"tag_name": *"v[^"]*' | cut -d'v' -f2)
+curl -sL "https://github.com/vale-cli/vale/releases/download/v${VALE_VERSION}/vale_${VALE_VERSION}_Linux_64-bit.tar.gz" -o /tmp/vale.tar.gz
 tar -xzf /tmp/vale.tar.gz -C /tmp
 sudo mv /tmp/vale /usr/local/bin/
 vale --version
@@ -570,7 +580,26 @@ vale --version
 sudo apt-get update && sudo apt-get install -y asciidoctor
 ```
 
-Once installed, Vale is available for all subsequent documentation work in that environment.
+### Syncing Vale packages
+
+`.vale.ini` declares an external package under `Packages`. Run `vale sync` once after installing, and again whenever `.vale.ini` changes:
+
+```bash
+vale sync
+```
+
+CI runs this before every lint. If you skip it, the packaged rules never load locally and your run reports fewer problems than CI does.
+
+### If your results do not match CI
+
+A local run that disagrees with the `lint` job is almost always a version or package mismatch, not a flaky rule. Symptoms include rules firing locally but not in CI, or the reverse, on the same commit.
+
+Check in this order:
+
+1. `vale --version` against the version CI printed in the `lint` job output.
+2. `vale sync`, in case the packaged rules are missing or stale.
+
+Treat CI as authoritative. Before concluding that a rule is wrong or that an alert is a false positive, reproduce it on the same version CI ran.
 
 ### Vale Linter
 
@@ -663,7 +692,7 @@ npm run build:docs
 
 Before committing documentation changes:
 
-1. ✅ **REQUIRED**: Run Vale locally and fix all error-level violations (recommended for all agents)
+1. ✅ **REQUIRED**: Run Vale locally and fix all error-level violations (recommended for all agents). Confirm `vale --version` matches CI and that you have run `vale sync`, or your results will not match the `lint` job
 2. ✅ Preview locally to check formatting and links
 3. ✅ Verify all xrefs point to existing files, and that heading hashes use kebab-case of the heading (not `_underscore_ids`)
 4. ✅ Check `:page-description:` is 70-160 characters

@@ -200,16 +200,16 @@ If you need more organizations or projects, consider upgrading to a Paid Plan or
 
 The following links take you to the sections you need to get set up with CircleCI:
 
-* xref:getting-started:first-steps.adoc[Sign up and Try].
+* xref:getting-started:first-steps.adoc[Sign Up and Try].
 * xref:getting-started:invite-your-team.adoc[Invite Your Team].
 * xref:getting-started:create-project.adoc[Create a Project].
-* xref:orchestrate:pipelines.adoc[Set up a Pipeline].
-* xref:orchestrate:set-up-triggers.adoc[Set up a Trigger].
+* xref:orchestrate:pipelines.adoc[Set Up a Pipeline].
+* xref:orchestrate:set-up-triggers.adoc[Set Up a Trigger].
 
 [#manage-vcs-integrations]
 == Manage VCS integrations
 
-To install a VCS connection, or to view, configure, or remove an existing one, see the xref:integration:set-up-vcs-connections.adoc[Set up VCS Connections] page. That page covers each provider, including what extra configuration self-managed providers need.
+To install a VCS connection, or to view, configure, or remove an existing one, see the xref:integration:set-up-vcs-connections.adoc[Set Up VCS Connections] page. That page covers each provider, including what extra configuration self-managed providers need.
 
 == Invite your team to your organization
 

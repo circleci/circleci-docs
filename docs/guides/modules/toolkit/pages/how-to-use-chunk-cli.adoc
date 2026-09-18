@@ -447,5 +447,5 @@ You can customize this behavior with the following flags:
 [#next-steps]
 == Next steps
 
-* xref:guides:toolkit:chunk-setup-and-overview.adoc[Set up Chunk in the CircleCI Web App]
+* xref:guides:toolkit:chunk-setup-and-overview.adoc[Set Up Chunk in the CircleCI Web App]
 * link:https://github.com/CircleCI-Public/chunk-cli/blob/main/docs/CLI.md[View the full command list in the Chunk CLI repository, window=_blank]

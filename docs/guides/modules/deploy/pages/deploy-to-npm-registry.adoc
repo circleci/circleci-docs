@@ -33,7 +33,7 @@ To understand each step, read the manual instructions below.
 [#prerequisites]
 == Prerequisites
 
-* A CircleCI Cloud account integrated with a supported VCS. See xref:getting-started:first-steps.adoc[Sign up and Try CircleCI] for more information.
+* A CircleCI Cloud account integrated with a supported VCS. See xref:getting-started:first-steps.adoc[Sign Up and Try CircleCI] for more information.
 * A project on CircleCI that builds your npm package.
 * An npm package that has already been published at least once. npm requires an existing package before a trusted publisher can be configured for it.
 * npm CLI version 11.5.1 or later, and Node.js 22.14.0 or later, in the Docker image (or executor) used by your publishing job.
