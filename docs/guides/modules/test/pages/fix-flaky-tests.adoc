@@ -5,7 +5,7 @@
 :experimental:
 :page-noindex: true
 
-NOTE: Chunk by CircleCI is currently in *beta*. There are no extra costs during beta, Chunk uses CircleCI credits and your AI model provider tokens. Chunk tasks will be a paid feature when generally available.
+NOTE: Chunk by CircleCI is currently in *beta*. Beta has no extra costs. Chunk uses CircleCI credits and your AI model provider tokens. Chunk tasks will be a paid feature when generally available.
 
 TIP: Have feedback or feature requests? Submit them on our link:https://circleci.canny.io/cloud-feature-requests?selectedCategory=chunk-ai[Ideas board, window=_blank] where you can also see existing feature requests and vote on them.
 

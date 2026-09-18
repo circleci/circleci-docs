@@ -722,7 +722,7 @@ Notice that in this JSON response, you will receive detailed metrics for the set
 * `failed_runs` - The number of runs that failed.
 * `successful_runs` - The number of successful runs.
 * `throughput` - The average number of builds per day.
-* `mttr` - The Mean Time to Recovery (MTTR). This is the average time it takes to get a failed CI build back to a "success" status.
+* `mttr` - The Mean Time to Recovery (MTTR). MTTR is the average time it takes to get a failed CI build back to a "success" status.
 * `duration_metrics` - A collection of specific metrics and measurements that provide the duration of the workflow. This includes `min`, `max`, `median`, `mean`, `p95`, and `standard_deviation`.
 * `total credits used` - The total number of credits used during the build.
 * `windows_start & windows_end` - The time the build was initiated and then completed.

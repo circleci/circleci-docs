@@ -4,7 +4,7 @@
 :page-description: An overview of Chunk by CircleCI, an AI agent for CI/CD tasks, and a guide to setting it up with your chosen model provider.
 :experimental:
 
-NOTE: **Chunk is currently in beta.** There are no extra costs during beta. Chunk uses CircleCI credits and your AI model provider tokens. Chunk tasks will be a paid feature when generally available.
+NOTE: **Chunk is currently in beta.** Beta has no extra costs. Chunk uses CircleCI credits and your AI model provider tokens. Chunk tasks will be a paid feature when generally available.
 
 NOTE: **Feedback or feature requests?** Submit them on our link:https://circleci.canny.io/cloud-feature-requests?selectedCategory=chunk-ai[Ideas board] where you can also see existing feature requests and vote on them.
 
@@ -45,7 +45,7 @@ Chunk supports four model providers. Three providers require you to bring your o
 
 |CircleCI (Powered by Anthropic)
 |No
-|CircleCI provides the API key. You receive 400,000 tokens per day. The token limit resets at 12:00 UTC. This is the default option.
+|CircleCI provides the API key. You receive 400,000 tokens per day. The token limit resets at 12:00 UTC. This option is the default.
 
 |Anthropic
 |Yes
@@ -99,7 +99,7 @@ Once you meet the prerequisites, set up Chunk as follows:
 image::guides:ROOT:chunk/set-up-chunk.png[Chunk setup modal]
 . A checkmark confirms the GitHub App is installed for your organization. If the checkmark is missing, select **Install CircleCI GitHub App** to install it now.
 . Select your AI model provider from the **Select your AI Model** dropdown. The available options are:
-* **CircleCI (Powered by Anthropic)**: No API key required. This is the default option.
+* **CircleCI (Powered by Anthropic)**: No API key required. This option is the default.
 * **Anthropic**: Requires your own Anthropic API key.
 * **OpenAI**: Requires your own OpenAI API key.
 * **Amazon Bedrock**: Requires your own AWS credentials.
@@ -173,7 +173,7 @@ NOTE: **Anthropic Claude models only.** Chunk on Amazon Bedrock supports Anthrop
 
 **Recommended models:**
 
-* **Claude Sonnet**. Best balance of performance and speed for code tasks. This is the recommended default.
+* **Claude Sonnet**. Best balance of performance and speed for code tasks. Claude Sonnet is the recommended default.
 * **Claude Haiku**. Fastest and most cost-efficient.
 * **Claude Opus**. Most capable, and best for complex, multi-file analysis.
 
@@ -558,7 +558,7 @@ jobs:
 ----
 
 NOTE: **Startup time.** Enabling IP ranges may slightly increase job startup time.
-This is because traffic is routed through CircleCI's static IP infrastructure.
+The increase happens because traffic is routed through CircleCI's static IP infrastructure.
 
 [#email-digest]
 == Email digest

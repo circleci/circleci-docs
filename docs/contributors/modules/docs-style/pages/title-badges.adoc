@@ -52,8 +52,8 @@ Currently we are not adding styling to these badges but this may change in futur
 
 When you add a page badge using `:page-badge:`, it automatically appears in two places:
 
-. Next to the page title when viewing the page
-. Next to the page link in the left sidebar navigation
+. Next to the page title when viewing the page.
+. Next to the page link in the left sidebar navigation.
 
 You do not need to configure navigation badges separately—the same `:page-badge:` attribute controls both locations.
 
@@ -69,19 +69,19 @@ This displays a "Preview" badge both on the page title and in the navigation sid
 
 === Best practices for navigation badges
 
-* Use concise badge text (8 characters or less recommended)
-* Apply badges sparingly (only for truly special status pages)
+* Use concise badge text (8 characters or less recommended).
+* Apply badges sparingly (only for truly special status pages).
 * Common badge types work best:
-** `Preview` - Features in preview
-** `Beta` - Beta features
-** `New` - Recently added content
-** `Deprecated` - Deprecated functionality
+** `Preview`: Features in preview.
+** `Beta`: Beta features.
+** `New`: Recently added content.
+** `Deprecated`: Deprecated functionality.
 
 Longer badge text may wrap or truncate on narrow viewports.
 
 == Subsection badges
 
-You can add badges to subsections (h2-h6 headings) using attribute syntax on the section. This is useful when a single documentation page covers multiple features with different maturity levels.
+You can add badges to subsections (h2-h6 headings) using attribute syntax on the section. Subsection badges are useful when a single documentation page covers multiple features with different maturity levels.
 
 === Basic usage
 
@@ -119,11 +119,11 @@ NOTE: This approach is deprecated. See xref:modern-approach.adoc[] instead.
 
 Common badge types for subsections include:
 
-* `Preview` - Features in preview
-* `Beta` - Beta features
-* `Deprecated` - Deprecated functionality
-* `Cloud only` - Cloud-specific features
-* `Server v4+` - Server version-specific features
+* `Preview`: Features in preview.
+* `Beta`: Beta features.
+* `Deprecated`: Deprecated functionality.
+* `Cloud only`: Cloud-specific features.
+* `Server v4+`: Server version-specific features.
 * Custom text as needed
 
 === Subsection badge attributes reference
@@ -135,7 +135,7 @@ Common badge types for subsections include:
 
 === Best practices
 
-* Use subsection badges consistently across related pages
-* Keep badge text short and clear
-* Badges should not be included in cross-references to the section
-* The badge is metadata, not part of the heading text itself
+* Use subsection badges consistently across related pages.
+* Keep badge text short and clear.
+* Do not include badges in cross-references to the section.
+* The badge is metadata, not part of the heading text itself.

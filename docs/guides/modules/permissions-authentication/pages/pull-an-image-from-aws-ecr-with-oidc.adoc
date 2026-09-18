@@ -84,6 +84,6 @@ jobs:
 
 . Replace `<your-image-uri>` with the URI of the ECR image you want to pull. This URI typically follows the format `aws_account_id.dkr.ecr.region.amazonaws.com/repository:tag`.
 
-. Replace `<your-iam-role-arn>` with the ARN of the IAM role you want to assume. This is the role you created in the last section.
+. Replace `<your-iam-role-arn>` with the ARN of the IAM role you want to assume. Use the role you created in the last section.
 
 . Save the changes to your CircleCI configuration file. Next time the job runs, CircleCI will use the specified IAM role and act as an OIDC provider to authenticate and pull your specified ECR image.

@@ -137,7 +137,7 @@ The `policy_name` must be declared using a partial rule and declare the name as 
 [#rego-v0-vs-v1-syntax]
 === Rego v0 vs v1 syntax
 
-CircleCI config policies support two Rego language syntax versions: **v0** (the legacy syntax) and **v1** (the syntax introduced with link:https://www.openpolicyagent.org/docs/v0-upgrade[OPA 1.0]). CircleCI parses policy files as v0 by default. This is why the examples on this page, such as `policy_name["unique_policy_name"]`, use the legacy bracket syntax.
+CircleCI config policies support two Rego language syntax versions: **v0** (the legacy syntax) and **v1** (the syntax introduced with link:https://www.openpolicyagent.org/docs/v0-upgrade[OPA 1.0]). CircleCI parses policy files as v0 by default. For that reason, the examples on this page, such as `policy_name["unique_policy_name"]`, use the legacy bracket syntax.
 
 To opt in to v1 syntax, add `import rego.v1` to the top of your policy file. You can mix v0-style and v1-style files within the same policy bundle. The most common difference you will encounter is how partial rules like `policy_name` and `enable_hard`/`enable_soft` are declared:
 
@@ -564,7 +564,7 @@ Policies and their rules can be categorized into two main types:
 
 When working with configuration `version 2.1` constructs and parameterization, it is crucial to understand how these two rule types interact with your policies.
 
-* **Deny list** rules are susceptible to being bypassed using parameterization and reusable constructs. This is because the literal parameter value is unlikely to match the banned value, and during config compilation, the values intended to be banned can be reintroduced. All parameterization examples provided above fall into this category. To address this, you can either utilize `++input._compiled_++` or detect parameterization and handle it appropriately.
+* **Deny list** rules are susceptible to being bypassed using parameterization and reusable constructs. The literal parameter value is unlikely to match the banned value, and during config compilation the values intended to be banned can be reintroduced. All parameterization examples provided above fall into this category. To address this, you can either utilize `++input._compiled_++` or detect parameterization and handle it appropriately.
 
 * **Allow list** rules are incompatible with parameterization. They reject configurations that could otherwise be considered valid but do not cause invalid configurations to pass.
 
