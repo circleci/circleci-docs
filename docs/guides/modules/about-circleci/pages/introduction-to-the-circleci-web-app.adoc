@@ -319,7 +319,7 @@ The following organization settings are available by selecting *Org* from the si
 | Opt in/out of the following: intelligent summaries for build failures, image brownouts, triggering pipelines with unversioned config.
 
 | Orbs
-| For `circleci` organizations you will find your URL orb allow list. FOr `github` and `bitbucket` organizations you will find registry information for orbs that have been authored by your organization.
+| For `circleci` organizations you will find your URL orb allow list. For `github` and `bitbucket` organizations you will find registry information for orbs that have been authored by your organization.
 
 | Self-hosted runners
 | Set up self-hosted runners for your organization, to build on your own infrastructure.
