@@ -45,7 +45,7 @@ A pipeline defines a unit of work that can be run within your project. Each pipe
 * A config source, which is a configuration file stored in a repository. The default config source location is `.circleci/config.yml` within the same repository as your code.
 ** For GitHub App and Cursor Origin pipelines you can choose any file path (with extension `*.yml`) in any repository to be your config source.
 ** GitHub OAuth pipelines require config files to be stored in the repository that gives the project its name, at `.circleci/config.yml`.
-** GitHub App and Cursor Origin pipelines can also use an existing GitHub Actions workflow file as the config source, instead of a CircleCI configuration file. See the xref:orchestrate:use-a-github-actions-workflow-file-as-your-pipeline-configuration.adoc[Use a GitHub Actions Workflow File as Your Pipeline Configuration] page.
+** GitHub App pipelines can also use an existing GitHub Actions workflow file as the config source, instead of a CircleCI configuration file. See the xref:orchestrate:use-a-github-actions-workflow-file-as-your-pipeline-configuration.adoc[Use a GitHub Actions Workflow File as Your Pipeline Configuration] page.
 
 * A checkout source, which determines which repository will be checked out when running a xref:reference:ROOT:configuration-reference.adoc#checkout[Checkout Step].
 ** For GitHub App and Cursor Origin pipelines you can choose any of your repositories as your checkout source. This model allows your CircleCI config to be stored in a different repository from your code.
