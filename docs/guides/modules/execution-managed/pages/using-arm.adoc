@@ -57,38 +57,15 @@ include::ROOT:partial$execution-resources/resource-class-view.adoc[]
 
 == Images with Arm support
 
-Arm resources are accessible by using the machine executor when using one of the following images:
+Use the `machine` executor with a current Ubuntu LTS image that includes Arm. Match the Linux VM images listed in the xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[Configuration Reference]:
 
-[discrete]
-==== Ubuntu 20.04 - focal
+* `ubuntu-2604:current`
+* `ubuntu-2404:current`
+* `ubuntu-2204:current`
 
-* `ubuntu-2004:current` - most recent, recommended for all users.
-* `ubuntu-2004:2023.07.1`
-* `ubuntu-2004:2023.04.2`
-* `ubuntu-2004:2023.02.1`
-* `ubuntu-2004:2022.10.1`
-* `ubuntu-2004:2022.07.1`
-* `ubuntu-2004:2022.04.1`
-* `ubuntu-2004:202201-02`
-* `ubuntu-2004:202201-01`
-* `ubuntu-2004:202111-02`
-* `ubuntu-2004:202111-01`
-* `ubuntu-2004:202107-01`
-* `ubuntu-2004:202104-01`
-* `ubuntu-2004:202101-01`
-* `ubuntu-2004:202011-01` - deprecated as of Feb 3, 2021.
+For dated tags and image contents, see the link:https://circleci.com/developer/images?imageType=machine[CircleCI Developer Hub]. For image update announcements, see link:https://discuss.circleci.com/c/ecosystem/circleci-images/64[CircleCI Discuss].
 
-[discrete]
-==== Ubuntu 22.04 - jammy
-
-* `ubuntu-2204:current` - most recent, recommended for all users.
-* `ubuntu-2204:2023.07.1`
-* `ubuntu-2204:2023.04.2`
-* `ubuntu-2204:2023.02.1`
-* `ubuntu-2204:2022.10.2`
-* `ubuntu-2204:2022.07.2`
-
-For a full list of machine executor images, see the link:https://circleci.com/developer/images?imageType=machine[CircleCI Developer Hub]. And for announcements about image updates, see link:https://discuss.circleci.com/c/ecosystem/circleci-images/64[CircleCI Discuss].
+Do not start new configurations on Ubuntu 20.04 (`ubuntu-2004`). That series is outside the xref:linux-vm-support-policy.adoc[Linux VM Images Support Policy] Gen2 set (22.04, 24.04, and 26.04).
 
 [#limitations]
 == Limitations

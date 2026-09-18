@@ -82,7 +82,7 @@ If you have not done so already, create a `.circleci` directory in your project,
 
 If you already have a `config.yml` file from the example above, here are the changes you need to make:
 
-* On Line 5, change the image to `cimg/base:2021.04`.
+* On Line 5, change the image to `cimg/base:current`.
 * On Line 7, add a `checkout` command.
 * Add another run step (lines 13-17) at the end.
 
@@ -94,7 +94,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/base:2021.04
+      - image: cimg/base:current
     steps:
       - checkout
       - run:
@@ -111,7 +111,7 @@ jobs:
 
 These two small changes have significantly increased the functionality of your config file:
 
-* *Line 5:* This line now specifies a Docker image that supports git. `cimg/base:2021.04` is a small Ubuntu-based image for running basic jobs.
+* *Line 5:* This line now specifies a Docker image that supports git. `cimg/base:current` is a small Ubuntu-based image for running basic jobs.
 * *Line 7:* The `checkout` command fetches the code from your git repository.
 * *Lines 13-17:* This second step in the `build` job is listing (using `ls -al`) the contents of the repository that has been checked out. You can now perform further actions on this repository.
 
