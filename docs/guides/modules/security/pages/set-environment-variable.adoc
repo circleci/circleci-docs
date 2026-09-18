@@ -118,7 +118,7 @@ Creating a context allows you to share environment variables across multiple pro
 [#set-an-environment-variable-in-a-project]
 == Set an environment variable in a project
 
-. On the CircleCI web app, go to your project's settings. You can do this two ways: Navigate to **Projects** on the side navigation, and then click the ellipsis button in the project's row, or select the **Project Settings** button on the project's individual **Pipelines** page.
+. On the CircleCI web app, go to your project's settings. You can do this two ways. Either navigate to **Projects** in the side navigation and select the ellipsis button in the project's row. Or select the **Project Settings** button on the project's **Pipelines** page.
 +
 .Project settings showing environment variables
 image::guides:ROOT:project-settings-env-var-v2.png[Environment Variables]
@@ -173,7 +173,7 @@ jobs:
 
 The following example shows separate environment variable settings for the primary container image (listed first) and the secondary or service container image.
 
-NOTE: While hard-coded environment variable values will be passed on correctly to the secondary or service container, contexts or project specific environment variables will not be interpolated for non-primary containers.
+NOTE: Hard-coded environment variable values pass correctly to the secondary or service container. Contexts and project-specific environment variables are not interpolated for non-primary containers.
 
 ```yaml
 version: 2.1

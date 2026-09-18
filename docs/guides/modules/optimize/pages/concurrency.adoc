@@ -57,7 +57,7 @@ workflows:
 
 [#fan-out-fan-in-workflow-example]
 === Fan-out/fan-in workflow example
-A more complex example of using concurrent workflows is running a common build job, fanning-out to run a set of acceptance test jobs concurrently, and then fanning-in to run a common deploy job. This flow is illustrated below.
+A more complex example runs a common build job, then fans out to run a set of acceptance test jobs concurrently. It then fans in to run a common deploy job. This flow is illustrated below.
 
 .Fan-out and fan-in workflow
 image::guides:ROOT:fan-out-in.png[Fan-out and Fan-in Workflow]

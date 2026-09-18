@@ -137,5 +137,5 @@ Common badge types for subsections include:
 
 * Use subsection badges consistently across related pages.
 * Keep badge text short and clear.
-* Badges should not be included in cross-references to the section.
+* Do not include badges in cross-references to the section.
 * The badge is metadata, not part of the heading text itself.

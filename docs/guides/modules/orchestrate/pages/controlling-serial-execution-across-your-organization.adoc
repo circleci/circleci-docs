@@ -85,7 +85,7 @@ image::guides:ROOT:serial-groups/lock-block-tooltip.png[A block with a key icon 
 .Screenshot showing a queued job in a serial group
 image::guides:ROOT:serial-groups/lock-job-queued-focus.png[A job in a serial group queueing]
 
-* The serial group start and end block statuses indicate the status of the job's place in the serial group. For example, if a job starts and is then canceled while running, either manually or due to waiting beyond the time limit, the group start block shows a "Completed" status because the job started.
+* The serial group start and end block statuses indicate the status of the job's place in the serial group. For example, a job might start and then be canceled while running, either manually or after waiting beyond the time limit. The group start block still shows a "Completed" status, because the job started.
 
 === Managing serial groups
 

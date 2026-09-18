@@ -143,7 +143,7 @@ If you are getting started with CircleCI, there are some points you can ask your
 * Minimize the number of secrets (private keys / environment variables) your build needs and rotate secrets regularly.
   ** It is important to rotate secrets regularly in your organization, especially as team members come and go.
   ** Rotating secrets regularly means your secrets are only active for a certain amount of time, helping to reduce possible risks if keys are compromised.
-  ** Ensure the secrets you _do_ use are of limited scope, with only enough permissions for the purposes of your build. Consider carefully adjudicating the role and permission systems of other platforms you use outside of CircleCI; for example, when using something such as IAM permissions on AWS, or GitHub's link:https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[Machine User] feature.
+  ** Ensure the secrets you _do_ use are of limited scope, with only enough permissions for the purposes of your build. Consider carefully adjudicating the role and permission systems of other platforms you use outside of CircleCI. Examples include IAM permissions on AWS, and GitHub's link:https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[Machine User] feature.
 * Sometimes user misuse of certain tools might accidentally print secrets to stdout which will appear in your logs. Be aware of the following:
   ** Running `env` or `printenv` which will print all your environment variables to stdout.
   ** Literally printing secrets in your codebase or in your shell with `echo`.
