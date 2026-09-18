@@ -81,7 +81,7 @@ Longer badge text may wrap or truncate on narrow viewports.
 
 == Subsection badges
 
-You can add badges to subsections (h2-h6 headings) using attribute syntax on the section. This is useful when a single documentation page covers multiple features with different maturity levels.
+You can add badges to subsections (h2-h6 headings) using attribute syntax on the section. Subsection badges are useful when a single documentation page covers multiple features with different maturity levels.
 
 === Basic usage
 

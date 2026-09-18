@@ -112,7 +112,7 @@ If authentication fails when connecting to the CircleCI docs MCP server:
 * Check that your AI assistant supports OAuth2 authentication for MCP servers.
 * Clear your browser cache and try authenticating again.
 
-NOTE: The CircleCI docs MCP server uses Google or GitHub OAuth for authentication. This is only for rate limiting purposes. You do not see the user's email or personal information.
+NOTE: The CircleCI docs MCP server uses Google or GitHub OAuth for authentication. Authentication is only for rate limiting purposes. You do not see the user's email or personal information.
 
 === No results returned
 

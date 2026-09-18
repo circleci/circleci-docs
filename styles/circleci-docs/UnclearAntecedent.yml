@@ -3,5 +3,8 @@ extends: existence
 message: "'%s' is an unclear antecedent. Clarify what 'this' refers to."
 ignorecase: true
 level: error
+# Anchors ^ to each sentence. Without this, Vale 3.18+ anchors to the whole
+# block, so only the first sentence of a paragraph or list item is checked.
+scope: sentence
 raw:
   - '(?:^[^\w]*|[;-]\s)This\b\s(is|are)\b'

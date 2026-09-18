@@ -527,7 +527,7 @@ include::ROOT:partial$using-expressions/operators.adoc[]
 === Precedence
 The following table shows operator precedence table, from weakest to strongest binding.
 
-NOTE: All operators are left associative. In practice, avoid operator chaining for anything other than `and` or `or`. This is because evaluation may cause type mismatches for other operators (see <<evaluation>>).
+NOTE: All operators are left associative. In practice, avoid operator chaining for anything other than `and` or `or`. Evaluation may cause type mismatches for other operators (see <<evaluation>>).
 
 [.table-scroll]
 --

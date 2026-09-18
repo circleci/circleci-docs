@@ -133,7 +133,7 @@ Use CircleCI's xref:troubleshoot-test-splitting.adoc#video-troubleshooting-globb
 Pass the list of test files to the `circleci tests run` command as standard input (link:https://www.computerhope.com/jargon/s/stdin.htm[`stdin`]).
 
 * `circleci tests run --command="xargs pytest -o junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings`
-** Invoke `circleci tests run` and specify the original command (`pytest`) used to run tests as part of the `--command=` parameter. **This is required**. `xargs` must be present as well.
+** Invoke `circleci tests run` and specify the original command (`pytest`) used to run tests as part of the `--command=` parameter. **This parameter is required**. `xargs` must be present as well.
 ** `--verbose` is an optional parameter for `circleci tests run` which enables more verbose debugging messages.
 ** *Optional*: `--split-by=timings` enables intelligent test splitting by timing for `circleci tests run`.
 +
@@ -449,7 +449,7 @@ gem 'rspec_junit_formatter'
      destination: test-results
 ```
 
-. You may also enable link:https://docs.knapsackpro.com/ruby/split-by-test-examples/[Split by Test Examples] to parallelize tests across CI nodes by individual `it`/`specify`. This is useful when you have slow test files but do not want to manually split test examples into smaller test files.
+. You may also enable link:https://docs.knapsackpro.com/ruby/split-by-test-examples/[Split by Test Examples] to parallelize tests across CI nodes by individual `it`/`specify`. Splitting by test examples helps when you have slow test files but do not want to split them into smaller files by hand.
 
 [#configure-a-job-running-ruby-cucumber-tests]
 === Configure a job running Ruby (Cucumber) tests
@@ -686,7 +686,7 @@ After configuring `circleci tests run`, if you see *all tests* are rerun after c
 
 . Ensure that the `--verbose` setting is enabled when invoking `circleci tests run`. This will display which tests `circleci tests run` is receiving on a "rerun".
 
-. Use xref:reference:ROOT:configuration-reference.adoc#storeartifacts[`store_artifacts`] to upload the JUnit XML that contains test results to CircleCI.  This is the same file(s) that is being uploaded to CircleCI with `store_test_results`.
+. Use xref:reference:ROOT:configuration-reference.adoc#storeartifacts[`store_artifacts`] to upload the JUnit XML that contains test results to CircleCI.  The JUnit XML is the same file or files uploaded to CircleCI with `store_test_results`.
 
 . Manually inspect the newly uploaded JUnit XML via the **Artifacts** tab and ensure that there is a `file=` attribute or a `classname` attribute.  If neither are present, you will see unexpected behavior when trying to rerun.  Follow the instructions on this page to ensure that the test runner you are using is outputting its JUnit XML test results with a `file` (preferred) or `classname` attribute.  Comment in our link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only-circleci-tests-run/47775/48[community forum] if you are still stuck.
 

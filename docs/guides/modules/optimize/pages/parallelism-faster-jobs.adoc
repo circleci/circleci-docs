@@ -83,7 +83,7 @@ Test splitting reduces the length of time taken for testing in your pipelines.
 
 You can split your tests up in a few different ways:
 
-* Alphabetically, by name. This is the default:
+* Alphabetically, by name, which is the default:
 +
 [,yaml]
 ----

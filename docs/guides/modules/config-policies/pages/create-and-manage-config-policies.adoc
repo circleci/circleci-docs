@@ -59,7 +59,7 @@ include::ROOT:partial$notes/find-organization-id.adoc[]
 
 CircleCI policies are managed by pushing directories of policies to CircleCI via the CLI. Following are recommended best practices:
 
-* Store your policies in a repository in your VCS, within your organization. This is how policies are managed internally at CircleCI. Pushing a policy bundle is done by triggering a CircleCI pipeline.
+* Store your policies in a repository in your VCS, within your organization. Storing policies in your VCS is how policies are managed internally at CircleCI. Pushing a policy bundle is done by triggering a CircleCI pipeline.
 
 * Create a bot account for pushing policies, and use its associated CircleCI personal API token for authentication. For maximum security the token is be stored as an environment variable within a context, and that context must be restricted to groups that are responsible for managing policies. For more information, see the xref:security:contexts.adoc[Using Contexts] page.
 

@@ -359,7 +359,7 @@ curl --request GET \
   --header 'content-type: application/json' \
 ----
 
-. In the JSON response, take note of the value associated with the `approved_by` key. This is the user ID of the user who approved the job.
+. In the JSON response, take note of the value associated with the `approved_by` key. The value is the user ID of the user who approved the job.
 +
 [,json]
 ----

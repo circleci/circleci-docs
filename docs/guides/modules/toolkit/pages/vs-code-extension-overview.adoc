@@ -145,7 +145,7 @@ image::guides:ROOT:vs_code_extension_config_helper_syntax-validation.gif[Screens
 .Usage Warnings
 image::guides:ROOT:vs_code_extension_config_helper_usage-warning.png[Screenshot showing code highlighting to warn on an unused job]
 
-- **Auto completion**. This is available with both built-in keys and parameters as well as user-defined variables.
+- **Auto completion**. Auto completion is available with both built-in keys and parameters as well as user-defined variables.
 +
 .Autocomplete
 image::guides:ROOT:vs_code_extension_config_helper_autocomplete.png[Screenshot showing two suggestions to autocomplete the line of code]

@@ -202,7 +202,7 @@ include::ROOT:example$orchestration-examples/job-group-multiple-invocations.yml[
 When CircleCI processes a job group invocation, it inlines all jobs from the group definition and adds synthetic boundary jobs at each end:
 
 * *Entry job*: Inserted before the root jobs (jobs in the group with no internal `requires` dependencies). With `serial-group`, this is a serial group start job that acquires the lock. Without it, this is a no-op group-start job.
-* *Exit job*: Inserted after the leaf jobs (jobs in the group that no other group job depends on). This is a no-op job that only runs if the leaf jobs succeed.
+* *Exit job*: Inserted after the leaf jobs (jobs in the group that no other group job depends on). The exit job is a no-op that only runs if the leaf jobs succeed.
 ** With `serial-group`, an additional serial group end job (unlock) is inserted after the group-end job. It runs regardless of the group-end job's outcome, so the lock is always released.
 
 The group invocation's `requires` and branch/tag filters are applied to the entry job. Jobs in the workflow that depend on the group invocation using `requires` are rewired to depend on the group-end job. By default, this means downstream jobs only run if all leaf jobs in the group succeeded, even though the lock is released regardless of outcome. To run a downstream job on a different outcome, specify the status (`success` and/or `not_run`) alongside the dependency in `requires`.
