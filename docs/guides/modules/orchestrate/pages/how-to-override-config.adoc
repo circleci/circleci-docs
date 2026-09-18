@@ -27,7 +27,7 @@ See the xref:reference:ROOT:configuration-reference.adoc#override-with[`override
 == Prerequisites
 Before following this how-to guide, ensure you have met the following prerequisites:
 
-* A CircleCI account, xref:getting-started:first-steps.adoc#[Sign up and Try CircleCI].
+* A CircleCI account, xref:getting-started:first-steps.adoc#[Sign Up and Try CircleCI].
 * Familiarity with CircleCI configuration files. See the xref:getting-started:introduction-to-yaml-configurations.adoc[Introduction to YAML Configurations] guide for more information.
 * Familiarity with the concepts of URL and registry orbs, and the URL orb allow-list. See the xref:orbs:use:orb-intro.adoc[Orbs Intro] and the xref:orbs:use:managing-url-orbs-allow-lists.adoc[Managing URL Orb Allow-Lists] guide for more information.
 * A GitHub App integration. This integration is optional but recommended. Only GitHub App pipelines can use a configuration file stored outside the project repository, which is what makes centralized config worthwhile. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide] for more information.

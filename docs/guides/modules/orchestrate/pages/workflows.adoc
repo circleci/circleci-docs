@@ -569,7 +569,7 @@ workflows:
             - test2
 ----
 
-The `test1` and `test2` jobs have access to environment variables stored in the `org-global` context if the pipeline meets the restrictions set for the context, for example:
+The `test1` and `test2` jobs access environment variables in the `org-global` context when the pipeline meets every restriction type set on the context. Security groups, project restrictions, and expression restrictions combine with logical AND. For details, see the xref:security:contexts.adoc#how-restrictions-combine[How Restrictions Combine] section.
 
 * Was the pipeline triggered by a user who has access (is in the relevant org/security group etc.)? See the xref:security:contexts.adoc#security-group-restrictions[Security Group Restrictions] page for more information.
 * Does the project have access to the context? By default all projects in an organization have access to contexts set for that organization, but restrictions on project access can be configured. See the xref:security:contexts.adoc#project-restrictions[Project Restrictions] guide for more information.
@@ -619,7 +619,7 @@ If you want to conditionally run workflows based on trigger event types, conside
 
 For further details see the following guides:
 
-* xref:set-up-multiple-configuration-files-for-a-project.adoc[Set up Multiple Configuration Files for a Project].
+* xref:set-up-multiple-configuration-files-for-a-project.adoc[Set Up Multiple Configuration Files for a Project].
 * xref:github-trigger-event-options.adoc[GitHub Trigger Event Options].
 ****
 

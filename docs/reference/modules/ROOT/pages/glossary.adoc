@@ -87,7 +87,7 @@ The unit of compute consumption in CircleCI. Credits are consumed by the second,
 
 == Cross-repo trigger
 
-A <<trigger>> that initiates a run in one repository when an event, such as a tag push, occurs in another. Cross-repo triggers help you test library consumers. See the xref:guides:orchestrate:set-up-cross-repo-triggers-for-library-consumers.adoc[Set up Cross-Repo Triggers] page.
+A <<trigger>> that initiates a run in one repository when an event, such as a tag push, occurs in another. Cross-repo triggers help you test library consumers. See the xref:guides:orchestrate:set-up-cross-repo-triggers-for-library-consumers.adoc[Set Up Cross-Repo Triggers] page.
 
 == Custom image
 
@@ -338,7 +338,7 @@ A <<workflow,workflow>> marked with `setup: true` that runs first in a <<dynamic
 [badge="Beta"]
 == Test impact analysis
 
-A feature that runs only the tests affected by a code change. Test impact analysis maps which tests exercise which source files and skips tests covering unchanged files, to speed up CI. See the xref:guides:test:set-up-test-impact-analysis.adoc[Set up Test Impact Analysis] page.
+A feature that runs only the tests affected by a code change. Test impact analysis maps which tests exercise which source files and skips tests covering unchanged files, to speed up CI. See the xref:guides:test:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis] page.
 
 == Test splitting
 

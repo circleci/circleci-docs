@@ -12,7 +12,7 @@ Refer to the link:https://circleci.com/changelog/[CircleCI Changelog] to find ou
 
 To update the Kubernetes release agent you need an operational CircleCI environment integrated with your Kubernetes cluster. Refer to the following pages for steps:
 
-* xref:set-up-the-circleci-release-agent.adoc[Set up the CircleCI Release Agent]
+* xref:set-up-the-circleci-release-agent.adoc[Set Up the CircleCI Release Agent]
 * xref:configure-your-kubernetes-components.adoc[Configure Your Kubernetes Components]
 
 ****
@@ -52,4 +52,4 @@ helm upgrade --install circleci-release-agent-system release-agent/circleci-rele
 --set managedNamespaces="{namespace1,namespace2}"
 ----
 +
-If the agent was installed with the integration token stored in the Helm release, you can omit `--set tokenSecret.token` on upgrade. Use `--reuse-values` when applying a values file that does not include the token. Do not use `--reset-values` unless you also supply the token again. See xref:set-up-the-circleci-release-agent.adoc[Set up the CircleCI Release Agent] for details on storing and managing integration tokens.
+If the agent was installed with the integration token stored in the Helm release, you can omit `--set tokenSecret.token` on upgrade. Use `--reuse-values` when applying a values file that does not include the token. Do not use `--reset-values` unless you also supply the token again. See xref:set-up-the-circleci-release-agent.adoc[Set Up the CircleCI Release Agent] for details on storing and managing integration tokens.

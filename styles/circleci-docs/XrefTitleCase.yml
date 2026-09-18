@@ -11,9 +11,12 @@ script: |
   lines := text.split(scope, "\n")
 
   // Words that should not be capitalized in title case (unless first/last word)
-  // Articles, coordinating conjunctions, and short prepositions only
+  // Articles, coordinating conjunctions, and short prepositions only.
+  // Note: "up" is deliberately absent. Chicago 8.159 capitalizes prepositions used
+  // adverbially, and in these docs "up" is almost always a phrasal-verb particle
+  // ("Set Up", "Sign Up", "Speed Up") rather than a preposition.
   lowercase_words := ["a", "an", "the", "and", "but", "or", "for", "nor", "so", "yet",
-                      "at", "by", "in", "of", "on", "to", "up", "as", "via", "per", "macos"]
+                      "at", "by", "in", "of", "on", "to", "as", "via", "per", "macos"]
   // Words with intentional capitalization that should be ignored by title case rules
   exception_words := ["iOS", "macOS", "iPhone", "iPad", "tvOS", "watchOS", "vCPU", "npm"]
   for i, line in lines {

@@ -4,7 +4,7 @@
 :experimental:
 :page-show-readtime: true
 
-Rollbacks allow you to quickly revert your application to a previous stable version when issues are detected in production. This guide covers using the CircleCI rollback capability. To get rollbacks set up, see the xref:set-up-rollbacks.adoc[Set up Rollbacks] page.
+Rollbacks allow you to quickly revert your application to a previous stable version when issues are detected in production. This guide covers using the CircleCI rollback capability. To get rollbacks set up, see the xref:set-up-rollbacks.adoc[Set Up Rollbacks] page.
 
 If you are using Kubernetes, you can also enable rollback functionality by using the CircleCI release agent which includes a "Restore version" command. See the xref:release-agent-overview.adoc[Release Agent Overview] guide for more information.
 
@@ -48,7 +48,7 @@ a| * Simple systems.
 
 == Prerequisites
 
-To rollback via a rollback pipeline, ensure you have set up deploy markers and a rollback pipeline, as described in the xref:set-up-rollbacks.adoc[Set up Rollbacks] guide.
+To rollback via a rollback pipeline, ensure you have set up deploy markers and a rollback pipeline, as described in the xref:set-up-rollbacks.adoc[Set Up Rollbacks] guide.
 
 == Rollback using a rollback pipeline
 
@@ -120,12 +120,12 @@ Both methods above are manual: someone notices a problem and triggers the rollba
 
 After a deploy completes, CircleCI opens an evaluation window and listens for alerts from your monitoring tool. If a validation check fails, CircleCI marks the release as failed and triggers your rollback pipeline to return the component to the last healthy version. No manual step is involved.
 
-Automatic rollback needs a configured rollback pipeline, so set that up first using the xref:set-up-rollbacks.adoc[Set up Rollbacks] guide. Note the following behavior:
+Automatic rollback needs a configured rollback pipeline, so set that up first using the xref:set-up-rollbacks.adoc[Set Up Rollbacks] guide. Note the following behavior:
 
 * A rollback that fails does not trigger another automatic rollback, even when your rollback pipeline includes validation of its own.
 * CircleCI skips the rollback when there is no prior successful release to return to.
 
-To get set up, see the xref:set-up-smart-deployments.adoc[Set up Smart Deployments] guide.
+To get set up, see the xref:set-up-smart-deployments.adoc[Set Up Smart Deployments] guide.
 
 
 

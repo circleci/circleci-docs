@@ -51,7 +51,7 @@ NOTE: See the xref:pull-an-image-from-aws-ecr-with-oidc.adoc[Pull an Image From 
 
 You will need to have the following to continue your AWS OIDC setup:
 
-* A CircleCI account. You must be a member of an organization. See xref:getting-started:first-steps.adoc[Sign up and Try CircleCI] for more information.
+* A CircleCI account. You must be a member of an organization. See xref:getting-started:first-steps.adoc[Sign Up and Try CircleCI] for more information.
 * A project set up that you want to configure to use OIDC.
 * An AWS account with the necessary permissions to create an IAM identity provider and role.
 
@@ -268,7 +268,7 @@ TIP: The Google Cloud CLI reads your configuration file to authenticate. You can
 
 You will need to have the following to continue your GCP OIDC setup:
 
-* A CircleCI account where you are a member of an organization. See xref:getting-started:first-steps.adoc[Sign up and Try CircleCI] for more information.
+* A CircleCI account where you are a member of an organization. See xref:getting-started:first-steps.adoc[Sign Up and Try CircleCI] for more information.
 * A project set up that you want to configure to use OIDC.
 * A GCP account with the necessary permissions to create a Workload Identity pool and provider.
 

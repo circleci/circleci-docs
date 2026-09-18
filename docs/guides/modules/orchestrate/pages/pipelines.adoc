@@ -88,7 +88,7 @@ NOTE: If you have not yet installed the CircleCI GitHub App into your GitHub org
 
 The GitHub App pipeline model also applies to GitHub Enterprise Server. GitHub App Server pipelines support the same configuration source and checkout source flexibility as GitHub App pipelines for GitHub Cloud, including custom config file paths and cross-repo setups. For more information, see the xref:integration:github-enterprise-server-integration.adoc[GitHub Enterprise Server Integration] page.
 
-Once you have set up a pipeline you need to set up a trigger to connect it to. Setting up a trigger is covered in the xref:set-up-triggers.adoc[Set up Triggers] page.
+Once you have set up a pipeline you need to set up a trigger to connect it to. Setting up a trigger is covered in the xref:set-up-triggers.adoc[Set Up Triggers] page.
 
 --
 GitLab::
@@ -123,7 +123,7 @@ Once you have set up a pipeline you need to set up a trigger to connect it to. S
 Cursor Origin::
 +
 --
-Before you can add a Cursor Origin pipeline, the CircleCI Origin app must be installed in your Origin codebase. Installing the app is a one-time step. You can install it from your menu:Org[VCS Connections] page, from the Cursor Origin marketplace, or as part of creating a project. See the xref:integration:set-up-vcs-connections.adoc[Set up VCS Connections] page.
+Before you can add a Cursor Origin pipeline, the CircleCI Origin app must be installed in your Origin codebase. Installing the app is a one-time step. You can install it from your menu:Org[VCS Connections] page, from the Cursor Origin marketplace, or as part of creating a project. See the xref:integration:set-up-vcs-connections.adoc[Set Up VCS Connections] page.
 
 To add or edit a pipeline, follow these steps:
 
@@ -141,7 +141,7 @@ include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 
 For Cursor Origin, commit the config file to your repository yourself before your pipeline can run. See the xref:getting-started:create-project.adoc#create-a-project[Create a Project] page.
 
-Once you have set up a pipeline you need to set up a trigger to connect it to. Setting up a trigger is covered in the xref:set-up-triggers.adoc[Set up Triggers] page.
+Once you have set up a pipeline you need to set up a trigger to connect it to. Setting up a trigger is covered in the xref:set-up-triggers.adoc[Set Up Triggers] page.
 --
 ====
 

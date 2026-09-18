@@ -11,7 +11,7 @@ This guide is for the CircleCI release agent. If you are using the CircleCI depl
 [#prerequisites]
 == Prerequisites
 
-Before following the steps below, ensure the environment integration has been set up and configured successfully. Refer to the xref:set-up-the-circleci-release-agent.adoc[Set up the CircleCI Release Agent] and xref:configure-your-kubernetes-components.adoc[Configure Your Kubernetes Components] pages for more information.
+Before following the steps below, ensure the environment integration has been set up and configured successfully. Refer to the xref:set-up-the-circleci-release-agent.adoc[Set Up the CircleCI Release Agent] and xref:configure-your-kubernetes-components.adoc[Configure Your Kubernetes Components] pages for more information.
 
 [#restore-version]
 == Restore version

@@ -8,7 +8,7 @@ Pipelines are triggered in response to actions or scheduled to run at specific t
 [#run-a-pipeline-on-commit-to-your-code-repository]
 == Trigger a pipeline on a repo event
 
-Trigger a pipeline on an event in your repository. The options available to you will be different depending on which integration you have set up, and for GitHub accounts, which GitHub authentication method you use. For steps to add a trigger for a project, see the xref:set-up-triggers.adoc[Set up Triggers] page.
+Trigger a pipeline on an event in your repository. The options available to you will be different depending on which integration you have set up, and for GitHub accounts, which GitHub authentication method you use. For steps to add a trigger for a project, see the xref:set-up-triggers.adoc[Set Up Triggers] page.
 
 For the full list of event options per integration, see the xref:github-trigger-event-options.adoc[GitHub Trigger Event Options], xref:gitlab-trigger-options.adoc[GitLab Trigger Options], and xref:cursor-origin-trigger-event-options.adoc[Cursor Origin Trigger Event Options] pages.
 

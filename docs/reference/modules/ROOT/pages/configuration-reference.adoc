@@ -1170,7 +1170,7 @@ CircleCI supports running jobs on link:https://developer.apple.com/macos/[macOS]
 | `code_signing`
 | N
 | List
-| A list of signing bundle names to install onto the macOS virtual machine with the `install_signing_bundle` step. See xref:guides:execution-managed:ios-codesigning.adoc[Set up Code Signing for iOS and macOS Projects].
+| A list of signing bundle names to install onto the macOS virtual machine with the `install_signing_bundle` step. See xref:guides:execution-managed:ios-codesigning.adoc[Set Up Code Signing for iOS and macOS Projects].
 |===
 --
 
@@ -2642,7 +2642,7 @@ NOTE: Even though CircleCI uses `ssh-agent` to sign all added SSH keys, you *mus
 [#install-signing-bundle]
 === *`install_signing_bundle`*
 
-A special step that installs the code signing certificates and provisioning profiles from the signing bundles declared in the `code_signing` key of your `macos` executor. CircleCI installs them into a temporary keychain on the runner at build time and removes them when the job completes. See xref:guides:execution-managed:ios-codesigning.adoc[Set up Code Signing for iOS and macOS Projects].
+A special step that installs the code signing certificates and provisioning profiles from the signing bundles declared in the `code_signing` key of your `macos` executor. CircleCI installs them into a temporary keychain on the runner at build time and removes them when the job completes. See xref:guides:execution-managed:ios-codesigning.adoc[Set Up Code Signing for iOS and macOS Projects].
 
 In the case of `install_signing_bundle`, the step type is just a string with no additional attributes.
 

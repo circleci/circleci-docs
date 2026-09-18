@@ -172,12 +172,18 @@ Organization administrators have read/write access to all projects and have unre
 [#run-workflows-with-a-restricted-context]
 === Run workflows with a restricted context
 
-To invoke a job that uses a restricted context, the following apply:
+To invoke a job that uses a restricted context, every restriction type that is set on the context must pass. Security groups, project restrictions, and expression restrictions combine with logical AND.
 
-* A user must be a member of one of the security groups or projects assigned to the context.
-* The expressions assigned to the context must be true.
+[#how-restrictions-combine]
+==== How restrictions combine
 
-If the user running the workflow does not have access to the context or an expression evaluates to false, the workflow will fail with the `Unauthorized` status.
+* *Security groups:* The user who triggered the pipeline must belong to at least one assigned group. The default group `All members` allows any organization member. If you assign more than one named group, membership in any one of those groups is enough (logical OR).
+* *Project restrictions:* If you add any project restrictions, the job must run in one of the listed projects (logical OR). If you add none, every project in the organization can use the context.
+* *Expression restrictions:* If you add any expression restrictions, every expression must evaluate to `true` (logical AND). If you add none, this check passes.
+
+A context with both a security group and a project restriction is available only when both checks pass. Group membership does not bypass a project allowlist. A listed project does not bypass a security group.
+
+If the user running the workflow does not have access to the context, or an expression evaluates to false, the workflow fails with the `Unauthorized` status.
 
 [#approve-jobs-that-use-restricted-contexts]
 === Approve jobs that use restricted contexts
