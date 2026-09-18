@@ -18,7 +18,7 @@ TIP: If you would rather convert your workflow into CircleCI syntax, see the xre
 
 * A GitHub App or Cursor Origin pipeline. Both pipeline types let you choose any config file path in any connected repository, which is what makes this possible. To check which pipeline types your organization uses, see the xref:integration:version-control-system-integration-overview.adoc[Version Control Systems, Pipeline Types, and Feature Support] page. #TODO: add GitHub App Server here if GitHub Enterprise Server supports this.#
 * A GitHub Actions workflow file already committed to your repository, at a path such as `.github/workflows/ci.yml`. CircleCI runs the file you point it at, and does not generate one for you.
-* A workflow that runs on Linux. CircleCI rejects workflows that require macOS or Windows runners.
+* A workflow that runs on Linux. The CircleCI GitHub Actions runner does not support macOS or Windows. For macOS and Windows builds you can migrate to use CircleCI YAML config. See the xref:migrate:migrating-from-github.adoc[Migrate From GitHub Actions] page for more information.
 
 To use the CircleCI CLI steps on this page, you also need the following:
 
@@ -234,7 +234,7 @@ CAUTION: **There is no CLI teardown.** The CLI has no command to delete a projec
 You point a pipeline at a GitHub Actions workflow file, and CircleCI does the rest each time the pipeline is triggered:
 
 . **CircleCI reads your workflow file** from the config source repository, at the path you gave the pipeline.
-. **CircleCI translates the workflow into a CircleCI workflow.** Each GitHub Actions job becomes a CircleCI job, and `needs:` relationships become `requires:` relationships, so your job graph is preserved.
+. **CircleCI translates the workflow into a CircleCI workflow.** Each GitHub Actions job becomes a CircleCI job, and `needs:` relationships become `requires:` relationships, so your workflow graph is preserved.
 . **Each job runs on the CircleCI actions runner.** The runner executes your steps using GitHub Actions semantics. This covers `run:` and `uses:` steps, `${{ }}` expression evaluation, step and job outputs, and secret masking.
 
 Your workflow file is never rewritten, and you do not maintain a CircleCI configuration file alongside it. You get CircleCI compute and the pipelines dashboard, running the workflow definition you already have.
