@@ -394,7 +394,7 @@ NOTE: Cursor Origin organizations are `circleci` type organizations, so the **Ci
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 
-| xref:orchestrate:set-up-multiple-configuration-files-for-a-project.adoc[Set up Multiple Pipelines and Configuration Files for a Project]
+| xref:orchestrate:set-up-multiple-configuration-files-for-a-project.adoc[Set Up Multiple Pipelines and Configuration Files for a Project]
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#

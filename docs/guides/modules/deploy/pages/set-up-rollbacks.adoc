@@ -5,7 +5,7 @@
 
 CircleCI rollbacks allow you to quickly revert your application to a previous stable version when issues are detected in production. This guide covers how to create and configure a CircleCI pipeline to enable rollback operations.
 
-TIP: *Smart Deployments sets up a rollback pipeline for you.* The Smart Deployments guided setup configures your rollback pipeline alongside deploy markers, a deploy pipeline, release validation, and automatic rollback, then opens a single pull request for you to merge. See the xref:set-up-smart-deployments.adoc[Set up Smart Deployments] guide. Use this page to configure a rollback pipeline on its own, or to customize the pipeline that Smart Deployments generated for you.
+TIP: *Smart Deployments sets up a rollback pipeline for you.* The Smart Deployments guided setup configures your rollback pipeline alongside deploy markers, a deploy pipeline, release validation, and automatic rollback, then opens a single pull request for you to merge. See the xref:set-up-smart-deployments.adoc[Set Up Smart Deployments] guide. Use this page to configure a rollback pipeline on its own, or to customize the pipeline that Smart Deployments generated for you.
 
 == Introduction
 
@@ -16,7 +16,7 @@ CircleCI rollbacks support two methods of manually reverting to a previous versi
 
 This guide covers setting up a rollback pipeline, which is the recommended approach for most applications. The process of rolling back is described in detail in the xref:rollback-a-deployment.adoc[Rollback a Deployment] guide, including a comparison of the two methods.
 
-A rollback pipeline is also what CircleCI triggers when release validation fails and automatic rollback is enabled. For more information, see the xref:set-up-smart-deployments.adoc[Set up Smart Deployments] guide.
+A rollback pipeline is also what CircleCI triggers when release validation fails and automatic rollback is enabled. For more information, see the xref:set-up-smart-deployments.adoc[Set Up Smart Deployments] guide.
 
 .Rollback guided setup
 image::guides:ROOT:deploy/rollback-guided-setup.png[Rollback guided setup]
@@ -73,7 +73,7 @@ No changes are pushed to your repository at this point. GitHub pipelines are vie
 
 Deploy markers *must* be configured in your project to use CircleCI rollback pipelines. If you already have deploy markers set up, select "I'll make the config changes myself" and then select btn:[I've updated my config] to proceed to the next step.
 
-The in-app setup process guides you to set up deploy markers now. Alternatively, manual configuration steps are available in the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide. If you want to set up deploy markers across multiple projects at once, see the xref:configure-deploy-markers.adoc#set-up-deploy-markers-for-multiple-projects[Set up deploy markers for multiple projects] section.
+The in-app setup process guides you to set up deploy markers now. Alternatively, manual configuration steps are available in the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide. If you want to set up deploy markers across multiple projects at once, see the xref:configure-deploy-markers.adoc#set-up-deploy-markers-for-multiple-projects[Set Up deploy markers for multiple projects] section.
 
 [tabs]
 ====

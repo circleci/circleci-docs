@@ -949,7 +949,7 @@ d| [.nowrap]#GitLab#
 [#deploy-information]
 === Deploy information
 
-Values prefixed with `+pipeline.deploy.*+` are only available for deployment pipelines. See the xref:guides:deploy:set-up-rollbacks.adoc[Set up a Rollback Pipeline] and xref:guides:deploy:set-up-deploys.adoc[Set up a Deploy Pipeline] guides for more information.
+Values prefixed with `+pipeline.deploy.*+` are only available for deployment pipelines. See the xref:guides:deploy:set-up-rollbacks.adoc[Set Up a Rollback Pipeline] and xref:guides:deploy:set-up-deploys.adoc[Set Up a Deploy Pipeline] guides for more information.
 
 [.table-scroll]
 --
