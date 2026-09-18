@@ -4,18 +4,20 @@
 :page-description: Set up a CircleCI pipeline that runs an existing GitHub Actions workflow file, and check which GitHub Actions features are supported.
 :experimental:
 
-A CircleCI pipeline is normally defined by a CircleCI configuration file. You can instead point a pipeline at an existing GitHub Actions workflow file, and CircleCI runs that workflow on CircleCI compute. Your workflow file stays where it is, in `.github/workflows/`, and you do not need to translate it into CircleCI syntax.
+#Add in where to share feedback#
 
-Running your workflow as it is helps when you want to move work onto CircleCI without rewriting your configuration first. It also lets you compare the two platforms using the same workflow. A subset of GitHub Actions features is supported. Before you start, check the <<github-actions-feature-support,GitHub Actions Feature Support>> section to confirm your workflow uses supported features.
+NOTE: **GitHub Actions workflow support is in Preview.** This feature is in its early stages and you may encounter bugs, unexpected behavior, or incomplete features.
 
-NOTE: **Preview feature.** This feature is in preview, on CircleCI Cloud, for GitHub App pipelines. Support for more pipeline types is planned, and feature support is expected to change while the feature is in preview.
+A CircleCI pipeline is generally defined by a CircleCI configuration file. You can instead use an existing GitHub Actions workflow file as your pipeline configuration. CircleCI runs your GitHub Actions workflow on CircleCI compute. Your workflow file stays where it is, in `.github/workflows/`, and you do not need to translate it into CircleCI syntax.
+
+Running your GitHub Actions workflow as it is helps when you want to move work onto CircleCI without rewriting your configuration first. It also lets you compare the two platforms using the same workflow. A subset of GitHub Actions features is supported. Before you start, check the <<github-actions-feature-support,GitHub Actions Feature Support>> section to confirm your workflow uses supported features.
 
 TIP: If you would rather convert your workflow into CircleCI syntax, see the xref:migrate:migrating-from-github.adoc[Migrate From GitHub Actions] page and the link:https://circleci.com/developer/tools/configTranslator[CircleCI configuration translator].
 
 == Prerequisites
 
-* A GitHub App pipeline. GitHub App pipelines let you choose any config file path in any connected repository, which is what makes this possible. To check which pipeline types your organization uses, see the xref:integration:version-control-system-integration-overview.adoc[Version Control Systems, Pipeline Types, and Feature Support] page.
-* A GitHub Actions workflow file already committed to your repository, at a path such as `.github/workflows/ci.yml`. CircleCI runs the file you point it at, and does not generate one for you.
+* A CircleCI Cloud organization integrated with GitHub using the CircleCI GitHub App.
+* A GitHub repository with a GitHub Actions workflow file.
 * A workflow that runs on Linux. The CircleCI GitHub Actions runner does not support macOS or Windows. For macOS and Windows builds you can migrate to use CircleCI YAML config. See the xref:migrate:migrating-from-github.adoc[Migrate From GitHub Actions] page for more information.
 
 To use the CircleCI CLI steps on this page, you also need the following:
@@ -25,7 +27,7 @@ To use the CircleCI CLI steps on this page, you also need the following:
 
 == Set up a new project with a GitHub Actions workflow file
 
-Choose the tab that matches how you prefer to work.
+To set up a new project with a GitHub Actions workflow file, follow the steps in the web app or the CircleCI CLI.
 
 [tabs]
 ====
@@ -40,11 +42,9 @@ include::ROOT:partial$create-project/choose-a-repo.adoc[]
 +
 Select the **GitHub Cloud** tile if you do not already have a connection. CircleCI redirects you to GitHub, where you install and authorize the CircleCI GitHub App. Installing the app is a one-time step.
 
-. On the *Select your config source* step, select **Use existing GitHub Actions workflow file**, then select btn:[Continue].
-+
-#TODO: add screenshot#
+. On the *Select your config source* step, select **Use existing GitHub Actions workflow file**, enter the path to the GitHub Actions workflow file, then select btn:[Continue].
 
-. Set up the triggers for your pipeline. CircleCI adds one trigger by default, to build your project on every commit. You can xref:orchestrate:set-up-triggers.adoc[Add More Triggers] at this point.
+. Set up the triggers for your pipeline. CircleCI adds one trigger by default, to build your project on every commit. You can xref:orchestrate:set-up-triggers.adoc[Add More Triggers] at this point. Select btn:[Next: review and finish setup]
 
 . Review what you have set up, then select btn:[Finish setup].
 
@@ -54,19 +54,16 @@ CircleCI CLI::
 +
 --
 
-. Find your organization slug. An organization slug looks like `gh/<my-org>` or `circleci/<org-id>`.
-+
-[,shell]
-----
-circleci project list --json
-----
+Run these commands from your repository directory. Every command below resolves your project from the git remote, so you do not need to pass a project slug.
 
-. Create the project. Replace `<repo-name>` with your repository name.
+. Create the project. CircleCI names it after the current repository.
 +
 [,shell]
 ----
-circleci project create <repo-name> --org <org-slug> --json
+circleci project create --json
 ----
++
+If you belong to more than one organization, add `--org <org-slug>`. Run `circleci org list` to find it, then use `gh/<org-name>` for a GitHub organization or `circleci/<org-id>` for a `circleci` type organization.
 
 . Find the numeric ID of your GitHub repository. You need this ID for both the pipeline definition and the trigger.
 +
@@ -80,7 +77,6 @@ gh api /repos/<owner>/<repo> --jq .id
 [,shell]
 ----
 circleci pipeline create \
-  --project <project-slug> \
   --name "github-actions-ci" \
   --config-provider github_app \
   --config-repo-id <github-repo-id> \
@@ -109,7 +105,7 @@ Note the pipeline definition ID returned by this command. You need it in the nex
 +
 [,shell]
 ----
-circleci project follow --project <project-slug>
+circleci project follow
 ----
 
 . Add a trigger to connect your pipeline definition to a Git event.
@@ -117,7 +113,6 @@ circleci project follow --project <project-slug>
 [,shell]
 ----
 circleci project trigger create \
-  --project <project-slug> \
   --pipeline-definition-id <definition-id> \
   --repo-id <github-repo-id> \
   --event-preset all-pushes \
@@ -130,14 +125,13 @@ Other presets include `only-open-prs` and `default-branch-pushes`. Run `circleci
 +
 [,shell]
 ----
-circleci pipeline run --project <project-slug> --definition-id <definition-id> --branch main --json
-circleci run watch <run-id> --project <project-slug> --failfast
+circleci pipeline run --definition-id <definition-id> --branch main --json
+circleci run watch <run-id> --failfast
 ----
 
-TIP: **Check what actually ran, rather than trusting a green result.** Because some GitHub Actions features are accepted without taking effect, a passing run does not prove that every step did what your workflow file asks for. Use `circleci run get <run-id> --project <project-slug> --json` to list workflow and job IDs, `circleci job get <job-id> --json` to list steps, and `circleci job output get <job-id> --step-num <n> --strip-ansi` to read the raw step output.
-
-CAUTION: **The CLI cannot tear these down.** The CLI has no command to delete a project or a pipeline definition, and no command to delete or disable a trigger. Check your flags before you create anything, and remove unwanted pipelines and triggers in the web app.
+TIP: **Check what actually ran, rather than trusting a green result.** Because some GitHub Actions features are accepted without taking effect, a passing run does not prove that every step did what your workflow file asks for. Use `circleci run get <run-id> --json` to list workflow and job IDs, `circleci job get <job-id> --json` to list steps, and `circleci job output get <job-id> --step-num <n> --strip-ansi` to read the raw step output.
 --
+
 ====
 
 == Add a GitHub Actions pipeline to an existing project
@@ -156,8 +150,6 @@ include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 . Give your pipeline a descriptive name, for example `github-actions-ci`.
 . Under *Config source*, select the repository that holds your GitHub Actions workflow file.
 . Under *Config filepath*, select the **GitHub Actions workflow file** checkbox, then enter the path to your workflow file, for example `.github/workflows/ci.yml`.
-+
-#TODO: add screenshot#
 
 . Under *Checkout source*, select the repository to check out when your workflow runs. For most projects this is the same repository you selected as the config source.
 . Select btn:[Save].
@@ -167,6 +159,8 @@ Connect your new pipeline to a trigger before it can run. See the xref:orchestra
 CircleCI CLI::
 +
 --
+
+Run these commands from your repository directory, so your project resolves from the git remote.
 
 . Find the numeric ID of your GitHub repository.
 +
@@ -180,7 +174,6 @@ gh api /repos/<owner>/<repo> --jq .id
 [,shell]
 ----
 circleci pipeline create \
-  --project <project-slug> \
   --name "github-actions-ci" \
   --config-provider github_app \
   --config-repo-id <github-repo-id> \
@@ -198,7 +191,6 @@ Note the pipeline definition ID returned by this command.
 [,shell]
 ----
 circleci project trigger create \
-  --project <project-slug> \
   --pipeline-definition-id <definition-id> \
   --repo-id <github-repo-id> \
   --event-preset all-pushes \
@@ -209,8 +201,8 @@ circleci project trigger create \
 +
 [,shell]
 ----
-circleci pipeline run --project <project-slug> --definition-id <definition-id> --branch main --json
-circleci run watch <run-id> --project <project-slug> --failfast
+circleci pipeline run --definition-id <definition-id> --branch main --json
+circleci run watch <run-id> --failfast
 ----
 
 CAUTION: **The CLI cannot tear these down.** The CLI has no command to delete a project or a pipeline definition, and no command to delete or disable a trigger. Check your flags before you create anything, and remove unwanted pipelines and triggers in the web app.
@@ -219,7 +211,7 @@ CAUTION: **The CLI cannot tear these down.** The CLI has no command to delete a 
 
 == How it works
 
-You point a pipeline at a GitHub Actions workflow file, and CircleCI does the rest each time the pipeline is triggered:
+When you set up a pipeline to use a GitHub Actions workflow file, CircleCI does the following:
 
 . **CircleCI reads your workflow file** from the config source repository, at the path you gave the pipeline.
 . **CircleCI translates the workflow into a CircleCI workflow.** Each GitHub Actions job becomes a CircleCI job, and `needs:` relationships become `requires:` relationships, so your workflow graph is preserved.
@@ -227,11 +219,11 @@ You point a pipeline at a GitHub Actions workflow file, and CircleCI does the re
 
 Your workflow file is never rewritten, and you do not maintain a CircleCI configuration file alongside it. You get CircleCI compute and the pipelines dashboard, running the workflow definition you already have.
 
-The runner implements GitHub Actions semantics rather than calling GitHub, so only a subset of features is available. See <<github-actions-feature-support,GitHub Actions Feature Support>>.
+The CircleCI actions runner implements GitHub Actions semantics rather than calling GitHub, so only a subset of features is available. See <<github-actions-feature-support,GitHub Actions Feature Support>>.
 
 === How CircleCI triggers your workflow
 
-Two things decide whether your workflow runs, and it helps to keep them separate in your mind:
+Two things decide whether your workflow runs:
 
 . **The CircleCI trigger** decides whether the pipeline runs at all. You configure this in CircleCI, in the same way as any other pipeline.
 . **The `on:` key in your workflow file** decides whether your workflow accepts the event that CircleCI passes to it. A workflow that declares only unsupported events never runs.
@@ -244,7 +236,7 @@ The following table shows which CircleCI events map to which GitHub Actions even
 |===
 | GitHub Actions event
 | CircleCI event
-| What to know
+| Notes
 
 | `push`
 | Push
