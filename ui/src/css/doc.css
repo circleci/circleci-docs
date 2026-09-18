@@ -1495,6 +1495,11 @@
   font-weight: var(--heading-font-weight);
 }
 
+.doc .circle-amber {
+  color: var(--link-partial-color) !important;
+  font-weight: var(--heading-font-weight);
+}
+
 /* Prevent inline code text from wrapping in table cells */
 .doc .tableblock code:not(.hljs) {
   white-space: nowrap;
