@@ -132,8 +132,6 @@ Select the **Cursor Origin** tile to get set up. CircleCI redirects you to Curso
 You set up one trigger during project creation. You can configure additional triggers once your project is created. See the xref:orchestrate:set-up-triggers.adoc[Set Up Triggers] page for more information.
 
 . On the **Review and finish setup** step, set the path to the config file in your repository. The default path is `.circleci/config.yml`.
-+
-NOTE: To run an existing GitHub Actions workflow file instead of a CircleCI config file, mark the config file path as a GitHub Actions workflow file. See the xref:orchestrate:use-a-github-actions-workflow-file-as-your-pipeline-configuration.adoc[Use a GitHub Actions Workflow File as Your Pipeline Configuration] page.
 
 Once your project is created you will land on your pipelines page. To see your first pipeline run, push a commit to your repository in Cursor Origin. If you have not added a config file yet, add one at the path you specified and push it.
 

@@ -6,23 +6,21 @@
 
 A CircleCI pipeline is normally defined by a CircleCI configuration file. You can instead point a pipeline at an existing GitHub Actions workflow file, and CircleCI runs that workflow on CircleCI compute. Your workflow file stays where it is, in `.github/workflows/`, and you do not need to translate it into CircleCI syntax.
 
-This is useful when you want to move work onto CircleCI without rewriting your configuration first, or when you want to compare the two platforms using the same workflow. A subset of GitHub Actions features is supported. Before you start, check the <<github-actions-feature-support,GitHub Actions Feature Support>> section to confirm your workflow uses supported features.
+Running your workflow as it is helps when you want to move work onto CircleCI without rewriting your configuration first. It also lets you compare the two platforms using the same workflow. A subset of GitHub Actions features is supported. Before you start, check the <<github-actions-feature-support,GitHub Actions Feature Support>> section to confirm your workflow uses supported features.
 
-NOTE: **Preview feature.** This feature is in preview and available on CircleCI Cloud for GitHub App and Cursor Origin pipelines. Feature support is expected to change while the feature is in preview.
-
-#TODO: confirm whether GitHub App Server pipelines support this, on GitHub Enterprise Server. If they do, update this note, the prerequisites below, the `:page-platform:` attribute at the top of this page (currently `Cloud`), and the GitHub App Server column of the feature support table in the VCS integration overview.#
+NOTE: **Preview feature.** This feature is in preview, on CircleCI Cloud, for GitHub App pipelines. Support for more pipeline types is planned, and feature support is expected to change while the feature is in preview.
 
 TIP: If you would rather convert your workflow into CircleCI syntax, see the xref:migrate:migrating-from-github.adoc[Migrate From GitHub Actions] page and the link:https://circleci.com/developer/tools/configTranslator[CircleCI configuration translator].
 
 == Prerequisites
 
-* A GitHub App or Cursor Origin pipeline. Both pipeline types let you choose any config file path in any connected repository, which is what makes this possible. To check which pipeline types your organization uses, see the xref:integration:version-control-system-integration-overview.adoc[Version Control Systems, Pipeline Types, and Feature Support] page. #TODO: add GitHub App Server here if GitHub Enterprise Server supports this.#
+* A GitHub App pipeline. GitHub App pipelines let you choose any config file path in any connected repository, which is what makes this possible. To check which pipeline types your organization uses, see the xref:integration:version-control-system-integration-overview.adoc[Version Control Systems, Pipeline Types, and Feature Support] page.
 * A GitHub Actions workflow file already committed to your repository, at a path such as `.github/workflows/ci.yml`. CircleCI runs the file you point it at, and does not generate one for you.
 * A workflow that runs on Linux. The CircleCI GitHub Actions runner does not support macOS or Windows. For macOS and Windows builds you can migrate to use CircleCI YAML config. See the xref:migrate:migrating-from-github.adoc[Migrate From GitHub Actions] page for more information.
 
 To use the CircleCI CLI steps on this page, you also need the following:
 
-* CircleCI CLI v1.0 or later, authenticated with `circleci auth login`. Run `circleci auth me` to confirm. See the xref:toolkit:circleci-cli.adoc[The CircleCI CLI] page.
+* CircleCI CLI v1.0 or later, authenticated with `circleci auth login`. Run `circleci auth me` to confirm. See the xref:toolkit:circleci-cli.adoc[CircleCI CLI] page.
 * The GitHub CLI (`gh`), used to look up your repository ID. Any other method of finding the repository ID works too.
 
 == Set up a new project with a GitHub Actions workflow file
@@ -34,21 +32,17 @@ Choose the tab that matches how you prefer to work.
 Web app::
 +
 --
-When you create a project, CircleCI asks how it should get build instructions for your repository. Choose your existing GitHub Actions workflow file at that point.
+When you create a project, CircleCI asks where to get build instructions for your repository. Choose your existing GitHub Actions workflow file at that point.
 
 include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
 
 include::ROOT:partial$create-project/choose-a-repo.adoc[]
 +
-Select the **GitHub Cloud** or **Cursor Origin** tile if you do not already have a connection. Installing the CircleCI app into your GitHub organization or Origin codebase is a one-time step.
+Select the **GitHub Cloud** tile if you do not already have a connection. CircleCI redirects you to GitHub, where you install and authorize the CircleCI GitHub App. Installing the app is a one-time step.
 
 . On the *Select your config source* step, select **Use existing GitHub Actions workflow file**, then select btn:[Continue].
 +
 #TODO: add screenshot#
-+
-NOTE: Cursor Origin projects set the config file path later in the flow, on the **Review and finish setup** step. See the Cursor Origin tab in xref:getting-started:create-project.adoc#create-a-project[Create a Project].
-+
-#TODO: check the Cursor Origin project creation flow. Does it show this same *Select your config source* step, or is the GitHub Actions workflow file option only on the Review and finish setup step? Screenshot whichever applies.#
 
 . Set up the triggers for your pipeline. CircleCI adds one trigger by default, to build your project on every commit. You can xref:orchestrate:set-up-triggers.adoc[Add More Triggers] at this point.
 
@@ -59,9 +53,6 @@ Your pipelines page opens. The next time your trigger fires, CircleCI runs the j
 CircleCI CLI::
 +
 --
-These steps set up a GitHub App pipeline.
-
-#TODO: confirm whether these CLI steps also work for Cursor Origin and GitHub App Server pipelines, and what provider value each needs. `--config-provider` accepts `github_app`, `github_server`, and `circleci`. `--checkout-provider` accepts `github_app` and `github_server`. Also confirm what `--checkout-provider` defaults to when omitted, because the CLI accepts the command without it.#
 
 . Find your organization slug. An organization slug looks like `gh/<my-org>` or `circleci/<org-id>`.
 +
@@ -102,7 +93,7 @@ circleci pipeline create \
 +
 [IMPORTANT]
 =====
-`--config-file-type github-actions` is the flag that makes this work, and it is easy to miss when following a general onboarding flow.
+`--config-file-type github-actions` is the flag that makes this work, and it is simple to miss when following a general onboarding flow.
 
 Leave it out and CircleCI reads your workflow file as CircleCI configuration syntax. The failure is confusing rather than obvious, and looks similar to the following:
 
@@ -145,7 +136,7 @@ circleci run watch <run-id> --project <project-slug> --failfast
 
 TIP: **Check what actually ran, rather than trusting a green result.** Because some GitHub Actions features are accepted without taking effect, a passing run does not prove that every step did what your workflow file asks for. Use `circleci run get <run-id> --project <project-slug> --json` to list workflow and job IDs, `circleci job get <job-id> --json` to list steps, and `circleci job output get <job-id> --step-num <n> --strip-ansi` to read the raw step output.
 
-CAUTION: **There is no CLI teardown.** The CLI has no command to delete a project or a pipeline definition, and no command to delete or disable a trigger. Check your flags before you create anything, and remove unwanted pipelines and triggers in the web app.
+CAUTION: **The CLI cannot tear these down.** The CLI has no command to delete a project or a pipeline definition, and no command to delete or disable a trigger. Check your flags before you create anything, and remove unwanted pipelines and triggers in the web app.
 --
 ====
 
@@ -176,9 +167,6 @@ Connect your new pipeline to a trigger before it can run. See the xref:orchestra
 CircleCI CLI::
 +
 --
-These steps add a GitHub App pipeline.
-
-#TODO: confirm whether these CLI steps also work for Cursor Origin and GitHub App Server pipelines, and what provider value each needs.#
 
 . Find the numeric ID of your GitHub repository.
 +
@@ -225,7 +213,7 @@ circleci pipeline run --project <project-slug> --definition-id <definition-id> -
 circleci run watch <run-id> --project <project-slug> --failfast
 ----
 
-CAUTION: **There is no CLI teardown.** The CLI has no command to delete a project or a pipeline definition, and no command to delete or disable a trigger. Check your flags before you create anything, and remove unwanted pipelines and triggers in the web app.
+CAUTION: **The CLI cannot tear these down.** The CLI has no command to delete a project or a pipeline definition, and no command to delete or disable a trigger. Check your flags before you create anything, and remove unwanted pipelines and triggers in the web app.
 --
 ====
 
@@ -436,7 +424,7 @@ If a feature does not appear in this section, treat it as unsupported.
 
 | Environment files
 | [.circle-green]#**Supported**#
-| `GITHUB_OUTPUT`, `GITHUB_ENV`, `GITHUB_PATH`, `GITHUB_STATE`, and `GITHUB_STEP_SUMMARY` all work, including multiline heredoc values.
+| `GITHUB_OUTPUT`, `GITHUB_ENV`, `GITHUB_PATH`, `GITHUB_STATE`, and `GITHUB_STEP_SUMMARY` all work, including multiline Heredoc values.
 
 | Log grouping and annotations
 | [.circle-green]#**Supported**#
@@ -511,7 +499,7 @@ For the contexts available in job conditions and step conditions, see <<availabl
 
 Some widely used setup actions, including `actions/setup-python`, put a tool on the path by calling the `add-path` workflow command. That command is disabled, so the action itself succeeds, but later `run:` steps do not pick up the version it installed and fall back to whatever is already on the path.
 
-This is the most common way a workflow passes on CircleCI while doing something different from what you expect. If your workflow pins a tool version through a setup action, add the tool to `GITHUB_PATH` yourself, or set the full path in the steps that need it.
+That silent difference is the most common way a workflow passes on CircleCI while doing something other than what you expect. If your workflow pins a tool version through a setup action, add the tool to `GITHUB_PATH` yourself, or set the full path in the steps that need it.
 
 === Checkout, artifacts, and caching
 

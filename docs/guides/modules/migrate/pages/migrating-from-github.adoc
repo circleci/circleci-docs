@@ -7,7 +7,7 @@ This document provides an overview of how to migrate from GitHub Actions to Circ
 
 TIP: The link:https://circleci.com/developer/tools/configTranslator[CircleCI configuration translator] provides a way to convert your GitHub Actions or GitLab config into a CircleCI `config.yml` file. The configuration translator is currently in open preview.
 
-TIP: **Not ready to convert your workflows?** A GitHub App or Cursor Origin pipeline can run an existing GitHub Actions workflow file as it is, without any conversion to CircleCI syntax. A subset of GitHub Actions features is available. See the xref:orchestrate:use-a-github-actions-workflow-file-as-your-pipeline-configuration.adoc[Use a GitHub Actions Workflow File as Your Pipeline Configuration] page.
+TIP: **Not ready to convert your workflows?** A GitHub App pipeline can run an existing GitHub Actions workflow file as it is, without any conversion to CircleCI syntax. A subset of GitHub Actions features is available. See the xref:orchestrate:use-a-github-actions-workflow-file-as-your-pipeline-configuration.adoc[Use a GitHub Actions Workflow File as Your Pipeline Configuration] page.
 
 [#concepts]
 == Concepts
