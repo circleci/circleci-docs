@@ -42,6 +42,8 @@ include::ROOT:partial$create-project/choose-a-repo.adoc[]
 Select the **GitHub Cloud** tile to get set up. CircleCI redirects you to GitHub, where you install and authorise the CircleCI GitHub App. You can connect CircleCI to all your repositories, or select a subset. An organization administrator, or someone with admin access to a repository in your org, can complete this one-time authorization.
 
 . CircleCI prepares a config file for you, unless your repo already contains a CircleCI config file. In a later step you will commit this config to your repo on a new branch. If you do already have a CircleCI config file in your repo it will be displayed. Once you have your config, select btn:[Next: set up your triggers].
++
+NOTE: To run an existing GitHub Actions workflow file instead of a CircleCI config file, select **Use existing GitHub Actions workflow file** on the *Select your config source* step. See the xref:orchestrate:use-a-github-actions-workflow-file-as-your-pipeline-configuration.adoc[Use a GitHub Actions Workflow File as Your Pipeline Configuration] page.
 
 . Set up triggers for your pipeline. A single GitHub App trigger is set up by default to build your project on every commit to your repo. You can xref:orchestrate:set-up-triggers.adoc[Add More Triggers] at this point too.
 

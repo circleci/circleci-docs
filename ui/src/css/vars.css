@@ -49,6 +49,7 @@
   /* Status colors */
   --color-success-green: #008542;
   --color-error-red: #8F001C;
+  --color-partial-amber: #8B6D04; /* Darkened #f7c007 for contrast on light backgrounds */
 
   /* Visual effects */
   --shadow-default: 0 0 6px 4px #1616161F;
@@ -92,6 +93,7 @@
   --link-unresolved-font-color: var(--color-important-red);
   --link-success-color: var(--color-success-green);
   --link-error-color: var(--color-error-red);
+  --link-partial-color: var(--color-partial-amber);
 
   /* Breadcrumbs */
   --breadcrumb-font-color: #343434;
@@ -305,6 +307,7 @@ html[data-theme="dark"] {
   --color-link-on-light: var(--dark-link-color);
   --link-success-color: var(--dark-accent-green); /* #94E5AB for circle-green */
   --link-error-color: #ED9187; /* Light red for circle-red */
+  --link-partial-color: #f7c007; /* Amber for circle-amber */
 
   /* Breadcrumbs */
   --breadcrumb-font-color: var(--dark-text-secondary);

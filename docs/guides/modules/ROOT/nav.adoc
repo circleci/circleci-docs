@@ -29,6 +29,7 @@
 ** xref:migrate:migrating-from-azuredevops.adoc[Migrate from Azure DevOps]
 ** xref:migrate:migrating-from-buildkite.adoc[Migrate from Buildkite]
 ** xref:migrate:migrating-from-github.adoc[Migrate from GitHub]
+** xref:orchestrate:use-a-github-actions-workflow-file-as-your-pipeline-configuration.adoc[Use a GitHub Actions workflow file as your pipeline configuration]
 ** xref:migrate:migrating-from-gitlab.adoc[Migrate from GitLab]
 ** xref:migrate:migrating-from-jenkins.adoc[Migrate from Jenkins]
 ** xref:migrate:migrating-from-teamcity.adoc[Migrate from TeamCity]
@@ -41,6 +42,7 @@
 *** xref:orchestrate:workflows.adoc[Workflow orchestration]
 *** xref:orchestrate:pipeline-variables.adoc[Pipeline values and parameters]
 *** xref:orchestrate:config-templating.adoc[Config templating]
+*** xref:orchestrate:use-a-github-actions-workflow-file-as-your-pipeline-configuration.adoc[Use a GitHub Actions workflow file as your pipeline configuration]
 ** Trigger and schedule pipelines
 *** xref:orchestrate:triggers-overview.adoc[Trigger options]
 *** xref:orchestrate:set-up-triggers.adoc[Set up triggers]

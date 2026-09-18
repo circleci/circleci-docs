@@ -14,7 +14,13 @@ This guide focuses on **how to write documentation**. The llms.txt file tells yo
 
 ## Git worktrees
 
-Always create a git worktree for your work in:
+What to do depends on which environment you are running in (see [Agent Environment Context](#agent-environment-context)):
+
+- **Local agents** (Claude Code CLI, Cursor Desktop): work in the main `circleci-docs` checkout by default. **Ask before creating a git worktree**, and create one only when the person you are working with asks for it. Worktrees are useful for genuinely parallel work on the same files, but they accumulate quickly and are awkward to unwind mid-task, so they are not the default.
+
+- **Cloud agents** (started via `@cursor` in Linear or GitHub): always create a worktree, since there is no one to ask.
+
+When you create a worktree, use this location and naming:
 
 ```
 ../circleci-docs-worktrees/<issue-id>-<short-description>
@@ -26,7 +32,7 @@ For example:
 git worktree add ../circleci-docs-worktrees/LIN-123-fix-nav -b LIN-123-fix-nav
 ```
 
-Do all work in that directory, not in the main circleci-docs checkout. If there is no issue ID, use a short description only.
+If there is no issue ID, use a short description only.
 
 ## Creating New Documentation Pages
 
