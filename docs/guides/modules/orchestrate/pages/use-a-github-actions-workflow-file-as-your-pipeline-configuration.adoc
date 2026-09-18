@@ -305,7 +305,7 @@ If a feature does not appear in this section, treat it as unsupported.
 | [.circle-green]#**Supported**#
 | Works as it does on GitHub Actions.
 
-| **Partial**
+| [.circle-amber]#**Partial**#
 | Works within the limits described in the table.
 
 | **No effect**
@@ -331,7 +331,7 @@ If a feature does not appear in this section, treat it as unsupported.
 | Static job dependencies, matrix fan-out and fan-in, job results, and job outputs all work. Dependency graphs can be up to 20 levels deep.
 
 | `runs-on`
-| **Partial**
+| [.circle-amber]#**Partial**#
 | Use `ubuntu-latest`, `ubuntu-24.04`, `ubuntu-22.04`, `ubuntu-20.04`, or `self-hosted`. All other labels are rejected, including all macOS and Windows labels.
 
 | `name`
@@ -347,11 +347,11 @@ If a feature does not appear in this section, treat it as unsupported.
 | Accepts literal booleans and expressions, at job and step level.
 
 | `timeout-minutes`
-| **Partial**
+| [.circle-amber]#**Partial**#
 | Enforced at job and step level, defaulting to 360 minutes. A warning in the build output may state that this key has no effect. That warning is wrong, and the timeout is enforced.
 
 | `env` and `defaults.run`
-| **Partial**
+| [.circle-amber]#**Partial**#
 | Workflow, job, and step values use normal precedence, so the most specific value wins. `NODE_OPTIONS` cannot be set through `GITHUB_ENV`.
 
 | `concurrency`
@@ -383,7 +383,7 @@ If a feature does not appear in this section, treat it as unsupported.
 | Up to 256 instances per job.
 
 | `include` and `exclude`
-| **Partial**
+| [.circle-amber]#**Partial**#
 | Literal combinations work. An `include` entry whose value is an expression that cannot be resolved when the workflow is parsed is skipped without an error.
 
 | `fail-fast`
@@ -411,7 +411,7 @@ If a feature does not appear in this section, treat it as unsupported.
 | What to know
 
 | `run` steps
-| **Partial**
+| [.circle-amber]#**Partial**#
 | Use `bash`, `sh`, `python`, `pwsh`, or a custom shell template. Linux only.
 
 | Operators and comparisons
@@ -423,11 +423,11 @@ If a feature does not appear in this section, treat it as unsupported.
 | Available in conditions and in string interpolation.
 
 | `always()`, `success()`, `failure()`, and `cancelled()`
-| **Partial**
+| [.circle-amber]#**Partial**#
 | Available in conditions, without arguments. Not available in string interpolation.
 
 | `hashFiles()`
-| **Partial**
+| [.circle-amber]#**Partial**#
 | Available in step conditions and workflow steps, not in job conditions.
 
 | `case()`
@@ -473,11 +473,11 @@ For the contexts available in job conditions and step conditions, see <<availabl
 | What to know
 
 | Local actions (`./path`)
-| **Partial**
+| [.circle-amber]#**Partial**#
 | Resolved relative to the workspace, or relative to the path of the composite action calling them.
 
 | Public actions (`owner/repo@ref`)
-| **Partial**
+| [.circle-amber]#**Partial**#
 | Downloaded from GitHub and cached on disk.
 
 | Private actions
@@ -489,15 +489,15 @@ For the contexts available in job conditions and step conditions, see <<availabl
 | The `node16`, `node20`, and `node24` runtimes are supported.
 
 | Composite actions
-| **Partial**
+| [.circle-amber]#**Partial**#
 | Nesting is limited to 10 levels. Secrets are not available inside composite action children.
 
 | Docker actions
-| **Partial**
+| [.circle-amber]#**Partial**#
 | Linux only. A Dockerfile is built before the action runs. Prebuilt images are pulled anonymously, so private images are not available.
 
 | `uses: docker://` as a workflow step
-| **Partial**
+| [.circle-amber]#**Partial**#
 | Accepted as a direct step, as on GitHub Actions.
 
 | Pre and post steps
@@ -526,19 +526,19 @@ CircleCI intercepts these actions and handles them natively, so they work withou
 | What to know
 
 | `actions/upload-artifact`
-| **Partial**
+| [.circle-amber]#**Partial**#
 | All versions are intercepted. The `overwrite` and `include-hidden-files` inputs are rejected. The `retention-days` and `compression-level` inputs are accepted and ignored.
 
 | `actions/download-artifact`
-| **Partial**
+| [.circle-amber]#**Partial**#
 | The `name` input is required. The `pattern` and `merge-multiple` inputs are not supported, and downloading every artifact at once is not supported.
 
 | `actions/cache`
-| **Partial**
+| [.circle-amber]#**Partial**#
 | Restoring and saving both work. The `cache-hit` output always returns `false`, so a step that branches on `cache-hit` always takes the cache-miss path. The `fail-on-cache-miss`, `lookup-only`, and `enableCrossOsArchive` inputs are rejected.
 
 | `actions/cache/restore` and `actions/cache/save`
-| **Partial**
+| [.circle-amber]#**Partial**#
 | Subject to the same limits as `actions/cache`.
 |===
 --
@@ -560,7 +560,7 @@ NOTE: `ACTIONS_RUNTIME_TOKEN` is not set. An action that expects this variable, 
 | Resolved from your repository.
 
 | Public calls (`owner/repo/.github/workflows/ci.yml@ref`)
-| **Partial**
+| [.circle-amber]#**Partial**#
 | Resolved from GitHub when the workflow runs.
 
 | Inputs
@@ -596,19 +596,19 @@ NOTE: `ACTIONS_RUNTIME_TOKEN` is not set. An action that expects this variable, 
 | What to know
 
 | `secrets.*`
-| **Partial**
+| [.circle-amber]#**Partial**#
 | Resolved from the job environment, matching names without regard to case. Set these values as CircleCI environment variables or in a xref:security:contexts.adoc[Context]. Secrets are not available in `if:` conditions, or inside composite action children.
 
 | `vars.*`
-| **Partial**
+| [.circle-amber]#**Partial**#
 | Resolved from a single flat set of values. The organization, repository, and environment scoping that GitHub applies is not reproduced.
 
 | `GITHUB_TOKEN`
-| **Partial**
+| [.circle-amber]#**Partial**#
 | A GitHub App installation token, scoped to the job. Injected when `permissions:` is omitted, when `permissions.contents` has any value other than `none`, or when the global `*` scope has any non-zero value. Set `permissions: {}` or `permissions.contents: none` to withhold it.
 
 | `permissions` scopes
-| **Partial**
+| [.circle-amber]#**Partial**#
 | Only `contents` and `id-token` change behavior. Other scopes, such as `issues`, `pull-requests`, and `checks`, are accepted, but the token scope is not narrowed to match.
 
 | GitHub Packages, Releases, Checks, and Deployments
