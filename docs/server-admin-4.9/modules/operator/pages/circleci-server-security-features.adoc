@@ -19,7 +19,7 @@ CircleCI uses HTTPS or SSH for all networking in and out of our service, includi
 
 None of your code or data travels to or from CircleCI without being encrypted, unless you have code in your builds that does so at your discretion. Operators may also choose to bypass our SSL configuration or not use TLS for communicating with underlying systems.
 
-The nature of CircleCI is that our software has access to your code and whatever data that code interacts with. With the exception of self-hosted runner, all jobs on CircleCI run in a sandbox (specifically, a container or an ephemeral VM). THe sandbox stands alone from all other builds and is not accessible from the Internet or from your own network.
+The nature of CircleCI is that our software has access to your code and whatever data that code interacts with. With the exception of self-hosted runner, all jobs on CircleCI run in a sandbox (specifically, a container or an ephemeral VM). The sandbox stands alone from all other builds and is not accessible from the Internet or from your own network.
 
 The build agent pulls code via git over SSH. Your test suite or job configurations may call out to external services or integration points within your network. The response from such calls will be pulled into your jobs and used at your discretion. After a job is complete, the container that ran the job is destroyed and rebuilt. All environment variables are encrypted using link:https://www.vaultproject.io/[HashiCorp Vault]. Environment variables are encrypted using AES256-GCM96 and are unavailable to CircleCI employees.
 
