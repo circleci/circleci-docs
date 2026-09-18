@@ -89,7 +89,7 @@ jobs:
           docker-username: DOCKERHUB_LOGIN  # DOCKER_LOGIN is the default value, if it exists, it automatically would be used.
           docker-password: DOCKERHUB_PASSWORD  # DOCKER_PASSWORD is the default value
       - docker/pull:
-          images: 'circleci/node:latest'
+          images: 'cimg/node:lts'
 ----
 
 [#machine-executor-with-docker-cli]
