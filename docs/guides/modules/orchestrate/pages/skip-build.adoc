@@ -84,8 +84,8 @@ To save time, you can configure CircleCI to automatically cancel any non-termina
 
 A few points to note regarding the use of the auto-cancel feature:
 
-* Pushing to a default branch (usually `main`) will never auto-cancel workflows.
-* Auto-cancel affects pipelines triggered by pushes to a VCS or via the API.
+* Pipelines targeting the default branch (usually `main`) are never auto-cancelled.
+* Auto-cancel affects pipelines triggered by pushes to a VCS, via the API, or by custom webhooks. For custom webhooks, we compare the trigger's checkout branch to the checkout repository's default branch to determine whether auto-cancel applies.
 * Only workflows that are triggered when the feature is enabled will be auto-cancelled.
 
 ### Enable auto-cancel
