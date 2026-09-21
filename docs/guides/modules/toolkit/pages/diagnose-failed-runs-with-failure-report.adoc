@@ -137,11 +137,11 @@ Re-run `circleci auth login`, or confirm `CIRCLE_TOKEN` is set in your environme
 
 === Run not found
 
-Double-check the run ID. Copy it directly from the run's URL in the dashboard rather than typing it from memory.
+Use `circleci run list` to retrieve the correct run ID rather than typing it from memory.
 
 === No output returned
 
-The run may not have failed. Check the run's status in the dashboard before assuming the command is not working.
+The run may not have failed. Use `circleci run get <run-id>` to check the run's status. The `--failure-report` flag only returns output for completed failed runs.
 
 == Next steps
 
