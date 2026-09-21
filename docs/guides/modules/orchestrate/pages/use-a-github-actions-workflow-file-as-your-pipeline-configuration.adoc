@@ -339,8 +339,8 @@ If a feature does not appear in this section, treat it as unsupported.
 | Parsed, and a warning is emitted. Concurrent runs are not serialized, so a workflow that relies on a concurrency group to prevent overlapping deploys is not protected.
 
 | `environment`
-| **No effect**
-| Parsed, but no approval gate is added and no environment-scoped secrets or variables are resolved. A job that relies on a manual approval gate runs without one.
+| [.circle-amber]#**Partial**#
+| CircleCI inserts an approval job before any job that declares `environment:`, so the job waits until someone approves it in the CircleCI web app. Environment-scoped secrets and variables are not resolved separately from your other secrets and variables.
 
 | `container:` at job level
 | **No effect**
