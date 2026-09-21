@@ -80,9 +80,9 @@ TIP: **Why tag-based triggers?** Tags represent stable release points in your li
 
 Before following this guide, ensure you have the following:
 
-* A CircleCI account connected to GitHub using the GitHub App integration.
-* A "library" repository and a "consumer" repository. These repositories must be in the same GitHub organization. If you want to follow the centralized config options, you will need a third repository for your centralized config store.
-* Admin access to both the library repository and the consumer repository in GitHub.
+* A CircleCI account connected to GitHub App or Cursor Origin. Cursor Origin is in beta.
+* A library repository and a consumer repository in the same GitHub organization or Cursor Origin codebase. If you want to follow the centralized config options, you will need a third repository for your centralized config store.
+* Admin access to both the library repository and the consumer repository.
 
 === Decide on your configuration approach
 
@@ -165,12 +165,14 @@ When a change to your library triggers your consumer pipeline, you need to know 
 
 For a full list of pipeline values, see the xref:reference:ROOT:variables.adoc[Pipeline Values] guide.
 
-CircleCI automatically populates the following pipeline values when a cross-repo trigger fires:
+CircleCI automatically populates the following pipeline values when a GitHub App cross-repo trigger fires:
 
 * `pipeline.event.github.ref`: The full Git ref that was pushed, this will be a tag name for tag triggers.
 * `pipeline.event.github.repository.name`: The name of the library repository that triggered the pipeline.
 
 You can use these values directly in your configuration without declaring them as parameters.
+
+NOTE: These `pipeline.event.github.*` values apply to GitHub App pipelines. Cursor Origin pipelines have `pipeline.event.name` and checkout values such as `pipeline.git.repo_name`. For the full list, see the xref:reference:ROOT:variables.adoc[Pipeline Values] guide.
 
 Here is an example consumer configuration file that uses the built-in pipeline values. This configuration works regardless of whether you store your configuration in the consumer repository or a centralized config repository. CircleCI automatically populates the pipeline values with trigger information regardless of where the config file is stored.
 
@@ -293,10 +295,10 @@ The trigger tells CircleCI to run the consumer pipeline when tags are created in
 
 === 4.a. Create the trigger in CircleCI
 
-. Select **GitHub trigger +** at the bottom of the pipeline box.
+. Select **GitHub trigger +** or **Cursor Origin trigger +** at the bottom of the pipeline box. Choose the button that matches your integration.
 . From the **Event** dropdown menu, select **Tag pushes**. Using this option means the pipeline will only be triggered when a new tag is created in the library repository.
 +
-NOTE: You can also configure triggers for other events like **PR merged** or **All pushes**. See the xref:guides:orchestrate:triggers-overview.adoc[Triggers Overview] for more information.
+NOTE: You can also configure triggers for other events like **PR merged** or **All pushes**. See the xref:github-trigger-event-options.adoc[GitHub Trigger Event Options] and xref:cursor-origin-trigger-event-options.adoc[Cursor Origin Trigger Event Options] pages for more information.
 
 . From the **Event Source** dropdown menu, select your library repository instead of the consumer repository.
 +
@@ -337,8 +339,8 @@ Your cross-repo trigger is now fully configured. When a tag is created in your l
 
 Verify that your trigger is configured by creating a tag in your library repository.
 
-. Navigate to your library repository in GitHub.
-. Create a new tag using the command line or GitHub interface:
+. Navigate to your library repository in GitHub or Cursor Origin.
+. Create a new tag using the command line, or the GitHub or Cursor Origin interface:
 +
 [source,console]
 ----
