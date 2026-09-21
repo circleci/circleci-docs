@@ -4,7 +4,7 @@
 :experimental:
 :page-show-readtime: true
 
-The `--failure-report` flag on `circleci run get` returns condensed output for every failed step in a run with a single call. The flag is built for agent consumption, as an alternative to your agent fetching step logs one at a time and burning tokens through separate round trips for each failure.
+The `--failure-report` flag on `circleci run get` returns condensed output for every failed step in a run with a single call. CircleCI built the flag for agent consumption, and it reduces the token cost of failure diagnosis by 70 to 90% compared to fetching each step's log individually.
 
 == When to use this approach
 
@@ -41,17 +41,19 @@ Before you use `--failure-report`, make sure you have:
 
 == 1. Find your run ID
 
-Copy the run ID from the run's URL in the CircleCI dashboard, or retrieve it from an API response. You can also query for it with the CLI:
+Copy the run ID from the run's URL in the CircleCI dashboard, or retrieve it from an API response. You can also query for it with the CLI. The `-q` flag applies a jq filter to the JSON output:
 
+.Return IDs of failed runs on the main branch
 [source,console]
 ----
 $ circleci run list --json -q '.[] | select(.branch=="main" and .status=="failed") | .id'
 ----
 
-Adjust the `branch` and `status` filters as needed.
+This outputs one UUID per line. Adjust the `branch` and `status` values as needed.
 
 == 2. Run the command
 
+.Get condensed failure output for a run
 [source,console]
 ----
 $ circleci run get --failure-report <run-id>
@@ -61,11 +63,37 @@ Replace `<run-id>` with your run's UUID.
 
 == 3. Read the output
 
-The CLI returns condensed output for each failed step. Each entry includes the job name, the step that failed, the exit code, and a condensed log excerpt. This gives you enough context to identify the cause and decide whether to investigate further with a full log fetch.
+The CLI returns condensed output for each failed step. The output groups failures by workflow, job, and step, with the exit code and a condensed log excerpt for each:
+
+.Example output
+----
+## workflow: build-and-test
+
+### job: test
+
+#### step 4: Run tests [exit: 1]
+
+FAIL github.com/example/myapp/pkg/auth (0.43s)
+--- FAIL: TestLogin (0.02s)
+    auth_test.go:42: expected status 200, got 401
+FAIL
+
+#### step 5: Upload test results [exit: 1]
+
+Error: no test result files found matching './test-results/**/*.xml'
+
+### job: lint
+
+#### step 2: Run golangci-lint [exit: 1]
+
+pkg/api/handler.go:87:2: `err` declared and not used (typecheck)
+----
+
+Each entry gives you enough context to identify the cause and decide whether to investigate further with a full log fetch.
 
 == Use with an AI agent
 
-You have two ways to get the failure report output to your agent.
+Once you have run `circleci run get --failure-report <run-id>`, you have two ways to get that output to your AI agent for analysis.
 
 === Run the command yourself and share the output
 
@@ -89,21 +117,17 @@ If you use CircleCI agent skills, the skills manage the diagnosis workflow. See 
 
 == Why --failure-report is more efficient
 
-Without `--failure-report`, you review logs step by step. With multiple failed steps, the process repeats for each one: open the step, read the output, move to the next. For an AI agent, each step is a separate tool call.
-
-`--failure-report` replaces those fetches with a single call that returns condensed output for every failed step at once.
-
-CircleCI has observed this reduce the tokens spent diagnosing a failure by 70 to 90%, compared to fetching each failed step's log individually. This figure comes from internal usage while building agent tooling for the CircleCI CLI, not a controlled benchmark. Treat it as directional rather than a guarantee for any specific run.
-
 The size of the reduction depends on the number of steps that failed:
 
 * One failed step: minimal difference. A single log fetch does the same work either way.
-* Several failed steps: the reduction grows with each additional failure, since `--failure-report` replaces what would otherwise be one round trip per step.
+* Several failed steps: the benefit grows with each additional failure, since `--failure-report` replaces what would otherwise be one round trip per step.
 * Parallel jobs with multiple failures: savings compound further, since each failed job would otherwise need its own sequence of log fetches.
+
+The 70 to 90% figure comes from internal usage while building agent tooling for the CircleCI CLI, not a controlled benchmark. Treat it as directional rather than a guarantee for any specific run.
 
 == Troubleshooting
 
-=== Command not found: `circleci`
+=== Command not found
 
 The CLI is not installed, or is not on your PATH. Reinstall it and confirm it resolves in your terminal. See xref:circleci-cli.adoc[The CircleCI CLI].
 
