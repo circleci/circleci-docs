@@ -267,6 +267,22 @@ The following table shows which CircleCI events map to which GitHub Actions even
 |===
 --
 
+== What to expect when your workflow runs on CircleCI
+
+Your workflow runs on CircleCI compute, so some values your workflow reads at runtime differ from the values GitHub would report.
+
+* Jobs run on Linux x86-64. The `runner.os` context reports `Linux`, `runner.arch` reports `X64`, and `runner.environment` reports `self-hosted`.
+* All standard `GITHUB_*` and `RUNNER_*` environment variables are set, with the exception of `ACTIONS_RUNTIME_TOKEN`.
+* OIDC tokens are issued by CircleCI. See <<oidc-tokens,OIDC Tokens>>.
+* Set the secrets your workflow reads as project environment variables, rather than as GitHub repository secrets. See the xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Set an Environment Variable in a Project] page.
+
+== Next steps
+
+* xref:orchestrate:set-up-triggers.adoc[Set Up Triggers]
+* xref:orchestrate:pipelines.adoc[Pipelines Overview and Setup]
+* xref:migrate:migrating-from-github.adoc[Migrate From GitHub Actions]
+* xref:integration:version-control-system-integration-overview.adoc[Version Control Systems, Pipeline Types, and Feature Support]
+
 [#github-actions-feature-support]
 == GitHub Actions feature support
 
@@ -826,19 +842,3 @@ Everything else is unavailable. That includes `commits`, `head_commit`, `before`
 | 50 nodes
 |===
 --
-
-== What to expect when your workflow runs on CircleCI
-
-Your workflow runs on CircleCI compute, so some values your workflow reads at runtime differ from the values GitHub would report.
-
-* Jobs run on Linux x86-64. The `runner.os` context reports `Linux`, `runner.arch` reports `X64`, and `runner.environment` reports `self-hosted`.
-* All standard `GITHUB_*` and `RUNNER_*` environment variables are set, with the exception of `ACTIONS_RUNTIME_TOKEN`.
-* OIDC tokens are issued by CircleCI. See <<oidc-tokens,OIDC Tokens>>.
-* Set the secrets your workflow reads as project environment variables, rather than as GitHub repository secrets. See the xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Set an Environment Variable in a Project] page.
-
-== Next steps
-
-* xref:orchestrate:set-up-triggers.adoc[Set Up Triggers]
-* xref:orchestrate:pipelines.adoc[Pipelines Overview and Setup]
-* xref:migrate:migrating-from-github.adoc[Migrate From GitHub Actions]
-* xref:integration:version-control-system-integration-overview.adoc[Version Control Systems, Pipeline Types, and Feature Support]
