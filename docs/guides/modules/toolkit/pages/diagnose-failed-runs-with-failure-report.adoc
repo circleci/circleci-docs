@@ -4,7 +4,7 @@
 :experimental:
 :page-show-readtime: true
 
-The `--failure-report` flag on `circleci run get` returns condensed output for every failed step in a run with a single call. For multi-failure runs, this saves round trips: instead of fetching each step's log in a separate call, you retrieve all failure context at once.
+The `--failure-report` flag on `circleci run get` returns condensed output for every failed step in a run with a single call. For multi-failure runs, this saves round trips. Instead of fetching each step's log in a separate call, you retrieve all failure context at once.
 
 == When to use this approach
 
