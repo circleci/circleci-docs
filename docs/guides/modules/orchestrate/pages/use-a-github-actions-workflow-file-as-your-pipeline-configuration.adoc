@@ -645,7 +645,7 @@ Service containers work as they do on GitHub Actions. CircleCI starts them on a 
 [#available-contexts]
 === Available contexts
 
-Contexts are available in different places depending on whether you use them in a job condition or a step condition.
+Contexts are available in different places depending on whether you use them in a job condition or a step condition. The table below shows where each context can be used, not how completely it is populated. The `github` and `github.event` contexts are both partial, so read <<the-github-context,GitHub Context Values>> and <<the-github-event-context,Event Payload Values>> before relying on a specific key.
 
 [.table-scroll]
 --
