@@ -326,6 +326,7 @@
 
 * Working with agents
 ** xref:toolkit:circleci-agent-skills.adoc[CircleCI Agent Skills]
+** xref:toolkit:diagnose-failed-runs-with-failure-report.adoc[Fix Broken Builds Efficiently with Agents]
 ** MCP
 *** xref:toolkit:circleci-mcp-overview.adoc[CircleCI MCP overview]
 *** xref:toolkit:connecting-to-the-circleci-mcp-server.adoc[Connecting to the CircleCI MCP server]
