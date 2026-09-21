@@ -339,11 +339,11 @@ If a feature does not appear in this section, treat it as unsupported.
 
 | `environment`
 | [.circle-amber]#**Partial**#
-| CircleCI inserts an approval job before any job that declares `environment:`, so the job waits until someone approves it in the CircleCI web app. Environment-scoped secrets and variables are not resolved separately from your other secrets and variables.
+| CircleCI inserts an approval job before any job that declares `environment:`, so the job waits for approval in the CircleCI web app. See <<environment-approval-gates,Environment Approval Gates>> for what the gate does and does not enforce.
 
 | `container:` at job level
-| **No effect**
-| Parsed, and a warning is emitted. Steps run directly on the host machine rather than in your chosen container image.
+| [.circle-amber]#**Partial**#
+| CircleCI starts a long-lived container and runs your `run:` steps inside it, using `docker exec`. The `image`, `env`, `ports`, `volumes`, `options`, and `credentials` keys work. Your workspace is mounted at `/github/workspace`, and the temporary directory is `/github/home`. JavaScript actions and `docker://` action steps run on the host rather than in the container.
 |===
 --
 
@@ -410,8 +410,8 @@ If a feature does not appear in this section, treat it as unsupported.
 | Available in step conditions and workflow steps, not in job conditions.
 
 | `case()`
-| [.circle-red]#**Not supported**#
-| Not implemented.
+| [.circle-green]#**Supported**#
+| Available in conditions and in string interpolation. The function is a Buildkite extension rather than GitHub Actions syntax, and takes an odd number of arguments, from three to 255.
 
 | Environment files
 | [.circle-green]#**Supported**#
@@ -484,6 +484,22 @@ For the contexts available in job conditions and step conditions, see <<availabl
 | The `pre-if` and `post-if` conditions work, and post steps run in reverse order.
 |===
 --
+
+[#environment-approval-gates]
+==== Environment approval gates
+
+When a job declares `environment:`, CircleCI inserts an approval job before it. Someone must approve the job in the CircleCI web app before the gated job starts.
+
+The gate is a hold on the pipeline rather than a reproduction of GitHub's environment protection rules. Read these limits before you rely on it:
+
+* **Reviewer identity is not checked.** Any project member with write access to the CircleCI project can approve. Named reviewers, team restrictions, and self-approval prevention are not enforced.
+* **Every environment is gated.** An environment with no protection rules in GitHub still holds the pipeline until someone approves it.
+* **A false `if:` condition still holds the pipeline.** The gated job runs once approved and then reports as skipped, so the pipeline waits for input either way.
+* **A matrix job gets one gate.** A single approval covers the whole fan-out.
+* **The object form needs a name.** An `environment:` block that sets only `url:` has no environment name to gate on, so CircleCI emits a warning and inserts no approval job.
+* **`wait_timer` and `deployment_branch_policy` are not translated.** Neither are deployment status URLs.
+
+Environment-scoped secrets and variables are not resolved separately from your other secrets and variables.
 
 [#actions-that-set-the-path]
 ==== Actions that set the path
