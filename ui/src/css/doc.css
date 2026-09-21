@@ -648,6 +648,24 @@
   min-width: 0;
 }
 
+/* Keep wide content, such as a code block, inside the admonition's border.
+   The admonition lays its table out with flex, and a flex item defaults to
+   min-width: auto, which resolves to min-content. A long unbreakable line
+   therefore stops the row shrinking and the content escapes the border box.
+   The base rules already give the code element overflow-x: auto. */
+.doc .admonitionblock > table > tbody,
+.doc .admonitionblock > table > tbody > tr {
+  min-width: 0;
+}
+
+.doc .admonitionblock td.content .listingblock,
+.doc .admonitionblock td.content .literalblock,
+.doc .admonitionblock td.content .listingblock > .content,
+.doc .admonitionblock td.content pre {
+  max-width: 100%;
+  min-width: 0;
+}
+
 .doc .imageblock,
 .doc .videoblock {
   display: flex;
