@@ -2,6 +2,7 @@
 ** xref:configuration-reference.adoc[Configuration reference]
 ** xref:reusing-config.adoc[Reusable configuration reference]
 ** xref:variables.adoc[Project values and variables]
+** xref:testsuite-configuration-reference.adoc[Testsuite configuration reference]
 ** xref:guides:config-policies:config-policy-reference.adoc[Config policy reference]
 ** xref:guides:optimize:optimizations.adoc[Optimization reference]
 ** xref:outbound-webhooks-reference.adoc[Outbound webhooks reference]
