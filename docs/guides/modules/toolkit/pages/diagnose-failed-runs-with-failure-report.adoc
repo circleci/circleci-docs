@@ -4,7 +4,7 @@
 :experimental:
 :page-show-readtime: true
 
-The `--failure-report` flag on `circleci run get` returns condensed output for every failed step in a run with a single call. CircleCI built the flag for agent consumption, and it reduces the token cost of failure diagnosis by 70 to 90% compared to fetching each step's log individually.
+The `--failure-report` flag on `circleci run get` returns condensed output for every failed step in a run with a single call. For multi-failure runs, this saves round trips: instead of fetching each step's log in a separate call, you retrieve all failure context at once.
 
 == When to use this approach
 
@@ -117,13 +117,13 @@ If you use CircleCI agent skills, the skills manage the diagnosis workflow. See 
 
 == Why --failure-report is more efficient
 
-The size of the reduction depends on the number of steps that failed:
+For an AI agent, each log fetch is a separate tool call with its own overhead. The benefit of `--failure-report` grows with the number of failures:
 
 * One failed step: minimal difference. A single log fetch does the same work either way.
 * Several failed steps: the benefit grows with each additional failure, since `--failure-report` replaces what would otherwise be one round trip per step.
 * Parallel jobs with multiple failures: savings compound further, since each failed job would otherwise need its own sequence of log fetches.
 
-The 70 to 90% figure comes from internal usage while building agent tooling for the CircleCI CLI, not a controlled benchmark. Treat it as directional rather than a guarantee for any specific run.
+CircleCI has observed 70 to 90% token savings in practice, compared to fetching each failed step's log individually. This figure comes from internal usage while building agent tooling for the CircleCI CLI, not a controlled benchmark. Treat it as directional rather than a guarantee for any specific run.
 
 == Troubleshooting
 
