@@ -411,7 +411,7 @@ If a feature does not appear in this section, treat it as unsupported.
 
 | `case()`
 | [.circle-green]#**Supported**#
-| Available in conditions and in string interpolation. The function is a Buildkite extension rather than GitHub Actions syntax, and takes an odd number of arguments, from three to 255.
+| Available in conditions and in string interpolation. Takes predicate and value pairs followed by a fallback, as in `case(pred1, val1, pred2, val2, default)`. CircleCI accepts an odd number of arguments, from three to 255. Any other number of arguments evaluates to an empty string rather than raising an error.
 
 | Environment files
 | [.circle-green]#**Supported**#
