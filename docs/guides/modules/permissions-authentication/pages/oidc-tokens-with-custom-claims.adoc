@@ -15,7 +15,7 @@ Use the `--root-issuer` flag with the CircleCI environment CLI to generate an OI
 [#create-oidc-token-in-a-job-with-custom-claims]
 == Create OIDC token in a job with custom claims
 
-TIP: See also the full xref:toolkit:environment-cli-usage-guide.adoc[Environment CLI Usage Guide].
+TIP: See also the full xref:reference:ROOT:environment-cli-usage-guide.adoc[Environment CLI Usage Guide].
 
 CircleCI allows you to create OIDC tokens in a job. Using this method you can:
 
