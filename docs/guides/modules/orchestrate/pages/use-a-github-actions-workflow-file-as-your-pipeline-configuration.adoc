@@ -4,9 +4,7 @@
 :page-description: Set up a CircleCI pipeline that runs an existing GitHub Actions workflow file, and check which GitHub Actions features are supported.
 :experimental:
 
-#Add in where to share feedback#
-
-NOTE: **GitHub Actions workflow support is in Preview.** This feature is in its early stages and you may encounter bugs, unexpected behavior, or incomplete features.
+NOTE: **GitHub Actions workflow support is in Preview.** This feature is in its early stages and you may encounter bugs, unexpected behavior, or incomplete features. Post all feedback to link:https://circleci.canny.io/cloud-feature-requests/p/github-actions-support-now-available-on-circleci[The CircleCI ideas board].
 
 A CircleCI pipeline is generally defined by a CircleCI configuration file. You can instead use an existing GitHub Actions workflow file as your pipeline configuration. CircleCI runs your GitHub Actions workflow on CircleCI compute. Your workflow file stays where it is, in `.github/workflows/`, and you do not need to translate it into CircleCI syntax.
 
