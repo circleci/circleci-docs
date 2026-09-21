@@ -221,6 +221,7 @@ Your workflow file is never rewritten, and you do not maintain a CircleCI config
 
 CircleCI implements GitHub Actions semantics rather than calling GitHub, so only a subset of features is available. See <<github-actions-feature-support,GitHub Actions Feature Support>>.
 
+[#how-circleci-triggers-your-workflow]
 === How CircleCI triggers your workflow
 
 Two things decide whether your workflow runs:
@@ -654,7 +655,7 @@ Contexts are available in different places depending on whether you use them in 
 | Job `if`
 | Step `if`
 
-| `github.actor`, `github.event_name`, `github.ref`, `github.ref_name`, `github.ref_type`, `github.repository`, `github.sha`, `github.base_ref`, and `github.head_ref`
+| `github.*`
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -708,7 +709,74 @@ Contexts are available in different places depending on whether you use them in 
 |===
 --
 
-The `github.event.*` context is built from the CircleCI pipeline values, so it is a partial payload rather than a complete GitHub webhook payload.
+[#the-github-context]
+==== GitHub context values
+
+CircleCI derives the `github` context from your pipeline, so most keys hold the value you would expect and a few differ.
+
+[.table-scroll]
+--
+[cols="2,3", options="header"]
+|===
+| Key
+| Value
+
+| `github.repository`, `github.repository_owner`, `github.repository_id`
+| Your repository, its owner, and its ID.
+
+| `github.repositoryUrl`
+| The `git://github.com/<owner>/<repo>.git` form, matching GitHub.
+
+| `github.sha`
+| The full 40-character SHA of the commit CircleCI checked out.
+
+| `github.ref`, `github.ref_name`, `github.ref_type`
+| The tag when the pipeline was triggered by a tag, and the branch otherwise.
+
+| `github.base_ref`, `github.head_ref`
+| The base and head branches. Populated for pull request events only.
+
+| `github.actor`, `github.triggering_actor`
+| The GitHub user who triggered the pipeline. Both hold the same value.
+
+| `github.event_name`
+| The translated event name. See <<how-circleci-triggers-your-workflow,How CircleCI Triggers Your Workflow>>.
+
+| `github.workflow`
+| The `name` from your workflow file.
+
+| `github.run_id`, `github.run_number`
+| The CircleCI pipeline ID and pipeline number.
+
+| `github.server_url`, `github.api_url`, `github.graphql_url`
+| Always the `github.com` values.
+
+| `github.token`
+| The `GITHUB_TOKEN` for the job, when the permission gate allows one.
+|===
+--
+
+The following keys have no CircleCI equivalent and keep their default values: `github.actor_id`, `github.repository_owner_id`, `github.ref_protected`, `github.run_attempt`, and `github.secret_source`. `github.retention_days` is always `90`.
+
+Four differences can change how a workflow behaves:
+
+* **`github.event_name` can be empty.** CircleCI does not guess an event name it cannot translate, so a condition such as `if: github.event_name == 'push'` is false rather than wrongly true on those pipelines. Handle the empty value if your workflow branches on the trigger.
+* **`github.run_id` is a UUID, not a number.** A workflow that does arithmetic on it does not work here.
+* **On a pull request, the refs describe the head branch.** GitHub sets `github.ref` to `refs/pull/<number>/merge` and `github.sha` to an ephemeral merge commit. CircleCI checks out the head branch instead, so `github.ref` is `refs/heads/<head-branch>` and `github.sha` is the head SHA. Use `github.event_name == 'pull_request'` with `github.base_ref` and `github.head_ref` rather than testing for `refs/pull/`.
+* **The GitHub URLs are always `github.com`.** GitHub Enterprise Server is not supported.
+
+[#the-github-event-context]
+==== Event payload values
+
+For push and pull request pipelines, CircleCI builds a partial event payload and writes it to the path in `GITHUB_EVENT_PATH`. Both `${{ github.event.* }}` expressions and shell steps that read the file see real values. For schedule, API, and custom webhook pipelines there is no payload, and `github.event.*` returns an empty string.
+
+* **Push events** populate `ref`, `after`, and `sender.login`.
+* **Pull request events** populate `action`, `number`, `sender.login`, and `pull_request.number`, `.title`, `.url`, `.draft`, `.head.ref`, `.head.sha`, `.base.ref`, and `.base.sha`.
+
+A field whose value is absent is left out of the payload rather than set to an empty value. A condition such as `if: github.event.pull_request.draft == false` therefore works on a pull request that does not supply the field.
+
+Everything else is unavailable. That includes `commits`, `head_commit`, `before`, and `pusher` on a push, and `body`, `state`, `labels`, `user.login`, `mergeable`, `requested_reviewers`, and the `repository` sub-objects on a pull request.
+
 
 === Limits
 
