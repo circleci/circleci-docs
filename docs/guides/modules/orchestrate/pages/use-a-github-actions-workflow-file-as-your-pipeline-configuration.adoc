@@ -89,12 +89,7 @@ circleci pipeline create \
 =====
 `--config-file-type github-actions` is the flag that makes this work, and it is simple to miss when following a general onboarding flow.
 
-Leave it out and CircleCI reads your workflow file as CircleCI configuration syntax. The failure is confusing rather than obvious, and looks similar to the following:
-
-[,shell]
-----
-jobs referenced in workflows that have not been defined: build
-----
+Leave it out and CircleCI reads your workflow file as CircleCI configuration syntax. The failure is confusing rather than obvious, and looks similar to `jobs referenced in workflows that have not been defined: build`.
 =====
 +
 Note the pipeline definition ID returned by this command. You need it in the next two steps.
