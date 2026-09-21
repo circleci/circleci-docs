@@ -577,7 +577,7 @@ NOTE: `ACTIONS_RUNTIME_TOKEN` is not set. An action that expects this variable, 
 
 | `secrets.*`
 | [.circle-amber]#**Partial**#
-| Resolved from the job environment, matching names without regard to case. Set these values as CircleCI environment variables or in a xref:security:contexts.adoc[Context]. Secrets are not available in `if:` conditions, or inside composite action children.
+| Resolved from the job environment, matching names without regard to case. Set these values as project environment variables, as described in xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Set an Environment Variable in a Project]. Contexts are not used yet, because the translation cannot tell which context holds a given secret. Secrets are not available in `if:` conditions, or inside composite action children.
 
 | `vars.*`
 | [.circle-amber]#**Partial**#
@@ -752,7 +752,7 @@ Your workflow runs on CircleCI compute, so some values your workflow reads at ru
 * Jobs run on Linux x86-64. The `runner.os` context reports `Linux`, `runner.arch` reports `X64`, and `runner.environment` reports `self-hosted`.
 * All standard `GITHUB_*` and `RUNNER_*` environment variables are set, with the exception of `ACTIONS_RUNTIME_TOKEN`.
 * OIDC tokens are issued by CircleCI. See <<oidc-tokens,OIDC Tokens>>.
-* Set the secrets your workflow reads as CircleCI environment variables or in a xref:security:contexts.adoc[Context], rather than as GitHub repository secrets.
+* Set the secrets your workflow reads as project environment variables, rather than as GitHub repository secrets. See the xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Set an Environment Variable in a Project] page.
 
 == Next steps
 
