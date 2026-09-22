@@ -6,7 +6,7 @@
 Machine Runner Orchestrator (MRO) auto-scales KubeVirt virtual machines to serve CircleCI self-hosted runner jobs.
 Its scaling behavior is directly affected by how you configure `maxReplicas`, node capacity, and resource class sizing.
 For a full description of scaling parameters, see the xref:execution-runner:machine-runner-orchestrator.adoc#scaling-behavior[Scaling Behavior] section of the Machine Runner Orchestrator overview.
-These experiments varied only `minReplicas` and `maxReplicas`; all other scaling parameters used their defaults.
+These experiments varied only `minReplicas` and `maxReplicas`. All other scaling parameters used their defaults.
 
 Use these benchmarks to understand MRO performance under realistic load and choose configurations that meet your throughput and latency goals.
 For an overview of Machine Runner Orchestrator concepts and setup, including full scaling configuration options, see xref:execution-runner:machine-runner-orchestrator.adoc[Machine Runner Orchestrator Overview].
@@ -15,9 +15,10 @@ For an overview of Machine Runner Orchestrator concepts and setup, including ful
 == Test setup
 
 Benchmarks ran on an AWS Elastic Kubernetes Service (EKS) cluster using `c8i.12xlarge` nodes (48 vCPU / 96 GiB RAM) with KubeVirt enabled and a cluster autoscaler ASG of 2–6 nodes.
-Each test triggered jobs at four increasing rates: 1, 2, 4, and 6 jobs/min. Every job performed 5 minutes of work.
+Each test triggered jobs at four increasing rates: 1, 2, 4, and 6 jobs per minute. Every job performed 5 minutes of work.
 
-The tests used two resource classes — the names and VM sizes in the table are examples.
+The tests used two resource classes. The names and VM sizes listed in the table are examples.
+Both resource classes shared the same node group.
 
 [.table-scroll]
 --
@@ -37,18 +38,21 @@ The tests used two resource classes — the names and VM sizes in the table are 
 |===
 --
 
-Both resource classes shared the same node group.
-
-The tables below report queue time and total job duration at three percentiles for each trigger rate.
-p50 is the median; p90 means 90% of jobs finished within that time; p99 captures the slowest 1%.
-
 [#increasing-load-results]
 == Increasing-load results
+
+The results tables in the following sections report queue time and total job duration at three percentiles for each trigger rate:
+
+p50:: The median
+p90:: 90% of jobs finished within the time
+p99:: Captures the slowest 1%.
 
 [#high-resource-class]
 === Large resource class
 
-Resource class: `my-org/runner-large` — 8 vCPU / 32 GiB, `maxReplicas`=9
+* Resource class: `my-org/runner-large`.
+* VM: 8 vCPU / 32 GiB.
+* `maxReplicas`: 9.
 
 [.table-scroll]
 --
@@ -102,7 +106,9 @@ The key result: MRO completes every job — the workload waits, but nothing drop
 [#low-resource-class]
 === Small resource class
 
-Resource class: `my-org/runner-small` — 2 vCPU / 8 GiB, `maxReplicas`=34
+* Resource class: `my-org/runner-small`.
+* VM: 2 vCPU / 8 GiB.
+* `maxReplicas`: 34.
 
 [.table-scroll]
 --
@@ -314,8 +320,10 @@ Both resource classes shared the same node group (ASG 2–6, `c8i.12xlarge`).
 [#burst-large-resource-class]
 === Large resource class (burst)
 
-Resource class: `my-org/runner-large` — 8 vCPU / 32 GiB, `maxReplicas`=12
-Burst rate: 12 jobs in 60 seconds.
+* Resource class: `my-org/runner-large`.
+* VM: 8 vCPU / 32 GiB.
+* `maxReplicas`: 12.
+* Burst rate: 12 jobs in 60 seconds.
 
 [.table-scroll]
 --
@@ -364,8 +372,10 @@ All 28 jobs completed with zero errors.
 [#burst-small-resource-class]
 === Small resource class (burst)
 
-Resource class: `my-org/runner-small` — 2 vCPU / 8 GiB, `maxReplicas`=48
-Burst rate: 49 jobs in 60 seconds.
+* Resource class: `my-org/runner-small`.
+* VM: 2 vCPU / 8 GiB.
+* `maxReplicas`: 48.
+* Burst rate: 49 jobs in 60 seconds.
 
 [.table-scroll]
 --
