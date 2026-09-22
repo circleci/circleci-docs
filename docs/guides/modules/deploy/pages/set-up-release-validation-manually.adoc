@@ -11,6 +11,8 @@ The xref:set-up-smart-deployments.adoc[Set Up Smart Deployments] guided setup ca
 
 Follow this guide to write the configuration and connect your monitoring tool yourself. The result is the same release validation feature.
 
+TIP: You can use the xref:guides:toolkit:circleci-agent-skills.adoc[CircleCI Agent Skills] to write this configuration in your editor. Install the link:https://github.com/CircleCI-Public/skills[CircleCI Public Skills] plugin to your AI coding agent, then ask your agent to set up release validation for your project. The `circleci-deploy-setup` skill adds the `validation` block with a matching release job, then checks the result against your configuration file.
+
 === What you can set up manually
 
 Release validation and deploy markers are configuration, so they work on any version control system. Rollback and deploy pipelines require the CircleCI GitHub App.
