@@ -339,10 +339,6 @@ If a feature does not appear in this section, treat it as unsupported.
 | [.circle-green]#**Supported**#
 | Retained at workflow and job level. Job names can use matrix values.
 
-| `run-name`
-| [.circle-red]#**Not supported**#
-| Parsed, but never displayed.
-
 | `continue-on-error`
 | [.circle-green]#**Supported**#
 | Accepts literal booleans and expressions, at job and step level.
@@ -357,7 +353,7 @@ If a feature does not appear in this section, treat it as unsupported.
 
 | `concurrency`
 | **No effect**
-| Parsed, and a warning is emitted. Concurrent runs are not serialized, so a workflow that relies on a concurrency group to prevent overlapping deploys is not protected.
+| CircleCI emits a warning. Concurrent runs are not serialized, so a workflow that relies on a concurrency group to prevent overlapping deploys is not protected.
 
 | `environment`
 | [.circle-amber]#**Partial**#
@@ -393,7 +389,7 @@ If a feature does not appear in this section, treat it as unsupported.
 
 | `max-parallel`
 | **No effect**
-| Parsed, but not enforced. Use CircleCI concurrency controls instead.
+| Use CircleCI concurrency controls instead.
 
 | `strategy.*` context
 | [.circle-red]#**Not supported**#
@@ -637,13 +633,13 @@ NOTE: `ACTIONS_RUNTIME_TOKEN` is not set. An action that expects this variable, 
 [#oidc-tokens]
 === OIDC tokens
 
-A job that declares `permissions: id-token: write`, or `permissions: write-all`, receives an OIDC token endpoint. CircleCI injects `ACTIONS_ID_TOKEN_REQUEST_URL` and `ACTIONS_ID_TOKEN_REQUEST_TOKEN` into `run` steps and JavaScript action steps, so `core.getIDToken()` and a direct `curl` both work.
+A job that declares `permissions: id-token: write`, or `permissions: write-all`, can request an OIDC token.
 
 [IMPORTANT]
 ====
-**The tokens are issued by CircleCI, not by GitHub.** The issuer is `https://oidc.circleci.com/org/<org-id>`, and the `sub` claim uses the CircleCI format rather than GitHub's.
+**The tokens are issued by CircleCI, not by GitHub.** A trust policy that trusts GitHub's issuer rejects them. Migrate the OIDC trust relationship on your cloud provider, whether that is AWS IAM, Google Cloud Workload Identity, or Microsoft Entra ID.
 
-Update the trust policy on your cloud provider, whether that is AWS IAM, Google Cloud Workload Identity, or Microsoft Entra ID, to trust the CircleCI issuer and claims. A policy that trusts GitHub's issuer rejects these tokens. See the xref:permissions-authentication:openid-connect-tokens.adoc[Use OpenID Connect Tokens in Jobs] page.
+For the token format and the claims to trust, see the xref:permissions-authentication:openid-connect-tokens.adoc[Using OpenID Connect Tokens in Jobs] page.
 ====
 
 OIDC tokens are not available to Docker action steps, or to any job that sets a job-level `container:` key. In both cases the step runs in a container that cannot reach the token endpoint on the host.
