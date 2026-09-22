@@ -172,7 +172,7 @@ test-suites:
 
 Test impact analysis uses code coverage data to map which tests exercise which source files. On a feature branch, it starts with your full test suite selected, then conservatively deselects only the tests proven unaffected by the files you changed. This routinely skips a large share of tests without reducing test confidence, since deselection is based on measured coverage rather than guesswork. A full run against your default branch keeps the underlying coverage baseline up to date.
 
-Full setup instructions, including coverage requirements per test runner, are on the xref:set-up-test-impact-analysis.adoc[Set up Test Impact Analysis] page.
+Full setup instructions, including coverage requirements per test runner, are on the xref:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis] page.
 
 [#dynamic-test-splitting]
 === Dynamic test splitting
@@ -184,7 +184,7 @@ See the xref:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting] page to
 [#auto-rerun-failed-tests]
 === Auto rerun failed tests
 
-Auto rerun failed tests retries a failing test immediately, without human intervention, up to `max-auto-rerun` times or until `auto-rerun-duration` is reached. If a test eventually passes, its earlier failure is suppressed and the job succeeds; a test that fails consistently still exhausts its retries and fails the job. This is intended for intermittent, flaky failures, not for masking genuine regressions. It pairs well with test impact analysis, since a smaller, more targeted test selection makes flakiness easier to spot.
+Auto rerun failed tests retries a failing test immediately, without human intervention, up to `max-auto-rerun` times or until `auto-rerun-duration` is reached. If a test eventually passes, its earlier failure is suppressed and the job succeeds; a test that fails consistently still exhausts its retries and fails the job. Auto rerun is intended for intermittent, flaky failures, not for masking genuine regressions. It pairs well with test impact analysis, since a smaller, more targeted test selection makes flakiness easier to spot.
 
 See the xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] page for configuration details.
 

@@ -156,7 +156,7 @@
 *** xref:test:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting]
 *** xref:test:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests]
 *** xref:test:testsuite-configuration-reference.adoc[Test suite Config Reference]
-** Legacy: `circleci tests` command
+** Legacy test split tooling
 *** xref:optimize:parallelism-faster-jobs.adoc[Test splitting and parallelism]
 *** xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the environment CLI to split tests]
 *** xref:test:troubleshoot-test-splitting.adoc[Troubleshoot test splitting]
