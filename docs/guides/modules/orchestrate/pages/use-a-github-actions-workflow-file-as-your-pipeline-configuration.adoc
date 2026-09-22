@@ -222,12 +222,18 @@ CircleCI implements GitHub Actions semantics rather than calling GitHub, so only
 [#how-circleci-triggers-your-workflow]
 === How CircleCI triggers your workflow
 
-Two things decide whether your workflow runs:
+Your CircleCI trigger decides whether the pipeline runs. You configure it in CircleCI, in the same way as any other pipeline. See the xref:orchestrate:set-up-triggers.adoc[Set Up Triggers] page.
 
-. **The CircleCI trigger** decides whether the pipeline runs at all. You configure this in CircleCI, in the same way as any other pipeline.
-. **The `on:` key in your workflow file** decides whether your workflow accepts the event that CircleCI passes to it. A workflow that declares only unsupported events never runs.
+[WARNING]
+====
+**The filters under `on:` are not applied.** CircleCI does not read `on.<event>.branches`, `paths`, or `types`, and it does not evaluate `on.schedule.cron`.
 
-The following table shows which CircleCI events map to which GitHub Actions events.
+A workflow with `on.push.branches: [main]` still runs on every branch if its CircleCI trigger fires on all pushes. Use your CircleCI trigger, or a job-level or step-level `if:` condition, to limit when work runs. For the trigger options, see the xref:orchestrate:github-trigger-event-options.adoc[GitHub Trigger Event Options] page.
+====
+
+CircleCI does read `on:` for two things: the inputs declared under `on.workflow_dispatch.inputs`, and the interface declared under `on.workflow_call`. A workflow that declares only unsupported events is skipped.
+
+The following table shows how CircleCI translates its own events into the `github.event_name` your workflow sees. It describes the value in the GitHub Actions context rather than a second gate on whether the workflow runs.
 
 [.table-scroll]
 --
