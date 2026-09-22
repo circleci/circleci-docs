@@ -20,7 +20,7 @@ Namespace and resource classes must follow specific naming conventions:
 .Runner set up, step two - Create a namespace and resource class
 image::guides:ROOT:runner/runner-ui-step-two.png[Runner set up, step two - Create a namespace and resource class]
 
-. Enter a description for your resource class. This is an optional field.
+. Enter a description for your resource class. The description is an optional field.
 . Select btn:[Save and continue] to save and view your resource class token.
 . Copy and save the resource class token. Self-hosted runners use this token to claim work for the associated resource class.
 +

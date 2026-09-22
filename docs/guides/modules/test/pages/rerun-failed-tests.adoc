@@ -135,7 +135,7 @@ Use CircleCI's xref:troubleshoot-test-splitting.adoc#video-troubleshooting-globb
 Pass the list of test files to the `circleci tests run` command as standard input (link:https://www.computerhope.com/jargon/s/stdin.htm[`stdin`]).
 
 * `circleci tests run --command="xargs pytest -o junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings`
-** Invoke `circleci tests run` and specify the original command (`pytest`) used to run tests as part of the `--command=` parameter. **This is required**. `xargs` must be present as well.
+** Invoke `circleci tests run` and specify the original command (`pytest`) used to run tests as part of the `--command=` parameter. **This parameter is required**. `xargs` must be present as well.
 ** `--verbose` is an optional parameter for `circleci tests run` which enables more verbose debugging messages.
 ** *Optional*: `--split-by=timings` enables intelligent test splitting by timing for `circleci tests run`.
 +
@@ -201,7 +201,7 @@ The job reruns only tests that are from a `classname` of `file` that had at leas
 
 . Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
 
-. Update the `glob` command to match your specific use case.  **If your current job is using xref:optimize:parallelism-faster-jobs.adoc[Test Splitting to Speed up Your Pipelines], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
+. Update the `glob` command to match your specific use case.  **If your current job is using xref:optimize:parallelism-faster-jobs.adoc[Test Splitting to Speed Up Your Pipelines], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
 
 Cypress may output a warning saying `Warning: It looks like you're passing --spec a space-separated list of arguments:`.  This can be ignored, but it can be removed by following the guidance from our link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only-circleci-tests-run/47775/18[community forum].
 
@@ -273,7 +273,7 @@ Ensure you are using `xargs` in your `circleci tests run` command to pass the li
 ```
 . Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
 
-. **If your current job is using xref:optimize:parallelism-faster-jobs.adoc[Test Splitting to Speed up Your Pipelines], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
+. **If your current job is using xref:optimize:parallelism-faster-jobs.adoc[Test Splitting to Speed Up Your Pipelines], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
 
 [#configure-a-job-running-javascript-typescript-jest-tests]
 === Configure a job running JavaScript/TypeScript (Jest) tests
@@ -302,7 +302,7 @@ You can also add it to your `jest.config.js` file by following these link:https:
 
 . Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
 
-. Update the `npx jest --listTests` command to match your use case. See the Jest section in the xref:collect-test-data.adoc#jest[Collect Test Data] document for details on how to output test results in an acceptable format for `jest`. **If your current job is using xref:optimize:parallelism-faster-jobs.adoc[Test Splitting to Speed up Your Pipelines], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
+. Update the `npx jest --listTests` command to match your use case. See the Jest section in the xref:collect-test-data.adoc#jest[Collect Test Data] document for details on how to output test results in an acceptable format for `jest`. **If your current job is using xref:optimize:parallelism-faster-jobs.adoc[Test Splitting to Speed Up Your Pipelines], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
 +
 `JEST_JUNIT_ADD_FILE_ATTRIBUTE=true` is added to ensure that the `file` attribute is present. `JEST_JUNIT_ADD_FILE_ATTRIBUTE=true` can also be added to your `jest.config.js` file instead of including it in `.circleci/config.yml`, by using the following attribute: `addFileAttribute="true"`.
 
@@ -338,7 +338,7 @@ You can also add it to your `jest.config.js` file by following these link:https:
     path: build/test-results/test
 ```
 
-. Update the `glob` command to match your use case. **If your current job is using xref:optimize:parallelism-faster-jobs.adoc[Test Splitting to Speed up Your Pipelines], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**. If you are not using test splitting, `--split-by=timings` can be omitted.
+. Update the `glob` command to match your use case. **If your current job is using xref:optimize:parallelism-faster-jobs.adoc[Test Splitting to Speed Up Your Pipelines], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**. If you are not using test splitting, `--split-by=timings` can be omitted.
 
 [#configure-a-job-running-phpunit-tests]
 === Configure a job running PHPUnit tests
@@ -363,7 +363,7 @@ You can also add it to your `jest.config.js` file by following these link:https:
 
 . Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
 
-. Note that this example uses a utility named link:https://github.com/previousnext/phpunit-finder[`phpunit-finder`] which is a third party tool that is not supported by CircleCI, use at your own risk. If your current job is using xref:optimize:parallelism-faster-jobs.adoc[Test Splitting to Speed up Your Pipelines], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter. If you are not using test splitting, `--split-by=timings` can be omitted.
+. Note that this example uses a utility named link:https://github.com/previousnext/phpunit-finder[`phpunit-finder`] which is a third party tool that is not supported by CircleCI, use at your own risk. If your current job is using xref:optimize:parallelism-faster-jobs.adoc[Test Splitting to Speed Up Your Pipelines], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter. If you are not using test splitting, `--split-by=timings` can be omitted.
 
 [#configure-a-job-running-playwright-tests]
 === Configure a job running Playwright tests
@@ -384,7 +384,7 @@ You can also add it to your `jest.config.js` file by following these link:https:
 
 . Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
 
-. Update the `glob` command to match your use case. **If your current job is using xref:optimize:parallelism-faster-jobs.adoc[Test Splitting to Speed up Your Pipelines], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**. If you are not using test splitting, `--split-by=timings` can be omitted. Note: you may also use link:https://playwright.dev/docs/test-reporters#junit-reporter[Playwright's built-in flag] (`PLAYWRIGHT_JUNIT_OUTPUT_NAME`) to specify the JUnit XML output directory.
+. Update the `glob` command to match your use case. **If your current job is using xref:optimize:parallelism-faster-jobs.adoc[Test Splitting to Speed Up Your Pipelines], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**. If you are not using test splitting, `--split-by=timings` can be omitted. Note: you may also use link:https://playwright.dev/docs/test-reporters#junit-reporter[Playwright's built-in flag] (`PLAYWRIGHT_JUNIT_OUTPUT_NAME`) to specify the JUnit XML output directory.
 +
 NOTE: Ensure that you are using version 1.34.2 or later of Playwright. Earlier versions of Playwright may not output JUnit XML in a format that is compatible with this feature.
 
@@ -411,7 +411,7 @@ gem 'rspec_junit_formatter'
 
 . `--format RspecJunitFormater` must come after any other `--format` RSpec argument.
 . Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
-. Update the `glob` command to match your use case. See the RSpec section in the xref:collect-test-data.adoc#rspec[Collect Test Data] document for details on how to output test results in an acceptable format for `rspec`. **If your current job is using xref:optimize:parallelism-faster-jobs.adoc[Test Splitting to Speed up Your Pipelines], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
+. Update the `glob` command to match your use case. See the RSpec section in the xref:collect-test-data.adoc#rspec[Collect Test Data] document for details on how to output test results in an acceptable format for `rspec`. **If your current job is using xref:optimize:parallelism-faster-jobs.adoc[Test Splitting to Speed Up Your Pipelines], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
 
 [#configure-a-job-running-ruby-rspec-tests-across-parallel-ci-nodes-with-knapsack-pro]
 === Configure a job running Ruby (RSpec) tests across parallel CI nodes with Knapsack Pro
@@ -451,7 +451,7 @@ gem 'rspec_junit_formatter'
      destination: test-results
 ```
 
-. You may also enable link:https://docs.knapsackpro.com/ruby/split-by-test-examples/[Split by Test Examples] to parallelize tests across CI nodes by individual `it`/`specify`. This is useful when you have slow test files but do not want to manually split test examples into smaller test files.
+. You may also enable link:https://docs.knapsackpro.com/ruby/split-by-test-examples/[Split by Test Examples] to parallelize tests across CI nodes by individual `it`/`specify`. Splitting by test examples helps when you have slow test files but do not want to split them into smaller files by hand.
 
 [#configure-a-job-running-ruby-cucumber-tests]
 === Configure a job running Ruby (Cucumber) tests
@@ -469,7 +469,7 @@ gem 'rspec_junit_formatter'
 ```
 . Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
 
-. Update the `glob` command to match your use case. See the Cucumber section in the xref:collect-test-data.adoc#cucumber[Collect Test Data] document for details on how to output test results in an acceptable format for `Cucumber`. **If your current job is using xref:optimize:parallelism-faster-jobs.adoc[Test Splitting to Speed up Your Pipelines], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
+. Update the `glob` command to match your use case. See the Cucumber section in the xref:collect-test-data.adoc#cucumber[Collect Test Data] document for details on how to output test results in an acceptable format for `Cucumber`. **If your current job is using xref:optimize:parallelism-faster-jobs.adoc[Test Splitting to Speed Up Your Pipelines], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
 
 [#configure-a-job-running-ruby-minitest-tests-across-parallel-ci-nodes-with-knapsack-pro]
 === Configure a job running Ruby (minitest) tests across parallel CI nodes with Knapsack Pro
@@ -578,7 +578,7 @@ Example:
 [#known-limitations]
 == Known limitations
 
-* If your testing job uses parallelism and test splitting, the job will spin up the number of containers/virtual machines (VMs) that are specified with the `parallelism` key. However, the step that runs tests for each of those parallel containers/VMs only runs a subset of tests, or no tests. This happens because the tests are split across the total number of parallel containers/VMs.
+* If your testing job uses parallelism and test splitting, the job will spin up the number of containers/virtual machines (VMs) that are specified with the `parallelism` key. However, the tests are split across the total number of parallel containers/VMs. Each container or VM therefore runs only a subset of the tests, and some run no tests at all.
 +
 For example, if parallelism is set to eight, there may only be enough tests after the test splitting occurs to "fill" the first parallel container/VM. The remaining seven containers/VMs will still start up, but they will not run any tests when they get to the test execution step.
 +
@@ -613,7 +613,7 @@ See <<parallel-rerun-failure>> for a workaround to avoid failures if you are als
 NOTE: The `halt` command will execute the rest of the _current_ step, regardless of whether `tests.txt` has content or not. Make sure to place the command to execute tests in the _following_ step.
 
 * Orbs that run tests may not work with this new functionality at this time.
-* If a shell script is invoked to run tests, `circleci tests run` must be placed **in the shell script** itself, and not `.circleci/config.yml`. Alternatively, see the <<output-test-files-only,section above>> to pipe the list of test files to a `.txt` file. Then pass the list of test file names to your shell script.
+* If a shell script is invoked to run tests, `circleci tests run` must be placed **in the shell script** itself, and not `.circleci/config.yml`. Alternatively, pipe the list of test files to a `.txt` file, then pass those file names to your shell script. See the <<output-test-files-only,section above>>.
 * Jobs that are older than the xref:optimize:persist-data.adoc#custom-storage-usage[Retention Period] for workspaces for the organization cannot be rerun with "Rerun failed tests".
 * Jobs that upload code coverage reports:
 +
@@ -688,7 +688,7 @@ After configuring `circleci tests run`, if you see *all tests* are rerun after c
 
 . Ensure that the `--verbose` setting is enabled when invoking `circleci tests run`. This will display which tests `circleci tests run` is receiving on a "rerun".
 
-. Use xref:reference:ROOT:configuration-reference.adoc#storeartifacts[`store_artifacts`] to upload the JUnit XML that contains test results to CircleCI.  This is the same file(s) that is being uploaded to CircleCI with `store_test_results`.
+. Use xref:reference:ROOT:configuration-reference.adoc#storeartifacts[`store_artifacts`] to upload the JUnit XML that contains test results to CircleCI.  The JUnit XML is the same file or files uploaded to CircleCI with `store_test_results`.
 
 . Manually inspect the newly uploaded JUnit XML via the **Artifacts** tab and ensure that there is a `file=` attribute or a `classname` attribute.  If neither are present, you will see unexpected behavior when trying to rerun.  Follow the instructions on this page to ensure that the test runner you are using is outputting its JUnit XML test results with a `file` (preferred) or `classname` attribute.  Comment in our link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only-circleci-tests-run/47775/48[community forum] if you are still stuck.
 

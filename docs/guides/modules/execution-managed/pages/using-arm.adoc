@@ -94,7 +94,7 @@ For a full list of machine executor images, see the link:https://circleci.com/de
 == Limitations
 
 * Only 64-bit `arm64` architectures are supported.
-* In CircleCI Server, Arm resources are only available when using the EC2 provider for VM service or machine provisioner. This is because there are no Arm instances available in GCP.
+* In CircleCI Server, Arm resources are only available when using the EC2 provider for VM service or machine provisioner. No Arm instances are available in GCP.
 * If you run into issues with orbs, or if there is software you require that is not available in the image, link:https://circleci.canny.io/cloud-feature-requests[submit a feature request].
 
 [#m1-mac-support]

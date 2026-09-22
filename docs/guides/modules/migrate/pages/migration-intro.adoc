@@ -11,7 +11,7 @@ TIP: The link:https://circleci.com/developer/tools/configTranslator[CircleCI con
 CircleCI is a first-class CI tool. CI/CD has been CircleCI's specialization since the company's founding over a decade ago. On top of the features you would expect from any CI/CD tool, what sets CircleCI apart are the following productivity-boosting features:
 
 . **Advanced Caching** - On top of xref:optimize:caching.adoc[Dependency Caching], CircleCI offers caching specific to xref:optimize:docker-layer-caching.adoc[Docker Image Layers]. This means subsequent builds of your Docker images will run faster, cutting even more time off your commit-to-deploy workflows.
-. **SSH Into Builds** - CircleCI offers the ability to xref:execution-managed:ssh-access-jobs.adoc[Securely SSH Into an Execution Environment] to tail logs, work with files, and directly interact with an environment. This is highly useful for debugging failing builds.
+. **SSH Into Builds** - CircleCI offers the ability to xref:execution-managed:ssh-access-jobs.adoc[Securely SSH Into an Execution Environment] to tail logs, work with files, and directly interact with an environment. SSH access is highly useful for debugging failing builds.
 . **Resource Classes** - You can use various different xref:optimize:optimizations.adoc#resource-class[Sizes of Executor] on our platform, great for adjusting according to lighter or heavier workloads on a node.
 . **Test Parallelism** - CircleCI's platform provides not only xref:optimize:concurrency.adoc[Concurrent Job Execution], but also the ability to split tests between parallel environments. You can dramatically cut build times by xref:optimize:parallelism-faster-jobs.adoc#how-test-splitting-works[Splitting Workloads] between different containers.
 
@@ -58,7 +58,7 @@ Some things to consider during this phase:
 [#planning-phase]
 ==  Planning phase
 
-Ensure that your VCS org is linked to your CircleCI account and that your plan is applied. Log in using your VCS credentials as described on the xref:getting-started:first-steps.adoc[Sign up and Try CircleCI] page.
+Ensure that your VCS org is linked to your CircleCI account and that your plan is applied. Log in using your VCS credentials as described on the xref:getting-started:first-steps.adoc[Sign Up and Try CircleCI] page.
 
 If using the Server product, ensure that you have been provided with your trial license and that all prerequisites are met as described in the xref:server-admin:ROOT:index.adoc[Server Installation Guides].
 

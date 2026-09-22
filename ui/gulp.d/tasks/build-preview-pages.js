@@ -1,6 +1,6 @@
 'use strict'
 
-const Asciidoctor = require('@asciidoctor/core')()
+const Asciidoctor = require('@asciidoctor/core')
 const fs = require('fs-extra')
 const handlebars = require('handlebars')
 const merge = require('merge-stream')

@@ -788,7 +788,7 @@ Configure a job to use the Docker execution environment using the `docker` key w
 | Key | Required | Type | Description
 
 | `image`
-| Y
+| N
 | String
 | The name of a custom Docker image to use. The first `image` listed under a job defines the job's own primary container image where all steps will run.
 
@@ -997,8 +997,6 @@ jobs:
 [#machine]
 === *`machine`*
 
-NOTE: *Using CircleCI Cloud?* The use of `machine: true` is deprecated. You must specify an image to use.
-
 The machine executor is configured using the `machine` key, which takes a map:
 
 [.table-scroll]
@@ -1172,7 +1170,7 @@ CircleCI supports running jobs on link:https://developer.apple.com/macos/[macOS]
 | `code_signing`
 | N
 | List
-| A list of signing bundle names to install onto the macOS virtual machine with the `install_signing_bundle` step. See xref:guides:execution-managed:ios-codesigning.adoc[Set up Code Signing for iOS and macOS Projects].
+| A list of signing bundle names to install onto the macOS virtual machine with the `install_signing_bundle` step. See xref:guides:execution-managed:ios-codesigning.adoc[Set Up Code Signing for iOS and macOS Projects].
 |===
 --
 
@@ -2278,6 +2276,126 @@ A path does not need to be specified here because CircleCI restores the cache to
 
 '''
 
+[#withtoolcache]
+[badge="Beta"]
+=== *`with_tool_cache`*
+
+NOTE: Build tool caching is in beta on CircleCI Cloud. The feature is still evolving, so you may encounter bugs or changes to behavior. Using it costs no more than standard xref:guides:optimize:persist-data.adoc#managing-network-and-storage-usage[Cache Storage Usage].
+
+Wraps a sequence of steps and configures the named build tool to use a CircleCI-managed remote cache for its own build outputs. See <<savecache,`save_cache`>> and <<restorecache,`restore_cache`>> for the default caching steps. For more information, see the xref:guides:optimize:build-tool-cache.adoc#[Build Tool Cache] page.
+
+[.table-scroll]
+--
+[cols="1,1,1,2", options="header"]
+|===
+| Key | Required | Type | Description
+
+| `tool`
+| Y
+| String
+| The build tool to cache for. One of: `gradle`, `bazel`, `turborepo`, `xcode`.
+
+| `steps`
+| Y
+| List
+| The steps to run with tool caching enabled.
+|===
+--
+
+The `with_tool_cache` step is supported on all executors (`docker`, `machine`, `macos`, and `windows`). Cached data is stored in CircleCI's object storage, the same as when using the default caching steps `save_cache` and `restore_cache`.
+
+*Example:*
+
+[tabs]
+====
+Gradle::
++
+--
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/base:current # use any image with Gradle installed
+    steps:
+      - checkout
+      - with_tool_cache:
+          tool: gradle
+          steps:
+            - run: ./gradlew build
+----
+--
+Bazel::
++
+--
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/base:current # use any image with Bazel installed
+    steps:
+      - checkout
+      - with_tool_cache:
+          tool: bazel
+          steps:
+            - run: bazel build //...
+----
+--
+Turborepo::
++
+--
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/base:current # use any image with Turborepo installed
+    steps:
+      - checkout
+      - with_tool_cache:
+          tool: turborepo
+          steps:
+            - run: turbo run build
+----
+--
+Xcode::
++
+--
+[,yaml,subs=attributes+]
+----
+jobs:
+  build:
+    macos:
+      xcode: {xcodeversion}
+    steps:
+      - checkout
+      - with_tool_cache:
+          tool: xcode
+          steps:
+            - run:
+                name: xcodebuild build
+                command: |
+                  sock="${COMPILATION_CACHE_REMOTE_SERVICE_PATH#unix://}"
+                  xcodebuild build \
+                    -workspace MyApp.xcworkspace \
+                    -scheme "MyApp" \
+                    -destination 'generic/platform=iOS Simulator' \
+                    COMPILATION_CACHE_REMOTE_SERVICE_PATH="$sock" \
+                    COMPILATION_CACHE_ENABLE_PLUGIN=YES \
+                    SWIFT_ENABLE_COMPILE_CACHE=YES \
+                    CLANG_ENABLE_COMPILE_CACHE=YES \
+                    SWIFT_ENABLE_EXPLICIT_MODULES=YES \
+                    SWIFT_USE_INTEGRATED_DRIVER=YES \
+                    CLANG_ENABLE_MODULES=YES \
+                    COMPILATION_CACHE_ENABLE_INTEGRATED_QUERIES=YES \
+                    COMPILATION_CACHE_ENABLE_DETACHED_KEY_QUERIES=YES
+----
+--
+====
+
+'''
+
 [#deploy-deprecated]
 === *`deploy` - DEPRECATED*
 
@@ -2524,7 +2642,7 @@ NOTE: Even though CircleCI uses `ssh-agent` to sign all added SSH keys, you *mus
 [#install-signing-bundle]
 === *`install_signing_bundle`*
 
-A special step that installs the code signing certificates and provisioning profiles from the signing bundles declared in the `code_signing` key of your `macos` executor. CircleCI installs them into a temporary keychain on the runner at build time and removes them when the job completes. See xref:guides:execution-managed:ios-codesigning.adoc[Set up Code Signing for iOS and macOS Projects].
+A special step that installs the code signing certificates and provisioning profiles from the signing bundles declared in the `code_signing` key of your `macos` executor. CircleCI installs them into a temporary keychain on the runner at build time and removes them when the job completes. See xref:guides:execution-managed:ios-codesigning.adoc[Set Up Code Signing for iOS and macOS Projects].
 
 In the case of `install_signing_bundle`, the step type is just a string with no additional attributes.
 
@@ -2748,7 +2866,7 @@ workflows:
 [#schedule]
 ==== *`schedule`*
 
-NOTE: Scheduled workflows are not available for projects integrated through the GitHub App, GitLab or Bitbucket Data Center.
+NOTE: Scheduled workflows are not available for projects integrated through the GitHub App or GitLab.
 
 NOTE: Using *schedule triggers* rather than scheduled workflows offers several benefits. Visit the schedule triggers xref:guides:orchestrate:migrate-scheduled-workflows-to-schedule-triggers.adoc[Migration Guide] to find out how to migrate existing scheduled workflows to schedule triggers. If you would like to set up schedule triggers from scratch, visit the xref:guides:orchestrate:schedule-triggers.adoc[Schedule Triggers] page.
 
@@ -3711,7 +3829,11 @@ workflows:
 
 == Using expressions in your configuration
 
-CircleCI configuration supports expressions for dynamic value evaluation. Expressions can include pipeline values, pipeline parameters, literals, and operators such as `and`, `or`, and comparison operators.
+CircleCI configuration supports expressions for dynamic value evaluation. Expressions can include pipeline values, pipeline parameters, and literals. They also support operators such as `and`, `or`, and comparison operators.
+
+The job `filters`, and workflow `when` and `unless` fields accept expressions directly. For other fields wrap the expression in `<<` and `>>`.
+
+To insert a pipeline value without logic, or for an overview of compile-time config templating, see the xref:guides:orchestrate:config-templating.adoc[Config Templating] page.
 
 [#expressions-in-config-fields]
 === Expressions in configuration fields

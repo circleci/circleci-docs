@@ -31,7 +31,7 @@ The guided setup is available for every project. What it generates depends on yo
 |Deploy markers and release validation only. The wizard shows configuration to copy. Edit each example to match your pipeline before you continue. Rollback and deploy pipelines and automatic rollback are not available until you install the CircleCI GitHub App.
 
 |Prefer to edit YAML directly
-|Follow the xref:set-up-release-validation-manually.adoc[Set up Release Validation Manually] guide instead.
+|Follow the xref:set-up-release-validation-manually.adoc[Set Up Release Validation Manually] guide instead.
 |===
 --
 
@@ -230,7 +230,7 @@ Revoking a secret takes effect immediately. Any monitoring tool still sending th
 == Next steps
 
 * Extend your generated validation configuration with named checks, custom fail criteria, and explicit field mappings. See the xref:release-validation-reference.adoc[Release Validation Configuration Reference] page.
-* Customize your generated rollback pipeline. See the xref:set-up-rollbacks.adoc[Set up Rollbacks] guide.
-* Customize your generated deploy pipeline. See the xref:set-up-deploys.adoc[Set up Deploys] guide.
+* Customize your generated rollback pipeline. See the xref:set-up-rollbacks.adoc[Set Up Rollbacks] guide.
+* Customize your generated deploy pipeline. See the xref:set-up-deploys.adoc[Set Up Deploys] guide.
 * Learn how to roll back manually. See the xref:rollback-a-deployment.adoc[Rollback a Deployment] guide.
 * Define ordered promotion paths across your environments. See the xref:environment-hierarchy-and-version-promotion.adoc[Environment Hierarchy and Version Promotion] guide.

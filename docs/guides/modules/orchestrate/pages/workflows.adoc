@@ -359,7 +359,7 @@ curl --request GET \
   --header 'content-type: application/json' \
 ----
 
-. In the JSON response, take note of the value associated with the `approved_by` key. This is the user ID of the user who approved the job.
+. In the JSON response, take note of the value associated with the `approved_by` key. The value is the user ID of the user who approved the job.
 +
 [,json]
 ----
@@ -446,7 +446,7 @@ Scheduled workflows allow you to run jobs at specific times rather than on every
 
 By default, a workflow runs on every push, or based on the event rules you have set up for your trigger (menu:Project settings[Triggers] or menu:Project settings[Project Setup]). To trigger a workflow on a schedule, add the `triggers` key to the workflow and specify a `schedule` including cron syntax and branch filters. Scheduled workflows use the `cron` syntax to represent Coordinated Universal Time (UTC). See <<nightly-example>> for an basic example.
 
-Scheduled workflows are *not* available for GitHub App, GitLab or Bitbucket Data Center pipelines.
+Scheduled workflows are *not* available for GitHub App or GitLab pipelines.
 
 [#nightly-example]
 === Example: Build every night
@@ -569,7 +569,7 @@ workflows:
             - test2
 ----
 
-The `test1` and `test2` jobs have access to environment variables stored in the `org-global` context if the pipeline meets the restrictions set for the context, for example:
+The `test1` and `test2` jobs access environment variables in the `org-global` context when the pipeline meets every restriction type set on the context. Security groups, project restrictions, and expression restrictions combine with logical AND. For details, see the xref:security:contexts.adoc#how-restrictions-combine[How Restrictions Combine] section.
 
 * Was the pipeline triggered by a user who has access (is in the relevant org/security group etc.)? See the xref:security:contexts.adoc#security-group-restrictions[Security Group Restrictions] page for more information.
 * Does the project have access to the context? By default all projects in an organization have access to contexts set for that organization, but restrictions on project access can be configured. See the xref:security:contexts.adoc#project-restrictions[Project Restrictions] guide for more information.
@@ -619,7 +619,7 @@ If you want to conditionally run workflows based on trigger event types, conside
 
 For further details see the following guides:
 
-* xref:set-up-multiple-configuration-files-for-a-project.adoc[Set up Multiple Configuration Files for a Project].
+* xref:set-up-multiple-configuration-files-for-a-project.adoc[Set Up Multiple Configuration Files for a Project].
 * xref:github-trigger-event-options.adoc[GitHub Trigger Event Options].
 ****
 
@@ -847,7 +847,7 @@ image::guides:ROOT:orchestrate-and-trigger/rerun-from-failed-workflows-page.png[
 --
 ====
 
-NOTE: If you rerun a workflow containing a job that was previously re-run with SSH, the new workflow runs with SSH enabled for that job, even after SSH capability is disabled at the project level.
+NOTE: If you rerun a workflow containing a job that was previously re-run with SSH, the new workflow runs with SSH enabled for that job. This applies even after SSH capability is disabled at the project level.
 
 [#rerun-limit]
 === Rerun limit

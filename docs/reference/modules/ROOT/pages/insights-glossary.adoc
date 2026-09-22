@@ -1,6 +1,7 @@
 = Insights metrics glossary
 :page-platform: Cloud, Server v4+
 :page-description: Definitions for the metrics in CircleCI Insights, Insights dashboard as well as the Insights API.
+:page-aliases: guides:insights:insights-glossary.adoc
 :experimental:
 
 [#overview]

@@ -28,7 +28,7 @@ The following features and settings can be useful for open source projects.
 
 Many projects require API tokens, SSH keys, or passwords. Private environment variables allow you to safely store secrets, even if your project is public.
 
-For more information, see the xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Set an environment variable] document.
+For more information, see the xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Set an Environment Variable] document.
 
 [#only-build-pull-requests]
 === Only build pull requests
@@ -36,8 +36,6 @@ For more information, see the xref:security:set-environment-variable.adoc#set-an
 Open source projects have significantly more commits than private projects, so building every commit from every branch might be excessive and costly (both in terms of time and credits usage).
 
 You can modify this behaviour by restricting builds to branches that have pull requests.
-
-NOTE: This feature *is not supported* for orgs that use the Bitbucket Data Center integration.
 
 [tabs]
 ====
@@ -93,31 +91,31 @@ image::guides:ROOT:triggers/gitlab-self-managed-trigger-filter-only-mr.png[Set t
 [#build-pull-requests-from-forked-repositories]
 === Build pull requests from forked repositories
 
-include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
+include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab or GitHub App]
 
 Many open source projects accept PRs from forked repositories. Building these PRs is an effective way to catch bugs before manually reviewing changes.
 
 By default, CircleCI does not build PRs from forked repositories. To change this setting, go to the menu:Project Settings[Advanced] of your project and set the *Build forked pull requests* option to _On_.
 
-If a user submits a pull request to your repository from a fork, but no pipeline is triggered, then the user most likely is following a project fork on their personal account rather than the project itself of CircleCI, causing the jobs to trigger under the user's personal account and not the organization account. To resolve this issue, have the user unfollow their fork of the project on CircleCI and instead follow the source project. This will trigger their jobs to run under the organization when they submit pull requests.
+Sometimes a user submits a pull request to your repository from a fork, but no pipeline is triggered. This usually happens because the user is following a project fork on their personal account rather than the project itself. As a result, jobs trigger under the user's personal account instead of the organization account. To resolve this issue, have the user unfollow their fork of the project on CircleCI and instead follow the source project. This causes their jobs to run under the organization when they submit pull requests.
 
 [#pass-secrets-to-builds-from-forked-pull-requests]
 === Pass secrets to builds from forked pull requests
 
-include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
+include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab or GitHub App]
 
 Running an unrestricted build in a parent repository can be dangerous. Projects often contain sensitive information, and this information is freely available to anyone who can push code that triggers a build.
 
 By default, CircleCI does not pass secrets to builds from forked PRs for open source projects and hides four types of configuration data:
 
 * <<private-environment-variables,Environment variables>> set through the application.
-* xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#create-a-user-key[Deployment keys and user keys].
-* Passphraseless private SSH keys you have xref:add-ssh-key.adoc[added to CircleCI] to access arbitrary hosts during a build.
-* xref:deploy:deploy-to-aws.adoc[AWS permissions] and configuration files.
+* xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#create-a-user-key[Deployment Keys and User Keys].
+* Passphraseless private SSH keys you have xref:add-ssh-key.adoc[Added to CircleCI] to access arbitrary hosts during a build.
+* xref:deploy:deploy-to-aws.adoc[AWS Permissions] and configuration files.
 
 Forked PR builds of open source projects that require secrets will not run successfully on CircleCI until you enable this setting.
 
-If you wish to use OpenID Connect in your project, the OIDC tokens will _only_ be generated if you have this setting turned on. This prevents your token data being shared with forked builds unless you require it. If you do choose to use OIDC with open source projects by enabling the *Pass secrets to builds from forked pull requests* option, you *must* check the `oidc.circleci.com/vcs-origin` claims in your policies to avoid forked builds having access to resources outside those that you require. For more information on OIDC, see the xref:permissions-authentication:openid-connect-tokens.adoc[Using OpenID Connect tokens in jobs] page.
+If you wish to use OpenID Connect in your project, the OIDC tokens will _only_ be generated if you have this setting turned on. This prevents your token data being shared with forked builds unless you require it. If you use OIDC with open source projects and enable the *Pass secrets to builds from forked pull requests* option, you *must* check the `oidc.circleci.com/vcs-origin` claims in your policies. This avoids forked builds having access to resources outside those that you require. For more information on OIDC, see the xref:permissions-authentication:openid-connect-tokens.adoc[Using OpenID Connect Tokens in Jobs] page.
 
 If you are comfortable sharing secrets with anyone who forks your project and opens a PR, you can enable the *Pass secrets to builds from forked pull requests* option:
 
@@ -130,11 +128,8 @@ If you are comfortable sharing secrets with anyone who forks your project and op
 Caches are isolated based on GitHub Repo for PRs. CircleCI uses the GitHub
 repository-id of the originator of the fork PR to identify the cache.
 
-* PRs from the same fork repo will share a cache. For example, PRs from the
-main repo share a cache with the main repo branches (in particular the
-`main` branch).
-* Two PRs in different fork repos will have different caches. That means
-that a PR from a fork will not share a cache with the main repo `main` branch.
+* PRs from the same fork repo will share a cache. For example, PRs from the main repo share a cache with the main repo branches (in particular the `main` branch).
+* Two PRs in different fork repos will have different caches. That means that a PR from a fork will not share a cache with the main repo `main` branch.
 * Enabling the <<pass-secrets-to-builds-from-forked-pull-requests,passing of secrets to build from forked pull requests>>
 will enable cache sharing between the original repo and all forked builds.
 

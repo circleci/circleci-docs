@@ -7,7 +7,7 @@ Release validation evaluates webhook signals from your monitoring tool during an
 
 == Introduction
 
-The xref:set-up-smart-deployments.adoc[Set up Smart Deployments] guided setup can generate this configuration for you in the web app. Use this guide when you prefer to edit YAML directly, or when you need field-level detail beyond what the wizard provides.
+The xref:set-up-smart-deployments.adoc[Set Up Smart Deployments] guided setup can generate this configuration for you in the web app. Use this guide when you prefer to edit YAML directly, or when you need field-level detail beyond what the wizard provides.
 
 Follow this guide to write the configuration and connect your monitoring tool yourself. The result is the same release validation feature.
 
@@ -25,7 +25,7 @@ Release validation and deploy markers are configuration, so they work on any ver
 
 |Deploy markers
 |No
-|Add the `circleci run release` commands to any project. See the xref:configure-deploy-markers.adoc#set-up-deploy-markers-manually[Set up Deploy Markers Manually] section.
+|Add the `circleci run release` commands to any project. See the xref:configure-deploy-markers.adoc#set-up-deploy-markers-manually[Set Up Deploy Markers Manually] section.
 
 |Release validation
 |No
@@ -33,7 +33,7 @@ Release validation and deploy markers are configuration, so they work on any ver
 
 |Rollback and deploy pipelines
 |Yes
-|See the xref:set-up-rollbacks.adoc[Set up Rollbacks] and xref:set-up-deploys.adoc[Set up Deploys] guides.
+|See the xref:set-up-rollbacks.adoc[Set Up Rollbacks] and xref:set-up-deploys.adoc[Set Up Deploys] guides.
 
 |Automatic rollback
 |Yes
@@ -52,7 +52,7 @@ A failing check still marks the release as failed, records the events that cause
 
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
 * A CircleCI project with a workflow configured to deploy your code.
-* Deploy markers configured in that workflow. See the xref:configure-deploy-markers.adoc#set-up-deploy-markers-manually[Set up Deploy Markers Manually] section.
+* Deploy markers configured in that workflow. See the xref:configure-deploy-markers.adoc#set-up-deploy-markers-manually[Set Up Deploy Markers Manually] section.
 * A monitoring tool that can send outbound webhooks. Datadog, Prometheus, and Alertmanager are supported directly, and you can connect any other tool as a custom provider.
 * Organization administrator permissions, to create a webhook secret.
 
@@ -269,4 +269,4 @@ For what each field means during matching, see the xref:release-validation-refer
 
 * Review every field you can set on the `validation` block. See the xref:release-validation-reference.adoc[Release Validation Configuration Reference] page.
 * Understand what happens when validation passes or fails. See the xref:smart-deployments-overview.adoc#how-release-validation-works[How Release Validation Works] section.
-* If your code is in a GitHub repository, set up a rollback pipeline to enable automatic rollback. See the xref:set-up-rollbacks.adoc[Set up Rollbacks] guide.
+* If your code is in a GitHub repository, set up a rollback pipeline to enable automatic rollback. See the xref:set-up-rollbacks.adoc[Set Up Rollbacks] guide.

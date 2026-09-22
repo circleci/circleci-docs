@@ -1,6 +1,8 @@
-checks:
-  settings:
-    author-membership:
-      mode: specific-users
-      specific-users:
-        - rosieyohannan
+review:
+  pr:
+    checks:
+      settings:
+        author-membership:
+          mode: specific-users
+          specific-users:
+            - rosieyohannan

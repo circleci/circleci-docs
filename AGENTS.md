@@ -12,6 +12,22 @@ For a comprehensive overview of the CircleCI documentation structure, see the au
 
 This guide focuses on **how to write documentation**. The llms.txt file tells you **what documentation exists and where**.
 
+## Git worktrees
+
+Always create a git worktree for your work in:
+
+```
+../circleci-docs-worktrees/<issue-id>-<short-description>
+```
+
+For example:
+
+```
+git worktree add ../circleci-docs-worktrees/LIN-123-fix-nav -b LIN-123-fix-nav
+```
+
+Do all work in that directory, not in the main circleci-docs checkout. If there is no issue ID, use a short description only.
+
 ## Creating New Documentation Pages
 
 **IMPORTANT**: When creating new documentation pages, always start with the appropriate page template from `docs/contributors/modules/templates/pages/`:
@@ -56,6 +72,29 @@ All pages require standard attributes (`:page-platform:`, `:page-description:`, 
   - Log in to your account …
   - Read the setup guide …
   - Set up your account …
+
+## Punctuation
+
+### Semicolons
+- **Avoid semicolons**. Prefer a new sentence, or use commas and periods.
+- Use a semicolon only sparingly, and only in these cases:
+  - When joining two closely related independent clauses where a period or a comma is not as effective.
+    - Recommended: Start with a smaller resource class; if the job fails due to memory limits, increase the class.
+  - When preceding a conjunctive adverb (like *therefore*) or a phrase (like *that is*) that joins two independent clauses.
+    - Recommended: The workflow skips the deploy job on feature branches; therefore, only the test jobs run.
+    - Recommended: Set the executor at the job level; that is, declare `docker`, `machine`, or `macos` under the job, not under the workflow.
+  - When separating a series of long or complex items that contain their own punctuation.
+    - Recommended: Review the page one more time, checking for the following: present tense and active voice; typos, punctuation, and grammar; and whether you can shorten anything.
+
+### Dashes
+- **Avoid dashes** (en or em) to split sentences. Prefer a new sentence, or use commas and periods.
+- If you use an em dash (—) to indicate a break in a sentence, do not put a space before or after it. Do not use an en dash or a hyphen in place of an em dash.
+- **Do not use en dashes** (–). Use a hyphen or the word "to" instead.
+  - Recommended: Server v4.0 to v4.8
+  - Not recommended: Server v4.0–v4.8
+- Do not use a dash to separate an item and its description. Use a colon or a period.
+  - Recommended: Resource class: The compute size assigned to a job.
+  - Not recommended: Resource class - The compute size assigned to a job.
 
 ## AsciiDoc Formatting
 
@@ -162,6 +201,14 @@ xref:guides:integration:github-integration.adoc#user-keys-and-deploy-keys[User K
   - **Good**: `xref:guides:orchestrate:schedule-triggers.adoc[Schedule Triggers]`
   - **Bad**: `xref:guides:orchestrate:schedule-triggers.adoc[schedule triggers]`
 - Always verify xrefs before using them. Check that the page you are referencing exists in the location you are using to create the resource ID
+- **Heading hashes are lowercase kebab-case of the heading text.** The playbook sets `idprefix: ""` and `idseparator: "-"`, so `== Install CircleCI agent skills` becomes `#install-circleci-agent-skills`. Do not use AsciiDoc's default underscore IDs (`#_install_circleci_agent_skills`). `validate-html` fails when a hash does not exist on the built page.
+- Add an explicit `[#custom-id]` only when the hash must differ from that kebab-case heading. Otherwise link to the generated ID:
+```adoc
+== Install CircleCI agent skills
+
+See the Codex and Copilot tabs in <<install-circleci-agent-skills>>.
+```
+- For cross-page section links: `xref:guides:toolkit:circleci-agent-skills.adoc#install-circleci-agent-skills[Install CircleCI Agent Skills]`
 
 Before adding any xref to a document, you must verify the target file exists and the path is correct:
 
@@ -197,6 +244,7 @@ link:https://circleci.com[CircleCI]
 - Links must have descriptive link text (not "click here", "here", or "this")
 
 ### Code Samples
+- **Reuse shared snippets** from `docs/guides/modules/ROOT/examples/` when the same config already exists. Include them with `example$` inside a source block. Follow `skills/partials/SKILL.md` to discover, insert, or extract examples.
 - **Provide working examples**: Code should be tested and valid
 - Readers should copy-paste with minimal changes
 - **Specify language** for syntax highlighting:
@@ -274,6 +322,8 @@ some code
 
 ### Reusable Partials
 
+When discovering, inserting, or creating partials or shared code examples, follow the partials skill at `skills/partials/SKILL.md`. That skill covers both `partials/` (AsciiDoc prose) and `examples/` (shared config snippets). It is the workflow for browsing categories, searching, suggesting from page context, proposing extractions, and writing the correct `include::` syntax. Other docs-authoring skills should reference it instead of copying reusable content.
+
 CircleCI docs use reusable partials to maintain consistency and reduce duplication. Partials are AsciiDoc snippets that can be included in multiple pages.
 
 **When to use partials:**
@@ -294,7 +344,7 @@ include::ROOT:partial$category/filename.adoc[]
 
 **Include with custom text or comment:**
 ```adoc
-include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
+include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab or GitHub App]
 ```
 
 **Partial categories and locations:**
@@ -388,6 +438,20 @@ When creating a new partial:
 - Update all pages when modifying a partial (partials affect multiple pages)
 - Use meaningful filenames that describe the content
 
+### Reusable Examples
+
+Shared code snippets live in `docs/guides/modules/ROOT/examples/`, next to `partials/`. Include them with `example$` **inside** a source block. Do not paste the snippet into the page.
+
+```adoc
+.Optional title for the snippet
+[source,yaml]
+----
+include::ROOT:example$orchestration-examples/job-group.yml[]
+----
+```
+
+From another component, use `include::guides:ROOT:example$path.yml[]`. Current categories: `expression-examples/` (current expression syntax), `logic-statement-examples/` (legacy logic statements), `orchestration-examples/` (job groups, serial groups, `override-with`). Follow `skills/partials/SKILL.md` to browse, search, insert, or extract examples.
+
 ### Images
 - **Always include descriptive alt text**:
 ```adoc
@@ -457,6 +521,9 @@ Content for Tab B
 14. Not using appropriate page templates for new content
 15. Using xrefs without verifying the target file exists and path is correct
 16. **Committing without running Vale and fixing linting errors**
+17. Using AsciiDoc underscore heading IDs (`<<_install_circleci_agent_skills>>`) instead of the site kebab-case ID (`<<install-circleci-agent-skills>>`)
+18. Unnecessary semicolons (prefer a period or a comma)
+19. En dashes, or dashes used to separate an item and its description
 
 ## AsciiDoc Validation Rules
 - Close all attribute blocks properly
@@ -490,11 +557,21 @@ AI agents run in two types of environments:
 
 ### Installing Vale
 
-If Vale is not installed in your environment, install it before running lint checks:
+**Match the version CI uses.** The `lint` job runs the `jdkato/vale:latest` Docker image, so CI tracks the newest Vale release. Install the latest version locally rather than pinning an old one.
+
+macOS:
 
 ```bash
-# Install Vale
-wget https://github.com/errata-ai/vale/releases/download/v3.7.1/vale_3.7.1_Linux_64-bit.tar.gz -O /tmp/vale.tar.gz
+brew install vale        # or: brew upgrade vale
+vale --version
+```
+
+Linux, including cloud agents:
+
+```bash
+# Install the latest Vale release, matching CI
+VALE_VERSION=$(curl -sL https://api.github.com/repos/vale-cli/vale/releases/latest | grep -o '"tag_name": *"v[^"]*' | cut -d'v' -f2)
+curl -sL "https://github.com/vale-cli/vale/releases/download/v${VALE_VERSION}/vale_${VALE_VERSION}_Linux_64-bit.tar.gz" -o /tmp/vale.tar.gz
 tar -xzf /tmp/vale.tar.gz -C /tmp
 sudo mv /tmp/vale /usr/local/bin/
 vale --version
@@ -503,7 +580,26 @@ vale --version
 sudo apt-get update && sudo apt-get install -y asciidoctor
 ```
 
-Once installed, Vale is available for all subsequent documentation work in that environment.
+### Syncing Vale packages
+
+`.vale.ini` declares an external package under `Packages`. Run `vale sync` once after installing, and again whenever `.vale.ini` changes:
+
+```bash
+vale sync
+```
+
+CI runs this before every lint. If you skip it, the packaged rules never load locally and your run reports fewer problems than CI does.
+
+### If your results do not match CI
+
+A local run that disagrees with the `lint` job is almost always a version or package mismatch, not a flaky rule. Symptoms include rules firing locally but not in CI, or the reverse, on the same commit.
+
+Check in this order:
+
+1. `vale --version` against the version CI printed in the `lint` job output.
+2. `vale sync`, in case the packaged rules are missing or stale.
+
+Treat CI as authoritative. Before concluding that a rule is wrong or that an alert is a false positive, reproduce it on the same version CI ran.
 
 ### Vale Linter
 
@@ -596,9 +692,9 @@ npm run build:docs
 
 Before committing documentation changes:
 
-1. ✅ **REQUIRED**: Run Vale locally and fix all error-level violations (recommended for all agents)
+1. ✅ **REQUIRED**: Run Vale locally and fix all error-level violations (recommended for all agents). Confirm `vale --version` matches CI and that you have run `vale sync`, or your results will not match the `lint` job
 2. ✅ Preview locally to check formatting and links
-3. ✅ Verify all xrefs point to existing files
+3. ✅ Verify all xrefs point to existing files, and that heading hashes use kebab-case of the heading (not `_underscore_ids`)
 4. ✅ Check `:page-description:` is 70-160 characters
 5. ✅ Ensure link text uses title case
 6. ✅ Confirm page is added to `nav.adoc` if new

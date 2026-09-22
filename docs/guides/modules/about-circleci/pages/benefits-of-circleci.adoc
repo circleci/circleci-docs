@@ -38,4 +38,4 @@ Organizations on the Free Plan are given free credits to use on open source proj
 [#next-steps]
 == Next steps
 
-- xref:getting-started:first-steps.adoc[Sign up and Try]
+- xref:getting-started:first-steps.adoc[Sign Up and Try]

@@ -19,10 +19,10 @@ To get set up right away, choose your route:
 |Start here
 
 |You want the guided setup in the web app
-|xref:set-up-smart-deployments.adoc[Set up Smart Deployments]. See the xref:set-up-smart-deployments.adoc#setup-routes[Setup routes] section for what the wizard generates with and without the GitHub App and AI features.
+|xref:set-up-smart-deployments.adoc[Set Up Smart Deployments]. See the xref:set-up-smart-deployments.adoc#setup-routes[Setup routes] section for what the wizard generates with and without the GitHub App and AI features.
 
 |You prefer to edit YAML directly
-|xref:set-up-release-validation-manually.adoc[Set up Release Validation Manually]. You write the validation policy and connect your monitoring tool yourself.
+|xref:set-up-release-validation-manually.adoc[Set Up Release Validation Manually]. You write the validation policy and connect your monitoring tool yourself.
 |===
 --
 
@@ -181,6 +181,6 @@ CAUTION: Do not use both Smart Deployments and the CircleCI release agent in the
 
 == Get started
 
-* xref:set-up-smart-deployments.adoc[Set up Smart Deployments]: Use the guided setup in the web app. See the xref:set-up-smart-deployments.adoc#setup-routes[Setup routes] section for what the wizard generates with and without the GitHub App and AI features.
-* xref:set-up-release-validation-manually.adoc[Set up Release Validation Manually]: Write the configuration yourself and connect your monitoring tool. Use this route when you prefer to edit YAML directly.
+* xref:set-up-smart-deployments.adoc[Set Up Smart Deployments]: Use the guided setup in the web app. See the xref:set-up-smart-deployments.adoc#setup-routes[Setup routes] section for what the wizard generates with and without the GitHub App and AI features.
+* xref:set-up-release-validation-manually.adoc[Set Up Release Validation Manually]: Write the configuration yourself and connect your monitoring tool. Use this route when you prefer to edit YAML directly.
 * xref:release-validation-reference.adoc[Release Validation Configuration Reference]: Every field you can set on the `validation` block.

@@ -1,7 +1,7 @@
 [#deployment-not-showing-up]
 === Why is my Deployment/Rollout not showing up in the components tab or releases timeline view?
 
-* Check that the Deployment/Rollout is annotated with the required labels. More information is available in the xref:guides:deploy:configure-your-kubernetes-components.adoc[Set up Guides]. If the required labels are not present, adding them solves the problem.
+* Check that the Deployment/Rollout is annotated with the required labels. More information is available in the xref:guides:deploy:configure-your-kubernetes-components.adoc[Set Up Guides]. If the required labels are not present, adding them solves the problem.
 
 * If you are using a Deployment, check that the desired replicas is not set to `0`. Deployments with `0` replicas are not reported as releases, even if they are scaled up subsequently. The configured value can be seen on the release agent deployment in the `circleci-release-agent-system` namespace. Here is an example in which the number of desired replicas is 2:
 +
@@ -43,7 +43,7 @@ In dynamic mode, `MANAGED_NAMESPACES` may contain glob patterns such as `team-*`
 
 * If you are using a Deployment, check whether it was deleted before the release could complete. In this scenario, this is an expected behavior. This experience will be improved upon in future release agent updates.
 
-* If you are using a Deployment, check whether the release agent restarted before all pods for the deployment could become ready. This is a known limitation that will be addressed in future updates of the release agent. Restarting a release agent while a release is ongoing will cause the release agent to lose track of the release status and fail to update the CircleCI services accordingly.
+* If you are using a Deployment, check whether the release agent restarted before all pods for the deployment could become ready. The restart behavior is a known limitation that will be addressed in future updates of the release agent. Restarting a release agent while a release is ongoing will cause the release agent to lose track of the release status and fail to update the CircleCI services accordingly.
 
 [#no-releases]
 === Why are no new releases showing up? and/or why are component versions not being updated?
@@ -55,7 +55,7 @@ In dynamic mode, `MANAGED_NAMESPACES` may contain glob patterns such as `team-*`
 +
 If the token has been last used longer than a minute ago, then this is likely to be the problem.
 
-* Check whether tokens are being shared between multiple release environments. This is **not** supported. Check this by following these steps:
+* Check whether tokens are being shared between multiple release environments. Sharing tokens between release environments is **not** supported. Check this by following these steps:
 .. Retrieve the token value from the token field in the `circleci-release-agent` secret in the `circleci-release-agent-system` namespace.
 .. Compare the value with the partially obscured value for the available Tokens in the CircleCI web app.
 +

@@ -1,7 +1,7 @@
 [#split-config-into-different-files]
 === Is it possible to split the `.circleci/config.yml` into different files?
 
-If your code is stored in GitHub you can split your configuration into multiple files using the CircleCI GitHub App integration. For steps, see the xref:guides:orchestrate:set-up-multiple-configuration-files-for-a-project.adoc[Set up Multiple Configuration Files] how-to guide.
+If your code is stored in GitHub you can split your configuration into multiple files using the CircleCI GitHub App integration. For steps, see the xref:guides:orchestrate:set-up-multiple-configuration-files-for-a-project.adoc[Set Up Multiple Configuration Files] how-to guide.
 
 include::ROOT:partial$tips/check-github-type-org.adoc[]
 
