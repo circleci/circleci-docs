@@ -4,10 +4,18 @@
 :experimental:
 :page-description: Reference for .circleci/test-suites.yml
 :page-show-readtime: true
+:page-aliases: guides:test:testsuite-configuration-reference.adoc
 
-include::ROOT:partial$notes/smarter-testing-beta.adoc[]
+include::guides:ROOT:partial$notes/smarter-testing-beta.adoc[]
 
 This document is a reference for the CircleCI Smarter Testing test suite configuration keys used in the `.circleci/test-suites.yml` file.
+
+To create that file and set the keys described here, follow the Smarter Testing setup guides:
+
+* xref:guides:test:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] creates the file and sets <<name,`name`>>, <<discover,`discover`>>, <<run,`run`>>, and <<outputs,`outputs`>>.
+* xref:guides:test:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis] adds <<test-impact-analysis,`test-impact-analysis`>>, <<analysis,`analysis`>>, and <<file-mapper,`file-mapper`>>.
+* xref:guides:test:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting] adds <<dynamic-test-splitting,`dynamic-test-splitting`>>.
+* xref:guides:test:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] adds <<max-auto-rerun,`max-auto-rerun`>> and <<auto-rerun-duration,`auto-rerun-duration`>>.
 
 '''
 

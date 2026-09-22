@@ -169,7 +169,7 @@ After declaring the `org` package and `policy_name` rule, policies can then be d
 * Enforcement status - Determines how a violation is enforced.
 * Enablement - Determines if a policy violation is enabled.
 
-Using this format allows policy writers to create custom helper functions without impacting CircleCI's ability to parse policy evaluation output. You can create your own helper functions, but also CircleCI provides a set of helpers by importing `data.circleci.config` in your policies. For more information, see the xref:config-policy-reference.adoc[Config Policy Reference].
+Using this format allows policy writers to create custom helper functions without impacting CircleCI's ability to parse policy evaluation output. You can create your own helper functions, but also CircleCI provides a set of helpers by importing `data.circleci.config` in your policies. For more information, see the xref:reference:ROOT:config-policy-reference.adoc[Config Policy Reference].
 
 NOTE: **Helpers** in the context of config policies are rules like any other, but rules that are not individually _enabled_ for the process of determining policy violation. Helpers can be written and used as building blocks for your policies.
 
@@ -529,7 +529,7 @@ In the above example, the rule does not raise a violation because the string `<<
 
 We cannot rely on `++input._compiled_++` because orbs are compiled away at that stage.
 
-The best approach here is to detect if an orb reference is a parameterized expression and raise a violation accordingly. To do this we can use the `is_parameterized_expression` xref:config-policy-reference.adoc#is_parameterized_expression[Helper].
+The best approach here is to detect if an orb reference is a parameterized expression and raise a violation accordingly. To do this we can use the `is_parameterized_expression` xref:reference:ROOT:config-policy-reference.adoc#is_parameterized_expression[Helper].
 
 .Policy to ban orbs from a specific namespace and detect parameterized orb references
 [source,go]
@@ -696,4 +696,4 @@ enable_hard["use_official_docker_image"]
 * xref:create-and-manage-config-policies.adoc[Create and Manage Config Policies]
 * xref:test-config-policies.adoc[Test Config Policies]
 * xref:use-the-cli-for-config-and-policy-development.adoc[Use the CircleCI CLI for Config and Policy Development]
-* xref:config-policy-reference.adoc[Config Policy Reference]
+* xref:reference:ROOT:config-policy-reference.adoc[Config Policy Reference]

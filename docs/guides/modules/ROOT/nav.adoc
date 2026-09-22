@@ -140,7 +140,7 @@
 *** xref:execution-runner:machine-runner-3-configuration-reference.adoc[Machine runner 3 configuration reference]
 
 ** Self-hosted runner reference
-*** xref:execution-runner:runner-api.adoc[Self-hosted runner API]
+*** xref:reference:ROOT:runner-api.adoc[Self-hosted runner API]
 *** xref:execution-runner:runner-faqs.adoc[Self-hosted runner FAQ]
 *** xref:execution-runner:troubleshoot-self-hosted-runner.adoc[Troubleshoot self-hosted runner]
 *** xref:execution-runner:runner-scaling.adoc[Scaling self-hosted runner]
@@ -161,7 +161,7 @@
 *** xref:test:set-up-test-impact-analysis.adoc[Set up Test Impact Analysis]
 *** xref:test:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting]
 *** xref:test:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests]
-*** xref:test:testsuite-configuration-reference.adoc[Test suite Config Reference]
+*** xref:reference:ROOT:testsuite-configuration-reference.adoc[Testsuite configuration reference]
 ** Testing strategies
 *** xref:test:testing-llm-enabled-applications-through-evaluations.adoc[Testing LLM-enabled applications through evaluations]
 *** xref:test:browser-testing.adoc[Browser testing]
@@ -232,7 +232,7 @@
 ** xref:insights:insights-tests.adoc[Test Insights]
 ** xref:insights:project-usage-dashboard.adoc[Project Usage Dashboard]
 ** xref:insights:insights-snapshot-badge.adoc[Generate an Insights snapshot badge]
-** xref:insights:insights-glossary.adoc[Insights glossary]
+** xref:reference:ROOT:insights-glossary.adoc[Insights glossary]
 
 * Manage roles, permissions, and authentication
 ** xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, organizations, and integrations guide]
@@ -283,7 +283,7 @@
 
 * Manage config policies
 ** xref:config-policies:config-policy-management-overview.adoc[Config policy management overview]
-** xref:config-policies:config-policy-reference.adoc[Config policy reference]
+** xref:reference:ROOT:config-policy-reference.adoc[Config policy reference]
 ** How-to guides
 *** xref:config-policies:create-and-manage-config-policies.adoc[Create and manage config policies]
 *** xref:config-policies:test-config-policies.adoc[Test config policies]
@@ -343,7 +343,7 @@
 *** xref:toolkit:cli-migration-guide.adoc[CLI migration guide]
 
 ** Environment CLI
-*** xref:toolkit:environment-cli-usage-guide.adoc[CircleCI environment CLI usage guide]
+*** xref:reference:ROOT:environment-cli-usage-guide.adoc[CircleCI environment CLI usage guide]
 
 ** In-app AI features
 *** xref:guides:toolkit:enable-ai-powered-features.adoc[Enable AI-powered features]
