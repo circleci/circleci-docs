@@ -18,7 +18,7 @@ This section outlines several project features that indicate your project is a g
 
 === Your test runner produces JUnit test results
 
-Auto rerun failed tests identifies which test atoms to rerun from JUnit XML output. Your test runner must be configured to emit JUnit XML results for the feature to work.
+Auto rerun failed tests identifies which test units to rerun from JUnit XML output. Your test runner must be configured to emit JUnit XML results for the feature to work.
 
 === Your test suite has flaky tests
 
@@ -26,13 +26,13 @@ If your test suite has flaky tests, auto rerun can quickly recover from intermit
 
 == How it works
 
-All test atoms are run as normal with the `discover` and `run` commands.
+All test units are run as normal with the `discover` and `run` commands.
 
 When auto rerun failed tests is enabled:
 
-* Any test atoms that failed in the JUnit XML output are rerun.
-* The process repeats until all test atoms pass, or the maximum number of rerun attempts is reached.
-* If all test atoms pass, the errors are suppressed and the job succeeds.
+* Any test units that failed in the JUnit XML output are rerun.
+* The process repeats until all test units pass, or the maximum number of rerun attempts is reached.
+* If all test units pass, the errors are suppressed and the job succeeds.
 * If the maximum number of reruns is reached and there are still test failures, the job fails.
 
 [mermaid]
@@ -106,15 +106,15 @@ options:
 
 |`max-auto-rerun`
 |0
-|The maximum number of times test atoms are rerun if they fail. Accepts a value in the range 0 to 10 inclusive.
+|The maximum number of times test units are rerun if they fail. Accepts a value in the range 0 to 10 inclusive.
 
-When `auto-rerun-duration` is also set, test atoms rerun until one of the two conditions is reached.
+When `auto-rerun-duration` is also set, test units rerun until one of the two conditions is reached.
 
 |`auto-rerun-duration`
 |null
-|The duration or percentage of total runtime to spend rerunning failed test atoms, for example, `5m`, `1h`, `20%`.
+|The duration or percentage of total runtime to spend rerunning failed test units, for example, `5m`, `1h`, `20%`.
 
-When `max-auto-rerun` is also set, test atoms rerun until one of the two conditions is reached.
+When `max-auto-rerun` is also set, test units rerun until one of the two conditions is reached.
 |===
 --
 
