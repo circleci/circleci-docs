@@ -52,13 +52,6 @@ If you need to restrict the connections allowed in your test jobs, consider enab
 
 This gets your tests running with your native test library, directly through the `run` step. Both `circleci testsuite` and the `circleci tests` commands build on this same `run` step. On Cloud, `circleci testsuite` is the preferred choice, and adds test impact analysis, dynamic test splitting, and auto rerun failed tests. See <<smarter-testing,Get started with Smarter Testing>> below, or <<tests-command,the `circleci tests` commands>> if you are on CircleCI Server.
 
-[#orbs]
-== Use orbs to simplify testing
-
-Orbs provide a way to integrate popular testing tools into your configuration. You can invoke CircleCI partner orbs such as Cypress, LambdaTest, and Sauce Labs in your `.circleci/config.yml` file. These orbs will allow you to include common testing tasks in your pipelines by running built-in jobs or concise usage commands in your jobs.
-
-Orbs are available for mobile testing, browser testing, load testing, and code coverage. To get started with orbs, visit the xref:orbs:use:orb-intro.adoc[Orbs Introduction] page. To view the orb registry, visit the link:https://circleci.com/developer/orbs?query=&category=Testing[CircleCI Developer Hub].
-
 [#store-test-data]
 == Store test data
 
