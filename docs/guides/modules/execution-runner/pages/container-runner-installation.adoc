@@ -100,7 +100,7 @@ Container runner uses three separate images. Configure each image with a top-lev
 
 Setting `agent.image` alone does not override the orchestrator or logging sidecar image settings. Task pods may still try to pull from Docker Hub and fail with `ImagePullBackOff` if you omit those keys.
 
-Add the following to your `values.yaml`, substituting your registry host, repository path, and tags (tags must match your container-agent chart version for compatibility):
+Add the following to your `values.yaml`, substituting your registry host, repository path, and image tags:
 
 [source,yaml]
 ----
@@ -117,7 +117,7 @@ orchestrator:
   image:
     registry: registry.example.com
     repository: circleci/runner-init
-    tag: agent-server-4.7
+    tag: agent-server-<minor>
 
 logging:
   image:
@@ -126,7 +126,11 @@ logging:
     tag: 3.1.9-9141-f95ed2b
 ----
 
-If you use CircleCI Server, include `agent.runnerAPI` as shown in the CircleCI Server step above. Adjust the `runner-init` tag to match your Server version.
+`agent.image.tag` follows the container-agent chart. The example uses `kubernetes-3`. The logging image uses its own tag.
+
+If you use CircleCI Server, include `agent.runnerAPI` as shown in the CircleCI Server step above. Set the `runner-init` tag to `agent-server-<minor>`, where `<minor>` is the Server minor version you run. Server 4.9 uses `agent-server-4.9`.
+
+CAUTION: After each CircleCI Server upgrade, mirror the new `runner-init` image and set `orchestrator.image.tag` to the new minor. Then run the Helm upgrade below. Task pods that keep the previous tag fail `attach_workspace` with HTTP 404. Nomad jobs and Docker jobs do not use this image.
 
 After updating `values.yaml`, upgrade the release:
 
