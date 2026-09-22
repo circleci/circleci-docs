@@ -1,0 +1,846 @@
+= Use a GitHub Actions workflow file as your pipeline configuration
+:page-platform: Cloud
+:page-badge: Preview
+:page-description: Set up a CircleCI pipeline that runs an existing GitHub Actions workflow file, and check which GitHub Actions features are supported.
+:experimental:
+
+NOTE: **GitHub Actions workflow support is in Preview.** This feature is in its early stages and you may encounter bugs, unexpected behavior, or incomplete features. Post all feedback to link:https://circleci.canny.io/cloud-feature-requests/p/github-actions-support-now-available-on-circleci[The CircleCI ideas board].
+
+A CircleCI pipeline is generally defined by a CircleCI configuration file. You can instead use an existing GitHub Actions workflow file as your pipeline configuration. CircleCI runs your GitHub Actions workflow on CircleCI compute. Your workflow file stays where it is, in `.github/workflows/`, and you do not need to translate it into CircleCI syntax.
+
+Running your GitHub Actions workflow as it is helps when you want to move work onto CircleCI without rewriting your configuration first. It also lets you compare the two platforms using the same workflow. A subset of GitHub Actions features is supported. Before you start, check the <<github-actions-feature-support,GitHub Actions Feature Support>> section to confirm your workflow uses supported features.
+
+TIP: If you would rather convert your workflow into CircleCI syntax, see the xref:migrate:migrating-from-github.adoc[Migrate From GitHub Actions] page and the link:https://circleci.com/developer/tools/configTranslator[CircleCI configuration translator].
+
+== Prerequisites
+
+* A CircleCI Cloud organization integrated with GitHub using the CircleCI GitHub App.
+* A GitHub repository with a GitHub Actions workflow file.
+* A workflow that runs on Linux. CircleCI does not support macOS or Windows for GitHub Actions workflows. For macOS and Windows builds you can migrate to use CircleCI YAML config. See the xref:migrate:migrating-from-github.adoc[Migrate From GitHub Actions] page for more information.
+
+To use the CircleCI CLI steps on this page, you also need the following:
+
+* CircleCI CLI v1.0 or later, authenticated with `circleci auth login`. Run `circleci auth me` to confirm. See the xref:toolkit:circleci-cli.adoc[CircleCI CLI] page.
+* The GitHub CLI (`gh`), used to look up your repository ID. Any other method of finding the repository ID works too.
+
+== Set up a new project with a GitHub Actions workflow file
+
+To set up a new project with a GitHub Actions workflow file, follow the steps in the web app or the CircleCI CLI.
+
+[tabs]
+====
+Web app::
++
+--
+When you create a project, CircleCI asks where to get build instructions for your repository. Choose your existing GitHub Actions workflow file at that point.
+
+include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
+
+include::ROOT:partial$create-project/choose-a-repo.adoc[]
++
+Select the **GitHub Cloud** tile if you do not already have a connection. CircleCI redirects you to GitHub, where you install and authorize the CircleCI GitHub App. Installing the app is a one-time step.
+
+. On the *Select your config source* step, select **Use existing GitHub Actions workflow file**, enter the path to the GitHub Actions workflow file, then select btn:[Continue].
+
+. Set up the triggers for your pipeline. CircleCI adds one trigger by default, to build your project on every commit. You can xref:orchestrate:set-up-triggers.adoc[Add More Triggers] at this point. Select btn:[Next: review and finish setup]
+
+. Review what you have set up, then select btn:[Finish setup].
+
+Your pipelines page opens. The next time your trigger fires, CircleCI runs the jobs from your GitHub Actions workflow file.
+--
+CircleCI CLI::
++
+--
+
+Run these commands from your repository directory. Every command below resolves your project from the git remote, so you do not need to pass a project slug.
+
+. Create the project. CircleCI names it after the current repository.
++
+[,shell]
+----
+circleci project create --json
+----
++
+If you belong to more than one organization, add `--org <org-slug>`. Run `circleci org list` to find it, then use `gh/<org-name>` for a GitHub organization or `circleci/<org-id>` for a `circleci` type organization.
+
+. Find the numeric ID of your GitHub repository. You need this ID for both the pipeline definition and the trigger.
++
+[,shell]
+----
+gh api /repos/<owner>/<repo> --jq .id
+----
+
+. Create the pipeline definition, pointing it at your workflow file.
++
+[,shell]
+----
+circleci pipeline create \
+  --name "github-actions-ci" \
+  --config-provider github_app \
+  --config-repo-id <github-repo-id> \
+  --config-file .github/workflows/ci.yml \
+  --config-file-type github-actions \
+  --checkout-provider github_app \
+  --checkout-repo-id <github-repo-id> \
+  --json
+----
++
+[IMPORTANT]
+=====
+`--config-file-type github-actions` is the flag that makes this work, and it is simple to miss when following a general onboarding flow.
+
+Leave it out and CircleCI reads your workflow file as CircleCI configuration syntax. The failure is confusing rather than obvious, and looks similar to the following:
+
+[,shell]
+----
+jobs referenced in workflows that have not been defined: build
+----
+=====
++
+Note the pipeline definition ID returned by this command. You need it in the next two steps.
+
+. Follow the project, so that it appears on your dashboard. This step is required for OAuth organizations, with slugs beginning `gh/` or `bb/`, and is worth doing for any organization.
++
+[,shell]
+----
+circleci project follow
+----
+
+. Add a trigger to connect your pipeline definition to a Git event.
++
+[,shell]
+----
+circleci project trigger create \
+  --pipeline-definition-id <definition-id> \
+  --repo-id <github-repo-id> \
+  --event-preset all-pushes \
+  --json
+----
++
+Other presets include `only-open-prs` and `default-branch-pushes`. Run `circleci help triggers` for the full list, or see the xref:orchestrate:github-trigger-event-options.adoc[GitHub Trigger Event Options] page.
+
+. Trigger a run to check your setup. Targeting the definition directly bypasses the trigger, so you do not need to push a commit.
++
+[,shell]
+----
+circleci pipeline run --definition-id <definition-id> --branch main --json
+circleci run watch <run-id> --failfast
+----
+
+TIP: **Check what actually ran, rather than trusting a green result.** Because some GitHub Actions features are accepted without taking effect, a passing run does not prove that every step did what your workflow file asks for. Use `circleci run get <run-id> --json` to list workflow and job IDs, `circleci job get <job-id> --json` to list steps, and `circleci job output get <job-id> --step-num <n> --strip-ansi` to read the raw step output.
+--
+
+====
+
+== Add a GitHub Actions pipeline to an existing project
+
+A project can have more than one pipeline, so you can add a GitHub Actions pipeline alongside pipelines that use CircleCI configuration.
+
+[tabs]
+====
+Web app::
++
+--
+include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
++
+. Select *Project Setup* in the sidebar.
+. Select btn:[Add Pipeline], or select the pencil icon (icon:edit-solid[Edit icon]) next to an existing pipeline to change it.
+. Give your pipeline a descriptive name, for example `github-actions-ci`.
+. Under *Config source*, select the repository that holds your GitHub Actions workflow file.
+. Under *Config filepath*, select the **GitHub Actions workflow file** checkbox, then enter the path to your workflow file, for example `.github/workflows/ci.yml`.
+
+. Under *Checkout source*, select the repository to check out when your workflow runs. For most projects this is the same repository you selected as the config source.
+. Select btn:[Save].
+
+Connect your new pipeline to a trigger before it can run. See the xref:orchestrate:set-up-triggers.adoc[Set Up Triggers] page.
+--
+CircleCI CLI::
++
+--
+
+Run these commands from your repository directory, so your project resolves from the git remote.
+
+. Find the numeric ID of your GitHub repository.
++
+[,shell]
+----
+gh api /repos/<owner>/<repo> --jq .id
+----
+
+. Create the pipeline definition in your existing project, pointing it at your workflow file. Include `--config-file-type github-actions`, or CircleCI reads your workflow file as CircleCI configuration syntax and the run fails.
++
+[,shell]
+----
+circleci pipeline create \
+  --name "github-actions-ci" \
+  --config-provider github_app \
+  --config-repo-id <github-repo-id> \
+  --config-file .github/workflows/ci.yml \
+  --config-file-type github-actions \
+  --checkout-provider github_app \
+  --checkout-repo-id <github-repo-id> \
+  --json
+----
++
+Note the pipeline definition ID returned by this command.
+
+. Add a trigger to connect your new pipeline definition to a Git event.
++
+[,shell]
+----
+circleci project trigger create \
+  --pipeline-definition-id <definition-id> \
+  --repo-id <github-repo-id> \
+  --event-preset all-pushes \
+  --json
+----
+
+. Trigger a run to check your setup.
++
+[,shell]
+----
+circleci pipeline run --definition-id <definition-id> --branch main --json
+circleci run watch <run-id> --failfast
+----
+
+CAUTION: **The CLI cannot tear these down.** The CLI has no command to delete a project or a pipeline definition, and no command to delete or disable a trigger. Check your flags before you create anything, and remove unwanted pipelines and triggers in the web app.
+--
+====
+
+== How it works
+
+When you set up a pipeline to use a GitHub Actions workflow file, CircleCI does the following:
+
+. **CircleCI reads your workflow file** from the config source repository, at the path you gave the pipeline.
+. **CircleCI translates the workflow into a CircleCI workflow.** Each GitHub Actions job becomes a CircleCI job, and `needs:` relationships become `requires:` relationships, so your workflow graph is preserved.
+. **CircleCI runs your GitHub Actions jobs.** Your steps run with GitHub Actions semantics. This covers `run:` and `uses:` steps, `${{ }}` expression evaluation, step and job outputs, and secret masking.
+
+Your workflow file is never rewritten, and you do not maintain a CircleCI configuration file alongside it. You get CircleCI compute and the pipelines dashboard, running the workflow definition you already have.
+
+CircleCI implements GitHub Actions semantics rather than calling GitHub, so only a subset of features is available. See <<github-actions-feature-support,GitHub Actions Feature Support>>.
+
+[#how-circleci-triggers-your-workflow]
+=== How CircleCI triggers your workflow
+
+Your CircleCI trigger decides whether the pipeline runs. You configure it in CircleCI, in the same way as any other pipeline. See the xref:orchestrate:set-up-triggers.adoc[Set Up Triggers] page.
+
+[WARNING]
+====
+**The filters under `on:` are not applied.** CircleCI does not read `on.<event>.branches`, `paths`, or `types`, and it does not evaluate `on.schedule.cron`.
+
+A workflow with `on.push.branches: [main]` still runs on every branch if its CircleCI trigger fires on all pushes. Use your CircleCI trigger, or a job-level or step-level `if:` condition, to limit when work runs. For the trigger options, see the xref:orchestrate:github-trigger-event-options.adoc[GitHub Trigger Event Options] page.
+====
+
+CircleCI does read `on:` for two things: the inputs declared under `on.workflow_dispatch.inputs`, and the interface declared under `on.workflow_call`. A workflow that declares only unsupported events is skipped.
+
+The following table shows how CircleCI translates its own events into the `github.event_name` your workflow sees. It describes the value in the GitHub Actions context rather than a second gate on whether the workflow runs.
+
+[.table-scroll]
+--
+[cols="1,1,2", options="header"]
+|===
+| GitHub Actions event
+| CircleCI event
+| Notes
+
+| `push`
+| Push
+| CircleCI builds a partial event payload from the pipeline values.
+
+| `pull_request`
+| Pull request
+| The payload includes the base and head SHA, and the branch.
+
+| `schedule`
+| Schedule
+| Set the schedule on your CircleCI trigger. The `cron` value in your workflow file is not evaluated.
+
+| `workflow_dispatch`
+| API
+| The `inputs.*` context is fully populated from the inputs declared in your workflow file.
+
+| `workflow_call`
+| Not applicable
+| Defines a reusable workflow interface for other local workflows to call.
+
+| `repository_dispatch`
+| Custom webhook
+| The event name is mapped, but the event payload is not populated.
+
+| Any other event
+| Not applicable
+| Not mapped. A workflow that declares only unsupported events is skipped.
+|===
+--
+
+== What to expect when your workflow runs on CircleCI
+
+Your workflow runs on CircleCI compute, so some values your workflow reads at runtime differ from the values GitHub would report.
+
+* Jobs run on Linux x86-64. The `runner.os` context reports `Linux`, `runner.arch` reports `X64`, and `runner.environment` reports `self-hosted`.
+* All standard `GITHUB_*` and `RUNNER_*` environment variables are set, with the exception of `ACTIONS_RUNTIME_TOKEN`.
+* OIDC tokens are issued by CircleCI. See <<oidc-tokens,OIDC Tokens>>.
+* Set the secrets your workflow reads as project environment variables, rather than as GitHub repository secrets. See the xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Set an Environment Variable in a Project] page.
+
+== Next steps
+
+* xref:orchestrate:set-up-triggers.adoc[Set Up Triggers]
+* xref:orchestrate:pipelines.adoc[Pipelines Overview and Setup]
+* xref:migrate:migrating-from-github.adoc[Migrate From GitHub Actions]
+* xref:integration:version-control-system-integration-overview.adoc[Version Control Systems, Pipeline Types, and Feature Support]
+
+[#github-actions-feature-support]
+== GitHub Actions feature support
+
+If a feature does not appear in this section, treat it as unsupported.
+
+=== Support levels
+
+[.table-scroll]
+--
+[cols="1,3", options="header"]
+|===
+| Level
+| Meaning
+
+| [.circle-green]#**Supported**#
+| Works as it does on GitHub Actions.
+
+| [.circle-amber]#**Partial**#
+| Works within the limits described in the table.
+
+| **No effect**
+| The syntax is accepted and your workflow still runs, but the feature does nothing. Read these rows carefully. A workflow that depends on one of these features for correctness or safety behaves differently on CircleCI.
+
+| [.circle-red]#**Not supported**#
+| Rejected, or outside the supported set.
+|===
+--
+
+=== Workflow and job structure
+
+[.table-scroll]
+--
+[cols="2,1,3", options="header"]
+|===
+| Feature
+| Support
+| What to know
+
+| Jobs, `needs`, and outputs
+| [.circle-green]#**Supported**#
+| Static job dependencies, matrix fan-out and fan-in, job results, and job outputs all work. Dependency graphs can be up to 20 levels deep.
+
+| `runs-on`
+| [.circle-amber]#**Partial**#
+| Use `ubuntu-latest`, `ubuntu-24.04`, `ubuntu-22.04`, `ubuntu-20.04`, or `self-hosted`. All other labels are rejected, including all macOS and Windows labels.
+
+| `name`
+| [.circle-green]#**Supported**#
+| Retained at workflow and job level. Job names can use matrix values.
+
+| `continue-on-error`
+| [.circle-green]#**Supported**#
+| Accepts literal booleans and expressions, at job and step level.
+
+| `timeout-minutes`
+| [.circle-amber]#**Partial**#
+| Enforced at job and step level, defaulting to 360 minutes. A warning in the build output may state that this key has no effect. That warning is wrong, and the timeout is enforced.
+
+| `env` and `defaults.run`
+| [.circle-amber]#**Partial**#
+| Workflow, job, and step values use normal precedence, so the most specific value wins. `NODE_OPTIONS` cannot be set through `GITHUB_ENV`.
+
+| `concurrency`
+| **No effect**
+| CircleCI emits a warning. Concurrent runs are not serialized, so a workflow that relies on a concurrency group to prevent overlapping deploys is not protected.
+
+| `environment`
+| [.circle-amber]#**Partial**#
+| CircleCI inserts an approval job before any job that declares `environment:`, so the job waits for approval in the CircleCI web app. See <<environment-approval-gates,Environment Approval Gates>> for what the gate does and does not enforce.
+
+| `container:` at job level
+| [.circle-amber]#**Partial**#
+| CircleCI starts a long-lived container and runs your `run:` steps inside it, using `docker exec`. The `image`, `env`, `ports`, `volumes`, `options`, and `credentials` keys work. Your workspace is mounted at `/github/workspace`, and the temporary directory is `/github/home`. JavaScript actions and `docker://` action steps run on the host rather than in the container.
+|===
+--
+
+=== Matrix strategies
+
+[.table-scroll]
+--
+[cols="2,1,3", options="header"]
+|===
+| Feature
+| Support
+| What to know
+
+| `matrix` with static values
+| [.circle-green]#**Supported**#
+| Up to 256 instances per job.
+
+| `include` and `exclude`
+| [.circle-amber]#**Partial**#
+| Literal combinations work. An `include` entry whose value is an expression that cannot be resolved when the workflow is parsed is skipped without an error.
+
+| `fail-fast`
+| **No effect**
+| A failing matrix instance does not cancel its siblings.
+
+| `max-parallel`
+| **No effect**
+| Use CircleCI concurrency controls instead.
+
+| `strategy.*` context
+| [.circle-red]#**Not supported**#
+| The context is not populated and resolves to null. Use `matrix.*` instead.
+|===
+--
+
+=== Steps, shells, and expressions
+
+[.table-scroll]
+--
+[cols="2,1,3", options="header"]
+|===
+| Feature
+| Support
+| What to know
+
+| `run` steps
+| [.circle-amber]#**Partial**#
+| Use `bash`, `sh`, `python`, `pwsh`, or a custom shell template. Linux only.
+
+| Operators and comparisons
+| [.circle-green]#**Supported**#
+| The full set of GitHub Actions operators is available in conditions and in string interpolation.
+
+| `startsWith()`, `contains()`, `endsWith()`, `format()`, `join()`, `toJSON()`, and `fromJSON()`
+| [.circle-green]#**Supported**#
+| Available in conditions and in string interpolation.
+
+| `always()`, `success()`, `failure()`, and `cancelled()`
+| [.circle-amber]#**Partial**#
+| Available in conditions, without arguments. Not available in string interpolation.
+
+| `hashFiles()`
+| [.circle-amber]#**Partial**#
+| Available in step conditions and workflow steps, not in job conditions.
+
+| `case()`
+| [.circle-green]#**Supported**#
+| Available in conditions and in string interpolation. Takes predicate and value pairs followed by a fallback, as in `case(pred1, val1, pred2, val2, default)`. CircleCI accepts an odd number of arguments, from three to 255. Any other number of arguments evaluates to an empty string rather than raising an error.
+
+| Environment files
+| [.circle-green]#**Supported**#
+| `GITHUB_OUTPUT`, `GITHUB_ENV`, `GITHUB_PATH`, `GITHUB_STATE`, and `GITHUB_STEP_SUMMARY` all work, including multiline Heredoc values.
+
+| Log grouping and annotations
+| [.circle-green]#**Supported**#
+| The `group`, `endgroup`, `warning`, `error`, `notice`, `debug`, `echo`, and `add-mask` workflow commands work.
+
+| `set-env` and `add-path` workflow commands
+| [.circle-red]#**Not supported**#
+| Disabled for security reasons, following link:https://github.com/advisories/GHSA-mfq2-61fr-9j23[CVE-2020-15228]. CircleCI logs a warning and does not apply the value. Use the `GITHUB_ENV` and `GITHUB_PATH` environment files instead. See <<actions-that-set-the-path,Actions That Set the Path>> for the effect this has on some common actions.
+
+| `set-output` and `save-state` workflow commands
+| **No effect**
+| Deprecated by GitHub, and silently consumed here. Use `GITHUB_OUTPUT` and `GITHUB_STATE`.
+
+| `add-matcher` and `remove-matcher` workflow commands
+| **No effect**
+| Silently consumed.
+
+| `background:`, `wait:`, `wait-all:`, `cancel:`, and `parallel:`
+| [.circle-red]#**Not supported**#
+| Not implemented.
+|===
+--
+
+For the contexts available in job conditions and step conditions, see <<available-contexts,Available Contexts>>.
+
+=== Actions
+
+[.table-scroll]
+--
+[cols="2,1,3", options="header"]
+|===
+| Feature
+| Support
+| What to know
+
+| Local actions (`./path`)
+| [.circle-amber]#**Partial**#
+| Resolved relative to the workspace, or relative to the path of the composite action calling them.
+
+| Public actions (`owner/repo@ref`)
+| [.circle-amber]#**Partial**#
+| Downloaded from GitHub and cached on disk.
+
+| Private actions
+| [.circle-red]#**Not supported**#
+| Private action sources cannot be reached.
+
+| JavaScript actions
+| [.circle-green]#**Supported**#
+| The `node16`, `node20`, and `node24` runtimes are supported.
+
+| Composite actions
+| [.circle-amber]#**Partial**#
+| Nesting is limited to 10 levels. Secrets are not available inside composite action children.
+
+| Docker actions
+| [.circle-amber]#**Partial**#
+| Linux only. A Dockerfile is built before the action runs. Prebuilt images are pulled anonymously, so private images are not available.
+
+| `uses: docker://` as a workflow step
+| [.circle-amber]#**Partial**#
+| Accepted as a direct step, as on GitHub Actions.
+
+| Pre and post steps
+| [.circle-green]#**Supported**#
+| The `pre-if` and `post-if` conditions work, and post steps run in reverse order.
+|===
+--
+
+[#environment-approval-gates]
+==== Environment approval gates
+
+When a job declares `environment:`, CircleCI inserts an approval job before it. Someone must approve the job in the CircleCI web app before the gated job starts.
+
+The gate is a hold on the pipeline rather than a reproduction of GitHub's environment protection rules. Read these limits before you rely on it:
+
+* **Reviewer identity is not checked.** Any project member with write access to the CircleCI project can approve. Named reviewers, team restrictions, and self-approval prevention are not enforced.
+* **Every environment is gated.** An environment with no protection rules in GitHub still holds the pipeline until someone approves it.
+* **A false `if:` condition still holds the pipeline.** The gated job runs once approved and then reports as skipped, so the pipeline waits for input either way.
+* **A matrix job gets one gate.** A single approval covers the whole fan-out.
+* **The object form needs a name.** An `environment:` block that sets only `url:` has no environment name to gate on, so CircleCI emits a warning and inserts no approval job.
+* **`wait_timer` and `deployment_branch_policy` are not translated.** Neither are deployment status URLs.
+
+Environment-scoped secrets and variables are not resolved separately from your other secrets and variables.
+
+[#actions-that-set-the-path]
+==== Actions that set the path
+
+Some widely used setup actions, including `actions/setup-python`, put a tool on the path by calling the `add-path` workflow command. That command is disabled, so the action itself succeeds, but later `run:` steps do not pick up the version it installed and fall back to whatever is already on the path.
+
+That silent difference is the most common way a workflow passes on CircleCI while doing something other than what you expect. If your workflow pins a tool version through a setup action, add the tool to `GITHUB_PATH` yourself, or set the full path in the steps that need it.
+
+=== Checkout, artifacts, and caching
+
+CircleCI intercepts these actions and handles them natively, so they work without needing GitHub's storage services.
+
+[.table-scroll]
+--
+[cols="2,1,3", options="header"]
+|===
+| Action
+| Support
+| What to know
+
+| `actions/upload-artifact`
+| [.circle-amber]#**Partial**#
+| All versions are intercepted. The `overwrite` and `include-hidden-files` inputs are rejected. The `retention-days` and `compression-level` inputs are accepted and ignored.
+
+| `actions/download-artifact`
+| [.circle-amber]#**Partial**#
+| The `name` input is required. The `pattern` and `merge-multiple` inputs are not supported, and downloading every artifact at once is not supported.
+
+| `actions/cache`
+| [.circle-amber]#**Partial**#
+| Restoring and saving both work. The `cache-hit` output always returns `false`, so a step that branches on `cache-hit` always takes the cache-miss path. The `fail-on-cache-miss`, `lookup-only`, and `enableCrossOsArchive` inputs are rejected.
+
+| `actions/cache/restore` and `actions/cache/save`
+| [.circle-amber]#**Partial**#
+| Subject to the same limits as `actions/cache`.
+|===
+--
+
+NOTE: `ACTIONS_RUNTIME_TOKEN` is not set. An action that expects this variable, such as the upstream JavaScript client behind `actions/cache`, does not find it.
+
+=== Reusable workflows
+
+[.table-scroll]
+--
+[cols="2,1,3", options="header"]
+|===
+| Feature
+| Support
+| What to know
+
+| Local calls (`./.github/workflows/...`)
+| [.circle-green]#**Supported**#
+| Resolved from your repository.
+
+| Public calls (`owner/repo/.github/workflows/ci.yml@ref`)
+| [.circle-amber]#**Partial**#
+| Resolved from GitHub when the workflow runs.
+
+| Inputs
+| [.circle-green]#**Supported**#
+| Static `boolean`, `number`, and `string` inputs work, and the `inputs.*` context is populated.
+
+| Call outputs
+| [.circle-red]#**Not supported**#
+| A called workflow cannot return outputs to its caller. A workflow that declares call outputs is rejected when it is parsed.
+
+| `secrets: inherit`
+| [.circle-red]#**Not supported**#
+| Pass secrets explicitly instead.
+
+| Private reusable workflows
+| [.circle-red]#**Not supported**#
+| Only local paths and public references are resolved.
+
+| Dynamic workflow paths
+| [.circle-red]#**Not supported**#
+| The path to a called workflow must be static.
+|===
+--
+
+=== Secrets, variables, and tokens
+
+[.table-scroll]
+--
+[cols="2,1,3", options="header"]
+|===
+| Feature
+| Support
+| What to know
+
+| `secrets.*`
+| [.circle-amber]#**Partial**#
+| Resolved from the job environment, matching names without regard to case. Set these values as project environment variables, as described in xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Set an Environment Variable in a Project]. Contexts are not used yet, because the translation cannot tell which context holds a given secret. Secrets are not available in `if:` conditions, or inside composite action children.
+
+| `vars.*`
+| [.circle-amber]#**Partial**#
+| Resolved from a single flat set of values. The organization, repository, and environment scoping that GitHub applies is not reproduced.
+
+| `GITHUB_TOKEN`
+| [.circle-amber]#**Partial**#
+| A GitHub App installation token, scoped to the job. Injected when `permissions:` is omitted, when `permissions.contents` has any value other than `none`, or when the global `*` scope has any non-zero value. Set `permissions: {}` or `permissions.contents: none` to withhold it.
+
+| `permissions` scopes
+| [.circle-amber]#**Partial**#
+| Only `contents` and `id-token` change behavior. Other scopes, such as `issues`, `pull-requests`, and `checks`, are accepted, but the token scope is not narrowed to match.
+
+| GitHub Packages, Releases, Checks, and Deployments
+| [.circle-red]#**Not supported**#
+| These GitHub services are not emulated.
+|===
+--
+
+[#oidc-tokens]
+=== OIDC tokens
+
+A job that declares `permissions: id-token: write`, or `permissions: write-all`, can request an OIDC token.
+
+[IMPORTANT]
+====
+**The tokens are issued by CircleCI, not by GitHub.** A trust policy that trusts GitHub's issuer rejects them. Migrate the OIDC trust relationship on your cloud provider, whether that is AWS IAM, Google Cloud Workload Identity, or Microsoft Entra ID.
+
+For the token format and the claims to trust, see the xref:permissions-authentication:openid-connect-tokens.adoc[Using OpenID Connect Tokens in Jobs] page.
+====
+
+OIDC tokens are not available to Docker action steps, or to any job that sets a job-level `container:` key. In both cases the step runs in a container that cannot reach the token endpoint on the host.
+
+=== Service containers
+
+Service containers work as they do on GitHub Actions. CircleCI starts them on a per-job Docker network before your steps run.
+
+[.table-scroll]
+--
+[cols="2,1,3", options="header"]
+|===
+| Feature
+| Support
+| What to know
+
+| `services:`
+| [.circle-green]#**Supported**#
+| The `image`, `credentials`, `env`, `ports`, `volumes`, `options`, `command`, and `entrypoint` keys all work.
+
+| Health checks
+| [.circle-green]#**Supported**#
+| A service with a Docker health check must report healthy before your steps run.
+
+| Port mapping
+| [.circle-green]#**Supported**#
+| Published ports are available through the `job.services.<id>.ports[<port>]` context.
+
+| Registry credentials
+| [.circle-green]#**Supported**#
+| CircleCI logs in to your registry before pulling the image.
+|===
+--
+
+[#available-contexts]
+=== Available contexts
+
+Contexts are available in different places depending on whether you use them in a job condition or a step condition. The table below shows where each context can be used, not how completely it is populated. The `github` and `github.event` contexts are both partial, so read <<the-github-context,GitHub Context Values>> and <<the-github-event-context,Event Payload Values>> before relying on a specific key.
+
+[.table-scroll]
+--
+[cols="2,1,1", options="header"]
+|===
+| Context
+| Job `if`
+| Step `if`
+
+| `github.*`
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+| `github.event.*`
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+| `runner.os`, `runner.arch`, `runner.name`, and `runner.temp`
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+| `needs.<job>.result` and `needs.<job>.outputs.<name>`
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+| `matrix.<name>`
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+| `vars.<name>`
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+| `inputs.<name>`
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+| `job.status`
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+| `steps.<id>.outcome`, `steps.<id>.conclusion`, and `steps.<id>.outputs.<name>`
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+
+| `env.<name>`
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+
+| `job.services.<service>.ports[<port>]`
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+
+| `strategy.*`
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+
+| `secrets.*`
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+|===
+--
+
+[#the-github-context]
+==== GitHub context values
+
+CircleCI derives the `github` context from your pipeline, so most keys hold the value you would expect and a few differ.
+
+[.table-scroll]
+--
+[cols="2,3", options="header"]
+|===
+| Key
+| Value
+
+| `github.repository`, `github.repository_owner`, `github.repository_id`
+| Your repository, its owner, and its ID.
+
+| `github.repositoryUrl`
+| The `git://github.com/<owner>/<repo>.git` form, matching GitHub.
+
+| `github.sha`
+| The full 40-character SHA of the commit CircleCI checked out.
+
+| `github.ref`, `github.ref_name`, `github.ref_type`
+| The tag when the pipeline was triggered by a tag, and the branch otherwise.
+
+| `github.base_ref`, `github.head_ref`
+| The base and head branches. Populated for pull request events only.
+
+| `github.actor`, `github.triggering_actor`
+| The GitHub user who triggered the pipeline. Both hold the same value.
+
+| `github.event_name`
+| The translated event name. See <<how-circleci-triggers-your-workflow,How CircleCI Triggers Your Workflow>>.
+
+| `github.workflow`
+| The `name` from your workflow file.
+
+| `github.run_id`, `github.run_number`
+| The CircleCI pipeline ID and pipeline number.
+
+| `github.server_url`, `github.api_url`, `github.graphql_url`
+| Always the `github.com` values.
+
+| `github.token`
+| The `GITHUB_TOKEN` for the job, when the permission gate allows one.
+|===
+--
+
+The following keys have no CircleCI equivalent and keep their default values: `github.actor_id`, `github.repository_owner_id`, `github.ref_protected`, `github.run_attempt`, and `github.secret_source`. `github.retention_days` is always `90`.
+
+Four differences can change how a workflow behaves:
+
+* **`github.event_name` can be empty.** CircleCI does not guess an event name it cannot translate, so a condition such as `if: github.event_name == 'push'` is false rather than wrongly true on those pipelines. Handle the empty value if your workflow branches on the trigger.
+* **`github.run_id` is a UUID, not a number.** CircleCI's pipeline ID is a UUID and has no numeric equivalent, so a workflow that does arithmetic on `github.run_id` does not work here.
+* **On a pull request, the refs describe the head branch.** GitHub sets `github.ref` to `refs/pull/<number>/merge` and `github.sha` to an ephemeral merge commit. CircleCI checks out the head branch instead, so `github.ref` is `refs/heads/<head-branch>` and `github.sha` is the head SHA. Use `github.event_name == 'pull_request'` with `github.base_ref` and `github.head_ref` rather than testing for `refs/pull/`.
+* **The GitHub URLs are always `github.com`.** GitHub Enterprise Server is not supported.
+
+[#the-github-event-context]
+==== Event payload values
+
+For push and pull request pipelines, CircleCI builds a partial event payload and writes it to the path in `GITHUB_EVENT_PATH`. Both `${{ github.event.* }}` expressions and shell steps that read the file see real values. For schedule, API, and custom webhook pipelines there is no payload, and `github.event.*` returns an empty string.
+
+* **Push events** populate `ref`, `after`, and `sender.login`.
+* **Pull request events** populate `action`, `number`, `sender.login`, and `pull_request.number`, `.title`, `.url`, `.draft`, `.head.ref`, `.head.sha`, `.base.ref`, and `.base.sha`.
+
+A field whose value is absent is left out of the payload rather than set to an empty value. A condition such as `if: github.event.pull_request.draft == false` therefore works on a pull request that does not supply the field.
+
+Everything else is unavailable. That includes `commits`, `head_commit`, `before`, and `pusher` on a push, and `body`, `state`, `labels`, `user.login`, `mergeable`, `requested_reviewers`, and the `repository` sub-objects on a pull request.
+
+
+=== Limits
+
+[.table-scroll]
+--
+[cols="2,1", options="header"]
+|===
+| Item
+| Limit
+
+| Matrix instances per job
+| 256
+
+| Jobs in a workflow
+| 255
+
+| Steps per job
+| 256
+
+| Nested composite action depth
+| 10 levels
+
+| Job dependency graph depth
+| 20 levels
+
+| Job or step timeout
+| 360 minutes
+
+| Expression length
+| 21,000 characters
+
+| Expression depth
+| 50 nodes
+|===
+--

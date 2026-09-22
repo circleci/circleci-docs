@@ -279,6 +279,7 @@ Playwright
 Podfile
 PostgreSQL
 PowerShell
+Entra
 [Vv]iewports?
 PRs
 [Pp]re
