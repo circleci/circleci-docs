@@ -164,7 +164,7 @@ A packaged system that includes the instructions for creating a running <<contai
 
 == Insights
 
-CircleCI's dashboards that report time-series and aggregated data on credit usage, success rates, duration, and test performance across your projects, workflows, jobs, and tests. See the xref:guides:insights:insights.adoc[Insights] page and the xref:guides:insights:insights-glossary.adoc[Insights Metrics Glossary] for metric definitions such as throughput, P95 duration, and mean time to recovery.
+CircleCI's dashboards that report time-series and aggregated data on credit usage, success rates, duration, and test performance across your projects, workflows, jobs, and tests. See the xref:guides:insights:insights.adoc[Insights] page and the xref:reference:ROOT:insights-glossary.adoc[Insights Metrics Glossary] for metric definitions such as throughput, P95 duration, and mean time to recovery.
 
 == IP ranges
 

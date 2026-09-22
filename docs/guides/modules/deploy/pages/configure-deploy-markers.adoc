@@ -134,7 +134,7 @@ This section covers how to set up deploy markers by editing your CircleCI config
 * <<deploy-markers-with-status-updates,With status updates>>: Track the full lifecycle of your deployments (pending, running, success, failed, canceled).
 * <<deploy-marker-logs-without-status-updates,Without status updates>>: Log deployments in the deploys UI without tracking their status.
 
-NOTE: The `circleci run release` commands are part of the CircleCI environment CLI. They are only available in CircleCI builds and are not part of the CircleCI local CLI. You do not need to install the CircleCI local CLI in your CircleCI pipeline to use these commands. See also the full xref:toolkit:environment-cli-usage-guide.adoc[Environment CLI Usage Guide].
+NOTE: The `circleci run release` commands are part of the CircleCI environment CLI. They are only available in CircleCI builds and are not part of the CircleCI local CLI. You do not need to install the CircleCI local CLI in your CircleCI pipeline to use these commands. See also the full xref:reference:ROOT:environment-cli-usage-guide.adoc[Environment CLI Usage Guide].
 
 === Prerequisites
 
