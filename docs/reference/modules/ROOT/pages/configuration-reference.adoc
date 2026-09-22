@@ -4255,4 +4255,4 @@ options:
   max-auto-rerun: 2
 ----
 
-For every key you can set in this file, see the xref:guides:test:testsuite-configuration-reference.adoc[Testsuite Configuration Reference] page.
+For every key you can set in this file, see the xref:testsuite-configuration-reference.adoc[Testsuite Configuration Reference] page.
