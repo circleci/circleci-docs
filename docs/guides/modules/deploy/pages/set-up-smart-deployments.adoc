@@ -9,6 +9,8 @@ Smart Deployments is the CircleCI continuous validation feature. For more inform
 
 The guided setup configures deploy markers, release validation, rollback and deploy pipelines, and automatic rollback in one flow. It replaces working through the deploy marker, rollback pipeline, and deploy pipeline guides separately.
 
+TIP: You can use the xref:guides:toolkit:circleci-agent-skills.adoc[CircleCI Agent Skills] to run this setup from your editor instead of the web app. Install the link:https://github.com/CircleCI-Public/skills[CircleCI Public Skills] plugin to your AI coding agent, then ask your agent to set up deploy markers, pipelines, and release validation for your project. The `circleci-deploy-setup` skill does not depend on your organization's AI settings, so it can generate configuration and open a pull request when the guided setup cannot.
+
 [#setup-routes]
 == Setup routes
 

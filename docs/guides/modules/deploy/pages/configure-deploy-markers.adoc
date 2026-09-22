@@ -41,6 +41,8 @@ You can set up deploy markers in two ways:
 
 You can also set up deploy markers using AI as part of the rollback or deploy pipeline guided setup process. See the xref:set-up-rollbacks.adoc[Set Up Rollbacks] or xref:set-up-deploys.adoc[Set Up Deploys] guides for more details.
 
+TIP: You can use the xref:guides:toolkit:circleci-agent-skills.adoc[CircleCI Agent Skills] to add deploy markers from your editor. Install the link:https://github.com/CircleCI-Public/skills[CircleCI Public Skills] plugin to your AI coding agent, then ask your agent to set up deploy markers for your project. The `circleci-deploy-setup` skill edits your configuration file and opens a pull request, and does not depend on your organization's AI settings.
+
 [#set-up-deploy-markers-for-multiple-projects]
 == Set up deploy markers from the web app
 
