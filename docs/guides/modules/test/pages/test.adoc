@@ -119,24 +119,21 @@ More information is available on the xref:insights:insights-tests.adoc[Test Insi
 [#smarter-testing]
 == Get started with Smarter Testing (`circleci testsuite`)
 
-`circleci testsuite` is CircleCI's preferred way to run tests, for all customers. It supports the same test discovery, running, and splitting capabilities as the legacy `circleci tests` command family, plus additional commands and the Smarter Testing features described below. It is currently available in Cloud only; Server projects continue to use the <<legacy-test-command,legacy `circleci tests` commands>> for now.
+NOTE: `circleci testsuite` is currently available on Cloud only. If you are on CircleCI Server, use the <<legacy-test-command,legacy `circleci tests` commands>> instead.
 
-`circleci testsuite` is driven by a single command and a `.circleci/test-suites.yml` configuration file that describes how to discover and run your tests. Setup has two parts:
+`circleci testsuite` is CircleCI's preferred way to run tests. It supports the same test discovery, running, and splitting capabilities as the legacy `circleci tests` command family, plus additional commands and the Smarter Testing features described below. It is driven by a single command and a `.circleci/test-suites.yml` file that describes how to discover and run your tests.
 
-. Configure `.circleci/test-suites.yml` to discover and run your tests.
-. Replace your existing test command with `circleci testsuite run`.
+. *Install the CircleCI CLI locally.* Download and install the link:https://cli.circleci.com/[CircleCI CLI, window=_blank] to validate your setup before pushing. Note that this is the CircleCI toolkit CLI, separate from the environment CLI that is injected automatically into every CI job. No install is needed in CI.
 
-To validate your setup locally, ensure the link:https://cli.circleci.com/[latest CircleCI CLI, window=_blank] is installed. The CLI is already available in CI, so no install is needed there.
-
-Use the `doctor` command to set up and validate `test-suites.yml` for a new project:
-
+. *Set up `test-suites.yml`.* Run the `doctor` command in your project root to generate and validate a `.circleci/test-suites.yml` file:
++
 [,shell]
 ----
 circleci testsuite doctor "ci tests"
 ----
 
-Then, in the job you built in <<basics,Basics>>, replace `command: npm test` with `circleci testsuite run`, keeping the rest of the job the same:
-
+. *Replace your test command.* In the job you built in <<basics,Basics>>, replace `command: npm test` with `circleci testsuite run`:
++
 [,yaml]
 ----
 jobs:
@@ -155,8 +152,8 @@ jobs:
           path: test-reports
 ----
 
-Once a project runs tests through `circleci testsuite`, each feature can be turned on independently with an `options` block in `test-suites.yml`:
-
+. *Enable features (optional).* Turn on Smarter Testing features individually with an `options` block in `test-suites.yml`:
++
 [,yaml]
 ----
 test-suites:
