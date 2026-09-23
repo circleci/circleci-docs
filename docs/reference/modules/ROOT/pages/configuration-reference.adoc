@@ -676,14 +676,14 @@ jobs:
 
 Use this feature to optimize test steps. If you set `parallelism` to N > 1, CircleCI sets up N independent executors, and each runs the job's steps in parallel.
 
-You can use the CircleCI CLI to split your test suite across parallel containers so the job completes in a shorter time.
+On CircleCI Cloud, use `circleci testsuite` to run and split your test suite across parallel containers; on CircleCI Server, use the CircleCI CLI's `circleci tests` commands.
 
 * Read more about splitting tests across parallel execution environments on the xref:guides:optimize:parallelism-faster-jobs.adoc#[Parallelism and Test Splitting] page.
 * Refer to the xref:guides:optimize:use-the-circleci-cli-to-split-tests.adoc#[Use the CircleCI CLI to Split Tests] how-to guide.
 
 [tabs]
 ====
-Use an integer::
+Cloud::
 +
 --
 [,yaml]
@@ -698,10 +698,13 @@ jobs:
     resource_class: large
     working_directory: ~/my-app
     steps:
-      - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --" --split-by=timings --timings-type=name
+      - run: circleci testsuite run "ci tests"
+      - store_test_results:
+          # Must match outputs.junit in test-suites.yml
+          path: test-reports
 ----
 --
-Use an expression::
+Server::
 +
 --
 [,yaml]
@@ -712,14 +715,21 @@ jobs:
       - image: cimg/base:2024.12
     environment:
       FOO: bar
-    parallelism: << pipeline.git.branch == "main" and 10 or 1 >>
+    parallelism: 3
     resource_class: large
     working_directory: ~/my-app
     steps:
-      - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --" --split-by=timings --timings-type=name
+      - run: go test -v $(go list ./... | circleci tests split --split-by=timings --timings-type=name)
 ----
 --
 ====
+
+`parallelism` also accepts a pipeline value expression instead of a plain integer, for example to vary the number of parallel executors by branch:
+
+[,yaml]
+----
+parallelism: << pipeline.git.branch == "main" and 10 or 1 >>
+----
 '''
 
 [#parameters-job]

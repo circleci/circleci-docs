@@ -369,6 +369,8 @@ jobs:
 
 A subcommand of `tests`. The `circleci tests run` command splits and runs tests.
 
+NOTE: `circleci tests run` is available on CircleCI Cloud only. It is *not* supported on CircleCI Server. If you are on CircleCI Server, use `circleci tests split` (above) instead.
+
 *Flags*
 
 [.table-scroll]

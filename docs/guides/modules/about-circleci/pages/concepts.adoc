@@ -444,10 +444,15 @@ See xref:orbs:use:orb-concepts.adoc[Using Orbs] for details on how to use orbs i
 
 The more tests your project involves, the longer it takes for them to complete on a single machine. Using _test splitting_ and _parallelism_, you can spread your tests across a specified number of separate executors.
 
-You conventionally define test suites at the xref:orchestrate:jobs-steps.adoc[Job] level in your `.circleci/config.yml` file. The `parallelism` key specifies how CircleCI sets up independent executors to run the steps of a job. You can use the `circleci tests` commands to split your test suite to run across your parallel executors.
+You conventionally define test suites at the xref:orchestrate:jobs-steps.adoc[Job] level in your `.circleci/config.yml` file. The `parallelism` key specifies how CircleCI sets up independent executors to run the steps of a job. On CircleCI Cloud, use `circleci testsuite` to run and split your tests across your parallel executors; on CircleCI Server, use the `circleci tests` commands.
 
 To run a job's steps in parallel, set the `parallelism` key to a value greater than `1`.
 
+[tabs]
+====
+Cloud::
++
+--
 [,yaml]
 ----
 jobs:
@@ -457,8 +462,28 @@ jobs:
     parallelism: 4
     resource_class: large
     steps:
-      - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --" --split-by=timings --timings-type=name
+      - run: circleci testsuite run "ci tests"
+      - store_test_results:
+          # Must match outputs.junit in test-suites.yml
+          path: test-reports
 ----
+--
+Server::
++
+--
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/go:1.18.1
+    parallelism: 4
+    resource_class: large
+    steps:
+      - run: go test -v $(go list ./... | circleci tests split --split-by=timings --timings-type=name)
+----
+--
+====
 
 .Executor types with parallelism
 image::guides:ROOT:executor_types_plus_parallelism.png[Executor types with parallelism]
