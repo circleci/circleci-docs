@@ -1,0 +1,147 @@
+= Fix broken builds efficiently with agents
+:page-platform: Cloud
+:page-description: Use --failure-report with circleci run get to retrieve condensed output for every failed step in a single call, reducing token costs in AI agent workflows.
+:experimental:
+:page-show-readtime: true
+
+The `--failure-report` flag on `circleci run get` returns condensed output for every failed step in a run with a single call. For multi-failure runs, this saves round trips. Instead of fetching each step's log in a separate call, you retrieve all failure context at once. This saves tokens and speeds up failure diagnosis.
+
+== When to use this approach
+
+[.table-scroll]
+--
+[cols="1,1", options="header"]
+|===
+| Use `--failure-report` | Use a different approach
+
+| A run has multiple failed steps. One call replaces what would otherwise be several sequential log fetches.
+| Only one step failed. Use `circleci run get <run-id>` to open the run and drill into the failed step directly.
+
+| A workflow runs jobs in parallel and more than one job fails. The report surfaces all failures together instead of requiring a lookup per job.
+| You need the full, uncut log for one step, such as a long stack trace or verbose test output. Use `circleci run get <run-id>` to navigate to that step and page through its full output.
+
+| An AI agent is diagnosing the failure. Agents that fetch context turn-by-turn pay a token cost per round trip. A single consolidated call avoids that overhead.
+| You are investigating a flaky test across multiple runs. `--failure-report` applies to a single run. Use xref:guides:insights:insights-tests.adoc[Test Insights] to analyze failure patterns across runs.
+
+| You need a first-pass triage. Condensed output is enough to identify the failing area and decide next steps.
+| The run is still in progress, was canceled, or succeeded with a warning. Check the run status with `circleci run get <run-id>` first. `--failure-report` only returns data for completed failed runs.
+
+| You are piping failure context into an automated notification, such as a Slack message or ticket.
+|
+
+|===
+--
+
+== Prerequisites
+
+Before you use `--failure-report`, make sure you have:
+
+* The CircleCI CLI installed and authenticated. See xref:circleci-cli.adoc[The CircleCI CLI].
+* Access to the run you want to query.
+
+== Let your agent run the command
+
+The recommended approach is the CircleCI CLI MCP server. Once enabled, your agent can call `run get --failure-report` as a native tool call with no shell execution required. The CLI builds its MCP tool tree directly from its full command set, so `--failure-report` is available as a proper tool parameter.
+
+.Enable the CircleCI CLI MCP server for Claude Code
+[source,console]
+----
+$ circleci mcp claude enable
+----
+
+See xref:connecting-to-the-circleci-cli-mcp.adoc[Connecting to the CircleCI CLI MCP] for setup instructions for other agents.
+
+If your agent has shell access instead of the CLI MCP, it can run `circleci run get --failure-report` as a shell command. Both approaches work. The CLI MCP is the cleaner agentic pattern.
+
+If you use CircleCI agent skills, the skills manage the diagnosis workflow. See xref:circleci-agent-skills.adoc[CircleCI Agent Skills].
+
+== Run the commands yourself
+
+If your agent is in a chat interface without shell access, run the following commands in your terminal and paste the output into your agent conversation.
+
+=== 1. Find your run ID
+
+Use the CLI to look up the run ID. The `-q` flag applies a jq filter to the JSON output:
+
+.Return IDs of failed runs on the main branch
+[source,console]
+----
+$ circleci run list --json -q '.[] | select(.branch=="main" and .status=="failed") | .id'
+----
+
+This outputs one UUID per line. Adjust the `branch` and `status` values as needed. You can also copy the run ID from the run's URL in the CircleCI dashboard, or retrieve it from an API response.
+
+=== 2. Run the command
+
+.Get condensed failure output for a run
+[source,console]
+----
+$ circleci run get --failure-report <run-id>
+----
+
+Replace `<run-id>` with your run's UUID.
+
+=== 3. Read the output
+
+The CLI returns condensed output for each failed step. The output groups failures by workflow, job, and step, with the exit code and a condensed log excerpt for each:
+
+.Example output
+----
+## workflow: build-and-test
+
+### job: test
+
+#### step 4: Run tests [exit: 1]
+
+FAIL github.com/example/myapp/pkg/auth (0.43s)
+--- FAIL: TestLogin (0.02s)
+    auth_test.go:42: expected status 200, got 401
+FAIL
+
+#### step 5: Upload test results [exit: 1]
+
+Error: no test result files found matching './test-results/**/*.xml'
+
+### job: lint
+
+#### step 2: Run golangci-lint [exit: 1]
+
+pkg/api/handler.go:87:2: `err` declared and not used (typecheck)
+----
+
+Each entry gives you enough context to identify the cause and decide whether to investigate further with a full log fetch.
+
+== Why --failure-report is more efficient
+
+For an AI agent, each log fetch is a separate tool call with its own overhead. The benefit of `--failure-report` grows with the number of failures:
+
+* One failed step: minimal difference. A single log fetch does the same work either way.
+* Several failed steps: the benefit grows with each additional failure, since `--failure-report` replaces what would otherwise be one round trip per step.
+* Parallel jobs with multiple failures: savings compound further, since each failed job would otherwise need its own sequence of log fetches.
+
+CircleCI has observed 70 to 90% token savings in practice, compared to fetching each failed step's log individually. This figure comes from internal usage while building agent tooling for the CircleCI CLI, not a controlled benchmark. Treat it as directional rather than a guarantee for any specific run.
+
+== Troubleshooting
+
+=== Command not found
+
+The CLI is not installed, or is not on your PATH. Reinstall it and confirm it resolves in your terminal. See xref:circleci-cli.adoc[The CircleCI CLI].
+
+=== Unauthorized or invalid token
+
+Re-run `circleci auth login`, or confirm `CIRCLE_TOKEN` is set in your environment.
+
+=== Run not found
+
+Use `circleci run list` to retrieve the correct run ID rather than typing it from memory.
+
+=== No output returned
+
+The run may not have failed. Use `circleci run get <run-id>` to check the run's status. The `--failure-report` flag only returns output for completed failed runs.
+
+== Next steps
+
+* xref:circleci-cli.adoc[The CircleCI CLI]
+* xref:connecting-to-the-circleci-cli-mcp.adoc[Connecting to the CircleCI CLI MCP]
+* xref:circleci-agent-skills.adoc[CircleCI Agent Skills]
+* xref:guides:insights:insights-tests.adoc[Test Insights]

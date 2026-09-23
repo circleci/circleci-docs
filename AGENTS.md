@@ -92,6 +92,14 @@ All pages require standard attributes (`:page-platform:`, `:page-description:`, 
   - When separating a series of long or complex items that contain their own punctuation.
     - Recommended: Review the page one more time, checking for the following: present tense and active voice; typos, punctuation, and grammar; and whether you can shorten anything.
 
+### Colons
+- **Avoid mid-sentence colons** to introduce an explanation or continuation. Prefer a new sentence.
+  - Not recommended: This saves round trips: instead of fetching each step's log in a separate call, you retrieve all failure context at once.
+  - Recommended: This saves round trips. Instead of fetching each step's log in a separate call, you retrieve all failure context at once.
+- Use a colon to introduce a list, a code block, or a table.
+- Use a colon to separate an item and its description (not a dash).
+  - Recommended: Resource class: The compute size assigned to a job.
+
 ### Dashes
 - **Avoid dashes** (en or em) to split sentences. Prefer a new sentence, or use commas and periods.
 - If you use an em dash (—) to indicate a break in a sentence, do not put a space before or after it. Do not use an en dash or a hyphen in place of an em dash.
