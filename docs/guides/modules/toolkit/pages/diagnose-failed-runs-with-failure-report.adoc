@@ -41,7 +41,7 @@ Before you use `--failure-report`, make sure you have:
 
 == 1. Find your run ID
 
-Copy the run ID from the run's URL in the CircleCI dashboard, or retrieve it from an API response. You can also query for it with the CLI. The `-q` flag applies a jq filter to the JSON output:
+Use the CLI to look up the run ID. The `-q` flag applies a jq filter to the JSON output:
 
 .Return IDs of failed runs on the main branch
 [source,console]
@@ -49,7 +49,7 @@ Copy the run ID from the run's URL in the CircleCI dashboard, or retrieve it fro
 $ circleci run list --json -q '.[] | select(.branch=="main" and .status=="failed") | .id'
 ----
 
-This outputs one UUID per line. Adjust the `branch` and `status` values as needed.
+This outputs one UUID per line. Adjust the `branch` and `status` values as needed. You can also copy the run ID from the run's URL in the CircleCI dashboard, or retrieve it from an API response.
 
 == 2. Run the command
 
