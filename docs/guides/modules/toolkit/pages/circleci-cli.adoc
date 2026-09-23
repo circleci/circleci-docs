@@ -1,10 +1,15 @@
 = The CircleCI CLI
-:page-platform: Cloud
+:page-platform: Cloud, Server v4+
 :page-description: A guide to the CircleCI CLI with links to setup guides, a ful reference and how-to guides for common tasks.
 :experimental:
 :page-aliases: local-cli.adoc, how-to-use-the-circleci-local-cli.adoc
 
 The link:https://cli.circleci.com/[CircleCI command line interface (CLI)] brings CircleCI's tooling to your terminal.
+
+[NOTE]
+====
+*Using CircleCI Server?* CLI v1 is not supported for CircleCI Server. Install CLI v0 instead. See <<install-cli-v0-for-circleci-server,Install CLI v0 for CircleCI Server>>.
+====
 
 == Quickstart
 
@@ -210,6 +215,46 @@ The CircleCI CLI:: The development tool used on your local machine for day-to-da
 The CircleCI environment CLI:: A specialized command-line interface that retrieves and configures a task. It manages the execution of the job within a chosen compute environment.
 
 The Chunk CLI:: A developer tool that brings AI-powered code review and remote validation to your local workflow. The `chunk` CLI works with AI coding agents such as Claude Code, Cursor, and VS Code Copilot.
+
+== Install CLI v0 for CircleCI Server
+
+CLI v1 works with CircleCI Cloud only. If you use CircleCI Server, install CLI v0 instead using one of the following methods.
+
+=== Install with Homebrew
+
+If you use link:https://brew.sh/[Homebrew] on macOS or Linux, install CLI v0 with the following command:
+
+[,shell]
+----
+brew install circleci-public/circleci/circleci@v0
+----
+
+This installs a `circleci-v0` binary, so it can coexist with a CLI v1 `circleci` installation.
+
+=== Install with the install script
+
+On macOS and Linux, set the `VERSION` environment variable to pin the install script to the latest v0 release:
+
+[,shell]
+----
+VERSION=0.1.47860 curl -fsSL https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/main/install.sh | bash
+----
+
+This installs a `circleci-v0` binary to `/usr/local/bin` by default.
+
+=== Manual install
+
+Download the archive for your platform, including Windows, from the link:https://github.com/CircleCI-Public/circleci-cli/releases/tag/v0.1.47860[v0.1.47860 release] page on GitHub.
+
+=== Reference documentation for CLI v0
+
+CLI v0 does not have a hosted reference site. Add `--help` to any `circleci-v0` command at any depth to see its description, flags, and examples:
+
+[,shell]
+----
+circleci-v0 --help
+circleci-v0 config --help
+----
 
 == Next steps
 
