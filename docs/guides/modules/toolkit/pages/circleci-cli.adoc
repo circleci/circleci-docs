@@ -220,6 +220,66 @@ The Chunk CLI:: A developer tool that brings AI-powered code review and remote v
 
 CLI v1 works with CircleCI Cloud only. If you use CircleCI Server, install CLI v0 instead using one of the following methods.
 
+=== What you can do with CLI v0
+
+The following table summarizes the top-level commands available in CLI v0.
+
+[.table-scroll]
+--
+[cols="1,2", options="header"]
+|===
+| Command
+| What it does
+
+| `config`
+| Validate, pack, and process build config files.
+
+| `context`
+| Secure and share environment variables across projects.
+
+| `diagnostic`
+| Check the status of your CircleCI CLI.
+
+| `info`
+| Check information associated with your user account.
+
+| `local`
+| Debug and run jobs on your local machine.
+
+| `namespace`
+| Operate on orb namespaces.
+
+| `orb`
+| Create, publish, validate, and manage orbs.
+
+| `pipeline`
+| Operate on pipelines.
+
+| `policy`
+| Manage security policies.
+
+| `project`
+| Operate on projects.
+
+| `runner`
+| Operate on self-hosted runners.
+
+| `setup`
+| Set up the CLI with your credentials.
+
+| `telemetry`
+| Configure telemetry preferences.
+
+| `trigger`
+| Operate on triggers.
+
+| `version`
+| Display version information.
+|===
+--
+
+The table does not cover every command. Run `circleci-v0 --help` to see the full command list.
+
 === Install with Homebrew
 
 If you use link:https://brew.sh/[Homebrew] on macOS or Linux, install CLI v0 with the following command:
