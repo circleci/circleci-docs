@@ -39,7 +39,27 @@ Before you use `--failure-report`, make sure you have:
 * The CircleCI CLI installed and authenticated. See xref:circleci-cli.adoc[The CircleCI CLI].
 * Access to the run you want to query.
 
-== 1. Find your run ID
+== Let your agent run the command
+
+The recommended approach is the CircleCI CLI MCP server. Once enabled, your agent can call `run get --failure-report` as a native tool call with no shell execution required. The CLI builds its MCP tool tree directly from its full command set, so `--failure-report` is available as a proper tool parameter.
+
+.Enable the CircleCI CLI MCP server for Claude Code
+[source,console]
+----
+$ circleci mcp claude enable
+----
+
+See xref:connecting-to-the-circleci-cli-mcp.adoc[Connecting to the CircleCI CLI MCP] for setup instructions for other agents.
+
+If your agent has shell access instead of the CLI MCP, it can run `circleci run get --failure-report` as a shell command. Both approaches work. The CLI MCP is the cleaner agentic pattern.
+
+If you use CircleCI agent skills, the skills manage the diagnosis workflow. See xref:circleci-agent-skills.adoc[CircleCI Agent Skills].
+
+== Run the commands yourself
+
+If your agent is in a chat interface without shell access, run the following commands in your terminal and paste the output into your agent conversation.
+
+=== 1. Find your run ID
 
 Use the CLI to look up the run ID. The `-q` flag applies a jq filter to the JSON output:
 
@@ -51,7 +71,7 @@ $ circleci run list --json -q '.[] | select(.branch=="main" and .status=="failed
 
 This outputs one UUID per line. Adjust the `branch` and `status` values as needed. You can also copy the run ID from the run's URL in the CircleCI dashboard, or retrieve it from an API response.
 
-== 2. Run the command
+=== 2. Run the command
 
 .Get condensed failure output for a run
 [source,console]
@@ -61,7 +81,7 @@ $ circleci run get --failure-report <run-id>
 
 Replace `<run-id>` with your run's UUID.
 
-== 3. Read the output
+=== 3. Read the output
 
 The CLI returns condensed output for each failed step. The output groups failures by workflow, job, and step, with the exit code and a condensed log excerpt for each:
 
@@ -90,30 +110,6 @@ pkg/api/handler.go:87:2: `err` declared and not used (typecheck)
 ----
 
 Each entry gives you enough context to identify the cause and decide whether to investigate further with a full log fetch.
-
-== Use with an AI agent
-
-Once you have run `circleci run get --failure-report <run-id>`, you have two ways to get that output to your AI agent for analysis.
-
-=== Run the command yourself and share the output
-
-If your agent is in a chat interface without shell access, run the command from the previous section in your terminal. Then paste the output into your conversation with the agent.
-
-=== Let your agent run the command directly
-
-The recommended way to give your agent access to `--failure-report` is the CircleCI CLI MCP server. The CLI builds its MCP tool tree directly from its full command set, so `run get --failure-report` is available as a proper MCP tool call with no shell execution required. Enable it with one command:
-
-.Enable the CircleCI CLI MCP server for Claude Code
-[source,console]
-----
-$ circleci mcp claude enable
-----
-
-See xref:connecting-to-the-circleci-cli-mcp.adoc[Connecting to the CircleCI CLI MCP] for setup instructions for other agents.
-
-If your agent has shell access instead of the CLI MCP, it can run `circleci run get --failure-report` as a shell command. Both approaches work. The CLI MCP is the cleaner agentic pattern.
-
-If you use CircleCI agent skills, the skills manage the diagnosis workflow. See xref:circleci-agent-skills.adoc[CircleCI Agent Skills].
 
 == Why --failure-report is more efficient
 
