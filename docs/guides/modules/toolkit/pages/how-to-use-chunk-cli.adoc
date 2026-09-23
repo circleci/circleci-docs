@@ -23,18 +23,52 @@ CAUTION: Chunk sidecars are available in preview on all CircleCI plans. The prod
 
 Chunk sidecars run your quality checks in a CircleCI Cloud environment that matches your CI pipeline, catching failures that do not reproduce locally.
 
-The easiest way to get started is to ask your AI agent. For first-time setup, say "set up chunk sidecar" or type `/chunk-sidecar-setup`. For ongoing validation, say "validate on the sidecar" or type `/chunk-sidecar`. The skills handle auth, sidecar creation, file sync, and validation automatically.
+TIP: Use `chunk watch` for a live dashboard of sidecar status and recent activity. Pass `--focus` to limit it to the current directory.
 
-To set up from the CLI instead, run:
+[tabs]
+====
+Using an agent::
++
+--
+For first-time setup, say "set up chunk sidecar" or type `/chunk-sidecar-setup` in Claude Code. The skill walks you through auth, org ID, sidecar creation, and dependency setup, then creates a reusable snapshot.
+
+For ongoing validation once a sidecar is configured, say "validate on the sidecar" or type `/chunk-sidecar`. The skill syncs your files, runs your validation commands, and loops until checks pass.
+--
+
+Using the CLI::
++
+--
+**One-command setup** — detects your tech stack, syncs files, runs install steps, and creates a snapshot:
 
 [source,console]
 ----
 $ chunk sidecar setup --name <name>
 ----
 
-This detects your tech stack, syncs your files, runs install steps, and creates a snapshot — all in one step. After the first run, the CLI saves the detected environment to `.chunk/config.json` and reuses it automatically. Pass `--force` to re-detect.
+The CLI saves the detected environment to `.chunk/config.json` and reuses it on future runs. Pass `--force` to re-detect.
 
-TIP: Use `chunk watch` for a live dashboard of sidecar status and recent activity. Pass `--focus` to limit it to the current directory.
+**Step-by-step** — for more control:
+
+[source,console]
+----
+# Create a sidecar and set it as active
+$ chunk sidecar create --name <name>
+$ chunk sidecar use <sidecar-id>
+
+# Sync your local files and validate remotely
+$ chunk sidecar sync
+$ chunk validate --remote
+
+# SSH in if you need to debug a failure
+$ chunk sidecar ssh
+
+# Snapshot the configured sidecar for faster future starts
+$ chunk sidecar snapshot create --name <snapshot-name>
+----
+
+CAUTION: `chunk sidecar snapshot create` deletes the source sidecar after the snapshot finishes. Launch a new sidecar from the snapshot with `chunk sidecar create --image <snapshot-id>` to resume work.
+--
+====
 
 [#manage-sidecars]
 === Sidecar command reference
@@ -70,8 +104,6 @@ TIP: Use `chunk watch` for a live dashboard of sidecar status and recent activit
 |`chunk sidecar list`
 |===
 --
-
-CAUTION: `chunk sidecar snapshot create` deletes the source sidecar after the snapshot finishes. Launch a new sidecar from the snapshot with `chunk sidecar create --image <snapshot-id>` to resume work.
 
 For the full sidecar command reference, see the link:https://github.com/CircleCI-Public/chunk-cli/blob/main/docs/CLI.md[Chunk CLI reference, window=_blank].
 
