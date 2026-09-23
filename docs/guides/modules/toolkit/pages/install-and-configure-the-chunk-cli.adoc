@@ -186,7 +186,7 @@ The following skills are available:
 
 |`chunk-sidecar-setup`
 |"set up chunk sidecar", "walk me through sidecar setup"
-|Interactive first-time onboarding wizard: auth, org ID, sidecar creation, dependency installation, and snapshotting.
+|Interactive first-time onboarding wizard. Steps through CircleCI auth, org ID, sidecar creation, and dependency setup, then creates a reusable snapshot.
 
 |`chunk-testing-gaps`
 |"find testing gaps", "mutation test"
@@ -194,7 +194,7 @@ The following skills are available:
 
 |`chunk-validate-config`
 |"configure background validation", "stop chunk blocking every turn"
-|Reads and sets the async validation keys in `.chunk/config.json` to control whether the agent waits for `chunk validate` or is released to continue working.
+|Reads and sets the background validation settings in `.chunk/config.json` to control whether `chunk validate` blocks the agent or runs in the background.
 
 |`debug-ci-failures`
 |"debug CI", "why is CI failing"

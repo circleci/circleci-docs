@@ -32,7 +32,7 @@ To set up from the CLI instead, run:
 $ chunk sidecar setup --name <name>
 ----
 
-This detects your tech stack, syncs your files, runs install steps, and creates a snapshot — all in one step. After the first run, the detected environment is saved to `.chunk/config.json` and reused automatically. Pass `--force` to re-detect.
+This detects your tech stack, syncs your files, runs install steps, and creates a snapshot — all in one step. After the first run, the CLI saves the detected environment to `.chunk/config.json` and reuses it automatically. Pass `--force` to re-detect.
 
 TIP: Use `chunk watch` for a live dashboard of sidecar status and recent activity. Pass `--focus` to limit it to the current directory.
 
@@ -71,9 +71,9 @@ TIP: Use `chunk watch` for a live dashboard of sidecar status and recent activit
 |===
 --
 
-CAUTION: `chunk sidecar snapshot create` deletes the source sidecar once the snapshot is captured. Launch a new sidecar from the snapshot with `chunk sidecar create --image <snapshot-id>` to resume work.
+CAUTION: `chunk sidecar snapshot create` deletes the source sidecar after the snapshot finishes. Launch a new sidecar from the snapshot with `chunk sidecar create --image <snapshot-id>` to resume work.
 
-For the full sidecar command reference including `exec`, `logs`, `add-ssh-key`, and `forget`, see the link:https://github.com/CircleCI-Public/chunk-cli/blob/main/docs/CLI.md[Chunk CLI reference, window=_blank].
+For the full sidecar command reference, see the link:https://github.com/CircleCI-Public/chunk-cli/blob/main/docs/CLI.md[Chunk CLI reference, window=_blank].
 
 [#run-validation]
 == Validate your changes locally
@@ -111,7 +111,7 @@ $ chunk validate --cmd "go test ./..."  # run an inline command
 |===
 --
 
-For additional flags (`--env-file`, `--sidecar-id`, `--async`, and others), see the link:https://github.com/CircleCI-Public/chunk-cli/blob/main/docs/CLI.md[Chunk CLI reference, window=_blank].
+For additional flags and options, see the link:https://github.com/CircleCI-Public/chunk-cli/blob/main/docs/CLI.md[Chunk CLI reference, window=_blank].
 
 [#trigger-chunk-tasks]
 == Trigger Chunk tasks
