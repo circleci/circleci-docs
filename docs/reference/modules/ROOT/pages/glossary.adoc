@@ -276,7 +276,7 @@ A user who has created a CircleCI account. Registered users can access the web a
 
 == Release
 
-A version of a <<component>> becoming available to an audience of users and other services. A release occurs when an existing component is updated or when the first version of a new component is deployed. Release history is retained according to your plan's data retention policy, then automatically deleted; this does not affect the currently live version of a component. See the xref:guides:deploy:deployment-overview.adoc[Deployment Overview] page. Compare with <<deployment>>.
+A version of a <<component>> becoming available to an audience of users and other services. A release occurs when an existing component is updated or when the first version of a new component is deployed. See the xref:guides:deploy:deployment-overview.adoc[Deployment Overview] page. Compare with <<deployment>>.
 
 == Release agent
 
