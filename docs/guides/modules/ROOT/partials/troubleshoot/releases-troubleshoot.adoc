@@ -46,7 +46,7 @@ In dynamic mode, `MANAGED_NAMESPACES` may contain glob patterns such as `team-*`
 * If you are using a Deployment, check whether the release agent restarted before all pods for the deployment could become ready. The restart behavior is a known limitation that will be addressed in future updates of the release agent. Restarting a release agent while a release is ongoing will cause the release agent to lose track of the release status and fail to update the CircleCI services accordingly.
 
 [#no-releases]
-=== Why are no new releases showing up? and/or why are component versions not being updated?
+=== Why are no new releases showing up, or why are component versions not being updated?
 
 * Check whether the token used by the release agent has been revoked:
 .. Select btn:[Releases] in the CircleCI web app sidebar.
@@ -85,6 +85,6 @@ Check if the error message is “invalid or missing project ID“. In this case 
 [#old-releases-missing]
 === Why is my release or deployment history missing for older releases?
 
-CircleCI automatically deletes deployment and release records once they exceed your plan's data retention period (Free: 90 days, Performance: 180 days, Scale: 2 years). This is the same policy that applies to your pipeline, workflow, and job data. For more information, see the link:https://support.circleci.com/hc/en-us/articles/5645222646939-Cloud-Data-Retention-Policy-and-Settings[Cloud Data Retention Policy and Settings] support article.
+CircleCI automatically deletes deployment and release records once they exceed your plan's data retention period (Free: 90 days, Performance: 180 days, Scale: 2 years). The same retention policy applies to your pipeline, workflow, and job data. For more information, see the link:https://support.circleci.com/hc/en-us/articles/5645222646939-Cloud-Data-Retention-Policy-and-Settings[Cloud Data Retention Policy and Settings] support article.
 
 This only removes historical deployment and release records. It does not affect the currently live version of any component.
