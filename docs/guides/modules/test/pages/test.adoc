@@ -183,7 +183,7 @@ For the full set of configuration keys available in `test-suites.yml`, refer to 
 [#tests-command]
 == Run tests with the `circleci tests` commands
 
-NOTE: These commands are the test tooling for CircleCI Server projects. On Cloud, `circleci testsuite` is the preferred option. See <<smarter-testing,Get started with Smarter Testing>>.
+NOTE: `circleci tests glob` and `circleci tests split` are the test tooling for CircleCI Server projects. `circleci tests run` is *not* supported on CircleCI Server, even though it is part of the same command family; see <<tests-command-rerun,Re-run failed tests only>> below. On Cloud, `circleci testsuite` is the preferred option. See <<smarter-testing,Get started with Smarter Testing>>.
 
 The `circleci tests` commands (`glob`, `run`, and `split`) discover, run, split, and re-run your tests. You wire them up as individual steps in your job. They are provided by the environment CLI, which is injected into every job automatically, so there is nothing to install.
 
@@ -197,7 +197,7 @@ See xref:optimize:parallelism-faster-jobs.adoc[Test Splitting and Parallelism] a
 [#tests-command-rerun]
 === Re-run failed tests only (`circleci tests run`)
 
-NOTE: Re-running failed tests is available on Cloud only.
+NOTE: `circleci tests run` is available on CircleCI Cloud only, for existing configurations. It is *not* supported on CircleCI Server. If you are on CircleCI Server, use `circleci tests split` (see <<tests-command-splitting,Test splitting and parallelism>> above) instead.
 
 You can configure jobs to re-run failed tests only. Using this option, when a transient test failure arises, only a subset of tests are re-run instead of the entire test suite. Also, only failed tests from the same commit are re-run, not new ones.
 
