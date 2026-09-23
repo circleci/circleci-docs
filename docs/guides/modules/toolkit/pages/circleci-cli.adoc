@@ -319,7 +319,7 @@ circleci-v0 setup
 
 . When prompted, provide the following:
 +
-* A personal API token from your Server web app. Go to *User Settings* -> *Personal API Tokens* to create one. Use a Server token, not a Cloud token.
+* A personal API token from your Server web app. Go to menu:User Settings[Personal API Tokens] to create one.
 * Your Server host URL, for example `https://circleci.example.com`. Do not use `https://circleci.com`.
 +
 CLI v0 saves this configuration to `~/.circleci/cli.yml`.
@@ -337,17 +337,9 @@ If you also use the CircleCI CLI for Cloud, keep the two separate. Run `circleci
 
 === Troubleshoot CLI v1 replacing your CLI v0 install
 
-Homebrew or the CLI's own update check can upgrade a `circleci` binary to CLI v1 without you asking for it. If your Server commands start failing, for example with missing API routes or an authentication method that only exists for Cloud, check which CLI you are running:
+Homebrew or the CLI's own update check can upgrade a `circleci` binary to CLI v1 without you asking for it. If `circleci` used to be your CLI v0 install, that upgrade breaks Server access, because CLI v1 does not work against a Server host. A typical sign is a Server command that used to work but now fails. The error is often a missing API route, or an authentication method that only exists for Cloud.
 
-[,shell]
-----
-circleci version
-circleci-v0 version
-----
-
-If `circleci version` reports a `1.x` release, CLI v1 has taken over the `circleci` command on your machine.
-
-You do not need to uninstall CLI v1 to fix this. Install CLI v0 alongside it using the Homebrew or install script method described earlier on this page, then run Server commands with `circleci-v0` instead of `circleci`.
+You do not need to uninstall CLI v1 to fix this. Install CLI v0 alongside it using the Homebrew or install script method described earlier on this page. This adds a separate `circleci-v0` binary without touching your existing `circleci` install. From then on, run Server commands with `circleci-v0` instead of `circleci`.
 
 If a machine only ever connects to Server and you would rather run a single CLI, you can uninstall CLI v1 once CLI v0 is working. For example, `brew uninstall circleci` or `brew uninstall --cask circleci@next`, depending on how CLI v1 was installed.
 
