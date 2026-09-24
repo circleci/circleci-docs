@@ -46,7 +46,14 @@ jobs:
 
 The following Arm resources are available as part of the xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[`machine` executor]:
 
+=== Gen1
+
 include::ROOT:partial$execution-resources/arm-resource-table.adoc[]
+
+[badge="Beta"]
+=== Gen2
+
+include::ROOT:partial$execution-resources/arm-gen2-resource-table.adoc[]
 
 For pricing and plans information, see the link:https://circleci.com/product/features/resource-classes/[resource class pricing overview].
 
@@ -55,9 +62,47 @@ For pricing and plans information, see the link:https://circleci.com/product/fea
 
 include::ROOT:partial$execution-resources/resource-class-view.adoc[]
 
+[#arm-vm-generations]
+== Arm VM generations
+
+[#arm-vm-gen2-benefits]
+[badge="Beta"]
+=== Gen2
+
+NOTE: **Arm gen2 for the machine executor is currently in beta.** Performance and pricing are tentative and may change when this feature becomes generally available.
+
+Resource classes running on gen2 infrastructure offer significant performance and cost improvements over their gen1 equivalents.
+
+[#arm-vm-performance-improvements]
+==== Performance improvements
+
+Using more modern compute, gen2 instances deliver up to 73% faster performance compared to gen1 equivalents, based on benchmarks measured during the beta period. Actual performance gains depend on your specific workloads, and this figure may change when Arm gen2 becomes generally available.
+
+[#using-arm-vm-gen2]
+==== Using gen2
+
+To use a gen2 resource class, specify an `arm.large.gen2` or equivalent class in your job configuration:
+
+[,yaml]
+----
+# .circleci/config.yml
+jobs:
+  my-job:
+    machine:
+      image: ubuntu-2404:current
+    resource_class: arm.large.gen2
+    steps:
+      - run: uname -a
+      - run: echo "Hello, Arm!"
+----
+
+NOTE: Gen2 resource classes for the Arm VM execution environment are available on CircleCI Cloud only.
+
 == Images with Arm support
 
 Arm resources are accessible by using the machine executor when using one of the following images:
+
+=== Gen1
 
 [discrete]
 ==== Ubuntu 20.04 - focal
@@ -88,26 +133,24 @@ Arm resources are accessible by using the machine executor when using one of the
 * `ubuntu-2204:2022.10.2`
 * `ubuntu-2204:2022.07.2`
 
+[badge="Beta"]
+=== Gen2
+
+Arm gen2 resource classes are only supported on the following images and tags:
+
+* `ubuntu-2404:current`
+* `ubuntu-2404:edge`
+* `ubuntu-2604:current`
+* `ubuntu-2604:edge`
+
 For a full list of machine executor images, see the link:https://circleci.com/developer/images?imageType=machine[CircleCI Developer Hub]. And for announcements about image updates, see link:https://discuss.circleci.com/c/ecosystem/circleci-images/64[CircleCI Discuss].
 
 [#limitations]
 == Limitations
 
-* Only 64-bit `arm64` architectures are supported.
+* CircleCI supports only 64-bit `arm64` architectures.
 * In CircleCI Server, Arm resources are only available when using the EC2 provider for VM service or machine provisioner. No Arm instances are available in GCP.
 * If you run into issues with orbs, or if there is software you require that is not available in the image, link:https://circleci.canny.io/cloud-feature-requests[submit a feature request].
-
-[#m1-mac-support]
-=== M1 Mac support
-
-Docker images built on M1 Macs, are by default, not compatible with the CircleCI standard platform. The `spin up environment` job in your pipelines will give you a green tick, but you will see the following message in the response:
-
-[,shell]
-----
-WARNING: docker image ghcr.io/{your_username}/runner-test:latest targets wrong architecture (found arm64 but need [amd64 i386 386])
-----
-
-If you build an image on an M1 you need to specify `docker build --platform linux/amd64` as the default builds `arm64`.
 
 [#arm-on-docker]
 == Arm on Docker
