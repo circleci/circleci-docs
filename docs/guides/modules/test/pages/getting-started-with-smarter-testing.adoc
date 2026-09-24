@@ -28,7 +28,7 @@ TIP: You can use the xref:guides:toolkit:circleci-agent-skills.adoc[CircleCI Age
 
 The following terms are used throughout the Smarter Testing documentation:
 
-Test atom:: The smallest unit of work your test runner can execute independently - typically a test file (for example, `tests/auth_test.py`), but can also be a test package or module.
+Test atom:: The smallest unit of work your test runner can execute independently - typically a test file (for example, `tests/auth_test.py`), but can also be a test package or module. A test atom maps to what JUnit calls a `testcase` and what pytest calls a test function.
 Test suite:: A named configuration in `.circleci/test-suites.yml` that defines how to discover and run your test atoms.
 
 == 1. Setup
