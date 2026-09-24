@@ -15,7 +15,9 @@ Confirm which platform you are working against before applying any default below
 
 ### Cloud
 
-To sign up or connect a project from the terminal:
+Before starting onboarding or project setup, install CLI v1 from [cli.circleci.com](https://cli.circleci.com/), then enable the CLI MCP server so the rest of the session runs through MCP tools instead of raw CLI calls. See [Connecting to the CircleCI CLI MCP](https://circleci.com/docs/guides/toolkit/connecting-to-the-circleci-cli-mcp/) for the current command.
+
+Then sign up or connect a project:
 
 ```shell
 circleci onboard      # scans the repo, generates a config, and signs up
@@ -28,7 +30,7 @@ Both commands currently hand off to a browser to complete signup — they do not
 circleci onboard --no-browser
 ```
 
-Install CLI v1 from [cli.circleci.com](https://cli.circleci.com/). Then authenticate and link the project:
+If you already have an account, authenticate and link the project instead:
 
 ```shell
 circleci auth login     # opens a browser to complete authentication
