@@ -369,6 +369,7 @@ Sysbox
 systemd
 TCPRoute
 TeamCity
+[Tt]eardown
 Telegraf
 [Tt]emplated
 [Tt]emplatize
