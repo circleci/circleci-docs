@@ -46,7 +46,7 @@ If your task does not match this guide, use this table to find the right page in
 | xref:server-admin:overview:circleci-server-overview.adoc[CircleCI Server Overview]. Server is a self-hosted CircleCI installation. It is not a self-hosted runner.
 
 | Call the CircleCI API
-| Cloud: link:https://circleci.com/docs/api/v3/[API v3 reference] and the link:https://circleci.com/fullopenapi.yaml[OpenAPI specification]. Server: xref:toolkit:api-intro.adoc[API Introduction] for API v1.1 and v2 — API v3 is Cloud only.
+| Cloud: link:https://circleci.com/docs/api/v3/[API v3 reference] and the link:https://circleci.com/fullopenapi.yaml[OpenAPI specification]. Server: xref:toolkit:api-intro.adoc[API Introduction] for API v1.1 and v2. API v3 is Cloud only.
 
 | Authenticate to the API or CLI
 | xref:toolkit:managing-api-tokens.adoc[Managing API Tokens]
