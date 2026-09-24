@@ -15,29 +15,7 @@ Confirm which platform you are working against before applying any default below
 
 ### Cloud
 
-Before starting onboarding or project setup, install CLI v1 from [cli.circleci.com](https://cli.circleci.com/), then enable the CLI MCP server so the rest of the session runs through MCP tools instead of raw CLI calls. See [Connecting to the CircleCI CLI MCP](https://circleci.com/docs/guides/toolkit/connecting-to-the-circleci-cli-mcp/) for the current command.
-
-Then sign up or connect a project:
-
-```shell
-circleci onboard      # scans the repo, generates a config, and signs up
-circleci auth signup  # signup only, no project setup
-```
-
-Both commands currently hand off to a browser to complete signup — they do not create an account natively in the terminal. If you are running headless (no browser available), add `--no-browser` to either command to print the sign-in URL instead:
-
-```shell
-circleci onboard --no-browser
-```
-
-If you already have an account, authenticate and link the project instead:
-
-```shell
-circleci auth login     # opens a browser to complete authentication
-circleci project link   # writes project/org IDs to .circleci/info.yml
-```
-
-See the [CircleCI CLI guide](https://circleci.com/docs/guides/toolkit/circleci-cli/).
+Before starting onboarding or project setup, install CLI v1, then enable the CLI MCP server, so the rest of the session runs through MCP tools instead of raw CLI calls. `circleci onboard` and `circleci auth signup` both hand off to a browser to complete signup — add `--no-browser` if you are running headless. See the [CircleCI CLI guide](https://circleci.com/docs/guides/toolkit/circleci-cli/) for installation, authentication, project linking, and onboarding, and [Connecting to the CircleCI CLI MCP](https://circleci.com/docs/guides/toolkit/connecting-to-the-circleci-cli-mcp/) for enabling the MCP server.
 
 ### Server
 
@@ -104,16 +82,3 @@ Do not add these to new configuration or integrations, on either platform:
 - The local `npx` CircleCI MCP server. Use the hosted MCP server or CLI MCP instead. MCP servers are not available on Server yet.
 
 To convert existing scheduled workflows on Cloud, see [Migrate Scheduled Workflows to Schedule Triggers](https://circleci.com/docs/guides/orchestrate/migrate-scheduled-workflows-to-schedule-triggers/). To migrate off the legacy CLI on Cloud, see the [CLI command migration guide](https://circleci.com/docs/guides/toolkit/cli-migration-guide/). Everything else that's deprecated on one platform but required on the other (API version, CLI version, schedule syntax) is covered under [Follow current defaults](#follow-current-defaults) above.
-
-## Read docs as markdown or OpenAPI
-
-Every docs page has a markdown export. Replace the page URL with `/index.md`, or select **Copy markdown** on the page.
-
-- Example HTML: `https://circleci.com/docs/guides/getting-started/how-to-use-these-docs/`
-- Example markdown: `https://circleci.com/docs/guides/getting-started/how-to-use-these-docs/index.md`
-
-The site also publishes a machine-readable index at [`llms.txt`](https://circleci.com/docs/llms.txt). That file lists every page with a markdown link.
-
-For API work on Cloud, fetch the [OpenAPI specification](https://circleci.com/fullopenapi.yaml). Do not infer request or response shapes from prose guides. The [API v3 index](https://circleci.com/docs/api/v3/llms.txt) lists every entity. On Server, use the [API introduction](https://circleci.com/docs/guides/toolkit/api-intro/) and the [API v2](https://circleci.com/docs/api/v2/) and [API v1.1](https://circleci.com/docs/api/v1/) reference pages instead — Server has no OpenAPI specification.
-
-To search docs from an AI assistant on Cloud, connect the [Docs MCP](https://circleci.com/docs/guides/toolkit/connecting-to-a-docs-mcp-server/). It is not available on Server; fetch the markdown export or `llms.txt` directly instead.
