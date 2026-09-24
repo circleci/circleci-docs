@@ -69,6 +69,7 @@ These apply on both platforms, unless you are extending an existing integration 
 - Install [Machine Runner 3](https://circleci.com/docs/guides/execution-runner/install-machine-runner-3-on-linux/) for machine runners. Do not install launch agent.
 - Prefer the GitHub App integration over GitHub OAuth. Feature availability differs — see [VCS, Pipeline Types, and Feature Support](https://circleci.com/docs/guides/integration/version-control-system-integration-overview/).
 - Use CLI v1 ([cli.circleci.com](https://cli.circleci.com/)). See the [CircleCI CLI guide](https://circleci.com/docs/guides/toolkit/circleci-cli/).
+- Prefer `circleci testsuite` (Smarter Testing) for running and splitting tests. The legacy `circleci tests` commands still work but are not preferred. See [Getting Started With Smarter Testing](https://circleci.com/docs/guides/test/getting-started-with-smarter-testing/).
 
 ### Server
 
@@ -77,6 +78,7 @@ These apply on both platforms, unless you are extending an existing integration 
 - Install [Machine Runner 3](https://circleci.com/docs/guides/execution-runner/install-machine-runner-3-on-linux/) on Server v4.4 and later. Earlier versions need launch agent.
 - Prefer GitHub App Server (Preview) over GitHub OAuth on Server, where it is available. See [VCS, Pipeline Types, and Feature Support](https://circleci.com/docs/guides/integration/version-control-system-integration-overview/).
 - Use the legacy CircleCI CLI (v0.1.x). CLI v1 is Cloud only. See [Get set up](#get-set-up) above for install commands.
+- Use `circleci tests glob` and `circleci tests split` to split tests. `circleci tests run` is *not* supported on Server, even though it is part of the same command family. `circleci testsuite` is not available on Server either. See [Use the CircleCI CLI to Split Tests](https://circleci.com/docs/guides/optimize/use-the-circleci-cli-to-split-tests/#tests-split-examples).
 
 ## Avoid mixing up these concepts
 
