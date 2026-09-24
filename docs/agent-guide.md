@@ -7,7 +7,7 @@ For a human-oriented starting point, see [How to use these docs](https://circlec
 CircleCI ships as two platforms with different feature sets:
 
 - **Cloud** — circleci.com. Has API v3, CLI v1, Schedule Triggers, and MCP servers.
-- **Server** — a self-hosted installation. Has none of those. Use API v2/v1.1, the legacy CLI, and `triggers.schedule` blocks instead.
+- **Server** — a self-hosted installation. Has none of those. Use API v2/v1.1, CLI v0, and `triggers.schedule` blocks instead.
 
 Confirm which platform you are working against before applying any default below. If you don't know, ask, or check whether the user's CircleCI URL is `circleci.com` or a private hostname.
 
@@ -21,19 +21,7 @@ Before starting onboarding or project setup, install CLI v1, then enable the CLI
 
 There is no self-serve signup. Accounts and orgs are provisioned by the Server administrator — direct the human to them, or to the [CircleCI Server overview](https://circleci.com/docs/server-admin/latest/overview/circleci-server-overview/).
 
-CLI v1 is not available on Server. Install the legacy CLI (v0.1.x) and pin a known-good release, for example `0.1.47860`:
-
-```shell
-curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/main/install.sh | VERSION=0.1.47860 bash
-```
-
-Or with Homebrew on macOS, Linux, or WSL:
-
-```shell
-brew install CircleCI-Public/circleci/circleci@v0
-```
-
-This installs a binary named `circleci-v0`, not `circleci` — adjust any scripts that invoke `circleci` directly.
+CLI v1 does not work against a Server host. Install CLI v0 instead — it installs as a separate `circleci-v0` binary, so it can coexist with a CLI v1 `circleci` install. See [Install CLI v0 for CircleCI Server](https://circleci.com/docs/guides/toolkit/circleci-cli/#install-cli-v0-for-circleci-server) for install methods and `circleci-v0 setup`.
 
 ## Follow current defaults
 
@@ -57,7 +45,7 @@ These apply on both platforms, unless you are extending an existing integration 
 - Schedule pipelines with a `triggers.schedule` block under the workflow. Schedule Triggers are Cloud only.
 - Install [Machine Runner 3](https://circleci.com/docs/guides/execution-runner/install-machine-runner-3-on-linux/) on Server v4.4 and later. Earlier versions need launch agent.
 - Prefer GitHub App Server (Preview) over GitHub OAuth on Server, where it is available. See [VCS, Pipeline Types, and Feature Support](https://circleci.com/docs/guides/integration/version-control-system-integration-overview/).
-- Use the legacy CircleCI CLI (v0.1.x). CLI v1 is Cloud only. See [Get set up](#get-set-up) above for install commands.
+- Use CLI v0. CLI v1 is Cloud only. See [Get set up](#get-set-up) above for install instructions.
 - Use `circleci tests glob` and `circleci tests split` to split tests. `circleci tests run` is *not* supported on Server, even though it is part of the same command family. `circleci testsuite` is not available on Server either. See [Use the CircleCI CLI to Split Tests](https://circleci.com/docs/guides/optimize/use-the-circleci-cli-to-split-tests/#tests-split-examples).
 
 ## Avoid mixing up these concepts
