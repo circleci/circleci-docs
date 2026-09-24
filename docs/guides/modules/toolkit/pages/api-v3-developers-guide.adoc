@@ -96,9 +96,7 @@ Understanding these conventions helps you work effectively with the API v3.
 
 API v3 uses token-based authentication to manage access to the API server and validate that you have permission to make requests.
 
-The following authentication methods are supported:
-
-API v3 uses Bearer Authentication. Pass your token in the `Authorization` header.
+API v3 uses Bearer Authentication. Pass your token in the `Authorization` header. The token can be a personal API token or any other CircleCI API token.
 
 ==== Create an API token
 
@@ -192,7 +190,7 @@ API v3 uses consistent response structures across all endpoints.
 [#single-resource]
 ==== Single resource
 
-When retrieving a single resource, the response contains a `data` object with `id`, `attributes`, and `references`. For example, the response when listing the jobs in a workflow gives you the following JSON object:
+When retrieving a single resource, the response contains a `data` object with `id`, `attributes`, and `references`. For example, fetching a single job gives you the following JSON object:
 
 [,json]
 ----
@@ -215,7 +213,7 @@ When retrieving a single resource, the response contains a `data` object with `i
 }
 ----
 
-The `references` object contains related resource IDs and may include embedded fields for convenience. In the example above you get the project and workflow IDs for each job. Check the operation's schema to see which fields the endpoint embeds inline.
+The `references` object contains related resource IDs and may include embedded fields for convenience. In the example above you get the project and workflow IDs for the job. Check the operation's schema to see which fields the endpoint embeds inline.
 
 [#collection-resources]
 ==== Collection resources
@@ -456,11 +454,11 @@ This saves each artifact's original path and download URL, tab-separated, to a f
 ----
 while IFS=$'\t' read -r artifact_path url; do
   mkdir -p "artifacts/$(dirname "$artifact_path")"
-  curl -o "artifacts/$artifact_path" "$url"
+  curl -o "artifacts/$artifact_path" --header "Authorization: Bearer $CIRCLE_TOKEN" "$url"
 done < artifacts.tsv
 ----
 +
-Artifact URLs are pre-authenticated, so no `Authorization` header is needed for the download itself. Using each artifact's path under a dedicated `artifacts/` directory avoids collisions when multiple artifacts share a filename in different directories.
+Using each artifact's path under a dedicated `artifacts/` directory avoids collisions when multiple artifacts share a filename in different directories.
 
 [#cancel-a-workflow]
 === Cancel a workflow
@@ -596,7 +594,7 @@ curl -X POST "https://circleci.com/api/v3/runner/tokens" \
     }
   }'
 ----
-+
+
 CAUTION: The `201` response includes the raw token value once. Save it immediately. The API does not return the raw value again, and you cannot recover it if you lose it.
 
 [#reference]
