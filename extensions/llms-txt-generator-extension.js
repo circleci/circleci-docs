@@ -82,6 +82,31 @@ function addToSitemap (siteCatalog, playbook) {
 }
 
 /**
+ * Point agents at AGENTS.md and humans at the Quickstart guide. Keep this
+ * short so defaults and deprecations live in docs/agent-guide.md (published
+ * as AGENTS.md), not in this generator.
+ */
+function generateDocsOrientation (siteUrl) {
+  const origin = siteUrl.replace(/\/docs\/?$/, '')
+  const guide = `${siteUrl}/guides/getting-started/getting-started/`
+  const agentsMd = `${siteUrl}/AGENTS.md`
+
+  return `## How to use these docs
+
+If you are an AI agent, read [AGENTS.md](${agentsMd}) first. It has current defaults, deprecated patterns, and the differences between Cloud and Server.
+
+For humans, or for which guide to open first, start with the [Quickstart guide](${guide}) [md](${guide}index.md).
+
+For API work, fetch the OpenAPI specification. Do not infer request or response shapes from prose guides.
+
+- OpenAPI (canonical): ${origin}/fullopenapi.yaml
+- API v3 index: ${siteUrl}/api/v3/llms.txt
+- Conventions: ${siteUrl}/api/v3/conventions.md
+
+`
+}
+
+/**
  * Generate the complete llms.txt content.
  */
 function generateLlmsTxt (playbook, contentCatalog) {
@@ -114,6 +139,9 @@ function generateLlmsTxt (playbook, contentCatalog) {
   sections.push('- **Updates**: Automatically regenerated on each deployment')
   sections.push('- **Discovery**: Announced via `<link rel="alternate" type="text/plain" href="/docs/llms.txt">` in page headers')
   sections.push('- **Sitemap**: Listed in https://circleci.com/docs/sitemap-llms.xml\n')
+
+  // Point at the live How to use these docs page before the generated tree.
+  sections.push(generateDocsOrientation(siteUrl))
 
   // Documentation Structure
   sections.push('## Documentation Structure\n')
