@@ -274,7 +274,7 @@ Always check the operation's required parameters before making a request.
 [#http-methods]
 === HTTP methods
 
-API v3 follows RESTful conventions:
+API v3 follows REST conventions:
 
 * `GET` - Read operations.
 * `POST` - Create, actions, and partial updates.
