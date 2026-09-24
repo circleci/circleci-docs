@@ -41,7 +41,7 @@ Before using environment hierarchy and version promotion, you need:
 
 * *Deploy markers* must be configured in your project to use a deploy pipeline. See the xref:guides:deploy:configure-deploy-markers.adoc[Configure Deploy Markers] page for more details.
 
-* *Deploy pipeline*. The project must have a deploy pipeline configured. You can check this in menu:Project settings[Deploys], check the Deploy Pipeline section. See the xref:guides:deploy:set-up-deploys.adoc[Set up a Deploy Pipeline] page for more details.
+* *Deploy pipeline*. The project must have a deploy pipeline configured. You can check this in menu:Project settings[Deploys], check the Deploy Pipeline section. See the xref:guides:deploy:set-up-deploys.adoc[Set Up a Deploy Pipeline] page for more details.
 
 == 1. Create a hierarchy
 

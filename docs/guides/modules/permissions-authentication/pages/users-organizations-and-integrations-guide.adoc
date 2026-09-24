@@ -68,7 +68,6 @@ A CircleCI _organization_ can be one of three types:
 a| * GitHub App (add-on, available for GitHub.com, GitHub Enterprise Cloud, and GitHub Enterprise Server).
 * GitLab (add-on).
 * GitLab self-managed (add-on).
-* Bitbucket Data Center (add-on).
 * Cursor Origin (add-on, beta).
 | Created manually via web app or API
 | This organization type is created separately to any VCS connection between CircleCI and your code repositories.
@@ -152,9 +151,9 @@ The VCS integration options available to you depend on your organization type. B
 
 [.table-scroll]
 --
-[cols=7*, options="header"]
+[cols=6*, options="header"]
 |===
-| Organization type |GitHub App | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | GitLab | Cursor Origin (beta)
+| Organization type |GitHub App | GitHub OAuth | Bitbucket Cloud | GitLab | Cursor Origin (beta)
 
 | `circleci`
 | [.circle-green]#Yes#
@@ -162,12 +161,10 @@ The VCS integration options available to you depend on your organization type. B
 | [.circle-red]#No#
 | [.circle-green]#Yes#
 | [.circle-green]#Yes#
-| [.circle-green]#Yes#
 
 |`github`
 | [.circle-green]#Yes#
 | [.circle-green]#Yes#
-| [.circle-red]#No#
 | [.circle-red]#No#
 | [.circle-red]#No#
 | [.circle-red]#No#
@@ -178,7 +175,6 @@ The VCS integration options available to you depend on your organization type. B
 | [.circle-green]#Yes#
 | [.circle-red]#No#
 | [.circle-red]#No#
-| [.circle-red]#No#
 
 |===
 --
@@ -186,10 +182,10 @@ The VCS integration options available to you depend on your organization type. B
 Integrations are set up as follows:
 
 * GitHub OAuth and Bitbucket Cloud are set up when logging in to CircleCI with your GitHub or Bitbucket social login. No additional action is required, but the installation can be viewed at menu:Org[VCS Connections].
-* GitHub App, GitLab self-managed, Bitbucket Data Center, and Cursor Origin are managed from menu:Org[VCS Connections]. However, when creating a project (if using a `circleci` organization) or creating a new pipeline from menu:Project Settings[Project setup] you will also be walked through the installation process.
+* GitHub App, GitLab self-managed, and Cursor Origin are managed from menu:Org[VCS Connections]. However, when creating a project (if using a `circleci` organization) or creating a new pipeline from menu:Project Settings[Project setup] you will also be walked through the installation process.
 * GitLab SaaS installation is set up when creating a new project (menu:Projects[Create project]) or a new pipeline (menu:Project Settings[Pipelines]).
 
-If you are using a self-hosted GitLab instance or Bitbucket Data Center instance, some additional configuration is required as follows. See the <<manage-vcs-integrations>> section for more information.
+If you are using a self-hosted GitLab instance, some additional configuration is required as follows. See the <<manage-vcs-integrations>> section for more information.
 
 == Limitations
 
@@ -204,16 +200,16 @@ If you need more organizations or projects, consider upgrading to a Paid Plan or
 
 The following links take you to the sections you need to get set up with CircleCI:
 
-* xref:getting-started:first-steps.adoc[Sign up and Try].
+* xref:getting-started:first-steps.adoc[Sign Up and Try].
 * xref:getting-started:invite-your-team.adoc[Invite Your Team].
 * xref:getting-started:create-project.adoc[Create a Project].
-* xref:orchestrate:pipelines.adoc[Set up a Pipeline].
-* xref:orchestrate:set-up-triggers.adoc[Set up a Trigger].
+* xref:orchestrate:pipelines.adoc[Set Up a Pipeline].
+* xref:orchestrate:set-up-triggers.adoc[Set Up a Trigger].
 
 [#manage-vcs-integrations]
 == Manage VCS integrations
 
-To install a VCS connection, or to view, configure, or remove an existing one, see the xref:integration:set-up-vcs-connections.adoc[Set up VCS Connections] page. That page covers each provider, including what extra configuration self-managed providers need.
+To install a VCS connection, or to view, configure, or remove an existing one, see the xref:integration:set-up-vcs-connections.adoc[Set Up VCS Connections] page. That page covers each provider, including what extra configuration self-managed providers need.
 
 == Invite your team to your organization
 
@@ -314,7 +310,7 @@ The trigger options available to you depend on your pipeline type. These options
 
 [.table-scroll]
 --
-[options="header",cols="10*"]
+[options="header",cols="9*"]
 |===
 |Pipeline type
 ^|GitHub OAuth trigger
@@ -322,7 +318,6 @@ The trigger options available to you depend on your pipeline type. These options
 ^|GitLab trigger
 ^|Schedule trigger
 ^|GitHub App trigger
-^|Bitbucket Data Center trigger
 ^|Cursor Origin trigger
 ^|Custom Webhook
 ^|API / Manual triggering
@@ -335,7 +330,6 @@ The trigger options available to you depend on your pipeline type. These options
 ^|[.circle-red]#*No*#
 ^|[.circle-red]#*No*#
 ^|[.circle-red]#*No*#
-^|[.circle-red]#*No*#
 ^|[.circle-green]#*Yes*#
 
 |GitHub App image:guides:ROOT:icons/github-app.svg[GitHub App pipeline badge, role="no-border"]
@@ -345,7 +339,6 @@ The trigger options available to you depend on your pipeline type. These options
 ^|Zero, one, many
 ^|Zero, one, many
 ^|[.circle-red]#*No*#
-^|[.circle-red]#*No*#
 ^|Zero, one, many
 ^|[.circle-green]#*Yes*#
 
@@ -353,7 +346,6 @@ The trigger options available to you depend on your pipeline type. These options
 ^|[.circle-red]#*No*#
 ^| One
 ^|[.circle-red]#*No*#
-^|Zero, one, many
 ^|Zero, one, many
 ^|[.circle-red]#*No*#
 ^|[.circle-red]#*No*#
@@ -368,18 +360,6 @@ The trigger options available to you depend on your pipeline type. These options
 ^|[.circle-red]#*No*#
 ^|[.circle-red]#*No*#
 ^|[.circle-red]#*No*#
-^|[.circle-red]#*No*#
-^|[.circle-green]#*Yes*#
-
-|Bitbucket Data Center
-^|[.circle-red]#*No*#
-^|[.circle-red]#*No*#
-^|[.circle-red]#*No*#
-^|Zero, one, many
-^|[.circle-red]#*No*#
-^|Zero, one, many
-^|[.circle-red]#*No*#
-^|[.circle-red]#*No*#
 ^|[.circle-green]#*Yes*#
 
 |Cursor Origin
@@ -387,7 +367,6 @@ The trigger options available to you depend on your pipeline type. These options
 ^|[.circle-red]#*No*#
 ^|[.circle-red]#*No*#
 ^|Zero, one, many
-^|[.circle-red]#*No*#
 ^|[.circle-red]#*No*#
 ^|Zero, one, many
 ^|Zero, one, many
@@ -462,11 +441,6 @@ When CircleCI builds your project, the private key is installed into the `.ssh` 
 - Automatic git merging/tagging/etc.
 
 Private keys are also used to enable your project to check out additional private repositories.
---
-Bitbucket Data Center::
-+
---
-When you connect a repository with your CircleCI project, behind the scenes, CircleCI is registering a webhook within your Bitbucket Data Center project. You may verify this once you have successfully created the project by navigating to your repository's menu:Project Settings[Webhooks] page.
 --
 GitLab::
 +

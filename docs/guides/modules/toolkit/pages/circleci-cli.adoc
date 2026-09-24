@@ -1,13 +1,15 @@
 = The CircleCI CLI
-:page-badge: Preview
-:page-platform: Cloud
+:page-platform: Cloud, Server v4+
 :page-description: A guide to the CircleCI CLI with links to setup guides, a ful reference and how-to guides for common tasks.
 :experimental:
 :page-aliases: local-cli.adoc, how-to-use-the-circleci-local-cli.adoc
 
-NOTE: The CircleCI CLI v1 is currently in preview. You can expect changes to the available commands and features during this phase. If you have any feedback or suggestions for the CircleCI CLI, or to report an issue, open an link:https://github.com/CircleCI-Public/circleci-cli/issues[Issue] on the GitHub repository.
-
 The link:https://cli.circleci.com/[CircleCI command line interface (CLI)] brings CircleCI's tooling to your terminal.
+
+[NOTE]
+====
+*Using CircleCI Server?* CLI v1 is not supported for CircleCI Server. Install CLI v0 instead. See <<install-cli-v0-for-circleci-server,Install CLI v0 for CircleCI Server>>.
+====
 
 == Quickstart
 
@@ -15,7 +17,7 @@ Follow these steps to authenticate and connect the CLI to your CircleCI project.
 
 . *Install the CircleCI CLI:* Visit the link:https://cli.circleci.com/[CircleCI CLI] page for installation instructions.
 +
-If you currently have the legacy stable release installed (v0.1.x) you must uninstall this before installing the new preview version. For example, `brew uninstall circleci` or the appropriate command for your operating system and/or package manager. You can check your current version with `circleci --version`.
+If you currently have the legacy stable release installed (v0.1.x) you must uninstall this before installing CLI v1. For example, `brew uninstall circleci` or the appropriate command for your operating system and/or package manager. You can check your current version with `circleci --version`.
 
 . *Log in to CircleCI:*
 +
@@ -138,7 +140,7 @@ The CLI respects standard terminal conventions:
 * Use `NO_COLOR=1` to disable all color output.
 * Use `PAGER` to control the pager used for long output (defaults to `less`).
 * Use `DO_NOT_TRACK=1` to disable telemetry (see also <<telemetry>>).
-* Output formatting adjusts automatically when the CLI is not connected to a terminal, for example, color and interactive elements are stripped when piping output to another command or running in a CI pipeline.
+* Output formatting adjusts automatically when the CLI is not connected to a terminal. For example, the CLI strips both color and interactive elements when you pipe output to another command or run the CLI in a CI pipeline.
 
 [#telemetry]
 == Telemetry
@@ -213,6 +215,143 @@ The CircleCI CLI:: The development tool used on your local machine for day-to-da
 The CircleCI environment CLI:: A specialized command-line interface that retrieves and configures a task. It manages the execution of the job within a chosen compute environment.
 
 The Chunk CLI:: A developer tool that brings AI-powered code review and remote validation to your local workflow. The `chunk` CLI works with AI coding agents such as Claude Code, Cursor, and VS Code Copilot.
+
+== Install CLI v0 for CircleCI Server
+
+CLI v1 works with CircleCI Cloud only. If you use CircleCI Server, install CLI v0 instead using one of the following methods.
+
+=== What you can do with CLI v0
+
+The following table summarizes the top-level commands available in CLI v0.
+
+[.table-scroll]
+--
+[cols="1,2", options="header"]
+|===
+| Command
+| What it does
+
+| `config`
+| Validate, pack, and process build config files.
+
+| `context`
+| Secure and share environment variables across projects.
+
+| `diagnostic`
+| Check the status of your CircleCI CLI.
+
+| `info`
+| Check information associated with your user account.
+
+| `local`
+| Debug and run jobs on your local machine.
+
+| `namespace`
+| Operate on orb namespaces.
+
+| `orb`
+| Create, publish, validate, and manage orbs.
+
+| `pipeline`
+| Operate on pipelines.
+
+| `policy`
+| Manage security policies.
+
+| `project`
+| Operate on projects.
+
+| `runner`
+| Operate on self-hosted runners.
+
+| `setup`
+| Set up the CLI with your credentials.
+
+| `telemetry`
+| Configure telemetry preferences.
+
+| `trigger`
+| Operate on triggers.
+
+| `version`
+| Display version information.
+|===
+--
+
+The table does not cover every command. Run `circleci-v0 --help` to see the full command list.
+
+=== Install with Homebrew
+
+If you use link:https://brew.sh/[Homebrew] on macOS or Linux, install CLI v0 with the following command:
+
+[,shell]
+----
+brew install circleci-public/circleci/circleci@v0
+----
+
+This installs a `circleci-v0` binary, so it can coexist with a CLI v1 `circleci` installation.
+
+=== Install with the install script
+
+On macOS and Linux, set the `VERSION` environment variable to pin the install script to the latest v0 release:
+
+[,shell]
+----
+VERSION=0.1.47860 curl -fsSL https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/main/install.sh | bash
+----
+
+This installs a `circleci-v0` binary to `/usr/local/bin` by default.
+
+=== Manual install
+
+Download the archive for your platform, including Windows, from the link:https://github.com/CircleCI-Public/circleci-cli/releases/tag/v0.1.47860[v0.1.47860 release] page on GitHub.
+
+=== Set up CLI v0 for your Server host
+
+After installing CLI v0, point it at your Server installation.
+
+. Run the setup command:
++
+[,shell]
+----
+circleci-v0 setup
+----
+
+. When prompted, provide the following:
++
+* A personal API token from your Server web app. Go to menu:User Settings[Personal API Tokens] to create one.
+* Your Server host URL, for example `https://circleci.example.com`. Do not use `https://circleci.com`.
++
+CLI v0 saves this configuration to `~/.circleci/cli.yml`.
+
+. Confirm the CLI can reach your Server host:
++
+[,shell]
+----
+circleci-v0 diagnostic
+----
+
+TIP: To run setup without interactive prompts, for example from a script, use `circleci-v0 setup --no-prompt --host <your-server-url> --token <your-token>`.
+
+If you also use the CircleCI CLI for Cloud, keep the two separate. Run `circleci auth login` to authenticate CLI v1 with Cloud, and `circleci-v0 setup` to authenticate CLI v0 with Server.
+
+=== Troubleshoot CLI v1 replacing your CLI v0 install
+
+Homebrew or the CLI's own update check can upgrade a `circleci` binary to CLI v1 without you asking for it. If `circleci` used to be your CLI v0 install, that upgrade breaks Server access, because CLI v1 does not work against a Server host. A typical sign is a Server command that used to work but now fails. The error is often a missing API route, or an authentication method that only exists for Cloud.
+
+You do not need to uninstall CLI v1 to fix this. Install CLI v0 alongside it using the Homebrew or install script method described earlier on this page. This adds a separate `circleci-v0` binary without touching your existing `circleci` install. From then on, run Server commands with `circleci-v0` instead of `circleci`.
+
+If a machine only ever connects to Server and you would rather run a single CLI, you can uninstall CLI v1 once CLI v0 is working. For example, `brew uninstall circleci` or `brew uninstall --cask circleci@next`, depending on how CLI v1 was installed.
+
+=== Reference documentation for CLI v0
+
+CLI v0 does not have a hosted reference site. Add `--help` to any `circleci-v0` command at any depth to see its description, flags, and examples:
+
+[,shell]
+----
+circleci-v0 --help
+circleci-v0 config --help
+----
 
 == Next steps
 

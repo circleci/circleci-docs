@@ -5,7 +5,7 @@
 
 Deploy pipelines allow you to deploy your components to a target environment as fast as possible. This guide covers how to configure your CircleCI pipeline to support manual deployment capabilities using a deploy pipeline.
 
-TIP: *Smart Deployments sets up a deploy pipeline for you.* The Smart Deployments guided setup configures your deploy pipeline alongside deploy markers, a rollback pipeline, release validation, and automatic rollback, then opens a single pull request for you to merge. See the xref:set-up-smart-deployments.adoc[Set up Smart Deployments] guide. Use this page to configure a deploy pipeline on its own, or to customize the pipeline that Smart Deployments generated for you.
+TIP: *Smart Deployments sets up a deploy pipeline for you.* The Smart Deployments guided setup configures your deploy pipeline alongside deploy markers, a rollback pipeline, release validation, and automatic rollback, then opens a single pull request for you to merge. See the xref:set-up-smart-deployments.adoc[Set Up Smart Deployments] guide. Use this page to configure a deploy pipeline on its own, or to customize the pipeline that Smart Deployments generated for you.
 
 == Introduction
 
@@ -63,7 +63,7 @@ No changes are being pushed to your repository at this point. GitHub pipelines a
 
 Deploy markers *must* be configured in your project to use CircleCI deploy pipelines. If you already have deploy markers set up, select "I'll make the config changes myself" and then select btn:[I've updated my config] to proceed to the next step.
 
-The in-app setup process guides you to set up deploy markers now. Alternatively, manual configuration steps are available in the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide. If you want to set up deploy markers across multiple projects at once, see the xref:configure-deploy-markers.adoc#set-up-deploy-markers-for-multiple-projects[Set up deploy markers for multiple projects] section.
+The in-app setup process guides you to set up deploy markers now. Alternatively, manual configuration steps are available in the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide. If you want to set up deploy markers across multiple projects at once, see the xref:configure-deploy-markers.adoc#set-up-deploy-markers-for-multiple-projects[Set Up deploy markers for multiple projects] section.
 
 [tabs]
 ====

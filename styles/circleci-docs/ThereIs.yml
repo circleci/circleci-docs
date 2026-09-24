@@ -3,5 +3,8 @@ extends: existence
 message: "Don't start a sentence with '%s'"
 ignorecase: true
 level: error
+# Anchors ^ to each sentence. Without this, Vale 3.18+ anchors to the whole
+# block, so only the first sentence of a paragraph or list item is checked.
+scope: sentence
 raw:
   - '(?:^[^\w]*|[;-]\s)There\b\s(is|are)\b'

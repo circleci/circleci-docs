@@ -172,12 +172,18 @@ Organization administrators have read/write access to all projects and have unre
 [#run-workflows-with-a-restricted-context]
 === Run workflows with a restricted context
 
-To invoke a job that uses a restricted context, the following apply:
+To invoke a job that uses a restricted context, every restriction type that is set on the context must pass. Security groups, project restrictions, and expression restrictions combine with logical AND.
 
-* A user must be a member of one of the security groups or projects assigned to the context.
-* The expressions assigned to the context must be true.
+[#how-restrictions-combine]
+==== How restrictions combine
 
-If the user running the workflow does not have access to the context or an expression evaluates to false, the workflow will fail with the `Unauthorized` status.
+* *Security groups:* The user who triggered the pipeline must belong to at least one assigned group. The default group `All members` allows any organization member. If you assign more than one named group, membership in any one of those groups is enough (logical OR).
+* *Project restrictions:* If you add any project restrictions, the job must run in one of the listed projects (logical OR). If you add none, every project in the organization can use the context.
+* *Expression restrictions:* If you add any expression restrictions, every expression must evaluate to `true` (logical AND). If you add none, this check passes.
+
+A context with both a security group and a project restriction is available only when both checks pass. Group membership does not bypass a project allowlist. A listed project does not bypass a security group.
+
+If the user running the workflow does not have access to the context, or an expression evaluates to false, the workflow fails with the `Unauthorized` status.
 
 [#approve-jobs-that-use-restricted-contexts]
 === Approve jobs that use restricted contexts
@@ -259,7 +265,7 @@ Web app::
 . Select *Create Context* if you wish to use a new context, or select the name of an existing context (if using an existing context, you will need to remove the `All members` security group before adding a new one).
 . Select *Add Security Group* button to view the dialog box.
 . Make your choices in the dialog box and then select the *Add Security Group* or *Add Project Restriction* button to finalize. Contexts will now be restricted to the selections you have made.
-. Select *Add Environment Variables* to add environment variables to the context if none exist, fill out your desired name and value in the dialogue box, then select the *Add Environment Variables* button to finalize. Use of the environment variables for this context is now limited to members of the security groups.
+. Select *Add Environment Variables* to add environment variables to the context. Fill out your desired name and value in the dialog box, then select *Add Environment Variables* again to finalize. Use of the environment variables for this context is now limited to members of the security groups.
 . Navigate back to menu:Org[Contexts] in the CircleCI app. The security groups appear in the Security column for the context.
 --
 ====
@@ -428,10 +434,14 @@ circleci context restriction create <context-name> --type expression --value "<e
 Web app::
 +
 --
-. Navigate to the menu:Organization Settings[Contexts] page of your organization in the https://app.circleci.com/[CircleCI web app].
+// Vale merges consecutive AsciiDoc ordered list items into one sentence, because
+// the `. ` marker reads as a period, so SentenceLength miscounts these short steps.
+pass:[<!-- vale circleci-docs.SentenceLength = NO -->]
+. In the https://app.circleci.com/[CircleCI web app], go to menu:Organization Settings[Contexts].
 . Select the context you want to add an expression restriction to.
 . Select btn:[Add Expression Restriction].
 . Enter your expression in the text box and select btn:[Add Expression Restriction] again to confirm.
+pass:[<!-- vale circleci-docs.SentenceLength = YES -->]
 --
 API::
 +
@@ -527,7 +537,7 @@ include::ROOT:partial$using-expressions/operators.adoc[]
 === Precedence
 The following table shows operator precedence table, from weakest to strongest binding.
 
-NOTE: All operators are left associative. In practice, avoid operator chaining for anything other than `and` or `or`. This is because evaluation may cause type mismatches for other operators (see <<evaluation>>).
+NOTE: All operators are left associative. In practice, avoid operator chaining for anything other than `and` or `or`. Evaluation may cause type mismatches for other operators (see <<evaluation>>).
 
 [.table-scroll]
 --
@@ -639,8 +649,8 @@ circleci context delete <context-name>
 Web app::
 +
 --
-. Navigate to the menu:Org[Contexts] in the CircleCI web app.
-. Select the *X* icon in the row of the context you want to delete. A confirmation dialog box will appear.
+. In the CircleCI web app, go to menu:Org[Contexts].
+. Select the *X* icon for the context you want to delete. A confirmation dialog appears.
 . Type "DELETE" in the field and then select *Delete Context*. The context and all associated environment variables will be deleted.
 --
 ====

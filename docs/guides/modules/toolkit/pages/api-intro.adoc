@@ -9,7 +9,7 @@ The CircleCI API enables you to interact with your pipelines, projects, and orga
 * link:https://circleci.com/api/v3/[API v3 Reference] (Current)
 * link:../../../api/v2/[API v2 Reference] (Legacy)
 * link:../../../api/v1/[API v1.1 Reference] (Legacy)
-* xref:execution-runner:runner-api.adoc[Runner API Reference] (Self-hosted runners)
+* xref:reference:ROOT:runner-api.adoc[Runner API Reference] (Self-hosted runners)
 
 [#api-version-overview]
 == API overview
@@ -47,7 +47,7 @@ a| * Existing integrations that have not yet migrated to v3.
 a| * Maintaining existing integrations that you have not yet updated.
 * Specific legacy use cases.
 
-| xref:execution-runner:runner-api.adoc[Runner API]
+| xref:reference:ROOT:runner-api.adoc[Runner API]
 | Specialized (separate API)
 a| * Hosted separately at `runner.circleci.com`
 * Manages and executes self-hosted runner tasks.
@@ -60,7 +60,7 @@ a| * Managing self-hosted runner resource classes and tasks.
 
 NOTE: CircleCI recommends migrating to API v3 for all new work. API v1.1 is planned for End-Of-Life (EOL); CircleCI will communicate the discontinuation date in the future.
 
-To get started, see the xref:api-v3-developers-guide.adoc[API V3 Developers Guide], the xref:api-developers-guide.adoc[API V2 Developers Guide], or the xref:execution-runner:runner-api.adoc[Runner API Reference].
+To get started, see the xref:api-v3-developers-guide.adoc[API V3 Developers Guide], the xref:api-developers-guide.adoc[API V2 Developers Guide], or the xref:reference:ROOT:runner-api.adoc[Runner API Reference].
 
 [#authentication]
 == Authentication
@@ -103,7 +103,7 @@ Basic Authentication:: Use the token as the username (Base64-encoded).
 
 See the xref:managing-api-tokens.adoc[Managing API Tokens] guide for information on creating and managing tokens.
 
-NOTE: The xref:execution-runner:runner-api.adoc[Runner API] accepts these same personal token methods, plus a resource class token used exclusively by self-hosted runner agents. See the Runner API reference for details.
+NOTE: The xref:reference:ROOT:runner-api.adoc[Runner API] accepts these same personal token methods, plus a resource class token used exclusively by self-hosted runner agents. See the Runner API reference for details.
 
 [#next-steps]
 == Next steps
@@ -111,4 +111,4 @@ NOTE: The xref:execution-runner:runner-api.adoc[Runner API] accepts these same p
 * Review the xref:api-v3-developers-guide.adoc[API V3 Developers Guide] for a detailed walkthrough on using the current API version.
 * Review the xref:api-developers-guide.adoc[API V2 Developers Guide] for information on the legacy v2 API.
 * Explore the link:../../../api/v3/[API V3 Reference] for complete endpoint documentation.
-* See the xref:execution-runner:runner-api.adoc[Runner API Reference] for self-hosted runner endpoints.
+* See the xref:reference:ROOT:runner-api.adoc[Runner API Reference] for self-hosted runner endpoints.

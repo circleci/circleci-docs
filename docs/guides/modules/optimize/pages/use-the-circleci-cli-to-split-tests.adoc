@@ -9,7 +9,9 @@ Test splitting requires the CircleCI environment CLI together with parallelism. 
 
 NOTE: The `circleci tests` commands are part of the environment CLI as they require information that only exists within a CircleCI container. `circleci tests` commands are not available in the xref:toolkit:local-cli.adoc[CircleCI CLI].
 
-NOTE: xref:execution-runner:runner-overview.adoc[Self-Hosted Runners] can invoke `circleci-agent` directly instead of using the CLI to split tests. This is because the xref:execution-runner:runner-overview.adoc#circleci-self-hosted-runner-operation[task-agent] already exists on the `$PATH`, removing an additional dependency when splitting tests.
+NOTE: xref:execution-runner:runner-overview.adoc[Self-Hosted Runners] can invoke `circleci-agent` directly instead of using the CLI to split tests. The xref:execution-runner:runner-overview.adoc#circleci-self-hosted-runner-operation[task-agent] already exists on the `$PATH`, which removes an additional dependency when splitting tests.
+
+NOTE: `circleci tests glob`/`run`/`split` are legacy commands. CircleCI's preferred way to run and split tests is now `circleci testsuite`, which is available on CircleCI Cloud only. See xref:test:test.adoc#smarter-testing[Get Started With Smarter Testing]. If you are on CircleCI Server, continue to use `circleci tests glob` and `circleci tests split`. `circleci tests run` is *not* supported on CircleCI Server, even though it is part of the same command family. See <<tests-split-examples,Using tests split>> below.
 
 [#prerequisites]
 == Prerequisites
@@ -18,6 +20,8 @@ NOTE: xref:execution-runner:runner-overview.adoc[Self-Hosted Runners] can invoke
 * A project in CircleCI where you run tests. See the xref:getting-started:create-project.adoc[Create a Project] page to get set up, and xref:test:collect-test-data.adoc[Collect Test Data] page for information about tests in your CI/CD pipeline.
 
 == Use the tests run command
+
+NOTE: `circleci tests run`, covered in this section, is available on CircleCI Cloud only, for existing configurations. If you are on CircleCI Server, skip ahead to <<tests-split-examples,Using tests split>>.
 
 Optimize your tests using multiple parallel-running environments. First, glob your test files, then split and run your tests.
 
@@ -57,12 +61,14 @@ jobs:
 
 === 2. Split and run tests
 
-Two commands are available for you to split your tests. We recommend using `circleci tests run` as this enables you to also take advantage of the xref:test:rerun-failed-tests.adoc[Rerun Failed Tests] feature. The examples in this section use the `circleci tests run` command.
+Two commands are available for you to split your tests: `circleci tests run` and `circleci tests split`. On CircleCI Cloud, we recommend using `circleci tests run` as this enables you to also take advantage of the xref:test:rerun-failed-tests.adoc[Rerun Failed Tests] feature. The examples in this section use the `circleci tests run` command.
 
-Alternatively, you can see `circleci tests split` examples <<tests-split-examples,here>>.
+`circleci tests run` is *not* supported on CircleCI Server. If you are on CircleCI Server, use `circleci tests split` examples <<tests-split-examples,here>> instead.
 
 [#tests-run-examples]
 == Test framework examples using tests run
+
+NOTE: `circleci tests run` is available on CircleCI Cloud only. If you are on CircleCI Server, use the <<tests-split-examples,`circleci tests split` examples>> below instead.
 
 The following set of examples show how to use the `circleci tests run` command to split and run your tests across parallel execution environments. Using this command also allows you to use the xref:test:rerun-failed-tests.adoc[Rerun Failed Tests] feature.
 
@@ -70,7 +76,7 @@ Some notes on the examples below:
 
 * For a full list of options when using this command, see the xref:parallelism-faster-jobs.adoc#the-tests-run-command[Test Splitting Overview] page.
 * Each example below includes a parallelism level of four, that is, four identical execution environments will be created to split your tests across. You can choose a parallelism level to suit your project.
-* Each example below shows configuring your tests to be split by timing data. This is the recommended way to split tests, but other options include splitting by name or by file size. Read more about these options in the xref:parallelism-faster-jobs.adoc#introduction[Test Splitting and Parallelism Overview].
+* Each example below shows configuring your tests to be split by timing data. Splitting by timing data is the recommended approach, but other options include splitting by name or by file size. Read more about these options in the xref:parallelism-faster-jobs.adoc#introduction[Test Splitting and Parallelism Overview].
 * On each successful run of a test suite, CircleCI saves timing data from the directory specified by the path in the xref:reference:ROOT:configuration-reference.adoc#storetestresults[`store_test_results` step]. This timing data consists of how long each test took to complete per file name or class name. The available timing data will then be analyzed and your tests will be split across your parallel-running containers as evenly as possible.
 * If no timing data is found, you will receive a message: `Error auto-detecting timing type, falling back to weighting by name.`. The tests will then be split alphabetically by test name.
 * If you do not use `store_test_results`, there will be no timing data available to split your tests.
@@ -433,6 +439,8 @@ The snippet above will write the list of test file names to `files.txt`.  On a n
 [#tests-split-examples]
 == Using tests split
 
+NOTE: If you are on CircleCI Server, use `circleci tests split`, as shown in this section. `circleci tests run`, covered above, is *not* supported on CircleCI Server.
+
 Optimize your tests using multiple parallel-running environments. First, glob your test files, then split test suite, then run your tests.
 
 [#glob-test-files-2]
@@ -483,7 +491,7 @@ The following test splitting options are available:
 [#split-by-name]
 ==== a. Split by name (default)
 
-By default, if you do not specify a method using the `--split-by` flag, `circleci tests run` expects a list of file names or class names and splits tests alphabetically by test name. You can provide this list in the following ways:
+By default, if you do not specify a method using the `--split-by` flag, `circleci tests split` expects a list of file names or class names and splits tests alphabetically by test name. You can provide this list in the following ways:
 
 * Pipe a glob of test files, as demonstrated in the above section.
 ```shell

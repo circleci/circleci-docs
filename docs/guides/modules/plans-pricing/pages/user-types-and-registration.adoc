@@ -69,7 +69,7 @@ Having your team members register for CircleCI accounts provides several benefit
 [#how-to-register]
 == How to become a registered user
 
-If you or your team members are currently unregistered users (triggering builds without a CircleCI account), see the xref:guides:getting-started:first-steps.adoc[Sign up and Try CircleCI] page for instructions.
+If you or your team members are currently unregistered users (triggering builds without a CircleCI account), see the xref:guides:getting-started:first-steps.adoc[Sign Up and Try CircleCI] page for instructions.
 
 [#invite-team-members]
 == How to ensure your team is registered
@@ -95,7 +95,7 @@ Let your team know about the benefits of registering and provide them with instr
 [#see-also]
 == See also
 
-* xref:guides:getting-started:first-steps.adoc[Sign up and Try CircleCI]
+* xref:guides:getting-started:first-steps.adoc[Sign Up and Try CircleCI]
 * xref:guides:getting-started:invite-your-team.adoc[Invite Your Team]
 * xref:prevent-unregistered-users-from-spending-credits.adoc[Prevent Unregistered Users From Spending Credits]
 * xref:guides:permissions-authentication:roles-and-permissions-overview.adoc[Roles and Permissions Overview]

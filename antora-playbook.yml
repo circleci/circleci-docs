@@ -70,7 +70,7 @@ asciidoc:
     helmversion: 3.9.2
     helmdiffversion: 3.5.0
     kotsversion: 1.65.0
-    xcodeversion: 26.6.0
+    xcodeversion: 27.0.0
     page-toclevels: 6
     idprefix: ""
     idseparator: "-"
@@ -132,3 +132,4 @@ antora:
       - '*-dark.svg'
       - 'icons/*.svg'
   - require: ./extensions/llms-txt-generator-extension.js
+  - require: ./extensions/agents-md-generator-extension.js

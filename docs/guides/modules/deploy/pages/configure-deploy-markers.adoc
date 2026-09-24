@@ -24,22 +24,24 @@ image::guides:ROOT:releases/dashboard.png[Deploys timeline with no deployments r
 
 Deploy markers also enable you to use the rollback and deploy features:
 
-* Rollback pipelines: Manually revert to a previous version of a component from the CircleCI web app. See the xref:set-up-rollbacks.adoc[Set up Rollbacks] guide for more details.
-* Deploy pipelines: Automatically deploy a new version of a component from the CircleCI web app. See the xref:set-up-deploys.adoc[Set up Deploys] for more details.
+* Rollback pipelines: Manually revert to a previous version of a component from the CircleCI web app. See the xref:set-up-rollbacks.adoc[Set Up Rollbacks] guide for more details.
+* Deploy pipelines: Automatically deploy a new version of a component from the CircleCI web app. See the xref:set-up-deploys.adoc[Set Up Deploys] for more details.
 
 
 == Choose your setup method
 
-TIP: *Consider using Smart Deployments instead of this guide.* The Smart Deployments guided setup configures deploy markers, rollback and deploy pipelines, release validation, and automatic rollback. When AI features are enabled and the CircleCI GitHub App is installed, CircleCI opens a single pull request for you to merge. See the xref:set-up-smart-deployments.adoc[Set up Smart Deployments] guide and its xref:set-up-smart-deployments.adoc#setup-routes[Setup routes] section. Use this page when you want deploy markers on their own. Also use it when your code is not in a GitHub repository, when your organization does not have AI features enabled, or when you prefer to edit YAML directly.
+TIP: *Consider using Smart Deployments instead of this guide.* The Smart Deployments guided setup configures deploy markers, rollback and deploy pipelines, release validation, and automatic rollback. When AI features are enabled and the CircleCI GitHub App is installed, CircleCI opens a single pull request for you to merge. See the xref:set-up-smart-deployments.adoc[Set Up Smart Deployments] guide and its xref:set-up-smart-deployments.adoc#setup-routes[Setup routes] section. Use this page when you want deploy markers on their own. Also use it when your code is not in a GitHub repository, when your organization does not have AI features enabled, or when you prefer to edit YAML directly.
 
 You can set up deploy markers in two ways:
 
-* <<set-up-deploy-markers-for-multiple-projects,Set up deploy markers from the web app>>: Use the CircleCI web app to set up deploy marker configuration for a single project or multiple projects at once.
+* <<set-up-deploy-markers-for-multiple-projects,Set up deploy markers from the web app>>: Use the CircleCI web app to set up deploy marker configuration for a single project or multiple projects at once. This route requires a GitHub repository and the CircleCI GitHub App.
 ** With AI features enabled, CircleCI generates the configuration for you.
 ** Without AI features you receive a configuration template to apply manually.
-* <<set-up-deploy-markers-manually,Set up deploy markers manually>>: Edit your CircleCI configuration file directly to add deploy markers. You can choose to configure deploy markers <<deploy-markers-with-status-updates,with status updates>> or <<deploy-marker-logs-without-status-updates,without status updates>>.
+* <<set-up-deploy-markers-manually,Set up deploy markers manually>>: Edit your CircleCI configuration file directly to add deploy markers. This route also works with GitLab, GitLab self-managed, Bitbucket Cloud, and Cursor Origin. You can choose to configure deploy markers <<deploy-markers-with-status-updates,with status updates>> or <<deploy-marker-logs-without-status-updates,without status updates>>.
 
-You can also set up deploy markers using AI as part of the rollback or deploy pipeline guided setup process. See the xref:set-up-rollbacks.adoc[Set up Rollbacks] or xref:set-up-deploys.adoc[Set up Deploys] guides for more details.
+You can also set up deploy markers using AI as part of the rollback or deploy pipeline guided setup process. See the xref:set-up-rollbacks.adoc[Set Up Rollbacks] or xref:set-up-deploys.adoc[Set Up Deploys] guides for more details.
+
+TIP: You can use the xref:guides:toolkit:circleci-agent-skills.adoc[CircleCI Agent Skills] to add deploy markers from your editor. Install the link:https://github.com/CircleCI-Public/skills[CircleCI Public Skills] plugin to your AI coding agent, then ask your agent to set up deploy markers for your project. The `circleci-deploy-setup` skill edits your configuration file and opens a pull request, and does not depend on your organization's AI settings.
 
 [#set-up-deploy-markers-for-multiple-projects]
 == Set up deploy markers from the web app
@@ -99,7 +101,7 @@ NOTE: Only projects you follow are shown. To follow more projects, select the **
 Single project::
 +
 --
-Follow the steps in-app to get set up. For more information on the process, see the xref:set-up-rollbacks.adoc#set-up-a-rollback-pipeline[Set up a Rollback Pipeline] guide which includes the same process.
+Follow the steps in-app to get set up. For more information on the process, see the xref:set-up-rollbacks.adoc#set-up-a-rollback-pipeline[Set Up a Rollback Pipeline] guide which includes the same process.
 --
 Multiple projects::
 +
@@ -134,12 +136,13 @@ This section covers how to set up deploy markers by editing your CircleCI config
 * <<deploy-markers-with-status-updates,With status updates>>: Track the full lifecycle of your deployments (pending, running, success, failed, canceled).
 * <<deploy-marker-logs-without-status-updates,Without status updates>>: Log deployments in the deploys UI without tracking their status.
 
-NOTE: The `circleci run release` commands are part of the CircleCI environment CLI. They are only available in CircleCI builds and are not part of the CircleCI local CLI. You do not need to install the CircleCI local CLI in your CircleCI pipeline to use these commands. See also the full xref:toolkit:environment-cli-usage-guide.adoc[Environment CLI Usage Guide].
+NOTE: The `circleci run release` commands are part of the CircleCI environment CLI. They are only available in CircleCI builds and are not part of the CircleCI local CLI. You do not need to install the CircleCI local CLI in your CircleCI pipeline to use these commands. See also the full xref:reference:ROOT:environment-cli-usage-guide.adoc[Environment CLI Usage Guide].
 
 === Prerequisites
 
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
 * A CircleCI project with a workflow configured to deploy your code.
+* Any supported version control provider: GitHub GitLab, GitLab self-managed, Bitbucket Cloud, and Cursor Origin.
 
 [#deploy-markers-with-status-updates]
 === Deploy markers with status updates
@@ -449,7 +452,7 @@ You can also create an environment integration manually in the CircleCI web app.
 . Select the **Environments** tab.
 . Select btn:[Create Environment Integration].
 . Enter a name for your environment, and a description if you would like.
-. Use the dropdown menu to choose your environment integration type. Choose the 'Custom' option to follow along with this guide. Choose 'Kubernetes Cluster' if you deploy to a Kubernetes cluster and want to use the CircleCI release agent. See the xref:set-up-circleci-deploys.adoc[Set up the CircleCI Release Agent] page.
+. Use the dropdown menu to choose your environment integration type. Choose the 'Custom' option to follow along with this guide. Choose 'Kubernetes Cluster' if you deploy to a Kubernetes cluster and want to use the CircleCI release agent. See the xref:set-up-circleci-deploys.adoc[Set Up the CircleCI Release Agent] page.
 . Select btn:[Save and Continue].
 
 == Next steps
@@ -458,8 +461,8 @@ By following the steps in this guide, you have added a deploy marker to your Cir
 You can now track the status of your deployments across your configured environments in the CircleCI deploys UI and in the project home page.
 You can now:
 
-* xref:set-up-rollbacks.adoc[Set up Rollbacks].
+* xref:set-up-rollbacks.adoc[Set Up Rollbacks].
 
-* xref:set-up-deploys.adoc[Set up Deploys].
+* xref:set-up-deploys.adoc[Set Up Deploys].
 
-* xref:set-up-smart-deployments.adoc[Set up Smart Deployments] to add release validation and automatic rollback.
+* xref:set-up-smart-deployments.adoc[Set Up Smart Deployments] to add release validation and automatic rollback.

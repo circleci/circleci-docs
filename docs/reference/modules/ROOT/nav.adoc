@@ -2,7 +2,8 @@
 ** xref:configuration-reference.adoc[Configuration reference]
 ** xref:reusing-config.adoc[Reusable configuration reference]
 ** xref:variables.adoc[Project values and variables]
-** xref:guides:config-policies:config-policy-reference.adoc[Config policy reference]
+** xref:testsuite-configuration-reference.adoc[Testsuite configuration reference]
+** xref:config-policy-reference.adoc[Config policy reference]
 ** xref:guides:optimize:optimizations.adoc[Optimization reference]
 ** xref:outbound-webhooks-reference.adoc[Outbound webhooks reference]
 
@@ -13,12 +14,12 @@
 ** link:https://circleci.com/docs/api/v1[API v1 reference]
 ** xref:guides:toolkit:api-v3-developers-guide.adoc[API v3 developers guide]
 ** xref:guides:toolkit:api-developers-guide.adoc[API v2 developers guide]
-** xref:guides:execution-runner:runner-api.adoc[Runner API reference]
+** xref:runner-api.adoc[Runner API reference]
 
 * General
 ** xref:guides:about-circleci:concepts.adoc[Concepts]
 ** xref:glossary.adoc[Glossary]
-** xref:guides:toolkit:environment-cli-usage-guide.adoc[Environment CLI usage guide]
-** xref:guides:insights:insights-glossary.adoc[Insights metrics glossary]
+** xref:environment-cli-usage-guide.adoc[Environment CLI usage guide]
+** xref:insights-glossary.adoc[Insights metrics glossary]
 ** xref:troubleshoot.adoc[Troubleshoot]
 ** xref:faq.adoc[FAQ]

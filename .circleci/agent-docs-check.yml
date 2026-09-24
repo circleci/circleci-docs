@@ -7,7 +7,7 @@ version: 2.1
 executors:
   node_executor:
     docker:
-      - image: cimg/node:24.20.0
+      - image: cimg/node:24.21.0
     working_directory: ~/project
 
 jobs:
@@ -21,14 +21,14 @@ jobs:
             - agent-docs-npm-
       - run:
           name: Install Dependencies
-          command: npm install -D afdocs
+          command: npm install -D afdocs vitest
       - save_cache:
           key: agent-docs-npm-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
       - run:
           name: Run AF Docs Check
-          command: npx afdocs check https://circleci.com/docs/ --verbose --fixes
+          command: npx vitest run agent-docs.test.ts --reporter=verbose
 
 workflows:
   agent-docs-workflow:

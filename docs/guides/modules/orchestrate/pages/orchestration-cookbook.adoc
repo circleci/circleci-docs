@@ -14,14 +14,14 @@ You may want to run a set of high credit-consuming tests only when a pull reques
 === Steps
 
 . Set up a GitHub App pipeline you want to trigger when a PR is marked ready for review. Steps for setting up a pipeline are available in the xref:pipelines.adoc#add-or-edit-a-pipeline[Pipelines Overview] page.
-. Set up a trigger for your pipeline and select *PR marked ready for review* under the *Run on* menu. Steps for setting up a trigger are available in the xref:set-up-triggers.adoc[Set up Triggers] page.
+. Set up a trigger for your pipeline and select *PR marked ready for review* under the *Run on* menu. Steps for setting up a trigger are available in the xref:set-up-triggers.adoc[Set Up Triggers] page.
 +
 .Run on trigger options for GitHub App triggers
 image::guides:ROOT:triggers/select-when-to-run.png[Run on trigger options for GitHub App triggers]
 
 === Notes
 
-* This option is only available for GitHub App pipelines. If you have a GitHub OAuth integration you can install the GitHub App into your GitHub org and then create GitHub App pipelines. This is a quick one-time action, as described in the xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth Organization] page.
+* This option is only available for GitHub App pipelines. If you have a GitHub OAuth integration you can install the GitHub App into your GitHub org and then create GitHub App pipelines. Installing the GitHub App is a quick one-time action, as described in the xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth Organization] page.
 +
 include::ROOT:partial$tips/check-github-type-org.adoc[]
 
@@ -34,14 +34,14 @@ You may want to trigger a specific pipeline when a pull request is merged, for e
 === Steps
 . Set up a GitHub App pipeline you want to trigger when a PR is merged. Steps for setting up a pipeline are available in the xref:pipelines.adoc#add-or-edit-a-pipeline[Pipelines and Triggers Overview] page.
 
-. Set up a trigger for your pipeline and select *PR merged* under the *Run on* menu. Steps for setting up a trigger are available in the xref:set-up-triggers.adoc[Set up Triggers] page.
+. Set up a trigger for your pipeline and select *PR merged* under the *Run on* menu. Steps for setting up a trigger are available in the xref:set-up-triggers.adoc[Set Up Triggers] page.
 +
 .Run on trigger options for GitHub App triggers
 image::guides:ROOT:triggers/select-when-to-run.png[Run on trigger options for GitHub App triggers]
 
 === Notes
 
-* This option is only available for GitHub App pipelines. If you have a GitHub OAuth integration you can install the GitHub App into your GitHub org and then create GitHub App pipelines. This is a quick one-time action, as described in the xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth Organization] page.
+* This option is only available for GitHub App pipelines. If you have a GitHub OAuth integration you can install the GitHub App into your GitHub org and then create GitHub App pipelines. Installing the GitHub App is a quick one-time action, as described in the xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth Organization] page.
 +
 include::ROOT:partial$tips/check-github-type-org.adoc[]
 
@@ -68,7 +68,7 @@ workflows:
 
 === Notes
 
-* The `pipeline.event.name` and `pipeline.event.action` variables are only available for GitHub App pipelines. If you have a GitHub OAuth integration you can install the GitHub App into your GitHub org and then create GitHub App pipelines. This is a quick one-time action, as described in the xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth Organization] page.
+* The `pipeline.event.name` and `pipeline.event.action` variables are only available for GitHub App pipelines. If you have a GitHub OAuth integration you can install the GitHub App into your GitHub org and then create GitHub App pipelines. Installing the GitHub App is a quick one-time action, as described in the xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth Organization] page.
 +
 include::ROOT:partial$tips/check-github-type-org.adoc[]
 

@@ -42,6 +42,8 @@ include::ROOT:partial$create-project/choose-a-repo.adoc[]
 Select the **GitHub Cloud** tile to get set up. CircleCI redirects you to GitHub, where you install and authorise the CircleCI GitHub App. You can connect CircleCI to all your repositories, or select a subset. An organization administrator, or someone with admin access to a repository in your org, can complete this one-time authorization.
 
 . CircleCI prepares a config file for you, unless your repo already contains a CircleCI config file. In a later step you will commit this config to your repo on a new branch. If you do already have a CircleCI config file in your repo it will be displayed. Once you have your config, select btn:[Next: set up your triggers].
++
+NOTE: To run an existing GitHub Actions workflow file instead of a CircleCI config file, select **Use existing GitHub Actions workflow file** on the *Select your config source* step. See the xref:orchestrate:use-a-github-actions-workflow-file-as-your-pipeline-configuration.adoc[Use a GitHub Actions Workflow File as Your Pipeline Configuration] page.
 
 . Set up triggers for your pipeline. A single GitHub App trigger is set up by default to build your project on every commit to your repo. You can xref:orchestrate:set-up-triggers.adoc[Add More Triggers] at this point too.
 
@@ -110,28 +112,6 @@ For guidance on creating a `config.yml` file, see the following pages:
 * xref:reference:ROOT:configuration-reference.adoc[Configuration Reference]
 ****
 --
-Bitbucket Data Center::
-+
---
-Before creating a project that you want to integrate with code in a Bitbucket Data Center instance, you need to set up an integration with your Bitbucket Data Center instance. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#vcs-integration[Bitbucket Data Center Integration Setup] page for more information.
-
-include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
-
-include::ROOT:partial$create-project/choose-a-repo.adoc[]
-+
-Select the **Bitbucket Data Center** tile to authorise access to your instance.
-
-. To set up your project you will need to create a project HTTP access token with the project admin scope. Create this under Projects in Bitbucket. For more information, see the link:https://confluence.atlassian.com/bitbucketserver/http-access-tokens-939515499.html[Bitbucket docs]. Copy the token somewhere safe, you will need to enter it when creating pipelines and triggers in CircleCI.
-+
-****
-If you set up your Bitbucket Data Center instance you will see your instance URL and known_hosts. If not see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#vcs-integration[Integration Instructions].
-****
-
-** Use the repository dropdown menu to tell CircleCI where your code is stored.
-** Use the Branch dropdown to tell CircleCI which branch to use for your pipeline.
-** Select **Save**. You will then be redirected to the Pipelines page.
-** The express CircleCI configuration setup is not currently available for Bitbucket Data Center projects. You will need to add a `.circleci/config.yml` file in your repository. If the repository you selected already contains a `.circleci/config.yml`, push a commit to see your pipeline on the dashboard.
---
 Cursor Origin::
 +
 --
@@ -149,7 +129,7 @@ Select the **Cursor Origin** tile to get set up. CircleCI redirects you to Curso
 
 . Set up the trigger for your pipeline. CircleCI creates one Cursor Origin trigger to get you started. Under "When would you like to run your pipeline?", use the dropdown to select the event that runs your pipeline. The default is **All pushes**. For the full list of options, see the xref:orchestrate:cursor-origin-trigger-event-options.adoc[Cursor Origin Trigger Event Options] page.
 +
-You set up one trigger during project creation. You can configure additional triggers once your project is created. See the xref:orchestrate:set-up-triggers.adoc[Set up Triggers] page for more information.
+You set up one trigger during project creation. You can configure additional triggers once your project is created. See the xref:orchestrate:set-up-triggers.adoc[Set Up Triggers] page for more information.
 
 . On the **Review and finish setup** step, set the path to the config file in your repository. The default path is `.circleci/config.yml`.
 
@@ -167,7 +147,7 @@ For guidance on creating a `config.yml` file, see the following pages:
 
 CircleCI uses the specified config file to run your pipeline. You can see the output on the pipelines page. To make changes to your pipeline, edit the config file in your repository.
 
-Through creating a project and connecting your code you have set up your pipeline and a trigger. The default trigger runs your pipeline when a change is committed to your code. You can create more triggers in your project settings. Use menu:Project settings[Project Setup] for GitHub and Cursor Origin projects, or menu:Project settings[Triggers] for GitLab and Bitbucket projects. For more information, see the xref:orchestrate:set-up-triggers.adoc[Set up Triggers] page.
+Through creating a project and connecting your code you have set up your pipeline and a trigger. The default trigger runs your pipeline when a change is committed to your code. You can create more triggers in your project settings. Use menu:Project settings[Project Setup] for GitHub and Cursor Origin projects, or menu:Project settings[Triggers] for GitLab and Bitbucket projects. For more information, see the xref:orchestrate:set-up-triggers.adoc[Set Up Triggers] page.
 
 [#set-up-a-project]
 === Set up a project
@@ -251,16 +231,16 @@ circleci project create my-project --org <my-org-slug>  # creates the project re
 
 Replace `my-project` with your project name and `<my-org-slug>` with your organization slug. For example, `gh/myorg`, `bb/myorg`, or `circleci/<orgID>`. If you omit the project name, CircleCI uses the current git repository's name.
 
-This only creates the project record in CircleCI. You still need to add a `.circleci/config.yml` file to your repository and set up a trigger. See the xref:orchestrate:set-up-triggers.adoc[Set up Triggers] page for more information.
+This only creates the project record in CircleCI. You still need to add a `.circleci/config.yml` file to your repository and set up a trigger. See the xref:orchestrate:set-up-triggers.adoc[Set Up Triggers] page for more information.
 
-This command does not set up a VCS integration, which is what gives CircleCI access to the code in your repositories. If your organization is not yet connected to your VCS provider, either set that connection up first, or use `circleci onboard`, which can do it for you. For steps, see the xref:integration:set-up-vcs-connections.adoc[Set up VCS Connections] page.
+This command does not set up a VCS integration, which is what gives CircleCI access to the code in your repositories. If your organization is not yet connected to your VCS provider, either set that connection up first, or use `circleci onboard`, which can do it for you. For steps, see the xref:integration:set-up-vcs-connections.adoc[Set Up VCS Connections] page.
 
 [#cli-cursor-origin]
 ==== Cursor Origin projects
 
 Both commands work for Cursor Origin projects. Two things are specific to Origin:
 
-* If the CircleCI Origin app is not yet installed in your Origin codebase, `circleci onboard` opens a browser to install it, then finds your repository and creates the pipeline definition and trigger. `circleci project create` does not install the app, so install it first. See the xref:integration:set-up-vcs-connections.adoc[Set up VCS Connections] page.
+* If the CircleCI Origin app is not yet installed in your Origin codebase, `circleci onboard` opens a browser to install it, then finds your repository and creates the pipeline definition and trigger. `circleci project create` does not install the app, so install it first. See the xref:integration:set-up-vcs-connections.adoc[Set Up VCS Connections] page.
 * Committing and pushing the config file yourself is required, whichever command you use, for the reason described in the Cursor Origin tab in <<create-a-project>>.
 
 TIP: If you created your project from a directory that is not yet linked to it, run `circleci project link` to bind the checkout to the project, so other CLI commands resolve it automatically. See the xref:toolkit:circleci-cli.adoc[CircleCI CLI] guide for more.
@@ -297,13 +277,11 @@ CAUTION: Disabling GitLab CI/CD in the GitLab UI is not a substitute for removin
 [#self-managed-connection-problems]
 === Self-managed instance connection problems
 
-For GitLab self-managed and Bitbucket Data Center integrations, if you encounter connection issues:
+For GitLab self-managed integrations, if you encounter connection issues:
 
 . **Verify instance URL and known_hosts**: Ensure your self-managed instance URL and known_hosts are correctly configured. If these are not visible during project creation, complete the integration setup first. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#vcs-integration[Integration Setup] page for more information.
 
 . **Check personal access token**: For GitLab self-managed, verify your personal access token has the `api` scope and has not expired. You may need to generate a new token in your GitLab instance.
-
-. **Check HTTP access token**: For Bitbucket Data Center, verify your HTTP access token has the project admin scope and has not expired. Generate tokens under Projects in your Bitbucket Data Center instance.
 
 . **Verify network connectivity**: Ensure CircleCI can reach your self-managed instance. Check firewall rules, network policies, and any VPN requirements that may block the connection.
 

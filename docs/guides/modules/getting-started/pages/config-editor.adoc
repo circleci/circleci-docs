@@ -3,7 +3,7 @@
 :page-description: Docs page on In-app configuration editor use and features
 :experimental:
 
-include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
+include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab or GitHub App]
 
 With the CircleCI configuration editor, you can modify your configuration files without the use of the xref:toolkit:local-cli.adoc[CircleCI CLI] or a text editor.
 

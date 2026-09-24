@@ -676,14 +676,14 @@ jobs:
 
 Use this feature to optimize test steps. If you set `parallelism` to N > 1, CircleCI sets up N independent executors, and each runs the job's steps in parallel.
 
-You can use the CircleCI CLI to split your test suite across parallel containers so the job completes in a shorter time.
+On CircleCI Cloud, use `circleci testsuite` to run and split your test suite across parallel containers; on CircleCI Server, use the CircleCI CLI's `circleci tests` commands.
 
 * Read more about splitting tests across parallel execution environments on the xref:guides:optimize:parallelism-faster-jobs.adoc#[Parallelism and Test Splitting] page.
 * Refer to the xref:guides:optimize:use-the-circleci-cli-to-split-tests.adoc#[Use the CircleCI CLI to Split Tests] how-to guide.
 
 [tabs]
 ====
-Use an integer::
+Cloud::
 +
 --
 [,yaml]
@@ -698,10 +698,13 @@ jobs:
     resource_class: large
     working_directory: ~/my-app
     steps:
-      - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --" --split-by=timings --timings-type=name
+      - run: circleci testsuite run "ci tests"
+      - store_test_results:
+          # Must match outputs.junit in test-suites.yml
+          path: test-reports
 ----
 --
-Use an expression::
+Server::
 +
 --
 [,yaml]
@@ -712,14 +715,21 @@ jobs:
       - image: cimg/base:2024.12
     environment:
       FOO: bar
-    parallelism: << pipeline.git.branch == "main" and 10 or 1 >>
+    parallelism: 3
     resource_class: large
     working_directory: ~/my-app
     steps:
-      - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --" --split-by=timings --timings-type=name
+      - run: go test -v $(go list ./... | circleci tests split --split-by=timings --timings-type=name)
 ----
 --
 ====
+
+`parallelism` also accepts a pipeline value expression instead of a plain integer, for example to vary the number of parallel executors by branch:
+
+[,yaml]
+----
+parallelism: << pipeline.git.branch == "main" and 10 or 1 >>
+----
 '''
 
 [#parameters-job]
@@ -788,7 +798,7 @@ Configure a job to use the Docker execution environment using the `docker` key w
 | Key | Required | Type | Description
 
 | `image`
-| Y
+| N
 | String
 | The name of a custom Docker image to use. The first `image` listed under a job defines the job's own primary container image where all steps will run.
 
@@ -997,8 +1007,6 @@ jobs:
 [#machine]
 === *`machine`*
 
-NOTE: *Using CircleCI Cloud?* The use of `machine: true` is deprecated. You must specify an image to use.
-
 The machine executor is configured using the `machine` key, which takes a map:
 
 [.table-scroll]
@@ -1172,7 +1180,7 @@ CircleCI supports running jobs on link:https://developer.apple.com/macos/[macOS]
 | `code_signing`
 | N
 | List
-| A list of signing bundle names to install onto the macOS virtual machine with the `install_signing_bundle` step. See xref:guides:execution-managed:ios-codesigning.adoc[Set up Code Signing for iOS and macOS Projects].
+| A list of signing bundle names to install onto the macOS virtual machine with the `install_signing_bundle` step. See xref:guides:execution-managed:ios-codesigning.adoc[Set Up Code Signing for iOS and macOS Projects].
 |===
 --
 
@@ -2278,6 +2286,126 @@ A path does not need to be specified here because CircleCI restores the cache to
 
 '''
 
+[#withtoolcache]
+[badge="Beta"]
+=== *`with_tool_cache`*
+
+NOTE: Build tool caching is in beta on CircleCI Cloud. The feature is still evolving, so you may encounter bugs or changes to behavior. Using it costs no more than standard xref:guides:optimize:persist-data.adoc#managing-network-and-storage-usage[Cache Storage Usage].
+
+Wraps a sequence of steps and configures the named build tool to use a CircleCI-managed remote cache for its own build outputs. See <<savecache,`save_cache`>> and <<restorecache,`restore_cache`>> for the default caching steps. For more information, see the xref:guides:optimize:build-tool-cache.adoc#[Build Tool Cache] page.
+
+[.table-scroll]
+--
+[cols="1,1,1,2", options="header"]
+|===
+| Key | Required | Type | Description
+
+| `tool`
+| Y
+| String
+| The build tool to cache for. One of: `gradle`, `bazel`, `turborepo`, `xcode`.
+
+| `steps`
+| Y
+| List
+| The steps to run with tool caching enabled.
+|===
+--
+
+The `with_tool_cache` step is supported on all executors (`docker`, `machine`, `macos`, and `windows`). Cached data is stored in CircleCI's object storage, the same as when using the default caching steps `save_cache` and `restore_cache`.
+
+*Example:*
+
+[tabs]
+====
+Gradle::
++
+--
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/base:current # use any image with Gradle installed
+    steps:
+      - checkout
+      - with_tool_cache:
+          tool: gradle
+          steps:
+            - run: ./gradlew build
+----
+--
+Bazel::
++
+--
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/base:current # use any image with Bazel installed
+    steps:
+      - checkout
+      - with_tool_cache:
+          tool: bazel
+          steps:
+            - run: bazel build //...
+----
+--
+Turborepo::
++
+--
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/base:current # use any image with Turborepo installed
+    steps:
+      - checkout
+      - with_tool_cache:
+          tool: turborepo
+          steps:
+            - run: turbo run build
+----
+--
+Xcode::
++
+--
+[,yaml,subs=attributes+]
+----
+jobs:
+  build:
+    macos:
+      xcode: {xcodeversion}
+    steps:
+      - checkout
+      - with_tool_cache:
+          tool: xcode
+          steps:
+            - run:
+                name: xcodebuild build
+                command: |
+                  sock="${COMPILATION_CACHE_REMOTE_SERVICE_PATH#unix://}"
+                  xcodebuild build \
+                    -workspace MyApp.xcworkspace \
+                    -scheme "MyApp" \
+                    -destination 'generic/platform=iOS Simulator' \
+                    COMPILATION_CACHE_REMOTE_SERVICE_PATH="$sock" \
+                    COMPILATION_CACHE_ENABLE_PLUGIN=YES \
+                    SWIFT_ENABLE_COMPILE_CACHE=YES \
+                    CLANG_ENABLE_COMPILE_CACHE=YES \
+                    SWIFT_ENABLE_EXPLICIT_MODULES=YES \
+                    SWIFT_USE_INTEGRATED_DRIVER=YES \
+                    CLANG_ENABLE_MODULES=YES \
+                    COMPILATION_CACHE_ENABLE_INTEGRATED_QUERIES=YES \
+                    COMPILATION_CACHE_ENABLE_DETACHED_KEY_QUERIES=YES
+----
+--
+====
+
+'''
+
 [#deploy-deprecated]
 === *`deploy` - DEPRECATED*
 
@@ -2524,7 +2652,7 @@ NOTE: Even though CircleCI uses `ssh-agent` to sign all added SSH keys, you *mus
 [#install-signing-bundle]
 === *`install_signing_bundle`*
 
-A special step that installs the code signing certificates and provisioning profiles from the signing bundles declared in the `code_signing` key of your `macos` executor. CircleCI installs them into a temporary keychain on the runner at build time and removes them when the job completes. See xref:guides:execution-managed:ios-codesigning.adoc[Set up Code Signing for iOS and macOS Projects].
+A special step that installs the code signing certificates and provisioning profiles from the signing bundles declared in the `code_signing` key of your `macos` executor. CircleCI installs them into a temporary keychain on the runner at build time and removes them when the job completes. See xref:guides:execution-managed:ios-codesigning.adoc[Set Up Code Signing for iOS and macOS Projects].
 
 In the case of `install_signing_bundle`, the step type is just a string with no additional attributes.
 
@@ -2748,7 +2876,7 @@ workflows:
 [#schedule]
 ==== *`schedule`*
 
-NOTE: Scheduled workflows are not available for projects integrated through the GitHub App, GitLab or Bitbucket Data Center.
+NOTE: Scheduled workflows are not available for projects integrated through the GitHub App or GitLab.
 
 NOTE: Using *schedule triggers* rather than scheduled workflows offers several benefits. Visit the schedule triggers xref:guides:orchestrate:migrate-scheduled-workflows-to-schedule-triggers.adoc[Migration Guide] to find out how to migrate existing scheduled workflows to schedule triggers. If you would like to set up schedule triggers from scratch, visit the xref:guides:orchestrate:schedule-triggers.adoc[Schedule Triggers] page.
 
@@ -3711,7 +3839,11 @@ workflows:
 
 == Using expressions in your configuration
 
-CircleCI configuration supports expressions for dynamic value evaluation. Expressions can include pipeline values, pipeline parameters, literals, and operators such as `and`, `or`, and comparison operators.
+CircleCI configuration supports expressions for dynamic value evaluation. Expressions can include pipeline values, pipeline parameters, and literals. They also support operators such as `and`, `or`, and comparison operators.
+
+The job `filters`, and workflow `when` and `unless` fields accept expressions directly. For other fields wrap the expression in `<<` and `>>`.
+
+To insert a pipeline value without logic, or for an overview of compile-time config templating, see the xref:guides:orchestrate:config-templating.adoc[Config Templating] page.
 
 [#expressions-in-config-fields]
 === Expressions in configuration fields
@@ -3914,109 +4046,223 @@ workflows:
 [#example-full-configuration]
 == Example full configuration
 
+The following configuration file builds, tests, and deploys a Node.js service. It combines keys from across this page into one pipeline, including:
+
+* Reusable <<orbs,orbs>>, <<executors,executors>>, and <<commands,commands>>.
+* A <<parameters-pipeline,pipeline parameter>> that sets the deployment target when you trigger the pipeline.
+* Service containers, dependency caching, workspaces, artifacts, and test results.
+* <<parallelism,Parallelism>> with Smarter Testing to split each suite across four execution environments, and a <<matrix,matrix>> that runs the test job once per suite. See the xref:guides:test:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] guide.
+* <<expression-based-job-filters,Expression-based job filters>>, an <<type,approval job>>, and a <<serial-group,serial group>> so only one deployment runs at a time across your organization.
+* Deploy markers that log each deployment in the CircleCI web app. See the xref:guides:deploy:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
+
 include::guides:ROOT:partial$notes/docker-auth.adoc[]
 
 [,yaml]
 ----
 version: 2.1
-jobs:
-  build:
+
+# Orbs are shareable packages of configuration.
+orbs:
+  node: circleci/node@7.2.1
+
+# Set a pipeline parameter when you trigger a pipeline from the web app or the API.
+parameters:
+  deploy-target:
+    type: enum
+    enum: ["staging", "production"]
+    default: "staging"
+
+# A reusable executor defines an execution environment once for several jobs to share.
+executors:
+  node-service:
     docker:
-      - image: ubuntu:23.04
-
-      - image: mongo:6.0.14
-        command: [mongod, --smallfiles]
-
-      - image: postgres:14.12
-        # some containers require setting environment variables
+      # The first image in the list is the primary container, where job steps run.
+      - image: cimg/node:24.21.0
+      # Any further images run as service containers, reachable on localhost.
+      - image: cimg/postgres:17.11
         environment:
-          POSTGRES_USER: user
-
-      - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
-
-      - image: rabbitmq:3.12.12
-
+          POSTGRES_USER: circleci
+          POSTGRES_DB: app_test
+      - image: cimg/redis:8.4
+    resource_class: large
+    working_directory: ~/app
     environment:
-      TEST_REPORTS: /tmp/test-reports
+      DATABASE_URL: postgres://circleci@localhost:5432/app_test
+      REDIS_URL: redis://localhost:6379
 
-    working_directory: ~/my-project
-
+# A reusable command defines a sequence of steps once for several jobs to share.
+commands:
+  install-dependencies:
+    description: Check out the code and install Node packages.
     steps:
       - checkout
+      # The node orb caches your packages between runs.
+      - node/install-packages:
+          pkg-manager: npm
 
+jobs:
+  build:
+    executor: node-service
+    steps:
+      - install-dependencies
       - run:
-          command: echo 127.0.0.1 devhost | sudo tee -a /etc/hosts
-
-      # Create Postgres users and database
-      # Note the YAML heredoc '|' for nicer formatting
-      - run: |
-          sudo -u root createuser -h localhost --superuser ubuntu &&
-          sudo createdb -h localhost test_db
-
-      - restore_cache:
-          keys:
-            - v1-my-project-{{ checksum "project.clj" }}
-            - v1-my-project-
-
-      - run:
-          environment:
-            SSH_TARGET: "localhost"
-            TEST_ENV: "linux"
-          command: |
-            set -xu
-            mkdir -p ${TEST_REPORTS}
-            run-tests.sh
-            cp out/tests/*.xml ${TEST_REPORTS}
-
-      - run: |
-          set -xu
-          mkdir -p /tmp/artifacts
-          create_jars.sh << pipeline.number >>
-          cp *.jar /tmp/artifacts
-
-      - save_cache:
-          key: v1-my-project-{{ checksum "project.clj" }}
+          name: Build the application
+          command: npm run build
+      # Pass the build output to the jobs that run later in the workflow.
+      - persist_to_workspace:
+          root: ~/app
           paths:
-            - ~/.m2
-
-      # Save artifacts
+            - dist
       - store_artifacts:
-          path: /tmp/artifacts
-          destination: build
+          path: dist
+          destination: build-output
 
-      # Upload test results
+  test:
+    executor: node-service
+    # Smarter Testing splits the suite across these four execution environments.
+    parallelism: 4
+    # Delete this job's cache data after seven days.
+    retention:
+      caches: 7d
+    parameters:
+      suite:
+        type: string
+    steps:
+      - install-dependencies
+      - attach_workspace:
+          at: ~/app
+      # Resolves to a suite named in .circleci/test-suites.yml, such as "unit tests".
+      - run:
+          name: Run the << parameters.suite >> tests
+          command: circleci testsuite run "<< parameters.suite >> tests"
       - store_test_results:
-          path: /tmp/test-reports
+          # This path must match the outputs.junit path in test-suites.yml.
+          path: test-reports
+      - store_artifacts:
+          path: coverage
+          destination: coverage
 
-  deploy-stage:
+  publish-image:
+    machine:
+      image: ubuntu-2604:current
+      # Reuse the image layers built by previous runs of this job.
+      docker_layer_caching: true
+    working_directory: ~/app
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/app
+      - run:
+          name: Build and push the container image
+          command: |
+            echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_LOGIN" --password-stdin
+            docker build --tag "$IMAGE_NAME:$CIRCLE_SHA1" .
+            docker push "$IMAGE_NAME:$CIRCLE_SHA1"
+
+  deploy:
     docker:
-      - image: ubuntu:23.04
-    working_directory: /tmp/my-project
+      - image: cimg/base:current
+    working_directory: ~/app
+    steps:
+      - checkout
+      # A deploy marker logs this deployment in the CircleCI web app.
+      - run:
+          name: Plan the deployment
+          command: |
+            circleci run release plan my-service \
+              --environment-name=<< pipeline.parameters.deploy-target >> \
+              --component-name=my-service \
+              --target-version=<< pipeline.number >>
+      - run:
+          name: Deploy to << pipeline.parameters.deploy-target >>
+          command: ./scripts/deploy.sh << pipeline.parameters.deploy-target >>
+      - run:
+          name: Mark the deployment as running
+          command: circleci run release update my-service --status=running
+      # The when attribute reports the outcome back to the deploy marker.
+      - run:
+          name: Mark the deployment as successful
+          command: circleci run release update my-service --status=SUCCESS
+          when: on_success
+      - run:
+          name: Mark the deployment as failed
+          command: circleci run release update my-service --status=FAILED
+          when: on_fail
+
+  cancel-deploy:
+    docker:
+      - image: cimg/base:current
     steps:
       - run:
-          name: Deploy if tests pass and branch is Staging
-          command: ansible-playbook site.yml -i staging
-
-  deploy-prod:
-    docker:
-      - image: ubuntu:23.04
-    working_directory: /tmp/my-project
-    steps:
-      - run:
-          name: Deploy if tests pass and branch is Main
-          command: ansible-playbook site.yml -i production
+          name: Mark the deployment as canceled
+          command: circleci run release update my-service --status=CANCELED
 
 workflows:
-  build-deploy:
+  build-test-deploy:
+    # Rerun failed jobs in this workflow up to two times.
+    max_auto_reruns: 2
     jobs:
-      - build:
-          filters: pipeline.git.branch != "develop" and not (pipeline.git.branch matches /feature-.*/) # only run the build job on branches other than develop and any branch starting with feature-
-      - deploy-stage:
+      - build
+      - test:
+          # The matrix runs the test job once for each suite listed.
+          matrix:
+            parameters:
+              suite: ["unit", "integration"]
           requires:
             - build
-          filters: pipeline.git.branch == "staging" # only run the deploy-stage job on the staging branch
-      - deploy-prod:
+      - publish-image:
+          # A context holds credentials shared across your organization.
+          context:
+            - docker-hub
           requires:
             - build
-          filters: pipeline.git.branch == "main" # only run the deploy-prod job on the main branch
+          filters: pipeline.git.branch == "main" or pipeline.git.tag starts-with "v"
+      # An approval job holds the workflow until someone approves it in the web app.
+      - hold:
+          type: approval
+          requires:
+            - test
+            - publish-image
+      - deploy:
+          context:
+            - deploy-credentials
+          # Only one job in this serial group runs at a time across your organization.
+          serial-group: << pipeline.project.slug >>/deploy-<< pipeline.parameters.deploy-target >>
+          requires:
+            - hold
+          filters: pipeline.git.branch == "main"
+      # Requiring a status runs this job only when the deploy job is canceled.
+      - cancel-deploy:
+          requires:
+            - deploy:
+                - canceled
+          filters: pipeline.git.branch == "main"
 ----
+
+The `test` job runs the two suites named in a companion `.circleci/test-suites.yml` file:
+
+[,yaml]
+----
+---
+name: unit tests
+discover: vitest list --filesOnly test/unit
+run: vitest run --reporter=junit --outputFile="<< outputs.junit >>" << test.atoms >>
+outputs:
+  junit: test-reports/junit.xml
+options:
+  impact-key: unit
+  dynamic-test-splitting: true
+---
+name: integration tests
+discover: vitest list --filesOnly test/integration
+run: vitest run --reporter=junit --outputFile="<< outputs.junit >>" << test.atoms >>
+outputs:
+  junit: test-reports/junit.xml
+options:
+  impact-key: integration
+  dynamic-test-splitting: true
+  # Rerun a failed test up to twice before the job fails.
+  max-auto-rerun: 2
+----
+
+For every key you can set in this file, see the xref:testsuite-configuration-reference.adoc[Testsuite Configuration Reference] page.

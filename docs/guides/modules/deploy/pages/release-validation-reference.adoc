@@ -5,7 +5,7 @@
 
 Release validation evaluates webhook signals from your monitoring tool during an evaluation window after each deploy. This page documents every field you can set to control that evaluation.
 
-The xref:set-up-smart-deployments.adoc[Set up Smart Deployments] guided setup generates a starting validation configuration for you. Use this page when you want to extend that configuration, or when you need to write it by hand.
+The xref:set-up-smart-deployments.adoc[Set Up Smart Deployments] guided setup generates a starting validation configuration for you. Use this page when you want to extend that configuration, or when you need to write it by hand.
 
 == Introduction
 
@@ -34,7 +34,7 @@ You need to write this configuration by hand in the following cases:
 * You want more than one named check per release.
 * Your monitoring tool sends payloads in a shape the provider defaults do not understand.
 
-For the steps to configure validation and connect your monitoring tool by hand, see the xref:set-up-release-validation-manually.adoc[Set up Release Validation Manually] guide. This page is the field reference for that work.
+For the steps to configure validation and connect your monitoring tool by hand, see the xref:set-up-release-validation-manually.adoc[Set Up Release Validation Manually] guide. This page is the field reference for that work.
 
 [#optional-validation-fields]
 == Optional validation fields
@@ -308,4 +308,4 @@ jobs:
 
 * Connect your monitoring tool so that it sends the tags these mappings expect. See the xref:set-up-smart-deployments.adoc#connect-monitoring-webhooks[Connect Monitoring Webhooks] section.
 * Understand what happens when validation passes or fails. See the xref:smart-deployments-overview.adoc#how-release-validation-works[How Release Validation Works] section.
-* Configure the rollback pipeline that automatic rollback triggers. See the xref:set-up-rollbacks.adoc[Set up Rollbacks] guide.
+* Configure the rollback pipeline that automatic rollback triggers. See the xref:set-up-rollbacks.adoc[Set Up Rollbacks] guide.

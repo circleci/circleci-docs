@@ -29,6 +29,7 @@
 ** xref:migrate:migrating-from-azuredevops.adoc[Migrate from Azure DevOps]
 ** xref:migrate:migrating-from-buildkite.adoc[Migrate from Buildkite]
 ** xref:migrate:migrating-from-github.adoc[Migrate from GitHub]
+** xref:orchestrate:use-a-github-actions-workflow-file-as-your-pipeline-configuration.adoc[Use a GitHub Actions workflow file as your pipeline configuration]
 ** xref:migrate:migrating-from-gitlab.adoc[Migrate from GitLab]
 ** xref:migrate:migrating-from-jenkins.adoc[Migrate from Jenkins]
 ** xref:migrate:migrating-from-teamcity.adoc[Migrate from TeamCity]
@@ -40,6 +41,8 @@
 *** xref:orchestrate:jobs-steps.adoc[Jobs and steps overview]
 *** xref:orchestrate:workflows.adoc[Workflow orchestration]
 *** xref:orchestrate:pipeline-variables.adoc[Pipeline values and parameters]
+*** xref:orchestrate:config-templating.adoc[Config templating]
+*** xref:orchestrate:use-a-github-actions-workflow-file-as-your-pipeline-configuration.adoc[Use a GitHub Actions workflow file as your pipeline configuration]
 ** Trigger and schedule pipelines
 *** xref:orchestrate:triggers-overview.adoc[Trigger options]
 *** xref:orchestrate:set-up-triggers.adoc[Set up triggers]
@@ -117,8 +120,9 @@
 ** xref:execution-runner:runner-overview.adoc[Self-hosted runner overview]
 ** xref:execution-runner:runner-concepts.adoc[Self-hosted runner concepts]
 ** xref:execution-runner:runner-feature-comparison-matrix.adoc[Runner feature comparison matrix]
-** Runner provisioner
-*** xref:execution-runner:runner-provisioner.adoc[Runner provisioner overview - Beta]
+** Machine Runner Orchestrator
+*** xref:execution-runner:machine-runner-orchestrator.adoc[Machine Runner Orchestrator overview]
+*** xref:execution-runner:machine-runner-orchestrator-performance-benchmarks.adoc[Machine Runner Orchestrator performance benchmarks]
 
 ** Container runner
 *** xref:execution-runner:container-runner-installation.adoc[Container runner installation]
@@ -138,7 +142,7 @@
 *** xref:execution-runner:machine-runner-3-configuration-reference.adoc[Machine runner 3 configuration reference]
 
 ** Self-hosted runner reference
-*** xref:execution-runner:runner-api.adoc[Self-hosted runner API]
+*** xref:reference:ROOT:runner-api.adoc[Self-hosted runner API]
 *** xref:execution-runner:runner-faqs.adoc[Self-hosted runner FAQ]
 *** xref:execution-runner:troubleshoot-self-hosted-runner.adoc[Troubleshoot self-hosted runner]
 *** xref:execution-runner:runner-scaling.adoc[Scaling self-hosted runner]
@@ -148,23 +152,24 @@
 *** xref:test:test.adoc[Automated testing]
 *** xref:test:collect-test-data.adoc[Collecting test data]
 *** xref:insights:insights-tests.adoc[Test Insights]
-** Manage and optimize tests
-*** xref:test:fix-flaky-tests.adoc[Fix flaky tests]
-*** xref:optimize:parallelism-faster-jobs.adoc[Test splitting and parallelism]
-*** xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the environment CLI to split tests]
-*** xref:test:troubleshoot-test-splitting.adoc[Troubleshoot test splitting]
-*** xref:test:automate-llm-evaluation-testing-with-the-circleci-evals-orb.adoc[Automate LLM evaluation testing with the CircleCI Evals orb]
 ** Smarter Testing
 *** xref:test:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing]
 *** xref:test:set-up-test-impact-analysis.adoc[Set up Test Impact Analysis]
 *** xref:test:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting]
 *** xref:test:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests]
 *** xref:test:testsuite-configuration-reference.adoc[Test suite Config Reference]
+** Legacy test split tooling
+*** xref:optimize:parallelism-faster-jobs.adoc[Test splitting and parallelism]
+*** xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the environment CLI to split tests]
+*** xref:test:troubleshoot-test-splitting.adoc[Troubleshoot test splitting]
+*** xref:test:rerun-failed-tests.adoc[Re-run failed tests overview]
+** Manage and optimize tests
+*** xref:test:fix-flaky-tests.adoc[Fix flaky tests]
+*** xref:test:automate-llm-evaluation-testing-with-the-circleci-evals-orb.adoc[Automate LLM evaluation testing with the CircleCI Evals orb]
 ** Testing strategies
 *** xref:test:testing-llm-enabled-applications-through-evaluations.adoc[Testing LLM-enabled applications through evaluations]
 *** xref:test:browser-testing.adoc[Browser testing]
 *** xref:test:code-coverage.adoc[Generate code coverage metrics]
-*** xref:test:rerun-failed-tests.adoc[Re-run failed tests overview]
 *** xref:test:testing-ios.adoc[Testing iOS applications]
 *** xref:test:testing-macos.adoc[Testing macOS applications]
 
@@ -212,6 +217,7 @@
 ** Data
 *** xref:optimize:persist-data.adoc[Persisting data overview]
 *** xref:optimize:caching.adoc[Caching dependencies]
+*** xref:optimize:build-tool-cache.adoc[Build tool cache]
 *** xref:optimize:artifacts.adoc[Store build artifacts]
 ** Speed
 *** xref:optimize:concurrency.adoc[Concurrency]
@@ -229,7 +235,7 @@
 ** xref:insights:insights-tests.adoc[Test Insights]
 ** xref:insights:project-usage-dashboard.adoc[Project Usage Dashboard]
 ** xref:insights:insights-snapshot-badge.adoc[Generate an Insights snapshot badge]
-** xref:insights:insights-glossary.adoc[Insights glossary]
+** xref:reference:ROOT:insights-glossary.adoc[Insights glossary]
 
 * Manage roles, permissions, and authentication
 ** xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, organizations, and integrations guide]
@@ -280,7 +286,7 @@
 
 * Manage config policies
 ** xref:config-policies:config-policy-management-overview.adoc[Config policy management overview]
-** xref:config-policies:config-policy-reference.adoc[Config policy reference]
+** xref:reference:ROOT:config-policy-reference.adoc[Config policy reference]
 ** How-to guides
 *** xref:config-policies:create-and-manage-config-policies.adoc[Create and manage config policies]
 *** xref:config-policies:test-config-policies.adoc[Test config policies]
@@ -323,6 +329,7 @@
 
 * Working with agents
 ** xref:toolkit:circleci-agent-skills.adoc[CircleCI Agent Skills]
+** xref:toolkit:diagnose-failed-runs-with-failure-report.adoc[Fix broken builds efficiently with agents]
 ** MCP
 *** xref:toolkit:circleci-mcp-overview.adoc[CircleCI MCP overview]
 *** xref:toolkit:connecting-to-the-circleci-mcp-server.adoc[Connecting to the CircleCI MCP server]
@@ -340,7 +347,7 @@
 *** xref:toolkit:cli-migration-guide.adoc[CLI migration guide]
 
 ** Environment CLI
-*** xref:toolkit:environment-cli-usage-guide.adoc[CircleCI environment CLI usage guide]
+*** xref:reference:ROOT:environment-cli-usage-guide.adoc[CircleCI environment CLI usage guide]
 
 ** In-app AI features
 *** xref:guides:toolkit:enable-ai-powered-features.adoc[Enable AI-powered features]

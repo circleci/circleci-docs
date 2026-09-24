@@ -26,7 +26,7 @@ Before you install CircleCI agent skills, set up the following:
 
 == Available CircleCI agent skills
 
-The CircleCI plugin currently includes the following seven skills. Your agent picks a skill from your request, or you can invoke a skill by name.
+The CircleCI plugin currently includes the following eight skills. Your agent picks a skill from your request, or you can invoke a skill by name.
 
 [.table-scroll]
 --
@@ -49,6 +49,10 @@ The CircleCI plugin currently includes the following seven skills. Your agent pi
 | `onboarding`
 | Walks through first-time CircleCI setup for a new repository.
 | Onboard my project to CircleCI.
+
+| `circleci-deploy-setup`
+| Sets up Smart Deployments in a repository: deploy markers, deploy and rollback pipelines, release validation, and monitoring webhooks. Your agent first audits what the repository already has, then asks which parts to add or regenerate. The manual setup is described on the xref:guides:deploy:set-up-smart-deployments.adoc[Set Up Smart Deployments] page.
+| Set up CircleCI deploy markers, deploy and rollback pipelines, and release validation for this project.
 
 | `chunk`
 | Sets up either/or/both Chunk for the CircleCI web app (cloud based CI/CD assistant) or the Chunk CLI (local CI/CD development tooling). For more information on Chunk, see the xref:chunk-setup-and-overview.adoc[Chunk Overview and Setup] page and the xref:install-and-configure-the-chunk-cli.adoc[Install and Configure the Chunk CLI] page.

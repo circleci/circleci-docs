@@ -62,4 +62,4 @@ Registry orbs use semantic versioning. If you set the _major_ version (example: 
 
 NOTE: Inline orbs do not have versions (updated by editing the config file), and URL orbs use Git-based versioning (branches, tags, or commits) rather than semantic versioning.
 
-WARNING: NOT RECOMMENDED - It is possible to use `@volatile` to receive the last published version of an orb. This is not recommended as breaking changes are expected.
+WARNING: NOT RECOMMENDED - It is possible to use `@volatile` to receive the last published version of an orb. Using `@volatile` is not recommended as breaking changes are expected.

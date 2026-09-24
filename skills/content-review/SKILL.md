@@ -46,7 +46,7 @@ Read these related pages to understand:
 
 ### Step 3: Conduct the Review
 
-Evaluate the page across these 10 dimensions:
+Evaluate the page across these 11 dimensions:
 
 #### 1. **Tone & Audience**
 - **General pages**: Should have a friendly, authoritative tone suitable for a junior engineer
@@ -108,6 +108,12 @@ Evaluate the page across these 10 dimensions:
 - Reader (human or agent) should know immediately if this page is relevant
 - Flag if the opening is vague, overly technical, or doesn't answer "why read this"
 
+#### 11. **Partial and Example Reuse**
+- Check hand-written prose (nav steps, notes, tips, FAQs, resource tables) against `docs/guides/modules/ROOT/partials/`. Flag it if an existing partial already covers the same content and should replace it.
+- Check hand-written YAML or config blocks against `docs/guides/modules/ROOT/examples/`. Flag it if an existing example already covers the same snippet and should replace it.
+- Flag hand-written prose or code that looks generic or reusable (not page-specific) as a candidate for a **new** partial or example, especially if you find the same or near-identical content on another page during Step 2.
+- Do not perform the search, extraction, or replacement yourself. Follow `skills/partials/SKILL.md` for that workflow; this review only surfaces the opportunity.
+
 ### Step 4: Generate and Save the Report
 
 Generate a narrative-style report with this structure:
@@ -129,7 +135,7 @@ Generate a narrative-style report with this structure:
 
 ### [Priority level]: [Issue title]
 
-**Category:** [Which of the 10 categories this relates to]
+**Category:** [Which of the 11 categories this relates to]
 
 **Issue:** [Clear description of the problem]
 
@@ -143,7 +149,7 @@ Generate a narrative-style report with this structure:
 
 ## Detailed Findings
 
-[Go through each of the 10 categories. For each category, either:]
+[Go through each of the 11 categories. For each category, either:]
 - ✅ **[Category Name]**: [Brief note on why this passes]
 - ⚠️ **[Category Name]**: [Detailed findings of issues]
 
@@ -183,7 +189,8 @@ Generate a narrative-style report with this structure:
 **Priority Levels:**
 - **Critical**: Issues that break comprehension or accessibility (missing "why", code without context, buried essential info)
 - **High**: Issues that significantly impact usability (poor headings, confusing flow, major inconsistencies)
-- **Medium**: Issues that reduce quality (minor inconsistencies, unnecessary repetition, weak value proposition)
+- **Medium**: Issues that reduce quality (minor inconsistencies, unnecessary repetition, weak value proposition, a partial/example that should replace hand-written content)
+- **Low**: Nice-to-have improvements (hand-written content that is a good candidate for a *new* partial or example, but nothing is broken today)
 
 **Specificity:**
 - Reference specific headings, paragraphs, or line numbers where possible
@@ -217,7 +224,7 @@ You:
 3. Check :page-platform: to determine audience
 4. Find 3-5 related getting-started pages using Grep/Glob
 5. Read those related pages
-6. Analyze all 10 dimensions
+6. Analyze all 11 dimensions
 7. Generate the narrative report with prioritized recommendations
 8. Save the report as `content-review-hello-world.md` in the repository root
 9. Inform the user where the report has been saved
@@ -228,11 +235,13 @@ You:
 - Consider both human and AI agent readability
 - Remember that agents often retrieve just one section or code block, so each should be self-contained
 - Use the full context from AGENTS.md - it contains detailed style rules beyond what's summarized here
-- If you can't find related pages, note that in the consistency section but still complete the other 9 categories
+- If you can't find related pages, note that in the consistency section but still complete the other 10 categories (Partial and Example Reuse does not depend on finding related pages)
 - Always read the actual related pages - don't guess at consistency without evidence
+- For the Partial and Example Reuse check, actually search `docs/guides/modules/ROOT/partials/` and `docs/guides/modules/ROOT/examples/` (Glob/Grep) rather than guessing whether something already exists
 
 ## What This Skill Is NOT
 
 - This is not a Vale linter replacement - focus on content quality, not grammar/style nitpicks
 - This is not a full copyedit - identify patterns and priorities, not every minor issue
 - This is not a rewrite - provide recommendations, not rewritten content
+- This is not the partials skill - it flags reuse and extraction opportunities but does not search categories, create partials/examples, or edit other pages. Hand that off to `skills/partials/SKILL.md`

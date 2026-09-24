@@ -154,4 +154,4 @@ resource_class_check = config.resource_class_by_project({
 
 * xref:create-and-manage-config-policies.adoc[Create and Manage Config Policies]
 * xref:test-config-policies.adoc[Test Config Policies]
-* xref:config-policy-reference.adoc[Config Policy Reference]
+* xref:reference:ROOT:config-policy-reference.adoc[Config Policy Reference]

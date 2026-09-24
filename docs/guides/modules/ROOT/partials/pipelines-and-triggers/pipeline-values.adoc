@@ -19,7 +19,6 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
-[.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab# +
 [.nowrap]#Cursor Origin#
 | String
@@ -32,7 +31,6 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
-[.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab# +
 [.nowrap]#Cursor Origin#
 | Integer
@@ -45,7 +43,6 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
-[.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab# +
 [.nowrap]#Cursor Origin# +
 _(except schedule workflows)_
@@ -59,7 +56,6 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
-[.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab# +
 [.nowrap]#Cursor Origin#
 | String
@@ -72,7 +68,6 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
-[.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab# +
 [.nowrap]#Cursor Origin#
 | String
@@ -85,7 +80,6 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
-[.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab# +
 [.nowrap]#Cursor Origin#
 | String
@@ -98,7 +92,6 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
-[.nowrap]#Bitbucket Data Center# +
 [.nowrap]#Cursor Origin# +
 _(except schedule workflows)_
 | String
@@ -111,7 +104,6 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
-[.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab# +
 [.nowrap]#Cursor Origin#
 | String
@@ -146,7 +138,6 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
-[.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab# +
 [.nowrap]#Cursor Origin#
 | String
@@ -159,7 +150,6 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
-[.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab# +
 [.nowrap]#Cursor Origin#
 | String
@@ -172,7 +162,6 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
-[.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab# +
 [.nowrap]#Cursor Origin#
 | Boolean
@@ -185,7 +174,6 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
-[.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab# +
 [.nowrap]#Cursor Origin#
 | String
@@ -198,7 +186,6 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
-[.nowrap]#Bitbucket Data Center# +
 [.nowrap]#Cursor Origin#
 | String
 | The URL of the repository.
@@ -232,7 +219,6 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
-[.nowrap]#Bitbucket Data Center# +
 [.nowrap]#Cursor Origin#
 | String
 | The unique identifier of the repository.
@@ -244,7 +230,6 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
-[.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab# +
 [.nowrap]#Cursor Origin# +
 _(except schedule workflows)_
@@ -258,7 +243,6 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
-[.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab# +
 [.nowrap]#Cursor Origin#
 | String
@@ -271,7 +255,6 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
-[.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab# +
 [.nowrap]#Cursor Origin#
 | String
@@ -283,7 +266,6 @@ d| [.nowrap]#GitHub App# +
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitHub OAuth# +
-[.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab# +
 [.nowrap]#Cursor Origin#
 | String
@@ -392,7 +374,6 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
-[.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab# +
 [.nowrap]#Cursor Origin#
 | String
@@ -403,7 +384,6 @@ d| [.nowrap]#GitHub App# +
 | `pipeline.trigger.id`
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
-[.nowrap]#Bitbucket Data Center# +
 [.nowrap]#Cursor Origin#
 | String
 | The unique ID of the trigger that initiated the pipeline.
@@ -415,7 +395,6 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
-[.nowrap]#Bitbucket Data Center# +
 [.nowrap]#Cursor Origin#
 | String
 | The type of trigger that initiated the pipeline. Possible values: `github_app`, `github_server`, `github_oauth`, `bitbucket_cloud`, `bitbucket_dc`, `schedule`, `webhook`, `api`.
@@ -428,7 +407,6 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
-[.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab# +
 [.nowrap]#Cursor Origin#
 | String
@@ -971,7 +949,7 @@ d| [.nowrap]#GitLab#
 [#deploy-information]
 === Deploy information
 
-Values prefixed with `+pipeline.deploy.*+` are only available for deployment pipelines. See the xref:guides:deploy:set-up-rollbacks.adoc[Set up a Rollback Pipeline] and xref:guides:deploy:set-up-deploys.adoc[Set up a Deploy Pipeline] guides for more information.
+Values prefixed with `+pipeline.deploy.*+` are only available for deployment pipelines. See the xref:guides:deploy:set-up-rollbacks.adoc[Set Up a Rollback Pipeline] and xref:guides:deploy:set-up-deploys.adoc[Set Up a Deploy Pipeline] guides for more information.
 
 [.table-scroll]
 --

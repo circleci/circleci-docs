@@ -14,13 +14,13 @@ orbs:
 executors:
   node_executor:
     docker:
-      - image: cimg/node:24.20.0
+      - image: cimg/node:24.21.0
     resource_class: medium+.gen2
     working_directory: ~/project
 
   go_executor:
     docker:
-      - image: cimg/go:1.26
+      - image: cimg/go:1.27
     working_directory: ~/project
 
 commands:

@@ -216,7 +216,7 @@ NOTE: Release agent v1.6.0 and Helm chart v1.6.0 or higher are required to use m
 
 Release agent v1.6.0 and Helm chart v1.6.0 introduce a `managedNamespacesMode` Helm value. This setting (exposed as `MANAGED_NAMESPACES_MODE` on the agent deployment) controls how the agent determines which namespaces to monitor. Managed namespaces mode has two options as follows:
 
-* `static` (default): The agent monitors the exact namespace names listed in `managedNamespaces`. This is the same behavior as prior versions and requires no additional RBAC permissions.
+* `static` (default): The agent monitors the exact namespace names listed in `managedNamespaces`. The `static` mode matches the behavior of prior versions and requires no additional RBAC permissions.
 * `dynamic`: The agent discovers namespaces at runtime by matching the patterns in `managedNamespaces` against all cluster namespaces. Use glob patterns such as `team-*` to monitor any namespace whose name matches the pattern.
 
 [#static-mode]
