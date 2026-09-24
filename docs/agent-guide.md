@@ -103,17 +103,7 @@ Do not add these to new configuration or integrations, on either platform:
 - Legacy convenience images such as `circleci/node` or `circleci/python`. Use `cimg/` images. See [Migrating to Next-gen Images](https://circleci.com/docs/guides/execution-managed/next-gen-migration-guide/).
 - The local `npx` CircleCI MCP server. Use the hosted MCP server or CLI MCP instead. MCP servers are not available on Server yet.
 
-The following flip direction between platforms — a pattern Cloud deprecates is often the only option Server has:
-
-**Cloud:**
-
-- `workflows.<name>.triggers.schedule` (scheduled workflows). Use [Schedule Triggers](https://circleci.com/docs/guides/orchestrate/schedule-triggers/). To convert existing schedules, see [Migrate Scheduled Workflows to Schedule Triggers](https://circleci.com/docs/guides/orchestrate/migrate-scheduled-workflows-to-schedule-triggers/).
-- API v2 or v1.1 for new integrations. Use API v3 and the [OpenAPI specification](https://circleci.com/fullopenapi.yaml).
-- The legacy CircleCI CLI (v0.1.x). Use CLI v1. See the [CLI command migration guide](https://circleci.com/docs/guides/toolkit/cli-migration-guide/).
-
-**Server:**
-
-- API v3 and CLI v1. Neither is available on Server. Use API v2 or v1.1, and the legacy CLI (v0.1.x), as shown under [Follow current defaults](#follow-current-defaults) above.
+To convert existing scheduled workflows on Cloud, see [Migrate Scheduled Workflows to Schedule Triggers](https://circleci.com/docs/guides/orchestrate/migrate-scheduled-workflows-to-schedule-triggers/). To migrate off the legacy CLI on Cloud, see the [CLI command migration guide](https://circleci.com/docs/guides/toolkit/cli-migration-guide/). Everything else that's deprecated on one platform but required on the other (API version, CLI version, schedule syntax) is covered under [Follow current defaults](#follow-current-defaults) above.
 
 ## Read docs as markdown or OpenAPI
 
