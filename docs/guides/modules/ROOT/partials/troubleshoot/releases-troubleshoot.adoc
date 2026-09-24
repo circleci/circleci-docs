@@ -87,4 +87,4 @@ Check if the error message is “invalid or missing project ID“. In this case 
 
 CircleCI automatically deletes deployment and release records once they exceed your plan's data retention period (Free: 90 days, Performance: 180 days, Scale: 2 years). The same retention policy applies to your pipeline, workflow, and job data. For more information, see the link:https://support.circleci.com/hc/en-us/articles/5645222646939-Cloud-Data-Retention-Policy-and-Settings[Cloud Data Retention Policy and Settings] support article.
 
-This only removes historical deployment and release records. It does not affect the currently live version of any component.
+Data retention rules on affect historical deployment and release records. The currently live version of any component is not affected.
