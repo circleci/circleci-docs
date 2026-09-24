@@ -1,5 +1,7 @@
 = Managing orbs
-:page-platform: Server 4.9, Server Admin
+:page-platform: server
+:page-server-min-version: "4.9"
+:page-audience: admin
 :page-description: Use this page to learn about orbs and how to manage them within CircleCI Server 4.9.
 :experimental:
 

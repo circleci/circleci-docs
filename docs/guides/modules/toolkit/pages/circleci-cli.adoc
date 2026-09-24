@@ -1,5 +1,7 @@
 = The CircleCI CLI
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: A guide to the CircleCI CLI with links to setup guides, a ful reference and how-to guides for common tasks.
 :experimental:
 :page-aliases: local-cli.adoc, how-to-use-the-circleci-local-cli.adoc

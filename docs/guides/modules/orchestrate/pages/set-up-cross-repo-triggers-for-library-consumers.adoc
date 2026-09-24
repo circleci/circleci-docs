@@ -1,5 +1,6 @@
 = Set up cross-repo triggers for library consumers
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: Learn how to automatically trigger consumer repository pipelines when you tag a new library release.
 :experimental:
 :page-show-readtime: true

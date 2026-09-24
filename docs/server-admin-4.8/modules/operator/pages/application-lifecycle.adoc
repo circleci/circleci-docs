@@ -1,6 +1,8 @@
 = Release cycle and versioning policy
 :page-noindex: true
-:page-platform: Server 4.8, Server Admin
+:page-platform: server
+:page-server-min-version: "4.8"
+:page-audience: admin
 :page-description: Learn about CircleCI Server 4.8 semantic versioning and release schedules.
 :experimental:
 

@@ -1,5 +1,7 @@
 = Release notes
-:page-platform: Server 4.9, Server Admin
+:page-platform: server
+:page-server-min-version: "4.9"
+:page-audience: admin
 :page-description: Details of the new features included in each CircleCI Server 4.9 release.
 :experimental:
 

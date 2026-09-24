@@ -1,5 +1,7 @@
 = CircleCI Server security features
-:page-platform: Server 4.9, Server Admin
+:page-platform: server
+:page-server-min-version: "4.9"
+:page-audience: admin
 :page-description: This document outlines security features built into CircleCI Server 4.9 and related integrations.
 :experimental:
 

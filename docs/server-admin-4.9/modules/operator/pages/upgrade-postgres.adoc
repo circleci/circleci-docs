@@ -1,5 +1,7 @@
 = Upgrade PostgreSQL
-:page-platform: Server 4.9, Server Admin
+:page-platform: server
+:page-server-min-version: "4.9"
+:page-audience: admin
 :page-description: Learn how to upgrade the internal PostgreSQL database from version 12 to 14 in an installation of CircleCI Server 4.9.
 :experimental:
 

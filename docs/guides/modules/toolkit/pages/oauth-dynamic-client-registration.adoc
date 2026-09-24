@@ -1,6 +1,7 @@
 = OAuth 2.0 API access with Dynamic Client Registration
 :page-show-readtime: true
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: Register OAuth 2.0 clients dynamically and use the authorization code flow with PKCE to obtain a CircleCI personal API token.
 :experimental:
 

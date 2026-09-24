@@ -1,5 +1,6 @@
 = Enable AI-powered features
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: Enable AI features in CircleCI including natural language to cron translation, deploy markers, and AI pipeline editor
 :experimental:
 :page-show-readtime: true

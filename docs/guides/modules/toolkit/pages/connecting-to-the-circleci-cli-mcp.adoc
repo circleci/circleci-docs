@@ -1,5 +1,6 @@
 = Connecting to the CircleCI CLI MCP
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: Enable the CircleCI CLI's built-in MCP server so AI coding assistants like Claude, Cursor, and VS Code can inspect your CI runs locally.
 :experimental:
 

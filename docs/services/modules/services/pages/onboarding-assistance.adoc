@@ -1,4 +1,6 @@
 = Onboarding assistance service
+:page-platform: cloud, server
+:page-audience: developer
 :page-description: Onboarding assistance service
 
 Onboarding assistance is a collection of engagements where your field engineer helps your team use CircleCI comfortably and efficiently, with appropriate safeguards. Your field engineer works with you on a customized onboarding journey so CircleCI follows best practices for your use case.

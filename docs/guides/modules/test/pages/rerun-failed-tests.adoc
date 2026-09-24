@@ -1,5 +1,6 @@
 = Rerun failed tests
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: How to rerun only failed tests in a job and optimize credit usage.
 :experimental:
 

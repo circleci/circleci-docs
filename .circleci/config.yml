@@ -176,6 +176,24 @@ jobs:
       - notify_error:
           message: "Validation job failed for branch ${CIRCLE_BRANCH}"
 
+  meta-lint:
+    executor: node_executor
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore npm cache
+          keys:
+            - npm-deps-{{ checksum "package-lock.json" }}
+            - npm-deps-
+      - run:
+          name: Install Node Dependencies
+          command: npm ci
+      - run:
+          name: Validate docs page metadata (manni)
+          command: npx manni meta validate
+      - notify_error:
+          message: "Docs metadata check failed for branch ${CIRCLE_BRANCH}"
+
   deploy-production:
     executor: go_executor
     steps:
@@ -199,6 +217,9 @@ workflows:
       - vale/lint:
           reference_branch: main
           base_dir: docs
+          filters: pipeline.git.branch != "main"
+
+      - meta-lint:
           filters: pipeline.git.branch != "main"
 
       - build:

@@ -1,4 +1,6 @@
 = General developer training
+:page-platform: cloud, server
+:page-audience: developer
 :page-description: General developer training service
 
 General developer training includes two one-hour sessions led by your field engineer. The sessions cover CircleCI basics such as configuration, secrets management, and debugging failed builds.

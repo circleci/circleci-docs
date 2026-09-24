@@ -1,5 +1,6 @@
 = Smart Deployments overview
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: Smart Deployments is the CircleCI continuous validation feature. Learn how the release validation engine gates releases on your monitoring signals.
 :experimental:
 

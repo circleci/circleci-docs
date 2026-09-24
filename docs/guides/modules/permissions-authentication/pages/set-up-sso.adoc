@@ -1,5 +1,6 @@
 = Set up SSO
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: Tutorial outlining how to set up SSO for an organization
 :experimental:
 

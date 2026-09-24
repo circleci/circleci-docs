@@ -1,5 +1,6 @@
 = How to use the Chunk CLI
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: How to use the `chunk` CLI to initialize projects, generate AI review prompts, manage Chunk sidecars, run validations, and install AI agent skills.
 :experimental:
 

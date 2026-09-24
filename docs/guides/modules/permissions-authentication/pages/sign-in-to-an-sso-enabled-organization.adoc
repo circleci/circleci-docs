@@ -1,5 +1,6 @@
 = Sign in to an SSO-enabled organization
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: Instructions outlining how to sign in as an SSO user
 :experimental:
 

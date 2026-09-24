@@ -1,5 +1,7 @@
 = CircleCI's self-hosted runner FAQs
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: This page answers the most frequently asked questions for the CircleCI's self-hosted runner product.
 :experimental:
 

@@ -1,5 +1,6 @@
 = Insights snapshot badge
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: Generate a badge that displays Insights metrics for a project.
 :experimental:
 

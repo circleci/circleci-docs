@@ -1,5 +1,6 @@
 = Manage releases
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: How to guide for managing releases from the CircleCI web app.
 :experimental:
 :page-aliases: manage-deploys.adoc

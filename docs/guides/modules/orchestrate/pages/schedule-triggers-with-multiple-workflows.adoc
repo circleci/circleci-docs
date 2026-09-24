@@ -1,5 +1,6 @@
 = Schedule triggers with multiple workflows
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: "Learn how to set conditionals for schedule triggers in multiple workflows."
 :experimental:
 :page-aliases: schedule-pipelines-with-multiple-workflows.adoc

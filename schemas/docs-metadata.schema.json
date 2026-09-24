@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://circleci.com/docs/schemas/docs-metadata.schema.json",
+  "title": "CircleCI docs page metadata",
+  "description": "The AsciiDoc page-* attributes CircleCI docs pages carry, per DOC-269. Comma-separated fields (page-content-type, page-vcs) are typed as strings with a pattern, not arrays, because AsciiDoc attribute values are text — see docs/contributors for authoring guidance.",
+  "type": "object",
+  "required": ["page-description", "page-platform", "page-audience"],
+  "additionalProperties": true,
+  "properties": {
+    "page-description": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Populates the HTML <meta> description tag. Required on every page."
+    },
+    "page-content-type": {
+      "type": "string",
+      "pattern": "^(tutorial|how-to|reference|explanation)(,\\s*(tutorial|how-to|reference|explanation))*$",
+      "description": "Diataxis content type(s), comma-separated. Multiple values are a permanent valid state for mixed pages, not a debt marker."
+    },
+    "page-platform": {
+      "type": "string",
+      "pattern": "^(cloud|server)(,\\s*(cloud|server))*$",
+      "description": "Comma-separated cloud/server enum. Migrated from the old mixed version+audience values (e.g. 'Server 4.9, Server Admin') on 2026-09-24; version moved to page-server-min-version, audience to page-audience. Required on every page, per the house style guide."
+    },
+    "page-server-min-version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$",
+      "description": "Minimum Server version a feature is available from, e.g. '4.7'. Only meaningful when page-platform includes Server."
+    },
+    "page-server-deprecated-in": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$",
+      "description": "Server version a feature was deprecated/removed in, e.g. '5.0'. Only meaningful when page-platform includes Server."
+    },
+    "page-vcs": {
+      "type": "string",
+      "pattern": "^(all|github|github-enterprise|gitlab|gitlab-self-hosted|bitbucket|cursor-origin)(,\\s*(all|github|github-enterprise|gitlab|gitlab-self-hosted|bitbucket|cursor-origin))*$",
+      "description": "VCS provider(s) a feature is available for, comma-separated. 'all' must not be combined with specific providers (enforced by review, not this schema)."
+    },
+    "page-badge": {
+      "type": "string",
+      "enum": ["Beta", "Preview", "Deprecated"],
+      "description": "Feature lifecycle badge shown under the page title. 'New' is deliberately excluded — it goes stale."
+    },
+    "page-audience": {
+      "type": "string",
+      "enum": ["admin", "developer"],
+      "description": "Replaces the old 'Server Admin' marker baked into page-platform. 'admin' where that marker was present, 'developer' as the default everywhere else."
+    }
+  }
+}

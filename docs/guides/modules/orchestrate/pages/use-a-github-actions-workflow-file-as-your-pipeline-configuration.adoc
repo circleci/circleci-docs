@@ -1,5 +1,6 @@
 = Use a GitHub Actions workflow file as your pipeline configuration
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-badge: Preview
 :page-description: Set up a CircleCI pipeline that runs an existing GitHub Actions workflow file, and check which GitHub Actions features are supported.
 :experimental:

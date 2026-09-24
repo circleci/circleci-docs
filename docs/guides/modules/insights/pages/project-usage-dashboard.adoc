@@ -1,5 +1,6 @@
 = Project usage dashboard
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: Use the Project Usage dashboard to understand credit consumption by workflow and job within a specific project.
 :experimental:
 

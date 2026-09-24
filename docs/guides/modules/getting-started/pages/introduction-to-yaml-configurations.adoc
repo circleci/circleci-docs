@@ -1,5 +1,7 @@
 = Introduction to YAML configuration
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: "Overview of CircleCI configuration written in YAML"
 :experimental:
 

@@ -1,5 +1,7 @@
 = How CircleCI handles security
-:page-platform: Server v4+, Server Admin
+:page-platform: server
+:page-server-min-version: "4.7"
+:page-audience: admin
 :page-description: An overview of security measures taken at CircleCI.
 :experimental:
 

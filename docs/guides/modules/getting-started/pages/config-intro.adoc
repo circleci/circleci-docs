@@ -1,5 +1,7 @@
 = Configuration introduction
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: "Learn how to get started with the CircleCI config.yml file."
 :experimental:
 

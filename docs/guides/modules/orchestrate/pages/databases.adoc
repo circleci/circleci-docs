@@ -1,5 +1,7 @@
 = Configure databases
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI.
 :experimental:
 

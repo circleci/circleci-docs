@@ -1,6 +1,7 @@
 = Set up a rollback pipeline
-:page-platform: Cloud
-:page-description:
+:page-platform: cloud
+:page-audience: developer
+:page-description: Configure a CircleCI rollback pipeline to revert a deployment to a previous stable version.
 :experimental:
 
 CircleCI rollbacks allow you to quickly revert your application to a previous stable version when issues are detected in production. This guide covers how to create and configure a CircleCI pipeline to enable rollback operations.

@@ -1,5 +1,7 @@
 = Config policy reference
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: Open preview of config policies for CircleCI. Reference page for function helpers.
 :page-aliases: guides:config-policies:config-policy-reference.adoc
 :experimental:

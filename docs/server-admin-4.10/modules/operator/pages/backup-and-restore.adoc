@@ -1,5 +1,7 @@
 = Backup and restore
-:page-platform: Server 4.10, Server Admin
+:page-platform: server
+:page-server-min-version: "4.10"
+:page-audience: admin
 :page-description: This document outlines recommendations for how to back up and restore your CircleCI Server 4.10 instance data and state.
 :experimental:
 

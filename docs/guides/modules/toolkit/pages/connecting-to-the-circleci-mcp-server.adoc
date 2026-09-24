@@ -1,5 +1,6 @@
 = Connecting to the CircleCI MCP server
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: Connect an AI coding assistant to CircleCI's hosted MCP server using the Claude or Cursor directory, OAuth2, or a personal API token.
 :experimental:
 

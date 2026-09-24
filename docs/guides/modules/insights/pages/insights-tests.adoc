@@ -1,5 +1,6 @@
 = Test Insights
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: Analyze your test performance using test Insights.
 :experimental:
 

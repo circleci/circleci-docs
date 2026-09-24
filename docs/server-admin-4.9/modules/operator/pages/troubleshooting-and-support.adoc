@@ -1,5 +1,7 @@
 = Troubleshooting and support
-:page-platform: Server 4.9, Server Admin
+:page-platform: server
+:page-server-min-version: "4.9"
+:page-audience: admin
 :page-description: Use this document to find troubleshooting steps if you are having problems with your CircleCI Server 4.9 installation.
 :experimental:
 

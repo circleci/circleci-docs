@@ -1,5 +1,6 @@
 = Orchestration cookbook
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: A cookbook of common pipeline, workflow and job execution goals and patterns
 :experimental:
 

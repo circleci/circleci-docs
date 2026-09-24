@@ -1,5 +1,7 @@
 = Introduction to environment variables
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: Introduction to environment variables in CircleCI
 :experimental:
 

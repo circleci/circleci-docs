@@ -1,5 +1,6 @@
 = Auto rerun failed tests
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :experimental:
 :page-description: Automatically retry failed tests to improve build reliability
 :page-show-readtime: true

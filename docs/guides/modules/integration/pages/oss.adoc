@@ -1,5 +1,6 @@
 = Build open source projects
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: Best practices for building open source projects
 :experimental:
 

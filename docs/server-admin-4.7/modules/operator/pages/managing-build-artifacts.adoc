@@ -1,6 +1,8 @@
 = Managing build artifacts
 :page-noindex: true
-:page-platform: Server v4.7, Server Admin
+:page-platform: server
+:page-server-min-version: "4.7"
+:page-audience: admin
 :page-description: How CircleCI server v4.7 build artifacts persist data after a job completes, for longer-term storage of your build outputs.
 :icons: font
 :toc: macro

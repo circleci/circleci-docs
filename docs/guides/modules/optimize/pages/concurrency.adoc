@@ -1,5 +1,7 @@
 = Concurrency
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: This page summarizes concurrency, and suggests ways to use concurrency to your advantage.
 :experimental:
 

@@ -1,5 +1,7 @@
 = Phase 1 GCP - Prerequisites
-:page-platform: Server 4.9, Server Admin
+:page-platform: server
+:page-server-min-version: "4.9"
+:page-audience: admin
 :page-description: Find the general and infrastructure-specific requirements that are needed in order to configure the CircleCI server 4.9 application.
 :env-gcp:
 :experimental:

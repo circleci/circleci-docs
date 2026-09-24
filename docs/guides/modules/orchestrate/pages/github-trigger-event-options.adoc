@@ -1,5 +1,6 @@
 = GitHub trigger event options
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: A guide to the options available for triggering GitHub App pipelines. Trigger pipelines on non-push events.
 :experimental:
 

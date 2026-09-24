@@ -1,5 +1,7 @@
 = CircleCI's self-hosted runner API
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: This document contains all the external-facing endpoints for CircleCI's self-hosted runner API.
 :page-aliases: guides:execution-runner:runner-api.adoc
 :experimental:

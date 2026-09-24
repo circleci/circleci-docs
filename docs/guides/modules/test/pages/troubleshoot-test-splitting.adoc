@@ -1,5 +1,7 @@
 = Troubleshoot test splitting
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: Tips and common errors to help troubleshoot your CircleCI test splitting implementation.
 :experimental:
 

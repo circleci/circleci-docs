@@ -1,5 +1,7 @@
 = Using workspaces to share data between jobs
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: This document describes how to use workspaces to share data to downstream jobs in your workflows.
 :experimental:
 

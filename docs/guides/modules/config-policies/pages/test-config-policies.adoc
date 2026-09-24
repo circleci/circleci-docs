@@ -1,5 +1,7 @@
 = Test config policies
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: Open preview of config policies for CircleCI. Learn about testing your policies.
 :experimental:
 

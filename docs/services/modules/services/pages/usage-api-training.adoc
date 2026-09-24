@@ -1,4 +1,6 @@
 = Usage API training
+:page-platform: cloud, server
+:page-audience: developer
 :page-description: Usage API training
 
 The usage API training is a one-hour session led by your field engineer. It teaches how field engineers at CircleCI use Usage API data to optimize pipelines.

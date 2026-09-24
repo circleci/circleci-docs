@@ -1,5 +1,7 @@
 = Sample config.yml Files
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: Sample config.yml File
 :experimental:
 :page-aliases: example-configs.adoc

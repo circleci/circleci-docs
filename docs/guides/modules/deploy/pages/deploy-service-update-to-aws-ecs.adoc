@@ -1,5 +1,7 @@
 = Deploy service update to AWS ECS
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: A how to guide for deploying changes to AWS ECS using CircleCI orbs.
 :experimental:
 

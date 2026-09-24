@@ -1,5 +1,6 @@
 = Audit logs
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: "This page describes the ways CircleCI customers can request and stream audit logs."
 :experimental:
 

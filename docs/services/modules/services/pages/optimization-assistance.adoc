@@ -1,4 +1,6 @@
 = Optimization assistance service
+:page-platform: cloud, server
+:page-audience: developer
 :page-description: Optimization assistance service
 
 Optimization assistance is a collection of engagements where your field engineer helps your projects run optimally on CircleCI. Your field engineer works with your team on an optimization journey tailored to your goals. Over the course of this journey, your field engineer performs configuration reviews, trains your team, and ensures you have the data you need.

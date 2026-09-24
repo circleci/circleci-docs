@@ -1,5 +1,7 @@
 = Migrate from AWS
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: This overview provides instructions for installing CircleCI Server on Amazon Web Services (AWS) with Terraform.
 :experimental:
 

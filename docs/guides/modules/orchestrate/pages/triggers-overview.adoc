@@ -1,5 +1,7 @@
 = Trigger options
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: "A guide to the various ways to manage pipeline triggering in CircleCI"
 :experimental:
 

@@ -1,5 +1,6 @@
 = Set a nightly schedule trigger
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: "Learn how to create schedule triggers on a specific timetable."
 :experimental:
 :page-aliases: set-a-nightly-scheduled-pipeline.adoc

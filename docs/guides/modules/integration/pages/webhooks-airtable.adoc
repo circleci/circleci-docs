@@ -1,5 +1,6 @@
 = CircleCI webhooks with Airtable
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: How to guide for setting up webhooks with Airtable
 :experimental:
 

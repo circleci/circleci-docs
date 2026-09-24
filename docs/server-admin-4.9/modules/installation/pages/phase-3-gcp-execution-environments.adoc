@@ -1,5 +1,7 @@
 = Phase 3 GCP - execution environments
-:page-platform: Server 4.9, Server Admin
+:page-platform: server
+:page-server-min-version: "4.9"
+:page-audience: admin
 :page-description: Installation guide for CircleCI server 4.9 execution environments.
 :experimental:
 :env-gcp:

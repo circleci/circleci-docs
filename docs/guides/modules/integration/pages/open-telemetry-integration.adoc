@@ -1,4 +1,7 @@
 = OpenTelemetry for CI/CD
+:page-platform: cloud
+:page-audience: developer
+:page-description: Configure CircleCI to export OpenTelemetry spans for your pipelines, workflows, jobs, and steps.
 
 CircleCI supports sending OpenTelemetry spans for your pipelines as they
 execute. CircleCI emits spans for pipelines, workflows, jobs, tasks, and steps,

@@ -1,5 +1,6 @@
 = Set up the CircleCI release agent
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: Tutorial outlining how to set up the CircleCI release agent, covering creating an environment integration, installing the release agent and creating components.
 :experimental:
 :page-aliases: set-up-circleci-deploys.adoc, set-up-the-release-agent.adoc

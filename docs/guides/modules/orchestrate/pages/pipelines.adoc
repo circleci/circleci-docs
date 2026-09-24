@@ -1,5 +1,7 @@
 = Pipelines overview and setup
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: This document introduces the concept of pipelines and shows how pipelines can be triggered and what they include.
 :experimental:
 :page-aliases: troubleshoot-pipelines.adoc

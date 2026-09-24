@@ -1,5 +1,7 @@
 = CircleCI Server 4.9 overview
-:page-platform: Server 4.9, Server Admin
+:page-platform: server
+:page-server-min-version: "4.9"
+:page-audience: admin
 :page-description: CircleCI Server 4.9 is a continuous integration and continuous delivery (CI/CD) platform that you can install on your GCP or AWS Kubernetes cluster.
 :experimental:
 
