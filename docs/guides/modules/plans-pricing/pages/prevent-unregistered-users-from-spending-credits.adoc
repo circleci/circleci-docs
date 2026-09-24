@@ -25,7 +25,7 @@ Follow these steps to prevent unregistered users from triggering work that consu
 
 . In the link:https://app.circleci.com/[CircleCI web app], select *Plan* in the sidebar.
 . Select the **Usage Controls** tab. If you do not see this option, you might be on the Free Plan, or you may not be an org admin, in which case this guide does not apply to you.
-. Select on the **Prevent unregistered user spend** toggle to switch it "On".
+. Select the **Prevent unregistered user spend** toggle to switch it "On".
 
 To disable this feature you can toggle this switch "Off" at any time.
 
