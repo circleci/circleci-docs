@@ -2,7 +2,7 @@
 
 This file is for AI coding agents and assistants working with a human on CircleCI, and for the humans directing them. It is published at `https://circleci.com/docs/AGENTS.md`.
 
-For a human-oriented starting point, see [How to use these docs](https://circleci.com/docs/guides/getting-started/how-to-use-these-docs/). For the full documentation structure, see [`llms.txt`](https://circleci.com/docs/llms.txt).
+For a human-oriented starting point, see the [Quickstart guide](https://circleci.com/docs/guides/getting-started/getting-started/). For the full documentation structure, see [`llms.txt`](https://circleci.com/docs/llms.txt).
 
 CircleCI ships as two platforms with different feature sets:
 
