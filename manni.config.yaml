@@ -26,3 +26,11 @@ meta:
     - collection: pages
       schemas:
         - ./schemas/docs-metadata.schema.json
+
+  # Pins the provider `manni meta fill` uses (page-content-type/page-vcs
+  # backfill, not yet run). Without this, fill auto-detects a provider from
+  # whichever API key happens to be in the environment first — a stray
+  # OPENAI_API_KEY left over from an unrelated project would silently send
+  # page content to OpenAI instead. See manni's fill-providers doc.
+  fill:
+    provider: anthropic
