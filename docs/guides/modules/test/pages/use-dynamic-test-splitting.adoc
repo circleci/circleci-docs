@@ -31,12 +31,19 @@ Static test splitting pre-allocates tests to each node. Dynamic test splitting r
 
 == How it works
 
-When you configure parallelism in your job and enable dynamic test splitting, Smarter Testing automatically:
+When you configure parallelism in your job and enable dynamic test splitting, Smarter Testing predicts how long a batch of tests takes to run. It then distributes tests across nodes so every node finishes at the same time.
 
-* Sorts tests by duration using timing data from previous runs, with longer tests prioritized first.
-* Gives the first node that is ready a full batch of tests, like static test splitting.
-* Gives each later-starting node a smaller batch size so all nodes finish at the same time.
-* Evenly distributes the remaining tests across all nodes.
+=== Predicting batch runtime
+
+Smarter Testing builds a regression model for your testsuite from your 1,000 most recent runs. The model predicts the wall clock time of a batch of tests. JUnit runtimes almost always leave out the overhead that scales with a batch, such as startup time and the added cost of each test.
+
+=== Distributing tests across nodes
+
+Smarter Testing distributes the predicted batch times across nodes so every node finishes at the same time. The first node to start sets the target finish time for every other node.
+
+When a node fetches tests, it takes a batch sized to finish at the target time and moves the rest to a shared queue. A late-starting node runs a smaller batch than it would under perfect conditions, instead of running past the target finish time.
+
+When a node finishes, it takes an equal share of the shared queue to redistribute the tests from late-starting nodes. Every node finishes its first batch at the same time, then takes an equal share of the queue to finish together.
 
 .Static test splitting with uneven node start times
 image::guides:ROOT:test/static-test-splitting-uneven-nodes.png[Job timings with static test splitting,role=icon-light]
