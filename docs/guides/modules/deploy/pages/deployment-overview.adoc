@@ -368,3 +368,28 @@ A deployment can be in one of the following states:
 --
 
 When you use release validation, each deployment also has a validation status of its own, visible in the Release Validation panel on the deployment details page. For more information, see the xref:smart-deployments-overview.adoc#view-validation-results[View Validation Results] section.
+
+[#data-retention]
+== Data retention
+
+Deployment and release data in the deploys UI follows your plan's data retention policy. This data includes the timeline, component and environment details pages, and release agent commands:
+
+[.table-scroll]
+--
+[cols="1,1", options="header"]
+|===
+|Plan
+|Retention period
+
+|Free
+|90 days
+
+|Performance
+|180 days
+
+|Scale
+|2 years
+|===
+--
+
+Once a deployment or release exceeds your plan's retention period, its historical record is automatically and permanently deleted. This does not affect the currently live version of any component; only historical deployment and release records are removed. For more information, see the link:https://support.circleci.com/hc/en-us/articles/5645222646939-Cloud-Data-Retention-Policy-and-Settings[Cloud Data Retention Policy and Settings] support article.
