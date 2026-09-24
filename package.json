@@ -9,8 +9,7 @@
     "build:ui": "gulp build:ui",
     "build:api-docs": "gulp build:api-docs",
     "build:docs": "npm run build:ui && gulp build:docs",
-    "fetch-server-branches": "chmod +x scripts/fetch-server-branches.sh && ./scripts/fetch-server-branches.sh",
-    "meta:check": "manni meta validate"
+    "fetch-server-branches": "chmod +x scripts/fetch-server-branches.sh && ./scripts/fetch-server-branches.sh"
   },
   "repository": {
     "type": "git",
@@ -22,7 +21,6 @@
     "@antora/cli": "3.2.0",
     "@antora/site-generator": "3.2.0",
     "@dotenvx/dotenvx": "^1.40.0",
-    "@hawkeyexl/manni": "2.11.0",
     "@redocly/cli": "^2.0.0",
     "@sntke/antora-mermaid-extension": "^0.0.13",
     "browser-sync": "^3.0.4",
