@@ -1,0 +1,25 @@
+---
+extends: script
+scope: raw
+level: error
+message: "Merge conflict marker detected. Resolve the conflict before committing."
+link: https://github.com/circleci/circleci-docs/blob/main/AGENTS.md
+script: |
+  text := import("text")
+  matches := []
+
+  patterns := [
+    "^<<<<<<<",
+    "^=======",
+    "^>>>>>>>"
+  ]
+
+  for line in text.split(scope, "\n") {
+    for pattern in patterns {
+      if text.re_match(pattern, line) {
+        start := text.index(scope, line)
+        matches = append(matches, {begin: start, end: start + len(line)})
+        break
+      }
+    }
+  }
