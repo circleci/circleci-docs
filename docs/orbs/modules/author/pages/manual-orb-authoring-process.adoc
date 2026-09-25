@@ -1,5 +1,6 @@
 = Registry orb authoring process (manual)
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Authoring simple orbs manually without the orb development kit.
