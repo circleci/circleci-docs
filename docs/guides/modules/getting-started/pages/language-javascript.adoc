@@ -1,5 +1,6 @@
 = Configure a Node.js application on CircleCI
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Building and Testing with JavaScript and Node.js on CircleCI

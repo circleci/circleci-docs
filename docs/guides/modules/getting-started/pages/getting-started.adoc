@@ -1,5 +1,6 @@
 = Quickstart guide
 :page-platform: cloud
+:page-vcs: all
 :page-audience: developer
 :page-description: A quickstart guide for adding a project to CircleCI and exploring some features
 :page-show-readtime: true

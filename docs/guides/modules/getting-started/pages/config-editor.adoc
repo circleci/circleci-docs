@@ -1,5 +1,6 @@
 = Using the CircleCI in-app configuration editor
 :page-platform: cloud, server
+:page-vcs: github, bitbucket
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Docs page on In-app configuration editor use and features
