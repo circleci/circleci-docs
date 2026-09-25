@@ -1,5 +1,6 @@
 = Automated testing in CircleCI
 :page-platform: cloud, server
+:page-vcs: github, bitbucket
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: An overview of setting up testing automation, integration, and analytics with Smarter Testing.
