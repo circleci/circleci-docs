@@ -1,5 +1,7 @@
 = Configuring external services
-:page-platform: Server 4.9, Server Admin
+:page-platform: server
+:page-server-min-version: "4.9"
+:page-audience: admin
 :page-description: This document describes how to configure the following external services for use with a CircleCI Server 4.9 installation
 :experimental:
 

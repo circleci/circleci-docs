@@ -1,6 +1,7 @@
 = Getting started with Smarter Testing
 :page-description: Install and configure Smarter Testing for your project
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :experimental:
 :page-show-readtime: true
 :tabs-sync-option:

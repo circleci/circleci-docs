@@ -1,5 +1,7 @@
 = Phase 4 AWS - post installation
-:page-platform: Server 4.9, Server Admin
+:page-platform: server
+:page-server-min-version: "4.9"
+:page-audience: admin
 :page-description: CircleCI server 4.9 post installation steps.
 :env-aws:
 :experimental:

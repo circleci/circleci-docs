@@ -1,5 +1,6 @@
 = Manual install - configure your Kubernetes components
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: Tutorial outlining how to configure your Kubernetes components for visibility and control on the deploys dashboard.
 :experimental:
 

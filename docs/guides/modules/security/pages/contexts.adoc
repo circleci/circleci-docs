@@ -1,5 +1,7 @@
 = Using contexts
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: Secured, cross-project resources
 :experimental:
 

@@ -1,5 +1,7 @@
 = Debugging container ID cannot be mapped to host ID error
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: Debugging 'Container ID XXX cannot be mapped to a host ID' error when starting a container
 :experimental:
 

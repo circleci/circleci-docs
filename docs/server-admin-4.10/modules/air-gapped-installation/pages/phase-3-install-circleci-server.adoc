@@ -1,5 +1,7 @@
 = Phase 3 - install CircleCI Server
-:page-platform: Server 4.10, Server Admin
+:page-platform: server
+:page-server-min-version: "4.10"
+:page-audience: admin
 :page-description: How to install the CircleCI Server 4.10 Helm deployment to an air-gapped environment.
 :experimental:
 

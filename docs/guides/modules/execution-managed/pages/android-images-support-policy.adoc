@@ -1,5 +1,6 @@
 = CircleCI Android images support policy
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: CircleCI Android images release, update, and deprecation policy
 :experimental:
 

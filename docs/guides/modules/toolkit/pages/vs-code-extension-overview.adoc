@@ -1,5 +1,6 @@
 = VS Code extension overview
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: Learn about how the CircleCI VS Code extension can help you manage your pipelines, workflows and jobs.
 :experimental:
 

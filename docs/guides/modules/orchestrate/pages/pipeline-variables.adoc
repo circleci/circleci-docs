@@ -1,5 +1,7 @@
 = Pipeline values and parameters
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :experimental:
 :page-description: This document describes the Free Plan available to developers on CircleCI.
 :experimental:

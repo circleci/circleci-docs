@@ -1,5 +1,6 @@
 = Using credits
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: Learn about the CircleCI credits-based plan system.
 :experimental:
 

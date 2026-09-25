@@ -1,5 +1,7 @@
 = Migrate from TeamCity
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: An overview of how to migrate from TeamCity to CircleCI.
 :source-highlighter: pygments.rb
 :experimental:

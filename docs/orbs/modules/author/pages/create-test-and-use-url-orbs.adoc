@@ -1,5 +1,6 @@
 = Create, test, and use URL orbs
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: How to author URL orbs for your organization
 :experimental:
 :page-show-readtime: true

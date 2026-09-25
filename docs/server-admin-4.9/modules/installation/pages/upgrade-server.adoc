@@ -1,5 +1,7 @@
 = Upgrade server
-:page-platform: Server 4.9, Server Admin
+:page-platform: server
+:page-server-min-version: "4.9"
+:page-audience: admin
 :page-description: "This document lists the steps required to upgrade a CircleCI Server 4.9 installation."
 :experimental:
 

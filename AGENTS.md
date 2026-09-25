@@ -47,7 +47,7 @@ If there is no issue ID, use a short description only.
 - `template-conceptual.adoc` - Explanatory content
 - `template-tutorial.adoc` - Learning-oriented tutorials
 
-All pages require standard attributes (`:page-platform:`, `:page-description:`, `:experimental:`) at the top. See the "Working with the Docs Site" section for complete details on templates and page attributes.
+All pages require standard attributes (`:page-platform:`, `:page-audience:`, `:page-description:`, `:experimental:`) at the top. See the "Working with the Docs Site" section for complete details on templates and page attributes.
 
 ## Voice and Style
 
@@ -537,7 +537,7 @@ Content for Tab B
 10. Inline code in headings
 11. More than 3 commas in a sentence
 12. Sentences over 25 words (affects readability)
-13. Missing page attributes (`:page-platform:`, `:page-description:`, `:experimental:`)
+13. Missing page attributes (`:page-platform:`, `:page-audience:`, `:page-description:`, `:experimental:`)
 14. Not using appropriate page templates for new content
 15. Using xrefs without verifying the target file exists and path is correct
 16. **Committing without running Vale and fixing linting errors**
@@ -718,6 +718,7 @@ Before committing documentation changes:
 4. ✅ Check `:page-description:` is 70-160 characters
 5. ✅ Ensure link text uses title case
 6. ✅ Confirm page is added to `nav.adoc` if new
+7. ✅ Confirm `:page-platform:` (lowercase `cloud`/`server`) and `:page-audience:` (`admin`/`developer`) are present, and `:page-server-min-version:` is quoted if set (see Page Attributes section)
 
 **Alternative for local agents**: If CircleCI CLI is available and authenticated, you can also check Vale errors from CI runs using `circleci run get` and `circleci job output get`, but running Vale locally is still the recommended approach.
 
@@ -815,21 +816,39 @@ npm run build:api-docs # API docs only
 
 All documentation pages must include attributes at the top of the file, before the main content. These attributes provide metadata and enable certain AsciiDoc features.
 
+The full metadata contract is defined in `schemas/docs-metadata.schema.json` (DOC-269). This section summarizes it; if the two ever disagree, the schema file wins.
+
 **Required attributes:**
 
 ```adoc
 = Page Title
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: A brief description for SEO and metadata (70-160 characters)
 :experimental:
 ```
 
 **Attribute descriptions:**
 
-- `:page-platform:` - Indicates which CircleCI platforms support the feature. Displays as badges under the page title.
-  - Options: `Cloud`, `Server v4+`, `Server v3`, or combinations like `Cloud, Server v4+`
-  - If feature is Cloud-only, use `:page-platform: Cloud`
-  - If feature is available on all platforms, use `:page-platform: Cloud, Server v4+`
+- `:page-platform:` - Which CircleCI platform(s) support the feature. Displays as badges under the page title.
+  - Comma-separated, lowercase only: `cloud`, `server`, or `cloud, server`
+  - Do not put a version number here — use `:page-server-min-version:` instead
+
+- `:page-server-min-version:` - Only when `server` is in `:page-platform:`. The minimum Server version the feature is available from, e.g. `"4.7"`.
+  - **Always quote the value.** An unquoted `4.10` is parsed as the number `4.1`, silently dropping the trailing zero.
+
+- `:page-server-deprecated-in:` - Optional. Same format and quoting rule as above, for a feature deprecated or removed in Server, e.g. `"5.0"`.
+
+- `:page-audience:` - Who the page is for.
+  - `admin` - Server operators/administrators (installation, cluster management, upgrades)
+  - `developer` - everyone else; this is the default for Cloud-only and general content
+
+- `:page-content-type:` - Optional. One or more Diátaxis types, comma-separated: `tutorial`, `how-to`, `reference`, `explanation`. A page can legitimately carry more than one.
+
+- `:page-vcs:` - Optional. Comma-separated VCS providers the feature supports: `all`, `github`, `github-enterprise`, `gitlab`, `gitlab-self-hosted`, `bitbucket`, `cursor-origin`. Use `all` on its own — never combine it with specific providers.
+
+- `:page-badge:` - Optional. One of `Beta`, `Preview`, `Deprecated`. Never `New` — it's date-relative and goes stale as soon as someone forgets to remove it.
 
 - `:page-description:` - Used for SEO meta descriptions and page previews
   - **Must be between 70-160 characters** (Vale enforced)

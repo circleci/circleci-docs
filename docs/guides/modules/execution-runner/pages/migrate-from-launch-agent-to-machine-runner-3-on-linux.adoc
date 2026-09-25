@@ -1,5 +1,7 @@
 = Migrate from launch agent to machine runner 3 on Linux
-:page-platform: Cloud, Server v4.4+
+:page-platform: cloud, server
+:page-server-min-version: "4.4"
+:page-audience: developer
 :page-description: Steps to migrate from using launch agent to machine runner 3
 :experimental:
 :machine:

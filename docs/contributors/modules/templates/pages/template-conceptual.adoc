@@ -1,13 +1,17 @@
 = Page title
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-audience: developer
 :page-description: A short page description goes here max 155 characters.
 :experimental:
 
 pass:[<!-- vale off -->]
 ////
-:page-platform: drives the platform badges that you see in the info bar under the page title.
+:page-platform: drives the platform badges that you see in the info bar under the page title. Comma-separated, lowercase: cloud, server, or cloud, server. Put a version number in :page-server-min-version: instead (quoted, e.g. "4.7" - unquoted "4.10" is read as the number 4.1).
+:page-audience: who the page is for - admin (Server operators) or developer (everyone else, the default).
 :page-description: is used for SEO and meta description. This should be a short description of the page content. Between 70 and 155 characters.
 :experimental: allows access to asciidoc macros, more info here: https://docs.asciidoctor.org/asciidoc/latest/macros/ui-macros/
+
+See schemas/docs-metadata.schema.json for the full metadata contract, including optional page-content-type, page-vcs, page-badge, and page-server-min-version/page-server-deprecated-in.
 ////
 
 ****

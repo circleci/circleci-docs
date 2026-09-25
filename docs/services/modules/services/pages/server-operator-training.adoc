@@ -1,4 +1,6 @@
 = Server operator training
+:page-platform: server
+:page-audience: admin
 :page-description: Server operator training
 
 == Overview

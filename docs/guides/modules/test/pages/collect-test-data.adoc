@@ -1,5 +1,7 @@
 = Collect test data
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: A guide to collecting test data in your CircleCI projects.
 :experimental:
 

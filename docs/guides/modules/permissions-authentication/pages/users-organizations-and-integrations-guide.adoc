@@ -1,5 +1,6 @@
 = Users, organizations, and integrations guide
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: A guide to understanding user accounts, organizations and integrations with version control systems in CircleCI.
 :experimental:
 :page-aliases: guides:integration:github-apps-integration.adoc, guides:integration:github-integration.adoc, guides:integration:bitbucket-integration.adoc, guides:integration:gitlab-integration.adoc, guides:integration:bitbucket-data-center-integration.adoc

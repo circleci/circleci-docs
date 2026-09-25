@@ -1,5 +1,7 @@
 = Config policies for self-hosted runner
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: Learn how to write a policy to restrict which projects can run jobs on a self-hosted runner.
 :experimental:
 

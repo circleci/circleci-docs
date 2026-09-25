@@ -1,7 +1,9 @@
 = Managing load balancers
 :page-noindex: true
-:page-platform: Server v4.7, Server Admin
-:page-description: Use this guide to make the frontend load balancer private for CircleCI Server v4.7.
+:page-platform: server
+:page-server-min-version: "4.7"
+:page-audience: admin
+:page-description: Use this guide to make the frontend load balancer private for CircleCI server v4.7.
 :icons: font
 :toc: macro
 :toc-title:

@@ -1,5 +1,7 @@
 = Analyze pipelines and job steps during an incident
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: Investigate pipelines and step output, then review audit logs and assess credential exposure after an incident.
 :experimental:
 

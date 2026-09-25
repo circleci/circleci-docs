@@ -1,5 +1,6 @@
 = Invite your team
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: Invite teammates to your CircleCI organization and assign them roles so your whole team gets access.
 :experimental:
 

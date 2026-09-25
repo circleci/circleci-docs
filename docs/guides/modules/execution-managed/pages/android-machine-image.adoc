@@ -1,5 +1,7 @@
 = Android images with the machine executor
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: Using the Android image on the machine executor
 :experimental:
 

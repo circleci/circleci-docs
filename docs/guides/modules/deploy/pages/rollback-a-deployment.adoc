@@ -1,6 +1,7 @@
 = Rollback a deployment
-:page-platform: Cloud
-:page-description:
+:page-platform: cloud
+:page-audience: developer
+:page-description: Roll back a deployment to a previous stable version using a CircleCI rollback pipeline or workflow re-run.
 :experimental:
 :page-show-readtime: true
 

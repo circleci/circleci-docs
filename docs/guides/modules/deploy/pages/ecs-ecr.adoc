@@ -1,5 +1,7 @@
 = Push image to AWS ECR and deploy to AWS ECS
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: How to use CircleCI to deploy to AWS ECS from ECR
 :experimental:
 

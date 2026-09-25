@@ -1,5 +1,6 @@
 = Migrate scheduled workflows to schedule triggers
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: Migrate scheduled workflows to schedule triggers
 :experimental:
 :page-aliases: migrate-scheduled-workflows-to-scheduled-pipelines.adoc

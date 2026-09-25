@@ -1,5 +1,7 @@
 = Branch and tag filtering
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: Control whether jobs, workflows, and steps run, based on the git branch or tag, using workflow filters or expression-based conditions.
 :experimental:
 

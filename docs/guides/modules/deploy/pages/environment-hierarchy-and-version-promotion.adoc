@@ -1,5 +1,6 @@
 = Environment hierarchy and version promotion
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: Learn how to use environment hierarchy and version promotion to manage your deployments through multiple environments.
 :experimental:
 

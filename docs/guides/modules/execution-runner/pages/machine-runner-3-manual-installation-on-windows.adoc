@@ -1,5 +1,7 @@
 = Machine runner 3 manual installation for Windows
-:page-platform: Cloud, Server v4.4+
+:page-platform: cloud, server
+:page-server-min-version: "4.4"
+:page-audience: developer
 :page-description: Instructions on how to manually install CircleCI's self-hosted machine runner 3 on Windows.
 :machine:
 :Windows:

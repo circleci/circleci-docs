@@ -1,5 +1,6 @@
 = Fix broken builds efficiently with agents
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: Use --failure-report with circleci run get to retrieve condensed output for every failed step in a single call, reducing token costs in AI agent workflows.
 :experimental:
 :page-show-readtime: true

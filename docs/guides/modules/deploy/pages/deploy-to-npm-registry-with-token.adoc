@@ -1,5 +1,7 @@
 = Publish to npm with an authentication token
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: Publish packages to the npm registry from CircleCI using a long-lived npm authentication token.
 :experimental:
 

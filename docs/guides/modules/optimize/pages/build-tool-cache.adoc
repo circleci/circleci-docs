@@ -1,6 +1,7 @@
 = Build tool cache
 :page-badge: Beta
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: Use with_tool_cache to transparently back Gradle, Bazel, Turborepo, and Xcode build caches with a CircleCI-managed remote cache.
 :experimental:
 

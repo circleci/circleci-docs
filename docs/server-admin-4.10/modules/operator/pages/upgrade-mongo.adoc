@@ -1,5 +1,7 @@
 = Upgrade MongoDB
-:page-platform: Server 4.10, Server Admin
+:page-platform: server
+:page-server-min-version: "4.10"
+:page-audience: admin
 :page-description: Learn how to upgrade MongoDB up to v7.0.15 in an installation of CircleCI Server 4.10.
 :experimental:
 

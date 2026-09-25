@@ -1,5 +1,6 @@
 = Set up code signing for iOS and macOS projects
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: How to set up code signing for iOS and macOS apps
 :experimental:
 

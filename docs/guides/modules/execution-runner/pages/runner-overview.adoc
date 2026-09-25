@@ -1,5 +1,7 @@
 = CircleCI's self-hosted runner overview
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: Learn how CircleCI's self-hosted runners enable you to use your own infrastructure for running jobs.
 :experimental:
 :page-aliases: runner-on-kubernetes.adoc

@@ -1,5 +1,6 @@
 = Configure deploy markers
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: Tutorial outlining how to configure deploy markers in your workflow.
 :experimental:
 :tabs-sync-option:

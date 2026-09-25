@@ -1,5 +1,6 @@
 = Release validation configuration reference
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: Reference for the validation block in your CircleCI configuration file, including webhook fields, data point mappings, and provider defaults.
 :experimental:
 

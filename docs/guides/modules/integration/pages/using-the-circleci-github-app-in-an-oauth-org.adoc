@@ -1,5 +1,6 @@
 = Using the CircleCI GitHub App in an OAuth organization
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: A guide to using the CircleCI GitHub app in an OAuth organization
 :experimental:
 

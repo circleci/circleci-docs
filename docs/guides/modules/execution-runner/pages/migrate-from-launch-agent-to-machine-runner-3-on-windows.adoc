@@ -1,5 +1,7 @@
 = Migrate from launch agent to machine runner 3 on Windows
-:page-platform: Cloud, Server v4.4+
+:page-platform: cloud, server
+:page-server-min-version: "4.4"
+:page-audience: developer
 :page-description: Steps to migrate from using launch agent to the machine runner 3 preview on Windows
 :machine:
 :Windows:

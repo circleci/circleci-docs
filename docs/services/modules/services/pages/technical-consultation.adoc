@@ -1,4 +1,6 @@
 = Technical consultation service
+:page-platform: cloud, server
+:page-audience: developer
 :page-description: Technical consultation service
 
 The technical consultation service is an engagement where your field engineer focuses on a single challenge your team faces. The service provides an in-depth explanation of related features and proven solutions.

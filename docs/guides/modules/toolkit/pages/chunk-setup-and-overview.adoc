@@ -1,6 +1,7 @@
 = Chunk overview and setup
 :page-badge: Beta
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: An overview of Chunk by CircleCI, an AI agent for CI/CD tasks, and a guide to setting it up with your chosen model provider.
 :experimental:
 

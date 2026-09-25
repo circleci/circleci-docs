@@ -1,5 +1,6 @@
 = CircleCI MCP overview
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: An overview of CircleCI's MCP offerings for AI coding assistants, how they work, best practices, and troubleshooting steps.
 :experimental:
 :page-aliases: using-the-circleci-mcp-server.adoc

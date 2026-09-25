@@ -1,5 +1,7 @@
 = Using the Windows execution environment
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: Learn how to configure a your jobs to run in the Windows execution environment.
 :experimental:
 

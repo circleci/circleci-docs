@@ -1,5 +1,7 @@
 = Phase 1 - Prerequisites
-:page-platform: Server 4.9, Server Admin
+:page-platform: server
+:page-server-min-version: "4.9"
+:page-audience: admin
 :experimental:
 :page-description: A guide to installing CircleCI Server 4.9 in an air-gapped environment. Requirements, images and Helm charts.
 

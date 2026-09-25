@@ -1,5 +1,7 @@
 = Optimization reference
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: Learn about ways to optimize your CircleCI pipelines
 :experimental:
 

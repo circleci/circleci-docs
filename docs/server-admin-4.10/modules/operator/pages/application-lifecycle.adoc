@@ -1,5 +1,7 @@
 = Release cycle and versioning policy
-:page-platform: Server 4.10, Server Admin
+:page-platform: server
+:page-server-min-version: "4.10"
+:page-audience: admin
 :page-description: Learn about CircleCI Server 4.10 semantic versioning and release schedules.
 :experimental:
 

@@ -1,5 +1,7 @@
 = Deploy to Google Cloud Platform
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: This document provides examples of deploying to Google Cloud Platform.
 :experimental:
 

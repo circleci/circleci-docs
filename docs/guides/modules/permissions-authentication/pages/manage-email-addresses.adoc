@@ -1,5 +1,6 @@
 = Manage email addresses
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: Learn how to add, update, or remove email addresses associated with your CircleCI account.
 :experimental:
 

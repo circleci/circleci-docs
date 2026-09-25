@@ -1,5 +1,6 @@
 = Enabling GitHub Checks
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: How to enable GitHub Checks for CircleCI
 :experimental:
 

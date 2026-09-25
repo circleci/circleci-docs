@@ -1,6 +1,8 @@
 = Phase 1 - Prerequisites
 :page-noindex: true
-:page-platform: Server v4.8, Server Admin
+:page-platform: server
+:page-server-min-version: "4.8"
+:page-audience: admin
 :experimental:
 :page-description: A guide to installing CircleCI server v4.8 in an air-gapped environment. Requirements, images and Helm charts.
 

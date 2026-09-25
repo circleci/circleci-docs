@@ -1,5 +1,6 @@
 = Update the Kubernetes release agent
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: How to update the Kubernetes release agent for integrations with CircleCI deploys.
 :experimental:
 

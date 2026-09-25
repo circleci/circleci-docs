@@ -1,7 +1,9 @@
 = Phase 5 - Test your installation
 :page-noindex: true
-:page-platform: Server v4.8, Server Admin
-:page-description: How to test your CircleCI Server v4.8 installation in an air-gapped environment.
+:page-platform: server
+:page-server-min-version: "4.8"
+:page-audience: admin
+:page-description: How to test your CircleCI server v4.8 installation in an air-gapped environment.
 :experimental:
 
 Test your air-gapped installation using CircleCI's Reality Check project.

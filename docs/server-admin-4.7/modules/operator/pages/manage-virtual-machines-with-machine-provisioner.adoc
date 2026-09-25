@@ -1,7 +1,9 @@
 = Manage virtual machines with machine provisioner
 :page-noindex: true
-:page-platform: Server v4.7, Server Admin
-:page-description: CircleCI Server v4.7 machine provisioner service controls how machine executor (Linux and Windows images) and Remote Docker jobs are run.
+:page-platform: server
+:page-server-min-version: "4.7"
+:page-audience: admin
+:page-description: CircleCI server v4.7 machine provisioner service controls how machine executor (Linux and Windows images) and Remote Docker jobs are run.
 :icons: font
 :toc: macro
 :toc-title:

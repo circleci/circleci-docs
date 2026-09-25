@@ -1,5 +1,7 @@
 = Glossary
-:page-platform: Cloud, Server v4+
+:page-platform: cloud, server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: A glossary of CircleCI-specific and CI/CD terminology used across the CircleCI product and documentation.
 :experimental:
 

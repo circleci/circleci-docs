@@ -1,5 +1,6 @@
 = Notify a Slack channel of a paused workflow
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: Use the CircleCI Slack integration to notify a channel when a workflow is held for approval, and approve held workflows directly from Slack.
 :experimental:
 

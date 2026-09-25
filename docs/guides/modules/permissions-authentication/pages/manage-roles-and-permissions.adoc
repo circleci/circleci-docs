@@ -1,5 +1,6 @@
 = Manage roles and permissions
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :page-description: How-to guides for managing roles and permissions in CircleCI.
 :experimental:
 

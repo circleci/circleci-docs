@@ -1,5 +1,6 @@
 = Testsuite configuration reference
-:page-platform: Cloud
+:page-platform: cloud
+:page-audience: developer
 :experimental:
 :page-description: Reference for .circleci/test-suites.yml
 :page-show-readtime: true
