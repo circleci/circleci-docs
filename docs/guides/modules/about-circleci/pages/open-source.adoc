@@ -1,5 +1,6 @@
 = Open source acknowledgments
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: List and acknowledgements for open-source projects and libraries that are used in CircleCI products and services.
