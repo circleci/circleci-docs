@@ -1,5 +1,6 @@
 = Version control systems, pipeline types, and feature support
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: An overview guide to the version control systems you can integrate with CircleCI and the features available to each pipeline type and organization type.
