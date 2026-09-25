@@ -1,5 +1,6 @@
 = Self-hosted runner concepts
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Conceptual Overview for CircleCI's self-hosted runner.

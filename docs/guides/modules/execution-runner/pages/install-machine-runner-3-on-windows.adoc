@@ -1,5 +1,6 @@
 = Install machine runner 3 on Windows
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.4"
 :page-audience: developer
 :page-description: Instructions on how to install CircleCI's machine runner 3  on Windows.

@@ -1,5 +1,6 @@
 = CircleCI's self-hosted runner overview
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Learn how CircleCI's self-hosted runners enable you to use your own infrastructure for running jobs.
