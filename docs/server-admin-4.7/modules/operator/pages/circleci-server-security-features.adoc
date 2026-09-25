@@ -1,6 +1,7 @@
 = CircleCI Server security features
 :page-noindex: true
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.7"
 :page-audience: admin
 :page-description: This document outlines security features built into CircleCI server v4.7 and related integrations.

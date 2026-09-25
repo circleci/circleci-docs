@@ -1,6 +1,7 @@
 = Operator overview
 :page-noindex: true
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.7"
 :page-audience: admin
 :page-description: Learn about the various tasks and tools involved in administering an installation of CircleCI server v4.7.

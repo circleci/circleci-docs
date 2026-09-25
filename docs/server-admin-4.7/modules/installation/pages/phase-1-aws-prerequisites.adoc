@@ -1,6 +1,7 @@
 = Phase 1 AWS - Prerequisites
 :page-noindex: true
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.7"
 :page-audience: admin
 :page-description: Find the general and infrastructure-specific requirements that are needed in order to configure the CircleCI server v4.7 application.

@@ -1,6 +1,7 @@
 = Application lifecycle
 :page-noindex: true
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.7"
 :page-audience: admin
 :page-description: Learn about CircleCI server v4.7 semantic versioning and release schedules.
