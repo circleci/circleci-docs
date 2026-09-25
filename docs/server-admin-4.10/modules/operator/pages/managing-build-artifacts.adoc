@@ -1,5 +1,6 @@
 = Managing build artifacts
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.10"
 :page-audience: admin
 :page-description: Learn how Server 4.10 build artifacts persist data after a job is completed and provide longer-term storage of build process outputs.

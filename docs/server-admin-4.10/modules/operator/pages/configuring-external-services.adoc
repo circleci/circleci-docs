@@ -1,5 +1,6 @@
 = Configuring external services
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.10"
 :page-audience: admin
 :page-description: This document describes how to configure the following external services for use with a CircleCI Server 4.10 installation

@@ -1,5 +1,6 @@
 = Upgrade server
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.10"
 :page-audience: admin
 :page-description: "This document lists the steps required to upgrade a CircleCI Server 4.10 installation."

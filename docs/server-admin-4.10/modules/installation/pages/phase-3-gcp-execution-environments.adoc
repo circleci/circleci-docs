@@ -1,5 +1,6 @@
 = Phase 3 GCP - execution environments
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.10"
 :page-audience: admin
 :page-description: Installation guide for CircleCI server 4.10 execution environments.
