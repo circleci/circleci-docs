@@ -7,6 +7,8 @@ PR: [#10788](https://github.com/circleci/circleci-docs/pull/10788) (branch `DOC-
 
 The schema is written, all 468 real Antora pages are migrated to it, and the style guide/templates that generate new pages are updated to match. No CI tool currently enforces it — see [Tooling decision](#tooling-decision-no-third-party-validator-for-now) below.
 
+The `vale/lint` blocker noted below is resolved: the pre-existing prose debt it surfaced was fixed separately in [#10789](https://github.com/circleci/circleci-docs/pull/10789) (merged into `main`), and `DOC-269-metadata-schema` has since been rebased onto `main` to pick that up. The rebase itself introduced a handful of new merge conflicts (the new schema's header fields colliding with #10789's prose fixes on the same lines) and surfaced 4 more pre-existing lint errors in files the schema migration touches for the first time — all fixed as part of the rebase. `vale/lint` is green on this branch as of the rebase.
+
 **Schema:** `schemas/docs-metadata.schema.json` — plain JSON Schema (draft 2020-12), no tool-specific extensions.
 
 | Attribute | Status | Values |
@@ -41,13 +43,15 @@ We evaluated and fully wired up [`manni`](https://github.com/hawkeyexl/manni) (`
 - **No CI enforcement.** Nothing currently fails a build if new metadata drifts from the schema. "Some simple validation" was the stated direction — not yet scoped or built.
 - **`page-description` length isn't in the JSON schema.** AGENTS.md documents 70–160 chars (Vale-enforced separately); the schema only checks `minLength: 1`. Worth reconciling once real validation exists, so the two rules aren't split across two systems.
 - **`server-admin-4.7`–`4.10` are 4 separate near-duplicate Antora components** (directory-per-version). The new `page-server-min-version`/`page-server-deprecated-in` fields could eventually let these collapse into one component, but that's explicitly out of scope for DOC-269 — a separate, larger initiative.
-- **`vale/lint` fails on this PR with entirely pre-existing prose debt** (documented in a PR comment with full evidence) — the orb lints whole files on any touch, and this PR touches nearly every page's header. Not something to fix here; will get caught incrementally as pages are edited going forward. The PR is mergeable with that check red.
+- ~~**`vale/lint` fails on this PR with entirely pre-existing prose debt**~~ — resolved; see [Where we're at](#where-were-at) above.
+- **Metadata isn't reaching the markdown mirror served to agents.** This schema's fields (`page-platform`, `page-audience`, `page-server-min-version`, etc.) live in the AsciiDoc source attributes, but nothing has confirmed that the externally-relevant subset of them actually surfaces in the plain-markdown content we generate for agents/crawlers. If an agent reading the markdown can't tell a page is Server-only, admin-only, or version-gated, it will give wrong answers. Needs a pass to check what the markdown-generation pipeline currently carries through from page attributes, and add whatever's missing.
 
 ## Next steps
 
-1. **Merge PR #10788.** Requires a manual override of the failing `vale/lint` check (evidence it's 100% pre-existing is in the PR comment).
+1. **Merge PR #10788.** `vale/lint` is green post-rebase; no override needed.
 2. **Scope and build "simple validation."** Needs a decision: a small script against `schemas/docs-metadata.schema.json` run in CI (closest to what manni did, without the dependency), a pre-commit hook, or something lighter. Should cover at minimum: required-field presence, the enum fields, and the quoting gotcha above.
 3. **`page-vcs` backfill** — bulk-default pass + exception handling, as scoped above.
 4. **`page-content-type` classification** — needs its own tooling decision before work starts.
 5. **File a separate ticket** for the `server-admin-4.7`–`4.10` component consolidation, if that's still wanted — it's real technical debt the new schema exposes but doesn't fix.
 6. **Reconcile `page-description` length** into the JSON schema once a validator exists to enforce it.
+7. **Audit the markdown-mirror pipeline** for which page attributes it currently carries through, and add the externally-relevant ones from this schema (platform, audience, version-gating at minimum) so agents reading the markdown get the same constraints a human reading the rendered Antora page would.
