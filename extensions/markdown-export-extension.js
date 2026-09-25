@@ -539,12 +539,7 @@ module.exports.register = function () {
        * ADD AGENT DISCOVERY DIRECTIVE
        *
        * Add a blockquote at the top of each markdown file pointing agents to
-       * the two site-wide discovery files, and what each is for:
-       * - AGENTS.md: instructions for agents and humans using the CircleCI
-       *   product (current defaults, deprecated patterns, Cloud/Server
-       *   differences).
-       * - llms.txt: the complete documentation index, for discovering site
-       *   structure and navigation.
+       * the site-wide discovery files (AGENTS.md and llms.txt).
        */
       const agentDiscoveryDirective =
         `> For current CircleCI product defaults, deprecated patterns, and Cloud/Server differences, see [AGENTS.md](${siteUrl}/AGENTS.md).\n` +
