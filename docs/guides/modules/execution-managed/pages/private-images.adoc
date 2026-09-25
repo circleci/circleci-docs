@@ -226,7 +226,7 @@ The minimum permissions required for your AWS account are as follows (you will n
 ----
 
 [#gcp-artifact-registry]
-== GCP artifact registry
+== GCP Artifact Registry
 
 CircleCI supports pulling private images from Google Cloud Artifact Registry (GAR) and Google Container Registry (GCR).
 

@@ -444,3 +444,6 @@ containerDisk
 routable
 DMs
 [Cc]ooldown
+[Hh]ostnames?
+Automations
+Create_secret_yourself

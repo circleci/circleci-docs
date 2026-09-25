@@ -15,7 +15,7 @@ This document outlines the xref:using-gpu.adoc#linux-gpu[CircleCI Linux CUDA Ima
 
 The CircleCI CUDA images are based on our Linux VM machine images. This provides an image that can leverage the additional processing capabilities of CircleCI’s GPU executor.
 
-We aim to support the two most recent and supported major CUDA releases. We closely track Nvidia’s own release cycle and aim to release our images within a week of the CUDA release.
+We aim to support the two most recent and supported major CUDA releases. We closely track NVIDIA’s own release cycle and aim to release our images within a week of the CUDA release.
 
 The release policy is not an SLA (service level agreement). We can not, and do not, provide an official SLA turnaround time for new CUDA images.
 
@@ -47,7 +47,7 @@ File a link:https://support.circleci.com/hc/en-us/requests/new[support ticket] w
 [#image-lifespan-eol]
 == Image lifespan / EOL
 
-Image lifespan will generally follow Nvidia’s CUDA release cycle.
+Image lifespan will generally follow NVIDIA’s CUDA release cycle.
 
 Once a new major version of CUDA is released, we will begin the deprecation process of the oldest major version that we support and schedule it to be removed. This allows us to maintain two major versions of CUDA effectively.
 

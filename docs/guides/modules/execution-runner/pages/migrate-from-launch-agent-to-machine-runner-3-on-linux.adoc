@@ -14,7 +14,7 @@ Migrating from launch agent to machine runner 3 is a straightforward process. Th
 
 The first step is to uninstall launch agent. The exact process depends on the platform, as described in the following sections.
 
-. If the agent has been installed as a `systemd` service, run the following commands to stop and uninstall the service unit, and delete the service file (the new agent will install a new service unit):
+. If the agent has been installed as a `systemd` service, run the following commands to stop and uninstall the service unit, and delete the service file. The new agent installs a new service unit:
 +
 ```shell
 sudo systemctl stop circleci.service

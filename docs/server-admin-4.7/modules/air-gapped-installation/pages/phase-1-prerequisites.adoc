@@ -7,11 +7,11 @@
 :toc: macro
 :toc-title:
 
-The guides in this section walk you through the steps required to install CircleCI server in an air-gapped environment.
+The guides in this section walk you through the steps required to install CircleCI Server in an air-gapped environment.
 
 [#required-components]
 == Required components for air-gapped installation
-The following table shows an overview of the prerequisites required to run an air-gapped CircleCI server installation. These items must be present in your air-gapped environment in order to move forward with the installation.
+The following table shows an overview of the prerequisites required to run an air-gapped CircleCI Server installation. These items must be present in your air-gapped environment in order to move forward with the installation.
 
 [.table-scroll]
 --
@@ -21,16 +21,16 @@ The following table shows an overview of the prerequisites required to run an ai
 | Used for
 
 | Container registry
-| Hosting CircleCI server images for Kubernetes
+| Hosting CircleCI Server images for Kubernetes
 
 | A Kubernetes cluster
-| Running CircleCI server
+| Running CircleCI Server
 
 | An object storage system (MinIO)
 | Object and artifact storage
 
 | GitHub Enterprise
-| Source of code for CircleCI server to build
+| Source of code for CircleCI Server to build
 
 | Nomad Virtual Machines
 | Machines for running Nomad
@@ -41,10 +41,10 @@ The following table shows an overview of the prerequisites required to run an ai
 [#copy-images]
 == 1. Copy images
 
-CircleCI server is deployed into a Kubernetes cluster using a Helm chart. You will need to copy the latest images and charts from CircleCI into your virtual environment. All images referenced in the CircleCI Helm chart must be accessible within your air-gapped environment.
+CircleCI Server is deployed into a Kubernetes cluster using a Helm chart. You will need to copy the latest images and charts from CircleCI into your virtual environment. All images referenced in the CircleCI Helm chart must be accessible within your air-gapped environment.
 
 [#login-to-acr]
-=== a. Log in to CircleCI server container registry
+=== a. Log in to CircleCI Server container registry
 Access to the images you need for your installation requires you to use a username and token, which will be provided by CircleCI. Access the link:https://support.circleci.com/[CircleCI support portal] for more information.
 
 [,bash]
@@ -53,7 +53,7 @@ docker login cciserver.azurecr.io --username <your-circleci-provided-username> -
 ----
 
 === b. Download all images required for this release
-Download all images required for the release of CircleCI server to your local machine. This list contains all required images for the Helm installation, the CircleCI Agent, and the Reality Check testing tool.
+Download all images required for the release of CircleCI Server to your local machine. This list contains all required images for the Helm installation, the CircleCI Agent, and the Reality Check testing tool.
 
 [,bash]
 ----
@@ -140,11 +140,11 @@ Copy all downloaded images to the container registry in your air-gapped environm
 
 [#copy-charts]
 == 2. Copy charts
-Copy the CircleCI server Helm chart to your air-gapped environment.
+Copy the CircleCI Server Helm chart to your air-gapped environment.
 
 [#download-helm-chart]
-=== a. Download the latest CircleCI server Helm chart
-Download the latest CircleCI server Helm chart to the current directory.
+=== a. Download the latest CircleCI Server Helm chart
+Download the latest CircleCI Server Helm chart to the current directory.
 
 [,bash]
 ----
@@ -159,4 +159,4 @@ Copy the downloaded `.tgz` Helm chart to your air-gapped environment.
 [#next-steps]
 == Next steps
 
-Once the steps on this page are complete, go to the xref:phase-2-configure-object-storage.adoc[Phase 2 - Configure object storage] guide.
+Once the steps on this page are complete, go to the xref:phase-2-configure-object-storage.adoc[Phase 2 - Configure Object Storage] guide.

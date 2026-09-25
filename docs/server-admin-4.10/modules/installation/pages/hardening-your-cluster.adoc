@@ -15,7 +15,7 @@ It is also recommended to place Nomad clients and VMs in a public subnet to enab
 
 NOTE: An nginx reverse proxy is placed in front of link:https://github.com/Kong/charts[Kong] and exposed as a Kubernetes service named `circleci-proxy`. nginx is responsible routing the traffic to the following services: `kong` and `nomad`.
 
-CAUTION: When using Amazon Certificate Manager (ACM), the name of the nginx service will be `circleci-proxy-acm` instead of `circleci-proxy`. If you have switched from some other method of handling your TLS certificates to using ACM, this change will recreate the load balancer and you will have to reroute your associated DNS records for your `<domain>` and `app.<domain>`.
+CAUTION: When using Amazon Certificate Manager (ACM), the name of the nginx service will be `circleci-proxy-acm` instead of `circleci-proxy`. If you switch from another method of handling your TLS certificates to using ACM, this change recreates the load balancer. You then need to reroute your associated DNS records for your `<domain>` and `app.<domain>`.
 
 CAUTION: When using Nomad, configure clients and servers to use MTLS for secure communication.
 
@@ -46,7 +46,7 @@ You may wish to check the status of the services routing traffic in your CircleC
 
 [#kubernetes-load-balancers]
 ## Kubernetes load balancers
-Depending on your setup, your load balancers might be transparent (that is, they are not treated as a distinct layer in your networking topology). In this case, you can apply the rules from this section directly to the underlying destination or source of the network traffic. Refer to the documentation of your cloud provider to make sure you understand how to correctly apply networking security rules, given the type of load balancing used by your installation.
+Depending on your setup, your load balancers might be transparent (that is, they are not treated as a distinct layer in your networking topology). In this case, you can apply the rules from this section directly to the underlying destination or source of the network traffic. Refer to the documentation of your cloud provider to understand how to correctly apply networking security rules. This depends on the type of load balancing used by your installation.
 
 [#ingress-load-balancers]
 === Ingress

@@ -82,7 +82,7 @@ nginx:
     metallb.universe.tf/allow-shared-ip: default
 ----
 
-. After installing the Helm chart, the `circleci-proxy` service must be patched to use the internal IP of the desired k3s node to act as the load balancer (this IP must be in the range entered in the ConfigMap above). The example below uses the IP address `10.0.0.5`.
+. After installing the Helm chart, patch the `circleci-proxy` service to use the internal IP of the desired k3s node to act as the load balancer. This IP must be in the range entered in the ConfigMap above. The example below uses the IP address `10.0.0.5`.
 +
 [source, bash]
 ----

@@ -16,6 +16,6 @@ Teams who take advantage of a configuration translation service save time by:
 
 This training is for teams bringing a new project onto CircleCI.
 
-Direct contributors to the migration effort for the translated project should be involved.
+Direct contributors to the migration effort for the translated project must be involved.
 
 For more information, contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].

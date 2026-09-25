@@ -110,7 +110,7 @@ _Used to trigger pipelines on a wide range of events from GitHub_
 
 * Zero, one or many per pipeline.
 * The *event source* repository can be any repository the CircleCI GitHub App has access to. This enable cross-repository pipeline triggering.
-* Extensive *event name* options available, including all pushes, pull request opened, pull request merged, pull request marked ready for review, tag pushes, and many more (see the full list of xref:orchestrate:github-trigger-event-options.adoc[GitHub Trigger Event Options]).
+* Extensive *event name* options are available, including all pushes, pull request opened, pull request merged, pull request marked ready for review, tag pushes, and more. See the full list of xref:orchestrate:github-trigger-event-options.adoc[GitHub Trigger Event Options].
 
 *Custom Webhook triggers* +
 _Used to trigger pipelines from any external system that can send HTTP requests_

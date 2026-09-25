@@ -614,7 +614,7 @@ jobs:
 [#authoring-reusable-executors]
 == Authoring reusable executors
 
-Executors define the environment in which the steps of a job will be run. When declaring a `job` in CircleCI configuration, you define the type of execution environment (`docker`, `machine`, `macos`, etc.) to run in, as well as any other parameters for that environment, including: environment variables to populate, which shell to use, what size `resource_class` to use, etc.
+Executors define the environment in which the steps of a job will be run. When declaring a `job` in CircleCI configuration, you define the type of execution environment (`docker`, `machine`, `macos`, etc.) to run in. You also define other parameters for that environment, including which environment variables to populate, which shell to use, and what size `resource_class` to use.
 
 Executor declarations outside of `jobs` can be used by all jobs in the scope of that declaration, allowing you to reuse a single executor definition across multiple jobs.
 

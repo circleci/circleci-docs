@@ -1,7 +1,7 @@
 = Introduction to Nomad cluster operation
 :page-noindex: true
 :page-platform: Server v4.7, Server Admin
-:page-description: Learn how to operate the Nomad Cluster in your CircleCI server v4.7 installation.
+:page-description: Learn how to operate the Nomad Cluster in your CircleCI Server v4.7 installation.
 :icons: font
 :toc: macro
 :toc-title:
@@ -14,11 +14,11 @@ CircleCI uses link:https://www.nomadproject.io/[Nomad] as the primary job schedu
 .Nomad Cluster Management
 image::guides:ROOT:nomad-diagram-v2.png[Diagram of the Nomad cluster]
 <<<
-- **Nomad server:** Nomad servers are the brains of the cluster. They receive and allocate jobs to Nomad clients. In CircleCI server, a Nomad server runs as a service in your Kubernetes cluster.
+- **Nomad server:** Nomad servers are the brains of the cluster. They receive and allocate jobs to Nomad clients. In CircleCI Server, a Nomad server runs as a service in your Kubernetes cluster.
 
 - **Nomad client:** Nomad clients execute the jobs they are allocated by Nomad servers. Usually a Nomad client runs on a dedicated machine (often a VM) to take full advantage of machine power. You can have multiple Nomad clients to form a cluster and the Nomad server allocates jobs to the cluster with its scheduling algorithm.
 
-- **Nomad jobs:** A Nomad job is a specification, provided by a user, that declares a workload for Nomad. A Nomad job corresponds to an execution of a CircleCI job. If the job uses xref:guides:optimize:parallelism-faster-jobs.adoc[parallelism], for example `parallelism: 10`, then Nomad runs 10 jobs.
+- **Nomad jobs:** A Nomad job is a specification, provided by a user, that declares a workload for Nomad. A Nomad job corresponds to an execution of a CircleCI job. If the job uses xref:guides:optimize:parallelism-faster-jobs.adoc[Parallelism], for example `parallelism: 10`, then Nomad runs 10 jobs.
 
 - **Build agent:** Build agent is a Go program written by CircleCI that executes steps in a job and reports the results. Build agent is executed as the main process inside a Nomad job.
 
@@ -57,7 +57,7 @@ To get a list of your Nomad clients, run the following command:
 kubectl exec -it <nomad-server-pod-ID> -- nomad node-status
 ----
 
-NOTE: `nomad node-status` reports both Nomad clients that are currently serving (status `active`) and Nomad clients that were taken out of the cluster (status `down`). Therefore, you need to count the number of `active` Nomad clients to know the current capacity of your cluster.
+NOTE: `nomad node-status` reports both Nomad clients that are currently serving (status `active`) and Nomad clients that have been removed from the cluster (status `down`). Therefore, you need to count the number of `active` Nomad clients to know the current capacity of your cluster.
 
 To get more information about a specific client, run the following command from that client:
 
@@ -118,7 +118,7 @@ nomad node-drain -enable -yes <node-id>
 
 To set up a mechanism for clients to shutdown, first enter `drain` mode, then wait for all jobs to be finished before terminating the client. You can also configure an link:https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html[ASG Lifecycle Hook] that triggers a script for scaling down instances.
 
-The script should use the commands in the section above to do the following:
+Use the commands in the section above in the script to do the following:
 
 . Put the instance in drain mode.
 . Monitor running jobs on the instance and wait for them to finish.
@@ -128,5 +128,5 @@ ifndef::pdf[]
 [#next-steps]
 == Next steps
 
-* Read the xref:managing-user-accounts.adoc[Managing user accounts] guide.
+* Read the xref:managing-user-accounts.adoc[Managing User Accounts] guide.
 endif::[]

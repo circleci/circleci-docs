@@ -41,7 +41,7 @@ Below, you'll find a side-by-side comparison of different configuration declarat
 | `language:` +
 `os:`
 | xref:execution-managed:executor-intro.adoc[`docker`, `machine`, `macos`, `windows`]
-| CircleCI doesn't assume dependencies or commands based on a language; instead, choose an executor and use `run:` steps as shown below to execute commands you require (for example, install, build, test).
+| CircleCI does not assume dependencies or commands based on a language. Instead, choose an executor and use `run:` steps as shown below to execute commands you require (for example, install, build, test).
 
 | `dist:`
 | xref:reference:ROOT:configuration-reference.adoc#machine[Machine]

@@ -27,4 +27,4 @@ nginx:
     private_load_balancers: true
 ----
 
-NOTE: If you are changing this setting after the initial deployment of CircleCI Server, you may need to delete the old public load balancer so that Kubernetes requests a new load balancer with the new configuration.
+NOTE: If you change this setting after the initial deployment of CircleCI Server, you may need to delete the old public load balancer. This allows Kubernetes to request a new load balancer with the new configuration.

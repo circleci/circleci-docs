@@ -20,7 +20,7 @@ To follow along with this document you will need:
 
 Let us consider a more advanced (but still introductory) "hello world" application using the Windows executor. This link:https://github.com/CircleCI-Public/circleci-demo-windows[example application] still prints "Hello World" to the console, but does so using .NET core to create an executable, uses dependency caching, and creates an artifact on every build.
 
-You can view the entire configuration link:https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml[here]. It also includes browser and UI testing, but we will focus on the `hello-world` workflow for now.
+You can view the link:https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml[entire configuration file]. It also includes browser and UI testing, but we will focus on the `hello-world` workflow for now.
 
 [,yaml]
 ----

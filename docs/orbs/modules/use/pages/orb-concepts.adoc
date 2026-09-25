@@ -34,7 +34,7 @@ CircleCI's xref:reference:ROOT:reusing-config.adoc[Reusable Configuration] featu
 
 Commands contain one or more steps in which xref:reference:ROOT:reusing-config.adoc#using-the-parameters-declaration[Parameters] can be used to modify behavior. Commands are the logic of orbs and are responsible for executing steps such as xref:reference:ROOT:configuration-reference.adoc#checkout[Checking Out Code], or running shell code, for example, running Bash or CLI tools. For more information see the xref:reference:ROOT:reusing-config.adoc#authoring-reusable-commands[Authoring Reusable Commands] guide.
 
-As an example, the AWS S3 orb includes a _command_ to copy a file or object to a new location: `aws-s3/copy`. If your AWS authentication details are stored as environment variables, the syntax to use this command in your config is simply:
+As an example, the AWS S3 orb includes a _command_ to copy a file or object to a new location: `aws-s3/copy`. If your AWS authentication details are stored as environment variables, the syntax to use this command in your config is:
 
 [,yaml]
 ----
@@ -182,7 +182,7 @@ By default, created namespaces appear as "community" namespaces in the link:http
 [#semantic-versioning]
 == Semantic versioning (registry orbs only)
 
-Registry orbs use the link:https://semver.org/[SemVer] release process, in which each orb update follows a standardized versioning pattern that orb authors and users should take advantage of.
+Registry orbs use the link:https://semver.org/[SemVer] release process, in which each orb update follows a standardized versioning pattern that orb authors and users take advantage of.
 
 In Semantic versioning, release versions are represented by three integers separated by a `.`, where each integer represents a different type of change being added.
 
@@ -230,7 +230,7 @@ When you import a registry orb, you can pin it to a particular SemVer component.
 |===
 --
 
-To avoid negatively impacting a user's CI process, orb authors should strictly adhere to SemVer versioning to ensure no breaking changes are introduced at the `minor` or `patch` update levels.
+To avoid negatively impacting a user's CI process, orb authors must strictly adhere to SemVer versioning to ensure no breaking changes are introduced at the `minor` or `patch` update levels.
 
 NOTE: CircleCI does not currently support non-numeric semantic versioning elements. We suggest that you use either SemVer-style version strings in x.y.z format, or a development-style version string in dev:* format.
 
@@ -251,7 +251,7 @@ Production registry orbs are immutable and can be found on the link:https://circ
 
 Production registry orbs:
 
-* Are immutable—they cannot be deleted or edited, and updates must be provided in a new SemVer release.
+* Are immutable: they cannot be deleted or edited, and updates must be provided in a new SemVer release.
 * Have a version string in SemVer format, for example, `<namespace>/<orb>@1.2.3`.
 * Can only be published by an owner of the namespace organization.
 * Are published to the link:https://circleci.com/developer/orbs[CircleCI Orb Registry].
@@ -279,7 +279,7 @@ NOTE: This section applies to *registry orbs only*. Inline orbs are inherently p
 
 Registry orbs can be published as public or private:
 
-* If you prefer to publish your registry orb so that only those within your organization can see and use it, you should publish a *private registry orb*.
+* If you prefer that only those within your organization can see and use your registry orb, publish it as a *private registry orb*.
 * If you want to publish your registry orb to the link:https://circleci.com/developer/orbs[CircleCI Orb Registry] for use by anyone, create a *public registry orb*.
 
 Private registry orbs are described in more detail below.
@@ -298,7 +298,7 @@ By choosing to use a private registry orb instead of a public registry orb, you 
 * You will be unable to use the `circleci config validate` command to validate your configuration. You may, however, use one of the following options:
  ** Paste the content of the orb into the `orbs` stanza of your configuration.
  ** Use the `circleci config validate --org-id <your-org-id> <path/to/config.yml>` command to validate your configuration.
-* You cannot use private registry orbs from one organization in another organization's pipelines, regardless of the relationship between organizations. This means that even if you commit code and start a pipeline, and have the necessary membership in both organizations, you can use a private registry orb from your configuration file, but not from another orb.
+* You cannot use private registry orbs from one organization in another organization's pipelines, regardless of the relationship between organizations. This holds true even if you commit code, start a pipeline, and have the necessary membership in both organizations. You can only use a private registry orb from your own configuration file, not from another orb.
 
 [#authoring-orbs]
 === Authoring registry orbs
