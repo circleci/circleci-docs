@@ -1,5 +1,6 @@
 = Manage virtual machines with machine provisioner
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.9"
 :page-audience: admin
 :page-description: CircleCI Server 4.9 machine provisioner service controls how machine executor (Linux and Windows images) and Remote Docker jobs are run.

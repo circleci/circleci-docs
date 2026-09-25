@@ -1,5 +1,6 @@
 = Installation reference
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.9"
 :page-audience: admin
 :page-description: Reference documentation for installing CircleCI Server 4.9.

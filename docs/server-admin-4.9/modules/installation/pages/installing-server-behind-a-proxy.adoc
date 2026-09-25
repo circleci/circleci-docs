@@ -1,5 +1,6 @@
 = Installing server behind a proxy
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.9"
 :page-audience: admin
 :page-description: Learn how to install CircleCI Server 4.9 behind a proxy.

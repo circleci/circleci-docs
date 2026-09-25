@@ -1,5 +1,6 @@
 = CircleCI Server 4.9 FAQ
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.9"
 :page-audience: admin
 :page-description: Find answers about the CircleCI Server 4.9 data retention policy, what control is granted over Nomad certificates.

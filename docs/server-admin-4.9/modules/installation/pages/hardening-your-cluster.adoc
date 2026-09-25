@@ -1,5 +1,6 @@
 = Hardening your cluster
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.9"
 :page-audience: admin
 :page-description: This section provides supplemental information on hardening your Kubernetes cluster for CircleCI Server 4.9.

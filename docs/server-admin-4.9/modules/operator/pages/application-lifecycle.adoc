@@ -1,5 +1,6 @@
 = Release cycle and versioning policy
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.9"
 :page-audience: admin
 :page-description: Learn about CircleCI Server 4.9 semantic versioning and release schedules.

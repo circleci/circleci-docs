@@ -1,5 +1,6 @@
 = User authentication
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.9"
 :page-audience: admin
 :page-description: CircleCI Server 4.9 supports OAuth through GitHub or GitHub Enterprise.

@@ -1,5 +1,6 @@
 = Phase 4 - Configure Nomad clients
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.9"
 :page-audience: admin
 :page-description: How to configure Nomad clients to run with CircleCI Server 4.9 in an air-gapped environment.
