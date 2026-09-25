@@ -1,6 +1,7 @@
 = Monitoring stack reference Helm chart
 :page-noindex: true
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.8"
 :page-audience: admin
 :page-description: Learn how to deploy your own monitoring stack using our Helm chart as a reference.

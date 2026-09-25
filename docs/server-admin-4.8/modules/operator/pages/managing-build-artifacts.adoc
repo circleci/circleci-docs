@@ -1,6 +1,7 @@
 = Managing build artifacts
 :page-noindex: true
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.8"
 :page-audience: admin
 :page-description: Learn how CircleCI server v4.8 build artifacts persist data after a job completes and how to use them for longer-term storage of build outputs.

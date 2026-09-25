@@ -1,6 +1,7 @@
 = Usage data collection
 :page-noindex: true
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.8"
 :page-audience: admin
 :page-description: Learn about CircleCI server v4.8 usage data collection for the purpose of improving our product and services.

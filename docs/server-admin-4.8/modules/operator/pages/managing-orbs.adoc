@@ -1,6 +1,7 @@
 = Managing orbs
 :page-noindex: true
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.8"
 :page-audience: admin
 :page-description: Use this page to learn about orbs and how to manage them within CircleCI server v4.8.

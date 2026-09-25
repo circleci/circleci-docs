@@ -1,6 +1,7 @@
 = Hardening your cluster
 :page-noindex: true
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.8"
 :page-audience: admin
 :page-description: This section provides supplemental information on hardening your Kubernetes cluster for CircleCI server v4.8.

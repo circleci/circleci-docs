@@ -1,6 +1,7 @@
 = Phase 5 - Test your installation
 :page-noindex: true
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.8"
 :page-audience: admin
 :page-description: How to test your CircleCI server v4.8 installation in an air-gapped environment.
