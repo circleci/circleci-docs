@@ -1,5 +1,6 @@
 = Single sign-on (SSO) overview
 :page-platform: cloud
+:page-vcs: all
 :page-audience: developer
 :page-description: Introduction to CircleCI SAML SSO
 :experimental:
