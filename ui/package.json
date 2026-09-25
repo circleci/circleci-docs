@@ -14,7 +14,7 @@
     "last 2 versions"
   ],
   "devDependencies": {
-    "@asciidoctor/core": "~4.0.0",
+    "@asciidoctor/core": "~4.1.0",
     "@eslint/js": "~10.0.0",
     "@fontsource/roboto": "~5.3.0",
     "@fontsource/roboto-mono": "~5.3.0",
