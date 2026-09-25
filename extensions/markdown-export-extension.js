@@ -536,14 +536,21 @@ module.exports.register = function () {
       markdown = markdown.replace(/\n{3,}/g, '\n\n')
 
       /**
-       * ADD LLMS.TXT DIRECTIVE
+       * ADD AGENT DISCOVERY DIRECTIVE
        *
-       * Add a blockquote at the top of each markdown file pointing agents
-       * to the llms.txt documentation index. This helps AI agents discover
-       * the complete documentation structure.
+       * Add a blockquote at the top of each markdown file pointing agents to
+       * the two site-wide discovery files, and what each is for:
+       * - AGENTS.md: instructions for agents and humans using the CircleCI
+       *   product (current defaults, deprecated patterns, Cloud/Server
+       *   differences).
+       * - llms.txt: the complete documentation index, for discovering site
+       *   structure and navigation.
        */
-      const llmsTxtDirective = `> For the complete documentation index, see [llms.txt](${siteUrl}/llms.txt)\n\n`
-      markdown = llmsTxtDirective + markdown
+      const agentDiscoveryDirective =
+        `> For current CircleCI product defaults, deprecated patterns, and Cloud/Server differences, see [AGENTS.md](${siteUrl}/AGENTS.md).\n` +
+        `>\n` +
+        `> For the complete documentation index and site structure, see [llms.txt](${siteUrl}/llms.txt).\n\n`
+      markdown = agentDiscoveryDirective + markdown
 
       /**
        * ADD YAML FRONTMATTER
