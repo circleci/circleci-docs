@@ -68,6 +68,7 @@ In addition to everything in the Performance plan, the Scale plan includes:
 * *Unlimited self-hosted runners*: No cap on the number of jobs running on your own infrastructure.
 * *Custom storage retention*: Full customization of retention periods for artifacts, workspaces, and caches.
 * *Premium support*: Expanded SLAs, an account team, training and onboarding options, and available support package add-ons.
+* *Plan sharing*: Share your plan with child organizations so they can build under your account.
 
 To set up a Scale plan, link:https://circleci.com/talk-to-us/[contact us].
 
