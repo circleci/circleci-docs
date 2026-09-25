@@ -1,5 +1,6 @@
 = Example values file
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.9"
 :page-audience: admin
 :page-description: This page presents an example values.yaml file to help with setting up an air-gapped installation of CircleCI Server 4.9.

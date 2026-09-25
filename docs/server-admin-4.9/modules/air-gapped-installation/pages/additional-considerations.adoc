@@ -1,5 +1,6 @@
 = Additional considerations
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.9"
 :page-audience: admin
 :page-description: This page presents some items that should be considered when starting an air-gapped installation of CircleCI Server 4.9.
