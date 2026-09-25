@@ -1,5 +1,6 @@
 = Introduction to the CircleCI Web App
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: This document describes the basic features and settings available in the CircleCI web app.
