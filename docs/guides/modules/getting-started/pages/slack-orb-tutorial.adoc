@@ -1,5 +1,6 @@
 = Use the Slack orb to set up notifications
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: "Learn how to get started with the CircleCI Slack orb"
