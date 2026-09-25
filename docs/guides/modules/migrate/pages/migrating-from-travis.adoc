@@ -137,7 +137,7 @@ jobs:
   build:
     working_directory: ~/mern-starter
     docker:
-      - image: cimg/node:17.2.0 # Primary execution image
+      - image: cimg/node:lts # Primary execution image
       - image: mongo:3.4.4         # Service/dependency image
     steps:
       - checkout

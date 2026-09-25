@@ -385,14 +385,14 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: "circleci/node:<< pipeline.parameters.image-tag >>"
+      - image: "cimg/node:<< pipeline.parameters.image-tag >>"
     environment:
       IMAGETAG: "<< pipeline.parameters.image-tag >>"
     steps:
       - run: echo "Image tag used was ${IMAGETAG}"
 parameters:
   image-tag:
-    default: latest
+    default: lts
     type: string
 ----
 +
@@ -405,7 +405,7 @@ You will need to declare the parameters you expect to receive from the API. In t
 ----
  curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
    "parameters": {
-     "image-tag": "4.8.2"
+     "image-tag": "lts"
    }
  }' https://circleci.com/api/v2/project/{project-slug}/pipeline
 ----

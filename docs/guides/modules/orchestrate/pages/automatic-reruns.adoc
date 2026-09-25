@@ -257,7 +257,7 @@ jobs:
   build:
     max_auto_reruns: 3  # Wrong placement
     docker:
-      - image: cimg/base:2021.04
+      - image: cimg/base:current
 
 # Correct - workflow level
 workflows:

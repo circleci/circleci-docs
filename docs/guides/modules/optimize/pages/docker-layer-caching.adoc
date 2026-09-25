@@ -99,7 +99,7 @@ orbs:
 jobs:
  build:
     docker:
-      - image: cimg/node:17.2-browsers
+      - image: cimg/node:lts-browsers
 
     steps:
       - checkout

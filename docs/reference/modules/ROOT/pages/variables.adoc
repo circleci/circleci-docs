@@ -228,7 +228,7 @@ If you must use the environment variables that are deprecated for GitLab SaaS in
 ```yaml
 build:
   docker:
-    - image: cimg/node:17.0
+    - image: cimg/node:lts
       auth:
         username: mydockerhub-user
         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

@@ -110,7 +110,7 @@ version: 2.1
 jobs:
   build:
     docker: # use a docker image to run the job
-      - image: cimg/base:2021.04
+      - image: cimg/base:current
     steps:
       - checkout # check out the code in the project directory
       - run:

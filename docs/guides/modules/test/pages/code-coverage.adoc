@@ -272,7 +272,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: cimg/node:17.2-browsers
+      - image: cimg/node:lts-browsers
     steps:
       - checkout
       - browser-tools/install-browser-tools
@@ -334,7 +334,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/go:1.16
+      - image: cimg/go:current
     steps:
       - checkout
       - run: go build

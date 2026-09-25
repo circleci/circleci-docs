@@ -252,7 +252,7 @@ If you find yourself setting up a VNC server often, then you might want to autom
 jobs:
   build:
     docker:
-      - image: cimg/node:17.2.0
+      - image: cimg/node:lts
     steps:
       - run:
           name: Download and start X
