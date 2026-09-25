@@ -1,5 +1,6 @@
 = Using the GPU execution environment
 :page-platform: cloud
+:page-vcs: all
 :page-audience: developer
 :page-description: Learn how to configure a your jobs to run in the GPU execution environment.
 :experimental:

@@ -1,5 +1,6 @@
 = Using the Arm VM execution environment
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Learn how to configure a your jobs to run in the Arm VM execution environment.

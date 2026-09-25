@@ -1,5 +1,6 @@
 = Hello world on Windows
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: First Windows project on CircleCI

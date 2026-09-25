@@ -1,5 +1,6 @@
 = Migrating to next-gen Convenience Images
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: A guide for migrating from using legacy images to next-gen images.

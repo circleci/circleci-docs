@@ -1,5 +1,6 @@
 = Debug jobs with SSH rerun
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: How to access a build container using SSH on CircleCI
