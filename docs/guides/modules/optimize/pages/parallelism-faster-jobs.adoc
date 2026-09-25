@@ -1,5 +1,6 @@
 = Test splitting and parallelism
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: A guide for test splitting and running tests across parallel compute environments to optimize your CircleCI pipelines.
