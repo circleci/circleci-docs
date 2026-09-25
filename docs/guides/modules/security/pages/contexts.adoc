@@ -8,7 +8,7 @@ Contexts provide a mechanism for securing and sharing environment variables acro
 [#overview]
 == Introduction
 
-Manage contexts using the xref:toolkit:circleci-cli.adoc[CircleCI CLI], link:https://circleci.com/docs/api/v3/contexts.md[API v3], or on the *Organization Settings* page of the https://app.circleci.com[CircleCI web app]. You must be an organization member to view, create, or edit contexts.
+Manage contexts using the xref:toolkit:circleci-cli.adoc[CircleCI CLI], the API (link:https://circleci.com/docs/api/v3/contexts.md[API v3] on Cloud, or the link:https://circleci.com/docs/api/v2/#tag/Context[API v2] on Server), or on the *Organization Settings* page of the https://app.circleci.com[CircleCI web app]. You must be an organization member to view, create, or edit contexts.
 
 Create a context and add your environment variables. You can use the `context` key in the workflows section of a project's configuration file to give any job(s) access to the environment variables associated with the context. See the xref:reference:ROOT:configuration-reference.adoc#context[Configuration Reference] page for more information.
 
@@ -105,9 +105,11 @@ jobs:
 API::
 +
 --
-include::ROOT:partial$notes/server-api-examples.adoc[]
+CAUTION: API v3 is available for Cloud only. If you are using CircleCI Server, use the API v2 steps at the end of this tab instead.
 
-. Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#add-an-api-token[API V3 Developer's Guide].
+*Cloud (API v3)*
+
+. Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
 . Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
 . Create a context with the link:https://circleci.com/docs/api/v3/contexts.md[Create a Context] endpoint. Replace `<org-id>` and `<context-name>`:
 +
@@ -171,6 +173,45 @@ jobs:
           name: "echo environment variables from org-global context"
           command: echo $MY_ENV_VAR
 ----
+
+*CircleCI Server (API v2)*
+
+include::ROOT:partial$notes/server-api-examples.adoc[]
+
+. Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
+. Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Create a context with the link:https://circleci.com/docs/api/v2/#operation/createContext[Create a new context] endpoint. Replace `<org-id>` and `<context-name>`:
++
+[,shell]
+----
+curl --request POST \
+  --url https://circleci.com/api/v2/context \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "name": "<context-name>",
+    "owner": {
+      "id": "<org-id>"
+    }
+  }'
+----
++
+Copy the context `id` from the response.
+
+. Add an environment variable with the link:https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Add or update an environment variable] endpoint. Replace `<context-id>`, `<env-var-name>`, and `<env-var-value>`:
++
+[,shell]
+----
+curl --request PUT \
+  --url https://circleci.com/api/v2/context/<context-id>/environment-variable/<env-var-name> \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "value": "<env-var-value>"
+  }'
+----
+
+. Add the `context` key to your workflow configuration as shown in the example above.
 --
 ====
 
@@ -421,9 +462,11 @@ Web app::
 API::
 +
 --
-include::ROOT:partial$notes/server-api-examples.adoc[]
+CAUTION: API v3 is available for Cloud only. If you are using CircleCI Server, use the API v2 steps at the end of this tab instead.
 
-. Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#add-an-api-token[API V3 Developer's Guide].
+*Cloud (API v3)*
+
+. Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
 . Copy your organization ID and project ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID] and xref:toolkit:how-to-find-ids.adoc#find-a-project-id[Find a Project ID].
 . List your contexts and copy the context ID. Replace `<org-id>`:
 +
@@ -455,6 +498,43 @@ curl --request POST \
         }
       }
     }
+  }'
+----
+
+*CircleCI Server (API v2)*
+
+include::ROOT:partial$notes/server-api-examples.adoc[]
+
+. Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
+. Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. List your contexts and copy the context ID. Replace `<org-id>`:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v2/context?owner-id=<org-id>" \
+  --header "Circle-Token: ${CIRCLE_TOKEN}"
+----
+
+. Get the project ID for the project you want to restrict access to. Replace `<project-slug>`:
++
+[,shell]
+----
+curl --request GET \
+  --url https://circleci.com/api/v2/project/<project-slug> \
+  --header "Circle-Token: ${CIRCLE_TOKEN}"
+----
+
+. Create a project restriction with the link:https://circleci.com/docs/api/v2/#operation/createContextRestriction[Create context restriction] endpoint. Replace `<context-id>` and `<project-id>`:
++
+[,shell]
+----
+curl --request POST \
+  --url https://circleci.com/api/v2/context/<context-id>/restrictions \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "restriction_type": "project",
+    "restriction_value": "<project-id>"
   }'
 ----
 --
@@ -496,9 +576,11 @@ Web app::
 API::
 +
 --
-include::ROOT:partial$notes/server-api-examples.adoc[]
+CAUTION: API v3 is available for Cloud only. If you are using CircleCI Server, use the API v2 steps at the end of this tab instead.
 
-. Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#add-an-api-token[API V3 Developer's Guide].
+*Cloud (API v3)*
+
+. Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
 . Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
 . List your contexts and copy the context ID. Replace `<org-id>`:
 +
@@ -523,6 +605,38 @@ curl -g "https://circleci.com/api/v3/context-restrictions?filter[context_id]=<co
 curl -g --request DELETE \
   --url "https://circleci.com/api/v3/context-restrictions/<restriction-id>?filter[context_id]=<context-id>" \
   --header "Authorization: Bearer ${CIRCLE_TOKEN}"
+----
+
+*CircleCI Server (API v2)*
+
+include::ROOT:partial$notes/server-api-examples.adoc[]
+
+. Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
+. Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. List your contexts and copy the context ID. Replace `<org-id>`:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v2/context?owner-id=<org-id>" \
+  --header "Circle-Token: ${CIRCLE_TOKEN}"
+----
+
+. List the restrictions for that context and copy the restriction ID. Replace `<context-id>`:
++
+[,shell]
+----
+curl --request GET \
+  --url https://circleci.com/api/v2/context/<context-id>/restrictions \
+  --header "Circle-Token: ${CIRCLE_TOKEN}"
+----
+
+. Delete the restriction with the link:https://circleci.com/docs/api/v2/#operation/deleteContextRestriction[Delete context restriction] endpoint. Replace `<context-id>` and `<restriction-id>`:
++
+[,shell]
+----
+curl --request DELETE \
+  --url https://circleci.com/api/v2/context/<context-id>/restrictions/<restriction-id> \
+  --header "Circle-Token: ${CIRCLE_TOKEN}"
 ----
 --
 ====
@@ -580,9 +694,11 @@ Web app::
 API::
 +
 --
-include::ROOT:partial$notes/server-api-examples.adoc[]
+CAUTION: API v3 is available for Cloud only. If you are using CircleCI Server, use the API v2 steps at the end of this tab instead.
 
-. Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#add-an-api-token[API V3 Developer's Guide].
+*Cloud (API v3)*
+
+. Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
 . Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
 . List your contexts and copy the context ID. Replace `<org-id>`:
 +
@@ -612,6 +728,34 @@ curl --request POST \
         }
       }
     }
+  }'
+----
+
+*CircleCI Server (API v2)*
+
+include::ROOT:partial$notes/server-api-examples.adoc[]
+
+. Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
+. Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. List your contexts and copy the context ID. Replace `<org-id>`:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v2/context?owner-id=<org-id>" \
+  --header "Circle-Token: ${CIRCLE_TOKEN}"
+----
+
+. Create an expression restriction with the link:https://circleci.com/docs/api/v2/#operation/createContextRestriction[Create context restriction] endpoint. Replace `<context-id>` and `<expression>`:
++
+[,shell]
+----
+curl --request POST \
+  --url https://circleci.com/api/v2/context/<context-id>/restrictions \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "restriction_type": "expression",
+    "restriction_value": "<expression>"
   }'
 ----
 --
@@ -799,9 +943,11 @@ Web app::
 API::
 +
 --
-include::ROOT:partial$notes/server-api-examples.adoc[]
+CAUTION: API v3 is available for Cloud only. If you are using CircleCI Server, use the API v2 steps at the end of this tab instead.
 
-. Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#add-an-api-token[API V3 Developer's Guide].
+*Cloud (API v3)*
+
+. Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
 . Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
 . List your contexts and copy the context ID. Replace `<org-id>`:
 +
@@ -818,6 +964,29 @@ curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=<org-id>" \
 curl --request DELETE \
   --url https://circleci.com/api/v3/contexts/<context-id> \
   --header "Authorization: Bearer ${CIRCLE_TOKEN}"
+----
+
+*CircleCI Server (API v2)*
+
+include::ROOT:partial$notes/server-api-examples.adoc[]
+
+. Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
+. Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. List your contexts and copy the context ID. Replace `<org-id>`:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v2/context?owner-id=<org-id>" \
+  --header "Circle-Token: ${CIRCLE_TOKEN}"
+----
+
+. Delete the context with the link:https://circleci.com/docs/api/v2/#operation/deleteContext[Delete a context] endpoint. Replace `<context-id>`:
++
+[,shell]
+----
+curl --request DELETE \
+  --url https://circleci.com/api/v2/context/<context-id> \
+  --header "Circle-Token: ${CIRCLE_TOKEN}"
 ----
 --
 ====
@@ -865,9 +1034,11 @@ circleci context secret set <context-name> --name <env-var-name> --value <env-va
 API::
 +
 --
-include::ROOT:partial$notes/server-api-examples.adoc[]
+CAUTION: API v3 is available for Cloud only. If you are using CircleCI Server, use the API v2 steps at the end of this tab instead.
 
-. Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#add-an-api-token[API V3 Developer's Guide].
+*Cloud (API v3)*
+
+. Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
 . Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
 . List your contexts and copy the context ID. Replace `<org-id>`:
 +
@@ -887,6 +1058,33 @@ curl --request POST \
   --header "Content-Type: application/json" \
   --data '{
     "name": "<env-var-name>",
+    "value": "<env-var-value>"
+  }'
+----
+
+*CircleCI Server (API v2)*
+
+include::ROOT:partial$notes/server-api-examples.adoc[]
+
+. Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
+. Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. List your contexts and copy the context ID. Replace `<org-id>`:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v2/context?owner-id=<org-id>" \
+  --header "Circle-Token: ${CIRCLE_TOKEN}"
+----
+
+. Add an environment variable with the link:https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Add or update an environment variable] endpoint. Replace `<context-id>`, `<env-var-name>`, and `<env-var-value>`:
++
+[,shell]
+----
+curl --request PUT \
+  --url https://circleci.com/api/v2/context/<context-id>/environment-variable/<env-var-name> \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" \
+  --header "Content-Type: application/json" \
+  --data '{
     "value": "<env-var-value>"
   }'
 ----
@@ -929,9 +1127,11 @@ circleci context secret delete <context-name> --name <secret-name>
 API::
 +
 --
-include::ROOT:partial$notes/server-api-examples.adoc[]
+CAUTION: API v3 is available for Cloud only. If you are using CircleCI Server, use the API v2 steps at the end of this tab instead.
 
-. Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#add-an-api-token[API V3 Developer's Guide].
+*Cloud (API v3)*
+
+. Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
 . Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
 . List your contexts and copy the context ID. Replace `<org-id>`:
 +
@@ -948,6 +1148,29 @@ curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=<org-id>" \
 curl -g --request DELETE \
   --url "https://circleci.com/api/v3/contexts/<context-id>/env-vars?filter[name]=<env-var-name>" \
   --header "Authorization: Bearer ${CIRCLE_TOKEN}"
+----
+
+*CircleCI Server (API v2)*
+
+include::ROOT:partial$notes/server-api-examples.adoc[]
+
+. Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
+. Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. List your contexts and copy the context ID. Replace `<org-id>`:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v2/context?owner-id=<org-id>" \
+  --header "Circle-Token: ${CIRCLE_TOKEN}"
+----
+
+. Delete the environment variable with the link:https://circleci.com/docs/api/v2/#operation/deleteEnvironmentVariableFromContext[Remove an environment variable] endpoint. Replace `<context-id>` and `<env-var-name>`:
++
+[,shell]
+----
+curl --request DELETE \
+  --url https://circleci.com/api/v2/context/<context-id>/environment-variable/<env-var-name> \
+  --header "Circle-Token: ${CIRCLE_TOKEN}"
 ----
 --
 ====
@@ -992,11 +1215,13 @@ circleci context secret set <context-name> --name <env-var-name> --value <new-va
 API::
 +
 --
-include::ROOT:partial$notes/server-api-examples.adoc[]
+CAUTION: API v3 is available for Cloud only. If you are using CircleCI Server, use the API v2 steps at the end of this tab instead.
+
+*Cloud (API v3)*
 
 The link:https://circleci.com/docs/api/v3/contexts.md[Set a Context Environment Variable] endpoint creates or updates a variable. Use it to rotate a secret without changing the variable name.
 
-. Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#add-an-api-token[API V3 Developer's Guide].
+. Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
 . Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
 . List your contexts and copy the context ID. Replace `<org-id>`:
 +
@@ -1019,6 +1244,35 @@ curl --request POST \
     "value": "<new-value>"
   }'
 ----
+
+*CircleCI Server (API v2)*
+
+include::ROOT:partial$notes/server-api-examples.adoc[]
+
+The link:https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Add or update an environment variable] endpoint creates or updates a variable. Use it to rotate a secret without changing the variable name.
+
+. Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
+. Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. List your contexts and copy the context ID. Replace `<org-id>`:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v2/context?owner-id=<org-id>" \
+  --header "Circle-Token: ${CIRCLE_TOKEN}"
+----
+
+. Set the new value. Replace `<context-id>`, `<env-var-name>`, and `<new-value>`:
++
+[,shell]
+----
+curl --request PUT \
+  --url https://circleci.com/api/v2/context/<context-id>/environment-variable/<env-var-name> \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "value": "<new-value>"
+  }'
+----
 --
 ====
 
@@ -1035,4 +1289,5 @@ If you have existing contexts (or environment variables) and you would like to r
 
 * xref:env-vars.adoc[Introduction to Environment Variables].
 * xref:orchestrate:workflows.adoc[Using Workflows to Orchestrate Jobs].
-* xref:toolkit:api-v3-developers-guide.adoc#manage-contexts[API V3 Developer's Guide].
+* xref:toolkit:api-v3-developers-guide.adoc#manage-contexts[API V3 Developer's Guide] (Cloud).
+* xref:toolkit:api-developers-guide.adoc[API V2 Developer's Guide] (Server).
