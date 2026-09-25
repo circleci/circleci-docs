@@ -1,5 +1,6 @@
 = Introduction to Nomad cluster operation
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.10"
 :page-audience: admin
 :page-description: Learn how to operate the Nomad Cluster in your CircleCI Server 4.10 installation.

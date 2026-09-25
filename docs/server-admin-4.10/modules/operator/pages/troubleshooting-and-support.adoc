@@ -1,5 +1,6 @@
 = Troubleshooting and support
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.10"
 :page-audience: admin
 :page-description: Use this document to find troubleshooting steps if you are having problems with your CircleCI Server 4.10 installation.

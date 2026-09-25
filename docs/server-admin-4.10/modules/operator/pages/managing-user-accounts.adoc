@@ -1,5 +1,6 @@
 = Managing user accounts
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.10"
 :page-audience: admin
 :page-description: This section provides information to help CircleCI Server 4.10 operators manage user accounts.

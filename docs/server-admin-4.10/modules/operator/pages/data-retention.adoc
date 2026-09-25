@@ -1,5 +1,6 @@
 = Data retention in server
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.10"
 :page-audience: admin
 :page-description: Learn how to configure data retention policies for MongoDB, PostgreSQL, and object storage buckets in your CircleCI Server installation.
