@@ -1,5 +1,6 @@
 = Prevent unregistered users from spending credits
 :page-platform: cloud
+:page-vcs: all
 :page-audience: developer
 :page-description: A how-to guide to configuring your org so that unregistered users will not be able to perform actions that spend credits.
 :experimental:

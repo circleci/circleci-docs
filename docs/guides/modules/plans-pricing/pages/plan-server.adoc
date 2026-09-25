@@ -1,5 +1,6 @@
 = Server Plan
 :page-platform: server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: This document describes the Server Plan available to developers on CircleCI.
