@@ -1,5 +1,6 @@
 = Secure secrets handling
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Learn how to handle secrets securely with CircleCI.

@@ -1,5 +1,6 @@
 = Rename organizations and repositories
 :page-platform: cloud
+:page-vcs: all
 :page-audience: developer
 :page-description: Learn how to rename organizations and repositories in CircleCI.
 :experimental:

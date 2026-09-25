@@ -1,5 +1,6 @@
 = Rotate project SSH keys
 :page-platform: cloud, server
+:page-vcs: github, github-enterprise, gitlab, gitlab-self-hosted, bitbucket
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: How to rotate your project SSH keys.
