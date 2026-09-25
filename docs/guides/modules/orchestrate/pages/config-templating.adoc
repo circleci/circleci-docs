@@ -1,5 +1,6 @@
 = Config templating
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Use compile-time config templating to insert pipeline values and parameters into your CircleCI configuration.

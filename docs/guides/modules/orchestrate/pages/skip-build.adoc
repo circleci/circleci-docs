@@ -1,5 +1,6 @@
 = Skip CI, auto-cancel, and block new pipelines
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Skip CI builds, auto-cancel redundant workflows, and block new work for your CircleCI organization or project.

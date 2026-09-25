@@ -1,5 +1,6 @@
 = GitLab trigger options
 :page-platform: cloud
+:page-vcs: gitlab, gitlab-self-hosted
 :page-audience: developer
 :page-description: A guide to the options available for triggering GitLab pipelines
 :experimental:

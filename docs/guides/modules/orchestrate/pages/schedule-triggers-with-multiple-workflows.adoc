@@ -1,5 +1,6 @@
 = Schedule triggers with multiple workflows
 :page-platform: cloud
+:page-vcs: github, github-enterprise, bitbucket, cursor-origin
 :page-audience: developer
 :page-description: "Learn how to set conditionals for schedule triggers in multiple workflows."
 :experimental:

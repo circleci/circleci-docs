@@ -1,5 +1,6 @@
 = Set up triggers
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: A guide to setting up triggers for your pipelines.

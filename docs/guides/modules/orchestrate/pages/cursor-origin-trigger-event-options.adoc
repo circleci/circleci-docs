@@ -1,5 +1,6 @@
 = Cursor Origin trigger event options
 :page-platform: cloud
+:page-vcs: cursor-origin
 :page-audience: developer
 :page-badge: Beta
 :page-description: A guide to the options available for triggering Cursor Origin pipelines. Trigger pipelines on pushes, tags, and pull request events.
