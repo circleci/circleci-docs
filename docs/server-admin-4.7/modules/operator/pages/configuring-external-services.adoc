@@ -69,7 +69,7 @@ Consider running at least two PostgreSQL replicas to allow recovery from primary
 
 NOTE: If you are doing a fresh install of CircleCI Server, then you can skip this section and head to <<connecting-your-external-postgres>>
 
-When a CircleCI Server instance is deployed, Postgres is deployed internally by default via its Helm chart. However, as an operator, you may wish to externalize this database to have better control over scalability and availability. Once you have configured your external Postgres, you may use the guide below to migrate your Postgres data to your external database.
+When a CircleCI Server instance is deployed, PostgreSQL is deployed internally by default via its Helm chart. However, as an operator, you may wish to externalize this database to have better control over scalability and availability. Once you have configured your external PostgreSQL, you may use the guide below to migrate your PostgreSQL data to your external database.
 
 CAUTION: This process requires downtime.
 
@@ -104,31 +104,31 @@ kubectl exec -it -n "$namespace" "$PG_POD" -- bash
 psql -h <your-external-postgres-host> -U postgres -p <your-external-postgres-port>
 ----
 
-You can now connect to your external Postgres. If not, resolve any issues before proceeding.
+You can now connect to your external PostgreSQL. If not, resolve any issues before proceeding.
 
 TIP: You may use `helm upgrade ...` to restore your CircleCI Server instance to a running state.
 
 ==== 3. Generate export of your internal PostgreSQL
 
-. Retrieve your internal Postgres credentials:
+. Retrieve your internal PostgreSQL credentials:
 +
 [source,shell]
 ----
 PG_PASSWORD=$(kubectl -n "$namespace" get secrets postgresql -o jsonpath="{.data.postgresql-password}" | base64 --decode)
 ----
 +
-NOTE: The username for your internal Postgres is `postgres`. The password is randomly generated unless directly set at installation.
+NOTE: The username for your internal PostgreSQL is `postgres`. The password is randomly generated unless directly set at installation.
 
-. Connect to your Postgres pod and perform a Postgres dump:
+. Connect to your PostgreSQL pod and perform a PostgreSQL dump:
 +
 [source,shell]
 ----
 kubectl -n "$namespace" exec -it "$PG_POD" -- bash -c "export PGPASSWORD='$PG_PASSWORD' && pg_dumpall -U postgres -c" > circle.sql
 ----
 +
-NOTE: This backup is created in the filesystem used by the Postgres pod. If you wish to store it locally, you may use `kubectl cp -n "$namespace" "$PG_POD":circle.sql /local/dir/circle.sql`
+NOTE: This backup is created in the filesystem used by the PostgreSQL pod. If you wish to store it locally, you may use `kubectl cp -n "$namespace" "$PG_POD":circle.sql /local/dir/circle.sql`
 
-. Clean up the Postgres Dump. Your internally deployed Postgres uses the username `postgres`. However, during the restore, the Postgres dump will drop all resources before trying to create new ones, including the `postgres` user. Access the Postgres pod where the dump is stored and run the following commands on the Postgres dump file to remove the lines that would delete the Postgres user.
+. Clean up the PostgreSQL Dump. Your internally deployed PostgreSQL uses the username `postgres`. However, during the restore, the PostgreSQL dump will drop all resources before trying to create new ones, including the `postgres` user. Access the PostgreSQL pod where the dump is stored and run the following commands on the PostgreSQL dump file to remove the lines that would delete the PostgreSQL user.
 +
 [source,shell]
 ----
@@ -142,14 +142,14 @@ sed -i".bak" '/ALTER ROLE postgres WITH SUPERUSER INHERIT CREATEROLE CREATEDB LO
 
 ==== 4. Restore your data in your external PostgreSQL
 
-While still connected to your the internally deployed Postgres, restore the dumped data to your external Postgres:
+While still connected to your the internally deployed PostgreSQL, restore the dumped data to your external PostgreSQL:
 
 [source,shell]
 ----
 psql -h <your-external-postgres-host> -U postgres -p <your-external-postgres-port> < circle.sql
 ----
 
-Now your external Postgres will have your CircleCI Server data. In the next section you will update CircleCI Server to point to your external Postgres.
+Now your external PostgreSQL will have your CircleCI Server data. In the next section you will update CircleCI Server to point to your external PostgreSQL.
 
 [#connecting-your-external-postgres]
 === Connecting your external PostgreSQL instance to CircleCI Server

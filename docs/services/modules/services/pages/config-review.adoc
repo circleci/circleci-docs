@@ -8,7 +8,7 @@ Findings typically include:
 * Optimization recommendations tied to your goals, such as cost savings or performance.
 * Feature options for your use case.
 * Right-fitting execution environments.
-* DRY (Don't Repeat Yourself) recommendations.
+* DRY (`Don't Repeat Yourself`) recommendations.
 * Solutions specific to your project's use case.
 * How your field engineer uses CircleCI data to analyze the project.
 

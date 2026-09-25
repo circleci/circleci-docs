@@ -157,7 +157,7 @@ CircleCI Server v4.7 consists of the following services. Find their descriptions
 
 | `circleci-rabbitmq`
 | Pipelines and Execution
-| Queuing for workflow messaging, test results, usage, crons, output, notifications, and scheduler.
+| Queuing for workflow messaging, test results, usage, cron jobs, output, notifications, and scheduler.
 |
 |
 

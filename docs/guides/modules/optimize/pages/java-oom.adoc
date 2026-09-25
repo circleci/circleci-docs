@@ -26,7 +26,7 @@ detect the number of CPUs and amount of RAM available to the job.
 For older versions of Java, this can lead to the JVM seeing a large amount of memory and CPUs
 being available to it. It may then try to use more memory than is allocated to the container. This pre-allocation can produce
 Out of Memory (OOM) errors, which are difficult to debug because the error messages lack detail. Usually you will
-see a `137` exit code, which means the process has been ``SIGKILL``ed by the OOM killer (`137 = 128 + "kill -9"`).
+see a `137` exit code, which means the process has been ``SIGKILL``ed by the `OOM killer` (`137 = 128 + "kill -9"`).
 
 You can see how much memory your container is allocated, and how much it has used, by looking at the following files:
 
