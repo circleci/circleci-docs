@@ -1,5 +1,6 @@
 = CircleCI API v3 developer's guide
 :page-platform: cloud
+:page-vcs: all
 :page-audience: developer
 :page-description: CircleCI API v3 guide for developers. Learn how to use the API to return detailed information about users, pipelines, projects, workflows, and more.
 :experimental:

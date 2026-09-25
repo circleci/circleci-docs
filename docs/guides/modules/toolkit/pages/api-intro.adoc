@@ -1,5 +1,6 @@
 = CircleCI APIs overview
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Introduction to the CircleCI API versions and their capabilities including a how to choose the right API version for your use case.

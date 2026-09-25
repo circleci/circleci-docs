@@ -1,5 +1,6 @@
 = CircleCI API developer's guide
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: API guide for internal and external CircleCI developers
