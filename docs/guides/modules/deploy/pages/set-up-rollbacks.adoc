@@ -1,5 +1,6 @@
 = Set up a rollback pipeline
 :page-platform: cloud
+:page-vcs: github, github-enterprise
 :page-audience: developer
 :page-description: Configure a CircleCI rollback pipeline to revert a deployment to a previous stable version.
 :experimental:

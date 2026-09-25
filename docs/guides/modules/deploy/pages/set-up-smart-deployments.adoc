@@ -1,5 +1,6 @@
 = Set up Smart Deployments
 :page-platform: cloud
+:page-vcs: all
 :page-audience: developer
 :page-description: Use the guided setup in the CircleCI web app to configure Smart Deployments, including release validation and automatic rollback, from one flow.
 :experimental:

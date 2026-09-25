@@ -1,5 +1,6 @@
 = Deploy to Cloud Foundry
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: This document provides examples of deploying to Cloud Foundry.
