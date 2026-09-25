@@ -1,5 +1,6 @@
 = Stop building a project on CircleCI
 :page-platform: cloud, server
+:page-vcs: github, bitbucket
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Learn how to remove a project from your CircleCI account
