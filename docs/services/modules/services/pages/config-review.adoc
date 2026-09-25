@@ -1,5 +1,6 @@
 = Configuration review service
 :page-platform: cloud, server
+:page-vcs: all
 :page-audience: developer
 :page-description: Configuration review service
 

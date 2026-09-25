@@ -1,5 +1,6 @@
 = Server operator training
 :page-platform: server
+:page-vcs: all
 :page-audience: admin
 :page-description: Server operator training
 

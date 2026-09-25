@@ -1,5 +1,6 @@
 = Custom service
 :page-platform: cloud, server
+:page-vcs: all
 :page-audience: developer
 :page-description: Custom service
 
