@@ -2,6 +2,7 @@
 :page-description: How to manage URL orbs allow-lists
 :experimental:
 :page-platform: cloud
+:page-vcs: github, github-enterprise, gitlab, bitbucket
 :page-audience: developer
 
 The URL orb allow-list is a security mechanism that restricts orb URL references to only approved URL prefixes. It provides security and access control for organizations using private or external orbs.

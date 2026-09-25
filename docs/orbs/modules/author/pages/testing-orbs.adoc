@@ -1,5 +1,6 @@
 = Registry orb testing methodologies
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Starting point for Testing CircleCI Orbs

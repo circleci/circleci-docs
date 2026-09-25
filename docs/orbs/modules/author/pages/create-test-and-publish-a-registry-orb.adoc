@@ -1,5 +1,6 @@
 = Create, test, and publish a registry orb
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Tutorial showing how to create an orb using the orb development kit.
