@@ -1,5 +1,6 @@
 = Migrate from GitLab
 :page-platform: cloud, server
+:page-vcs: gitlab, gitlab-self-hosted
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: An overview of how to migrate from GitLab to CircleCI.
