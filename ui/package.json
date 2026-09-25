@@ -22,7 +22,7 @@
     "autoprefixer": "~10.6.0",
     "browser-pack-flat": "~3.5.0",
     "browserify": "~17.0.0",
-    "cssnano": "~8.0.0",
+    "cssnano": "~9.0.0",
     "eslint": "~10.11.0",
     "fancy-log": "~2.0.0",
     "fs-extra": "~11.4.0",
