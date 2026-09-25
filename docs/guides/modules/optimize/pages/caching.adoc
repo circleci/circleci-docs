@@ -1,5 +1,6 @@
 = Caching dependencies
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: A guide to caching dependencies in CircleCI pipelines.

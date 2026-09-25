@@ -1,5 +1,6 @@
 = Avoiding and debugging Java memory errors
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: How to avoid and debug Java memory errors on CircleCI.

@@ -1,5 +1,6 @@
 = Docker layer caching overview
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: How to reuse unchanged cache layers in images you build to reduce overall run time

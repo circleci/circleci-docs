@@ -1,5 +1,6 @@
 = Persisting data overview
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: An introductory guide to the various ways to persist data in CircleCI
