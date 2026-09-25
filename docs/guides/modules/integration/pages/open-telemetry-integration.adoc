@@ -69,6 +69,28 @@ Then run this command, substituting your own values:
 $ curl -sH "Circle-Token: <CircleCI Token>" -X POST -H "Content-Type: application/json" -d '{"org_id": "<CircleCI org ID>", "endpoint": "https://<your-gateway>.grafana.net/otlp/v1/traces", "protocol": "http", "headers": {"Authorization": "Basic <base64>"}}' 'https://circleci.com/api/v2/otel/exporters'
 ----
 
+
+=== Example setup for exporting to Dash0
+
+You need three things:
+
+* A CircleCI personal API token belonging to an organization admin.
+* The CircleCI organization ID.
+* Your link:https://app.dash0.com/goto/settings/endpoints?endpoint_type=otlp_grpc[Dash0 OTLP via gRPC endpoint] and your link:https://app.dash0.com/settings/auth-tokens[Dash0 auth token].
+
+Then run this command, substituting your own values:
+
+[source,console]
+----
+$ curl \
+    --silent \
+    -X POST \
+    -H 'Content-Type: application/json' \
+    -H 'Circle-Token: <CircleCI Token>' \
+    -d '{"org_id": "<CircleCI org ID>", "endpoint": "ingress.<your-cloud-region>.dash0.com:4317", "protocol": "grpc", "headers": {"Authentication": "Bearer <Dash0 auth token>"}}' \
+    'https://circleci.com/api/v2/otel/exporters'
+----
+
 [NOTE]
 ====
 *Enterprise and IP-restricted endpoints*
