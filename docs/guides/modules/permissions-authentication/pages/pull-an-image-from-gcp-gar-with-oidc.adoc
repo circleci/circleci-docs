@@ -1,5 +1,6 @@
 = Pull an image from GCP Artifact Registry with OIDC
 :page-platform: cloud
+:page-vcs: all
 :page-audience: developer
 :page-description: Learn how to pull an image from GCP Artifact Registry using OIDC authentication
 :experimental:

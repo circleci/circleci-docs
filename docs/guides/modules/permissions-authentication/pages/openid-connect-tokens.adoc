@@ -1,5 +1,6 @@
 = Using OpenID Connect tokens in jobs
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.4"
 :page-audience: developer
 :page-description: Learn how to use OpenID Connect ID tokens for access to compatible cloud services.

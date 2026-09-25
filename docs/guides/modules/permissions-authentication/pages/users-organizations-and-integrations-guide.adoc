@@ -1,5 +1,6 @@
 = Users, organizations, and integrations guide
 :page-platform: cloud
+:page-vcs: all
 :page-audience: developer
 :page-description: A guide to understanding user accounts, organizations and integrations with version control systems in CircleCI.
 :experimental:
