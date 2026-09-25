@@ -1,5 +1,6 @@
 = Integrate with Finout for cost management
 :page-platform: cloud
+:page-vcs: all
 :page-audience: developer
 :page-description: Connect CircleCI to Finout to track CI/CD costs alongside your cloud infrastructure and optimize spending with detailed cost allocation.
 :experimental:

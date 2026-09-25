@@ -1,5 +1,6 @@
 = Manage budgets
 :page-platform: cloud
+:page-vcs: all
 :page-audience: developer
 :page-description: Learn how to manage and monitor your CircleCI credit usage by setting spending limits at the organization and project level.
 :experimental:
