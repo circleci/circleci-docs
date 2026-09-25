@@ -39,7 +39,15 @@ We evaluated and fully wired up [`manni`](https://github.com/hawkeyexl/manni) (`
 ## Known gaps / outstanding work
 
 - **`page-content-type` — 0% coverage.** Genuinely needs per-page judgment (Diátaxis classification isn't derivable from a pattern). No tooling decision made for this yet — an LLM-assisted pass is the obvious approach but we've just decided against adding a third-party tool, so this needs its own call: build a small one-off script, do it by hand in batches, or revisit tooling scoped narrowly to this one task.
-- **`page-vcs` — 0% coverage.** Plan: bulk-default `all` (most pages are VCS-agnostic), then grep for VCS-specific keywords (GitHub Apps, GitLab triggers, Bitbucket, self-hosted, Cursor) and hand-correct the exceptions. `docs/guides/modules/deploy/pages/set-up-deploys.adoc` is a known real exception — it explicitly requires a GitHub repo.
+- **`page-vcs` — in progress (DOC-273).** One PR per Antora module. Done so far, all merged or open:
+  - `root` (1 page, all `all`) — PR #10792
+  - `reference` (12 pages, all `all` — the page-level union of provider mentions already covers everything, e.g. `variables.adoc`'s per-variable tables) — PR #10793
+  - `orbs` (12 pages, mostly `all`; `create-test-and-use-url-orbs.adoc` excludes GitLab per an explicit in-page NOTE; `managing-url-orbs-allow-lists.adoc` is scoped to its enumerated auth types) — PR #10794
+  - `services` (15 pages, all `all`) — PR #10795
+  - `server-admin-4.7` / `4.8` / `4.9` / `4.10` (39/41/42/42 pages, **every page** `github, github-enterprise` — CircleCI Server only ever integrates with GitHub/GitHub Enterprise; confirmed via each version's own `installation-reference.adoc`, no GitLab/Bitbucket/Cursor Origin anywhere in these modules) — PRs #10796, #10797, #10798, #10799
+  - `contributors` — no work needed; it's the docs-about-docs style guide/templates module, not real product content, and doesn't carry `page-platform` outside its templates.
+  - **Still outstanding: `guides` (264 pages, the largest and most VCS-heterogeneous module)** — not started. Needs its own pass; unlike the other modules, `guides` has real per-feature VCS exceptions across many submodules (deploy, orchestrate/triggers, integration/VCS setup, migrate) and is where `cursor-origin` (a new, beta-stage VCS type) actually shows up as a first-class concept (e.g. `orchestrate/pages/cursor-origin-trigger-event-options.adoc`, `integration/pages/set-up-vcs-connections.adoc`). `docs/guides/modules/deploy/pages/set-up-deploys.adoc` is a known real exception — it explicitly requires a GitHub repo.
+  - Policy decisions made along the way (apply consistently to the `guides` pass too): (1) when a page says "GitHub"/"GitLab" generically, include the Enterprise/self-hosted variant by default unless the page says otherwise; (2) `cursor-origin` counts as a real VCS provider and should be included wherever GitHub/GitLab/Bitbucket are listed as generic VCS options — but leave it off pages that enumerate an exhaustive, explicit list of supported providers/auth types that doesn't include it.
 - **No CI enforcement.** Nothing currently fails a build if new metadata drifts from the schema. "Some simple validation" was the stated direction — not yet scoped or built.
 - **`page-description` length isn't in the JSON schema.** AGENTS.md documents 70–160 chars (Vale-enforced separately); the schema only checks `minLength: 1`. Worth reconciling once real validation exists, so the two rules aren't split across two systems.
 - **`server-admin-4.7`–`4.10` are 4 separate near-duplicate Antora components** (directory-per-version). The new `page-server-min-version`/`page-server-deprecated-in` fields could eventually let these collapse into one component, but that's explicitly out of scope for DOC-269 — a separate, larger initiative.
@@ -50,7 +58,7 @@ We evaluated and fully wired up [`manni`](https://github.com/hawkeyexl/manni) (`
 
 1. **Merge PR #10788.** `vale/lint` is green post-rebase; no override needed.
 2. **Scope and build "simple validation."** Needs a decision: a small script against `schemas/docs-metadata.schema.json` run in CI (closest to what manni did, without the dependency), a pre-commit hook, or something lighter. Should cover at minimum: required-field presence, the enum fields, and the quoting gotcha above.
-3. **`page-vcs` backfill** — bulk-default pass + exception handling, as scoped above.
+3. **`page-vcs` backfill** — done for `root`, `reference`, `orbs`, `services`, and all four `server-admin-4.x` modules (see above). Remaining: the `guides` module (264 pages).
 4. **`page-content-type` classification** — needs its own tooling decision before work starts.
 5. **File a separate ticket** for the `server-admin-4.7`–`4.10` component consolidation, if that's still wanted — it's real technical debt the new schema exposes but doesn't fix.
 6. **Reconcile `page-description` length** into the JSON schema once a validator exists to enforce it.
