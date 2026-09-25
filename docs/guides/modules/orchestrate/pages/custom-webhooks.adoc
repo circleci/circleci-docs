@@ -1,5 +1,6 @@
 = Custom webhooks
 :page-platform: cloud, server
+:page-vcs: github, github-enterprise, cursor-origin
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Use webhooks to integrate with third-party services and subscribe to CircleCI events

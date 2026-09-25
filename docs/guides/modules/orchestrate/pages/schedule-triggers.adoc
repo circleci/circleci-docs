@@ -1,5 +1,6 @@
 = Schedule triggers
 :page-platform: cloud
+:page-vcs: github, github-enterprise, bitbucket, cursor-origin
 :page-audience: developer
 :page-description: Learn about schedule triggers for your CircleCI projects.
 :experimental:

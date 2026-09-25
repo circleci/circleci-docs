@@ -1,5 +1,6 @@
 = Set a nightly schedule trigger
 :page-platform: cloud
+:page-vcs: github, github-enterprise, bitbucket, cursor-origin
 :page-audience: developer
 :page-description: "Learn how to create schedule triggers on a specific timetable."
 :experimental:

@@ -1,5 +1,6 @@
 = Set up multiple configuration files for a project
 :page-platform: cloud
+:page-vcs: github, github-enterprise, gitlab, gitlab-self-hosted, cursor-origin
 :page-audience: developer
 :page-description: A step by step guide for setting up multiple pipelines, each defined in a separate configuration file, in a CircleCI project.
 :experimental:

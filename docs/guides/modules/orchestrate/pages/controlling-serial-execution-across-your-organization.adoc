@@ -1,5 +1,6 @@
 = Controlling serial execution across your organization
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.9"
 :page-audience: developer
 :page-description: An overview of controlling serial execution across a CircleCI org.
