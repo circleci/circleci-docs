@@ -1,5 +1,6 @@
 = Migrate from Buildkite
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: An overview of how to migrate from Buildkite to CircleCI.
