@@ -60,10 +60,21 @@ include::ROOT:partial$app-navigation/steps-to-org-settings.adoc[]
 ====
 If your workspace restricts app installations, you will see a **Request to Install** button. Submit the request. A Slack Workspace Admin must approve it before installation can complete. After approval, return to menu:Org[Slack Integration] and go through the installation flow again to complete setup.
 ====
++
+[NOTE]
+====
+Slack may display _This app is not approved by Slack_. See <<troubleshoot-slack-app-install,Troubleshoot Slack App Install>>.
+====
 . Verify that your Slack workspace appears as connected on the **Slack Integration** page.
 
 .Organization Settings > Slack Integration showing a connected workspace
 image::guides:ROOT:slack-integration/org-settings-slack-integration.png[Screenshot of the Notifications page in Organization Settings with Slack Integration selected. Shows the Slack App section with a connected CircleCI workspace, an enable/disable toggle in the enabled state, and a delete icon]
+
+[#troubleshoot-slack-app-install]
+=== Troubleshoot Slack app install
+
+* **Slack shows "This app is not approved by Slack."** The CircleCI Slack app is not yet published in the Slack Marketplace. Slack displays that banner for unlisted apps. Continue the install from menu:Org[Slack Integration]. After a Slack Workspace Admin approves the app, a successful install is valid. Confirm the official CircleCI Slack app by checking the App ID in Slack. The official App ID is `A0AMHTGLKFD`.
+* **Slack Marketplace links open a blank page.** Slack may show Marketplace-style links before a public listing exists. Blank pages appear while the app has no public Marketplace listing.
 
 == 2. Link a project to a Slack channel
 
