@@ -14,7 +14,7 @@ You can see a complete `config.yml` in our <<example-full-configuration,full exa
 [#version]
 == *`version`*
 
-The `version` field is intended to be used in order to issue warnings for deprecation or breaking changes.
+CircleCI uses the `version` field to issue warnings for deprecation or breaking changes.
 
 [.table-scroll]
 --
@@ -550,7 +550,7 @@ jobs:
 
 For the `data_points` keys, the provider defaults, and how the engine matches an incoming signal to a check, see the xref:guides:deploy:release-validation-reference.adoc[Release Validation Configuration Reference] page.
 
-The `no-op` type is used to configure a job that performs no actions and consumes no credits. `no-op` is commonly used to organize the order of operations within a workflow and make it easier to maintain. Only the `type` is required for a `no-op` type job, no further job configuration is required. For some examples of using `no-op` jobs, see the xref:guides:orchestrate:orchestration-cookbook.adoc#use-no-op-jobs-to-create-a-cleaner-workflow-graph[Orchestration Cookbook].
+Use the `no-op` type to configure a job that performs no actions and consumes no credits. Teams commonly use `no-op` to organize the order of operations within a workflow and make it easier to maintain. A `no-op` type job needs only the `type` key, and requires no further job configuration. For some examples of using `no-op` jobs, see the xref:guides:orchestrate:orchestration-cookbook.adoc#use-no-op-jobs-to-create-a-cleaner-workflow-graph[Orchestration Cookbook].
 
 **Example** of a job with a `no-op` type:
 
@@ -1303,6 +1303,24 @@ jobs:
 
 include::guides:ROOT:partial$execution-resources/docker-arm-resource-table.adoc[]
 
+[#arm-gen2]
+[badge="Beta"]
+==== Arm (gen2)
+
+include::guides:ROOT:partial$execution-resources/docker-arm-gen2-resource-table.adoc[]
+
+.Set a resource class for an Arm Docker job
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2024.12
+    resource_class: arm.large.gen2
+    steps:
+      ... // other config
+----
+
 '''
 
 [#linuxvm-execution-environment]
@@ -1496,8 +1514,6 @@ jobs:
 [#arm-execution-environment-linux]
 === Arm VM execution environment
 
-include::guides:ROOT:partial$execution-resources/arm-resource-table.adoc[]
-
 *Example:*
 
 [tabs]
@@ -1534,6 +1550,31 @@ jobs:
 --
 ====
 
+[#arm-vm-gen1]
+==== Gen1
+
+include::guides:ROOT:partial$execution-resources/arm-resource-table.adoc[]
+
+[#arm-vm-gen2]
+[badge="Beta"]
+==== Gen2
+
+include::guides:ROOT:partial$execution-resources/arm-gen2-resource-table.adoc[]
+
+*Example:*
+
+[,yaml]
+----
+jobs:
+  my-job:
+    machine:
+      image: ubuntu-2604:current
+    resource_class: arm.large.gen2
+    steps:
+      - run: uname -a
+      - run: echo "Hello, Arm!"
+----
+
 '''
 
 [#steps]
@@ -1556,9 +1597,9 @@ jobs:
           command: make test
 ----
 
-Here `run` is a step type. The `name` attribute is used by the UI for display purposes. The `command` attribute is specific to the `run` step and defines the command to execute.
+Here `run` is a step type. The UI uses the `name` attribute for display purposes. The `command` attribute is specific to the `run` step and defines the command to execute.
 
-Some steps may implement a shorthand semantic. For example, `run` may also be called like this:
+Some steps support a shorthand syntax. For example, you can also call `run` like this:
 
 [,yml]
 ----
@@ -1701,13 +1742,13 @@ For jobs that run on *Linux*, CircleCI defaults the `shell` option to `/bin/bash
 
 For jobs that run on *macOS*, the default shell is `/bin/bash --login -eo pipefail`. The shell is a non-interactive login shell. The shell executes `/etc/profile/` followed by `~/.bash_profile` before every step.
 
-For more information about which files are executed when Bash is invoked, link:https://linux.die.net/man/1/bash[see the `INVOCATION` section of the `bash` manpage].
+For more information about which files Bash executes when it starts, link:https://linux.die.net/man/1/bash[see the `INVOCATION` section of the `bash` manpage].
 
-Descriptions of the `-eo pipefail` options are provided below.
+The following sections describe the `-eo pipefail` options.
 
 ==== `-e`
 
-Exit immediately if any of the following exits with a non-zero status:
+Exit as soon as any of the following exits with a non-zero status:
 
 ** A pipeline (which may consist of a single simple command).
 ** A subshell command enclosed in parentheses.
@@ -1892,9 +1933,9 @@ For more information, see the xref:guides:orchestrate:automatic-reruns.adoc#[Aut
 [#the-when-step]
 === *The when step*
 
-NOTE: The `when` and `unless` steps are supported in `version: 2.1` configuration
+NOTE: `version: 2.1` configuration supports the `when` and `unless` steps.
 
-A conditional step consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`. Use the `when` step to customize commands and job configuration to run on custom conditions. Conditions are determined at config compilation time. This means `when` step conditions are checked before your workflow runs. See the xref:reusing-config.adoc#defining-conditional-steps[Conditional Steps Section of the Reusable Configuration Reference] for more details.
+A conditional step consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`. Use the `when` step to run commands or apply job configuration conditionally. CircleCI determines conditions at config compilation time, which means it checks `when` step conditions before your workflow runs. See the xref:reusing-config.adoc#defining-conditional-steps[Conditional Steps Section of the Reusable Configuration Reference] for more details.
 
 [.table-scroll]
 --
@@ -2504,11 +2545,11 @@ test-results
 [#persisttoworkspace]
 === *`persist_to_workspace`*
 
-Special step used to persist a temporary file to be used by another job in the workflow. For more information on using workspaces, see the xref:guides:orchestrate:workspaces.adoc#[Using Workspaces to Share Data Between Jobs] page.
+Special step that persists a temporary file for another job in the workflow to use. For more information on using workspaces, see the xref:guides:orchestrate:workspaces.adoc#[Using Workspaces to Share Data Between Jobs] page.
 
-`persist_to_workspace` adopts the storage settings from the storage customization controls on the CircleCI web app. If no custom setting is provided, `persist_to_workspace` defaults to 15 days.
+`persist_to_workspace` adopts the storage settings from the storage customization controls on the CircleCI web app. If you do not provide a custom setting, `persist_to_workspace` defaults to 15 days.
 
-Workspace storage retention can be customized on the https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls].
+You can customize workspace storage retention on the https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls].
 
 [.table-scroll]
 --
@@ -2589,7 +2630,7 @@ NOTE: Everything must be relative to the workspace root directory.
 [#attachworkspace]
 === *`attach_workspace`*
 
-Special step used to attach the workflow's workspace to the current container. The full contents of the workspace are downloaded and copied into the directory the workspace is being attached at. For more information on using workspaces, see the xref:guides:orchestrate:workspaces.adoc#[Using Workspaces] page.
+Special step that attaches the workflow's workspace to the current container. CircleCI downloads the full contents of the workspace and copies them into the directory where it attaches the workspace. For more information on using workspaces, see the xref:guides:orchestrate:workspaces.adoc#[Using Workspaces] page.
 
 [.table-scroll]
 --
@@ -3035,9 +3076,9 @@ workflows:
 [#using-when-in-workflows]
 ==== *Using `when` in workflows*
 
-NOTE: Using `when` or `unless` under `workflows` is supported in `version: 2.1` configuration. Workflows are always run unless there is a `when` or `unless` filter that prevents the workflow from being run. If you want a workflow to run in every pipeline, do not add a `when` or `unless` filter.
+NOTE: `version: 2.1` configuration supports using `when` or `unless` under `workflows`. Workflows always run unless a `when` or `unless` filter prevents them from running. If you want a workflow to run in every pipeline, do not add a `when` or `unless` filter.
 
-You may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a <<logic-statements,logic statement>> to determine whether or not to run that workflow.
+You may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a <<logic-statements,logic statement>> to determine whether to run that workflow.
 
 The example configuration below uses a pipeline parameter, `run_integration_tests` to drive the `integration_tests` workflow.
 
@@ -3130,9 +3171,9 @@ The `override-with` key is used to override the job configuration with a job fro
 include::guides:ROOT:example$orchestration-examples/override-with.yml[]
 ----
 
-In the example above, the `test` job in the workflow is being overridden with the orb job `my-orb/my-test`. The `my-orb/my-test` job might be defined with a different resource class or execution steps.
+In the example above, the orb job `my-orb/my-test` overrides the `test` job in the workflow. The `my-orb/my-test` job can define a different resource class or execution steps.
 
-If the `my-orb/my-test` job is not defined inside the orb, the `test` job will compile using the local job definition.
+If the orb does not define the `my-orb/my-test` job, the `test` job compiles using the local job definition.
 
 '''
 [#serial-group]
@@ -3251,7 +3292,7 @@ workflows:
 [#name]
 ==== *`name`*
 
-The `name` key can be used to invoke reusable jobs across any number of workflows. Using the name key ensures numbers are not appended to your job name (for example, sayhello-1, sayhello-2, etc.). The name you assign to the `name` key needs to be unique, otherwise the numbers will still be appended to the job name.
+You can use the `name` key to invoke reusable jobs across any number of workflows. Using the name key ensures CircleCI does not append numbers to your job name (for example, sayhello-1, sayhello-2, etc.). The name you assign to the `name` key needs to be unique; otherwise, CircleCI still appends numbers to the job name.
 
 [.table-scroll]
 --
@@ -3291,7 +3332,7 @@ Jobs may be configured to use global environment variables set for an organizati
 | `context`
 | N
 | String/List
-| The name of the context(s). The initial default name is `org-global`. Each context name must be unique. If using CircleCI Server, only a single context per workflow is supported. *Note:* A maximum of 100 unique contexts across all workflows is allowed.
+| The name of the context(s). The initial default name is `org-global`. Each context name must be unique. CircleCI Server supports only a single context per workflow. *Note:* CircleCI allows a maximum of 100 unique contexts across all workflows.
 |===
 --
 
@@ -3581,16 +3622,16 @@ workflows:
 [#tags]
 ==== *`tags`*
 
-WARNING: Job filters are deprecated. Use expression-based job filters instead. See <<expression-based-job-filters>> for more information.
+WARNING: CircleCI has deprecated job filters. Use expression-based job filters instead. See <<expression-based-job-filters>> for more information.
 
 CircleCI does not run workflows for tags unless you explicitly specify tag filters. If a job requires any other jobs (directly or indirectly), you must specify tag filters for those jobs.
 
-Tags can have the keys `only` and `ignore`. You may also use regular expressions to match against tags by enclosing them with slashes, or map to a list of such strings. Regular expressions must match the *entire* string. Both lightweight and annotated tags are supported.
+Tags can have the keys `only` and `ignore`. You may also use regular expressions to match against tags by enclosing them with slashes, or map to a list of such strings. Regular expressions must match the *entire* string. CircleCI supports both lightweight and annotated tags.
 
 * Any tags that match `only` runs the job.
 * Any tags that match `ignore` do not run the job.
-* If neither `only` nor `ignore` are specified then the job is skipped for all tags.
-* If both `only` and `ignore` are specified the `only` is considered before `ignore`.
+* If you specify neither `only` nor `ignore`, CircleCI skips the job for all tags.
+* If you specify both `only` and `ignore`, CircleCI considers `only` before `ignore`.
 
 [.table-scroll]
 --
@@ -3802,11 +3843,11 @@ workflows:
 [#pre-steps-and-post-steps]
 ==== *`pre-steps`* and *`post-steps`*
 
-NOTE: Pre-steps and post-steps are supported in `version: 2.1` configuration
+NOTE: `version: 2.1` configuration supports pre-steps and post-steps.
 
 Every job invocation in a workflow may optionally accept two special arguments: `pre-steps` and `post-steps`.
 
-Steps under `pre-steps` are executed before any of the other steps in the job. The steps under `post-steps` are executed after all of the other steps.
+CircleCI executes steps under `pre-steps` before any other steps in the job, and executes steps under `post-steps` after all other steps.
 
 Pre and post steps allow you to execute steps in a given job without modifying the job. Pre and post steps are useful, for example, to run custom setup steps before job execution.
 
@@ -4015,11 +4056,11 @@ The following logic values are considered falsy:
 * empty strings ("").
 * statements with no arguments.
 
-All other values are truthy. Also note that using logic with an empty list will cause a validation error.
+All other values are truthy. Also note that using logic with an empty list causes a validation error.
 
-Logic statements always evaluate to a boolean value at the top level, and coerce as necessary. They can be nested in an arbitrary fashion, according to their argument specifications, and to a maximum depth of 100 levels.
+Logic statements always resolve to a boolean value at the top level, and coerce as necessary. You can nest them in an arbitrary fashion, according to their argument specifications, to a maximum depth of 100 levels.
 
-`matches` uses link:https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html[Java regular expressions] for its `pattern`. A full match pattern must be provided, prefix matching is not an option. Though, it is recommended to enclose a pattern in `^` and `$` to avoid accidental partial matches.
+`matches` uses link:https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html[Java regular expressions] for its `pattern`. You must provide a full match pattern; prefix matching is not an option. We recommend enclosing a pattern in `^` and `$` to avoid accidental partial matches.
 
 NOTE: When using logic statements at the workflow level, do not include the `condition:` key (the `condition` key is only needed for `job` level logic statements).
 

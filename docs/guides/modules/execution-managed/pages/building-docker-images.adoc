@@ -56,7 +56,9 @@ Gen2 resource classes are also available for remote Docker (for example, `medium
 
 Arm-based Docker jobs use an equivalent **Arm machine** resource class for remote Docker.
 
-NOTE: Gen2 resource classes are not currently available for Arm-based remote Docker. Arm-based remote Docker also does not currently support the xref:security:ip-ranges.adoc[IP Ranges].
+Gen2 resource classes are also available for remote Docker (for example, `arm.medium.gen2`).
+
+NOTE: **Arm gen2 is currently in beta.** Performance and pricing are tentative and may change when this feature becomes generally available. Arm-based remote Docker also does not currently support the xref:security:ip-ranges.adoc[IP Ranges].
 
 === Docker executor to Remote Docker (Linux/Arm Machine) mapping
 
@@ -120,6 +122,25 @@ NOTE: Gen2 resource classes are not currently available for Arm-based remote Doc
 | `arm.xlarge` (Arm VM)
 | `arm.2xlarge`
 | `arm.2xlarge` (Arm VM)
+|===
+--
+
+==== Arm gen2 architecture
+
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+| Docker resource class
+| Remote Docker (Arm Linux Machine) resource class
+| `arm.medium.gen2`
+| `arm.medium.gen2` (Arm VM)
+| `arm.large.gen2`
+| `arm.large.gen2` (Arm VM)
+| `arm.xlarge.gen2`
+| `arm.xlarge.gen2` (Arm VM)
+| `arm.2xlarge.gen2`
+| `arm.2xlarge.gen2` (Arm VM)
 |===
 --
 
