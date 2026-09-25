@@ -1,5 +1,6 @@
 = Reusable config reference
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Reference guide for CircleCI 2.1 Configuration
