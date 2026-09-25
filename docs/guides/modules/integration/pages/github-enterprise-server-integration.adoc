@@ -1,5 +1,6 @@
 = GitHub Enterprise Server integration
 :page-platform: cloud
+:page-vcs: github-enterprise
 :page-audience: developer
 :page-badge: Preview
 :page-description: Connect your self-hosted GitHub Enterprise Server instance to CircleCI Cloud.

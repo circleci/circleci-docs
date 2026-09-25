@@ -1,5 +1,6 @@
 = Status updates overview
 :page-platform: cloud, server
+:page-vcs: github, github-enterprise, gitlab, gitlab-self-hosted, bitbucket
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: An overview of commit statuses and GitHub Checks in CircleCI, including how they appear in GitHub, Bitbucket, and GitLab.

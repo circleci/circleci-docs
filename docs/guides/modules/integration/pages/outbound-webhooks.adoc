@@ -1,5 +1,6 @@
 = Outbound webhooks
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Use outbound webhooks to integrate with third-party services and subscribe to CircleCI events

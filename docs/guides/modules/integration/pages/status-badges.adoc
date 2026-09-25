@@ -1,5 +1,6 @@
 = Adding status badges
 :page-platform: cloud, server
+:page-vcs: github, bitbucket
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: How to embed a CircleCI status badge in any web page or document

@@ -1,5 +1,6 @@
 = OpenTelemetry for CI/CD
 :page-platform: cloud
+:page-vcs: all
 :page-audience: developer
 :page-description: Configure CircleCI to export OpenTelemetry spans for your pipelines, workflows, jobs, and steps.
 
