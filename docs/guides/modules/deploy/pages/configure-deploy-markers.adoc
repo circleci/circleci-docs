@@ -1,5 +1,6 @@
 = Configure deploy markers
 :page-platform: cloud
+:page-vcs: all
 :page-audience: developer
 :page-description: Tutorial outlining how to configure deploy markers in your workflow.
 :experimental:

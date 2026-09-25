@@ -1,5 +1,6 @@
 = Set up release validation manually
 :page-platform: cloud
+:page-vcs: all
 :page-audience: developer
 :page-description: Configure release validation by editing your CircleCI configuration file, or when you prefer to write the validation policy yourself.
 :experimental:

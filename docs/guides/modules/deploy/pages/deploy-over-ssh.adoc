@@ -1,5 +1,6 @@
 = Deploy over SSH
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Learn how to deploy your application over SSH using CircleCI.

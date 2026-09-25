@@ -1,5 +1,6 @@
 = Set up a deploy pipeline
 :page-platform: cloud
+:page-vcs: github, github-enterprise
 :page-audience: developer
 :page-description: Configure a CircleCI deploy pipeline to support manual deployment of a component to a target environment.
 :experimental:
