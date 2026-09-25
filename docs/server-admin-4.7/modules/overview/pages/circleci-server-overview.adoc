@@ -1,6 +1,7 @@
 = CircleCI Server v4.7 overview
 :page-noindex: true
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.7"
 :page-audience: admin
 :page-description: CircleCI server v4.7 is a continuous integration and continuous delivery (CI/CD) platform that you can install on your GCP or AWS Kubernetes cluster.

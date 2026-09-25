@@ -1,6 +1,7 @@
 = Phase 1 - Prerequisites
 :page-noindex: true
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.7"
 :page-audience: admin
 :experimental:

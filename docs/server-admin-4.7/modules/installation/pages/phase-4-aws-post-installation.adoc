@@ -1,6 +1,7 @@
 = Phase 4 AWS - post installation
 :page-noindex: true
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.7"
 :page-audience: admin
 :page-description: CircleCI server v4.7 post installation steps

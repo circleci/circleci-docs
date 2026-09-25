@@ -1,6 +1,7 @@
 = CircleCI Server v4.7 FAQ
 :page-noindex: true
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.7"
 :page-audience: admin
 :page-description: Find answers about the CircleCI server v4.7 data retention policy, what control is granted over Nomad certificates.
