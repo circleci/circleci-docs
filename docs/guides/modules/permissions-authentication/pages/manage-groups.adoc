@@ -7,7 +7,7 @@ If you have a `circleci` type organization, the content on this page applies to 
 
 include::ROOT:partial$tips/check-org-type.adoc[]
 
-Use groups to manage access to projects and features. By creating groups based on teams or roles within your organization, you can, for example, add a user to a group to give them access to all required projects (for example, mobile projects, DevOps projects). For more information about the roles available, and their associated permissions, see the xref:roles-and-permissions-overview.adoc[Roles and permissions] overview page.
+Use groups to manage access to projects and features. Create groups based on teams or roles within your organization. Then, add a user to a group to give them access to all required projects, such as mobile or DevOps projects. For more information about the roles available and their associated permissions, see the xref:roles-and-permissions-overview.adoc[Roles and Permissions] overview page.
 
 The how-to guides on this page provide steps for some common group management tasks.
 
@@ -15,7 +15,7 @@ The how-to guides on this page provide steps for some common group management ta
 == Prerequisites
 
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
-* At least one project created in your organization. See the xref:getting-started:create-project.adoc[Create a project] page for instructions.
+* At least one project created in your organization. See the xref:getting-started:create-project.adoc[Create a Project] page for instructions.
 
 [#create-a-group]
 == Create a group
@@ -24,9 +24,9 @@ NOTE: To do this, you must have the _Organization Admin_ role.
 
 . In the CircleCI web app, click on **Org** in the sidebar.
 . Select **Groups** from the sidebar.
-. Click btn:[Create Group].
+. Select btn:[Create Group].
 . Enter a name and description (optional) for your group.
-. Click btn:[Create Group].
+. Select btn:[Create Group].
 
 View your new group in the groups list. Click on the group name to view details. You can now <<add-people-to-a-group,add people to the group>>.
 
@@ -37,7 +37,7 @@ NOTE: To do this, you must have the _Organization Admin_ role.
 
 . In the CircleCI web app, click on **Org** in the sidebar.
 . Select **Groups** from the sidebar.
-. Click on the name of the group you want to add people to.
+. Select on the name of the group you want to add people to.
 . On the group page, click btn:[Add members].
 . In the popup, search or scroll for users to add to your group. You can select multiple users on one session. When you have made your selection, click btn:[Save].
 
@@ -47,9 +47,9 @@ NOTE: To do this, you must have the _Organization Admin_ role.
 NOTE: To do this, you must have the _Organization Admin_ role.
 
 . In the CircleCI web app, click on **Projects** in the sidebar.
-. Click on the ellipsis next to your project icon:more[Ellipsis menu icon] and then select **Project Settings**.
+. Select on the ellipsis next to your project icon:more[Ellipsis menu icon] and then select **Project Settings**.
 . Select **Groups** from the sidebar.
-. Click btn:[Add Groups].
+. Select btn:[Add Groups].
 . Select the group name and then use the dropdown to assign a project role (Admin/Contributor/Viewer).
 
 [#assign-a-new-project-role-to-a-group]
@@ -58,7 +58,7 @@ NOTE: To do this, you must have the _Organization Admin_ role.
 NOTE: To do this, you must have the _Organization Admin_ role.
 
 . In the CircleCI web app, click on **Projects** in the sidebar.
-. Click on the ellipsis next to your project icon:more[Ellipsis menu icon] and then select **Project Settings**.
+. Select on the ellipsis next to your project icon:more[Ellipsis menu icon] and then select **Project Settings**.
 . Select **Groups** from the sidebar.
 . Locate the group in the list and open up the "Project Grant" dropdown to access all role options.
 . Select the new role you wish to assign to the group for this project. You will see a notification to confirm when the change is complete.
@@ -70,8 +70,8 @@ NOTE: To do this, you must have the _Organization Admin_ role.
 
 . In the CircleCI web app, click on **Org** in the sidebar.
 . Select **Groups** from the sidebar.
-. Click on the name of the group in the list to view the group details page.
-. Click btn:[Delete group].
+. Select on the name of the group in the list to view the group details page.
+. Select btn:[Delete group].
 
 [#remove-a-user-from-a-group]
 == Remove a user from a group
@@ -80,5 +80,5 @@ NOTE: To do this, you must have the _Organization Admin_ role.
 
 . In the CircleCI web app, click on **Org** in the sidebar.
 . Select **Groups** from the sidebar.
-. Click on the name of the group in the list.
-. Click on the checkbox next to the user you want to remove from the group, and click btn:[Remove Members].
+. Select on the name of the group in the list.
+. Select on the checkbox next to the user you want to remove from the group, and click btn:[Remove Members].

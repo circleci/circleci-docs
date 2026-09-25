@@ -31,7 +31,7 @@ For a complete comparison of all three orb types, see the xref:use:orb-concepts.
 
 == Prerequisites
 
-Before creating an inline orb, you should be familiar with:
+Before creating an inline orb, make sure you are familiar with:
 
 * xref:guides:getting-started:config-intro.adoc[CircleCI Configuration Basics].
 * xref:reference:ROOT:reusing-config.adoc[Reusable Configuration Elements] (commands, jobs, executors).

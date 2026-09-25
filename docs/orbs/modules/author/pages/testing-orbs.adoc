@@ -157,7 +157,7 @@ image::guides:ROOT:orbtools-rc008.png[orb-tools review check RC008]
 
 When you click into the error you will receive more information including the file and line number in the code where the error was found, and a suggestion for resolution.
 
-CAUTION: The `orb-tools/review` job currently cannot be run locally due to the fact that the results are output as JUnit XML and uploaded to CircleCI, which is not supported by the local execute command at this time.
+CAUTION: The `orb-tools/review` job cannot currently be run locally. Its results are output as JUnit XML and uploaded to CircleCI, which the local execute command does not support at this time.
 
 [#unit-testing]
 == Unit testing

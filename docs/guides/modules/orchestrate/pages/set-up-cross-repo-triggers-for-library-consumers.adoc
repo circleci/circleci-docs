@@ -112,7 +112,7 @@ You have two options for structuring your cross-repo trigger setup. Each approac
 
 |**When to use**
 |Use this option when each consumer has unique test requirements or when you want teams to maintain their own CI/CD configurations.
-|Use this option when you want a platform team to maintain consistent test configurations across multiple consumers, or when you want to reuse the same configuration file for multiple consumer repositories.
+|Use this option when you want a platform team to maintain consistent test configurations across multiple consumers. It also works when you want to reuse the same configuration file for multiple consumer repositories.
 
 |**Repository structure**
 a|
@@ -262,7 +262,7 @@ Option 1: Config in consumer repository::
 +
 --
 .. For **Config source**, select your consumer repository from the dropdown menu.
-.. In the **Config filepath** field, you can either leave the default if you want to run your existing `circleci/config.yml` file, or enter the path to the specific configuration file for this pipeline if you want to run a different build on changes to the library, for example `.circleci/library-integration-tests-config.yml`.
+.. In the **Config filepath** field, leave the default to run your existing `circleci/config.yml` file. To run a different build on changes to the library, enter the path to that configuration file instead, for example `.circleci/library-integration-tests-config.yml`.
 .. For **Checkout source**, select your consumer repository from the dropdown menu.
 
 .. Select btn:[Save].

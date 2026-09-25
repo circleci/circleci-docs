@@ -29,10 +29,10 @@ The evaluation process involves using a dataset of inputs to an LLM or applicati
 
 Evaluations can cover many aspects of a model performance, including:
 
-* Ability to comprehend specific jargon
+* Ability to comprehend specific jargon.
 * Make accurate predictions
-* Avoid hallucinations and generate relevant content
-* Respond in a fair and unbiased way, and within a specific style
+* Avoid hallucinations and generate relevant content.
+* Respond in a fair and unbiased way, and within a specific style.
 * Avoid certain expressions
 
 Some important differences between evaluations and standard software tests to consider include the following:
@@ -74,14 +74,16 @@ With the CircleCI evals orb, evaluations:
 * Job step details can include direct links to your evaluation results stored on your third-party evaluation provider. When you need to further review the evaluation results in detail, this link enables you to navigate to and view your evaluation results.
 * Your evaluation results can be saved to a `.json` file, for evaluation testing.
 
+.Evaluations Job Step Details: Task Evals
 image::guides:ROOT:llmops/eval-job-run-eval-step.png[Evaluations Job Step Details: Task Evals]
 
 ==== Test evaluation results in CircleCI
 
 Evaluation testing enables you to determine if your evaluation results meet specified conditions. CircleCI evaluation testing uses a suite of test cases. Each test case represents a scenario with an assertion to check if a specified condition is true or false. If any test case fails, the evaluation test fails.
 
-Assertions are expressed using the link:https://cel.dev/[Common Expression Language] (CEL). For more information, see the link:https://github.com/google/cel-spec/blob/master/doc/langdef.md[specification]. All values from the results `.json` file are available as global variables. Try out CEL link:https://playcel.undistro.io/[here].
+Assertions are expressed using the link:https://cel.dev/[Common Expression Language] (CEL). For more information, see the link:https://github.com/google/cel-spec/blob/master/doc/langdef.md[specification]. All values from the results `.json` file are available as global variables. Try out CEL using the link:https://playcel.undistro.io/[CEL playground].
 
+.Evaluation testing: diagram
 image::guides:ROOT:llmops/eval-test-diagram.png[Evaluation testing: diagram]
 
 Assuming the evaluation results are in a `.json` file, as follows:
@@ -122,7 +124,7 @@ You can configure test case assertions, like this:
 
 Test cases are composed of a name and an assertion. In the first example above, the name is `correctness` and the assertion is that correctness is above 0.9. When configuring test cases, we suggest assigning a name based on the test scenario. The examples above use names based on input metrics: `correctness` , `toxicity` and `labels`.
 
-Evaluation testing results determine if a job should stop or continue, as follows:
+Evaluation testing results determine whether a job stops or continues, as follows:
 
 * **The evaluation test fails**: This indicates a proposed change resulted in a degradation of model performance. The job stops running, and the pipeline fails.
 * **The evaluation test passes**: This indicates that model performance has met set criteria, the job continues to run.
@@ -133,10 +135,12 @@ Evaluation testing determines if your evaluation results meet specified conditio
 
 * In the step details
 +
+.Evaluation testing: Job Step Details
 image::guides:ROOT:llmops/eval-job-eval-test-step.png[Evaluation testing: Job Step Details]
 
 * In the tests tab. Additionally, when a test case has failed, its details are displayed.
 +
+.Evaluation testing: Test Failure Details
 image::guides:ROOT:llmops/eval-test-fail-detail.png[Evaluation testing: Test Failure Details]
 
 == Store credentials for your evaluations
@@ -148,9 +152,11 @@ To store your LLM provider credentials, follow these steps:
 . Select btn:[Set Up] next to your chosen provider, and follow the in-app instructions.
 * When connecting an OpenAI account, you can also save the credentials for your evaluation platform, such as Braintrust and LangSmith. These credentials can then be used when setting up a pipeline that uses the CircleCI evals orb.
 
+.Project Settings > LLMOps: Create Context Modal Window in CircleCI
 image::guides:ROOT:llmops/create-context.png[Project Settings > LLMOps: Create Context Modal Window in CircleCI]
+.Project Settings > LLMOps: View contexts in CircleCI
 image::guides:ROOT:llmops/openai-context.png[Project Settings > LLMOps: View contexts in CircleCI]
 
 == Next steps
 
-* Follow our how to guide to xref:automate-llm-evaluation-testing-with-the-circleci-evals-orb.adoc[automate LLM evaluation testing with the CircleCI evals orb].
+* Follow our how to guide to xref:automate-llm-evaluation-testing-with-the-circleci-evals-orb.adoc[Automate LLM Evaluation Testing With the CircleCI Evals Orb].

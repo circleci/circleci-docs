@@ -13,8 +13,8 @@ NOTE: Once SSO Group Mapping is configured, your IdP will have complete control 
 Before you begin, ensure you have the following:
 
 * You are using Okta as your IdP and have access to your Okta admin console.
-* SSO is configured in your CircleCI organization and you have the organization admin role in CircleCI. For information on roles and permissions, see the xref:roles-and-permissions-overview.adoc[Roles and permissions overview].
-* Your CircleCI organization has one or more groups. For more information on groups, see xref:manage-groups.adoc[Manage groups].
+* SSO is configured in your CircleCI organization and you have the organization admin role in CircleCI. For information on roles and permissions, see the xref:roles-and-permissions-overview.adoc[Roles and Permissions Overview].
+* Your CircleCI organization has one or more groups. For more information on groups, see xref:manage-groups.adoc[Manage Groups].
 
 == How to set up group mapping with Okta
 

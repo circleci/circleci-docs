@@ -1,4 +1,4 @@
-= CircleCI server v4.7 release notes
+= CircleCI Server v4.7 release notes
 :page-noindex: true
 :page-platform: Server v4.7, Server Admin
 :page-description: Details of the new features included in each CircleCI server v4.7 release.
@@ -13,7 +13,7 @@ The v4.7 release introduces security improvements with the implementation of roo
 
 [#upgrade]
 == Upgrade
-For upgrade steps see the xref:installation:upgrade-server.adoc[Upgrade server v4.7 guide].
+For steps to upgrade to v4.7, see the xref:installation:upgrade-server.adoc[Upgrade Guide].
 
 
 == Release 4.7.15

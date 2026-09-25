@@ -41,7 +41,7 @@ orbs:
   python: circleci/python@2.0.3
 ----
 
-NOTE: When using an orb, it is a good idea to check the link:https://circleci.com/developer/orbs[Orb Registry] to ensure you are using the most recent version, or the version that fits best with your specific project.
+NOTE: When using an orb, check the link:https://circleci.com/developer/orbs[Orb Registry] to confirm you are using the most recent version. Alternatively, use the version that best fits your specific project.
 
 [#create-jobs]
 === 3. Create jobs

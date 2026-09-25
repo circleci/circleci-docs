@@ -85,7 +85,7 @@ Incorrect lifecycle settings may result in data being removed earlier than expec
 After configuring retention limits for your MongoDB and PostgresDB objects, you can also apply object expiry policies to your S3 or GCS buckets. These policies typically expire objects at n+1 days, where n is the retention period set for your databases.
 
 NOTE: **Object Storage Paths** +
-If a retention policy of `n` days is configured for both MongoDB and PostgreSQL data, you can set `n+1` for **all objects** in your S3/GCS buckets to expire at `n+1` days. This ensures alignment between database retention and object storage retention.
+If a retention policy of `n` days is configured for both MongoDB and PostgreSQL data, set `n+1` for **all objects** in your S3/GCS buckets. These objects then expire at `n+1` days. This ensures alignment between database retention and object storage retention.
 
 CAUTION: **Audit Logs** +
 Be sure to configure exceptions for critical paths, such as `audit-logs/*`, in accordance with your organization's compliance or audit requirements. Objects under these paths must not be expired by default.

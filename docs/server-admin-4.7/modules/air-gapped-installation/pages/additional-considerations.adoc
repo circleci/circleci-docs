@@ -48,9 +48,9 @@ configs:
 [#service-type-load-balancers-k3s]
 == Service type load balancers in K3s
 
-CircleCI server makes use of link:https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer[Service] `type: LoadBalancer` Kubernetes resources to listen to traffic on multiple ports.
+CircleCI Server makes use of link:https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer[Service] `type: LoadBalancer` Kubernetes resources to listen to traffic on multiple ports.
 
-If using a K3s installation, link:https://metallb.universe.tf/installation/[MetalLB] can be used to create a virtual load balancer on the K3s node, to allow ingress traffic to CircleCI server.
+If using a K3s installation, link:https://metallb.universe.tf/installation/[MetalLB] can be used to create a virtual load balancer on the K3s node, to allow ingress traffic to CircleCI Server.
 
 Once installed, the following steps need to be followed:
 
@@ -72,7 +72,7 @@ data:
       - <<k3s_internal_ip_range_start>>-<<k3s_internal_ip_range_end>>
 ----
 +
-The address pool can be named something other than "default", but the annotations in `values.yaml` will need to be updated. If there is only one k3s node, the address range should have the same IP repeated (for example, `10.0.0.5-10.0.0.5`).
+The address pool can be named something other than "default", but the annotations in `values.yaml` will need to be updated. If there is only one k3s node, use the same IP repeated for the address range (for example, `10.0.0.5-10.0.0.5`).
 
 . Once this ConfigMap resource is applied to the cluster (`kubectl apply -f metallb-configmap.yaml`), update the address pool name in `values.yaml` for the Helm installation.
 +
@@ -85,7 +85,7 @@ nginx:
     metallb.universe.tf/allow-shared-ip: default
 ----
 
-. After installing the Helm chart, the `circleci-proxy` service must be patched to use the internal IP of the desired k3s node to act as the load balancer (this IP should be in the range entered in the ConfigMap above). The example below uses the IP address `10.0.0.5`.
+. After installing the Helm chart, the `circleci-proxy` service must be patched to use the internal IP of the desired k3s node to act as the load balancer. This IP must be in the range entered in the ConfigMap above. The example below uses the IP address `10.0.0.5`.
 +
 [source, bash]
 ----
@@ -97,7 +97,7 @@ kubectl patch svc circleci-proxy  -p '{"spec": {"type": "LoadBalancer", "externa
 [#tls-importing]
 == Importing trusted TLS certificates
 
-When using a GitHub Enterprise instance with self-signed or custom certificate authority certificates, CircleCI server can be configured to trust these certificates using two methods, as described below.
+When using a GitHub Enterprise instance with self-signed or custom certificate authority certificates, CircleCI Server can be configured to trust these certificates using two methods, as described below.
 
 NOTE: Values provided for either of these methods are supported for GitHub Enterprise certificates only. No other VCS application is supported at this time.
 
@@ -113,12 +113,12 @@ tls:
     - github.airgap.example.com:443
 ----
 
-For each `hostname:port` combination, CircleCI server will, during installation, retrieve the public certificate for the particular GitHub Enterprise instance and trust it to establish connections with that instance.
+For each `hostname:port` combination, CircleCI Server will, during installation, retrieve the public certificate for the particular GitHub Enterprise instance and trust it to establish connections with that instance.
 
 
 [#configuring-the-tls-certificates-array]
 === Configuring the TLS certificates array
-Instead of providing a list of `hostname:port` combinations for certificates to import, the public certificate chains of the corresponding TLS certificates to trust can be provided in the `values.yaml` file, in the `tls.certificates`  value, as a list of base64 encoded certificates strings.
+Instead of providing a list of `hostname:port` combinations for certificates to import, provide the public certificate chains of the corresponding TLS certificates to trust in the `values.yaml` file. Add these to the `tls.certificates` value as a list of base64 encoded certificates strings.
 
 [source, yaml]
 ----

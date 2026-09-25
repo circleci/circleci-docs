@@ -1,10 +1,10 @@
 = Configuring external services
 :page-noindex: true
 :page-platform: Server v4.7, Server Admin
-:page-description: This document describes how to configure the following external services for use with a CircleCI server v4.7 installation
+:page-description: This document describes how to configure the following external services for use with a CircleCI Server v4.7 installation
 :icons: font
 
-This page describes how to configure external services for use with either a new CircleCI server v4.7 installation or migrating internal PostgreSQL and MongoDB data from existing CircleCI server v4.7 installation to your externalized datastores.
+This page describes how to configure external services for use with a new CircleCI Server v4.7 installation. It also covers migrating internal PostgreSQL and MongoDB data from an existing CircleCI Server v4.7 installation to your externalized datastores.
 
 [#postgresql]
 == PostgreSQL
@@ -67,15 +67,15 @@ Consider running at least two PostgreSQL replicas to allow recovery from primary
 [#migrating-from-internal-postgres]
 === Migrating from an internal PostgreSQL to an externalized source
 
-NOTE: If you are doing a fresh install of CircleCI server, then you can skip this section and head to <<connecting-your-external-postgres>>
+NOTE: If you are doing a fresh install of CircleCI Server, then you can skip this section and head to <<connecting-your-external-postgres>>
 
-When a CircleCI server instance is deployed, Postgres is deployed internally by default via its helm chart. However, as an operator, you may wish to externalize this database to have better control over scalability and availability. Once you have configured your external Postgres, you may use the guide below to migrate your Postgres data to your external database.
+When a CircleCI Server instance is deployed, Postgres is deployed internally by default via its Helm chart. However, as an operator, you may wish to externalize this database to have better control over scalability and availability. Once you have configured your external Postgres, you may use the guide below to migrate your Postgres data to your external database.
 
 CAUTION: This process requires downtime.
 
 ==== 1. Disable the application
 
-Disable the CircleCI server application by scaling down the application layer pods. No Data is lost in this process, but the application will be unreachable.
+Disable the CircleCI Server application by scaling down the application layer pods. No Data is lost in this process, but the application will be unreachable.
 
 Scale down your application layer pods:
 
@@ -89,7 +89,7 @@ Running `kubectl -n "$namespace" get pods` will show most of your pods scaling t
 
 ==== 2. Validate access to your external PostgreSQL from within the cluster (optional)
 
-. Confirm that pods within your CircleCI server cluster can access your external PostgreSQL. You can do this from within your internal PostgreSQL.
+. Confirm that pods within your CircleCI Server cluster can access your external PostgreSQL. You can do this from within your internal PostgreSQL.
 +
 [source,shell]
 ----
@@ -104,9 +104,9 @@ kubectl exec -it -n "$namespace" "$PG_POD" -- bash
 psql -h <your-external-postgres-host> -U postgres -p <your-external-postgres-port>
 ----
 
-You should be able to connect to your external Postgres at this point. If not, resolve any issues before proceeding.
+You can now connect to your external Postgres. If not, resolve any issues before proceeding.
 
-TIP: You may use `helm upgrade ...` to restore your CircleCI server instance to a running state.
+TIP: You may use `helm upgrade ...` to restore your CircleCI Server instance to a running state.
 
 ==== 3. Generate export of your internal PostgreSQL
 
@@ -149,12 +149,12 @@ While still connected to your the internally deployed Postgres, restore the dump
 psql -h <your-external-postgres-host> -U postgres -p <your-external-postgres-port> < circle.sql
 ----
 
-Now your external Postgres will have your CircleCI server data. In the next section you will update CircleCI server to point to your external Postgres.
+Now your external Postgres will have your CircleCI Server data. In the next section you will update CircleCI Server to point to your external Postgres.
 
 [#connecting-your-external-postgres]
-=== Connecting your external PostgreSQL instance to CircleCI server
+=== Connecting your external PostgreSQL instance to CircleCI Server
 
-Once you have set up your external PostgreSQL instance, add the following to your `values.yaml` file so that your CircleCI server instance can access it.
+Once you have set up your external PostgreSQL instance, add the following to your `values.yaml` file so that your CircleCI Server instance can access it.
 
 [source,yaml]
 ----
@@ -205,19 +205,19 @@ postgresql:
 --
 ====
 
-The changes will take effect upon running `helm install/upgrade`. If you are completing a migration to an externalized PostgreSQL instance then when you perform `helm upgrade`, the scaled down pods will be scaled back to their replica numbers as defined by your `values.yaml`.
+The changes will take effect upon running `helm install/upgrade`. If you are completing a migration to an externalized PostgreSQL instance, run `helm upgrade`. The scaled down pods will then be scaled back to their replica numbers, as defined by your `values.yaml`.
 
 
 [#backing-up-postgresql]
 === Back up PostgreSQL
-PostgreSQL provides official documentation for backing up and restoring your PostgreSQL 12 install, which can be found link:https://www.postgresql.org/docs/12/backup.html[here].
+PostgreSQL provides official documentation for backing up and restoring your PostgreSQL 12 install. See the link:https://www.postgresql.org/docs/12/backup.html[PostgreSQL backup and restore documentation].
 
 We strongly recommend the following:
 
-* Take daily backups
-* Keep at least 30 days of backups
-* Use encrypted storage for backups as databases might contain sensitive information
-* Perform a backup before each upgrade of CircleCI server
+* Take daily backups.
+* Keep at least 30 days of backups.
+* Use encrypted storage for backups as databases might contain sensitive information.
+* Perform a backup before each upgrade of CircleCI Server.
 
 [#mongodb]
 == MongoDB
@@ -227,15 +227,15 @@ NOTE: If using your own MongoDB instance, it needs to be version 3.6 or higher.
 [#migrating-from-internal-mongodb]
 === Migrating from an internal MongoDB to an externalized source
 
-NOTE: If you are doing a fresh install of CircleCI server, then you can skip this section and head to <<connecting-your-external-mongodb>>
+NOTE: If you are doing a fresh install of CircleCI Server, then you can skip this section and head to <<connecting-your-external-mongodb>>
 
-When a CircleCI server instance deployed, MongoDB is deployed internally by default via its helm chart. However, as an operator, you may wish to externalize this database to have better control over scalability and availability. Once you have configured your external MongoDB, you may use the guide below to migrate your Mongo data to your external database.
+When a CircleCI Server instance deployed, MongoDB is deployed internally by default via its Helm chart. However, as an operator, you may wish to externalize this database to have better control over scalability and availability. Once you have configured your external MongoDB, you may use the guide below to migrate your Mongo data to your external database.
 
 CAUTION: This process requires downtime.
 
 ==== 1. Disable the application
 
-Disable the CircleCI server application by scaling down the application layer pods. No Data is lost in this process, but the application will be unreachable.
+Disable the CircleCI Server application by scaling down the application layer pods. No Data is lost in this process, but the application will be unreachable.
 
 Scale down your application layer pods:
 
@@ -249,7 +249,7 @@ Running `kubectl -n "$namespace" get pods` will show most of your pods scaling t
 
 ==== 2. Validate access to your external MongoDB from within the cluster (optional)
 
-. Confirm that pods within your CircleCI server cluster can access your external MongoDB. You can do this from within your internal MongoDB pod:
+. Confirm that pods within your CircleCI Server cluster can access your external MongoDB. You can do this from within your internal MongoDB pod:
 +
 [source,shell]
 ----
@@ -264,9 +264,9 @@ kubectl exec -it -n "$namespace" "$MONGO_POD" -- bash
 mongo --username <username> --password --authenticationDatabase admin --host <external-mongodb-host> --port <external-mongodb-port>
 ----
 
-You should be able to connect to your external MongoDB at this point. If not, resolve any issues before proceeding.
+You can now connect to your external MongoDB. If not, resolve any issues before proceeding.
 
-TIP: You may use `helm upgrade ...` to restore your CircleCI server instance to a running state.
+TIP: You may use `helm upgrade ...` to restore your CircleCI Server instance to a running state.
 
 ==== 3. Generate export of your internal MongoDB
 
@@ -302,12 +302,12 @@ Use the generated MongoDB backup to restore the data to your external MongoDB:
 kubectl -n "$namespace" exec "$MONGO_POD" -- mongorestore --drop -u "$MONGODB_USERNAME" -p "$MONGODB_PASSWORD" --host <external-mongodb-host> --port <external-mongodb-port> --authenticationDatabase admin /tmp/backups/circle_ghe;
 ----
 
-Now your external MongoDB will have your CircleCI server data. In the next section you will update CircleCI server to point to your external MongoDB.
+Now your external MongoDB will have your CircleCI Server data. In the next section you will update CircleCI Server to point to your external MongoDB.
 
 [#connecting-your-external-mongodb]
-=== Connecting your external MongoDB instance to CircleCI server
+=== Connecting your external MongoDB instance to CircleCI Server
 
-Once you have configured your external MongoDB instance, add the following to your `values.yaml` file to connect your CircleCI server instance.
+Once you have configured your external MongoDB instance, add the following to your `values.yaml` file to connect your CircleCI Server instance.
 
 [source,yaml]
 ----
@@ -370,4 +370,4 @@ mongodb:
 --
 ====
 
-The changes will take effect upon running `helm install/upgrade`. If you are completing a migration to an externalized MongoDB instance then when you perform `helm upgrade`, the scaled down pods will be scaled back to their replica numbers as defined by your `values.yaml`.
+The changes will take effect upon running `helm install/upgrade`. If you are completing a migration to an externalized MongoDB instance, run `helm upgrade`. The scaled down pods will then be scaled back to their replica numbers, as defined by your `values.yaml`.

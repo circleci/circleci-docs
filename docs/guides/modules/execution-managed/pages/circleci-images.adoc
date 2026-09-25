@@ -97,7 +97,7 @@ for as long as you would like before making any changes.
 [#notes-on-pinning-images]
 === Notes on pinning images
 
-* It is not recommended that you use the SHA for extended periods of time. If there is a major bug or security issue that requires a rebuild of the image, your pipeline's dependency on the image could inhibit you from acquiring the update that fixes that bug or patches a security issue.
+* It is not recommended that you use the SHA for extended periods of time. If there is a major bug or security issue that requires a rebuild of the image, your pipeline's dependency on the image could be a problem. It might inhibit you from acquiring the update that fixes the bug or patches the security issue.
 
 * If you are using a legacy image and you do not specify a tag, Docker applies the `latest` tag. The `latest` tag refers to the most recent stable release of an image. However, since this tag may change unexpectedly, it is best practice to add an explicit image tag.
 
