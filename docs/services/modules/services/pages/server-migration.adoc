@@ -1,5 +1,6 @@
 = Server migration service
 :page-platform: server
+:page-vcs: all
 :page-audience: admin
 :page-description: Server migration service
 

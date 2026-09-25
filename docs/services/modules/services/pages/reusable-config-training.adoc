@@ -1,5 +1,6 @@
 = Reusable configuration training
 :page-platform: cloud, server
+:page-vcs: all
 :page-audience: developer
 :page-description: Reusable configuration training
 

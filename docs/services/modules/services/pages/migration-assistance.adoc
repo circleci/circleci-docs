@@ -1,5 +1,6 @@
 = Migration assistance service
 :page-platform: cloud, server
+:page-vcs: all
 :page-audience: developer
 :page-description: Migration assistance service
 
