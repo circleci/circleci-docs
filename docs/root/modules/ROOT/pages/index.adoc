@@ -1,5 +1,6 @@
 = Welcome to CircleCI Documentation
 :page-platform: cloud, server
+:page-vcs: all
 :page-audience: developer
 :page-description: Landing page for CircleCI documentation.
 :page-layout: home
