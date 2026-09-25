@@ -1,5 +1,6 @@
 = CircleCI machine/convenience image lifecycle: A complete guide
 :page-platform: cloud
+:page-vcs: all
 :page-audience: developer
 :page-description: CircleCI Machine/Convenience Image Lifecycle
 :experimental:

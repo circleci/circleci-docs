@@ -1,5 +1,6 @@
 = Configuring a macOS application on CircleCI
 :page-platform: cloud
+:page-vcs: all
 :page-audience: developer
 :page-description: First macOS project on CircleCI
 :experimental:

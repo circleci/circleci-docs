@@ -1,5 +1,6 @@
 = Migrating from Docker to Machine
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Best practices and considerations when migrating your executor from Docker to machine

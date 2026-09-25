@@ -1,5 +1,6 @@
 = Resource class overview
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Learn how to use resource classes in CircleCI to specify compute resources for jobs, configure self-hosted runners, and choose execution environments.
