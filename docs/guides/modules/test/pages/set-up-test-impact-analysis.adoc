@@ -93,7 +93,7 @@ During test selection, the current state of the branch's checked-out code is com
 [mermaid]
 ----
 flowchart TD
-    Start([Discovered Test Atoms\nFor each test])
+    Start([Discovered Test Units\nFor each test])
 
     Start --> New{New test?}
     New -- Yes --> Selected
@@ -153,7 +153,7 @@ include::ROOT:partial$tips/testsuite-working-directory.adoc[]
 
 Once all checks pass, follow the "Next steps" from the doctor output to generate initial impact data locally and send it to CircleCI.
 
-NOTE: Depending on the test runner, the first run of analysis can take a long time because every test atom needs to run analysis.
+NOTE: Depending on the test runner, the first run of analysis can take a long time because every test unit needs to run analysis.
 
 Commit the `.circleci/test-suites.yml` changes to your feature branch and push to your VCS. Follow your usual process to merge to your default branch.
 
@@ -163,10 +163,10 @@ Commit the `.circleci/test-suites.yml` changes to your feature branch and push t
 After analysis has been generated locally and sent to CircleCI, verify test impact analysis is working correctly by following these steps:
 
 . In the CircleCI web app, navigate to your pipeline and open the test job.
-. Check that the job was successful with skipped test atoms in the "Test" tab.
-. Modify a source file that was analyzed, then push. Only the test atoms that cover the modified file are selected to run. Look for the `Selecting tests...` output in the job to confirm the correct test atoms are selected and the reason for selection.
+. Check that the job was successful with skipped test units in the "Test" tab.
+. Modify a source file that was analyzed, then push. Only the test units that cover the modified file are selected to run. Look for the `Selecting tests...` output in the job to confirm the correct test units are selected and the reason for selection.
 
-*Test impact analysis is now set up for your test suite.* Feature branches run the test atoms impacted by code changes, and your default branch runs all tests while also updating impact data.
+*Test impact analysis is now set up for your test suite.* Feature branches run the test units impacted by code changes, and your default branch runs all tests while also updating impact data.
 
 If these defaults do not suit your project, see the <<advanced-configuration,Advanced configuration>> section for alternative configurations.
 
@@ -183,7 +183,7 @@ If these defaults do not suit your project, see the <<advanced-configuration,Adv
 
 Some project files affect the running system without being directly covered by tests. Examples include dependency manifests, database migration files, or CI configuration.
 
-Use `full-test-run-paths` to list files that cause all test atoms to be selected and run.
+Use `full-test-run-paths` to list files that cause all test units to be selected and run.
 
 .Example test suite with full test run paths configured
 [source,yaml]
@@ -203,9 +203,9 @@ options:
 
 === Test selection rules
 
-Code coverage cannot detect every relationship between source files and test atoms.
+Code coverage cannot detect every relationship between source files and test units.
 
-Use `test-selection-rules` to extend test selection to cover non-source files, or to always run specific test atoms. For example, run integration tests when database migrations change, or always run acceptance tests regardless of which files changed.
+Use `test-selection-rules` to extend test selection to cover non-source files, or to always run specific test units. For example, run integration tests when database migrations change, or always run acceptance tests regardless of which files changed.
 
 .Example test suite with test selection rules
 [source,yaml]
@@ -238,16 +238,16 @@ Each flag accepts three values:
 | Value | Meaning for `--analyze-tests` | Meaning for `--run-tests`
 
 | `impacted`
-| Analyze only test atoms whose impact data needs updating -- either the test changed, or the files it covers changed.
-| Select and run only the test atoms impacted by a change.
+| Analyze only test units whose impact data needs updating -- either the test changed, or the files it covers changed.
+| Select and run only the test units impacted by a change.
 
 | `none`
 | Skip analysis entirely.
 | Skip running tests entirely.
 
 | `all`
-| Analyze ALL discovered test atoms. *Rarely needed* -- only use to rebuild impact data from scratch.
-| Select and run all discovered test atoms (full test suite).
+| Analyze ALL discovered test units. *Rarely needed* -- only use to rebuild impact data from scratch.
+| Select and run all discovered test units (full test suite).
 |===
 --
 
@@ -400,11 +400,11 @@ jobs:
 [#dynamic-parallelism]
 === Set parallelism from the number of selected tests
 
-Use the `circleci testsuite list-tests` command in a setup workflow to count the selected test atoms, then pass a parallelism value to the continued workflow as a pipeline parameter. This approach requires xref:orchestrate:dynamic-config.adoc[Dynamic Configuration] to be enabled for your project.
+Use the `circleci testsuite list-tests` command in a setup workflow to count the selected test units, then pass a parallelism value to the continued workflow as a pipeline parameter. This approach requires xref:orchestrate:dynamic-config.adoc[Dynamic Configuration] to be enabled for your project.
 
-The `list-tests` command prints the selected test atoms to stdout, one per line, without running them. It applies the same selection rules as `circleci testsuite run`, so the count reflects what the test job runs. The `--run-tests` and `--analyze-tests` flags accept the same values as `run`. If your test job passes either flag, pass the same flags to `list-tests` so the count matches.
+The `list-tests` command prints the selected test units to stdout, one per line, without running them. It applies the same selection rules as `circleci testsuite run`, so the count reflects what the test job runs. The `--run-tests` and `--analyze-tests` flags accept the same values as `run`. If your test job passes either flag, pass the same flags to `list-tests` so the count matches.
 
-.Setup configuration that counts the selected test atoms
+.Setup configuration that counts the selected test units
 [source,yaml]
 ----
 # .circleci/config.yml
@@ -421,12 +421,12 @@ jobs:
       # Check out the code and install the dependencies the discover command needs.
       - setup
       - run:
-          name: Count selected test atoms
+          name: Count selected test units
           command: |
             TESTS_PER_NODE=20
             MAX_PARALLELISM=10
 
-            # List the test atoms that would be selected, without running them.
+            # List the test units that would be selected, without running them.
             TEST_COUNT=$(circleci testsuite list-tests "ci tests" | wc -l)
 
             # Round up to the next whole node, then clamp to the range 1-MAX_PARALLELISM.
@@ -438,7 +438,7 @@ jobs:
               PARALLELISM=$MAX_PARALLELISM
             fi
 
-            echo "Selected ${TEST_COUNT} test atoms, continuing with parallelism ${PARALLELISM}"
+            echo "Selected ${TEST_COUNT} test units, continuing with parallelism ${PARALLELISM}"
             echo "{\"test_parallelism\": ${PARALLELISM}}" > /tmp/parameters.json
       - continuation/continue:
           configuration_path: .circleci/continue-config.yml
