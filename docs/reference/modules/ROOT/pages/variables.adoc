@@ -1,5 +1,6 @@
 = Project values and variables
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: A list of all built-in variables for your CircleCI projects.

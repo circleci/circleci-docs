@@ -1,5 +1,6 @@
 = Outbound webhooks reference
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Reference for the common fields and event-specific payloads sent by CircleCI outbound webhooks.
