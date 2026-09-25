@@ -1,6 +1,7 @@
 = Upgrade MongoDB
 :page-noindex: true
 :page-platform: server
+:page-vcs: github, github-enterprise
 :page-server-min-version: "4.8"
 :page-audience: admin
 :page-description: Learn how to upgrade MongoDB up to v4.4.15 in an installation of CircleCI server v4.8.
