@@ -161,7 +161,7 @@ To enable this optional feature, follow the instructions below **after reading t
 
 - The SSH server is configured for public key authentication. Anyone with permission to initiate a job can rerun it with SSH. However, only the user who initiated the rerun will have their SSH public keys added to the server for the duration of the SSH session.
 
-- Rerunning a job with SSH will hold the job open for **two hours** if a connection is made to the SSH server, or **ten minutes** if no connection is made, unless canceled. While in this state, the job is counted against an organization’s concurrency limit, and the task-agent will be unavailable to handle other jobs. Therefore, it is recommended to cancel an SSH rerun job explicitly (through the web UI or CLI) when you have finished debugging.
+- Rerunning a job with SSH holds the job open for up to **two hours** if a connection is made to the SSH server. If no connection is made, the job stays open for up to **ten minutes**, unless canceled. While in this state, the job is counted against an organization’s concurrency limit, and the task-agent will be unavailable to handle other jobs. Therefore, it is recommended to cancel an SSH rerun job explicitly (through the web UI or CLI) when you have finished debugging.
 
 - When establishing a SSH connection, you may experience a warning relating to a host change, due to the reuse of a previously used port to connect to a different pod. RSA host fingerprints can be cross-referenced with the output in the console for verification.
 ****
