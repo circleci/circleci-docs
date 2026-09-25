@@ -1,5 +1,6 @@
 = CircleCI agent skills
 :page-platform: cloud
+:page-vcs: all
 :page-audience: developer
 :page-description: Install CircleCI agent skills in Claude Code, Cursor, Codex, or Copilot to debug builds, optimize config, and onboard projects.
 :experimental:

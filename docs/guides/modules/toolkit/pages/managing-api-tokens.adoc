@@ -1,5 +1,6 @@
 = Managing API tokens
 :page-platform: cloud, server
+:page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: How to assign scoped tokens for using the CircleCI API

@@ -1,5 +1,6 @@
 = Install and configure the Chunk CLI
 :page-platform: cloud
+:page-vcs: all
 :page-audience: developer
 :page-description: How to install and configure the Chunk CLI, a tool for integrating AI code review standards and remote validation into your development workflow.
 :experimental:
