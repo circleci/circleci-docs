@@ -34,12 +34,12 @@ After checking your `.circleci/config.yml` for formatting errors, search for you
 [#why-is-my-job-queued]
 === Why is my job queued?
 
-A job might end up being queued because you have reached your organization's concurrency limit. Free, Performance, and Custom plans each have a maximum number of jobs that can run concurrently, based on your plan tier. Scale plan organizations have no concurrency limit, except for macOS resource classes, which retain a custom concurrency limit. If your jobs are queuing often, you can consider link:https://circleci.com/pricing/[upgrading your plan].
+A job might end up being queued because you have reached your organization's concurrency limit. Free and Performance plans each have a maximum number of jobs that can run concurrently, based on your plan tier. Scale plan organizations have no concurrency limit, except for macOS resource classes, which retain a custom concurrency limit. If your jobs are queuing often, you can consider link:https://circleci.com/pricing/[upgrading your plan].
 
 [#why-are-my-jobs-queuing-performance-plan]
 === Why are my jobs queuing even though I'm on the Performance Plan?
 
-Concurrency limits are set per xref:reference:ROOT:configuration-reference.adoc#resourceclass[Resource Class] and vary between Free, Performance, and Custom plans. For example, macOS resource classes have a lower concurrency limit than other resource classes on the same plan. If you are experiencing queuing, you may have reached the limit for that specific resource class. This can happen even if you have not reached your overall plan limit. link:https://support.circleci.com/hc/en-us/requests/new[Contact CircleCI Support] to request an increase to your limit.
+Concurrency limits are set per xref:reference:ROOT:configuration-reference.adoc#resourceclass[Resource Class] and vary between Free and Performance plans. For example, macOS resource classes have a lower concurrency limit than other resource classes on the same plan. If you are experiencing queuing, you may have reached the limit for that specific resource class. This can happen even if you have not reached your overall plan limit. link:https://support.circleci.com/hc/en-us/requests/new[Contact CircleCI Support] to request an increase to your limit.
 
 [#find-project-projects-dashboard]
 === Why can I not find my project on the Projects dashboard?
