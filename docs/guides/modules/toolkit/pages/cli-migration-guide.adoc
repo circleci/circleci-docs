@@ -1,6 +1,7 @@
 = CLI command migration guide
 :page-platform: Cloud
 :page-vcs: all
+:page-plan: Free, Performance, Scale
 :page-audience: developer
 :page-description: A mapping of legacy CircleCI CLI commands to their equivalents in CircleCI CLI v1.
 :experimental:

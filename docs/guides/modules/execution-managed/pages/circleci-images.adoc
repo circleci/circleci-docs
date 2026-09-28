@@ -1,6 +1,7 @@
 = Convenience images
 :page-platform: Cloud, Server
 :page-vcs: all
+:page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Listing of available Docker images maintained by CircleCI

@@ -2,6 +2,7 @@
 :page-aliases: deploys-overview.adoc, deploy:deploy-to-amazon-sagemaker.adoc
 :page-platform: Cloud
 :page-vcs: all
+:page-plan: Free, Performance, Scale
 :page-audience: developer
 :page-description: Learn the basics of deployment and deploys management with CircleCI.
 :experimental:

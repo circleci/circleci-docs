@@ -1,6 +1,7 @@
 = Deploy iOS applications
 :page-platform: Cloud
 :page-vcs: all
+:page-plan: Free, Performance, Scale
 :page-audience: developer
 :page-description: Deploy iOS Applications
 :experimental:

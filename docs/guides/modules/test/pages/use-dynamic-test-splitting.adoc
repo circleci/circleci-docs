@@ -1,6 +1,7 @@
 = Use dynamic test splitting
 :page-platform: Cloud
 :page-vcs: all
+:page-plan: Free, Performance, Scale
 :page-audience: developer
 :experimental:
 :page-description: Evenly distribute tests across parallel execution nodes

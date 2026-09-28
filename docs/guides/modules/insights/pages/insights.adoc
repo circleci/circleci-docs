@@ -1,6 +1,7 @@
 = Using Insights
 :page-platform: Cloud, Server
 :page-vcs: all
+:page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Viewing the status of repos and test performance

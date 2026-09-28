@@ -2,6 +2,7 @@
 :page-badge: Preview
 :page-platform: Cloud
 :page-vcs: all
+:page-plan: Free, Performance, Scale
 :page-audience: developer
 :page-description: Publish packages to PyPI from CircleCI using OIDC trusted publishing, the recommended tokenless approach.
 :experimental:

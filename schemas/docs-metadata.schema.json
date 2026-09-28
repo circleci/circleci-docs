@@ -46,6 +46,11 @@
       "type": "string",
       "enum": ["admin", "developer"],
       "description": "Replaces the old 'Server Admin' marker baked into page-platform. 'admin' where that marker was present, 'developer' as the default everywhere else."
+    },
+    "page-plan": {
+      "type": "string",
+      "pattern": "^(Free|Performance|Scale)(, (Free|Performance|Scale))*$",
+      "description": "CircleCI cloud plan(s) a page's functionality is available on, comma-separated, one to three of Free/Performance/Scale in that order. Title case deliberately, unlike page-platform/page-audience/page-vcs, since it matches the product's own plan names. Not used on Server-only pages (Server is covered by page-platform)."
     }
   }
 }

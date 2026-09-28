@@ -1,6 +1,7 @@
 = Quickstart guide
 :page-platform: Cloud
 :page-vcs: all
+:page-plan: Free, Performance, Scale
 :page-audience: developer
 :page-description: A quickstart guide for adding a project to CircleCI and exploring some features
 :page-show-readtime: true

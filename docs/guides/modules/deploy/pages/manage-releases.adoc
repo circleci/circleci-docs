@@ -1,6 +1,7 @@
 = Manage releases
 :page-platform: Cloud
 :page-vcs: all
+:page-plan: Free, Performance, Scale
 :page-audience: developer
 :page-description: How to guide for managing releases from the CircleCI web app.
 :experimental:

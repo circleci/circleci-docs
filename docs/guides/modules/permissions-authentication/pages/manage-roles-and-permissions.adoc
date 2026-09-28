@@ -1,6 +1,7 @@
 = Manage roles and permissions
 :page-platform: Cloud
 :page-vcs: github, github-enterprise, gitlab, gitlab-self-hosted, cursor-origin
+:page-plan: Free, Performance, Scale
 :page-audience: developer
 :page-description: How-to guides for managing roles and permissions in CircleCI.
 :experimental:

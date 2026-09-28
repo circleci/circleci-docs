@@ -1,6 +1,7 @@
 = Integrate with Vantage for cost management
 :page-platform: Cloud
 :page-vcs: all
+:page-plan: Free, Performance, Scale
 :page-audience: developer
 :page-description: Connect CircleCI to Vantage to track CI/CD costs alongside your cloud infrastructure and SaaS providers.
 :experimental:

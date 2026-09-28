@@ -1,6 +1,7 @@
 = Trigger options
 :page-platform: Cloud, Server
 :page-vcs: all
+:page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: "A guide to the various ways to manage pipeline triggering in CircleCI"

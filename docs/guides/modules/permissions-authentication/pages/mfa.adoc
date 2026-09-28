@@ -1,6 +1,7 @@
 = Multi-factor authentication (MFA)
 :page-platform: Cloud
 :page-vcs: all
+:page-plan: Free, Performance, Scale
 :page-audience: developer
 :page-description: MFA Overview
 :experimental:

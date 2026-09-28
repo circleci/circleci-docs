@@ -1,6 +1,7 @@
 = Test Insights
 :page-platform: Cloud
 :page-vcs: github, bitbucket
+:page-plan: Free, Performance, Scale
 :page-audience: developer
 :page-description: Analyze your test performance using test Insights.
 :experimental:

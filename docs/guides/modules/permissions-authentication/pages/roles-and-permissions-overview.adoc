@@ -1,6 +1,7 @@
 = Roles and permissions
 :page-platform: Cloud
 :page-vcs: github, github-enterprise, gitlab, gitlab-self-hosted, cursor-origin
+:page-plan: Free, Performance, Scale
 :page-audience: developer
 :page-description: An overview of the various project and organization roles in CircleCI and the permissions associated with each role.
 :experimental:

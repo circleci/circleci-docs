@@ -1,6 +1,7 @@
 = Pull an image from AWS ECR with OIDC
 :page-platform: Cloud
 :page-vcs: all
+:page-plan: Free, Performance, Scale
 :page-audience: developer
 :page-description: Learn how to pull an image from AWS ECR using OIDC authentication
 :experimental:

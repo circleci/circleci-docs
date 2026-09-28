@@ -1,6 +1,7 @@
 = Migrate from Jenkins
 :page-platform: Cloud
 :page-vcs: all
+:page-plan: Free, Performance, Scale
 :page-audience: developer
 :page-description: Differences between CircleCI and Jenkins, with migration guide.
 :experimental:

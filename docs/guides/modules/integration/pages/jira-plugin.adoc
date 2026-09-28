@@ -1,6 +1,7 @@
 = Connect Jira with CircleCI
 :page-platform: Cloud
 :page-vcs: all
+:page-plan: Free, Performance, Scale
 :page-audience: developer
 :page-description: Connecting Jira with CircleCI
 :experimental:

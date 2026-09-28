@@ -1,6 +1,7 @@
 = Delete organizations and projects
 :page-platform: Cloud
 :page-vcs: all
+:page-plan: Free, Performance, Scale
 :page-audience: developer
 :page-description: Learn how to delete organizations and projects in CircleCI.
 :experimental:

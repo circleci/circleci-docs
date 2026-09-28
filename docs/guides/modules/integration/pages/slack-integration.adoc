@@ -1,6 +1,7 @@
 = Slack integration
 :page-platform: Cloud
 :page-vcs: all
+:page-plan: Free, Performance, Scale
 :page-audience: developer
 :page-description: Install the CircleCI Slack app and configure project-level Slack notifications for workflow status updates.
 :experimental:

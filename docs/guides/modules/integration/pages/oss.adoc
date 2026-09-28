@@ -1,6 +1,7 @@
 = Build open source projects
 :page-platform: Cloud
 :page-vcs: github, github-enterprise, gitlab, bitbucket
+:page-plan: Free, Performance, Scale
 :page-audience: developer
 :page-description: Best practices for building open source projects
 :experimental:

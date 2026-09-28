@@ -1,6 +1,7 @@
 = CircleCI image updater
 :page-platform: Cloud
 :page-vcs: all
+:page-plan: Free, Performance, Scale
 :page-audience: developer
 :page-description: The CircleCI tool to help customers update images in config.
 :experimental:

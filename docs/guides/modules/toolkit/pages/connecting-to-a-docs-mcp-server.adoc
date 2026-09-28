@@ -1,6 +1,7 @@
 = Connecting to the CircleCI docs MCP server
 :page-platform: Cloud
 :page-vcs: all
+:page-plan: Free, Performance, Scale
 :page-audience: developer
 :page-description: Connect your AI assistant to CircleCI's documentation MCP server to search CircleCI docs and knowledge sources directly from your development environment.
 :experimental:

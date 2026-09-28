@@ -1,7 +1,7 @@
 = How CircleCI handles security
-:page-platform: Server
+:page-platform: Cloud
 :page-vcs: all
-:page-server-min-version: "4.7"
+:page-plan: Free, Performance, Scale
 :page-audience: admin
 :page-description: An overview of security measures taken at CircleCI.
 :experimental:

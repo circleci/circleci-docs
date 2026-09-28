@@ -2,6 +2,7 @@
 :page-description: Run only the tests impacted by your code changes
 :page-platform: Cloud
 :page-vcs: all
+:page-plan: Free, Performance, Scale
 :page-audience: developer
 :experimental:
 

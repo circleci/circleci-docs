@@ -1,6 +1,7 @@
 = Deploy Android applications
 :page-platform: Cloud
 :page-vcs: all
+:page-plan: Free, Performance, Scale
 :page-audience: developer
 :page-description: Learn to deploy Android apps through CircleCI.
 :experimental:
