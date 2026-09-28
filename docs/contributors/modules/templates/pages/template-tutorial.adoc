@@ -12,7 +12,7 @@ Some notes on attributes
 :page-audience: who the page is for - admin (Server operators) or developer (everyone else, the default).
 :experimental: allows access to asciidoc macros, more info here: https://docs.asciidoctor.org/asciidoc/latest/macros/ui-macros/
 
-See schemas/docs-metadata.schema.json for the full metadata contract, including optional page-content-type, page-vcs, page-badge, and page-server-min-version/page-server-deprecated-in.
+See schemas/docs-metadata.schema.json for the full metadata contract, including optional page-content-type, page-vcs, page-badge, page-plan, and page-server-min-version/page-server-deprecated-in.
 
 ////
 
