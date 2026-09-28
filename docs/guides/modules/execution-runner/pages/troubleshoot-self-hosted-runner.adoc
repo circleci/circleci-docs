@@ -1,6 +1,7 @@
 = Troubleshoot self-hosted runner
 :page-platform: cloud
 :page-vcs: all
+:page-plan: Free, Performance, Scale
 :page-audience: developer
 :page-description: Errors and troubleshooting methods for container and machine runners.
 :experimental:
