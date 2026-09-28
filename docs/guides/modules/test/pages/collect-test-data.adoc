@@ -1,6 +1,7 @@
 = Collect test data
 :page-platform: cloud, server
 :page-vcs: github, bitbucket
+:page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: A guide to collecting test data in your CircleCI projects.

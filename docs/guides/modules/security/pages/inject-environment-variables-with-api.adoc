@@ -1,6 +1,7 @@
 = Inject environment variables with the CircleCI API
 :page-platform: cloud, server
 :page-vcs: all
+:page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: How to inject env var values using the API.

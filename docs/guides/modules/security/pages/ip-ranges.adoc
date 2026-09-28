@@ -1,6 +1,7 @@
 = Restrict your pipeline traffic to specific IP ranges
 :page-platform: cloud
 :page-vcs: all
+:page-plan: Performance, Scale
 :page-audience: developer
 :page-description: Enable CircleCI jobs to go through a set of well-defined IP address ranges
 :experimental:
