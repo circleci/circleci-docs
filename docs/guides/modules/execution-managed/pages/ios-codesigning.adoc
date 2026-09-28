@@ -1,6 +1,7 @@
 = Set up code signing for iOS and macOS projects
 :page-platform: cloud
 :page-vcs: all
+:page-plan: Free, Performance, Scale
 :page-audience: developer
 :page-description: How to set up code signing for iOS and macOS apps
 :experimental:

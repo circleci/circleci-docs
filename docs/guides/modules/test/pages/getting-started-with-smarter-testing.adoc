@@ -2,6 +2,7 @@
 :page-description: Install and configure Smarter Testing for your project
 :page-platform: cloud
 :page-vcs: all
+:page-plan: Free, Performance, Scale
 :page-audience: developer
 :experimental:
 :page-show-readtime: true

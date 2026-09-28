@@ -1,6 +1,7 @@
 = How to find IDs
 :page-platform: cloud
 :page-vcs: all
+:page-plan: Free, Performance, Scale
 :page-audience: developer
 :page-description: "This page describes how customers can find IDs of various CircleCI elements."
 :experimental:
