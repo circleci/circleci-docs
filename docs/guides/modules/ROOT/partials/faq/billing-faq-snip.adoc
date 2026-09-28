@@ -31,7 +31,7 @@ On the *Performance Plan*, when you reach 0 credits, you will be refilled approx
 
 If you notice that your account is receiving repeated refills, review your credit usage by logging in to the CircleCI web app, then select menu:Plan[Plan Usage]. In most cases, increasing your credit package will minimize repeat refills. You can manage your plan by clicking `Plan Overview`.
 
-On the *Scale/Custom Plan*, you have the option to agree to use Credit Auto-Refill (CAR). When your usage gets to 20% of credit purchase, you receive a notice that credit is getting low. If your credit gets to 10%, and you have not made another purchase, you receive a refill of either 25% (default) or 10% of your credit purchase.
+On the *Scale Plan*, you have the option to agree to use Credit Auto-Refill (CAR). When your usage gets to 20% of credit purchase, you receive a notice that credit is getting low. If your credit gets to 10%, and you have not made another purchase, you receive a refill of either 25% (default) or 10% of your credit purchase.
 
 For example:
 

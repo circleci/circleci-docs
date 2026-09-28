@@ -36,7 +36,10 @@ The Free plan includes:
 * A selection of resource classes across Docker, Arm, Linux, Windows, and macOS execution environments.
 * A set number of active users. Users beyond the included number are charged at an additional per-user credit rate. For more information on user types and registration, see xref:user-types-and-registration.adoc[User Types and Registration].
 * Access to the features described in <<#features-available-on-all-plans,Features available on all plans>>.
+* *Flaky test detection*: Automatic detection of flaky tests, limited to 5 tests. Refer to the xref:test:fix-flaky-tests.adoc[Fix Flaky Tests] page for details.
 * Community support via the link:https://discuss.circleci.com/[CircleCI community forums] and the link:https://support.circleci.com/hc/en-us[support portal].
+
+For current network and storage allowances, refer to the link:https://circleci.com/pricing/[Pricing] page.
 
 
 [#performance-plan]
@@ -52,7 +55,11 @@ In addition to everything in the Free plan, the Performance plan includes:
 * *Scalable user seats*: Start with a set number of active users and add more as your team grows. Additional users are charged at a per-user credit rate.
 * *Organization-level custom storage retention*: Configure how long artifact, workspace, and cache objects are stored for your organization. Reducing retention periods can lower your monthly bill.
 * *Additional self-hosted runners*: Expand the number of jobs running on your own infrastructure.
+* *Unlimited flaky test detection*: No cap on the number of flaky tests detected. Refer to the xref:test:fix-flaky-tests.adoc[Fix Flaky Tests] page for details.
+* *Unregistered user spend prevention*: Control credit spend from unregistered users. Refer to the xref:prevent-unregistered-users-from-spending-credits.adoc[Prevent Unregistered Users From Spending Credits] page for details.
 * *Standard support*: Support through SLAs with defined response times, plus access to the global link:https://support.circleci.com/hc/en-us/requests/new[ticket-based system].
+
+For current network and storage allowances, refer to the link:https://circleci.com/pricing/[Pricing] page.
 
 NOTE: For details on canceling a Performance plan, refer to the xref:reference:ROOT:faq.adoc#cancel-performance-plan[Cancel Performance Plan FAQ].
 
@@ -68,7 +75,14 @@ In addition to everything in the Performance plan, the Scale plan includes:
 * *Custom user seat count*: Set user limits based on your organization's needs.
 * *Unlimited self-hosted runners*: No cap on the number of jobs running on your own infrastructure.
 * *Custom storage retention*: Full customization of retention periods for artifacts, workspaces, and caches.
+* *Single sign-on (SSO)*: SAML-based SSO for your organization. Refer to the xref:permissions-authentication:sso-overview.adoc[SSO Overview] page for details.
+* *Config policies*: Organization-level rules that govern which configuration elements are required, allowed, or disallowed in project configurations. Refer to the xref:config-policies:config-policy-management-overview.adoc[Config Policy Management Overview] page for details.
+* *Audit log streaming*: Stream audit log events to your own storage. Refer to the xref:security:audit-logs.adoc[Audit Logs] page for details.
+* *Budget controls*: Set and monitor spending budgets for your organization. Refer to the xref:manage-budgets.adoc[Manage Budgets] page for details.
+* *Site-to-site connectivity* (preview): Connect CircleCI to your private network over a dedicated link. Refer to the xref:security:site-to-site-connectivity.adoc[Site-to-Site Connectivity] page for details.
 * *Premium support*: Expanded SLAs, an account team, training and onboarding options, and available support package add-ons.
+
+For current network and storage allowances, refer to the link:https://circleci.com/pricing/[Pricing] page.
 
 To set up a Scale plan, link:https://circleci.com/talk-to-us/[contact us].
 

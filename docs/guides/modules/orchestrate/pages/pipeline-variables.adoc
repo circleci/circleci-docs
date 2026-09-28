@@ -3,8 +3,7 @@
 :page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
-:experimental:
-:page-description: This document describes the Free Plan available to developers on CircleCI.
+:page-description: Learn about pipeline values and pipeline parameters, and how to use them in your CircleCI configuration.
 :experimental:
 
 [#introduction]

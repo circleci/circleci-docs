@@ -14,9 +14,9 @@ This guide introduces the core concepts you need to understand how CircleCI work
 [#concurrency]
 == Concurrency
 
-In CircleCI, _concurrency_ refers to utilizing multiple containers to run multiple jobs at the same time. Concurrency is different from CircleCI _parallelism_, which splits the tests of a single job across multiple containers. Free, Performance, and Custom plans each have a set concurrency limit based on your plan tier. Scale plan organizations have no concurrency limit, except for macOS xref:reference:ROOT:configuration-reference.adoc#resourceclass[Resource Classes], which retain a custom concurrency limit.
+In CircleCI, _concurrency_ refers to utilizing multiple containers to run multiple jobs at the same time. Concurrency is different from CircleCI _parallelism_, which splits the tests of a single job across multiple containers. Free and Performance plans each have a set concurrency limit based on your plan tier. Scale plan organizations have no concurrency limit, except for macOS xref:reference:ROOT:configuration-reference.adoc#resourceclass[Resource Classes], which retain a custom concurrency limit.
 
-If you experience queueing on your jobs and are on a Free, Performance, or Custom plan, you may be hitting your plan's concurrency limit. Customers on annual plans can request an increase to their limit at no extra charge. For more information about plan tiers, see the xref:guides:plans-pricing:plan-overview.adoc[Plans Overview] page.
+If you experience queueing on your jobs and are on a Free or Performance plan, you may be hitting your plan's concurrency limit. Customers on annual plans can request an increase to their limit at no extra charge. For more information about plan tiers, see the xref:guides:plans-pricing:plan-overview.adoc[Plans Overview] page.
 
 See the xref:optimize:concurrency.adoc[Concurrency] page for more information.
 
