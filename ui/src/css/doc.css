@@ -1048,6 +1048,24 @@
   max-width: 100%;
 }
 
+/* Availability sidebar (page-availability-extension.js): plain text lines,
+   no title/list/code. Its lines are paragraph blocks, whose default
+   `margin: 1rem 0 0` (see the .paragraph rule above) sizes the gap *between*
+   lines but also left a visible bottom margin under the last line, unlike
+   the table-based admonitionblock's tighter, icon-row layout. Overridden
+   here with an explicit flex column + gap instead of relying on
+   :first-child/:last-child margin resets. */
+.doc .sidebarblock.page-availability > .content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.doc .sidebarblock.page-availability > .content .paragraph,
+.doc .sidebarblock.page-availability > .content p {
+  margin: 0;
+}
+
 /* NEEDS REVIEW prevent pre in table from causing article to exceed bounds */
 .doc .listingblock.wrap pre {
   white-space: pre-wrap;

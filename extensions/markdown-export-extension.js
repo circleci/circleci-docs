@@ -341,10 +341,9 @@ module.exports.register = function () {
       /**
        * REMOVE THE GENERATED AVAILABILITY SIDEBAR
        *
-       * page-availability-extension.js inserts a `.page-availability` sidebar
-       * for restricted pages, meant for the HTML sidebar only. The markdown
-       * mirror gets its own unconditional plan/VCS lines below instead (see
-       * "ADD THE AVAILABILITY BLOCK"), so drop the HTML version here.
+       * Its restricted-only HTML rendering doesn't apply here; the markdown
+       * mirror gets its own unconditional lines instead (see "ADD THE
+       * AVAILABILITY BLOCK" below).
        */
       parsed.querySelectorAll('.page-availability').forEach(el => el.remove())
 
@@ -531,12 +530,11 @@ module.exports.register = function () {
       /**
        * ADD THE AVAILABILITY BLOCK
        *
-       * Unlike the HTML sidebar (page-availability-extension.js, restricted
-       * lines only), the markdown mirror always shows both the plan and VCS
-       * lines when the attribute is present, since agents don't suffer from
-       * banner blindness. Scoped to guides/reference, same as the HTML
-       * sidebar. page-vcs: all links to the VCS integration overview page.
-       * Placed directly after the title (added just above).
+       * Always shows both the plan and VCS lines when the attribute is
+       * present (not restricted-only), since agents don't suffer from banner
+       * blindness. Scoped to guides/reference. page-vcs: all links to the
+       * VCS integration overview page. Placed directly after the title
+       * (added just above).
        */
       const componentName = page.asciidoc.attributes && page.asciidoc.attributes['page-component-name']
       const inAvailabilityScope = SCOPED_COMPONENTS.includes(componentName)

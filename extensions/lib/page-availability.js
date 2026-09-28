@@ -24,8 +24,7 @@ const LABELS = {
 }
 
 const VCS_ALL_TEXT = 'All supported providers'
-// Rendered path of guides:integration:version-control-system-integration-overview.adoc,
-// used to link VCS_ALL_TEXT in the markdown mirror (see markdown-export-extension.js).
+// Rendered path for VCS_ALL_TEXT's link.
 const VCS_OVERVIEW_PATH = '/guides/integration/version-control-system-integration-overview/'
 
 // Antora components in scope for the sidebar (checked via page-component-name).

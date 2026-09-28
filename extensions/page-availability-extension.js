@@ -17,21 +17,12 @@ const {
  * Only restricted lines are shown - a page on all three plans, or with
  * page-vcs: all, gets no line for that attribute. A page with no restricted
  * lines gets no sidebar at all. This keeps the sidebar meaningful for human
- * readers; the markdown mirror shows both lines unconditionally (see
- * markdown-export-extension.js), since agents don't suffer from banner
- * blindness.
+ * readers.
  *
  * The sidebar is inserted as the first block of the body - inside the
- * preamble when the page has one, since a preamble already occupies that
- * position, otherwise as the doc's own first block. Pages whose first body
- * block was already a sidebar are fixed at the source level (see the
- * "availability sidebar" planning doc) so the generated sidebar is never
- * stacked behind another one.
+ * preamble when the page has one, otherwise as the doc's own first block.
  *
- * Configuration in antora-playbook.yml:
- *   asciidoc:
- *     extensions:
- *     - ./extensions/page-availability-extension.js
+ * Registered as an asciidoc extension in antora-playbook.yml.
  */
 module.exports.register = function register(registry) {
   registry.treeProcessor(function () {
