@@ -208,3 +208,76 @@ None. Ready to start with chunks 0 and 0b.
 * SSO, config policies, flaky test detection limits, and network/storage allowances aren't in `plan-overview.adoc`. Resolved: add them (chunk 0b).
 * "Custom plan" appears in 6 files. Resolved: remove it (chunk 0b).
 * `pipeline-variables.adoc` has a copied, wrong `page-description`. Resolved: rewrite (chunk 0b).
+
+## Availability sidebar: plan of work
+
+Status: **Planned, not started.** Decisions below confirmed by the user on 2026-09-28. Ticket: TBD.
+
+Goal: use the existing `page-plan` and `page-vcs` metadata to show a sidebar at the top of each page saying which cloud plans and version control providers the page applies to. This is a trial, so the wording lives in one place and is easy to change.
+
+### Decisions (2026-09-28)
+
+1. **Build-time Asciidoctor extension**, not hand-written `****` blocks in source and not a UI template. One source of truth, wording changes are a one-file edit.
+2. **Scope:** `guides` and `reference` components only (check the `page-component-name` attribute).
+3. **Wording:** `*Cloud plans:*` and `*Version control:*`. "Cloud plans" makes it clear the line doesn't apply to Server.
+4. **HTML shows only restricted lines.** A plan line appears only when the page isn't on all three plans; a VCS line appears only when `page-vcs` isn't `all`. No restricted lines means no sidebar. This keeps the sidebar meaningful for human readers.
+5. **The markdown mirror always gets both lines**, restricted or not, since agents don't suffer from banner blindness.
+6. **Existing top-of-page sidebars are fixed first** (see below), so pages don't show two sidebars back to back.
+7. **Duplicate plan NOTEs** (for example `NOTE: ...available on the Scale Plan`) stay for now and are removed in a follow-up pass.
+8. **Search index excludes the sidebar**, so availability text doesn't pollute search results.
+
+### Display names
+
+| Value | Display |
+|---|---|
+| `github` | GitHub |
+| `github-enterprise` | GitHub Enterprise Server |
+| `gitlab` | GitLab |
+| `gitlab-self-hosted` | GitLab self-managed |
+| `bitbucket` | Bitbucket Cloud |
+| `cursor-origin` | Cursor Origin |
+
+These match how the docs already write each name. Plans display as-is (`Free`, `Performance`, `Scale`).
+
+In the markdown mirror, `page-vcs: all` displays as "All supported providers", linked to the VCS integration overview page.
+
+### How "HTML restricted only, markdown always" works
+
+Both outputs are built from the same attributes, using a small shared helper so the wording and display names are defined once:
+
+* `extensions/lib/page-availability.js` (new): parses `page-plan`/`page-vcs`, maps display names, and returns the lines plus a `restricted` flag for each.
+* `extensions/page-availability-extension.js` (new, Asciidoctor tree processor, registered under `asciidoc.extensions` in `antora-playbook.yml`): inserts a sidebar block with role `page-availability` containing **restricted lines only**, as the first block of the body. If the page has a preamble, the block goes inside the preamble, not before it.
+* `extensions/markdown-export-extension.js`: removes the `.page-availability` block from the HTML before conversion, then writes **both lines** from attributes: as a short block after the title, and as frontmatter fields (for example `cloud_plans`, `version_control`) next to the existing `description`/`doc_version`.
+* `extensions/export-content-extension.js`: skips `.page-availability` when building the search index.
+
+No hidden HTML (`display: none`) is involved: the HTML only contains what humans see.
+
+### Edge cases
+
+* Missing attribute: skip that line. Neither attribute present, or neither restricted: no sidebar.
+* Unknown value: log a build warning instead of showing the raw value.
+* Blank values are ignored.
+* Expected result from current metadata: **50 pages** in guides/reference get a visible sidebar (17 plan-restricted, 33 VCS-restricted, no page is both).
+
+### Step 1: fix pages that already start with a sidebar
+
+Only pages whose **first body block** is a sidebar matter; sidebars further down don't stack with the generated one. There are three in scope, and all three will get a generated sidebar (their `page-vcs` is restricted):
+
+| Page | Source of the sidebar | Fix |
+|---|---|---|
+| `integration:using-the-circleci-github-app-in-an-oauth-org.adoc` | Inline `****` at line 9 | Remove the `****` delimiters, so it becomes the opening paragraph |
+| `insights:insights-tests.adoc` | `include::ROOT:partial$notes/standalone-unsupported.adoc[]` at line 9 | See the partial note below |
+| `getting-started:config-editor.adoc` | Same partial, at line 10 | See the partial note below |
+
+`ROOT:partials/notes/standalone-unsupported.adoc` is a sidebar and is also included mid-page in 5 other places (`test:test.adoc`, `test:collect-test-data.adoc`, `security:stop-building-a-project-on-circleci.adoc`, `integration:oss.adoc` twice). Just removing its `****` would turn it into loose body paragraphs in those 5 places. **Decision (2026-09-28): convert the partial to a delimited `NOTE` block** (`[NOTE]` + `====`), matching the other `notes/` partials. This fixes all 7 includes at once.
+
+Checked and not affected: pages that open with a NOTE partial (`linux-cuda-deprecation-notice`, `server-api-examples`) and pages with a sidebar below the first paragraph or later.
+
+### Remaining steps
+
+2. Write `extensions/lib/page-availability.js` and `extensions/page-availability-extension.js`; register the extension in `antora-playbook.yml`.
+3. Update `markdown-export-extension.js` (strip the block, write the full lines and the frontmatter fields) and `export-content-extension.js` (skip the block).
+4. Add a note to `AGENTS.md` and the contributors docs saying the availability sidebar is generated from metadata, so nobody writes one by hand.
+5. Build and check these pages: a Scale-only page (`config-policies:test-config-policies`), a Performance and Scale page (`security:ip-ranges`), a default page (no sidebar in HTML, both lines in `.md`), the Server-only page (`plans-pricing:plan-server`), the three pages from step 1, a `reference` page, and the `.md` output plus the search index for one restricted page. The user previews with `npm run start:dev` and shares screenshots.
+6. PRs: step 1 as a small content PR; steps 2 to 4 as one tooling PR.
+7. Follow-up: remove the duplicate plan NOTEs.
