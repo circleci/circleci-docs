@@ -9,7 +9,30 @@
 :machine:
 :windows:
 
-This page describes how to install CircleCI's machine runner 3 on Windows. This has been tested for Windows Server 2016, 2019, and 2022 in Datacenter Edition. Other Server SKUs with Desktop Experience and Remote Desktop Services (RDS) also work.
+This page describes how to install CircleCI's machine runner 3 on Windows. Windows Server 2016 and older are not compatible with machine runner 3. CircleCI tests machine runner 3 against Windows Server 2019, 2022, and 2025. Server SKUs with Desktop Experience and Remote Desktop Services (RDS) are compatible.
+
+The following table shows machine runner 3 compatibility by Windows Server version:
+
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+| Windows Server version
+| Machine runner 3
+
+| 2025
+| Compatible
+
+| 2022
+| Compatible
+
+| 2019
+| Compatible
+
+| 2016 and older
+| Not compatible
+|===
+--
 
 This page walks you through installing a machine runner and its dependencies (for example, Chocolatey, Git, and Gzip) on your Windows Server.
 
