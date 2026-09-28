@@ -100,6 +100,12 @@ function collectPages(contentCatalog, siteUrl) {
  * AsciiDoc with idprefix="" and idseparator="-" generates IDs like "pipeline-states".
  */
 function extractSections(html, pageTitle, pageRelUrl) {
+  // Strip the generated availability sidebar (page-availability-extension.js)
+  // before splitting into sections, so its text doesn't pollute search results.
+  const withoutAvailability = parseHTML(html);
+  withoutAvailability.querySelectorAll('.page-availability').forEach(el => el.remove());
+  html = withoutAvailability.toString();
+
   const parts = html.split(/(?=<h[2-4][\s>])/i);
   const sections = [];
 

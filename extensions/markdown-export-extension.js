@@ -50,6 +50,14 @@ const fs = require('fs')
 const path = require('path')
 const TurndownService = require('turndown') // HTML to Markdown converter
 const { parse: parseHTML } = require('node-html-parser') // HTML parser
+const {
+  SCOPED_COMPONENTS,
+  VCS_ALL_TEXT,
+  VCS_OVERVIEW_PATH,
+  LABELS,
+  getPlanAvailability,
+  getVcsAvailability,
+} = require('./lib/page-availability')
 
 module.exports.register = function () {
   /**
@@ -331,6 +339,16 @@ module.exports.register = function () {
       parsed.querySelectorAll('span.image').forEach(el => el.remove())
 
       /**
+       * REMOVE THE GENERATED AVAILABILITY SIDEBAR
+       *
+       * page-availability-extension.js inserts a `.page-availability` sidebar
+       * for restricted pages, meant for the HTML sidebar only. The markdown
+       * mirror gets its own unconditional plan/VCS lines below instead (see
+       * "ADD THE AVAILABILITY BLOCK"), so drop the HTML version here.
+       */
+      parsed.querySelectorAll('.page-availability').forEach(el => el.remove())
+
+      /**
        * CONVERT DATA TABLES
        *
        * Each Asciidoctor data table (table.tableblock) is either converted to a
@@ -511,6 +529,36 @@ module.exports.register = function () {
       }
 
       /**
+       * ADD THE AVAILABILITY BLOCK
+       *
+       * Unlike the HTML sidebar (page-availability-extension.js, restricted
+       * lines only), the markdown mirror always shows both the plan and VCS
+       * lines when the attribute is present, since agents don't suffer from
+       * banner blindness. Scoped to guides/reference, same as the HTML
+       * sidebar. page-vcs: all links to the VCS integration overview page.
+       * Placed directly after the title (added just above).
+       */
+      const componentName = page.asciidoc.attributes && page.asciidoc.attributes['page-component-name']
+      const inAvailabilityScope = SCOPED_COMPONENTS.includes(componentName)
+      const availabilityPlan = inAvailabilityScope ? getPlanAvailability(page.asciidoc.attributes['page-plan']) : null
+      const availabilityVcs = inAvailabilityScope ? getVcsAvailability(page.asciidoc.attributes['page-vcs']) : null
+
+      if (availabilityPlan || availabilityVcs) {
+        const availabilityLines = []
+        if (availabilityPlan) availabilityLines.push(`**${LABELS.plan}:** ${availabilityPlan.text}`)
+        if (availabilityVcs) {
+          const vcsText = availabilityVcs.isAll
+            ? `[${VCS_ALL_TEXT}](${absolutizeUrl(VCS_OVERVIEW_PATH, page.pub.url)})`
+            : availabilityVcs.text
+          availabilityLines.push(`**${LABELS.vcs}:** ${vcsText}`)
+        }
+        const availabilityBlock = availabilityLines.join('\n\n') + '\n\n'
+        markdown = doctitle
+          ? markdown.replace(/\n\n/, `\n\n${availabilityBlock}`)
+          : availabilityBlock + markdown
+      }
+
+      /**
        * CONVERT RELATIVE LINKS TO ABSOLUTE URLS
        *
        * Markdown files can be viewed anywhere (locally, in editors, etc.)
@@ -580,6 +628,8 @@ module.exports.register = function () {
         `description: ${yamlString(description)}`,
         `doc_version: ${yamlString(docVersion)}`,
         `last_updated: ${yamlString(lastUpdatedISO)}`,
+        ...(availabilityPlan ? [`cloud_plans: ${yamlString(availabilityPlan.text)}`] : []),
+        ...(availabilityVcs ? [`version_control: ${yamlString(availabilityVcs.text)}`] : []),
         '---',
         ''
       ].join('\n')
