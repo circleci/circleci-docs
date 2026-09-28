@@ -213,9 +213,13 @@ None. Ready to start with chunks 0 and 0b.
 
 Status: **Steps 1-5 done, on 2026-09-28. Steps 6 (PRs) done; step 7 (remove duplicate plan NOTEs) still open.** Decisions below confirmed by the user on 2026-09-28. Ticket: TBD.
 
-- Step 1 (fix pages that already start with a sidebar): PR [#10825](https://github.com/circleci/circleci-docs/pull/10825), open.
+- Step 1 (fix pages that already start with a sidebar): PR [#10825](https://github.com/circleci/circleci-docs/pull/10825), open. `factory-bot` reviewed and approved.
 - Steps 2-4 (the extension itself, markdown-mirror/search-index updates, AGENTS.md note): PR [#10826](https://github.com/circleci/circleci-docs/pull/10826), open. Depends on #10825 merging first (see the PR description).
 - Step 5 (build verification): done against both PRs' branches. Confirmed exactly 50 pages get a sidebar (17 plan-restricted, 33 VCS-restricted, 0 overlapping — matches the "Edge cases" expected count below), checked the Scale-only/Performance+Scale/default/Server-only/reference/step-1 pages and the `.md` output and search index for a restricted page. No attribute warnings during the build.
+- Post-review fixes on #10826, all pushed:
+  - `factory-bot` flagged a WARN on `documentation` (comments restating a sibling file's behavior, and one duplicating the `antora-playbook.yml` config snippet) — trimmed.
+  - CSS gap the bot's `impact-matches-intent` check couldn't verify (repo wasn't indexed): the sidebar had no dedicated stylesheet rule, so its paragraph lines carried a trailing margin the table-based `admonitionblock` doesn't have. Added `.sidebarblock.page-availability` to `ui/src/css/doc.css` (explicit flex column + gap, zeroed paragraph margins) and confirmed it lands in the compiled UI bundle.
+  - Added a sitewide `platform` frontmatter field mirroring `page-platform` in the `.md` export (not scoped to guides/reference, since that attribute is required on every page) — closes part of the "metadata isn't reaching the markdown mirror" gap noted above.
 
 Goal: use the existing `page-plan` and `page-vcs` metadata to show a sidebar at the top of each page saying which cloud plans and version control providers the page applies to. This is a trial, so the wording lives in one place and is easy to change.
 
