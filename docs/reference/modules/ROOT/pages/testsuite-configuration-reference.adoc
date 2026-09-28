@@ -1,6 +1,7 @@
 = Testsuite configuration reference
 :page-platform: cloud
 :page-vcs: all
+:page-plan: Free, Performance, Scale
 :page-audience: developer
 :experimental:
 :page-description: Reference for .circleci/test-suites.yml

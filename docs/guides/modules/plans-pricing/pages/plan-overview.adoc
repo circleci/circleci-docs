@@ -1,6 +1,7 @@
 = CircleCI plans overview
 :page-platform: cloud
 :page-vcs: all
+:page-plan: Free, Performance, Scale
 :page-audience: developer
 :page-description: An overview of CircleCI's credit-based plans, including features available at each plan tier.
 :experimental:

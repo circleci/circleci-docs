@@ -1,6 +1,7 @@
 = Migrate from GitHub Actions
 :page-platform: cloud, server
 :page-vcs: github, github-enterprise
+:page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: An overview of how to migrate from GitHub Actions to CircleCI.

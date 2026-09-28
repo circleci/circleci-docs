@@ -1,6 +1,7 @@
 = Migrate from Travis CI
 :page-platform: cloud
 :page-vcs: all
+:page-plan: Free, Performance, Scale
 :page-audience: developer
 :page-description: An overview of how to migrate from Travis CI to CircleCI.
 :experimental:

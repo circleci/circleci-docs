@@ -1,6 +1,7 @@
 = Sign up and try CircleCI
 :page-platform: cloud
 :page-vcs: all
+:page-plan: Free, Performance, Scale
 :page-audience: developer
 :page-description: First step for using CircleCI.
 :experimental:
