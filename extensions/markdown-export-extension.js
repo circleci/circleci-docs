@@ -597,12 +597,15 @@ module.exports.register = function () {
        * ADD YAML FRONTMATTER
        *
        * Metadata an agent can read without parsing the body: title,
-       * description, the doc version this page belongs to (or "unversioned"
-       * for the version-less components: guides, reference, orbs, services,
-       * contributors), and the source file's last-updated date. lastUpdate
-       * comes from page-metadata-extension.js, which runs earlier in the
-       * same 'documentsConverted' event and stashes it on this same
-       * attributes object, so it's already there by the time we get here.
+       * description, the page-platform value (cloud, server, or both -
+       * without this, an agent reading the markdown can't tell a
+       * Server-only page apart from a Cloud one), the doc version this page
+       * belongs to (or "unversioned" for the version-less components:
+       * guides, reference, orbs, services, contributors), and the source
+       * file's last-updated date. lastUpdate comes from
+       * page-metadata-extension.js, which runs earlier in the same
+       * 'documentsConverted' event and stashes it on this same attributes
+       * object, so it's already there by the time we get here.
        *
        * doc_version: page-version is '' for version-less components, so only
        * trust page-component-display-version (the human-readable version,
@@ -613,6 +616,7 @@ module.exports.register = function () {
        */
       const yamlString = (value) => JSON.stringify(value || '')
       const description = page.asciidoc.attributes && page.asciidoc.attributes['page-description']
+      const platform = page.asciidoc.attributes && page.asciidoc.attributes['page-platform']
       const rawVersion = page.asciidoc.attributes && page.asciidoc.attributes['page-version']
       const docVersion = rawVersion
         ? (page.asciidoc.attributes['page-component-display-version'] || rawVersion)
@@ -624,6 +628,7 @@ module.exports.register = function () {
         '---',
         `title: ${yamlString(plainTitle)}`,
         `description: ${yamlString(description)}`,
+        `platform: ${yamlString(platform)}`,
         `doc_version: ${yamlString(docVersion)}`,
         `last_updated: ${yamlString(lastUpdatedISO)}`,
         ...(availabilityPlan ? [`cloud_plans: ${yamlString(availabilityPlan.text)}`] : []),
