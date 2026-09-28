@@ -1,5 +1,5 @@
 = How to find IDs
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: all
 :page-audience: developer
 :page-description: "This page describes how customers can find IDs of various CircleCI elements."

@@ -1,5 +1,5 @@
 = Set up VCS connections
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: all
 :page-audience: developer
 :page-description: Connect your CircleCI organization to a version control system provider, and view, configure, or remove existing connections.

@@ -1,5 +1,5 @@
 = CircleCI image updater
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: all
 :page-audience: developer
 :page-description: The CircleCI tool to help customers update images in config.

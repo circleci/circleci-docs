@@ -718,7 +718,7 @@ Before committing documentation changes:
 4. ✅ Check `:page-description:` is 70-160 characters
 5. ✅ Ensure link text uses title case
 6. ✅ Confirm page is added to `nav.adoc` if new
-7. ✅ Confirm `:page-platform:` (lowercase `cloud`/`server`) and `:page-audience:` (`admin`/`developer`) are present, and `:page-server-min-version:` is quoted if set (see Page Attributes section)
+7. ✅ Confirm `:page-platform:` (capitalized `Cloud`/`Server`) and `:page-audience:` (`admin`/`developer`) are present, and `:page-server-min-version:` is quoted if set (see Page Attributes section)
 
 **Alternative for local agents**: If CircleCI CLI is available and authenticated, you can also check Vale errors from CI runs using `circleci run get` and `circleci job output get`, but running Vale locally is still the recommended approach.
 
@@ -822,7 +822,7 @@ The full metadata contract is defined in `schemas/docs-metadata.schema.json` (DO
 
 ```adoc
 = Page Title
-:page-platform: cloud, server
+:page-platform: Cloud, Server
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: A brief description for SEO and metadata (70-160 characters)
@@ -832,7 +832,7 @@ The full metadata contract is defined in `schemas/docs-metadata.schema.json` (DO
 **Attribute descriptions:**
 
 - `:page-platform:` - Which CircleCI platform(s) support the feature. Displays as badges under the page title.
-  - Comma-separated, lowercase only: `cloud`, `server`, or `cloud, server`
+  - Comma-separated, capitalized: `Cloud`, `Server`, or `Cloud, Server`
   - Do not put a version number here — use `:page-server-min-version:` instead
 
 - `:page-server-min-version:` - Only when `server` is in `:page-platform:`. The minimum Server version the feature is available from, e.g. `"4.7"`.

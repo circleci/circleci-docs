@@ -1,5 +1,5 @@
 = Server installation service
-:page-platform: server
+:page-platform: Server
 :page-vcs: all
 :page-audience: admin
 :page-description: Server installation service

@@ -1,5 +1,5 @@
 = Run a job in a container on your machine with Docker
-:page-platform: cloud, server
+:page-platform: Cloud, Server
 :page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer

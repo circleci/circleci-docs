@@ -13,6 +13,11 @@ module.exports = (platform) => {
     return 'The features and processes described on this page are available for CircleCI Cloud'
   }
 
+  // Special handling for plain Server
+  if (platformKey === 'Server') {
+    return 'The features and processes described on this page are available for CircleCI Server'
+  }
+
   // Special handling for Server Admin
   if (platformKey === 'Server Admin') {
     return 'This guide is for CircleCI Server administrators'

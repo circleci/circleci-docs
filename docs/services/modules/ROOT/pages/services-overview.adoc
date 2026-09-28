@@ -1,5 +1,5 @@
 = Field engineering services overview
-:page-platform: cloud, server
+:page-platform: Cloud, Server
 :page-vcs: all
 :page-audience: developer
 :page-description: Field engineering services overview

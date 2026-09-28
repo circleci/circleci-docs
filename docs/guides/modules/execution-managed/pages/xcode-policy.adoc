@@ -1,5 +1,5 @@
 = CircleCI Xcode image release, update, and deprecation policy
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: all
 :page-audience: developer
 :page-description: CircleCI Xcode Image Release, Update and Deprecation Policy

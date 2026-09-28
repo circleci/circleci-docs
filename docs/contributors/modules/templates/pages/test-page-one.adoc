@@ -1,5 +1,5 @@
 = Test page for docs site
-:page-platform: cloud, server
+:page-platform: Cloud, Server
 :page-audience: developer
 :page-description: A page with all components for testing the new docs site.
 :experimental:

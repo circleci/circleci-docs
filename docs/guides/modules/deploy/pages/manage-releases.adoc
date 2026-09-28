@@ -1,5 +1,5 @@
 = Manage releases
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: all
 :page-audience: developer
 :page-description: How to guide for managing releases from the CircleCI web app.

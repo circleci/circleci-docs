@@ -1,5 +1,5 @@
 = Test Insights
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: github, bitbucket
 :page-audience: developer
 :page-description: Analyze your test performance using test Insights.

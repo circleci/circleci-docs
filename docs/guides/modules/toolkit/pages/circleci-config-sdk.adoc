@@ -1,5 +1,5 @@
 = CircleCI config SDK
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: all
 :page-audience: developer
 :page-description: The CircleCI Config SDK is a JavaScript package library for generating CircleCI config YAML.

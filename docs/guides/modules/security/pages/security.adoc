@@ -1,5 +1,5 @@
 = How CircleCI handles security
-:page-platform: server
+:page-platform: Server
 :page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: admin

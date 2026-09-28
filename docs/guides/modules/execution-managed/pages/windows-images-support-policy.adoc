@@ -1,5 +1,5 @@
 = CircleCI Windows images support policy
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: all
 :page-audience: developer
 :page-description: CircleCI Windows images release, update, and deprecation policy

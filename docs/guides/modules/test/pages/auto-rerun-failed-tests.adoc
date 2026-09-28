@@ -1,5 +1,5 @@
 = Auto rerun failed tests
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: all
 :page-audience: developer
 :experimental:

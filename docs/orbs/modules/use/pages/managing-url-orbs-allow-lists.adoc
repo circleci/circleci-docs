@@ -1,7 +1,7 @@
 = Managing URL orbs allow-lists
 :page-description: How to manage URL orbs allow-lists
 :experimental:
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: github, github-enterprise, gitlab, bitbucket
 :page-audience: developer
 

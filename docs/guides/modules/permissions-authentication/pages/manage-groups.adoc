@@ -1,5 +1,5 @@
 = Manage groups
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: all
 :page-audience: developer
 :page-description: How-to guides for setting up and assigning groups in CircleCI to manage roles and permissions across projects.

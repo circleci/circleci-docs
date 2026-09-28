@@ -1,5 +1,5 @@
 = Set up SSO group mapping with Okta
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: all
 :page-audience: developer
 :page-description: Follow this guide to set up SSO (Single sign-on) group mapping with Okta and CircleCI.

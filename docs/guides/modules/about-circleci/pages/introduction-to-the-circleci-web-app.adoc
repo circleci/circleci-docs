@@ -1,5 +1,5 @@
 = Introduction to the CircleCI Web App
-:page-platform: cloud, server
+:page-platform: Cloud, Server
 :page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer

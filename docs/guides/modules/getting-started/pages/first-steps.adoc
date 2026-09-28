@@ -1,5 +1,5 @@
 = Sign up and try CircleCI
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: all
 :page-audience: developer
 :page-description: First step for using CircleCI.

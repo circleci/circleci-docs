@@ -1,5 +1,5 @@
 = Status updates overview
-:page-platform: cloud, server
+:page-platform: Cloud, Server
 :page-vcs: github, github-enterprise, gitlab, gitlab-self-hosted, bitbucket
 :page-server-min-version: "4.7"
 :page-audience: developer

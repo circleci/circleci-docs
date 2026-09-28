@@ -1,6 +1,6 @@
 = Phase 3 - install CircleCI Server
 :page-noindex: true
-:page-platform: server
+:page-platform: Server
 :page-vcs: github, github-enterprise
 :page-server-min-version: "4.7"
 :page-audience: admin

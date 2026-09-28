@@ -1,5 +1,5 @@
 = Collect test data
-:page-platform: cloud, server
+:page-platform: Cloud, Server
 :page-vcs: github, bitbucket
 :page-server-min-version: "4.7"
 :page-audience: developer

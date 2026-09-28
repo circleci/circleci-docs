@@ -1,5 +1,5 @@
 = Migrate from launch agent to machine runner 3 on Linux
-:page-platform: cloud, server
+:page-platform: Cloud, Server
 :page-vcs: all
 :page-server-min-version: "4.4"
 :page-audience: developer

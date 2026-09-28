@@ -1,5 +1,5 @@
 = Create an organization
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: all
 :page-audience: developer
 :page-description: Create a new organization in CircleCI.

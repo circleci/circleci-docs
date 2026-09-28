@@ -1,6 +1,6 @@
 = Publish to PyPI using OIDC trusted publishing
 :page-badge: Preview
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: all
 :page-audience: developer
 :page-description: Publish packages to PyPI from CircleCI using OIDC trusted publishing, the recommended tokenless approach.
