@@ -1,6 +1,7 @@
 = Migrate scheduled workflows to schedule triggers
 :page-platform: cloud
 :page-vcs: github, github-enterprise, bitbucket
+:page-plan: Free, Performance, Scale
 :page-audience: developer
 :page-description: Migrate scheduled workflows to schedule triggers
 :experimental:

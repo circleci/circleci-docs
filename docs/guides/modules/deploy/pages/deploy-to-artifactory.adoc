@@ -1,6 +1,7 @@
 = Deploy to Artifactory
 :page-platform: cloud, server
 :page-vcs: all
+:page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: How to upload artifacts to Artifactory in CircleCI
