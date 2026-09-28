@@ -855,6 +855,7 @@ The full metadata contract is defined in `schemas/docs-metadata.schema.json` (DO
   - No `all` shorthand — a page available on every plan lists all three: `Free, Performance, Scale`.
   - Not used on Server-only pages (`:page-platform: server` with no `cloud`); Server is a separate plan covered by `page-platform`, not by `page-plan`.
   - A page gets a plan if the feature is available on it at all, even at a lower limit (e.g. capped flaky test detection). If only a section of the page is gated, the page still lists all three plans and the gated section carries its own inline note.
+  - On `guides` and `reference` pages, `page-plan` and `page-vcs` drive a generated availability sidebar (Cloud plans / Version control) — don't write one by hand as a `****` sidebar or NOTE. It's built at build time from these attributes; see `extensions/page-availability-extension.js`.
 
 - `:page-description:` - Used for SEO meta descriptions and page previews
   - **Must be between 70-160 characters** (Vale enforced)

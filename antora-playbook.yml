@@ -78,6 +78,7 @@ asciidoc:
   - '@asciidoctor/tabs'
   - ./extensions/theme-icon-extension.js
   - ./extensions/subsection-badge-extension.js
+  - ./extensions/page-availability-extension.js
 urls:
   latest_version_segment: latest
   latest_version_segment_strategy: redirect:to

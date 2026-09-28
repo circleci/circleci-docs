@@ -50,6 +50,14 @@ const fs = require('fs')
 const path = require('path')
 const TurndownService = require('turndown') // HTML to Markdown converter
 const { parse: parseHTML } = require('node-html-parser') // HTML parser
+const {
+  SCOPED_COMPONENTS,
+  VCS_ALL_TEXT,
+  VCS_OVERVIEW_PATH,
+  LABELS,
+  getPlanAvailability,
+  getVcsAvailability,
+} = require('./lib/page-availability')
 
 module.exports.register = function () {
   /**
@@ -331,6 +339,15 @@ module.exports.register = function () {
       parsed.querySelectorAll('span.image').forEach(el => el.remove())
 
       /**
+       * REMOVE THE GENERATED AVAILABILITY SIDEBAR
+       *
+       * Its restricted-only HTML rendering doesn't apply here; the markdown
+       * mirror gets its own unconditional lines instead (see "ADD THE
+       * AVAILABILITY BLOCK" below).
+       */
+      parsed.querySelectorAll('.page-availability').forEach(el => el.remove())
+
+      /**
        * CONVERT DATA TABLES
        *
        * Each Asciidoctor data table (table.tableblock) is either converted to a
@@ -511,6 +528,35 @@ module.exports.register = function () {
       }
 
       /**
+       * ADD THE AVAILABILITY BLOCK
+       *
+       * Always shows both the plan and VCS lines when the attribute is
+       * present (not restricted-only), since agents don't suffer from banner
+       * blindness. Scoped to guides/reference. page-vcs: all links to the
+       * VCS integration overview page. Placed directly after the title
+       * (added just above).
+       */
+      const componentName = page.asciidoc.attributes && page.asciidoc.attributes['page-component-name']
+      const inAvailabilityScope = SCOPED_COMPONENTS.includes(componentName)
+      const availabilityPlan = inAvailabilityScope ? getPlanAvailability(page.asciidoc.attributes['page-plan']) : null
+      const availabilityVcs = inAvailabilityScope ? getVcsAvailability(page.asciidoc.attributes['page-vcs']) : null
+
+      if (availabilityPlan || availabilityVcs) {
+        const availabilityLines = []
+        if (availabilityPlan) availabilityLines.push(`**${LABELS.plan}:** ${availabilityPlan.text}`)
+        if (availabilityVcs) {
+          const vcsText = availabilityVcs.isAll
+            ? `[${VCS_ALL_TEXT}](${absolutizeUrl(VCS_OVERVIEW_PATH, page.pub.url)})`
+            : availabilityVcs.text
+          availabilityLines.push(`**${LABELS.vcs}:** ${vcsText}`)
+        }
+        const availabilityBlock = availabilityLines.join('\n\n') + '\n\n'
+        markdown = doctitle
+          ? markdown.replace(/\n\n/, `\n\n${availabilityBlock}`)
+          : availabilityBlock + markdown
+      }
+
+      /**
        * CONVERT RELATIVE LINKS TO ABSOLUTE URLS
        *
        * Markdown files can be viewed anywhere (locally, in editors, etc.)
@@ -551,12 +597,15 @@ module.exports.register = function () {
        * ADD YAML FRONTMATTER
        *
        * Metadata an agent can read without parsing the body: title,
-       * description, the doc version this page belongs to (or "unversioned"
-       * for the version-less components: guides, reference, orbs, services,
-       * contributors), and the source file's last-updated date. lastUpdate
-       * comes from page-metadata-extension.js, which runs earlier in the
-       * same 'documentsConverted' event and stashes it on this same
-       * attributes object, so it's already there by the time we get here.
+       * description, the page-platform value (cloud, server, or both -
+       * without this, an agent reading the markdown can't tell a
+       * Server-only page apart from a Cloud one), the doc version this page
+       * belongs to (or "unversioned" for the version-less components:
+       * guides, reference, orbs, services, contributors), and the source
+       * file's last-updated date. lastUpdate comes from
+       * page-metadata-extension.js, which runs earlier in the same
+       * 'documentsConverted' event and stashes it on this same attributes
+       * object, so it's already there by the time we get here.
        *
        * doc_version: page-version is '' for version-less components, so only
        * trust page-component-display-version (the human-readable version,
@@ -567,6 +616,7 @@ module.exports.register = function () {
        */
       const yamlString = (value) => JSON.stringify(value || '')
       const description = page.asciidoc.attributes && page.asciidoc.attributes['page-description']
+      const platform = page.asciidoc.attributes && page.asciidoc.attributes['page-platform']
       const rawVersion = page.asciidoc.attributes && page.asciidoc.attributes['page-version']
       const docVersion = rawVersion
         ? (page.asciidoc.attributes['page-component-display-version'] || rawVersion)
@@ -578,8 +628,11 @@ module.exports.register = function () {
         '---',
         `title: ${yamlString(plainTitle)}`,
         `description: ${yamlString(description)}`,
+        `platform: ${yamlString(platform)}`,
         `doc_version: ${yamlString(docVersion)}`,
         `last_updated: ${yamlString(lastUpdatedISO)}`,
+        ...(availabilityPlan ? [`cloud_plans: ${yamlString(availabilityPlan.text)}`] : []),
+        ...(availabilityVcs ? [`version_control: ${yamlString(availabilityVcs.text)}`] : []),
         '---',
         ''
       ].join('\n')
