@@ -1,5 +1,5 @@
 = Skip CI, auto-cancel, and block new pipelines
-:page-platform: cloud, server
+:page-platform: Cloud, Server
 :page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"

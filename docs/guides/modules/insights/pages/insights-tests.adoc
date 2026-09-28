@@ -1,5 +1,5 @@
 = Test Insights
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: github, bitbucket
 :page-plan: Free, Performance, Scale
 :page-audience: developer

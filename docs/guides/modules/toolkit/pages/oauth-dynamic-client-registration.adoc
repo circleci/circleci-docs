@@ -1,6 +1,6 @@
 = OAuth 2.0 API access with Dynamic Client Registration
 :page-show-readtime: true
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-audience: developer

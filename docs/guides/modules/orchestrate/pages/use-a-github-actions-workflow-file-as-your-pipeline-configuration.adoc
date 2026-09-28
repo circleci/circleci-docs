@@ -1,5 +1,5 @@
 = Use a GitHub Actions workflow file as your pipeline configuration
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: github
 :page-plan: Free, Performance, Scale
 :page-audience: developer

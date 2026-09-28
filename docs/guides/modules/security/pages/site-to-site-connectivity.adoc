@@ -1,6 +1,6 @@
 = Site-to-site connectivity
 :page-badge: Preview
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: all
 :page-plan: Scale
 :page-audience: developer

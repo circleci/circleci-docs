@@ -1,5 +1,5 @@
 = Using the CircleCI GitHub App in an OAuth organization
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: github
 :page-plan: Free, Performance, Scale
 :page-audience: developer

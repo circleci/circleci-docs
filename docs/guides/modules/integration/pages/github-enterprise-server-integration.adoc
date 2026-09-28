@@ -1,5 +1,5 @@
 = GitHub Enterprise Server integration
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: github-enterprise
 :page-plan: Free, Performance, Scale
 :page-audience: developer

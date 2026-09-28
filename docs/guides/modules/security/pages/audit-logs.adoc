@@ -1,5 +1,5 @@
 = Audit logs
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-audience: developer

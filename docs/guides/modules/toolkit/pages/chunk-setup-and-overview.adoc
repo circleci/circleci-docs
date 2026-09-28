@@ -1,6 +1,6 @@
 = Chunk overview and setup
 :page-badge: Beta
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: github
 :page-plan: Free, Performance, Scale
 :page-audience: developer

@@ -1,5 +1,5 @@
 = Using the GPU execution environment
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: all
 :page-plan: Scale
 :page-audience: developer

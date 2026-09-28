@@ -1,5 +1,5 @@
 = Single sign-on (SSO) overview
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: all
 :page-plan: Scale
 :page-audience: developer

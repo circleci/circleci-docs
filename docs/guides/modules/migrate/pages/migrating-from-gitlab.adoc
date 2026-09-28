@@ -1,5 +1,5 @@
 = Migrate from GitLab
-:page-platform: cloud, server
+:page-platform: Cloud, Server
 :page-vcs: gitlab, gitlab-self-hosted
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"

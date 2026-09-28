@@ -1,5 +1,5 @@
 = Set up cross-repo triggers for library consumers
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: github, github-enterprise, cursor-origin
 :page-plan: Free, Performance, Scale
 :page-audience: developer

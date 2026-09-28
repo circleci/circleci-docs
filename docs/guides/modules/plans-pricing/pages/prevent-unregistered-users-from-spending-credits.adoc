@@ -1,5 +1,5 @@
 = Prevent unregistered users from spending credits
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: all
 :page-plan: Performance, Scale
 :page-audience: developer

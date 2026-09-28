@@ -1,5 +1,5 @@
 = Data retention in server
-:page-platform: server
+:page-platform: Server
 :page-vcs: github, github-enterprise
 :page-server-min-version: "4.9"
 :page-audience: admin

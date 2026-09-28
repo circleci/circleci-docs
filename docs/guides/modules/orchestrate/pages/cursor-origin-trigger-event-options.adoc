@@ -1,5 +1,5 @@
 = Cursor Origin trigger event options
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: cursor-origin
 :page-plan: Free, Performance, Scale
 :page-audience: developer

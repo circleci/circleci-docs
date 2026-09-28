@@ -1,5 +1,5 @@
 = Restrict your pipeline traffic to specific IP ranges
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: all
 :page-plan: Performance, Scale
 :page-audience: developer

@@ -1,5 +1,5 @@
 = Database configuration examples
-:page-platform: cloud, server
+:page-platform: Cloud, Server
 :page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"

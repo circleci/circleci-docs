@@ -1,6 +1,6 @@
 = Publish to PyPI using OIDC trusted publishing
 :page-badge: Preview
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-audience: developer

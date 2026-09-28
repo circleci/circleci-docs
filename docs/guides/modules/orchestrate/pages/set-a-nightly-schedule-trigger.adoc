@@ -1,5 +1,5 @@
 = Set a nightly schedule trigger
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: github, github-enterprise, bitbucket, cursor-origin
 :page-plan: Free, Performance, Scale
 :page-audience: developer

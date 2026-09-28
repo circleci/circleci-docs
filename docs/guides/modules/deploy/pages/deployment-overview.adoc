@@ -1,6 +1,6 @@
 = Deployment and deploy management overview
 :page-aliases: deploys-overview.adoc, deploy:deploy-to-amazon-sagemaker.adoc
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-audience: developer

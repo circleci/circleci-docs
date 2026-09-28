@@ -1,5 +1,5 @@
 = Config policy reference
-:page-platform: cloud, server
+:page-platform: Cloud, Server
 :page-vcs: all
 :page-plan: Scale
 :page-server-min-version: "4.7"

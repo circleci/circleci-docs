@@ -1,5 +1,5 @@
 = Set up a rollback pipeline
-:page-platform: cloud
+:page-platform: Cloud
 :page-vcs: github, github-enterprise
 :page-plan: Free, Performance, Scale
 :page-audience: developer
