@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Benefits of choosing CircleCI for CI/CD
+:page-description: Find out why teams choose CircleCI for CI/CD, including fast jobs, caching and parallelism options, and pricing plans to suit your needs.
 :experimental:
 
 

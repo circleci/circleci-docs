@@ -3,7 +3,7 @@
 :page-vcs: github
 :page-plan: Free, Performance, Scale
 :page-audience: developer
-:page-description: A guide to using the CircleCI GitHub app in an OAuth organization
+:page-description: Use the CircleCI GitHub App alongside the GitHub OAuth app in an OAuth organization, and see how each integration affects project and pipeline types.
 :experimental:
 
 *This page is relevant if your CircleCI organization has `/github/` or `/gh/` in the URL.* Throughout this guide we will refer to org types by the appearance of `/github/` or other strings in the URL.

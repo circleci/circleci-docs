@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: An overview of how to migrate from Buildkite to CircleCI.
+:page-description: Migrate from Buildkite to CircleCI, with guidance on source control setup and a side-by-side comparison of build configuration syntax.
 :experimental:
 
 This document provides an overview of how to migrate from Buildkite to CircleCI.

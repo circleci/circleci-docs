@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: How to inject env var values using the API.
+:page-description: Pass variable values into your pipelines with the CircleCI API, using pipeline parameters in API v2 or build parameters in API v1.
 :experimental:
 
 include::ROOT:partial$notes/server-api-examples.adoc[]

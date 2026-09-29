@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Reference guide for CircleCI 2.1 Configuration
+:page-description: Reference for CircleCI 2.1 reusable configuration. Author reusable commands, executors and parameterized jobs, define conditional steps, and write inline orbs.
 :experimental:
 
 This guide describes how to get started with reusable commands, jobs, executors, and orbs. This guide also covers the use of parameters for creating parameterized reusable elements.

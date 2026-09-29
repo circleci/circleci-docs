@@ -4,7 +4,7 @@
 :page-plan: Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Config policies for CircleCI project configurations.
+:page-description: Use config policies to set organization-level rules that govern which configuration elements your CircleCI projects must use, may use, or cannot use.
 :experimental:
 
 NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI Server v4.2. You must be an organization admin in order to create and manage config policies.

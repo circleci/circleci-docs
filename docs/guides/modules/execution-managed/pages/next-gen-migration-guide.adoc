@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: A guide for migrating from using legacy images to next-gen images.
+:page-description: Migrate from legacy CircleCI convenience images to next-gen images by switching from the circleci namespace to cimg, with notes on browser testing.
 :experimental:
 
 [#overview]

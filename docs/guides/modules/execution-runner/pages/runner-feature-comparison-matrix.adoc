@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: A comparison table of the features available for CircleCI runners.
+:page-description: Compare the features of CircleCI machine runner and container runner, see the key differences, and decide which runner to choose for your jobs.
 :experimental:
 
 This page offers a comparison of the features available for CircleCI machine runner vs. CircleCI container runner.

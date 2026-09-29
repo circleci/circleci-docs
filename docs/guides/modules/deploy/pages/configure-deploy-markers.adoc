@@ -3,7 +3,7 @@
 :page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-audience: developer
-:page-description: Tutorial outlining how to configure deploy markers in your workflow.
+:page-description: Add deploy markers to your CircleCI configuration to log deployments, track their status, and roll back or promote versions from the web app.
 :experimental:
 :tabs-sync-option:
 

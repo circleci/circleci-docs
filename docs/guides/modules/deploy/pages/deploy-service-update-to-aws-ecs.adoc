@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: A how to guide for deploying changes to AWS ECS using CircleCI orbs.
+:page-description: Use CircleCI orbs to build and push a Docker image, deploy a service update to AWS ECS, and verify the deployment in your workflow.
 :experimental:
 
 In this how-to guide, you will learn how to configure CircleCI to deploy to AWS ECS using CircleCI orbs.

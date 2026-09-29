@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Description of CircleCI jobs and steps.
+:page-description: Get an overview of CircleCI jobs and steps, including how to pass parameters to jobs and use jobs and commands from orbs.
 :experimental:
 
 This page provides an overview of CircleCI jobs and steps.

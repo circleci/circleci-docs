@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: How to publish packages to Packagecloud using CircleCI.
+:page-description: Configure CircleCI to publish packages to Packagecloud with the packagecloud CLI or API, including npm package deployment and dependency caching.
 :experimental:
 
 In this how-to guide, you will learn how to configure CircleCI to publish packages to Packagecloud.

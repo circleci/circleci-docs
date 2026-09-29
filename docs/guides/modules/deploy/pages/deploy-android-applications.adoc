@@ -3,7 +3,7 @@
 :page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-audience: developer
-:page-description: Learn to deploy Android apps through CircleCI.
+:page-description: Automatically deploy your Android app to the Google Play Store from CircleCI using Fastlane, Gradle signing configuration, and environment variables.
 :experimental:
 
 In this how-to guide, you will learn how to automatically deploy your Android app through CircleCI with link:https://fastlane.tools/[Fastlane].

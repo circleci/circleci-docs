@@ -1,5 +1,5 @@
 = Getting started with Smarter Testing
-:page-description: Install and configure Smarter Testing for your project
+:page-description: Install and configure Smarter Testing for your project: the foundation for test impact analysis, dynamic test splitting and auto rerun failed tests.
 :page-platform: Cloud
 :page-vcs: all
 :page-plan: Free, Performance, Scale

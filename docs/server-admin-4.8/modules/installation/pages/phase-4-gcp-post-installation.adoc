@@ -4,7 +4,7 @@
 :page-vcs: github, github-enterprise
 :page-server-min-version: "4.8"
 :page-audience: admin
-:page-description: CircleCI server v4.8 post installation steps.
+:page-description: Complete your CircleCI Server 4.8 installation on GCP by setting up backup and restore, email notifications, and orb management.
 :env-gcp:
 :experimental:
 

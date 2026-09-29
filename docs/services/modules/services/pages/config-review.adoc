@@ -2,7 +2,7 @@
 :page-platform: Cloud, Server
 :page-vcs: all
 :page-audience: developer
-:page-description: Configuration review service
+:page-description: A field engineer evaluates one CircleCI project and delivers a findings report with optimization and feature recommendations for your goals.
 
 The configuration review service evaluates a single CircleCI project and delivers a findings report. Your field engineer meets with the team that manages the project to learn about the use case and goals. After a two-week analysis, depending on the size of the project, your field engineer delivers findings. If additional help is needed to implement requirements, additional consultative time is scheduled.
 

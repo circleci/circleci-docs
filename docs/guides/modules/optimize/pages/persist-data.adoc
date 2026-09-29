@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: An introductory guide to the various ways to persist data in CircleCI
+:page-description: An introduction to persisting data in CircleCI with caches, workspaces and artifacts, plus how to manage your network and storage usage.
 :experimental:
 
 This guide gives an introductory overview of the various ways to persist and optimize data within and beyond your CircleCI builds. Use artifacts, workspaces, and caches to move data into, out of, and between jobs, persisting data for future use. Using the right feature for the right task will help speed up your builds, and improve repeatability and efficiency.

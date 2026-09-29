@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Sample config.yml File
+:page-description: Sample .circleci/config.yml files to start from, with examples of concurrent, sequential, approval and fan-in/fan-out workflows and multiple executors.
 :experimental:
 :page-aliases: example-configs.adoc
 

@@ -4,7 +4,7 @@
 :page-plan: Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Learn how to manage the use of contexts with config policies.
+:page-description: Write config policies that control context use in your organization by defining which contexts are allowed, blocked, or reserved by a project or branch.
 :experimental:
 
 NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI Server v4.2.

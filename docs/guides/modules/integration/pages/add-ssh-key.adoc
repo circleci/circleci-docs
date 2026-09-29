@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: How to add additional SSH keys to CircleCI
+:page-description: Add additional SSH keys to your CircleCI project and jobs so you can deploy to other services or check out code from other repositories.
 :experimental:
 
 Add additional SSH keys to your project for access to deploy to other services, or to write or check out code from other repositories.

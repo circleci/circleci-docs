@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.4"
 :page-audience: developer
-:page-description: Steps to migrate from using launch agent to machine runner 3
+:page-description: Migrate an existing launch agent installation on Linux to machine runner 3. Uninstall launch agent, then install the machine runner 3 agent.
 :experimental:
 :machine:
 :linux:

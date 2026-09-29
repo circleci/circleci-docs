@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Introduction to environment variables in CircleCI
+:page-description: An introduction to environment variables in CircleCI: built-in variables, private keys and secrets, order of precedence, substitution and contexts.
 :experimental:
 
 [#introduction]

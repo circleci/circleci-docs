@@ -1,5 +1,5 @@
 = Managing URL orbs allow-lists
-:page-description: How to manage URL orbs allow-lists
+:page-description: Manage URL orb allow-lists to restrict orb URL references to approved prefixes. Add, view and delete allow-lists in the CircleCI web app or with the API.
 :experimental:
 :page-platform: Cloud
 :page-vcs: github, github-enterprise, gitlab, bitbucket

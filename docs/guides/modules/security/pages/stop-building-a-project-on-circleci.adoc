@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Learn how to remove a project from your CircleCI account
+:page-description: Stop building a project on CircleCI while keeping its build history, and see how this option compares with pausing pipelines during an incident.
 :experimental:
 
 [#introduction]

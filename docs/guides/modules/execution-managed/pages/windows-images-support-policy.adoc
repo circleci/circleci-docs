@@ -3,7 +3,7 @@
 :page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-audience: developer
-:page-description: CircleCI Windows images release, update, and deprecation policy
+:page-description: Read the CircleCI policy for releasing, tagging, patching, and deprecating Windows Server images built for the Windows executor.
 :experimental:
 
 [#overview]

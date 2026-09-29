@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Continuous integration with Python on CircleCI
+:page-description: Set up continuous integration for a Python application on CircleCI. Follow a configuration walkthrough to create a basic config.yml file.
 :experimental:
 
 This quickstart guide covers integrating a Python project with CircleCI. This guide is designed to help you create a basic CircleCI configuration file to build, test and deploy your Python project. After completing this quickstart, you can edit and optimize the config to fit the requirements of your project.

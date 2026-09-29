@@ -3,7 +3,7 @@
 :page-vcs: all
 :page-plan: Scale
 :page-audience: developer
-:page-description: Tutorial outlining how to set up SSO for an organization
+:page-description: Set up SAML single sign-on (SSO) for your CircleCI organization with your Identity Provider, and find out how to stop enforcing or delete an SSO connection.
 :experimental:
 
 NOTE: SAML single sign-on for CircleCI is available for Scale Plan customers. See xref:sso-overview.adoc#prerequisites-and-limitations[Prerequisites and Limitations]

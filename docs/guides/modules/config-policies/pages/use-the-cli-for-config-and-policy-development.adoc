@@ -4,7 +4,7 @@
 :page-plan: Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Learn about developing your config policies using the CLI.
+:page-description: Use the CircleCI CLI to develop and test configs and config policies locally, and to retrieve policy decision audit logs for your organization.
 :experimental:
 
 NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI Server v4.2.

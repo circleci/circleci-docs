@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: How to enable Docker Compose in your primary container
+:page-description: Install and use Docker Compose in your CircleCI pipelines with the machine executor or the Docker executor and remote Docker, and review its limitations.
 :experimental:
 
 This page describes how to use Docker Compose in your CircleCI pipelines.

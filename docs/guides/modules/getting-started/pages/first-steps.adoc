@@ -3,7 +3,7 @@
 :page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-audience: developer
-:page-description: First step for using CircleCI.
+:page-description: Sign up for CircleCI in the web app or with the CLI, then create an organization for your team or join teammates who already use CircleCI.
 :experimental:
 
 To start building on CircleCI, sign up for an account, then create an organization for your team, or join teammates who are already using CircleCI. CircleCI supports GitHub, Bitbucket, GitLab, and Cursor Origin projects.

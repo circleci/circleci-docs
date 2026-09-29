@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: A how to guide for using CircleCI dynamic configuration.
+:page-description: Follow examples of CircleCI dynamic configuration, such as passing parameters to a continuation workflow and running work based on modified files.
 :experimental:
 
 This page covers some dynamic configuration examples. The following examples are provided below:

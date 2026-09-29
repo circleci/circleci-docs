@@ -3,7 +3,7 @@
 :page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-audience: developer
-:page-description: Testing macOS applications.
+:page-description: Configure CircleCI for macOS app UI testing, including supported Xcode and macOS versions, Fastlane setup and managing permissions with the macOS orb.
 :experimental:
 
 This document describes how to configure CircleCI for macOS app UI testing.

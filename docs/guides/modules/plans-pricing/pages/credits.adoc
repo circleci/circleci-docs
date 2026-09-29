@@ -3,7 +3,7 @@
 :page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-audience: developer
-:page-description: Learn about the CircleCI credits-based plan system.
+:page-description: Understand how credits work on CircleCI Free, Performance and Scale plans, how to manage your credit usage, and what limits apply on the Free plan.
 :experimental:
 
 This document describes how to find the available resources regarding credits with CircleCI.

@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: This document provides examples of deploying to Heroku.
+:page-description: Configure CircleCI to deploy your application to Heroku, either with the Heroku orb or with a custom deploy job and environment variables.
 :experimental:
 
 In this how-to guide, you will learn how to configure CircleCI to deploy to Heroku.

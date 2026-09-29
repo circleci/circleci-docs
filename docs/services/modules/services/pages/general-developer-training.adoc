@@ -2,7 +2,7 @@
 :page-platform: Cloud, Server
 :page-vcs: all
 :page-audience: developer
-:page-description: General developer training service
+:page-description: Two one-hour sessions led by your field engineer that cover CircleCI basics such as configuration, secrets management, and debugging builds.
 
 General developer training includes two one-hour sessions led by your field engineer. The sessions cover CircleCI basics such as configuration, secrets management, and debugging failed builds.
 

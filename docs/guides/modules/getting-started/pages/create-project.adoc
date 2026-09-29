@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: "Learn how to create a project in CircleCI."
+:page-description: Create a project in CircleCI to give CircleCI access to the code in your repository, so it can check out that code and run pipelines against it.
 :experimental:
 
 This guide walks you through creating a new project in CircleCI. Creating a project is the step where you give CircleCI access to the code in your repository, so it can check that code out and run pipelines against it.

@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-audience: developer
 :experimental:
-:page-description: Reference for .circleci/test-suites.yml
+:page-description: Reference for the CircleCI Smarter Testing configuration keys in the .circleci/test-suites.yml file, including discover, run, analysis and outputs.
 :page-show-readtime: true
 :page-aliases: guides:test:testsuite-configuration-reference.adoc
 

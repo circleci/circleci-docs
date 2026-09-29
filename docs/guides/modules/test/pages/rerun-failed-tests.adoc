@@ -3,7 +3,7 @@
 :page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-audience: developer
-:page-description: How to rerun only failed tests in a job and optimize credit usage.
+:page-description: Rerun only the failed tests in a job with the legacy circleci tests run command to save time and credits, with examples for common test frameworks.
 :experimental:
 
 Use rerun failed tests to only rerun a subset of tests, instead of an entire test suite, when a transient test failure arises.

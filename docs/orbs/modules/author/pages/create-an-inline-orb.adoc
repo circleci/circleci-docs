@@ -3,7 +3,7 @@
 :page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: How to author inline orbs for your projects
+:page-description: Create inline orbs to package reusable configuration elements directly in your project config file, then validate and test them.
 :experimental:
 :page-show-readtime: true
 

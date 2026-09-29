@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: First Windows project on CircleCI
+:page-description: Get started with continuous integration on the Windows execution environment by setting up your first Windows project with an example application.
 :experimental:
 
 This document describes how to get started with continuous integration on *Windows execution environments* on CircleCI. If this is your first time setting up CircleCI, we recommend checking out the xref:getting-started:getting-started.adoc[Getting Started Guide].

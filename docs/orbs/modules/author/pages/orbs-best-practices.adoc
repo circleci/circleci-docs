@@ -3,7 +3,7 @@
 :page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: A reference guide to best practices for developing orbs.
+:page-description: Follow best practices for developing orbs, covering naming, structure, deployment and promotion, so your orbs are easy to use and maintain.
 :experimental:
 
 [#general]

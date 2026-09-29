@@ -4,7 +4,7 @@
 :page-plan: Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: CircleCI Linux CUDA images release, update, and deprecation policy
+:page-description: Read the CircleCI policy for releasing, tagging, patching, and deprecating Linux CUDA images used with the GPU executor.
 :experimental:
 
 include::ROOT:partial$execution-resources/linux-cuda-deprecation-notice.adoc[]

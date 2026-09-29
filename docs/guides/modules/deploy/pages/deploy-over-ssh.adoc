@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Learn how to deploy your application over SSH using CircleCI.
+:page-description: Deploy your application over SSH from CircleCI by adding an SSH key for the target, setting the username and hostname, and creating a deploy job.
 :experimental:
 
 In this how-to guide, you will learn how to configure CircleCI to deploy your application over SSH.

@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Why and how to create custom Docker images
+:page-description: Create a custom Docker image for your CircleCI jobs when convenience images do not suit your needs, then build it and store it in a Docker registry.
 :experimental:
 
 This page describes how to create and use custom Docker images with CircleCI.

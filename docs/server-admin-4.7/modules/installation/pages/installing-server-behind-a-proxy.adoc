@@ -4,7 +4,7 @@
 :page-vcs: github, github-enterprise
 :page-server-min-version: "4.7"
 :page-audience: admin
-:page-description: Learn how to install CircleCI server v4.7 behind a proxy.
+:page-description: Install CircleCI Server 4.7 behind a proxy to monitor and control access to the internet, and review the known limitations of a proxied setup.
 :icons: font
 :toc: macro
 :toc-title:

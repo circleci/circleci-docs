@@ -3,7 +3,7 @@
 :page-vcs: github, github-enterprise
 :page-server-min-version: "4.9"
 :page-audience: admin
-:page-description: Learn how to configure data retention policies for MongoDB, PostgreSQL, and object storage buckets in your CircleCI Server installation.
+:page-description: Learn how to configure data retention policies for MongoDB, PostgreSQL, and object storage buckets in your CircleCI Server 4.9 installation.
 :experimental:
 
 [#background]

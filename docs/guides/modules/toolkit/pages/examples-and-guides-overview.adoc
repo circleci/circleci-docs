@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Resources for learning CircleCI using examples.
+:page-description: Examples and guides for building, testing and deploying applications on CircleCI, organized by programming language, framework and platform.
 :experimental:
 
 This page provides a collection of examples to help you learn how to build, test, and deploy applications written in the most common programming languages, frameworks, and platforms on CircleCI.

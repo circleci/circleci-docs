@@ -3,7 +3,7 @@
 :page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-audience: developer
-:page-description: MFA Overview
+:page-description: Set up multi-factor authentication (MFA) for your CircleCI account, sign in with MFA, and use recovery codes if you lose access to your device.
 :experimental:
 
 Multi-factor authentication (MFA) for CircleCI is now required if you sign in to your CircleCI account using email and password. If you use a social login method to access your CircleCI account (such as GitHub or Bitbucket), you can use your login provider's MFA offering.

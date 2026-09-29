@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: This document provides examples of deploying to Cloud Foundry.
+:page-description: Configure CircleCI to deploy to Cloud Foundry with the Cloud Foundry CLI, using a blue-green pattern of dark and live deployments with optional approval.
 :experimental:
 
 In this how-to guide, you will learn how to configure CircleCI to deploy to Cloud Foundry.

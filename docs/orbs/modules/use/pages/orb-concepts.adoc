@@ -3,7 +3,7 @@
 :page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Conceptual Overview for Orbs
+:page-description: Understand orb concepts, including orb types, configuration elements, namespaces, semantic versioning, private and public registry orbs, and orb packing.
 :experimental:
 
 CircleCI orbs are shareable packages of configuration elements, including the following:

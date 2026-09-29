@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: A guide to setting up triggers for your pipelines.
+:page-description: Set up triggers for your pipelines. Triggers are rules that determine when to automatically run a pipeline based on specific events and conditions.
 :experimental:
 
 Triggers are configurable rules that determine when to automatically run a pipeline based on specific events and conditions.

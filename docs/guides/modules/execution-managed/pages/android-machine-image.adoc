@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Using the Android image on the machine executor
+:page-description: Use the Android machine image on the Linux machine executor with the Android orb or manual configuration, and review resource classes and preinstalled tools.
 :experimental:
 
 [#overview]

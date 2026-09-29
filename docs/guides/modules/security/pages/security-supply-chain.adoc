@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Protecting against supply chain attacks on CircleCI
+:page-description: Reduce the risk of supply chain attacks on CircleCI as a publisher or developer by using contexts and pinning your dependencies.
 :experimental:
 
 [#overview]

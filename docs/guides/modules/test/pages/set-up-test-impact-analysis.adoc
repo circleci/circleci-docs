@@ -1,5 +1,5 @@
 = Set up test impact analysis
-:page-description: Run only the tests impacted by your code changes
+:page-description: Run only the tests impacted by your code changes. Set up test impact analysis in your test-suites.yml file to skip tests that cover unchanged files.
 :page-platform: Cloud
 :page-vcs: all
 :page-plan: Free, Performance, Scale

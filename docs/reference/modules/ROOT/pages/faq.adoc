@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Frequently asked questions about CircleCI
+:page-description: Find answers to frequently asked questions about CircleCI, covering migration, orbs, self-hosted runner, pipelines, workflows, billing and more.
 :experimental:
 
 This page answers frequently asked questions about the following CircleCI topics:
