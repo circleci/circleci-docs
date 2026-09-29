@@ -43,6 +43,16 @@ commands:
             echo "[ERROR] << parameters.message >>"
 
 jobs:
+  check-metadata:
+    docker:
+      - image: cimg/node:24.21.0
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          name: Check page metadata against schema
+          command: node scripts/check-metadata.js
+
   build:
     executor: node_executor
     steps:
@@ -200,6 +210,8 @@ workflows:
           reference_branch: main
           base_dir: docs
           filters: pipeline.git.branch != "main"
+
+      - check-metadata
 
       - build:
           filters: pipeline.git.branch == "main"

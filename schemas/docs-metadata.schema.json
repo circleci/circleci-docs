@@ -9,7 +9,8 @@
   "properties": {
     "page-description": {
       "type": "string",
-      "minLength": 1,
+      "minLength": 70,
+      "maxLength": 160,
       "description": "Populates the HTML <meta> description tag. Required on every page."
     },
     "page-content-type": {

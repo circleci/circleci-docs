@@ -9,7 +9,9 @@
     "build:ui": "gulp build:ui",
     "build:api-docs": "gulp build:api-docs",
     "build:docs": "npm run build:ui && gulp build:docs",
-    "fetch-server-branches": "chmod +x scripts/fetch-server-branches.sh && ./scripts/fetch-server-branches.sh"
+    "fetch-server-branches": "chmod +x scripts/fetch-server-branches.sh && ./scripts/fetch-server-branches.sh",
+    "check:metadata": "node scripts/check-metadata.js",
+    "hooks:install": "git config core.hooksPath .githooks"
   },
   "repository": {
     "type": "git",
