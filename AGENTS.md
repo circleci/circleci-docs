@@ -718,7 +718,7 @@ Before committing documentation changes:
 4. ✅ Check `:page-description:` is 70-160 characters
 5. ✅ Ensure link text uses title case
 6. ✅ Confirm page is added to `nav.adoc` if new
-7. ✅ Confirm `:page-platform:` (capitalized `Cloud`/`Server`) and `:page-audience:` (`admin`/`developer`) are present, and `:page-server-min-version:` is quoted if set (see Page Attributes section)
+7. ✅ **REQUIRED**: Run `npm run check:metadata` and fix any page attribute errors (see Page Attributes section)
 
 **Alternative for local agents**: If CircleCI CLI is available and authenticated, you can also check Vale errors from CI runs using `circleci run get` and `circleci job output get`, but running Vale locally is still the recommended approach.
 
@@ -818,6 +818,8 @@ All documentation pages must include attributes at the top of the file, before t
 
 The full metadata contract is defined in `schemas/docs-metadata.schema.json` (DOC-269). This section summarizes it; if the two ever disagree, the schema file wins.
 
+The `check-metadata` CI job validates every page against the schema. Run the same check locally with `npm run check:metadata`, or pass file paths to check only those files (`node scripts/check-metadata.js <file>...`). To run it automatically on staged `.adoc` files before each commit, run `npm run hooks:install` once.
+
 **Required attributes:**
 
 ```adoc
@@ -858,7 +860,8 @@ The full metadata contract is defined in `schemas/docs-metadata.schema.json` (DO
   - On `guides` and `reference` pages, `page-plan` and `page-vcs` drive a generated availability sidebar (Cloud plans / Version control) — don't write one by hand as a `****` sidebar or NOTE. It's built at build time from these attributes; see `extensions/page-availability-extension.js`.
 
 - `:page-description:` - Used for SEO meta descriptions and page previews
-  - **Must be between 70-160 characters** (Vale enforced)
+  - **Must be between 70-160 characters** (enforced by `check-metadata`)
+  - Must be unique across the site. On `server-admin-*` pages, include the Server version (for example `CircleCI Server 4.10`), since each version has its own copy of the page
   - Write a clear, concise summary of what the page covers
   - Use active voice
 
