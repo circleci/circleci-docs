@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Learn how to handle secrets securely with CircleCI.
+:page-description: Protect secrets at the boundary between CircleCI and your systems. Understand command-line risks and apply mitigations such as protecting API tokens.
 :experimental:
 
 Many builds must reference secret values entrusted to CircleCI. CircleCI understands that security is critical to every organization's success. However, you can also take a few steps to help protect secrets at the boundary between CircleCI's systems and yours.

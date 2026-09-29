@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Learn about CircleCI resource class lifecycle management.
+:page-description: Find out how CircleCI deprecates and retires resource classes, what happens during a brownout, and how you can respond by updating your configuration.
 :experimental:
 
 CircleCI periodically introduces new compute as "resource classes," consisting of new underlying compute infrastructure. As older compute infrastructure ages, CircleCI deprecates and retires it from the fleet.

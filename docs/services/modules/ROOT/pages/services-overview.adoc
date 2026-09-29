@@ -2,7 +2,7 @@
 :page-platform: Cloud, Server
 :page-vcs: all
 :page-audience: developer
-:page-description: Field engineering services overview
+:page-description: Find out about the CircleCI field engineering team and the migration, onboarding, optimization and training services they provide.
 
 == Field engineering team
 

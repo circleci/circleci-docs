@@ -3,7 +3,7 @@
 :page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-audience: developer
-:page-description: Differences between CircleCI and Jenkins, with migration guide.
+:page-description: Key differences between Jenkins and CircleCI for migration, covering job configuration, plugins, distributed builds, containers and parallelism.
 :experimental:
 
 This document provides the basic concepts that a longtime Jenkins user needs to know when migrating from Jenkins to CircleCI.

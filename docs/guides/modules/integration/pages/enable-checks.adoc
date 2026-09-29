@@ -3,7 +3,7 @@
 :page-vcs: github, github-enterprise
 :page-plan: Free, Performance, Scale
 :page-audience: developer
-:page-description: How to enable GitHub Checks for CircleCI
+:page-description: Enable GitHub Checks so CircleCI reports workflow status to the GitHub user interface, and learn how to disable Checks or troubleshoot them.
 :experimental:
 
 [#introduction]

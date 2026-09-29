@@ -4,7 +4,7 @@
 :page-vcs: github, github-enterprise
 :page-server-min-version: "4.8"
 :page-audience: admin
-:page-description: Installation guide for CircleCI server v4.8 execution environments.
+:page-description: Set up CircleCI Server 4.8 execution environments on GCP, including Nomad clients and servers, machine provisioner, and runner.
 :experimental:
 :env-gcp:
 

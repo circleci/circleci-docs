@@ -3,7 +3,7 @@
 :page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-audience: developer
-:page-description: CircleCI Linux VM images release, update, and deprecation policy
+:page-description: Read the CircleCI policy for releasing, tagging, patching, and deprecating the Ubuntu-based Linux VM images built for the machine executor.
 :experimental:
 
 [#overview]

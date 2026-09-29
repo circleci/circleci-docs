@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.4"
 :page-audience: developer
-:page-description: Learn about the capabilities to customize claims in OIDC tokens.
+:page-description: Create CircleCI OIDC tokens with the environment CLI and customize the aud claim to connect your jobs to different cloud services without long-lived secrets.
 :experimental:
 
 Use OpenID Connect (OIDC) tokens to connect your pipelines to compatible cloud services without the need to manage long-lived secrets in CircleCI. Create CircleCI OIDC tokens, using the CircleCI environment CLI, and customize the `aud` claim to meet the unique needs of different cloud services.

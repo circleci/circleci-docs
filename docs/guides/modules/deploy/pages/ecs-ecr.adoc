@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: How to use CircleCI to deploy to AWS ECS from ECR
+:page-description: Build and push a Docker image to AWS ECR, then deploy it to an existing AWS ECS service using CircleCI and a sample project with Terraform.
 :experimental:
 
 WARNING: This page is outdated. CircleCI is working on a new updated sample project. The information on this page is still relevant, but the sample project will be replaced.

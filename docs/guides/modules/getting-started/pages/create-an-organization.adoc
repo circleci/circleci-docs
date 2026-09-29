@@ -3,7 +3,7 @@
 :page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-audience: developer
-:page-description: Create a new organization in CircleCI.
+:page-description: Create a new organization in CircleCI, the top-level container for your team's projects, users, permissions, settings, and billing.
 :experimental:
 
 This guide covers creating a new organization in CircleCI. An organization is the top-level container for your team's projects. It also holds the users, permissions, settings, and billing shared across those projects.

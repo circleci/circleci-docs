@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: This is document provides examples of deploying to Capistrano.
+:page-description: Use this example CircleCI configuration to run Capistrano deployment commands from a job once your project is set up to use Capistrano.
 :experimental:
 
 This how-to guide covers an example CircleCI configuration to deploy to Capistrano.

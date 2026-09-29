@@ -3,7 +3,7 @@
 :page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Starting point for authoring CircleCI orbs
+:page-description: Start authoring CircleCI orbs. Compare registry, URL and inline orbs, get started with each type, and explore orb development tools.
 :experimental:
 :page-aliases: orb-development-kit
 

@@ -3,7 +3,7 @@
 :page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Starting point for Testing CircleCI Orbs
+:page-description: Test your registry orbs with validation, unit testing and integration testing, using the orb-tools pipeline to catch breaking changes before release.
 :experimental:
 
 This guide covers various best practices for testing orbs.

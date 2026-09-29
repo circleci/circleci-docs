@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: How to upload artifacts to Artifactory in CircleCI
+:page-description: Upload artifacts such as JAR and WAR files to Artifactory from CircleCI using Artifactory plugins for Maven and Gradle, or the JFrog CLI.
 :experimental:
 
 In this how-to guide, you will learn how to upload artifacts to Artifactory in CircleCI.

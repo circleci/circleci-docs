@@ -3,7 +3,7 @@
 :page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-audience: developer
-:page-description: Errors and troubleshooting methods for container and machine runners.
+:page-description: Find common errors for CircleCI container and machine runners, along with the troubleshooting steps you can use to diagnose and fix them.
 :experimental:
 
 This page describes errors and troubleshooting methods for container and machine runners.

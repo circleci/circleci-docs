@@ -3,7 +3,7 @@
 :page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: This page answers the most frequently asked questions by orb authors.
+:page-description: Find answers to frequently asked questions and common technical issues that come up when you author and publish CircleCI orbs.
 :experimental:
 
 This document describes various questions and technical issues that you may find helpful when authoring orbs.

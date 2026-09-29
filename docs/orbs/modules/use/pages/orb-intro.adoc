@@ -3,7 +3,7 @@
 :page-vcs: all
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Starting point for using CircleCI orbs
+:page-description: Get started with CircleCI orbs, reusable packages of parameterizable configuration. Choose an orb type and use registry, URL or inline orbs in your config.
 :experimental:
 
 Orbs are reusable packages of parameterizable configuration. Use orbs to:

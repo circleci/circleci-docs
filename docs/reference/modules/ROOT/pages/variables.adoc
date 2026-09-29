@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: A list of all built-in variables for your CircleCI projects.
+:page-description: Reference for all built-in environment variables and pipeline values available in your CircleCI projects, and which VCS integrations support each one.
 :experimental:
 
 This page is a reference for all built-in values available for use in your CircleCI projects.

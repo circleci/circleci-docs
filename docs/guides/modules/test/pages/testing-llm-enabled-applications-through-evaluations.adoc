@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Docs page on setting up LLM evaluations in your CI/CD pipeline
+:page-description: Test applications powered by large language models (LLMs) with evaluations, and automate evals in your CircleCI pipelines with the CircleCI Evals orb.
 :experimental:
 
 This page describes methods for testing applications powered by large language models (LLMs) through evaluations, including automating evaluations with CircleCI.

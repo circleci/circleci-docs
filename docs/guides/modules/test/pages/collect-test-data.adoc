@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: A guide to collecting test data in your CircleCI projects.
+:page-description: Store test results with the store_test_results step so CircleCI can collect test data for Test Insights. Includes test runner examples by language.
 :experimental:
 
 [#introduction]

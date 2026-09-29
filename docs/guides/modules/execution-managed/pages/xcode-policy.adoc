@@ -3,7 +3,7 @@
 :page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-audience: developer
-:page-description: CircleCI Xcode Image Release, Update and Deprecation Policy
+:page-description: Read the CircleCI policy for releasing, retaining, patching, and deprecating Xcode images, including beta image support and macOS versions.
 :experimental:
 
 [#overview]

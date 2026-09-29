@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: How to access a build container using SSH on CircleCI
+:page-description: Rerun a job with SSH to inspect log files, running processes, and directory paths, and troubleshoot permission denied errors when you connect.
 :experimental:
 
 Troubleshoot problems in a job using  the *Rerun job with SSH* option. Using this feature you can inspect log files, running processes, and directory paths.

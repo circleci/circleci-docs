@@ -3,7 +3,7 @@
 :page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-audience: developer
-:page-description: Learn how to delete organizations and projects in CircleCI.
+:page-description: Steps for deleting an organization or a project connected to CircleCI, and what to do if you only want to stop building a project.
 :experimental:
 
 This page details everything you need to know about deleting organizations and projects connected to CircleCI.

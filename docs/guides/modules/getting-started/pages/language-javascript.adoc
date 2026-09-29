@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Building and Testing with JavaScript and Node.js on CircleCI
+:page-description: Build and test a Node.js application on CircleCI. Follow a configuration walkthrough to create a basic config.yml file for your JavaScript project.
 :experimental:
 
 This quickstart guide covers integrating a Node.js project with CircleCI. This guide is designed to help you create a basic CircleCI configuration file to build, test and deploy your Node.js project. After completing this quickstart you can edit and optimize the config to fit the requirements of your project.

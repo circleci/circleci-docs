@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: How to rotate your project SSH keys.
+:page-description: Rotate project SSH keys for GitHub, Bitbucket Cloud and GitLab projects by removing and replacing both the private and public keys.
 :experimental:
 
 To revoke usage of a project SSH key, rotate the key pairs by following the steps outlined below. Separate instructions exist for each supported version control system (VCS).

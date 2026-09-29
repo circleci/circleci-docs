@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: A quickstart tutorial for the CircleCI VS Code extension.
+:page-description: A quickstart for the CircleCI VS Code extension: install it, authenticate, set up your project, and configure the pipelines panel and notifications.
 :experimental:
 
 This tutorial is a quickstart guide to setting up and using the official CircleCI VS Code extension. You can read more about the extension's capabilities in the xref:vs-code-extension-overview.adoc[Overview].

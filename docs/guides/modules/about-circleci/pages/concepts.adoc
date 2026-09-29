@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: CircleCI concepts
+:page-description: Get to know the core CircleCI concepts, such as concurrency, configuration, contexts, jobs, orbs, executors and workflows, and how they fit together.
 :experimental:
 
 [#introduction]

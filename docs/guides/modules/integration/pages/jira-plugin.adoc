@@ -3,7 +3,7 @@
 :page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-audience: developer
-:page-description: Connecting Jira with CircleCI
+:page-description: Connect Jira Cloud with CircleCI using the CircleCI for Jira app or the Jira orb, so you can view build and deploy statuses in your Jira issues.
 :experimental:
 
 Integrate your CI/CD build and deployment status notifications directly into your Jira cards.

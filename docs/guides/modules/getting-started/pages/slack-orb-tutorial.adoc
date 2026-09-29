@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: "Learn how to get started with the CircleCI Slack orb"
+:page-description: Get started with the CircleCI Slack orb: create your config.yml file, connect CircleCI with Slack, and use message templates for notifications.
 :experimental:
 
 This guide gets you started with the CircleCI Slack orb.

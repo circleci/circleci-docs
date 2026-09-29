@@ -3,7 +3,7 @@
 :page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-audience: developer
-:page-description: An overview of how to migrate from Travis CI to CircleCI.
+:page-description: Migrate from Travis CI to CircleCI, covering configuration files, caching dependencies, environment variables and uploading artifacts.
 :experimental:
 
 This document provides an overview of how to migrate from Travis CI to CircleCI.

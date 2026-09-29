@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Generate code coverage metrics for different languages.
+:page-description: Generate code coverage metrics for Ruby, Python, Java, JavaScript, PHP and Go, then view reports on CircleCI or send them to Codecov or Coveralls.
 :experimental:
 
 [#introduction]

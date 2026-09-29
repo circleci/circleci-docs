@@ -3,7 +3,7 @@
 :page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-audience: developer
-:page-description: How to set up code signing for iOS and macOS apps
+:page-description: Set up code signing for iOS and macOS projects on CircleCI using the code signing API to upload certificates and profiles, or use Fastlane Match.
 :experimental:
 
 This document describes how to set up code signing for your iOS and

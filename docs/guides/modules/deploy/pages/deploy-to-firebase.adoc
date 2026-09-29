@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: This document provides examples of deploying to Firebase.
+:page-description: Configure CircleCI to deploy to Firebase by installing firebase-tools as a dev dependency and authenticating with a service account.
 :experimental:
 
 In this how-to guide, you will learn how to configure CircleCI to deploy to Firebase.

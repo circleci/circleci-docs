@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.3"
 :page-audience: developer
-:page-description: Instructions on how to install CircleCI's container runner.
+:page-description: Install CircleCI's container runner on Kubernetes: create a namespace and resource class, then install the runner using the web app or the CLI.
 :experimental:
 :container:
 

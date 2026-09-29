@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: How to embed a CircleCI status badge in any web page or document
+:page-description: Create and embed a CircleCI status badge that shows your project's build status in a README or any other web page or document.
 :experimental:
 
 This document describes how to create a badge that displays your project's build status (passed or failed) in a README or other document.

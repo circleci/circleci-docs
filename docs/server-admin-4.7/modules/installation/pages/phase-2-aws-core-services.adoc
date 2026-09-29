@@ -4,7 +4,7 @@
 :page-vcs: github, github-enterprise
 :page-server-min-version: "4.7"
 :page-audience: admin
-:page-description: Installation guide for CircleCI server v4.7 core services.
+:page-description: Install CircleCI Server 4.7 core services on AWS: create a namespace, pull images, set Helm values, deploy, and create a DNS entry.
 :icons: font
 :toc: macro
 :toc-title:

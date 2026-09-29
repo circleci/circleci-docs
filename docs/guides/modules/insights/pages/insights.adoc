@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Viewing the status of repos and test performance
+:page-description: Use the CircleCI Insights dashboard to track the health and usage of your projects, including credit usage, success rates and pipeline duration.
 :experimental:
 
 The CircleCI Insights dashboard provides an overview of the health and usage of your projects' build processes. Insights include time-series and aggregated data on credit usage, success rates, and pipeline duration. This page describes how to access and use the Insights dashboard on CircleCI Cloud and Server.

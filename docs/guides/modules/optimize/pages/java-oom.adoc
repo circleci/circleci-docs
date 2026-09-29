@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: How to avoid and debug Java memory errors on CircleCI.
+:page-description: Avoid and debug Java out of memory errors on CircleCI by setting JVM memory limits through container support and Java environment variables.
 :experimental:
 
 How to avoid and debug Java memory errors on CircleCI.

@@ -3,7 +3,7 @@
 :page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-audience: developer
-:page-description: How to guide for managing releases from the CircleCI web app.
+:page-description: Manage releases from the CircleCI web app with the CircleCI release agent: restore a version, scale or restart a component, and retry a rollout.
 :experimental:
 :page-aliases: manage-deploys.adoc
 

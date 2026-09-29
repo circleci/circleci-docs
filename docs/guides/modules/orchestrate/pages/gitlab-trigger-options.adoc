@@ -3,7 +3,7 @@
 :page-vcs: gitlab, gitlab-self-hosted
 :page-plan: Free, Performance, Scale
 :page-audience: developer
-:page-description: A guide to the options available for triggering GitLab pipelines
+:page-description: Use GitLab trigger filters to decide when a trigger starts a build, choosing from common options or building your own rules with a custom filter.
 :experimental:
 
 GitLab **Trigger filters** allow you to determine when a trigger starts a build based on the parameters provided by GitLab's webhook.

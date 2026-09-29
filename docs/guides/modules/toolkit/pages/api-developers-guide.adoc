@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: API guide for internal and external CircleCI developers
+:page-description: Make calls to CircleCI API v2 with guidance on authentication, API tokens, getting started for each integration type, rate limits and pagination.
 :experimental:
 
 This guide was written to assist developers in making API calls to CircleCI services to return detailed information about users, pipelines, projects, and workflows. The API v2 Specification itself may be viewed in the https://circleci.com/docs/api/v2/[Reference documentation].

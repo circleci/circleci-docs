@@ -3,7 +3,7 @@
 :page-vcs: github, github-enterprise
 :page-server-min-version: "4.9"
 :page-audience: admin
-:page-description: Learn how to deploy your own monitoring stack using our Helm chart as a reference.
+:page-description: Learn how to deploy your own monitoring stack for CircleCI Server 4.9 using our Helm chart as a reference.
 :experimental:
 
 You may want to access metrics to gain insight into the performance of builds on your CircleCI Server installation. This page provides a sample to show how observability can be set up using the most common tools via a Helm chart package.

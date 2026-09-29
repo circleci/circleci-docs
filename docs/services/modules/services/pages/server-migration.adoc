@@ -2,7 +2,7 @@
 :page-platform: Server
 :page-vcs: all
 :page-audience: admin
-:page-description: Server migration service
+:page-description: Your field engineer guides CircleCI Server migrations, including version upgrades, cloud provider migrations, and new installations.
 
 The server migration service is an engagement where your field engineer guides CircleCI Server migrations. It covers major or minor version upgrades, cloud provider migrations, and new installations.
 

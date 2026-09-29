@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Reference for .circleci/config.yml
+:page-description: Reference for all CircleCI configuration keys used in the .circleci/config.yml file, including orbs, commands, executors, jobs, steps and workflows.
 :experimental:
 
 This document is a reference for the CircleCI 2.x configuration keys that are used in the `.circleci/config.yml` file.

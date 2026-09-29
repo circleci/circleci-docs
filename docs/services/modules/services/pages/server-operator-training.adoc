@@ -2,7 +2,7 @@
 :page-platform: Server
 :page-vcs: all
 :page-audience: admin
-:page-description: Server operator training
+:page-description: A one-hour session led by your field engineer on CircleCI Server functionality, cluster resources, and effective instance management.
 
 == Overview
 

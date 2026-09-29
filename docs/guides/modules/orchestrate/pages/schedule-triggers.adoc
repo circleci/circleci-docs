@@ -3,7 +3,7 @@
 :page-vcs: github, github-enterprise, bitbucket, cursor-origin
 :page-plan: Free, Performance, Scale
 :page-audience: developer
-:page-description: Learn about schedule triggers for your CircleCI projects.
+:page-description: Use schedule triggers to run pipelines in your CircleCI projects periodically, and configure them in the web app or with the API.
 :experimental:
 :page-aliases: scheduled-pipelines.adoc
 
