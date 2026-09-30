@@ -134,3 +134,4 @@ antora:
       - 'icons/*.svg'
   - require: ./extensions/llms-txt-generator-extension.js
   - require: ./extensions/agents-md-generator-extension.js
+  - require: ./extensions/link-headers-extension.js
