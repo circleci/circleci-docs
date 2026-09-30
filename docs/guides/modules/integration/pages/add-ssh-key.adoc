@@ -45,8 +45,6 @@ Even though all CircleCI jobs use `ssh-agent` to automatically sign all added SS
 
 To add a set of SSH keys to a container, use the `add_ssh_keys` xref:reference:ROOT:configuration-reference.adoc#add-ssh-keys[Special Step] within the appropriate xref:orchestrate:jobs-steps.adoc[Job] in your configuration file. The fingerprint can be SHA256 or MD5. Prefix SHA256 fingerprints with `SHA256:`, and include the colons between character pairs for MD5 fingerprints. When you add your key to CircleCI in menu:Project Settings[SSH keys > Additional SSH keys] the SHA256 fingerprint will be visible.
 
-CAUTION: **Using server?** Only MD5 fingerprints are supported. In CircleCI in menu:Project Settings[SSH keys > Additional SSH keys] the MD5 fingerprint will be visible. SHA256 support is planned for an upcoming server release.
-
 For a self-hosted runner, ensure that you have an `ssh-agent` on your system to successfully use the `add_ssh_keys` step. The SSH key is written to `$HOME/.ssh/id_rsa_<fingerprint>`, where `$HOME` is the home directory of the user configured to execute jobs, and `<fingerprint>` is the MD5 fingerprint of the key. A host entry is also appended to `$HOME/.ssh/config`, along with a relevant `IdentityFile` option to use the key.
 
 [source,yaml]

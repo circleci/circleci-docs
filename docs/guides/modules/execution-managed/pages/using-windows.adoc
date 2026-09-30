@@ -242,7 +242,7 @@ version: 2.1
 jobs:
   build: # name of your job
     machine:
-      image: windows-server-2019-vs2019:current # Windows machine image
+      image: windows-default # Windows machine image
     resource_class: windows.medium
     steps:
       # default shell is PowerShell

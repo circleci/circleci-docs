@@ -182,7 +182,7 @@ Auto rerun failed tests retries a failing test immediately, without human interv
 
 See the xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] page for configuration details.
 
-For the full set of configuration keys available in `test-suites.yml`, refer to the xref:testsuite-configuration-reference.adoc[Test Suite Config Reference].
+For the full set of configuration keys available in `test-suites.yml`, refer to the xref:reference:ROOT:testsuite-configuration-reference.adoc[Test Suite Config Reference].
 
 [#tests-command]
 == Run tests with the `circleci tests` commands
