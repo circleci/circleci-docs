@@ -1,7 +1,7 @@
 'use strict'
 
 /**
- * Antora extension (SPIKE 2, DOC-281) that builds the guides component twice
+ * Antora extension (DOC-281) that builds the guides component twice
  * from the same source files: once for Cloud (the existing unversioned build)
  * and once for the latest CircleCI Server release.
  *

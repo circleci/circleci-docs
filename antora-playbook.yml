@@ -134,3 +134,7 @@ antora:
       - 'icons/*.svg'
   - require: ./extensions/llms-txt-generator-extension.js
   - require: ./extensions/agents-md-generator-extension.js
+  - require: ./extensions/guides-versions-extension.js
+    component: guides
+    serverversion: '4.10'
+    serverstartpage: getting-started:config-intro.adoc
