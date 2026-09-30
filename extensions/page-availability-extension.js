@@ -6,6 +6,7 @@ const {
   SCOPED_COMPONENTS,
   getPlanAvailability,
   getVcsAvailability,
+  getServerVersionAvailability,
 } = require('./lib/page-availability')
 
 /**
@@ -14,6 +15,9 @@ const {
  * `page-vcs` attributes.
  *
  * Scope: guides and reference only (checked via page-component-name).
+ * In a Server build (the `server` attribute is set) it shows the minimum
+ * Server version from `page-server-min-version` instead, when that is later
+ * than the earliest covered version.
  * Only restricted lines are shown - a page on all three plans, or with
  * page-vcs: all, gets no line for that attribute. A page with no restricted
  * lines gets no sidebar at all. This keeps the sidebar meaningful for human
@@ -33,12 +37,18 @@ module.exports.register = function register(registry) {
       const logWarning = (msg) =>
         console.warn(`${msg} (${doc.getAttribute('docfile') || 'unknown file'})`)
 
-      const plan = getPlanAvailability(doc.getAttribute('page-plan'), logWarning)
-      const vcs = getVcsAvailability(doc.getAttribute('page-vcs'), logWarning)
-
       const lines = []
-      if (plan && plan.restricted) lines.push(`*${LABELS.plan}:* ${plan.text}`)
-      if (vcs && vcs.restricted) lines.push(`*${LABELS.vcs}:* ${vcs.text}`)
+      if (doc.hasAttribute('server')) {
+        // Server build: plans and VCS providers are Cloud concepts, so show
+        // the minimum Server version instead.
+        const serverText = getServerVersionAvailability(doc.getAttribute('page-server-min-version'))
+        if (serverText) lines.push(`*${LABELS.server}:* ${serverText}`)
+      } else {
+        const plan = getPlanAvailability(doc.getAttribute('page-plan'), logWarning)
+        const vcs = getVcsAvailability(doc.getAttribute('page-vcs'), logWarning)
+        if (plan && plan.restricted) lines.push(`*${LABELS.plan}:* ${plan.text}`)
+        if (vcs && vcs.restricted) lines.push(`*${LABELS.vcs}:* ${vcs.text}`)
+      }
       if (lines.length === 0) return doc
 
       const firstBlock = doc.getBlocks()[0]

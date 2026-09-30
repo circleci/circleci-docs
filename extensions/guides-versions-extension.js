@@ -1,33 +1,37 @@
 'use strict'
 
 /**
- * Antora extension (SPIKE, DOC-281) that builds the guides component once for
- * Cloud (the existing unversioned build) and once per CircleCI Server minor
- * version, all from the same source files.
+ * Antora extension (SPIKE 2, DOC-281) that builds the guides component twice
+ * from the same source files: once for Cloud (the existing unversioned build)
+ * and once for the latest CircleCI Server release.
  *
  * On `contentAggregated` it clones the unversioned guides bucket into one
- * bucket per Server version (`server-4.7`, and so on). Each clone gets:
+ * component version called `server` (displayed as "Server"). The clone gets:
  *
- * - its own `version` and `displayVersion`
- * - the AsciiDoc attributes `server`, `server-version` ("4.7"),
- *   `server-version-num` (407, for `ifeval`) and `server-admin-version`
+ * - the AsciiDoc attributes `server`, `server-version` ("4.10"),
+ *   `server-version-num` (410) and `server-admin-version`
  * - only the pages that apply to that Server version, worked out from
  *   `page-platform`, `page-server-min-version` and `page-server-deprecated-in`
  * - a copy of the nav with entries for dropped pages removed
- * - a Server start page (`serverStartPage`), since the Cloud start page is
+ * - a Server start page (`serverstartpage`), since the Cloud start page is
  *   Cloud-only
  * - no `page-aliases`: aliases redirect old Cloud URLs, and an alias into
  *   another component is not versioned, so it would be registered once per
  *   clone and fail the build as a duplicate
  *
+ * Pages that need a later Server version than the earliest one covered keep
+ * `page-server-min-version`, which page-availability-extension.js shows as a
+ * "Server version: 4.9 and later" sidebar.
+ *
  * The unversioned Cloud bucket is left exactly as it is.
  *
- * Playbook config (Antora lowercases extension config keys, so read them lowercased):
+ * Playbook config (Antora lowercases extension config keys, so read them
+ * lowercased):
  *
  *   - require: ./extensions/guides-versions-extension.js
  *     component: guides
- *     serverStartPage: getting-started:config-intro.adoc
- *     serverVersions: ['4.7', '4.8', '4.9', '4.10']
+ *     serverversion: '4.10'
+ *     serverstartpage: getting-started:config-intro.adoc
  */
 
 const PAGE_PATH = /^modules\/([^/]+)\/pages\/(.+\.adoc)$/
@@ -102,7 +106,7 @@ function pruneNav (source, droppedPages) {
 module.exports.register = function register ({ config }) {
   const logger = this.getLogger('guides-versions-extension')
   const componentName = config.component || 'guides'
-  const serverVersions = (config.serverversions || ['4.7', '4.8', '4.9', '4.10']).map(String)
+  const serverVersion = String(config.serverversion || '4.10')
 
   this.once('contentAggregated', ({ contentAggregate }) => {
     const source = contentAggregate.find((b) => b.name === componentName && !b.version)
@@ -118,56 +122,54 @@ module.exports.register = function register ({ config }) {
       if (m) pages.push({ file, key: `${m[1]}:${m[2]}`, attrs: readHeaderAttributes(file.contents) })
     }
 
-    for (const serverVersion of serverVersions) {
-      const num = versionNum(serverVersion)
-      const dropped = new Map()
-      for (const page of pages) {
-        const reason = dropReason(page.attrs, num)
-        if (reason) dropped.set(page.key, reason)
-      }
-      const droppedKeys = new Set(dropped.keys())
-      const droppedFiles = new Set(pages.filter((p) => droppedKeys.has(p.key)).map((p) => p.file))
-
-      const files = []
-      for (const file of source.files) {
-        if (droppedFiles.has(file)) continue
-        if (file.path === NAV_PATH) {
-          const pruned = pruneNav(file.contents.toString('utf8'), droppedKeys)
-          files.push(cloneFile(file, Buffer.from(pruned)))
-        } else if (PAGE_PATH.test(file.path)) {
-          files.push(cloneFile(file, stripAliases(file.contents)))
-        } else {
-          files.push(cloneFile(file))
-        }
-      }
-
-      const nav = source.nav ? [...source.nav] : source.nav
-      if (nav && source.nav.origin) nav.origin = source.nav.origin
-
-      const reasons = [...dropped.values()].reduce((acc, r) => ({ ...acc, [r]: (acc[r] || 0) + 1 }), {})
-      logger.info(
-        `${componentName} server-${serverVersion}: ${pages.length - dropped.size} pages kept, ` +
-          `${dropped.size} dropped ${JSON.stringify(reasons)}`
-      )
-
-      contentAggregate.push({
-        ...source,
-        version: `server-${serverVersion}`,
-        displayVersion: `Server ${serverVersion}`,
-        asciidoc: {
-          ...source.asciidoc,
-          attributes: {
-            ...(source.asciidoc && source.asciidoc.attributes),
-            server: '',
-            'server-version': serverVersion,
-            'server-version-num': num,
-            'server-admin-version': `server-${serverVersion}`,
-          },
-        },
-        nav,
-        startPage: config.serverstartpage || source.startPage,
-        files,
-      })
+    const num = versionNum(serverVersion)
+    const dropped = new Map()
+    for (const page of pages) {
+      const reason = dropReason(page.attrs, num)
+      if (reason) dropped.set(page.key, reason)
     }
+    const droppedKeys = new Set(dropped.keys())
+    const droppedFiles = new Set(pages.filter((p) => droppedKeys.has(p.key)).map((p) => p.file))
+
+    const files = []
+    for (const file of source.files) {
+      if (droppedFiles.has(file)) continue
+      if (file.path === NAV_PATH) {
+        const pruned = pruneNav(file.contents.toString('utf8'), droppedKeys)
+        files.push(cloneFile(file, Buffer.from(pruned)))
+      } else if (PAGE_PATH.test(file.path)) {
+        files.push(cloneFile(file, stripAliases(file.contents)))
+      } else {
+        files.push(cloneFile(file))
+      }
+    }
+
+    const nav = source.nav ? [...source.nav] : source.nav
+    if (nav && source.nav.origin) nav.origin = source.nav.origin
+
+    const reasons = [...dropped.values()].reduce((acc, r) => ({ ...acc, [r]: (acc[r] || 0) + 1 }), {})
+    logger.info(
+      `${componentName} server ${serverVersion}: ${pages.length - dropped.size} pages kept, ` +
+        `${dropped.size} dropped ${JSON.stringify(reasons)}`
+    )
+
+    contentAggregate.push({
+      ...source,
+      version: 'server',
+      displayVersion: 'Server',
+      asciidoc: {
+        ...source.asciidoc,
+        attributes: {
+          ...(source.asciidoc && source.asciidoc.attributes),
+          server: '',
+          'server-version': serverVersion,
+          'server-version-num': num,
+          'server-admin-version': `server-${serverVersion}`,
+        },
+      },
+      nav,
+      startPage: config.serverstartpage || source.startPage,
+      files,
+    })
   })
 }

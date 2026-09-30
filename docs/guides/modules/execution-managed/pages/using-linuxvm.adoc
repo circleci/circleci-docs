@@ -133,15 +133,7 @@ ifdef::server[]
 [#spike-server-only]
 == Server sample
 
-This section only appears in Server builds. You are reading the guides for CircleCI server {server-version}. See the xref:server-{server-version}@server-admin:overview:circleci-server-overview.adoc[server {server-version} overview] for installation details.
-
-ifeval::[{server-version-num} >= 410]
-This sentence only appears in server 4.10 and later.
-endif::[]
-
-ifeval::[{server-version-num} < 410]
-This sentence only appears before server 4.10.
-endif::[]
+This section only appears in the Server build. The Server docs describe CircleCI server {server-version}. See the xref:server-{server-version}@server-admin:overview:circleci-server-overview.adoc[server {server-version} overview] for installation details.
 endif::server[]
 
 // SPIKE: link to a Cloud-only page, to see how a dropped target is reported.

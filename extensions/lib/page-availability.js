@@ -21,6 +21,7 @@ const VCS_DISPLAY_NAMES = {
 const LABELS = {
   plan: 'Cloud plans',
   vcs: 'Version control',
+  server: 'Server version',
 }
 
 const VCS_ALL_TEXT = 'All supported providers'
@@ -28,7 +29,25 @@ const VCS_ALL_TEXT = 'All supported providers'
 const VCS_OVERVIEW_PATH = '/guides/integration/version-control-system-integration-overview/'
 
 // Antora components in scope for the sidebar (checked via page-component-name).
+// Earliest Server version the docs cover. A page available from this version
+// needs no Server version line.
+const SERVER_BASELINE = '4.7'
+
 const SCOPED_COMPONENTS = ['guides', 'reference']
+
+function versionNum(version) {
+  const [major, minor] = String(version).split('.').map(Number)
+  return major * 100 + minor
+}
+
+// Returns the sidebar text for a Server build, or null when the page is
+// available from the earliest covered version.
+function getServerVersionAvailability(rawMin) {
+  const min = typeof rawMin === 'string' ? rawMin.replace(/"/g, '').trim() : ''
+  if (!/^\d+\.\d+$/.test(min)) return null
+  if (versionNum(min) <= versionNum(SERVER_BASELINE)) return null
+  return `${min} and later`
+}
 
 function parseList(rawValue) {
   if (!rawValue || typeof rawValue !== 'string') return []
@@ -93,4 +112,5 @@ module.exports = {
   parseList,
   getPlanAvailability,
   getVcsAvailability,
+  getServerVersionAvailability,
 }
