@@ -1833,14 +1833,18 @@ The following steps are supported inside `teardown`:
 * `store_artifacts`
 * `store_test_results`
 * `persist_to_workspace`
+* The `teardown` attribute works on a `run` step inside a xref:reusing-config.adoc#authoring-reusable-commands[Reusable Command] definition.
 
-`restore_cache` and `attach_workspace` are not supported. Use them as ordinary steps in the job's `steps` list instead.
+The following steps and options are *not* supported for `teardown`:
 
-A teardown step cannot run in the background, cannot set `max_auto_reruns` or `auto_rerun_delay`, and cannot nest another `teardown` key, which is rejected when your config is validated.
+* `restore_cache`: Use as an ordinary step instead.
+* `attach_workspace`: Use as an ordinary step instead.
+* A step inside `teardown` cannot run in the background. 
+* A step inside `teardown` cannot use `max_auto_reruns` or `auto_rerun_delay`.
+* A step inside `teardown` cannot nest another `teardown` key.
 
-The `teardown` attribute works on a `run` step inside a xref:reusing-config.adoc#authoring-reusable-commands[Reusable Command] definition.
 
-NOTE: `teardown` takes a list of steps. Use list syntax even for a single step.
+TIP: The `teardown` key takes a list of steps. Use list syntax even for a single step.
 
 .Save a build cache even if the job is canceled
 [,yml]
