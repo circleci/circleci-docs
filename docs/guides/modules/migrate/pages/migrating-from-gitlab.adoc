@@ -1,8 +1,7 @@
 = Migrate from GitLab
-:page-platform: Cloud, Server
+:page-platform: Cloud
 :page-vcs: gitlab, gitlab-self-hosted
 :page-plan: Free, Performance, Scale
-:page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Move your CI/CD from GitLab to CircleCI. Sign up, then compare your GitLab configuration with the equivalent CircleCI configuration.
 :experimental:

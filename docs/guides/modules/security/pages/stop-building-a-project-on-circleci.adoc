@@ -2,7 +2,7 @@
 :page-platform: Cloud, Server
 :page-vcs: github, bitbucket
 :page-plan: Free, Performance, Scale
-:page-server-min-version: "4.7"
+:page-server-min-version: "4.10"
 :page-audience: developer
 :page-description: Stop building a project on CircleCI while keeping its build history, and see how this option compares with pausing pipelines during an incident.
 :experimental:
