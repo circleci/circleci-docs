@@ -1,21 +1,20 @@
 = Resource class lifecycle process
-:page-platform: Cloud, Server
+:page-platform: Cloud
 :page-vcs: all
 :page-plan: Free, Performance, Scale
-:page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Find out how CircleCI deprecates and retires resource classes, what happens during a brownout, and how you can respond by updating your configuration.
 :experimental:
 
 CircleCI periodically introduces new compute as "resource classes," consisting of new underlying compute infrastructure. As older compute infrastructure ages, CircleCI deprecates and retires it from the fleet.
 
-CircleCI announces resource class deprecations via the link:https://circleci.com/changelog/[changelog] and email. Announcements include the list of affected resource classes, scheduled brownout dates and durations, and end-of-life (EOL) date. 
+CircleCI announces resource class deprecations via the link:https://circleci.com/changelog/[changelog] and email. Announcements include the list of affected resource classes, scheduled brownout dates and durations, and end-of-life (EOL) date.
 
 Scheduled brownout dates are also listed on the link:https://status.circleci.com/[CircleCI status page].
 
 == Resource class brownouts
 
-A CircleCI resource class brownout is a temporary, planned period during which deprecated resource classes are intentionally made unavailable on the CircleCI platform. 
+A CircleCI resource class brownout is a temporary, planned period during which deprecated resource classes are intentionally made unavailable on the CircleCI platform.
 
 During a brownout, CI/CD jobs that attempt to use deprecated resource classes fail, giving users advance notice of upcoming permanent removals.
 
@@ -69,13 +68,13 @@ machine:
 
 === Option 2: Temporarily disable brownouts
 
-If you need immediate relief to restore workflows during an active brownout, you can temporarily disable brownouts. 
+If you need immediate relief to restore workflows during an active brownout, you can temporarily disable brownouts.
 
 Navigate to menu:Org[Advanced > Enable resource class brownouts] and toggle the setting off.
 
 [IMPORTANT]
 ====
-Disabling brownouts is only a temporary solution. Access to deprecated resource classes ends by the final EOL date regardless of brownout settings. 
+Disabling brownouts is only a temporary solution. Access to deprecated resource classes ends by the final EOL date regardless of brownout settings.
 
 You must update your configurations before the EOL date.
 ====
@@ -110,6 +109,6 @@ A: Create a branch with updated configuration files, then push and test this bra
 A: Different resource classes have different pricing, so switching resource classes may affect your compute costs. Review the link:https://circleci.com/pricing/price-list/[pricing documentation] and test thoroughly to understand the impact on both cost and performance.
 
 *Q: How do I know which resource class to migrate to?*::
-A: Deprecation announcements include recommended migration paths. 
+A: Deprecation announcements include recommended migration paths.
 +
 Generally, you choose a resource class that matches or exceeds the compute capacity of your deprecated class.
