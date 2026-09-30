@@ -19,6 +19,21 @@ pass:[<!-- vale off -->]
 | `"8Gi"`
 | Memory limit for the api-service deployment.
 
+| authentication_service.auth_api.rate_limit.burst
+| int
+| `50`
+| Burst allowance for the catch-all limit (RATE_LIMIT_BURST). Auth-api default: 50.
+
+| authentication_service.auth_api.rate_limit.count
+| int
+| `300`
+| Sustained request rate for the catch-all limit (RATE_LIMIT_COUNT). Auth-api default: 300.
+
+| authentication_service.auth_api.rate_limit.enabled
+| bool
+| `true`
+| Enable Gubernator per-user rate limiting on auth-api (maps to RATE_LIMIT_DISABLED when false).
+
 | authentication_service.auth_api.replicas
 | int
 | `1`

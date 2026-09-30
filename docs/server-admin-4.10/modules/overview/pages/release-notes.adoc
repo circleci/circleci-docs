@@ -24,6 +24,10 @@ Server 4.10 requires *mongoDB 7.0* or higher
 
 For upgrade steps see the xref:installation:upgrade-server.adoc#[Upgrade Server 4.10 Guide].
 
+== Release 4.10.1
+
+For full details of this release see the link:https://circleci.com/changelog/server-release-4-10-1/[changelog].
+
 == Release 4.10.0
 
 For full details of this release see the link:https://circleci.com/changelog/server-release-4-10-0/[changelog].
