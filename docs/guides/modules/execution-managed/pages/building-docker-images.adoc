@@ -209,7 +209,7 @@ To use Docker 27, use the following tag:
 
 * `docker27`
 
-To use Docker 24, use the following tag:
+To use Docker 26, use the following tag:
 
 * `docker26`
 

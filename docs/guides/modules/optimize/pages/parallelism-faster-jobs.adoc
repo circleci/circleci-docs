@@ -137,9 +137,10 @@ jobs:
 
 CircleCI attempts to detect the granularity of the test split (for example, to split by file name, or down to class name) based on the input to the split command. You may need to choose a different timing type depending on how your test coverage output is formatted, using the `--timings-type` option. Valid timing types are:
 
-* `name` - test name
+* `autodetect` - detect the timing type from the input (default)
 * `classname` - class name
-* `file` - file name
+* `testname` - test name
+* `filename` - file name
 
 [#example-using-timing-based-test-splitting]
 === Example using timing-based test splitting
