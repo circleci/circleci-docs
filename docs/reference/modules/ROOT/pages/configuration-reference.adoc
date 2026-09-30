@@ -1841,8 +1841,7 @@ The following steps and options are *not* supported for `teardown`:
 * `attach_workspace`: Use as an ordinary step instead.
 * A step inside `teardown` cannot run in the background. 
 * A step inside `teardown` cannot use `max_auto_reruns` or `auto_rerun_delay`.
-* A step inside `teardown` cannot nest another `teardown` key.
-
+* A step inside `teardown` cannot nest another `teardown` key. Config validation rejects this.
 
 TIP: The `teardown` key takes a list of steps. Use list syntax even for a single step.
 
@@ -1880,7 +1879,7 @@ workflows:
 
 A step registers its teardown steps when it starts, before its command runs, so the teardown steps still run if the job is canceled part way through the step. A step that CircleCI skips, for example because of its <<the-when-attribute,`when` attribute>>, never reaches registration and registers nothing. A step that is retried through `max_auto_reruns` registers its teardown steps once, not once per attempt.
 
-Teardown steps run in reverse order of registration across the whole job, in the manner of Go's `defer`: the most recently registered teardown step runs first. A teardown step can register additional teardown steps at runtime; those run before the remaining ones.
+Teardown steps run in reverse order of registration across the whole job: the teardown steps from the last step to start run first. For example, if step A starts a database and step B starts a server, B's teardown (stop the server) runs before A's teardown (stop the database).
 
 CircleCI allows 10 minutes in total for a job's teardown steps, not 10 minutes each. Teardown steps that have not run when that time is up do not run.
 
@@ -1891,7 +1890,7 @@ Steps inside `teardown` accept the <<the-when-attribute,`when` attribute>>, and 
 
 Inside `teardown`, `when` is evaluated against the state of the job, not the result of the step the teardown is attached to. A teardown step with `when: on_fail` runs when the job has failed, even if its own parent step succeeded.
 
-If a teardown step fails, the job fails.
+If a teardown step fails, the job fails. Later teardown steps see the failed job, so a teardown step with `when: on_success` that has not run yet is skipped.
 
 '''
 
