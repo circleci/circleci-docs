@@ -12,11 +12,7 @@ Using the machine executor gives your application full access to OS resources an
 
 To use the machine executor, use the xref:reference:ROOT:configuration-reference.adoc#machine[`machine` key] in your job configuration and specify an image:
 
-[tabs]
-====
-Cloud::
-+
---
+ifndef::server[]
 [,yaml]
 ----
 version: 2.1
@@ -26,10 +22,9 @@ jobs:
       image: ubuntu-2604:current
     resource_class: large.gen2
 ----
---
-Server::
-+
---
+endif::server[]
+
+ifdef::server[]
 [,yaml]
 ----
 version: 2.1
@@ -38,8 +33,7 @@ jobs:
     machine: true
     resource_class: large
 ----
---
-====
+endif::server[]
 
 You can view the list of available images in the xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[Configuration Reference], or on the link:https://circleci.com/developer/images?imageType=machine[Developer Hub]. If you are working on an installation of CircleCI Server, the syntax is slightly different. Your system administrator manages the available Linux images.
 
@@ -133,3 +127,22 @@ CircleCI reserves the IP range `192.168.53.0/24` for internal use on the machine
 == Next steps
 
 To find out about migrating a project from using the Docker executor to using `machine`, see the xref:docker-to-machine.adoc[Executor Migration] from Docker to Machine document.
+
+// SPIKE (DOC-281): sample Server-only content to test the build. Remove before merging.
+ifdef::server[]
+[#spike-server-only]
+== Server sample
+
+This section only appears in Server builds. You are reading the guides for CircleCI server {server-version}. See the xref:server-{server-version}@server-admin:overview:circleci-server-overview.adoc[server {server-version} overview] for installation details.
+
+ifeval::[{server-version-num} >= 410]
+This sentence only appears in server 4.10 and later.
+endif::[]
+
+ifeval::[{server-version-num} < 410]
+This sentence only appears before server 4.10.
+endif::[]
+endif::server[]
+
+// SPIKE: link to a Cloud-only page, to see how a dropped target is reported.
+See xref:getting-started:first-steps.adoc[Sign up and try CircleCI].
