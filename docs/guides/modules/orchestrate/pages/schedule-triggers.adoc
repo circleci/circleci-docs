@@ -50,7 +50,16 @@ If you would like to manage common schedules for multiple workflows, you will ne
 If your project has no scheduled workflows, and you would like to try out schedule triggers:
 
 . Have your CircleCI token ready, or create a new token by following the steps on the xref:toolkit:managing-api-tokens.adoc[Managing API Tokens] page.
-. Get your pipeline definition ID. In the web app, go to menu:Project Settings[Project Setup], locate your pipeline, and select the btn:[Copy] icon next to the pipeline definition ID.
+. Get your pipeline definition ID using the link:https://circleci.com/docs/api/v3#tag/pipelines/GET/api/v3/pipelines[API v3]. For example:
++
+[source,shell]
+----
+curl --request GET \
+  --url https://circleci.com/api/v3/pipelines \
+  --header "Authorization: Bearer $CIRCLE_TOKEN"
+----
++
+Locate the pipeline for your project in the response and copy its `id` value.
 . Create a new schedule trigger using the link:https://circleci.com/docs/api/v3#tag/triggers/POST/api/v3/triggers[API v3]. Replace `<PIPELINE_ID>` with your pipeline definition ID, and update `config.ref` and `checkout.ref` with your target branch:
 +
 [source,shell]
