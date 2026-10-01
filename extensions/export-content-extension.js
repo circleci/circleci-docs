@@ -57,6 +57,14 @@ function collectPages(contentCatalog, siteUrl) {
 
   contentCatalog.getComponents().forEach(({ name: comp, versions }) => {
     versions.forEach(({ version }) => {
+      // The guides Server build (guides-versions-extension.js) repeats the
+      // Cloud guides with small differences, so it stays out of search. Server
+      // readers find the Cloud page and use the version switcher.
+      if (comp === 'guides' && version === 'server') {
+        console.log('Skipping Algolia indexing for the guides Server build')
+        return
+      }
+
       if (comp === 'server-admin' && excludedServerAdminVersions.includes(version)) {
         console.log(`Skipping Algolia indexing for server-admin version: ${version}`);
         return;

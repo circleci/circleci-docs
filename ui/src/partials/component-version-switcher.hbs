@@ -1,6 +1,10 @@
 {{#if page.component.versions.[1]}}
   {{#with (component-versions-to-nav page.component) }} 
-    <div data-dropdown class="relative flex font-normal w-1/2 mt-6 mb-8 mr-2">
+    {{!-- Sticks to the top of the scrolling nav panel so the switcher stays visible
+          while scrolling a long navigation. The negative top offset cancels most of
+          the top padding, leaving a small gap above the dropdown when it is stuck. --}}
+    <div data-version-switcher class="sticky top-[-36px] z-10 bg-body-bg -mt-6 pt-12 pb-4">
+    <div data-dropdown class="relative flex font-normal w-1/2 mr-2">
       <!-- Trigger Button -->
       <button
         data-dropdown-button
@@ -16,6 +20,7 @@
 
       <!-- Dropdown Menu -->
       {{> dropdown-menu navList=./navList }}
+    </div>
     </div>
   {{/with}}
 {{/if}}

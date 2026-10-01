@@ -197,7 +197,10 @@ function generateLlmsTxt (playbook, contentCatalog) {
       const startPage = getStartPage(version, siteUrl)
       if (startPage) sections.push(`- Start: ${startPage}`)
 
-      const nav = formatNavigation(version.navigation, siteUrl, contentCatalog)
+      // The guides Server build (guides-versions-extension.js) repeats the
+      // Cloud guides, so list its start page only and not its navigation.
+      const isGuidesServerBuild = component.name === 'guides' && version.version === 'server'
+      const nav = isGuidesServerBuild ? null : formatNavigation(version.navigation, siteUrl, contentCatalog)
       if (nav) sections.push(nav)
       sections.push('')
     }
@@ -217,6 +220,7 @@ function generateLlmsTxt (playbook, contentCatalog) {
   // Common URL Patterns
   sections.push('## Common URL Patterns\n')
   sections.push(`- Guides: ${siteUrl}/guides/<topic>/`)
+  sections.push(`- Guides for CircleCI Server (latest release): ${siteUrl}/guides/server/<topic>/`)
   sections.push(`- Reference: ${siteUrl}/reference/<topic>/`)
   sections.push(`- Orbs: ${siteUrl}/orbs/<topic>/`)
   sections.push(`- Server Admin: ${siteUrl}/server-admin-<version>/<topic>/`)
@@ -271,7 +275,8 @@ function generateLlmsTxt (playbook, contentCatalog) {
 
 function getStartPage (version, siteUrl) {
   if (!version.startPage) return null
-  return siteUrl + version.startPage
+  const startPage = version.startPage
+  return siteUrl + (startPage.pub ? startPage.pub.url : startPage)
 }
 
 function formatNavigation (navigation, siteUrl, contentCatalog, indent = 0) {
