@@ -43,7 +43,12 @@ For example:
 
 * Jobs that require Docker images (`docker`) may use an image for Node.js, Python, etc. The xref:circleci-images.adoc[Pre-built CircleCI Docker Image] (convenience images) will help you get started. CircleCI convenience images are not a full operating system, so they generally make building your software more efficient.
 
+ifndef::server[]
 * Jobs that require a complete Linux virtual machine (VM) image (`machine`) may use an Ubuntu version supported by the xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[List of Available Machine Images].
+endif::server[]
+ifdef::server[]
+* Jobs that require a complete Linux virtual machine (VM) image (`machine`) use an image that your system administrator manages.
+endif::server[]
 
 ifndef::server[]
 * Jobs that require a macOS VM image (`macos`) may use an Xcode version. A full list is available on the xref:using-macos.adoc#supported-xcode-versions[Using macOS] page.
@@ -54,7 +59,9 @@ endif::server[]
 When you configure an executor it is recommended that you also specify a resource class to specify compute resource size (CPU and RAM).
 
 * For an overview of resource classes, see the xref:resource-class-overview.adoc[Resource Class Overview] page.
+ifndef::server[]
 * For an overview of available resource classes per Plan, see the link:https://circleci.com/pricing/[Pricing page].
+endif::server[]
 
 [#docker]
 == Docker

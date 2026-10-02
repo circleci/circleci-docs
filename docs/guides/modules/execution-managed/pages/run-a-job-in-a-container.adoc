@@ -65,7 +65,14 @@ Further, not all commands may work on your local machine as they do online. For 
 
 **Environment variables and contexts**
 
-For security reasons, encrypted environment variables or contexts configured in the link:https://app.circleci.com/[web application] will not be imported into local builds. As an alternative, you can specify environment variables to the CLI with the `-e` flag. See the output of the following command for more information.
+For security reasons, encrypted environment variables or contexts configured in the
+ifndef::server[]
+link:https://app.circleci.com/[web application]
+endif::server[]
+ifdef::server[]
+web application
+endif::server[]
+will not be imported into local builds. As an alternative, you can specify environment variables to the CLI with the `-e` flag. See the output of the following command for more information.
 
 ```shell
 circleci help build

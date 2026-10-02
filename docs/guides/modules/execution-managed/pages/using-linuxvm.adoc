@@ -41,7 +41,12 @@ jobs:
 --
 ====
 
-You can view the list of available images in the xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[Configuration Reference], or on the link:https://circleci.com/developer/images?imageType=machine[Developer Hub]. If you are working on an installation of CircleCI Server, the syntax is slightly different. Your system administrator manages the available Linux images.
+ifndef::server[]
+You can view the list of available images in the xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[Configuration Reference], or on the link:https://circleci.com/developer/images?imageType=machine[Developer Hub].
+endif::server[]
+ifdef::server[]
+Your system administrator manages the available Linux images.
+endif::server[]
 
 [#available-linuxvm-resource-classes]
 == Available LinuxVM resource classes
@@ -49,15 +54,18 @@ You can view the list of available images in the xref:reference:ROOT:configurati
 === Gen1
 include::ROOT:partial$execution-resources/machine-resource-table.adoc[]
 
+ifndef::server[]
 === Gen2
 
 include::ROOT:partial$execution-resources/machine-gen2-resource-table.adoc[]
+endif::server[]
 
 [#view-resource-usage]
 === View resource usage
 
 include::ROOT:partial$execution-resources/resource-class-view.adoc[]
 
+ifndef::server[]
 [#linux-vm-generations]
 == Linux VM generations
 
@@ -87,6 +95,7 @@ jobs:
       image: ubuntu-2604:current
     resource_class: large.gen2
 ----
+endif::server[]
 
 [#pre-installed-software]
 == Pre-installed software
@@ -101,8 +110,14 @@ version: 2.1
 ...
 jobs:
   whats-installed:
+ifndef::server[]
     machine: # executor type
       image: ubuntu-2604:current
+endif::server[]
+ifdef::server[]
+    machine: true # executor type
+    # Contact your system administrator for details of the image.
+endif::server[]
     steps:
       - run: apt list --installed
 ...
@@ -120,14 +135,22 @@ The following example uses an image and enables xref:optimize:docker-layer-cachi
 [,yaml]
 ----
 machine:
+ifndef::server[]
   image: ubuntu-2604:current
   docker_layer_caching: true    # default - false
+endif::server[]
+ifdef::server[]
+  docker_layer_caching: true    # default - false
+  # Contact your system administrator for details of the image.
+endif::server[]
 ----
 
+ifndef::server[]
 [#using-machine-and-ip-ranges]
 == Using machine and IP ranges
 
 CircleCI reserves the IP range `192.168.53.0/24` for internal use on the machine executor. Do not use this range in your jobs.
+endif::server[]
 
 [#next-steps]
 == Next steps

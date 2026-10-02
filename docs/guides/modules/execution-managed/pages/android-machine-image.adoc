@@ -24,15 +24,18 @@ You can configure the Android image in your configuration using xref:orbs:use:or
 
 include::ROOT:partial$execution-resources/machine-resource-table.adoc[]
 
+ifndef::server[]
 === Gen2
 
 include::ROOT:partial$execution-resources/machine-gen2-resource-table.adoc[]
+endif::server[]
 
 [#view-resource-usage]
 === View resource usage
 
 include::ROOT:partial$execution-resources/resource-class-view.adoc[]
 
+ifndef::server[]
 [#android-generations]
 == Android machine image generations
 
@@ -66,6 +69,7 @@ jobs:
 ----
 
 NOTE: Gen2 resource classes for the Android machine image are available on CircleCI Cloud only.
+endif::server[]
 
 [#pre-installed-software]
 == Pre-installed software
@@ -77,6 +81,7 @@ View the latest update announcement on our link:https://discuss.circleci.com/c/e
 
 The following examples show how to use the Android machine image, both with and without orbs.
 
+ifndef::server[]
 [#simple-orb-usage]
 === Simple orb usage
 
@@ -230,13 +235,15 @@ workflows:
     jobs:
       - build
 ```
+endif::server[]
 
-[#using-the-android-image-on-server-v3x]
-=== Using the Android image on server
+ifdef::server[]
+[#using-the-android-image-on-server]
+=== Using the Android image
 
 NOTE: Android machine images are only available on server installations on Google Cloud Platform (GCP).
 
-CircleCI Server 3.4+ supports Android machine images for installations on GCP. To use the Android image in your projects, set the `image` key to `android-default` in your jobs.
+To use the Android image in your projects, set the `image` key to `android-default` in your jobs.
 
 ```yaml
 version: 2.1
@@ -249,7 +256,7 @@ jobs:
     # job steps here
 ```
 
-You can also use the Android orb, as shown above, for cloud. Your server administrator needs to import the orb first. You also need to define the `android-default` image for the machine executor, as shown in the example below, rather than using the default executor built into the orb. View the xref:server-admin:operator:managing-orbs.adoc[CircleCI Server Orbs] page for instructions on importing orbs.
+You can also use the Android orb. Your server administrator needs to import the orb first. You also need to define the `android-default` image for the machine executor, as shown in the example below, rather than using the default executor built into the orb. View the xref:server-admin:operator:managing-orbs.adoc[CircleCI Server Orbs] page for instructions on importing orbs.
 
 This example shows how you can use granular orb commands to achieve what the link:https://circleci.com/developer/orbs/orb/circleci/android#commands-start-emulator-and-run-tests[start-emulator-and-run-tests] command does.
 
@@ -292,3 +299,4 @@ workflows:
     jobs:
       - test
 ```
+endif::server[]

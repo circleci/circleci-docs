@@ -23,11 +23,21 @@ NOTE: Regular CircleCI pipelines execute each step in a non-interactive shell. S
 
 NOTE: **Using self-hosted runners?** To use SSH reruns with CircleCI runners you will first need to enable the SSH rerun feature. Refer to the xref:execution-runner:machine-runner-3-configuration-reference.adoc#runner-ssh-advertise-addr[Machine Runner 3], xref:execution-runner:container-runner-installation.adoc#enable-rerun-job-with-ssh[Container Runner], or xref:execution-runner:machine-runner-orchestrator.adoc#enable-rerun-job-with-ssh[Machine Runner Orchestrator] pages for steps.
 
+ifndef::server[]
 . If you have not already done so, add an SSH key to your link:https://app.circleci.com/settings/user/job-ssh-keys[User Settings].
+endif::server[]
+ifdef::server[]
+. If you have not already done so, add an SSH key to your *User Settings*.
+endif::server[]
 +
 This key connects to the container or virtual machine (VM) that is running your job.
 +
+ifndef::server[]
 NOTE: If you are using a GitHub or Bitbucket organization, you can add an SSH key to your VCS account instead of CircleCI user settings. See the https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/[GitHub] or https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html[Bitbucket] docs. For organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
+endif::server[]
+ifdef::server[]
+NOTE: If you are using a GitHub organization, you can add an SSH key to your VCS account instead of CircleCI user settings. See the https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/[GitHub] docs.
+endif::server[]
 
 include::guides:ROOT:partial$app-navigation/steps-to-job.adoc[]
 . To start a job with SSH enabled, select the *Rerun job with SSH* option from the *Rerun* dropdown menu.
@@ -39,18 +49,32 @@ image::guides:ROOT:rerun-job-with-ssh.png[Screenshot showing rerun job with SSH 
 
 . To see the connection details, expand the *Enable SSH* section in the job output where you will see the SSH command needed to connect. The details are displayed again in the *Wait for SSH* section at the end of the job.
 +
+ifndef::server[]
 NOTE: After clicking btn:[Rerun Job With SSH], if your job does not populate the Enable SSH step, you have not added an SSH key to your link:https://app.circleci.com/settings/user/job-ssh-keys[User Settings].
+endif::server[]
+ifdef::server[]
+NOTE: After clicking btn:[Rerun Job With SSH], if your job does not populate the Enable SSH step, you have not added an SSH key to your *User Settings*.
+endif::server[]
 +
 .Screenshot showing SSH connection details in the Enable SSH section
 image::guides:ROOT:rerun-job-connect.png[Screenshot showing SSH connection details in the Enable SSH section]
 
 . Run the connection command given in the job output.
 +
+ifndef::server[]
 Follow the instructions to SSH into the running job, using the same SSH key that you use for GitHub or Bitbucket.
+endif::server[]
+ifdef::server[]
+Follow the instructions to SSH into the running job, using the same SSH key that you use for GitHub.
+endif::server[]
 +
 NOTE: If you are using the Windows executor, you will need to pass in the shell you want to use when using SSH. For example, to run  `powershell` in your build you would run: `ssh -p <remote_ip> -- powershell.exe`.
 
-The job VM will remain available for an SSH connection for *10 minutes after the pipeline finishes running* and then automatically shut down (or you can cancel it). After you SSH into the job, the connection will remain open for *one hour* for customers on the Free Plan, or *two hours* for all other customers.
+The job VM will remain available for an SSH connection for *10 minutes after the pipeline finishes running* and then automatically shut down (or you can cancel it).
+
+ifndef::server[]
+After you SSH into the job, the connection will remain open for *one hour* for customers on the Free Plan, or *two hours* for all other customers.
+endif::server[]
 
 If your job has parallel steps, CircleCI launches more than one VM to perform them. You will see more than one 'Enable SSH' and 'Wait for SSH' section in the job output.
 
@@ -62,7 +86,12 @@ NOTE: If you rerun a workflow containing a job that was previously rerun with SS
 If you run into permission issues trying to SSH to your job, try the following in the sections below.
 
 [#ensure-authentication-with-githubbitbucket]
+ifndef::server[]
 === Verify authentication with GitHub/Bitbucket
+endif::server[]
+ifdef::server[]
+=== Verify authentication with GitHub
+endif::server[]
 
 . Test that your keys are set up as expected by running one of the following commands.
 +
@@ -72,6 +101,7 @@ For GitHub, run
 ----
 $ ssh git github.com
 ----
+ifndef::server[]
 +
 Or, for Bitbucket, run:
 +
@@ -79,22 +109,27 @@ Or, for Bitbucket, run:
 ----
 $ ssh -Tv git@bitbucket.org
 ----
+endif::server[]
 . Check the output for the following messages:
 +
 [source,shell]
 ----
 Hi :username! You've successfully authenticated...
 ----
+ifndef::server[]
 +
 [source,shell]
 ----
 logged in as :username.
 ----
+endif::server[]
 
 . If you do not see this output, try troubleshooting with the following resources:
 +
 * https://help.github.com/articles/error-permission-denied-publickey[Troubleshooting your SSH keys with GitHub]
+ifndef::server[]
 * https://confluence.atlassian.com/bitbucket/troubleshoot-ssh-issues-271943403.html[Troubleshooting your SSH keys with Bitbucket]
+endif::server[]
 
 [#ensure-authenticating-as-the-correct-user]
 === Verify you are authenticating as the correct user
@@ -114,6 +149,7 @@ If you have verified that you can authenticate as the correct user, but you are 
 ----
 $ ssh -v git@github.com
 ----
+ifndef::server[]
 +
 Or,
 +
@@ -121,6 +157,7 @@ Or,
 ----
 $ ssh -v git@bitbucket.com
 ----
+endif::server[]
 
 . In the output, look for a sequence like this:
 +
