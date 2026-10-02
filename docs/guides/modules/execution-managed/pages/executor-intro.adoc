@@ -335,7 +335,10 @@ workflows:
 --
 ====
 
-Find out more about the Arm VM execution environment on the xref:using-arm.adoc[Using the Arm VM Execution Environment] page. You can also use xref:using-docker.adoc#arm[Arm on Docker].
+Find out more about the Arm VM execution environment on the xref:using-arm.adoc[Using the Arm VM Execution Environment] page.
+ifndef::server[]
+You can also use xref:using-docker.adoc#arm[Arm on Docker].
+endif::server[]
 
 [#self-hosted-runner]
 == Self-hosted runner

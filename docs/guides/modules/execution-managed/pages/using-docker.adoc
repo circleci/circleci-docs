@@ -88,14 +88,19 @@ jobs:
 
 For the Docker execution environment, the following resource classes are available for the x86 architecture:
 
+ifndef::server[]
 ==== Gen1
 
+endif::server[]
 include::ROOT:partial$execution-resources/docker-resource-table.adoc[]
 
+ifndef::server[]
 ==== Gen2
 
 include::ROOT:partial$execution-resources/docker-gen2-resource-table.adoc[]
 
+endif::server[]
+ifndef::server[]
 [#arm]
 === Arm
 
@@ -103,11 +108,13 @@ The following resource classes are available for Arm with Docker:
 
 include::ROOT:partial$execution-resources/docker-arm-resource-table.adoc[]
 
+endif::server[]
 [#view-resource-usage]
 === View resource usage
 
 include::ROOT:partial$execution-resources/resource-class-view.adoc[]
 
+ifndef::server[]
 [#docker-gen2-benefits]
 == Docker gen2
 
@@ -137,6 +144,7 @@ jobs:
       # ... steps for your job
 ----
 
+endif::server[]
 [#docker-benefits-and-limitations]
 == Docker benefits and limitations
 
