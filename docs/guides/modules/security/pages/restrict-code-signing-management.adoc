@@ -1,0 +1,59 @@
+= Restrict code signing management
+:page-platform: Cloud
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-audience: developer
+:page-content-type: how-to
+:page-description: Restrict code signing management to organization admins so only admins can manage certificates, signing bundles, and provisioning profiles.
+:experimental:
+
+By default, organization admins and contributors can manage the certificates, signing bundles, and provisioning profiles used for xref:guides:execution-managed:ios-codesigning.adoc[iOS and macOS Code Signing]. An organization admin can turn on a setting that restricts these actions to organization admins only. This page describes what the setting controls and how to turn it on.
+
+[#understand-what-the-setting-controls]
+== Understand what the setting controls
+
+The setting applies to your whole organization and is off by default. The following table shows who can manage code signing for each state of the setting.
+
+[.table-scroll]
+--
+[cols="1,2", options="header"]
+|===
+| Setting state | Who can manage code signing
+
+| Off (default)
+| Organization admins and contributors
+
+| On
+| Organization admins only
+|===
+--
+
+Managing code signing includes the following actions:
+
+* Creating or deleting signing bundles.
+* Uploading or deleting certificates.
+* Updating or removing provisioning profiles.
+
+Every member of your organization can still view certificates and signing bundles, regardless of the setting. Viewers cannot manage code signing whether the setting is on or off. For more information about roles, see the xref:guides:permissions-authentication:roles-and-permissions-overview.adoc#organization-role-permissions-matrix[Organization Role Permissions Matrix].
+
+[#restrict-code-signing-management-to-organization-admins]
+== Restrict code signing management to organization admins
+
+Only organization admins can change this setting. Other roles can see the toggle, but they cannot change it.
+
+include::ROOT:partial$app-navigation/steps-to-org-settings.adoc[]
+
+[start=3]
+. Select **Security**.
+. In the **Code Signing Security Settings** section, turn on **Restrict code signing management to organization admins only**.
+
+To allow contributors to manage code signing again, turn off the same toggle.
+
+NOTE: CircleCI records changes to organization settings in your audit logs as the `organization.settings.update` event. See the xref:guides:security:audit-logs.adoc#audit-log-events[Audit Log Events] section for more information.
+
+[#understand-how-the-restriction-applies-to-the-api]
+== Understand how the restriction applies to the API
+
+CircleCI enforces the setting on the server, so it applies to the web app and to API requests. When the setting is on, a request from a non-admin user to change code signing assets returns an HTTP 403 response. Requests that list certificates and signing bundles are not affected.
+
+For the API requests used to manage code signing, see xref:guides:execution-managed:ios-codesigning.adoc#code-signing-api[Code Signing API].

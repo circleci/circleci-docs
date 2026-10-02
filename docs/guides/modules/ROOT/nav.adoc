@@ -264,6 +264,7 @@
 *** xref:security:security.adoc[How CircleCI handles security]
 *** xref:security:env-vars.adoc[Intro to environment variables]
 *** xref:security:contexts.adoc[Using contexts]
+*** xref:security:restrict-code-signing-management.adoc[Restrict code signing management]
 *** xref:security:ip-ranges.adoc[IP ranges]
 *** xref:security:site-to-site-connectivity.adoc[Site-to-site connectivity]
 *** xref:security:audit-logs.adoc[Audit logs]
