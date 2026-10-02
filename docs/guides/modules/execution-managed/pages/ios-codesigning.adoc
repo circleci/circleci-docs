@@ -18,6 +18,8 @@ alternative.
 
 NOTE: CircleCI supports the code signing API (recommended) and Fastlane Match. Other methods may be used, but are not guaranteed to work and are unsupported.
 
+NOTE: An organization admin can restrict code signing management to organization admins only. When this setting is on, only admins can manage signing bundles, certificates, and provisioning profiles. See xref:guides:security:restrict-code-signing-management.adoc[Restrict Code Signing Management].
+
 [#code-signing-api]
 == Code signing with the CircleCI API
 
@@ -34,6 +36,7 @@ The same endpoints and configuration are used for both iOS and macOS.
 * *Apple assets*: Your `.p12` certificate file and its password, and your provisioning profiles (if required for your certificate type, see <<supported-certificate-types>>).
 * *CircleCI API token*: A personal API token to authenticate your requests. See xref:guides:toolkit:managing-api-tokens.adoc[Managing API Tokens].
 * *Organization ID*: Your CircleCI organization ID. See xref:guides:toolkit:how-to-find-ids.adoc#find-an-organization-id[How to Find IDs].
+* *Permissions*: You must be an organization admin or contributor to manage code signing. If your organization restricts code signing management to admins, you must be an organization admin. See xref:guides:security:restrict-code-signing-management.adoc[Restrict Code Signing Management].
 
 [#api-upload-certificate]
 === 1. Upload a certificate
@@ -176,6 +179,8 @@ requires provisioning profiles depends on the certificate type.
 === View and delete certificates and signing bundles
 
 You can list the certificates stored for your organization, and the signing bundles created for your organization. You can also delete a certificate or signing bundle.
+
+All organization members can list certificates and signing bundles. Deleting follows the same permissions as uploading and creating. See xref:guides:security:restrict-code-signing-management.adoc[Restrict Code Signing Management].
 
 .List the certificates stored for your organization
 [,shell]
