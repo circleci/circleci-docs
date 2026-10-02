@@ -262,6 +262,10 @@ Example verification process:
 link:https://circleci.com[CircleCI]
 ```
 - Links must have descriptive link text (not "click here", "here", or "this")
+- **Use title case for link text on CircleCI-owned URLs** (including API reference docs at `circleci.com/docs/api/`):
+ - **Good**: `link:https://circleci.com/docs/api/v3#tag/triggers[API v3 Triggers Reference]`
+ - **Bad**: `link:https://circleci.com/docs/api/v3#tag/triggers[Triggers section of the API v3 docs]`
+- **Links to third-party sites may use sentence case** (match the name or title as it appears on that site)
 
 ### Code Samples
 - **Reuse shared snippets** from `docs/guides/modules/ROOT/examples/` when the same config already exists. Include them with `example$` inside a source block. Follow `skills/partials/SKILL.md` to discover, insert, or extract examples.
