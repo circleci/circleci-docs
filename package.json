@@ -11,6 +11,7 @@
     "build:docs": "npm run build:ui && gulp build:docs",
     "fetch-server-branches": "chmod +x scripts/fetch-server-branches.sh && ./scripts/fetch-server-branches.sh",
     "check:metadata": "node scripts/check-metadata.js",
+    "test:extensions": "node --test extensions/test/*.test.js",
     "hooks:install": "git config core.hooksPath .githooks"
   },
   "repository": {

@@ -6,18 +6,18 @@
 //   node scripts/check-metadata.js              check every page
 //   node scripts/check-metadata.js <file>...    check only these files (out-of-scope files are skipped)
 //
-// Reads attributes as plain text rather than YAML, so values like 4.10 stay
-// strings and an empty attribute is an empty string, not boolean true.
+// Header parsing lives in extensions/lib/page-header.js, shared with the
+// guides Server build so both read a header the same way.
 
 const fs = require('fs')
 const path = require('path')
 const { execFileSync } = require('child_process')
+const { parsePage } = require('../extensions/lib/page-header')
 
 const ROOT = path.resolve(__dirname, '..')
 const SCHEMA_PATH = path.join(ROOT, 'schemas/docs-metadata.schema.json')
 const PAGE_RE = /^docs\/[^/]+\/modules\/[^/]+\/pages\/.+\.adoc$/
 const EXCLUDED = /^docs\/contributors\//
-const ATTR_RE = /^:(!?)([\w-]+?)(!?):(?:\s+(.*?))?\s*$/
 
 const SUPPORTED_SCHEMA_KEYS = new Set(['$schema', '$id', 'title', 'description', 'type', 'required', 'additionalProperties', 'properties'])
 const SUPPORTED_PROPERTY_KEYS = new Set(['type', 'description', 'pattern', 'enum', 'minLength', 'maxLength'])
@@ -37,32 +37,6 @@ function loadSchema () {
     process.exit(2)
   }
   return schema
-}
-
-// Header = the title line plus the attribute and comment lines directly below it.
-// Returns header attributes and any page-* attributes found after the header.
-function parsePage (text) {
-  const lines = text.split('\n')
-  const attrs = {}
-  const outside = []
-  let inHeader = true
-  let seenTitle = false
-  lines.forEach((line, i) => {
-    if (inHeader) {
-      if (!seenTitle && line.startsWith('= ')) { seenTitle = true; return }
-      if (seenTitle && line.trim() === '') { inHeader = false; return }
-      if (line.startsWith('//')) return
-    }
-    const m = line.match(ATTR_RE)
-    if (!m) return
-    const [, unsetBefore, name, unsetAfter, value = ''] = m
-    if (inHeader) {
-      if (!unsetBefore && !unsetAfter) attrs[name] = { value, line: i + 1 }
-    } else if (name.startsWith('page-')) {
-      outside.push({ name, line: i + 1 })
-    }
-  })
-  return { attrs, outside }
 }
 
 function splitList (value) {

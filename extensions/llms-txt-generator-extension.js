@@ -1,6 +1,7 @@
 'use strict'
 
 const File = require('vinyl')
+const { isGuidesServerBuild } = require('./lib/guides-server')
 
 /**
  * An Antora extension that auto-generates llms.txt from the documentation structure.
@@ -199,8 +200,7 @@ function generateLlmsTxt (playbook, contentCatalog) {
 
       // The guides Server build (guides-versions-extension.js) repeats the
       // Cloud guides, so list its start page only and not its navigation.
-      const isGuidesServerBuild = component.name === 'guides' && version.version === 'server'
-      const nav = isGuidesServerBuild ? null : formatNavigation(version.navigation, siteUrl, contentCatalog)
+      const nav = isGuidesServerBuild(component.name, version.version) ? null : formatNavigation(version.navigation, siteUrl, contentCatalog)
       if (nav) sections.push(nav)
       sections.push('')
     }

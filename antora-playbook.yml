@@ -135,6 +135,12 @@ antora:
   - require: ./extensions/llms-txt-generator-extension.js
   - require: ./extensions/agents-md-generator-extension.js
   - require: ./extensions/guides-versions-extension.js
-    component: guides
     serverversion: '4.10'
+    # Earliest Server version the docs cover. Pages available from it get no
+    # "Server version" sidebar line.
+    serverbaseline: '4.7'
     serverstartpage: getting-started:config-intro.adoc
+    # The build fails when more xrefs than this point to pages the Server build
+    # drops. Lower it as they get wrapped in ifndef::server[] (the list is in
+    # extensions/.temp/guides-server-unlinked.md after a build).
+    maxunlinkedxrefs: 132
