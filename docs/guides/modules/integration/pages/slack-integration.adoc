@@ -14,6 +14,7 @@ This guide explains how to:
 * Link a project to a Slack channel.
 * Update notification preferences for a project.
 * Link your Slack identity to receive personal notifications.
+* Approve or cancel on-hold workflows from Slack.
 
 == Benefits
 
@@ -25,6 +26,7 @@ The Slack integration is the recommended way to set up workflow notifications in
 * Link projects to channels and manage notification preferences from your project settings in the web app. Any organization member with write access to a project can configure it.
 * Receive notifications as direct messages. After you <<link-your-slack-identity,link your Slack identity>>, CircleCI can send workflow notifications to you directly, not only to shared channels.
 * Get tagged directly in notifications. Once your identity is linked, CircleCI mentions you in the Slack notifications for workflows you trigger.
+* Approve or cancel on-hold workflows directly from a Slack notification, without opening the CircleCI web app.
 
 == Limitations
 
@@ -35,11 +37,11 @@ Each Slack workspace can only be connected to one CircleCI organization at a tim
 To install the CircleCI Slack app, you need:
 
 * CircleCI organization administrator or contributor permissions.
-** If you have an organization of type `circleci` permissions are controlled through CircleCI, see the xref:permissions-authentication:roles-and-permissions-overview.adoc[Roles and Permissions Overview] page for more information.
-** If you have an organization of type `github` or `bitbucket` you must be an owner or member in the connected GitHub or Bitbucket organization.
+** If you have an organization of type `circleci`, CircleCI controls permissions. See the xref:permissions-authentication:roles-and-permissions-overview.adoc[Roles and Permissions Overview] page for more information.
+** If you have an organization of type `github` or `bitbucket`, you must be an owner or member in the connected GitHub or Bitbucket organization.
 +
 include::ROOT:partial$tips/check-org-type.adoc[]
-* Slack Workspace Admin permissions to authorize the app in your workspace.
+* Approval from a Slack Workspace Admin to install the app in your workspace. If you are not a Slack Workspace Admin, you can request approval during installation.
 
 After the app is installed, any CircleCI organization member with write permissions to a project can:
 
@@ -157,7 +159,7 @@ When you link your Slack identity, CircleCI tags you in a project's Slack notifi
 
 === Prerequisites
 
-* Your organization must have the CircleCI Slack app installed. See <<install-the-slack-app,Install the Slack app>> above.
+* Your organization must have the CircleCI Slack app installed. See <<install-the-slack-app,Install the Slack App>> above.
 * Your Slack workspace must allow **Sign in with Slack**. A Slack workspace admin can confirm or enable this from **Admin** > **Apps and workflows** > **App Management Settings** in Slack. Some organizations set an Apps organization policy at the Slack org level. In that case, an Org Owner may also need to approve the CircleCI app's use of the Sign in with Slack identity scope.
 
 === How Slack identity linking works
@@ -192,7 +194,19 @@ To stop personal Slack notifications, select btn:[Disconnect] next to the linked
 
 * **The link fails after you select Allow in Slack.** Your Slack workspace or organization may have Sign in with Slack disabled, or may require admin approval for apps that request the Sign in with Slack identity scope. Ask a Slack workspace admin or Org Owner to enable Sign in with Slack for the CircleCI app and try again.
 * **CircleCI shows a "Slack account already linked" error.** The Slack identity you authenticated with is already connected to a different CircleCI account. Sign in to that account and unlink the Slack identity before linking it here.
-* **The Connect button is unavailable or shows "Slack not installed."** An organization administrator must install the CircleCI Slack app before you can link your identity. See <<install-the-slack-app,Install the Slack app>> above.
+* **The Connect button is unavailable or shows "Slack not installed."** An organization administrator or contributor must install the CircleCI Slack app before you can link your identity. If your Slack workspace restricts app installations, a Slack Workspace Admin must approve the installation. See <<install-the-slack-app,Install the Slack App>> above.
+
+== Approve or cancel workflows from Slack
+
+When a workflow goes on hold at an approval job, the Slack notification includes btn:[Approve] and btn:[Cancel] buttons. Use these buttons to act on the workflow without opening the CircleCI web app. Selecting a button opens a confirmation dialog before the action runs. The buttons appear in both project channel notifications and direct messages.
+
+For more information on approval jobs, see the xref:orchestrate:workflows.adoc#holding-a-workflow-for-a-manual-approval[Hold a Workflow for a Manual Approval] section.
+
+=== Prerequisites
+
+* Your organization must have the CircleCI Slack app installed. See <<install-the-slack-app,Install the Slack App>> above.
+* You must link your Slack identity to your CircleCI account. See <<link-your-slack-identity,Link Your Slack Identity>> above.
+* You need the same permissions to approve or cancel a workflow from Slack as you do in the CircleCI web app.
 
 == Example Slack notifications
 
