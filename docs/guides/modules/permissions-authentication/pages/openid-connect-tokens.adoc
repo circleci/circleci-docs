@@ -49,8 +49,10 @@ The following instructions cover the following:
 * A one-time configuration of your AWS account to trust CircleCI's OIDC tokens.
 * Running a job that uses the OIDC token to interact with AWS.
 
+ifndef::server[]
 NOTE: See the xref:pull-an-image-from-aws-ecr-with-oidc.adoc[Pull an Image From AWS ECR With OIDC] how-to guide after following this setup section.
 
+endif::server[]
 === Prerequisites
 
 You will need to have the following to continue your AWS OIDC setup:
