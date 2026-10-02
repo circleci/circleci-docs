@@ -1,8 +1,7 @@
 = Introduction to the CircleCI Web App
-:page-platform: Cloud, Server
+:page-platform: Cloud
 :page-vcs: all
 :page-plan: Free, Performance, Scale
-:page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: This document describes the basic features and settings available in the CircleCI web app.
 :experimental:
@@ -109,10 +108,8 @@ From your organization home page you have access to org-level options. You can c
 
 **Projects**: Allows you to see all projects associated with your organization. Choose to follow or unfollow projects, as well as xref:getting-started:create-project.adoc[Create a Project].
 
-ifndef::server[]
 **Deploys**: Set up environment integrations to manage deployments for your projects. For full details of the deployments feature, see the xref:deploy:deployment-overview.adoc[Deployment Overview] page.
 
-endif::server[]
 **Insights**: Provides you with time-series data overviews of credit usage, success rates, pipeline duration, and more. For full details of the Insights feature, see the xref:insights:insights.adoc[Using Insights] page.
 
 **Runners**: Set up self-hosted runners to use your own infrastructure for running jobs. Once set up the self-hosted runners dashboard displays a list of your resource classes and self-hosted runners. For full details covering installation, setup, and usage, see the xref:execution-runner:runner-overview.adoc[Self-Hosted Runners Overview] page.
