@@ -307,7 +307,7 @@ The table below is not a full list of CircleCI features. Only features where the
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#

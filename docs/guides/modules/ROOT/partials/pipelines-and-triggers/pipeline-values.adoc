@@ -946,6 +946,7 @@ d| [.nowrap]#GitLab#
 |===
 --
 
+ifndef::server[]
 [#deploy-information]
 === Deploy information
 
@@ -1012,3 +1013,4 @@ d| [.nowrap]#GitHub App# +
 
 |===
 --
+endif::server[]
