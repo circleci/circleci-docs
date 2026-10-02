@@ -1,0 +1,37 @@
+NOTE: **Arm gen2 for the machine executor is currently in beta.** Performance and pricing are tentative and may change when this feature becomes generally available.
+
+[.table-scroll]
+--
+[cols=6*, options="header"]
+|===
+| Class  | vCPUs | RAM | Disk Size | Cloud | Server
+
+| `arm.medium.gen2`
+| 2
+| 8GB
+| 100 GB
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `arm.large.gen2`
+| 4
+| 16GB
+| 100 GB
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `arm.xlarge.gen2`
+| 8
+| 32GB
+| 100 GB
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `arm.2xlarge.gen2`
+| 16
+| 64GB
+| 100 GB
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+|===
+--
