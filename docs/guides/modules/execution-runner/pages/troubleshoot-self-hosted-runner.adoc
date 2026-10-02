@@ -1,5 +1,5 @@
 = Troubleshoot self-hosted runner
-:page-platform: Cloud
+:page-platform: Cloud, Server
 :page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-audience: developer
