@@ -9,7 +9,7 @@
 
 NOTE: Schedule triggers are not currently available for GitLab projects.
 
-A common scenario you might want to set up is to trigger a pipeline overnight. The examples below show how to schedule a pipeline to be run at midnight every night. You can set a schedule right from the link:https://app.circleci.com/[CircleCI web app], or if you would prefer, you can set one using the link:https://circleci.com/docs/api/v2/index.html[API].
+A common scenario you might want to set up is to trigger a pipeline overnight. The examples below show how to schedule a pipeline to run at midnight every night. You can set a schedule right from the link:https://app.circleci.com/[CircleCI web app], or you can set one using the API.
 
 [#set-a-in-the-web-app]
 == Set a schedule in the web app
@@ -23,53 +23,48 @@ include::ROOT:partial$pipelines-and-triggers/set-up-schedule-trigger.adoc[]
 [#set-a-schedule-with-the-api]
 == Set a schedule with the API
 
-NOTE: Setting up a schedule trigger with the API is not currently available for GitHub App pipelines.
+To set a schedule with the API, you will need your CircleCI personal API token. Follow these steps to create a schedule trigger that runs your pipeline at midnight UTC every night.
 
-To set a schedule with the API, you will need a project building on CircleCI, environment variables set, and your CircleCI personal API token. Much like in the web app form, you are required to enter a name, parameters (like the branch or tag) as well as a timetable.
-
-```javascript
-const axios = require('axios').default;
-require('dotenv').config()
-
-// environment variables
-const API_BASE_URL = "https://circleci.com/api/v2/project"
-const vcs = process.env.VCS_TYPE
-const org = process.env.ORG_NAME
-const project = process.env.PROJECT_ID
-const token = process.env.CIRCLE_TOKEN
-
-const postScheduleEndpoint = `${API_BASE_URL}/${vcs}/${org}/${project}/schedule`
-
-async function setupNightlySchedule(){
-  let res = await axios.post(postScheduleEndpoint,
-    {
-      name: "Nightly build",
-      description: "Builds and pushes a new build every night.",
-        "attribution-actor": "system",
-        "parameters": {
-          "branch": "main",
-          "run-schedule": true
-        },
-        "timetable": {
-            // once per hour
-            "per-hour": 1,
-            // at 01:00 UTC
-            "hours-of-day": [1],
-            // on the following days of the week
-            "days-of-week": ["TUE", "WED", "THU", "FRI", "SAT"]
+. Get your pipeline definition ID using the link:https://circleci.com/docs/api/v3#tag/pipelines/GET/api/v3/pipelines[API v3]:
++
+[source,console]
+----
+$ curl --request GET \
+  --url https://circleci.com/api/v3/pipelines \
+  --header "Authorization: Bearer $CIRCLE_TOKEN"
+----
++
+Locate the pipeline for your project in the response and copy its `id` value.
+. Create the nightly schedule trigger using the link:https://circleci.com/docs/api/v3#tag/triggers/POST/api/v3/triggers[API v3]. Replace `<PIPELINE_ID>` with your pipeline definition ID:
++
+[source,console]
+----
+$ curl --request POST \
+  --url https://circleci.com/api/v3/triggers \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "data": {
+      "attributes": {
+        "config":   { "ref": "main" },
+        "checkout": { "ref": "main" },
+        "event": {
+          "type": "schedule",
+          "schedule": {
+            "name": "nightly-build",
+            "cron_expression": "0 0 * * *",
+            "attribution_actor": "current"
+          }
         }
-    },
-    {
-      headers: { 'Circle-Token': token }
+      },
+      "references": {
+        "pipeline": { "id": "<PIPELINE_ID>" }
+      }
     }
-  )
-  console.log(res.data)
-}
+  }'
+----
 
-setupNightlySchedule()
-```
-
-You can view the build scheduling of this link:https://github.com/zmarkan/Android-Espresso-ScrollableScroll/tree/main/build-scheduling[sample project] on GitHub.
+The cron expression `0 0 * * *` runs at midnight UTC every day. Update `config.ref` and `checkout.ref` to point to your target branch. For more information, see the xref:schedule-triggers.adoc#use-the-api[Schedule Triggers] page.
 
 [#next-steps]
 == Next steps
