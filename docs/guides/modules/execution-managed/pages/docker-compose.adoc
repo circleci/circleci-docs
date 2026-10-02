@@ -99,11 +99,13 @@ See the link:https://github.com/circleci/cci-demo-docker/tree/docker-compose[Exa
 
 The primary container runs in a separate environment from Remote Docker and the two cannot communicate directly. To interact with a running service, run a container in the service's network.
 
+ifndef::server[]
 [#limitations]
 == Limitations
 
 Using `docker compose` with the `macos` executor is not supported.
 See link:https://support.circleci.com/hc/en-us/articles/360045029591-Can-I-use-Docker-within-the-macOS-executor-[our support article for more information].
+endif::server[]
 
 [#see-also]
 == See also

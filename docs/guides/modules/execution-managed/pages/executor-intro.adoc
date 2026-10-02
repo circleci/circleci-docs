@@ -9,11 +9,20 @@
 
 CircleCI offers several execution environments:
 
+ifndef::server[]
 * Docker (x86 or Arm)
+endif::server[]
+ifdef::server[]
+* Docker
+endif::server[]
 * Linux VM (virtual machine)
+ifndef::server[]
 * macOS
+endif::server[]
 * Windows
+ifndef::server[]
 * GPU
+endif::server[]
 * Arm VM
 
 Each job defined in your project configuration is run in a separate execution environment, either a Docker container or a virtual machine.
@@ -34,16 +43,25 @@ For example:
 
 * Jobs that require Docker images (`docker`) may use an image for Node.js, Python, etc. The xref:circleci-images.adoc[Pre-built CircleCI Docker Image] (convenience images) will help you get started. CircleCI convenience images are not a full operating system, so they generally make building your software more efficient.
 
+ifndef::server[]
 * Jobs that require a complete Linux virtual machine (VM) image (`machine`) may use an Ubuntu version supported by the xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[List of Available Machine Images].
+endif::server[]
+ifdef::server[]
+* Jobs that require a complete Linux virtual machine (VM) image (`machine`) use an image that your system administrator manages.
+endif::server[]
 
+ifndef::server[]
 * Jobs that require a macOS VM image (`macos`) may use an Xcode version. A full list is available on the xref:using-macos.adoc#supported-xcode-versions[Using macOS] page.
 
+endif::server[]
 === Resource class
 
 When you configure an executor it is recommended that you also specify a resource class to specify compute resource size (CPU and RAM).
 
 * For an overview of resource classes, see the xref:resource-class-overview.adoc[Resource Class Overview] page.
+ifndef::server[]
 * For an overview of available resource classes per Plan, see the link:https://circleci.com/pricing/[Pricing page].
+endif::server[]
 
 [#docker]
 == Docker
@@ -102,6 +120,7 @@ jobs:
 
 Find out more about the Linux VM execution environment on the xref:using-linuxvm.adoc[Using Linux Virtual Machines] page.
 
+ifndef::server[]
 [#macos]
 == macOS
 
@@ -123,6 +142,7 @@ jobs:
 
 Find out more about the macOS execution environment on the xref:using-macos.adoc[Using macOS] page.
 
+endif::server[]
 [#windows]
 == Windows
 
@@ -195,6 +215,7 @@ jobs:
 
 Find out more about the Windows execution environment on the xref:using-windows.adoc[Using the Windows Execution Environment] page. See link:https://circleci.com/developer/orbs/orb/circleci/windows[the Windows orb page on the developer hub] for the list of options available in the Windows orb.
 
+ifndef::server[]
 [#gpu]
 == GPU
 
@@ -262,6 +283,7 @@ jobs:
 
 Find out more about the GPU execution environment on the xref:using-gpu.adoc[Using the GPU Execution Environment] page.
 
+endif::server[]
 [#arm]
 == Arm VM
 
@@ -335,7 +357,10 @@ workflows:
 --
 ====
 
-Find out more about the Arm VM execution environment on the xref:using-arm.adoc[Using the Arm VM Execution Environment] page. You can also use xref:using-docker.adoc#arm[Arm on Docker].
+Find out more about the Arm VM execution environment on the xref:using-arm.adoc[Using the Arm VM Execution Environment] page.
+ifndef::server[]
+You can also use xref:using-docker.adoc#arm[Arm on Docker].
+endif::server[]
 
 [#self-hosted-runner]
 == Self-hosted runner

@@ -12,11 +12,17 @@ This guide walks you through creating a new project in CircleCI. Creating a proj
 [#prerequisites]
 == Prerequisites
 
+ifndef::server[]
 * A CircleCI account and organization. See the xref:create-an-organization.adoc[Create an Organization] page if you have not created one yet.
+endif::server[]
+ifdef::server[]
+* A CircleCI Server account. Your organizations are the GitHub organizations you belong to.
+endif::server[]
 * Code you want to build on CircleCI.
 
 == Build a new project on CircleCI
 
+ifndef::server[]
 The authorization method used to set up your CircleCI account determines the definition of "project" in CircleCI, as well as the permissions management processes available to you:
 
 On the **Home** page, check which option you see:
@@ -27,6 +33,12 @@ On the **Home** page, check which option you see:
 
 NOTE: Using CircleCI Server? Use the <<set-up-a-project>> steps below. Rather than Home you will see Dashboard in the web app sidebar.
 
+endif::server[]
+ifdef::server[]
+On CircleCI Server, each project is a repository in one of your GitHub organizations. To build a repository on CircleCI, set it up as a project from the *Dashboard* in the web app and choose the configuration file to use. Follow the steps in <<set-up-a-project>> below.
+
+endif::server[]
+ifndef::server[]
 [#create-a-project]
 === Create a project
 
@@ -153,14 +165,22 @@ CircleCI uses the specified config file to run your pipeline. You can see the ou
 
 Through creating a project and connecting your code you have set up your pipeline and a trigger. The default trigger runs your pipeline when a change is committed to your code. You can create more triggers in your project settings. Use menu:Project settings[Project Setup] for GitHub and Cursor Origin projects, or menu:Project settings[Triggers] for GitLab and Bitbucket projects. For more information, see the xref:orchestrate:set-up-triggers.adoc[Set Up Triggers] page.
 
+endif::server[]
 [#set-up-a-project]
 === Set up a project
 
+ifndef::server[]
 If you authenticated CircleCI with either the xref:integration:github-integration.adoc[GitHub OAuth App] or xref:integration:bitbucket-integration.adoc[Bitbucket Cloud], or if you use CircleCI Server, the steps in this section apply to you.
 
+endif::server[]
 Follow these steps to  set up a new project in CircleCI:
 
+ifndef::server[]
 . In the CircleCI web app, select **Home** in the sidebar. The equivalent option in CircleCI Server is **Dashboard**.
+endif::server[]
+ifdef::server[]
+. In the CircleCI web app, select **Dashboard** in the sidebar.
+endif::server[]
 . Select btn:[Set up a project].
 . Find your project in the list and select btn:[Set Up Project].
 +
@@ -181,6 +201,7 @@ To make changes to your pipeline, choose one of the following:
 * Select the ellipsis icon:more[Ellipsis menu icon] next your project in the Pipelines or Projects dashboard and choose **Configuration File**. This opens the CircleCI configuration editor, from where you can edit and commit your `config.yml` file.
 * Access the configuration editor using the btn:[Edit Config] button from the Pipelines page when you have a project and branch selected.
 
+ifndef::server[]
 [#create-a-project-with-the-cli]
 === Create a project with the CLI
 
@@ -249,6 +270,7 @@ Both commands work for Cursor Origin projects. Two things are specific to Origin
 
 TIP: If you created your project from a directory that is not yet linked to it, run `circleci project link` to bind the checkout to the project, so other CLI commands resolve it automatically. See the xref:toolkit:circleci-cli.adoc[CircleCI CLI] guide for more.
 
+endif::server[]
 [#troubleshooting]
 == Troubleshooting
 
@@ -261,12 +283,17 @@ If you do not see your repository when trying to connect it to a project, try th
 
 * If you are using the btn:[Set up project] flow, **Check your permissions**. Ensure you have admin access to the repository in your VCS provider. CircleCI requires admin permissions to set up projects.
 
+ifndef::server[]
 * If you are using the btn:[Create project] flow **re-authorize your VCS connection**. Select the btn:[Add] button and then select the btn:[Authorize] option for your VCS provider.
 
+endif::server[]
 * **Verify organization selection**: Select the CircleCI logo at the top of the web app to navigate to your user homepage and confirm you are in the correct organization.
 
+ifndef::server[]
 * **Check GitHub App installation**: If using GitHub App, verify the CircleCI app is installed on your github organization and has access to the repository. Go to your github organization settings, select **GitHub Apps**, and check the CircleCI app configuration.
 
+endif::server[]
+ifndef::server[]
 [#gitlab-cicd-conflicts]
 === GitLab CI/CD running alongside CircleCI
 
@@ -321,6 +348,7 @@ To resolve this issue, choose one of the following options:
 
 . Follow the steps in the <<create-a-project>> or <<set-up-a-project>> section to create your project again, ensuring you complete all setup steps.
 
+endif::server[]
 [#see-also]
 == See also
 

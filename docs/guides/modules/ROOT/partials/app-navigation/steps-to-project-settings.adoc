@@ -1,4 +1,9 @@
+ifndef::server[]
 . In the link:https://app.circleci.com[CircleCI web app, window=_blank], select your org from the org cards on your user homepage.
+endif::server[]
+ifdef::server[]
+. In the CircleCI web app, select your org from the org cards on your user homepage.
+endif::server[]
 . Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
 . Select the ellipsis icon:more[Ellipsis menu icon] next to your project and select **Project Settings**.
 +

@@ -57,7 +57,9 @@ const {
   LABELS,
   getPlanAvailability,
   getVcsAvailability,
+  getServerVersionAvailability,
 } = require('./lib/page-availability')
+const { BASELINE_ATTRIBUTE, isGuidesServerBuild } = require('./lib/guides-server')
 
 module.exports.register = function () {
   /**
@@ -538,11 +540,18 @@ module.exports.register = function () {
        */
       const componentName = page.asciidoc.attributes && page.asciidoc.attributes['page-component-name']
       const inAvailabilityScope = SCOPED_COMPONENTS.includes(componentName)
-      const availabilityPlan = inAvailabilityScope ? getPlanAvailability(page.asciidoc.attributes['page-plan']) : null
-      const availabilityVcs = inAvailabilityScope ? getVcsAvailability(page.asciidoc.attributes['page-vcs']) : null
+      // In the guides Server build plans and VCS providers are Cloud concepts,
+      // so the minimum Server version is shown instead, as in the HTML sidebar.
+      const isServerBuild = isGuidesServerBuild(page.src.component, page.src.version)
+      const availabilityPlan = inAvailabilityScope && !isServerBuild ? getPlanAvailability(page.asciidoc.attributes['page-plan']) : null
+      const availabilityVcs = inAvailabilityScope && !isServerBuild ? getVcsAvailability(page.asciidoc.attributes['page-vcs']) : null
+      const availabilityServer = inAvailabilityScope && isServerBuild
+        ? getServerVersionAvailability(page.asciidoc.attributes['page-server-min-version'], page.asciidoc.attributes[BASELINE_ATTRIBUTE])
+        : null
 
-      if (availabilityPlan || availabilityVcs) {
+      if (availabilityPlan || availabilityVcs || availabilityServer) {
         const availabilityLines = []
+        if (availabilityServer) availabilityLines.push(`**${LABELS.server}:** ${availabilityServer}`)
         if (availabilityPlan) availabilityLines.push(`**${LABELS.plan}:** ${availabilityPlan.text}`)
         if (availabilityVcs) {
           const vcsText = availabilityVcs.isAll
@@ -633,6 +642,7 @@ module.exports.register = function () {
         `last_updated: ${yamlString(lastUpdatedISO)}`,
         ...(availabilityPlan ? [`cloud_plans: ${yamlString(availabilityPlan.text)}`] : []),
         ...(availabilityVcs ? [`version_control: ${yamlString(availabilityVcs.text)}`] : []),
+        ...(availabilityServer ? [`server_min_version: ${yamlString(availabilityServer)}`] : []),
         '---',
         ''
       ].join('\n')

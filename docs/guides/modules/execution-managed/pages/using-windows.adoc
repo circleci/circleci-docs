@@ -14,7 +14,12 @@ The Windows execution environment provides the tools to build Windows projects, 
 * PowerShell is the default shell (Bash and CMD are available to be manually selected).
 * Docker Engine - Enterprise is available for running Windows containers.
 
+ifndef::server[]
 You can access the Windows execution environment by using the machine executor and specifying a Windows image, or by using the Windows orb and specifying the default executor.
+endif::server[]
+ifdef::server[]
+You can access the Windows execution environment by using the machine executor and specifying a Windows image.
+endif::server[]
 
 [#quickstart]
 == Quickstart
@@ -63,6 +68,7 @@ jobs:
 --
 ====
 
+ifndef::server[]
 [#the-windows-orb]
 === The Windows orb
 
@@ -104,6 +110,7 @@ workflows:
     jobs:
       - build
 ----
+endif::server[]
 
 [#available-resource-classes]
 == Available resource classes
@@ -177,6 +184,7 @@ jobs:
 
 include::ROOT:partial$execution-resources/resource-class-view.adoc[]
 
+ifndef::server[]
 [#windows-machine-executor-images]
 == Windows machine executor images
 
@@ -192,6 +200,13 @@ NOTE: The `current` tag is available for Windows images. The `current` and `stab
 
 * Previous: This image tag points to the previous production-ready Windows image. This image can be used in cases where there was a breaking change in the latest software updates. It is typically updated once a month.
 * Edge: This image tag points to the latest version of the Windows image, and is built from the HEAD of the main branch. This tag is intended to be used as a testing version of the image with the most recent changes, and not guaranteed to be stable.
+endif::server[]
+ifdef::server[]
+[#windows-machine-executor-images]
+== Windows machine executor images
+
+Your system administrator manages the Windows images available on your installation. Use the `windows-default` image in your job configuration.
+endif::server[]
 
 [#specifying-a-shell-with-the-windows-executor]
 == Specifying a shell with the Windows executor
@@ -367,9 +382,19 @@ It is possible to SSH into a Windows build container, which can be useful for tr
 [#steps]
 === Steps
 
+ifndef::server[]
 NOTE: The steps described in this section apply to all CircleCI accounts. If you are using Bitbucket Cloud, or your account is integrated through the GitHub OAuth app, you can add an SSH key to your VCS account (https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/[GitHub] or https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html[Bitbucket]). Do this rather than adding it in the CircleCI app under https://app.circleci.com/settings/user/job-ssh-keys[User Settings], if you prefer.
+endif::server[]
+ifdef::server[]
+NOTE: The steps described in this section apply to all CircleCI accounts. If your account is integrated through the GitHub OAuth app, you can add an SSH key to your VCS account (https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/[GitHub]). Do this rather than adding it in the CircleCI app under *User Settings*, if you prefer.
+endif::server[]
 
+ifndef::server[]
 . If you have not already done so, add an SSH key to your https://app.circleci.com/settings/user/job-ssh-keys[User Settings]. This key will be used to connect to the container or VM that is running your job.
+endif::server[]
+ifdef::server[]
+. If you have not already done so, add an SSH key to your *User Settings*. This key will be used to connect to the container or VM that is running your job.
+endif::server[]
 . To start a job with SSH enabled, select the *Rerun job with SSH* option from the "Rerun Workflow" dropdown menu.
 . To see the connection details, expand the "Enable SSH" section in the job output where you will see the SSH command needed to connect.
 

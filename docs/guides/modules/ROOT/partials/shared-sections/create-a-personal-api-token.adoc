@@ -1,5 +1,11 @@
+ifndef::server[]
 . In the CircleCI application, go to your link:https://app.circleci.com/settings/user[User settings].
 . Select link:https://app.circleci.com/settings/user/tokens[Personal API Tokens].
+endif::server[]
+ifdef::server[]
+. In the CircleCI application, go to your *User settings*.
+. Select *Personal API Tokens*.
+endif::server[]
 . Select btn:[Create New Token] button.
 . In the *Token name* field, type a memorable name for the token.
 . Set an expiry date for the token. You must choose a date no more than one year in the future.

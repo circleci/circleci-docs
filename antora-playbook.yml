@@ -134,3 +134,18 @@ antora:
       - 'icons/*.svg'
   - require: ./extensions/llms-txt-generator-extension.js
   - require: ./extensions/agents-md-generator-extension.js
+  - require: ./extensions/guides-versions-extension.js
+    # When Server 5.0 ships and this moves to '5.0', decide what 4.x readers get.
+    # One option is to freeze the 4.10 guides as a separate archive site and use
+    # the Antora Atlas extension (https://gitlab.com/antora/antora-atlas-extension)
+    # so its links to pages it doesn't contain resolve to the live site. Atlas
+    # was alpha software when this note was written, so check its status first.
+    serverversion: '4.10'
+    # Earliest Server version the docs cover. Pages available from it get no
+    # "Server version" sidebar line.
+    serverbaseline: '4.7'
+    serverstartpage: getting-started:config-intro.adoc
+    # The build fails when more xrefs than this point to pages the Server build
+    # drops. Lower it as they get wrapped in ifndef::server[] (the list is in
+    # extensions/.temp/guides-server-unlinked.md after a build).
+    maxunlinkedxrefs: 132

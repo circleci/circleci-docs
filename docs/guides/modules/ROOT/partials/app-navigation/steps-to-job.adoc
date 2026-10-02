@@ -1,3 +1,8 @@
+ifndef::server[]
 . In the link:https://app.circleci.com[CircleCI web app, window=_blank], select your org from the org cards on your user homepage.
+endif::server[]
+ifdef::server[]
+. In the CircleCI web app, select your org from the org cards on your user homepage.
+endif::server[]
 . Select **Pipelines** from the sidebar and locate your pipeline from the list. You can use the project, branch, date, and status search options to help.
 . Select the job you want to access by selecting the job name.

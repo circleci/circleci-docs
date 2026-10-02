@@ -243,6 +243,7 @@ You can read more about publishing npm packages to packagecloud on the CircleCI 
 
 Packagecloud also provides a robust API to manage package repositories. You can read more about the link:https://packagecloud.io/docs/api[Packagecloud API] and how to upload, delete, and promote packages across repositories.
 
+ifndef::server[]
 [#track-deployments-with-deploy-markers]
 == Track your deployments with deploy markers
 
@@ -255,6 +256,7 @@ You have two options for setting up deploy markers:
 * *Manual setup*: Add deploy marker commands directly to your `.circleci/config.yml` file by following the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
 
 Both approaches will enable you to track deployment history and manage rollbacks directly from the CircleCI web app.
+endif::server[]
 
 [#see-also]
 == See also

@@ -7,7 +7,14 @@
 :page-description: Learn how to use resource classes in CircleCI to specify compute resources for jobs, configure self-hosted runners, and choose execution environments.
 :experimental:
 
-Use the `resource_class` key in your `.circleci/config.yml` to control the compute resources available to each job. Specifying the right resource class speeds up builds and reduces credit usage. Over-provisioned jobs cost more than necessary, and under-provisioned jobs run slowly or fail.
+Use the `resource_class` key in your `.circleci/config.yml` to control the compute resources available to each job.
+ifndef::server[]
+Specifying the right resource class speeds up builds and reduces credit usage.
+endif::server[]
+ifdef::server[]
+Specifying the right resource class speeds up builds.
+endif::server[]
+Over-provisioned jobs cost more than necessary, and under-provisioned jobs run slowly or fail.
 
 Use resource classes to:
 
@@ -31,7 +38,10 @@ jobs:
 
 Executor resource classes are specified by size, for example, `small` or `medium`. Each size corresponds to specific CPU and RAM requirements.
 
-NOTE: **For a full list of available resource class options,** see the xref:reference:ROOT:configuration-reference.adoc#resourceclass[Configuration Reference]. The link:https://circleci.com/product/features/resource-classes[resource class product page] provides information on credit usage per resource class, and resource class availability for each plan type.
+NOTE: **For a full list of available resource class options,** see the xref:reference:ROOT:configuration-reference.adoc#resourceclass[Configuration Reference].
+ifndef::server[]
+The link:https://circleci.com/product/features/resource-classes[resource class product page] provides information on credit usage per resource class, and resource class availability for each plan type.
+endif::server[]
 
 When using CircleCI's self-hosted runners, use the `resource_class` key in your project configuration to specify which runner to use for a job. Self-hosted runner resource classes are assigned and configured during the xref:execution-runner:runner-overview.adoc#getting-started[Runner Installation Process].
 
@@ -68,11 +78,15 @@ For config examples showing how to use the `resource_class` key to **specify CPU
 
 * xref:reference:ROOT:configuration-reference.adoc#docker-execution-environment[Docker Resource Classes]
 * xref:reference:ROOT:configuration-reference.adoc#linuxvm-execution-environment[Linux VM Resource Classes]
+ifndef::server[]
 * xref:reference:ROOT:configuration-reference.adoc#macos-execution-environment[macOS Resource Classes]
+endif::server[]
 * xref:reference:ROOT:configuration-reference.adoc#windows-execution-environment[Windows Resource Classes]
+ifndef::server[]
 * GPU resource classes:
 ** xref:reference:ROOT:configuration-reference.adoc#gpu-execution-environment-linux[Linux]
 ** xref:reference:ROOT:configuration-reference.adoc#gpu-execution-environment-windows[Windows]
+endif::server[]
 * xref:reference:ROOT:configuration-reference.adoc#arm-execution-environment-linux[Arm Resource Classes]
 
 NOTE: **To get started setting up a self-hosted runner**, see the xref:execution-runner:runner-overview.adoc#getting-started[Getting Started] section of the Self-hosted runners overview.
@@ -106,4 +120,6 @@ include::ROOT:partial$execution-resources/resource-class-view.adoc[]
 == See also
 
 * For a full list of available resource class options, see the xref:reference:ROOT:configuration-reference.adoc#resourceclass[Configuration Reference].
+ifndef::server[]
 * For information on credit usage per resource class, and to find out resource class availability per plan type, see the link:https://circleci.com/product/features/resource-classes[resource class product page].
+endif::server[]

@@ -48,17 +48,25 @@ jobs:
 [#available-resource-classes]
 == Available resource classes
 
+ifndef::server[]
 The following Arm resources are available as part of the xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[`machine` executor]:
+endif::server[]
+ifdef::server[]
+The following Arm resources are available as part of the `machine` executor:
+endif::server[]
 
 include::ROOT:partial$execution-resources/arm-resource-table.adoc[]
 
+ifndef::server[]
 For pricing and plans information, see the link:https://circleci.com/product/features/resource-classes/[resource class pricing overview].
+endif::server[]
 
 [#view-resource-usage]
 === View resource usage
 
 include::ROOT:partial$execution-resources/resource-class-view.adoc[]
 
+ifndef::server[]
 == Images with Arm support
 
 Arm resources are accessible by using the machine executor when using one of the following images:
@@ -93,13 +101,23 @@ Arm resources are accessible by using the machine executor when using one of the
 * `ubuntu-2204:2022.07.2`
 
 For a full list of machine executor images, see the link:https://circleci.com/developer/images?imageType=machine[CircleCI Developer Hub]. And for announcements about image updates, see link:https://discuss.circleci.com/c/ecosystem/circleci-images/64[CircleCI Discuss].
+endif::server[]
+ifdef::server[]
+== Images with Arm support
+
+Arm resources are accessible by using the machine executor with the `arm-default` image.
+endif::server[]
 
 [#limitations]
 == Limitations
 
 * Only 64-bit `arm64` architectures are supported.
-* In CircleCI Server, Arm resources are only available when using the EC2 provider for VM service or machine provisioner. No Arm instances are available in GCP.
+ifdef::server[]
+* Arm resources are only available when using the EC2 provider for VM service or machine provisioner. No Arm instances are available in GCP.
+endif::server[]
+ifndef::server[]
 * If you run into issues with orbs, or if there is software you require that is not available in the image, link:https://circleci.canny.io/cloud-feature-requests[submit a feature request].
+endif::server[]
 
 [#m1-mac-support]
 === M1 Mac support
@@ -113,7 +131,9 @@ WARNING: docker image ghcr.io/{your_username}/runner-test:latest targets wrong a
 
 If you build an image on an M1 you need to specify `docker build --platform linux/amd64` as the default builds `arm64`.
 
+ifndef::server[]
 [#arm-on-docker]
 == Arm on Docker
 
 For further information on using Arm with the Docker execution environment, see the xref:using-docker.adoc#arm[Using the Docker Execution Environment] page.
+endif::server[]

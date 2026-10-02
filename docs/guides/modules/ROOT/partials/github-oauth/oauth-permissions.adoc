@@ -1,0 +1,17 @@
+CircleCI requests the following permissions from GitHub, defined in the link:https://developer.github.com/v3/oauth/#scopes[GitHub permissions model].
+
+**Read Permission**
+
+- Get a user's email address.
+
+**Write Permissions**
+
+- Get a list of a user's repositories.
+- Add an SSH key to a user's account.
+
+**Admin Permissions**, needed for setting up a project
+
+- Add deploy keys to a repository.
+- Add service hooks to a repository.
+
+NOTE: CircleCI only asks for permissions that are necessary. However, as a GitHub OAuth app, CircleCI is constrained by the specific permissions available via GitHub's OAuth scopes. For example, getting a full list of a user's repository, public and private, from GitHub, requires the link:https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/#available-scopes[`repo` scope], which is write-level access. GitHub does not provide a read-only OAuth scope for listing all of a user's repositories.

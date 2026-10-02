@@ -1,5 +1,5 @@
 = Migrate from GitHub Actions
-:page-platform: Cloud, Server
+:page-platform: Cloud
 :page-vcs: github, github-enterprise
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
