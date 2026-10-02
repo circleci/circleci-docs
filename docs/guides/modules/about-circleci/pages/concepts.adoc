@@ -422,7 +422,18 @@ See the xref:execution-managed:circleci-images.adoc[CircleCI Images] page for mo
 [#jobs]
 == Jobs
 
-Jobs are the building blocks of your configuration. Jobs are collections of <<steps,steps>>, which run commands/scripts as required. Each job must declare an executor that is either `docker`, `machine`, `windows`, or `macos`. For `docker` you must xref:execution-managed:executor-intro.adoc#docker[Specify an Image] to use for the primary container. For `macos` you must specify an xref:execution-managed:executor-intro.adoc#macos[Xcode Version]. For `windows` you must use the xref:execution-managed:executor-intro.adoc#windows[Windows Orb].
+Jobs are the building blocks of your configuration. Jobs are collections of <<steps,steps>>, which run commands/scripts as required.
+ifndef::server[]
+Each job must declare an executor that is either `docker`, `machine`, `windows`, or `macos`.
+endif::server[]
+ifdef::server[]
+Each job must declare an executor that is either `docker`, `machine`, or `windows`.
+endif::server[]
+For `docker` you must xref:execution-managed:executor-intro.adoc#docker[Specify an Image] to use for the primary container.
+ifndef::server[]
+For `macos` you must specify an xref:execution-managed:executor-intro.adoc#macos[Xcode Version].
+endif::server[]
+For `windows` you must use the xref:execution-managed:executor-intro.adoc#windows[Windows Orb].
 
 .Illustration of a CircleCI job
 image::guides:ROOT:job.png[Illustration of a CircleCI job]
