@@ -1,5 +1,5 @@
 = Users, organizations, and integrations guide
-:page-platform: Cloud
+:page-platform: Cloud, Server
 :page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-audience: developer
@@ -13,15 +13,21 @@ This guide explains the concepts of user, organization, and integration in Circl
 
 When you log in to CircleCI you are logging in to your _user account_.
 
+ifndef::server[]
 You can log in to CircleCI using one of the following methods. These methods cannot be used together. For example, if you have an email/password account and then use a social login, this will create a new account connected to your VCS provider:
 
 * Email and password.
 * Social login (GitHub, Bitbucket).
 
 As a CircleCI _user_ you can create and access _organizations_. You can access zero, one, or many organizations. You can create new organizations and/or join an existing organization.
+endif::server[]
+ifdef::server[]
+On CircleCI Server, you log in with your GitHub account. Your organizations are the GitHub organizations you belong to, imported automatically when you authorize CircleCI.
+endif::server[]
 
 A CircleCI user account can be integrated with VCS user accounts via _authorization_.
 
+ifndef::server[]
 The following table describes user authorization for the different VCS providers:
 
 [.table-scroll]
@@ -52,13 +58,23 @@ The following table describes user authorization for the different VCS providers
 |Installing the CircleCI app into your Origin codebase is the only action required. See the <<manage-vcs-integrations>> section.
 |===
 --
+endif::server[]
+ifdef::server[]
+Your GitHub OAuth app authorization is displayed in menu:User Settings[Account Integrations], and managed in GitHub from your GitHub settings, under *Applications*.
+endif::server[]
 
 == Organizations
 
+ifndef::server[]
 An organization in CircleCI is a top-level account that serves as a container for your team's projects, settings, permissions, and billing. Organizations are typically linked to your version control system (VCS) account(s) (GitHub, GitLab, Bitbucket, or Cursor Origin).
+endif::server[]
+ifdef::server[]
+An organization in CircleCI is a top-level account that serves as a container for your team's projects, settings, and permissions. On CircleCI Server, every organization is a `github` type organization, linked to an organization on GitHub.com or GitHub Enterprise through the GitHub OAuth app.
+endif::server[]
 
 Each organization has its own settings, including security, integrations, and resource management, allowing you to coordinate and control your CI/CD processes across multiple projects and users.
 
+ifndef::server[]
 A CircleCI _organization_ can be one of three types:
 
 [.table-scroll]
@@ -90,36 +106,25 @@ a| * Bitbucket OAuth (built-in)
 --
 
 NOTE: The GitHub App integration for GitHub Enterprise Server is currently in Preview. For more information, see the xref:integration:github-enterprise-server-integration.adoc[GitHub Enterprise Server Integration] page. The Cursor Origin integration is in beta and is available for `circleci` type organizations only.
+endif::server[]
 
 The xref:guides:integration:version-control-system-integration-overview.adoc[VCS Integration Overview] page provides a full list of CircleCI features available for each organization and integration type.
 
+ifndef::server[]
 include::ROOT:partial$tips/check-org-type.adoc[Check your organization type]
 
 For full details on creating organizations, see the xref:getting-started:create-an-organization.adoc[Create an Organization] page.
+endif::server[]
 
 === Projects
 
+ifndef::server[]
 [tabs]
 ====
 `github` organizations::
 +
 --
-For `github`  organizations projects are created automatically from your VCS repositories. Select "Projects" in the link:https://app.circleci.com/home[CircleCI web app] to view your repositories. From here you have the option to:
-
-* Set up new repositories as CircleCI projects. Commit a CircleCI `config.yml` file to the repository to define your pipeline. This creates a GitHub OAuth pipeline for you, which you can view in menu:Project Settings[Project Setup].
-* Follow/unfollow projects, to subscribe/unsubscribe from notifications for builds.
-
-If you install the CircleCI GitHub App into your organization you can create new GitHub App pipelines and triggers alongside existing OAuth pipelines. GitHub App pipelines and triggers are not bound to the project repository. For example:
-
-* You could set up a trigger for your pipeline that runs when someone pushes to the repository itself. It could also trigger when there is a push to the default branch of a library your project depends on.
-* You could create a new pipeline within the project that uses a configuration file from a centrally managed repository but is triggered on events in the project repository.
-
-When you set up a project to build with CircleCI, the following settings are added to the repository using the permissions you gave CircleCI when you signed up:
-
-- A deploy key that is used to check out your project from GitHub.
-- A webhook that is used to notify CircleCI when you push to GitHub.
-
-CircleCI builds push events by default. Builds are triggered for all pushes to the repository and push is the most common case of triggering a build.
+include::ROOT:partial$github-oauth/projects.adoc[]
 --
 `bitbucket` organizations::
 +
@@ -146,10 +151,15 @@ For `circleci` type organizations, projects are created directly in CircleCI via
 * Follow/unfollow projects, to subscribe/unsubscribe from notifications for builds.
 --
 ====
+endif::server[]
+ifdef::server[]
+include::ROOT:partial$github-oauth/projects.adoc[]
+endif::server[]
 
 [#vcs-integration]
 === VCS integration
 
+ifndef::server[]
 The VCS integration options available to you depend on your organization type. By _integration_ here we mean the way CircleCI checks out your code from your VCS provider. Options are as follows:
 
 [.table-scroll]
@@ -189,7 +199,12 @@ Integrations are set up as follows:
 * GitLab SaaS installation is set up when creating a new project (menu:Projects[Create project]) or a new pipeline (menu:Project Settings[Pipelines]).
 
 If you are using a self-hosted GitLab instance, some additional configuration is required as follows. See the <<manage-vcs-integrations>> section for more information.
+endif::server[]
+ifdef::server[]
+On CircleCI Server, CircleCI checks out your code from GitHub.com or GitHub Enterprise through the GitHub OAuth app integration. Your Server administrator sets up the GitHub OAuth app when installing CircleCI Server, so no additional action is required.
+endif::server[]
 
+ifndef::server[]
 == Limitations
 
 The following limits are currently in place for the Free Plan:
@@ -217,37 +232,28 @@ To install a VCS connection, or to view, configure, or remove an existing one, s
 == Invite your team to your organization
 
 For a guide to inviting your team, see the xref:getting-started:invite-your-team.adoc[Invite Your Team] page. To understand the differences between registered users, unregistered users, and active users, and how they affect billing, see xref:plans-pricing:user-types-and-registration.adoc[User types and registration].
+endif::server[]
 
 == Organization user permissions
 
+ifndef::server[]
 For `github` and `bitbucket` type organizations user permissions are inherited from the VCS provider.
 
 For `circleci` type organizations user permissions are managed through CircleCI. You can find information on managing organization and project roles and permissions starting with the xref:permissions-authentication:roles-and-permissions-overview.adoc[Roles and Permissions] page. You can manage roles and permissions at an organization and project level. You can manage roles and permissions individually for each user or add users to groups and manage group roles and permissions.
+endif::server[]
+ifdef::server[]
+On CircleCI Server, user permissions are inherited from GitHub.
+endif::server[]
 
 === OAuth permissions
 
+ifndef::server[]
 [tabs]
 ====
 GitHub OAuth::
 +
 --
-CircleCI requests the following permissions from GitHub, defined in the link:https://developer.github.com/v3/oauth/#scopes[GitHub permissions model].
-
-**Read Permission**
-
-- Get a user's email address.
-
-**Write Permissions**
-
-- Get a list of a user's repositories.
-- Add an SSH key to a user's account.
-
-**Admin Permissions**, needed for setting up a project
-
-- Add deploy keys to a repository.
-- Add service hooks to a repository.
-
-NOTE: CircleCI only asks for permissions that are necessary. However, as a GitHub OAuth app, CircleCI is constrained by the specific permissions available via GitHub's OAuth scopes. For example, getting a full list of a user's repository, public and private, from GitHub, requires the link:https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/#available-scopes[`repo` scope], which is write-level access. GitHub does not provide a read-only OAuth scope for listing all of a user's repositories.
+include::ROOT:partial$github-oauth/oauth-permissions.adoc[]
 --
 Bitbucket Cloud OAuth::
 +
@@ -273,7 +279,12 @@ NOTE: CircleCI only asks for permissions that are necessary. However, CircleCI i
 If you feel strongly about reducing the number of permissions CircleCI uses, consider contacting Bitbucket to communicate your concerns.
 --
 ====
+endif::server[]
+ifdef::server[]
+include::ROOT:partial$github-oauth/oauth-permissions.adoc[]
+endif::server[]
 
+ifndef::server[]
 === GitHub OAuth SAML SSO
 
 If you use SAML SSO with a `github` type organization, be aware that it can affect settings that control how CircleCI reports build status back to GitHub. Enabling SAML protection on a GitHub org can cause changes to CircleCI’s settings related to GitHub Checks and GitHub status updates. Ensure these settings are configured for their desired state after enabling SAML for your organization. You can find these settings at:
@@ -282,8 +293,10 @@ If you use SAML SSO with a `github` type organization, be aware that it can affe
 * GitHub status updates, from the CircleCI web app menu:Project Settings[Advanced > GitHub Status Updates]
 
 For more information on GitHub Checks and GitHub status updates, see the xref:integration:enable-checks.adoc#github-check-and-github-status-updates[Enabling GitHub Checks].
+endif::server[]
 
 
+ifndef::server[]
 == Rename an organization or project
 
 For a guide to renaming organizations and projects, see the xref:security:rename-organizations-and-repositories.adoc[Rename Organizations and Repositories] page.
@@ -291,10 +304,14 @@ For a guide to renaming organizations and projects, see the xref:security:rename
 == Delete an organization or project
 
 For a guide to deleting organizations and projects, see the xref:security:delete-organizations-and-projects.adoc[Delete Organizations and Projects] page.
+endif::server[]
 
 == Pipelines
 
-Pipelines (also called pipeline definitions, in the API) are the highest-level unit of work in your CI/CD process. Pipelines orchestrate the execution of _workflows_ which run _jobs_ to build, test, and deploy your code.
+Pipelines are the highest-level unit of work in your CI/CD process. Pipelines orchestrate the execution of _workflows_ which run _jobs_ to build, test, and deploy your code.
+ifndef::server[]
+In the API, pipelines are also called pipeline definitions.
+endif::server[]
 
 Pipelines are defined by two characteristics:
 
@@ -303,10 +320,16 @@ Pipelines are defined by two characteristics:
 
 The pipelines you can create and configure are derived from the integration types available to you. You can find this information in the <<vcs-integration>> section.
 
+ifndef::server[]
 If you have an organization of type `github` or `bitbucket` with a corresponding VCS integration, a pipeline definition is created automatically for each of your projects when the project is set up.
 
 If you have a `circleci` organization, you must create pipeline definitions manually. See the xref:orchestrate:pipelines.adoc[Pipelines] page for more information.
+endif::server[]
+ifdef::server[]
+On CircleCI Server, a pipeline is created automatically for each of your projects when the project is set up.
+endif::server[]
 
+ifndef::server[]
 == Triggers
 
 The trigger options available to you depend on your pipeline type. These options are described in the following table:
@@ -376,9 +399,11 @@ The trigger options available to you depend on your pipeline type. These options
 ^|[.circle-green]#*Yes*#
 |===
 --
+endif::server[]
 
 == How CircleCI checks out your code
 
+ifndef::server[]
 The way your code is checked out when a pipeline triggers depends on the pipeline type you have set up. The different methods are described below. Select the tab for your pipeline type to view information relevant to you.
 
 [tabs]
@@ -391,35 +416,7 @@ When using the GitHub App integration, CircleCI uses HTTPS-based authentication 
 GitHub OAuth::
 +
 --
-When you set up a new project with a GitHub OAuth pipeline, CircleCI creates a deployment key on the VCS provider for your project. A deploy key is an SSH key-pair, one public, one private. The VCS provider stores the public key, and CircleCI stores the private key. The deployment key gives CircleCI access to a single repository. To prevent CircleCI from pushing to your repository, this deployment key is read-only.
-
-For code in GitHub, to set up a CircleCI project, you might find you need to enable the creation of deploy keys in your GitHub organization. To do so follow these steps:
-
-. Log in to link:https://github.com[GitHub.com].
-. Navigate to your organization.
-. Select Settings at the top of the organization page.
-. In the left sidebar, select "Deploy Keys" in the Security section.
-. Enable the option for allow repositories in this organization to create deploy keys.
-. Select btn:[Save].
-
-If you want to push to the repository from your builds, you will need a deployment key with write access. See the below section for GitHub-specific instructions to create a deployment key.
-
-If your deploy keys or user keys appear to have been removed, it may be due to one of the following reasons:
-
-* GitHub will remove inactive keys if they are unused for over a year.
-* If CircleCI creates keys through a user's OAuth integration with GitHub, and the user revokes or removes the integration, GitHub will also remove the associated keys.
-* In GitHub, if an organization owner restricts or disables deploy keys across all repositories, GitHub may disable or remove existing deploy keys.
-* If your CircleCI project has no followers, CircleCI will consider it disabled and remove the associated keys.
-* When you delete a CircleCI project, CircleCI will remove its associated keys.
-
-When CircleCI builds your project, the private key is installed into the `.ssh` directory and SSH is subsequently configured to communicate with your version control provider. Therefore, the private key is used for:
-
-- Checking out the main project.
-- Checking out any GitHub-hosted submodules.
-- Checking out any GitHub-hosted private dependencies.
-- Automatic git merging/tagging/etc.
-
-Private keys are also used to enable your project to check out additional private repositories.
+include::ROOT:partial$github-oauth/checkout.adoc[]
 --
 Bitbucket Cloud::
 +
@@ -465,6 +462,10 @@ Cursor Origin::
 When using the Cursor Origin integration, CircleCI uses HTTPS-based authentication to check out your code. No SSH keys or deploy keys are required.
 --
 ====
+endif::server[]
+ifdef::server[]
+include::ROOT:partial$github-oauth/checkout.adoc[]
+endif::server[]
 
 === Custom checkout commands
 
@@ -476,36 +477,13 @@ If you would rather use a custom checkout command, follow the steps below to ens
 
 When using SSH keys to check out a repository, it may be necessary to add the fingerprints for the VCS provider to a "known hosts" file (`~/.ssh/known_hosts`). Using `known_hosts` allows the executor to verify that the host it is connecting to is authentic. If you use the CircleCI `checkout` step, this is done automatically for you.
 
+ifndef::server[]
 [tabs]
 ====
 GitHub::
 +
 --
-When using a custom checkout command you will need to run the following commands:
-
-```shell
-mkdir -p ~/.ssh
-
-echo 'github.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCj7ndNxQowgcQnjshcLrqPEiiphnt+VTTvDP6mHBL9j1aNUkY4Ue1gvwnGLVlOhGeYrnZaMgRK6+PKCUXaDbC7qtbW8gIkhL7aGCsOr/C56SJMy/BCZfxd1nWzAOxSDPgVsmerOBYfNqltV9/hWCqBywINIR+5dIg6JTJ72pcEpEjcYgXkE2YEFXV1JHnsKgbLWNlhScqb2UmyRkQyytRLtL+38TGxkxCflmO+5Z8CSSNY7GidjMIZ7Q4zMjA2n1nGrlTDkzwDCsw+wqFPGQA179cnfGWOWRVruj16z6XyvxvjJwbz0wQZ75XK5tKSb7FNyeIEs4TT4jk+S4dhPeAUC5y+bDYirYgM4GC7uEnztnZyaVWQ7B381AK4Qdrwt51ZqExKbQpTUNn+EjqoTwvqNj4kqx5QUCI0ThS/YkOxJCXmPUWZbhjpCg56i+2aB6CmK2JGhn57K5mj0MNdBXA4/WnwH6XoPWJzK5Nyu2zB3nAZp+S5hpQs+p1vN1/wsjk=
-' >> ~/.ssh/known_hosts
-```
-
-SSH keys for servers can be fetched by running `ssh-keyscan <host>`, then adding the key that is prefixed with `ssh-rsa` to the `known_hosts` file of your job. You can see this in action here:
-
-```shell
-➜  ~ ssh-keyscan github.com
-# github.com:22 SSH-2.0-babeld-439edbdb
-github.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCj7ndNxQowgcQnjshcLrqPEiiphnt+VTTvDP6mHBL9j1aNUkY4Ue1gvwnGLVlOhGeYrnZaMgRK6+PKCUXaDbC7qtbW8gIkhL7aGCsOr/C56SJMy/BCZfxd1nWzAOxSDPgVsmerOBYfNqltV9/hWCqBywINIR+5dIg6JTJ72pcEpEjcYgXkE2YEFXV1JHnsKgbLWNlhScqb2UmyRkQyytRLtL+38TGxkxCflmO+5Z8CSSNY7GidjMIZ7Q4zMjA2n1nGrlTDkzwDCsw+wqFPGQA179cnfGWOWRVruj16z6XyvxvjJwbz0wQZ75XK5tKSb7FNyeIEs4TT4jk+S4dhPeAUC5y+bDYirYgM4GC7uEnztnZyaVWQ7B381AK4Qdrwt51ZqExKbQpTUNn+EjqoTwvqNj4kqx5QUCI0ThS/YkOxJCXmPUWZbhjpCg56i+2aB6CmK2JGhn57K5mj0MNdBXA4/WnwH6XoPWJzK5Nyu2zB3nAZp+S5hpQs+p1vN1/wsjk=
-# github.com:22 SSH-2.0-babeld-439edbdb
-# github.com:22 SSH-2.0-babeld-439edbdb
-➜  ~ ✗
-```
-
-You can add the key to `known_hosts` by running the following command:
-
-```shell
-ssh-keyscan github.com >> ~/.ssh/known_hosts
-```
+include::ROOT:partial$github-oauth/known-hosts.adoc[]
 --
 Bitbucket::
 +
@@ -545,10 +523,19 @@ SSH keys for remote servers can be fetched by running `ssh-keyscan <host>`, for 
 When retrieving the host keys, you can confirm that you have the correct key by checking its fingerprints. You can check the fingerprints found in the **Instance Configuration** section of your self-managed instance's Help pages (link:https://gitlab.com/help/instance_configuration#ssh-host-keys-fingerprints[this Instance Configuration page] shows an example).
 --
 ====
+endif::server[]
+
+ifdef::server[]
+include::ROOT:partial$github-oauth/known-hosts.adoc[]
+
+If you use GitHub Enterprise, use your GitHub Enterprise hostname in place of `github.com` in these commands.
+endif::server[]
 
 == Best practices for SSH keys
 
+ifndef::server[]
 NOTE: This section is relevant to projects in a `github` or `bitbucket` type organization.
+endif::server[]
 
 This section describes best practices for using SSH keys in your CircleCI pipelines.
 
@@ -561,7 +548,9 @@ This section describes best practices for using SSH keys in your CircleCI pipeli
 [#create-a-user-key]
 == Create a user key
 
+ifndef::server[]
 NOTE: If your organization is a `github` or `bitbucket` type organization, you can create a user key for your project.
+endif::server[]
 
 Create a user key in CircleCI when:
 
@@ -638,38 +627,13 @@ You may need to add additional SSH keys to your pipelines. Some examples of when
 
 If you need additional SSH keys in your builds, follow these steps:
 
+ifndef::server[]
 [tabs]
 ====
 GitHub::
 +
 --
-In this example you will create a deploy key with write access to a GitHub repository. The GitHub repository is `\https://github.com/you/test-repo`, and the CircleCI project is `\https://app.circleci.com/pipelines/github/you/test-repo`.
-
-. Create an SSH key-pair by following the link:https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/[GitHub instructions]. When prompted to enter a passphrase, do **not** enter one (below is one example command to generate a key on macOS):
-+
-[source,console]
-----
-$ ssh-keygen -t ed25519 -C "your_email@example.com"
-----
-
-. Go to `\https://github.com/you/test-repo/settings/keys`, and select **Add Deploy Key**. Enter a title in the "Title" field, then copy and paste the public key you created in step 1. Check **Allow write access**, then select **Add key**.
-
-. Go to your project settings in the CircleCI app, select **SSH Keys**, and **Add SSH key**. In the "hostname" field, enter `github.com` and add the private key you created in step 1. Then select **Add SSH Key**.
-
-. In your `.circleci/config.yml` file, add the fingerprint to a job using the `add_ssh_keys` key:
-+
-```yaml
-  version: 2.1
-
-  jobs:
-    deploy-job:
-      steps:
-        - add_ssh_keys:
-            fingerprints:
-              - "SO:ME:FIN:G:ER:PR:IN:T"
-```
-
-When you push to your GitHub repository from a job, CircleCI will use the SSH key you added.
+include::ROOT:partial$github-oauth/additional-ssh-key.adoc[]
 --
 Bitbucket::
 +
@@ -733,6 +697,13 @@ When you push to your GitLab repository from a job, CircleCI will use the SSH ke
 
 --
 ====
+endif::server[]
+
+ifdef::server[]
+include::ROOT:partial$github-oauth/additional-ssh-key.adoc[]
+
+If you use GitHub Enterprise, enter your GitHub Enterprise hostname in the "hostname" field in place of `github.com`.
+endif::server[]
 
 For a guide to additional SSH keys for CircleCI pipelines, see the xref:integration:add-ssh-key.adoc[Add SSH Keys] page.
 
@@ -748,7 +719,12 @@ NOTE: To perform these steps, the machine user must have admin access. When you 
 
 . Log in to GitHub as the machine user.
 
+ifndef::server[]
 . Log in to the link:https://circleci.com/login[CircleCI web app]. When GitHub prompts you to authorize CircleCI, select **Authorize application**.
+endif::server[]
+ifdef::server[]
+. Log in to the CircleCI web app for your Server installation. When GitHub prompts you to authorize CircleCI, select **Authorize application**.
+endif::server[]
 
 . From the **Projects** page, follow all projects you want the machine user to have access to.
 
@@ -758,6 +734,7 @@ NOTE: To perform these steps, the machine user must have admin access. When you 
 
 Now, CircleCI will use the machine user's SSH key for any Git commands that run during your builds.
 
+ifndef::server[]
 [#Moving-from-github-oauth-app-to-github-app]
 == Moving from the GitHub OAuth app integration to the GitHub App integration
 
@@ -807,6 +784,7 @@ NOTE: You can install the CircleCI GitHub App into the same GitHub organization 
 . At this point, you will be left with a GitHub App-integrated organization that has the same payment plan and projects as your previous organization. If you get logged out, you can continue to use the "Login with GitHub" button on link:https://circleci.com/login[the CircleCI login page] as long as the old organization is not deleted.
 
 NOTE: Data from xref:insights:insights.adoc[Insights] and historical pipeline runs will not be present in your new organization. Contexts will not be present until you recreate them for your new org.
+endif::server[]
 
 == Built-in environment variables and pipeline values
 
@@ -835,7 +813,12 @@ NOTE: If you enable these restrictions on an organization for which CircleCI has
 
 ==== How to re-enable CircleCI for a GitHub organization
 
+ifndef::server[]
 This section describes how to re-enable CircleCI after enabling third-party application restrictions for a GitHub organization. Go to link:https://github.com/settings/connections/applications/78a2ba87f071c28e65bb[GitHub Settings], and in the **Organization access** section, you will have the option to:
+endif::server[]
+ifdef::server[]
+This section describes how to re-enable CircleCI after enabling third-party application restrictions for a GitHub organization. In your GitHub settings, select *Applications*, then the *Authorized OAuth Apps* tab, and select the CircleCI OAuth app that your Server administrator set up. In the **Organization access** section, you will have the option to:
+endif::server[]
 
 * Request access if you are not an admin.
 * Grant access if you are an admin.
@@ -865,7 +848,12 @@ When disconnecting a VCS connection using the method described here, any existin
 
 Follow these steps to disconnect your CircleCI account from GitHub.
 
+ifndef::server[]
 . From the link:https://app.circleci.com/[CircleCI web app], navigate to your **User Settings** by clicking on your user icon in the top bar.
+endif::server[]
+ifdef::server[]
+. From the CircleCI web app, navigate to your **User Settings** by clicking on your user icon in the top bar.
+endif::server[]
 . Select **Account Integrations**.
 . You will see a list of connections along with the GitHub or Bitbucket organizations they are associated with. Select btn:[Disconnect] next to the GitHub/Bitbucket connection you wish to disconnect.
 
@@ -875,6 +863,7 @@ Once disconnected, you will be redirected to the CircleCI login page. To reconne
 
 The following are common questions about managing your user account and organizations in CircleCI.
 
+ifndef::server[]
 === How do I delete my user account?
 
 For guidance on deleting your user account link:https://support.circleci.com/hc/en-us/articles/360037058873-How-Do-I-Delete-My-User-Account#h_01JMMX9C1BAM445WCFZF56QMEE[see this support article].
@@ -882,6 +871,7 @@ For guidance on deleting your user account link:https://support.circleci.com/hc/
 === How do I delete an organization from CircleCI?
 
 See the xref:security:delete-organizations-and-projects.adoc[Delete Organizations and Projects] page for full instructions.
+endif::server[]
 
 [#enable-project-to-check-out-additional-private-repositories]
 === How can I enable my project to check out additional private repositories?
