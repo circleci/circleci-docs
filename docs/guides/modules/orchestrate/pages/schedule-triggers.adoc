@@ -52,9 +52,9 @@ If your project has no scheduled workflows, and you would like to try out schedu
 . Have your CircleCI token ready, or create a new token by following the steps on the xref:toolkit:managing-api-tokens.adoc[Managing API Tokens] page.
 . Get your pipeline definition ID using the link:https://circleci.com/docs/api/v3#tag/pipelines/GET/api/v3/pipelines[API v3]. For example:
 +
-[source,shell]
+[source,console]
 ----
-curl --request GET \
+$ curl --request GET \
   --url https://circleci.com/api/v3/pipelines \
   --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
@@ -62,9 +62,9 @@ curl --request GET \
 Locate the pipeline for your project in the response and copy its `id` value.
 . Create a new schedule trigger using the link:https://circleci.com/docs/api/v3#tag/triggers/POST/api/v3/triggers[API v3]. Replace `<PIPELINE_ID>` with your pipeline definition ID, and update `config.ref` and `checkout.ref` with your target branch:
 +
-[source,shell]
+[source,console]
 ----
-curl --request POST \
+$ curl --request POST \
   --url https://circleci.com/api/v3/triggers \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
