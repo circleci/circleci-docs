@@ -1,3 +1,4 @@
+ifndef::server[]
 [NOTE]
 ====
 This feature **is supported** for orgs that use OAuth authentication.
@@ -13,3 +14,4 @@ This feature is **not supported** if your organization slug is in the following 
 
 For an overview of feature support, see the xref:guides:integration:version-control-system-integration-overview.adoc#feature-support-for-each-pipeline-type[VCS Integration Overview] page.
 ====
+endif::server[]

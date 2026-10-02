@@ -9,9 +9,11 @@ config file .circleci/sample-filename.yml could not be located on branch sample-
 
 * Ensure that there is a CircleCI configuration file in the repository on the branch that uses the filename specified in the error message. If there is not one present, add a CircleCI configuration file.
 
+ifndef::server[]
 * If there is a config file present:
 .. Navigate to menu:Project Settings[Pipelines] or menu:Project Settings[Project Setup] in the CircleCI web app for the project where you are seeing this error message.
 .. Ensure that the "Config File Path" field matches the file path of the config file that is in your repository. If you changed the name of the config file in your repository, the reference to that file path must also be changed for any pipeline that uses that configuration file.
+endif::server[]
 
 [#why-is-my-scheduled-pipeline-not-running]
 === Why is my scheduled pipeline not running?
@@ -31,6 +33,7 @@ See the xref:guides:getting-started:introduction-to-yaml-configurations.adoc[YAM
 
 After checking your `.circleci/config.yml` for formatting errors, search for your issue in the link:https://support.circleci.com/hc/en-us[CircleCI support center].
 
+ifndef::server[]
 [#why-is-my-job-queued]
 === Why is my job queued?
 
@@ -40,6 +43,7 @@ A job might end up being queued because you have reached your organization's con
 === Why are my jobs queuing even though I'm on the Performance Plan?
 
 Concurrency limits are set per xref:reference:ROOT:configuration-reference.adoc#resourceclass[Resource Class] and vary between Free and Performance plans. For example, macOS resource classes have a lower concurrency limit than other resource classes on the same plan. If you are experiencing queuing, you may have reached the limit for that specific resource class. This can happen even if you have not reached your overall plan limit. link:https://support.circleci.com/hc/en-us/requests/new[Contact CircleCI Support] to request an increase to your limit.
+endif::server[]
 
 [#find-project-projects-dashboard]
 === Why can I not find my project on the Projects dashboard?
