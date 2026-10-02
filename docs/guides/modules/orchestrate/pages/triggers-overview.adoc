@@ -131,6 +131,7 @@ TIP: You can also specify pipeline parameters when triggering a pipeline using t
 --
 ====
 
+ifndef::server[]
 [#trigger-a-pipeline-from-a-custom-webhook]
 == Trigger a pipeline from a custom webhook
 
@@ -157,6 +158,7 @@ When handling custom webhook requests, we use the "config branch" and "checkout 
 GitHub does not provide documented consistency guarantees for their API responses. There can be a brief delay (typically seconds) between when a commit is pushed and when the API returns the updated reference, especially with larger repositories. As a result, when fetching a branch reference, you may receive a slightly outdated commit rather than the most recent one.
 ****
 
+endif::server[]
 [#trigger-a-pipeline-from-vs-code-with-unversioned-config]
 == Trigger a pipeline from VS Code with unversioned config
 
