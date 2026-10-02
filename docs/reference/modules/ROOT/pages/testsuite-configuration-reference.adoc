@@ -58,11 +58,11 @@ name: backend tests
 [#discover]
 == *`discover`*
 
-The `discover` command finds all test atoms for a given test suite. The command’s output is split on newlines to extract individual test atoms (the command may instead output a single line of space-separated test atoms).
+The `discover` command finds all test units for a given test suite. The command’s output is split on newlines to extract individual test units (the command may instead output a single line of space-separated test units).
 
 The `discover` command must not execute any tests.
 
-Every line of stdout is interpreted as a test atom. Any tool that prints metadata in the stdout must be suppressed.
+Every line of stdout is interpreted as a test unit. Any tool that prints metadata in the stdout must be suppressed.
 
 [.table-scroll]
 --
@@ -97,14 +97,14 @@ discover: go list ./...
 [#run]
 == *`run`*
 
-The `run` command executes the test atoms discovered by the `discover` command using your test runner.
+The `run` command executes the test units discovered by the `discover` command using your test runner.
 
 The command needs to be modified to use placeholders:
 
-For test atoms:
+For test units:
 
-* Use the template variable `<< test.atoms >>` in your run command. This variable is replaced with a space-separated list of test atoms to run.
-* If the template variable is not found, the command stdin receives a newline-separated list of test atoms.
+* Use the template variable `<< test.atoms >>` in your run command. This variable is replaced with a space-separated list of test units to run.
+* If the template variable is not found, the command stdin receives a newline-separated list of test units.
 
 For JUnit output:
 
@@ -143,17 +143,17 @@ run: go tool gotestsum --junitfile="<< outputs.junit >>" -- -race -count=1 << te
 [#file-mapper]
 == *`file-mapper`*
 
-When test atoms are not files, Smarter Testing cannot determine which test files belong to which test atom. The `file-mapper` command creates a mapping of test atoms to related test files.
+When test units are not files, Smarter Testing cannot determine which test files belong to which test unit. The `file-mapper` command creates a mapping of test units to related test files.
 
-* During analysis, Smarter Testing can associate test files with their test atoms in impact data.
-* During selection, Smarter Testing can determine which test atom to run when a test file is modified.
+* During analysis, Smarter Testing can associate test files with their test units in impact data.
+* During selection, Smarter Testing can determine which test unit to run when a test file is modified.
 
-File mapper maps all test atoms to test files in a single pass.
+File mapper maps all test units to test files in a single pass.
 
-The test atoms to map can be specified in one of two ways:
+The test units to map can be specified in one of two ways:
 
 * Use the template variable `<< test.atoms >>` in the `file-mapper` command.
-* If the template variable is not found in the `file-mapper` command, the test atoms will be passed on stdin separated by newlines.
+* If the template variable is not found in the `file-mapper` command, the test units will be passed on stdin separated by newlines.
 
 File mapper supports two different output formats:
 
@@ -191,9 +191,9 @@ It consists of one or more JSON documents separated by newlines. Note that each 
 
 CircleCI list format is a plain text, record oriented format. It consists of one or more records separated by newlines.
 
-Each record begins with a line starting with `TA:`, followed by the test atom name.
+Each record begins with a line starting with `TA:`, followed by the test unit name.
 
-Each subsequent line lists a file that contains code for the test atom.
+Each subsequent line lists a file that contains code for the test unit.
 
 Each line must be fewer than 32,768 characters long.
 
@@ -217,7 +217,7 @@ src/quz_test.py
 | `file-mapper`
 | N
 | String
-| A command that determines which test files contain the code for a test atom.
+| A command that determines which test files contain the code for a test unit.
 |===
 --
 
@@ -242,25 +242,25 @@ file-mapper: for _atom in << test.atoms >>; do echo "TA:${_atom}"; echo "${_atom
 [#analysis]
 == *`analysis`*
 
-The `analysis` command is similar to your `run` command, but with coverage instrumentation enabled. Analysis generates coverage data that tells Smarter Testing which source files are covered by each test atom.
+The `analysis` command is similar to your `run` command, but with coverage instrumentation enabled. Analysis generates coverage data that tells Smarter Testing which source files are covered by each test unit.
 
 Analysis can run in two modes:
 
-* *One test atom at a time.* This mode is compatible with most coverage tooling.
-* *All test atoms in a single pass.* This mode is much faster but requires specific support for the CircleCI coverage format from the coverage tooling.
+* *One test unit at a time.* This mode is compatible with most coverage tooling.
+* *All test units in a single pass.* This mode is much faster but requires specific support for the CircleCI coverage format from the coverage tooling.
 
-The `analysis` command needs to be modified to use placeholders for the coverage report output location, and the test atom that will be run.
+The `analysis` command needs to be modified to use placeholders for the coverage report output location, and the test unit that will be run.
 
-The test atom to analyze can be specified in one of two ways:
+The test unit to analyze can be specified in one of two ways:
 
-* Use the template variable `<< test.atoms >>` in the `analysis` command. This will be replaced with the test atom to analyze.
-* If the template variable is not found in the `analysis` command, the test atom will be passed on stdin.
+* Use the template variable `<< test.atoms >>` in the `analysis` command. This will be replaced with the test unit to analyze.
+* If the template variable is not found in the `analysis` command, the test unit will be passed on stdin.
 
 Different template variables are available for coverage output, depending on the format of the coverage data produced by the test runner:
 
-* *LCOV* `<< outputs.lcov >>` -- analyses one test atom at a time.
-* *Go coverage format* `<< outputs.go-coverage >>` -- analyses one test atom at a time.
-* *CircleCI coverage format* `<< outputs.circleci-coverage >>` -- analyses all test atoms in a single pass.
+* *LCOV* `<< outputs.lcov >>` -- analyses one test unit at a time.
+* *Go coverage format* `<< outputs.go-coverage >>` -- analyses one test unit at a time.
+* *CircleCI coverage format* `<< outputs.circleci-coverage >>` -- analyses all test units in a single pass.
 
 Your `analysis` command must use the output variable for the coverage format it produces.
 
@@ -352,7 +352,7 @@ A map of option fields that configure how the test suite is run.
 [#test-impact-analysis]
 === *`test-impact-analysis`*
 
-Enable test impact analysis to run only the test atoms relevant to your changes.
+Enable test impact analysis to run only the test units relevant to your changes.
 
 [.table-scroll]
 --
@@ -454,7 +454,7 @@ options:
 [#dynamic-test-splitting]
 === *`dynamic-test-splitting`*
 
-Enable dynamic test splitting to run test atoms from a shared queue, reducing the impact of slow parallel nodes.
+Enable dynamic test splitting to run test units from a shared queue, reducing the impact of slow parallel nodes.
 
 [.table-scroll]
 --
@@ -485,7 +485,7 @@ options:
 [#full-test-run-paths]
 === *`full-test-run-paths`*
 
-When test selection is enabled, changes to these file paths cause all test atoms to be selected and run.
+When test selection is enabled, changes to these file paths cause all test units to be selected and run.
 
 Project files that affect the running system without directly referencing tests may be listed here. For example, project dependency files or database migration files.
 
@@ -525,7 +525,7 @@ options:
 
 Use test selection rules to extend the test selection mechanism to cover non-source files.
 
-Each rule lists a test atom, and what cause that test atom to be selected in addition to the usual selection algorithm.
+Each rule lists a test unit, and what cause that test unit to be selected in addition to the usual selection algorithm.
 
 The `\*` and `**` globs can be used to match files and directories.
 
@@ -553,12 +553,12 @@ The `\*` and `**` globs can be used to match files and directories.
 | `test-atom`
 | Y
 | String
-| Name of the test atom covered by this rule.
+| Name of the test unit covered by this rule.
 
 | `include`
 | Y
 | Boolean, or list of file paths (limited to 100 globs/paths).
-| When to include the test atom in test selection. If `true` the test atom is always selected. If a list of file paths, then the test atom is selected when there are changes to any of those file paths.
+| When to include the test unit in test selection. If `true` the test unit is always selected. If a list of file paths, then the test unit is selected when there are changes to any of those file paths.
 |===
 --
 
@@ -593,7 +593,7 @@ options:
 [#max-auto-rerun]
 === *`max-auto-rerun`*
 
-Set `max-auto-rerun` to automatically rerun failed test atoms up to a maximum number of attempts. Test atoms will run once initially, then up to a further `max-auto-rerun` times.
+Set `max-auto-rerun` to automatically rerun failed test units up to a maximum number of attempts. Test units will run once initially, then up to a further `max-auto-rerun` times.
 
 [.table-scroll]
 --
@@ -604,9 +604,9 @@ Set `max-auto-rerun` to automatically rerun failed test atoms up to a maximum nu
 | `max-auto-rerun`
 | N
 | Integer (min 0, max 10)
-| The maximum number of times test atoms will be rerun if they fail.
+| The maximum number of times test units will be rerun if they fail.
 
-When `auto-rerun-duration` is set, test atoms will rerun until one of the two conditions is reached.
+When `auto-rerun-duration` is set, test units will rerun until one of the two conditions is reached.
 |===
 --
 
@@ -626,9 +626,9 @@ options:
 [#auto-rerun-duration]
 === *`auto-rerun-duration`*
 
-Set `auto-rerun-duration` to automatically rerun failed test atoms until either they all pass, or the rerun duration is reached.
+Set `auto-rerun-duration` to automatically rerun failed test units until either they all pass, or the rerun duration is reached.
 
-NOTE: Test atoms will rerun a maximum of 10 times even if the rerun duration is not reached.
+NOTE: Test units will rerun a maximum of 10 times even if the rerun duration is not reached.
 
 [.table-scroll]
 --
@@ -638,9 +638,9 @@ NOTE: Test atoms will rerun a maximum of 10 times even if the rerun duration is 
 | `auto-rerun-duration`
 | N
 | Duration or percentage
-| The duration or percentage of total runtime that will be spent rerunning test atoms if they fail, for example, `5m`, `1h`, `20%`.
+| The duration or percentage of total runtime that will be spent rerunning test units if they fail, for example, `5m`, `1h`, `20%`.
 
-When `max-auto-rerun` is set, test atoms will rerun until one of the two conditions is reached.
+When `max-auto-rerun` is set, test units will rerun until one of the two conditions is reached.
 |===
 --
 
