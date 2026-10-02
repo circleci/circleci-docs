@@ -14,6 +14,7 @@ This guide explains how to:
 * Link a project to a Slack channel.
 * Update notification preferences for a project.
 * Link your Slack identity to receive personal notifications.
+* Approve or cancel on-hold workflows from Slack.
 
 == Benefits
 
@@ -25,6 +26,7 @@ The Slack integration is the recommended way to set up workflow notifications in
 * Link projects to channels and manage notification preferences from your project settings in the web app. Any organization member with write access to a project can configure it.
 * Receive notifications as direct messages. After you <<link-your-slack-identity,link your Slack identity>>, CircleCI can send workflow notifications to you directly, not only to shared channels.
 * Get tagged directly in notifications. Once your identity is linked, CircleCI mentions you in the Slack notifications for workflows you trigger.
+* Approve or cancel on-hold workflows directly from a Slack notification, without opening the CircleCI web app.
 
 == Limitations
 
@@ -193,6 +195,18 @@ To stop personal Slack notifications, select btn:[Disconnect] next to the linked
 * **The link fails after you select Allow in Slack.** Your Slack workspace or organization may have Sign in with Slack disabled, or may require admin approval for apps that request the Sign in with Slack identity scope. Ask a Slack workspace admin or Org Owner to enable Sign in with Slack for the CircleCI app and try again.
 * **CircleCI shows a "Slack account already linked" error.** The Slack identity you authenticated with is already connected to a different CircleCI account. Sign in to that account and unlink the Slack identity before linking it here.
 * **The Connect button is unavailable or shows "Slack not installed."** An organization administrator must install the CircleCI Slack app before you can link your identity. See <<install-the-slack-app,Install the Slack app>> above.
+
+== Approve or cancel workflows from Slack
+
+When a workflow goes on hold at an approval job, the Slack notification includes btn:[Approve] and btn:[Cancel] buttons. Use these buttons to act on the workflow without opening the CircleCI web app. Selecting a button opens a confirmation dialog before the action runs. The buttons appear in both project channel notifications and direct messages.
+
+For more information on approval jobs, see the xref:orchestrate:workflows.adoc#holding-a-workflow-for-a-manual-approval[Hold a Workflow for a Manual Approval] section.
+
+=== Prerequisites
+
+* Your organization must have the CircleCI Slack app installed. See <<install-the-slack-app,Install the Slack app>> above.
+* You must link your Slack identity to your CircleCI account. See <<link-your-slack-identity,Link Your Slack Identity>> above.
+* You need the same permissions to approve or cancel a workflow from Slack as you do in the CircleCI web app.
 
 == Example Slack notifications
 
