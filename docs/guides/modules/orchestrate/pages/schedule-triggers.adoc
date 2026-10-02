@@ -131,7 +131,7 @@ Optional fields:
 - `attributes.is_disabled`: Set to `true` to create the schedule in a disabled state.
 - `attributes.parameters`: Pipeline parameters to pass when the schedule triggers.
 
-For additional information, refer to the link:https://circleci.com/docs/api/v3#tag/triggers/POST/api/v3/triggers[Triggers section of the API v3 docs]. Also see the xref:toolkit:api-developers-guide.adoc#getting-started-with-the-api[Getting Started With the API] section of the API Developer's Guide for more guidance on making requests.
+For additional information, refer to the link:https://circleci.com/docs/api/v3#tag/triggers/POST/api/v3/triggers[API v3 Triggers Reference]. Also see the xref:toolkit:api-developers-guide.adoc#getting-started-with-the-api[Getting Started With the API] section of the API Developer's Guide for more guidance on making requests.
 
 == Migrate scheduled workflows to schedule triggers
 
