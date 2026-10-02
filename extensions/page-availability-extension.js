@@ -8,6 +8,7 @@ const {
   getVcsAvailability,
   getServerVersionAvailability,
 } = require('./lib/page-availability')
+const { BASELINE_ATTRIBUTE, isGuidesServerBuild } = require('./lib/guides-server')
 
 /**
  * AsciiDoc extension that generates a sidebar summarizing which cloud plans
@@ -15,9 +16,10 @@ const {
  * `page-vcs` attributes.
  *
  * Scope: guides and reference only (checked via page-component-name).
- * In a Server build (the `server` attribute is set) it shows the minimum
- * Server version from `page-server-min-version` instead, when that is later
- * than the earliest covered version.
+ * In the guides Server build it shows the minimum Server version from
+ * `page-server-min-version` instead, when that is later than the baseline.
+ * The build is detected from the component version, not the `server`
+ * attribute, since a Cloud page can set `:server:` for its own partials.
  * Only restricted lines are shown - a page on all three plans, or with
  * page-vcs: all, gets no line for that attribute. A page with no restricted
  * lines gets no sidebar at all. This keeps the sidebar meaningful for human
@@ -38,10 +40,13 @@ module.exports.register = function register(registry) {
         console.warn(`${msg} (${doc.getAttribute('docfile') || 'unknown file'})`)
 
       const lines = []
-      if (doc.hasAttribute('server')) {
+      if (isGuidesServerBuild(componentName, doc.getAttribute('page-component-version'))) {
         // Server build: plans and VCS providers are Cloud concepts, so show
         // the minimum Server version instead.
-        const serverText = getServerVersionAvailability(doc.getAttribute('page-server-min-version'))
+        const serverText = getServerVersionAvailability(
+          doc.getAttribute('page-server-min-version'),
+          doc.getAttribute(BASELINE_ATTRIBUTE)
+        )
         if (serverText) lines.push(`*${LABELS.server}:* ${serverText}`)
       } else {
         const plan = getPlanAvailability(doc.getAttribute('page-plan'), logWarning)
