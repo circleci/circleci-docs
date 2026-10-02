@@ -1,23 +1,38 @@
 = Notifications overview
-:page-platform: Cloud
+:page-platform: Cloud, Server
 :page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-audience: developer
 :page-description: Learn how to get CircleCI notifications through Slack, IRC and email notifications.
 :experimental:
 
+ifndef::server[]
 CircleCI offers multiple ways to receive notifications about your builds, workflows, and deployments. You can configure email notifications for your own work and set up Slack notifications for team channels. You can receive alerts about deployment status and Chunk usage, and when a workflow pauses and waits for a manual approval. You can also designate contacts for organization-wide security and technical communications. Notifications can be configured at the user level, project level, and organization level.
 
 This page explains how to configure email notifications, Slack notifications, and organization-level contacts.
+endif::server[]
+ifdef::server[]
+CircleCI can send you email notifications about your builds. You can choose the email address CircleCI uses, which builds you receive emails for, and a different email address for each organization and project. You can also send notifications from your pipelines using orbs.
+
+This page explains how to configure email notifications.
+endif::server[]
 
 == User-level notifications
 
+ifndef::server[]
 Configure your notification preferences, including the email address to use and the notifications category you would like to receive.
+endif::server[]
+ifdef::server[]
+Configure your notification preferences, including the email address to use and which build emails you receive.
+endif::server[]
 
+ifndef::server[]
 TIP: Your available email addresses depend on how you log in. If you use email and password, you will have a single email address. If you log in via GitHub or Bitbucket, you will see all email addresses associated with your connected account. To add or remove email addresses from your account, see the xref:permissions-authentication:manage-email-addresses.adoc[Manage Email Addresses] guide.
 
+endif::server[]
 === Default email address for notifications
 
+ifndef::server[]
 CircleCI uses your "default" email address to send mandatory communications, which include:
 
 * System and security messages.
@@ -25,16 +40,24 @@ CircleCI uses your "default" email address to send mandatory communications, whi
 * Deprecation notices.
 * Personal API token expiry notifications.
 
+endif::server[]
 To set or change your default email address, follow these steps:
 
 include::ROOT:partial$app-navigation/steps-to-user-settings.adoc[]
 . Select *Notifications* from the sidebar.
 
+ifndef::server[]
 At the top of the page you can select the default email address for your notifications.
 
 .Default email address for notifications
 image::guides:ROOT:default-email.png[Screenshot showing how to change default email address and choose notifications]
 
+endif::server[]
+ifdef::server[]
+At the top of the page, select *Change Email Address* to choose your default email address.
+endif::server[]
+
+ifndef::server[]
 === Build notification preferences
 
 Under "Build notification preferences" you can select between your saved email addresses per organization. You can also select `Don't send email notifications` for a specific organization as required.
@@ -113,6 +136,22 @@ image::guides:ROOT:chunk/chunk-notification-settings.png[Chunk notification sett
 
 For a full guide to setting up and using Chunk, including the email digest, see the xref:guides:toolkit:chunk-setup-and-overview.adoc#email-digest[Email Digest] section of the Chunk Overview and Setup guide.
 
+endif::server[]
+ifdef::server[]
+=== Build notifications
+
+Under *Build notifications*, choose which build emails you receive:
+
+* *All builds in my projects*: an email for every build in your projects.
+* *My builds*: an email every time a build you pushed fails, and when it is fixed. For GitHub projects, this also includes anyone's builds in branches you have pushed to before.
+* *None*: no build emails. You still receive administrative emails about your account.
+
+=== Notification preferences for each organization and project
+
+Under *Notification Preferences*, you can use a different email address for each organization and project. Select *Change Email Address* next to the organization or project, and choose the address to use.
+endif::server[]
+
+ifndef::server[]
 [#personal-api-token-expiry-notifications]
 === Personal API token expiry notifications
 
@@ -163,6 +202,7 @@ include::ROOT:partial$app-navigation/steps-to-org-settings.adoc[]
 .Organization-level contacts
 image::guides:ROOT:security-technical-contacts.png[Screenshot showing how to set up organization-level contacts]
 
+endif::server[]
 [#notifications-with-orbs]
 == Sending notifications with orbs
 
