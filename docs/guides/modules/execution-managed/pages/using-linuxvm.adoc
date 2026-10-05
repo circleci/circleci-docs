@@ -45,7 +45,7 @@ ifndef::server[]
 You can view the list of available images in the xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[Configuration Reference], or on the link:https://circleci.com/developer/images?imageType=machine[Developer Hub].
 endif::server[]
 ifdef::server[]
-Your system administrator manages the available Linux images.
+On CircleCI Server, specify the machine executor as either `machine: true` or `machine` with `image: default`. Use `machine: true` for the shorter form. Use `image: default` when you also set other keys, such as `docker_layer_caching`. Your system administrator manages the available Linux images.
 endif::server[]
 
 [#available-linuxvm-resource-classes]
