@@ -23,9 +23,20 @@ The following diagram illustrates how data flows between jobs:
 .Jobs overview
 image::guides:ROOT:jobs-overview.png[Jobs overview]
 
+ifndef::server[]
 Jobs can be run in Docker containers, using the Docker executor, or in virtual machines using the `machine` executor, with Linux, macOS, or Windows images. Service containers or VMs can be configured to attach services, such as databases, to run alongside your jobs.
+endif::server[]
+ifdef::server[]
+Jobs can be run in Docker containers, using the Docker executor, or in virtual machines using the `machine` executor, with Linux images, or Windows images if your system administrator has set them up. Service containers or VMs can be configured to attach services, such as databases, to run alongside your jobs.
+endif::server[]
 
-When using the Docker executor, images listed under the `docker` key specify the containers you want to start for your job. Any public Docker images can be used with the Docker executor, but CircleCI provides convenience images for a variety of use-cases. Full lists of available convenience and VM images are available in the link:https://circleci.com/developer/images[CircleCI Developer Hub].
+When using the Docker executor, images listed under the `docker` key specify the containers you want to start for your job. Any public Docker images can be used with the Docker executor, but CircleCI provides convenience images for a variety of use-cases.
+ifndef::server[]
+Full lists of available convenience and VM images are available in the link:https://circleci.com/developer/images[CircleCI Developer Hub].
+endif::server[]
+ifdef::server[]
+For a list of convenience images, see the xref:execution-managed:circleci-images.adoc[CircleCI Convenience Images] page. Your system administrator manages the available VM images.
+endif::server[]
 
 See the xref:execution-managed:executor-intro.adoc[Introduction to Execution Environments] document for a comparison of the different executor types, and links to further information for each option.
 
@@ -61,13 +72,25 @@ The job name within the workflow can be anything you like _including_ spaces and
 
 === Job types
 
+ifndef::server[]
 A job can be one of four types:
+endif::server[]
+ifdef::server[]
+A job can be one of three types:
+endif::server[]
 
+ifndef::server[]
 - `release`: Jobs with this type are used to connect your pipeline configuration to a deployment in the CircleCI deploys UI.
+endif::server[]
 
 - `approval`: This type is used to configure a manual approval step.
 
+ifndef::server[]
 - `no-op`: This type is used to configure a job that performs no actions and consumes no credits.
+endif::server[]
+ifdef::server[]
+- `no-op`: This type is used to configure a job that performs no actions.
+endif::server[]
 
 - `build`: This is the default type used to build your code.
 
@@ -80,6 +103,7 @@ See the xref:reference:ROOT:configuration-reference.adoc#job-type[Configuration 
 
 The following diagram and table shows the possible job statuses and transitions.
 
+ifndef::server[]
 .CircleCI Cloud job status transitions
 [mermaid]
 ----
@@ -110,7 +134,8 @@ stateDiagram-v2
     unauthorized --> [*]
     not_run --> [*]
 ----
-
+endif::server[]
+ifdef::server[]
 .CircleCI Server job status transitions
 [mermaid]
 ----
@@ -141,6 +166,7 @@ stateDiagram-v2
     canceled --> [*]
     unauthorized --> [*]
 ----
+endif::server[]
 
 [.table-scroll]
 --
