@@ -111,7 +111,8 @@ Server::
 ----
 jobs:
   build: # name of your job
-    machine: true # executor type
+    machine:
+      image: default # executor type
     steps:
       # Commands run in a Linux virtual machine environment
 ----

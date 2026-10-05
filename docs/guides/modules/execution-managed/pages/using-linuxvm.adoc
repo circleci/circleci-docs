@@ -35,7 +35,8 @@ Server::
 version: 2.1
 jobs:
   my-job:
-    machine: true
+    machine:
+      image: default
     resource_class: large
 ----
 --
@@ -45,7 +46,9 @@ ifndef::server[]
 You can view the list of available images in the xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[Configuration Reference], or on the link:https://circleci.com/developer/images?imageType=machine[Developer Hub].
 endif::server[]
 ifdef::server[]
-On CircleCI Server, specify the machine executor as either `machine: true` or `machine` with `image: default`. Use `machine: true` for the shorter form. Use `image: default` when you also set other keys, such as `docker_layer_caching`. Your system administrator manages the available Linux images.
+Your system administrator manages the available Linux images.
+
+TIP: On CircleCI Server, `machine: true` also works as shorthand for `machine` with `image: default`.
 endif::server[]
 
 [#available-linuxvm-resource-classes]
@@ -115,8 +118,8 @@ ifndef::server[]
       image: ubuntu-2604:current
 endif::server[]
 ifdef::server[]
-    machine: true # executor type
-    # Contact your system administrator for details of the image.
+    machine: # executor type
+      image: default
 endif::server[]
     steps:
       - run: apt list --installed
