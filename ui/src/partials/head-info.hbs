@@ -4,6 +4,11 @@
     <link rel="alternate" type="text/markdown" href="index.md" title="Markdown version">
     <link rel="alternate" type="text/plain" href="{{{siteRootPath}}}/llms.txt" title="LLM-optimized sitemap">
     <link rel="alternate" type="text/markdown" href="{{{siteRootPath}}}/AGENTS.md" title="Instructions for AI agents using CircleCI">
+    {{!-- RFC 8288 link relations for agent and tool discoverability --}}
+    <link rel="describedby" type="text/plain" href="{{{siteRootPath}}}/llms.txt" title="LLM-optimized documentation index">
+    <link rel="describedby" type="text/markdown" href="{{{siteRootPath}}}/AGENTS.md" title="AI agent instructions for using CircleCI">
+    <link rel="service-doc" href="{{{siteRootPath}}}/api/v2/" title="CircleCI API v2 Reference">
+    <link rel="service-doc" href="{{{siteRootPath}}}/api/v3/" title="CircleCI API v3 Reference">
     {{#unless (eq page.attributes.pagination undefined)}}
     {{#with page.previous}}
     <link rel="prev" href="{{{relativize ./url}}}">
