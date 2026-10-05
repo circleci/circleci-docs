@@ -291,7 +291,7 @@ For more configuration examples on CircleCI, visit our xref:toolkit:examples-and
 
 Since the configuration between GitHub Actions and CircleCI is similar, migrating your jobs and workflows is straightforward. For best chances of success, we recommend migrating over items in the following order:
 
-. xref:about-circleci:concepts.adoc[Jobs, Steps, and Workflows]
+. xref:reference:ROOT:concepts.adoc[Jobs, Steps, and Workflows]
 . xref:orchestrate:workflows.adoc[More Advanced Workflow and Job Dependency Configuration]
 . xref:orbs:use:orb-intro.adoc[Actions to Orbs]. Our registry can be found https://circleci.com/developer/orbs?filterBy=all[here].
 . xref:optimize:optimizations.adoc[Optimizations Like Caching, Workspaces, and Parallelism]

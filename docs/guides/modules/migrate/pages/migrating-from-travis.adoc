@@ -16,7 +16,7 @@ The example build configurations referenced throughout this article are based on
 This document assumes that:
 
 * You have an account with CircleCI that is linked to a repository. If you do not have an account, consider reading our xref:getting-started:getting-started.adoc[Getting Started Guide].
-* You understand the xref:about-circleci:concepts.adoc[Basic Concepts] in CircleCI.
+* You understand the xref:reference:ROOT:concepts.adoc[Basic Concepts] in CircleCI.
 
 [#why-migrate-to-circleci]
 == Why migrate to CircleCI?

@@ -17,7 +17,7 @@
 ** xref:runner-api.adoc[Runner API reference]
 
 * General
-** xref:guides:about-circleci:concepts.adoc[Concepts]
+** xref:concepts.adoc[Concepts]
 ** xref:glossary.adoc[Glossary]
 ** xref:environment-cli-usage-guide.adoc[Environment CLI usage guide]
 ** xref:insights-glossary.adoc[Insights metrics glossary]
