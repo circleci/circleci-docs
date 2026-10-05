@@ -50,19 +50,25 @@ Before you can create a new schedule, interpret the frequency your trigger needs
 [#use-the-api]
 === a. Use the API
 
-Have your CircleCI token ready, or create a new token by following the steps on the xref:toolkit:managing-api-tokens.adoc[Managing API Tokens] page.
+Have your CircleCI token ready, or create a new token by following the steps on the xref:toolkit:managing-api-tokens.adoc[Managing API Tokens] page. Then select the tab for your pipeline type:
 
-. Get your pipeline definition ID using the link:https://circleci.com/docs/api/v3#tag/pipelines/GET/api/v3/pipelines[API v3]:
+[tabs]
+====
+GitHub App and Cursor Origin::
++
+--
+. Find your project ID. See xref:toolkit:api-v3-developers-guide.adoc#getting-started-with-api-v3[Getting Started With API V3] for steps to list your organizations and projects and retrieve your project ID.
+. Get your pipeline definition ID. Replace `<PROJECT_ID>` with your project ID:
 +
 [source,console]
 ----
-$ curl --request GET \
-  --url https://circleci.com/api/v3/pipelines \
+$ curl -g \
+  --url "https://circleci.com/api/v3/pipelines?filter[project_id]=<PROJECT_ID>" \
   --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
 +
-Locate the pipeline for your project in the response and copy its `id` value.
-. Create a new schedule trigger using the link:https://circleci.com/docs/api/v3#tag/triggers/POST/api/v3/triggers[API v3]. Replace `<PIPELINE_ID>` with your pipeline definition ID, `<SCHEDULE_NAME>` with a name for your schedule, and `<CRON_EXPRESSION>` with the cron expression from your scheduled workflow:
+Locate your pipeline in the response and copy its `id` value.
+. Create a new schedule trigger. Replace `<PIPELINE_ID>` with your pipeline definition ID, `<SCHEDULE_NAME>` with a name for your schedule, and `<CRON_EXPRESSION>` with the cron expression from your scheduled workflow:
 +
 [source,console]
 ----
@@ -91,7 +97,40 @@ $ curl --request POST \
   }'
 ----
 
-For additional information, refer to the link:https://circleci.com/docs/api/v3#tag/triggers/POST/api/v3/triggers[API v3 Triggers Reference]. Also see the xref:toolkit:api-developers-guide.adoc#getting-started-with-the-api[Getting Started With the API] section of the API Developer's Guide for more guidance on making requests.
+For additional information, refer to the link:https://circleci.com/docs/api/v3#tag/triggers/POST/api/v3/triggers[API v3 Triggers Reference].
+--
+GitHub OAuth and Bitbucket Cloud::
++
+--
+. Create a new schedule using the link:https://circleci.com/docs/api/v2/index.html#operation/createSchedule[API v2 Create Schedule] endpoint. Replace `<project-slug>` with your project slug, `<PERSONAL_API_KEY>` with your CircleCI token, and `<CRON_EXPRESSION>` with your schedule's cron expression:
++
+[source,console]
+----
+$ curl --request POST "https://circleci.com/api/v2/project/<project-slug>/schedule" \
+  --header "circle-token: <PERSONAL_API_KEY>" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "name": "<SCHEDULE_NAME>",
+    "description": "some description",
+    "attribution-actor": "system",
+    "parameters": {
+      "branch": "main"
+    },
+    "timetable": {
+      "per-hour": 1,
+      "hours-of-day": [4],
+      "days-of-week": ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
+    }
+}'
+----
+
+include::ROOT:partial$tips/find-project-slug.adoc[]
+
+For additional information, refer to the **Schedule** section under the link:https://circleci.com/docs/api/v2/[API v2 Reference].
+--
+====
+
+Also see the xref:toolkit:api-developers-guide.adoc#getting-started-with-the-api[Getting Started With the API] section of the API Developer's Guide for more guidance on making requests.
 
 [#use-project-settings]
 === b. Use project settings in the web app
