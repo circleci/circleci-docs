@@ -102,12 +102,12 @@ For additional information, refer to the link:https://circleci.com/docs/api/v3#t
 GitHub OAuth and Bitbucket Cloud::
 +
 --
-. Create a new schedule using the link:https://circleci.com/docs/api/v2/index.html#operation/createSchedule[API v2 Create Schedule] endpoint. Replace `<project-slug>` with your project slug, `<PERSONAL_API_KEY>` with your CircleCI token, and `<CRON_EXPRESSION>` with your schedule's cron expression:
+. Create a new schedule using the link:https://circleci.com/docs/api/v2/index.html#operation/createSchedule[API v2 Create Schedule] endpoint. Replace `<project-slug>` with your project slug and `<CRON_EXPRESSION>` with your schedule's cron expression:
 +
 [source,console]
 ----
 $ curl --request POST "https://circleci.com/api/v2/project/<project-slug>/schedule" \
-  --header "circle-token: <PERSONAL_API_KEY>" \
+  --header "Circle-Token: $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
   --data '{
     "name": "<SCHEDULE_NAME>",
