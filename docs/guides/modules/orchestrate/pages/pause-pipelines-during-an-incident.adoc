@@ -106,7 +106,7 @@ ifndef::server[]
 * xref:security:audit-logs.adoc[Audit Logs]
 endif::server[]
 ifdef::server[]
-* xref:server-admin:operator:circleci-server-security-features.adoc[CircleCI Server security features]
+* xref:server-admin:operator:circleci-server-security-features.adoc[CircleCI Server Security Features]
 endif::server[]
 
 To inventory variable names across multiple projects, use the open source link:https://github.com/CircleCI-Public/CircleCI-Env-Inspector[CircleCI Environment Inspector] (run with a xref:toolkit:managing-api-tokens.adoc[Personal API Token]; treat output as sensitive).
