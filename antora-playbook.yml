@@ -144,7 +144,7 @@ antora:
     # Earliest Server version the docs cover. Pages available from it get no
     # "Server version" sidebar line.
     serverbaseline: '4.7'
-    serverstartpage: getting-started:config-intro.adoc
+    serverstartpage: getting-started:create-project.adoc
     # The build fails when more xrefs than this point to pages the Server build
     # drops. Lower it as they get wrapped in ifndef::server[] (the list is in
     # extensions/.temp/guides-server-unlinked.md after a build).

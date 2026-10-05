@@ -40,7 +40,7 @@
  *   - require: ./extensions/guides-versions-extension.js
  *     serverversion: '4.10'
  *     serverbaseline: '4.7'
- *     serverstartpage: getting-started:config-intro.adoc
+ *     serverstartpage: getting-started:create-project.adoc
  *     # Fails the build (logs an error) when more xrefs than this are
  *     # unlinked, so new links to Cloud-only pages get wrapped. Lower it as
  *     # the list shrinks.
