@@ -28,7 +28,7 @@ If your task does not match this guide, use this table to find the right page in
 | Start here
 
 | Write or edit `.circleci/config.yml`
-| xref:about-circleci:concepts.adoc[Concepts], then xref:config-intro.adoc[Configuration Introduction], then the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference]
+| xref:reference:ROOT:concepts.adoc[Concepts], then xref:config-intro.adoc[Configuration Introduction], then the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference]
 
 | Trigger or schedule a pipeline
 | xref:orchestrate:triggers-overview.adoc[Trigger Options]. On Cloud, use xref:orchestrate:schedule-triggers.adoc[Schedule Triggers]. Server does not support Schedule Triggers; use a `triggers.schedule` block under the workflow instead.
@@ -242,5 +242,5 @@ pass:[<!-- vale on -->]
 
 * link:https://www.youtube.com/playlist?list=PL9GgS3TcDh8wqLRk-0mDz7purXh-sNu7r[CircleCI foundation videos]
 * xref:config-intro.adoc[Introduction to Configuration]
-* xref:about-circleci:concepts.adoc[CircleCI Concepts]
+* xref:reference:ROOT:concepts.adoc[CircleCI Concepts]
 * xref:plans-pricing:plan-overview.adoc[CircleCI Plans Overview]

@@ -116,7 +116,7 @@
   new: /guides/test/collect-test-data/
 
 - old: /concepts/
-  new: /guides/about-circleci/concepts/
+  new: /reference/concepts/
 
 - old: /concurrency/
   new: /guides/optimize/concurrency/
