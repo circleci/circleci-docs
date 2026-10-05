@@ -23,7 +23,7 @@ sudo sed -i "s/<< AUTH_TOKEN >>/$RUNNER_AUTH_TOKEN/g" /etc/circleci-runner/circl
 ```
 
 ifdef::server[]
-. Provide the URL for your CircleCI server installation. You can do this by either setting the `CIRCLECI_RUNNER_API_URL` environment variable:
+. Provide the URL for your CircleCI Server installation. You can do this by either setting the `CIRCLECI_RUNNER_API_URL` environment variable:
 +
 ```shell
 export CIRCLECI_RUNNER_API_URL="your server domain"

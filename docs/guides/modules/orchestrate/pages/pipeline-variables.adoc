@@ -22,7 +22,9 @@ Pipeline values are available to all pipeline configurations and can be used wit
 
 For a full list of values and built-in environment variables, see the xref:reference:ROOT:variables.adoc[Project Values and Variables] guide.
 
+ifndef::server[]
 include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration type]
+endif::server[]
 
 include::ROOT:partial$pipelines-and-triggers/pipeline-values.adoc[]
 

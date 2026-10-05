@@ -13,7 +13,7 @@ ifndef::server[]
 A Windows Server 2022 image is available to CircleCI Cloud customers, read more on link:https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198[Discuss].
 endif::server[]
 ifdef::server[]
-NOTE: Windows execution environments are available on CircleCI server only if your system administrator has set them up. Contact your system administrator to check that Windows is available.
+NOTE: Windows execution environments are available on CircleCI Server only if your system administrator has set them up. Contact your system administrator to check that Windows is available.
 endif::server[]
 
 [#prerequisites]
@@ -23,10 +23,9 @@ To follow along with this document you will need:
 
 ifndef::server[]
 * An link:https://circleci.com/signup/[account] on CircleCI.
-* Either the Free, Performance, or Scale link:https://circleci.com/pricing/usage/[Plan].
 endif::server[]
 ifdef::server[]
-* An account on your CircleCI server installation.
+* An account on your CircleCI Server installation.
 endif::server[]
 
 [#example-application]
@@ -41,7 +40,7 @@ You can view the link:https://github.com/CircleCI-Public/circleci-demo-windows/b
 version: 2.1
 ----
 
-Above, we start by declaring that we will use version `2.1` of CircleCI, giving us access to link:https://circleci.com/orbs/[orbs] and xref:orchestrate:pipelines.adoc[Pipelines].
+Above, we start by declaring that we will use version `2.1` of CircleCI.
 
 ifndef::server[]
 [,yaml]
@@ -133,6 +132,6 @@ In our last step, we store the build executable as an artifact, making it access
 
 Consider reading documentation on some of CircleCI's features:
 
-* See the xref:about-circleci:concepts.adoc[Concepts] document for a summary of configuration and the hierarchy of top-level keys in a `.circleci/config.yml` file.
+* See the xref:reference:ROOT:concepts.adoc[Concepts] document for a summary of configuration and the hierarchy of top-level keys in a `.circleci/config.yml` file.
 * Refer to the xref:orchestrate:workflows.adoc[Workflows] document for examples of orchestrating job runs with concurrent, sequential, scheduled, and manual approval workflows.
 * Find complete reference information for all keys and pre-built Docker images in the xref:reference:ROOT:configuration-reference.adoc[Configuring CircleCI] and xref:circleci-images.adoc[CircleCI Images] documentation, respectively.

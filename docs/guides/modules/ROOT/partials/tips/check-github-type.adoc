@@ -1,4 +1,3 @@
-ifndef::server[]
 ****
 **Check your project slug to discover which GitHub integration you have set up:**
 
@@ -13,4 +12,3 @@ ifndef::server[]
 
 For more information about the differences, see the xref:guides:integration:version-control-system-integration-overview.adoc[Version Control Systems, Pipeline Types, and Feature Support] guide.
 ****
-endif::server[]

@@ -40,10 +40,10 @@ image::guides:ROOT:remote-docker-label.png[Remote Docker label]
 
 CAUTION: Only use `setup_remote_docker` key for jobs where your primary executor _is_ a Docker container. If your job uses a VM rather than a container (for example, your executor is `machine`) you do *not* need to use the `setup_remote_docker` key. For an example, see <<run-docker-commands-using-the-machine-executor,Run Docker commands using the `machine` executor>>.
 
-ifndef::server[]
 [#specifications]
 == Specifications
 
+ifndef::server[]
 CircleCI runs remote Docker environments using **Linux or Arm machine resource classes**, depending on the resource class you assign to the Docker executor.
 
 === x86 architecture
@@ -130,9 +130,6 @@ NOTE: Gen2 resource classes are not currently available for Arm-based remote Doc
 - Full specifications and pricing: link:https://circleci.com/pricing/price-list/[CircleCI Pricing]
 endif::server[]
 ifdef::server[]
-[#specifications]
-== Specifications
-
 Contact your system administrator for the remote Docker specifications for your installation.
 endif::server[]
 
@@ -185,10 +182,10 @@ xref:circleci-images.adoc[CircleCI Convenience Images] have the Docker CLI pre-i
           command: apk add docker-cli
 ----
 
-ifndef::server[]
 [#docker-version]
 == Specify a Docker version for remote Docker
 
+ifndef::server[]
 To optionally specify a Docker version, you can set it as a `version` attribute with supported tags:
 
 [,yml]
@@ -222,10 +219,7 @@ To use Docker 26, use the following tag:
 To use the current deprecated version, Docker 20, use `20.10.24`.
 endif::server[]
 ifdef::server[]
-[#docker-version]
-== Specify a Docker version for remote Docker
-
-The `version` key for `setup_remote_docker` is not supported on CircleCI server. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
+The `version` key for `setup_remote_docker` is not supported on CircleCI Server. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 endif::server[]
 
 [#run-docker-commands-using-the-machine-executor]

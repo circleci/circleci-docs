@@ -1,4 +1,3 @@
-ifndef::server[]
 ****
 To find out which GitHub integration type you have, check your Organization slug at menu:Organization settings[Overview]. OAuth authenticated orgs are structured as follows:
 
@@ -9,4 +8,3 @@ An organization slug for a GitHub App integration is in the following format:
 
 * `circleci/<UID>`
 ****
-endif::server[]
