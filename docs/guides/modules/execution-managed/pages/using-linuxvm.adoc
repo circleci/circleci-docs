@@ -137,12 +137,11 @@ The following example uses an image and enables xref:optimize:docker-layer-cachi
 machine:
 ifndef::server[]
   image: ubuntu-2604:current
-  docker_layer_caching: true    # default - false
 endif::server[]
 ifdef::server[]
-  docker_layer_caching: true    # default - false
-  # Contact your system administrator for details of the image.
+  image: default
 endif::server[]
+  docker_layer_caching: true    # default - false
 ----
 
 ifndef::server[]
