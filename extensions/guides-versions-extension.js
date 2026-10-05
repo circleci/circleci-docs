@@ -41,6 +41,8 @@
  *     serverversion: '4.10'
  *     serverbaseline: '4.7'
  *     serverstartpage: getting-started:create-project.adoc
+ *     # Set to false to publish Cloud only (no Server build, no version switcher).
+ *     enabled: true
  *     # Fails the build (logs an error) when more xrefs than this are
  *     # unlinked, so new links to Cloud-only pages get wrapped. Lower it as
  *     # the list shrinks.
@@ -319,6 +321,10 @@ module.exports.register = function register ({ config }) {
   const baselineVersion = String(config.serverbaseline || '4.7')
   const maxUnlinked = config.maxunlinkedxrefs === undefined ? null : Number(config.maxunlinkedxrefs)
   const reportDir = config.reportdir || REPORT_DIR
+
+  // `enabled: false` skips the Server build, so only Cloud is published and the
+  // version switcher does not appear. Set it back to true to build Server again.
+  if (String(config.enabled).toLowerCase() === 'false') return
 
   this.once('contentAggregated', ({ contentAggregate }) => {
     const source = contentAggregate.find((b) => b.name === componentName && !b.version)

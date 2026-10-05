@@ -140,6 +140,9 @@ antora:
     # the Antora Atlas extension (https://gitlab.com/antora/antora-atlas-extension)
     # so its links to pages it doesn't contain resolve to the live site. Atlas
     # was alpha software when this note was written, so check its status first.
+    # Server build is off while the Server conversion is unfinished (DOC-281).
+    # Set to true to build it and show the version switcher again.
+    enabled: false
     serverversion: '4.10'
     # Earliest Server version the docs cover. Pages available from it get no
     # "Server version" sidebar line.
