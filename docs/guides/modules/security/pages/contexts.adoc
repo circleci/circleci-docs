@@ -220,7 +220,7 @@ workflows:
             - test
 ----
 
-In this example, the jobs `test` and `deploy` are restricted, and `deploy` will only run if the user who approves the `hold` job is a member of the security group assigned to the context _and_ `deploy-key-restricted-context`. When the workflow `build-test-deploy` runs, the jobs `build` and `test` will run, then the `hold` job will run, which will present a manual approval button in the CircleCI application. This approval job may be approved by _any_ member of the project, but the `deploy` job will fail as `unauthorized` if the approver is not part of the restricted context security group.
+In this example, the jobs `test` and `deploy` are restricted. The `deploy` job only runs if the user who approves the `hold` job is a member of the security group assigned to the context _and_ `deploy-key-restricted-context`. When the workflow `build-test-deploy` runs, the jobs `build` and `test` run, then the `hold` job runs and presents a manual approval button in the CircleCI application. _Any_ member of the project can approve this job, but the `deploy` job fails as `unauthorized` if the approver is not part of the restricted context security group.
 
 [#security-group-restrictions]
 == Security group restrictions
@@ -266,7 +266,7 @@ Web app::
 +
 --
 . Navigate to menu:Org[Contexts] in the CircleCI web app to see the list of contexts. The default security group is `All members`, and allows all users in the organization to invoke jobs with that context.
-. Select *Create Context* if you wish to use a new context, or select the name of an existing context (if using an existing context, you will need to remove the `All members` security group before adding a new one).
+. Select *Create Context* to use a new context, or select the name of an existing context. If you use an existing context, remove the `All members` security group before adding a new one.
 . Select *Add Security Group* button to view the dialog box.
 . Make your choices in the dialog box and then select the *Add Security Group* or *Add Project Restriction* button to finalize. Contexts will now be restricted to the selections you have made.
 . Select *Add Environment Variables* to add environment variables to the context. Fill out your desired name and value in the dialog box, then select *Add Environment Variables* again to finalize. Use of the environment variables for this context is now limited to members of the security groups.
