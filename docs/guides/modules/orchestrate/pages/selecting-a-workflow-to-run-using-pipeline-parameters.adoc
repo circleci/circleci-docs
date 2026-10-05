@@ -60,6 +60,8 @@ In this example, the workflow named `report` would run. Remember to substitute x
 
 CAUTION: For GitHub App or GitLab pipelines, use the link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/triggerPipelineRun[Trigger a new pipeline endpoint] rather than the endpoint used in this example.
 
+include::ROOT:partial$notes/server-api-examples.adoc[]
+
 [source,shell]
 ----
 curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \

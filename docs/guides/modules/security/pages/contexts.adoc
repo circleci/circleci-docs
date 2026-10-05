@@ -702,6 +702,8 @@ circleci context secret set <context-name> --name <env-var-name> --value <env-va
 API::
 +
 --
+include::ROOT:partial$notes/server-api-examples.adoc[]
+
 To create an environment variable using the API, call the https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Add Environment Variable] endpoint with the appropriate request body. For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the new environment variable name. The request body must include a `value` key containing the plain text secret as a string.
 --
 ====
@@ -742,6 +744,8 @@ circleci context secret delete <context-name> --name <secret-name>
 API::
 +
 --
+include::ROOT:partial$notes/server-api-examples.adoc[]
+
 To delete an environment variable using the API, call the https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Delete environment variable] endpoint.
 
 For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the environment variable name to update.
@@ -788,6 +792,8 @@ circleci context secret set <context-name> --name <env-var-name> --value <new-va
 API::
 +
 --
+include::ROOT:partial$notes/server-api-examples.adoc[]
+
 To rotate an environment variable from the API, call the link:https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Update environment variable] endpoint with the appropriate request body. For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the environment variable name to update. The request body must include a `value` key containing the plain text secret as a string.
 --
 ====

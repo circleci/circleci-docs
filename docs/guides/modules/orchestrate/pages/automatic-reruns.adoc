@@ -173,6 +173,8 @@ You can get information about automatic reruns via the CircleCI APIs.
 
 ==== Automatic workflow reruns
 
+include::ROOT:partial$notes/server-api-examples.adoc[]
+
 You can retrieve information about *automatic workflow reruns* using the link:https://circleci.com/docs/api/v2/index.html#tag/Workflow/operation/getWorkflowById[CircleCI API v2]:
 
 [source,bash]

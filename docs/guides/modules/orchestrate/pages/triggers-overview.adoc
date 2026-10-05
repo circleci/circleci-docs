@@ -61,6 +61,8 @@ NOTE: Triggering a pipeline via the CircleCI v2 API is not currently supported f
 GitHub, Bitbucket, and Cursor Origin::
 +
 --
+include::ROOT:partial$notes/server-api-examples.adoc[]
+
 This method is supported for GitHub (OAuth and App), Bitbucket (Cloud and Data Center), and Cursor Origin orgs.
 
 TIP: **GitHub OAuth and Bitbucket Cloud pipelines** can also be triggered using the link:https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[Trigger a New Pipeline] endpoint, which is described in the **CircleCI Server** tab. However, the method outlined in this section is recommended.
