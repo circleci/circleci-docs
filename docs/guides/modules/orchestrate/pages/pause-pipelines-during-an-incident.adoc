@@ -23,6 +23,11 @@ Once you have paused or stopped pipelines, use xref:orchestrate:analyze-pipeline
 
 First use the **Block all new work** option at the **organization** or **project** level.
 
+ifdef::server[]
+NOTE: **Block all new work** is available in Server 4.10 and later.
+
+endif::server[]
+
 [tabs]
 ====
 Organization::
@@ -52,6 +57,7 @@ image::guides:ROOT:block-all-new-work-org.png[Organization settings > Advanced >
 
 TIP: If you already know a credential was compromised, begin rotating it now (step 4) **in parallel** with this step rather than waiting. Early rotation limits the window an attacker can use a leaked secret.
 
+ifndef::server[]
 The method for cancelling running work is different for different organization types. The three organization types are: `github`, `bitbucket`, and `circleci`. Check the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide] to see which organization type you have.
 
 [tabs]
@@ -61,21 +67,7 @@ The method for cancelling running work is different for different organization t
 --
 If you have an organization of type `github` or `bitbucket`, use the **Stop Building** option.
 
-Use the **Stop Building** to:
-
-* Remove all project followers.
-* Cancel all running workflows.
-* Remove the webhook and deploy key from the repository.
-
-Once the incident is resolved, you can set up the project again.
-
-include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[Steps to access project settings]
-. Scroll down to the bottom of the overview page and select btn:[Stop Building].
-
-.Stop Building button in Project settings > Overview
-image::guides:ROOT:stop-building.png[Stop building button in Project settings > Overview]
-
-See xref:security:stop-building-a-project-on-circleci.adoc[Stop Building a Project on CircleCI] for more information.
+include::ROOT:partial$incident/stop-building.adoc[]
 --
 `circleci` org::
 +
@@ -85,6 +77,10 @@ If you have an organization of type `circleci`, you can cancel all running workf
 
 --
 ====
+endif::server[]
+ifdef::server[]
+include::ROOT:partial$incident/stop-building.adoc[]
+endif::server[]
 
 === 3. Coordinate who follows the project
 
@@ -106,7 +102,12 @@ Use the CLI or API to **list names**, **remove** bad variables, and **store** re
 Start here if you suspect a leak:
 
 * link:https://support.circleci.com/hc/en-us/articles/31307485547419[What to do if you suspect you have a secret leaked from CircleCI]
+ifndef::server[]
 * xref:security:audit-logs.adoc[Audit Logs]
+endif::server[]
+ifdef::server[]
+* xref:server-admin:operator:circleci-server-security-features.adoc[CircleCI Server security features]
+endif::server[]
 
 To inventory variable names across multiple projects, use the open source link:https://github.com/CircleCI-Public/CircleCI-Env-Inspector[CircleCI Environment Inspector] (run with a xref:toolkit:managing-api-tokens.adoc[Personal API Token]; treat output as sensitive).
 
@@ -168,8 +169,6 @@ The table in this section presents some common scenarios you may encounter durin
 
 After you have paused or stopped work in CircleCI, see xref:orchestrate:analyze-pipelines-during-an-incident.adoc[Analyze Pipelines and Job Steps During an Incident] to investigate what ran and what the incident exposed.
 
-NOTE: For server customers, **Block all new work** is available in Server 4.10+. See xref:orchestrate:skip-build.adoc#block-all-new-work[Block All New Work] for details.
-
 == Block all new work vs Stop Building feature comparison
 
 The table below compares the two controls.
@@ -203,7 +202,9 @@ The table below compares the two controls.
 == Further options
 
 * **Skip the next push only:** Add `[ci skip]` or `[skip ci]` to the latest commit (see xref:orchestrate:skip-build.adoc#skip-jobs[Skip CI for a Specific Push]). This does not stop work that is already queued or running across the org.
+ifndef::server[]
 * **Scale Plan (optional policy-based pause):** **Block all new work** at **organization** scope is enough to stop pipelines org-wide. On **Scale**, you can also use **config policy** to fail pipelines with a **custom message** and **exempt** specific projects (for example a repo used only to publish policies). See xref:config-policies:config-policy-management-overview.adoc[Policy Management Overview] and the Help Center sample link:https://support.circleci.com/hc/en-us/articles/42043259044379[Blocking builds org-wide through config policies].
+endif::server[]
 * **Bulk "unfollow" or scripted stop (GitHub OAuth-style projects):** Some teams use a scripted loop against the link:https://circleci.com/docs/api/v1/[API v1] to unfollow multiple repositories at once. That pattern operates **per user** who runs it and can require **Set Up Project** again later. Read link:https://support.circleci.com/hc/en-us/articles/360019776413[How to Mass Unfollow Projects From CircleCI] before using it in an emergency.
 
 [#see-also]

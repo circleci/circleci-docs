@@ -1,0 +1,15 @@
+**Stop Building** does the following:
+
+* Remove all project followers.
+* Cancel all running workflows.
+* Remove the webhook and deploy key from the repository.
+
+Once the incident is resolved, you can set up the project again.
+
+include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[Steps to access project settings]
+. Scroll down to the bottom of the overview page and select btn:[Stop Building].
+
+.Stop Building button in Project settings > Overview
+image::guides:ROOT:stop-building.png[Stop building button in Project settings > Overview]
+
+See xref:security:stop-building-a-project-on-circleci.adoc[Stop Building a Project on CircleCI] for more information.
