@@ -93,6 +93,7 @@ workflows:
             - test
 ----
 
+ifndef::server[]
 You can combine automatic reruns with workflow conditions. The following example shows how to configure automatic reruns for a workflow that is not triggered by a schedule trigger:
 
 .Combining automatic reruns with workflow conditions
@@ -108,6 +109,7 @@ workflows:
       - build
       - test
 ----
+endif::server[]
 
 [#how-automatic-reruns-work]
 == How automatic reruns work
@@ -242,7 +244,12 @@ workflows:
 [#excessive-reruns]
 === Excessive rerun attempts
 
+ifndef::server[]
 To prevent unnecessary reruns and credit consumption:
+endif::server[]
+ifdef::server[]
+To prevent unnecessary reruns:
+endif::server[]
 
 * Set conservative `max_auto_reruns` values based on your failure patterns.
 * Investigate recurring failures to address root causes.
@@ -277,9 +284,14 @@ workflows:
 == Frequently asked questions
 
 [#faq-cost]
-=== Do automatic reruns consume additional credits?
+=== Do automatic reruns consume additional resources?
 
+ifndef::server[]
 Yes, automatic reruns consume compute credits for each retry attempt. Only failed jobs are rerun, so successful jobs from the original workflow do not consume additional credits.
+endif::server[]
+ifdef::server[]
+Yes, each retry attempt uses executor capacity. Only failed jobs are rerun, so successful jobs from the original workflow do not use additional capacity.
+endif::server[]
 
 [#faq-manual-rerun]
 === What happens if I manually rerun a workflow?
