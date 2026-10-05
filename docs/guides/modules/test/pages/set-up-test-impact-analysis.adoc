@@ -226,6 +226,7 @@ options:
       include: true
 ----
 
+[#overriding-tests-selected-for-run-and-analysis]
 === Overriding tests selected for run and analysis
 
 The `--analyze-tests` and `--run-tests` flags give you fine-grained control over how the `testsuite` command behaves. For most projects you can rely on defaults to work automatically with no need to set these flags.
@@ -403,71 +404,39 @@ jobs:
 [#dynamic-parallelism]
 === Set parallelism from the number of selected tests
 
-Use the `circleci testsuite list-tests` command in a setup workflow to count the selected test atoms, then pass a parallelism value to the continued workflow as a pipeline parameter. This approach requires xref:orchestrate:dynamic-config.adoc[Dynamic Configuration] to be enabled for your project.
+NOTE: Dynamic parallelism is experimental. The `experimental.dynamic-parallelism` configuration will be replaced in a future release. You will be required to update your configuration when the syntax changes.
 
-The `list-tests` command prints the selected test atoms to stdout, one per line, without running them. It applies the same selection rules as `circleci testsuite run`, so the count reflects what the test job runs. The `--run-tests` and `--analyze-tests` flags accept the same values as `run`. If your test job passes either flag, pass the same flags to `list-tests` so the count matches.
+Use the `circleci testsuite list-tests` command in an upstream job to select test atoms, then run the test atoms in a downstream job with parallelism set from the number of selected test atoms.
 
-.Setup configuration that counts the selected test atoms
+The `list-tests` command selects test atoms without running them, applying the same selection rules as `circleci testsuite run`. The count reflects what the test job runs. The `--run-tests` and `--analyze-tests` flags accept the same values as `run`. If your test job passes either flag, pass the same flags to `list-tests` so the count matches. See <<overriding-tests-selected-for-run-and-analysis>>.
+
+To get set up, pass a unique key to `list-tests` with the `--key` flag. Then add an `experimental.dynamic-parallelism` stanza to your configuration, including the following:
+
+* The name of the downstream test job.
+* The unique key.
+* Minimum and maximum parallelism for the job.
+
+.CircleCI configuration that sets parallelism from the selected test atoms
 [source,yaml]
 ----
 # .circleci/config.yml
 version: 2.1
-setup: true
-
-orbs:
-  continuation: circleci/continuation@1
 
 jobs:
-  set-parallelism:
+  list-tests:
     executor: my-executor
     steps:
       # Check out the code and install the dependencies the discover command needs.
       - setup
-      - run:
-          name: Count selected test atoms
-          command: |
-            TESTS_PER_NODE=20
-            MAX_PARALLELISM=10
+      # List the test atoms that would be selected, without running them.
+      - run: circleci testsuite list-tests "ci tests" --key=ci-tests-parallelism-key
 
-            # List the test atoms that would be selected, without running them.
-            TEST_COUNT=$(circleci testsuite list-tests "ci tests" | wc -l)
-
-            # Round up to the next whole node, then clamp to the range 1-MAX_PARALLELISM.
-            PARALLELISM=$(( (TEST_COUNT + TESTS_PER_NODE - 1) / TESTS_PER_NODE ))
-            if [ "$PARALLELISM" -lt 1 ]; then
-              PARALLELISM=1
-            fi
-            if [ "$PARALLELISM" -gt "$MAX_PARALLELISM" ]; then
-              PARALLELISM=$MAX_PARALLELISM
-            fi
-
-            echo "Selected ${TEST_COUNT} test atoms, continuing with parallelism ${PARALLELISM}"
-            echo "{\"test_parallelism\": ${PARALLELISM}}" > /tmp/parameters.json
-      - continuation/continue:
-          configuration_path: .circleci/continue-config.yml
-          parameters: /tmp/parameters.json
-
-workflows:
-  setup-workflow:
-    jobs:
-      - set-parallelism
-----
-
-.Continue configuration that sets parallelism from the pipeline parameter
-[source,yaml]
-----
-# .circleci/continue-config.yml
-version: 2.1
-
-parameters:
-  test_parallelism:
-    type: integer
-    default: 1
-
-jobs:
   test:
     executor: my-executor
-    parallelism: << pipeline.parameters.test_parallelism >>
+    # Set job parallelism to the maximum parallelism for a full suite to run.
+    # Any failures will fall back to this value.
+    # This is optional but recommended.
+    parallelism: 20
     steps:
       - setup
       - run: circleci testsuite run "ci tests"
@@ -477,10 +446,24 @@ jobs:
 workflows:
   test-workflow:
     jobs:
-      - test
+      - list-tests
+      - test:
+          requires:
+            - list-tests
+
+experimental:
+  dynamic-parallelism:
+    # The name of the job to set parallelism for.
+    test:
+      # Must match the key passed to list-tests.
+      key: ci-tests-parallelism-key
+      min: 1
+      max: 20
 ----
 
 [TIP]
 ====
-The setup job runs your `discover` command, so it needs a checkout and any dependencies that command relies on.
+The `list-tests` job runs your `discover` command, so it needs a checkout and any dependencies that command relies on.
+
+Dynamic parallelism requires test timings to work, these are generated whenever the full test suite is run with Smarter Testing. Merging to your default branch or running the test suite once with the `--run-tests=all` flag will generate timings for dynamic parallelism.
 ====
