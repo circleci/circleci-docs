@@ -2,7 +2,6 @@
 :page-platform: Cloud
 :page-vcs: all
 :page-plan: Free, Performance, Scale
-:page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Migrate from TeamCity to CircleCI. Compare concepts and configuration, including environments, steps, build templates and complex builds.
 :source-highlighter: pygments.rb

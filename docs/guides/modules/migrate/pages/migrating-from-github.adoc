@@ -2,7 +2,6 @@
 :page-platform: Cloud
 :page-vcs: github, github-enterprise
 :page-plan: Free, Performance, Scale
-:page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Migrate from GitHub Actions to CircleCI. Compare jobs and workflows, actions and orbs, runners and executors, and configuration syntax.
 :experimental:
