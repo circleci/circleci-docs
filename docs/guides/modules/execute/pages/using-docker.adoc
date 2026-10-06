@@ -89,8 +89,10 @@ jobs:
 
 For the Docker execution environment, the following resource classes are available for the x86 architecture:
 
+ifndef::server[]
 ==== Gen1
 
+endif::server[]
 include::ROOT:partial$execution-resources/docker-resource-table.adoc[]
 
 ifndef::server[]
@@ -114,6 +116,7 @@ include::ROOT:partial$execution-resources/docker-arm-resource-table.adoc[]
 
 include::ROOT:partial$execution-resources/docker-arm-gen2-resource-table.adoc[]
 
+endif::server[]
 [#view-resource-usage]
 === View resource usage
 
