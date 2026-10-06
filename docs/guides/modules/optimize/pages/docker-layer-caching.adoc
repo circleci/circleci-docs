@@ -18,7 +18,9 @@ DLC caches the individual layers of any Docker images built during your CircleCI
 
 You can use DLC with both the `machine` executor and in a xref:execution-managed:building-docker-images.adoc[Remote Docker Environment] (`setup_remote_docker`).
 
+ifndef::server[]
 DLC costs 200 credits per job run. For more information about DLC charges, see the xref:plans-pricing:credits.adoc#charge-for-docker-layer-caching[FAQ].
+endif::server[]
 
 NOTE: DLC has a known issue with QEMU/binfmt multi-arch `buildx` builds. See <<known-issues,Known Issues>> before enabling it.
 
@@ -134,7 +136,12 @@ If part of the Dockerfile changes, a subsequent run of the exact same job with t
 
 If you change something in your Dockerfile, CircleCI invalidates all later steps from the point of the change and rebuilds those layers. When some steps remain the same (the steps before the one you removed), CircleCI can reuse those steps, so the build is still faster than rebuilding the entire image.
 
+ifndef::server[]
 At the beginning of each job that uses DLC, there is a `DLC set-up` step. You are not charged for this step. At the end of each job that uses DLC, CircleCI uploads the cache asynchronously, which does not prevent the workflow from continuing to progress. This means that jobs within the same workflow generally do not access a cache uploaded from an upstream job. You are not charged for this `DLC teardown` step.
+endif::server[]
+ifdef::server[]
+At the beginning of each job that uses DLC, there is a `DLC set-up` step. At the end of each job that uses DLC, CircleCI uploads the cache asynchronously, which does not prevent the workflow from continuing to progress. This means that jobs within the same workflow generally do not access a cache uploaded from an upstream job.
+endif::server[]
 
 [#parallelism-and-dlc]
 === Parallelism and DLC

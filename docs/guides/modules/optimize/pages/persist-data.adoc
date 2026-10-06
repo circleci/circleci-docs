@@ -45,12 +45,14 @@ Because caches are global within a project, a cache saved on one branch will be 
 
 * For more information on caching dependencies, including race conditions, managing caches, and using cache keys, see the xref:caching.adoc[Caching Dependencies] page.
 
+ifndef::server[]
 [#build-tool-cache]
 === Build tool cache
 
 Dependency caching and build tool cache both use CircleCI's cache storage, but they cache different things. Dependency caching (above) saves what your package manager downloads. Build tool cache saves what your build tool itself produces: task or build outputs for tools such as Gradle, Bazel, Turborepo, and Xcode. Use the `with_tool_cache` step instead of a `save_cache`/`restore_cache` pair when you want to cache one of these tools' own build outputs.
 
 * For more information, see the xref:build-tool-cache.adoc[Build Tool Cache] page.
+endif::server[]
 
 [#cache-optimization]
 === Caching optimization
@@ -101,6 +103,7 @@ If you need to store artifacts for longer periods of time, there are other optim
 
 For more information on artifact optimization, and using artifacts to persist data once a job has completed, see the xref:artifacts.adoc[Storing Build Artifacts] page.
 
+ifndef::server[]
 [#managing-network-and-storage-usage]
 == Managing network and storage usage
 
@@ -159,8 +162,17 @@ To access custom storage controls from the link:https://app.circleci.com/[Circle
 Once you save your preferences, they take effect immediately. Previously created objects that are stored with a different retention period will continue to persist for the retention period set when the object was created.
 
 Anyone in the organization can view the custom usage controls, but you must be an admin to make changes to the storage periods.
+endif::server[]
 
+ifndef::server[]
 === Job level retention
+endif::server[]
+ifdef::server[]
+== Job level retention
+
+NOTE: Job level retention requires CircleCI Server 4.9 or later.
+
+endif::server[]
 You can configure job retention periods to control how long job data is kept. Job retention specifically controls cache retention at the job level. This setting can be configured from 1 day to 15 days using string values (for example, "1d", "7d", "15d") in your CircleCI configuration YAML file. This reduces retention from the organization-level default, automatically removing cache data after the specified period.
 
 The following example shows how to configure job retention in your configuration file:
@@ -181,8 +193,11 @@ jobs:
       - run: npm test
 ----
 
+ifndef::server[]
 Storage retention periods run independently of your billing cycle. When you save a cache, its retention countdown begins immediately for the configured storage period (for example, 10 days). Storage retention is not affected by when your billing cycle starts or ends. For example, if you save a cache on day 25 with a 10-day storage period, that cache remains in storage through day 35. This period spans the end of one billing cycle and the start of the next.
+endif::server[]
 
+ifndef::server[]
 [#how-to-calculate-an-approximation-of-network-and-storage-costs]
 === How to calculate an approximation of network and storage costs
 
@@ -204,13 +219,18 @@ For questions on data usage for the IP ranges feature, visit the xref:reference:
 Network transfer to self-hosted runners can be reduced by using custom local storage, such as a persistent volume, instead of the built-in caches and workspaces provided by CircleCI.
 
 To minimize storage billing, evaluate your needs and set custom retention periods for artifacts, workspaces, and caches. Navigate to menu:Plan[Usage Controls] on the link:https://app.circleci.com/[CircleCI web app].
+endif::server[]
 
 [#see-also]
 == See also
 
 * xref:caching.adoc[Caching Dependencies]
+ifndef::server[]
 * xref:build-tool-cache.adoc[Build Tool Cache]
+endif::server[]
 * xref:orchestrate:workspaces.adoc[Workspaces]
 * xref:artifacts.adoc[Artifacts]
+ifndef::server[]
 * xref:security:ip-ranges.adoc[IP Ranges]
+endif::server[]
 * xref:optimizations.adoc[Optimizations Overview]

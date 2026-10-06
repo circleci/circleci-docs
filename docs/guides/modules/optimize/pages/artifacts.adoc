@@ -23,12 +23,22 @@ Another example of an artifact is a project that is packaged as an Android app w
 
 If a job produces persistent artifacts such as screenshots, coverage reports, core files, or deployment tarballs, CircleCI can automatically save and link them for you.
 
+ifndef::server[]
 Navigate to a pipeline's *Job* page on the link:https://app.circleci.com/[CircleCI web app] to find the *Artifacts* tab. Artifacts are stored on Amazon S3 and are protected with your CircleCI account for private projects. Individual artifact files have a maximum size limit of 3GB.
+endif::server[]
+ifdef::server[]
+Navigate to a pipeline's *Job* page on the CircleCI web app to find the *Artifacts* tab. Your system administrator configures where artifacts are stored and their size limits.
+endif::server[]
 
 .Artifacts tab in job page
 image::guides:ROOT:artifacts.png[Artifacts tab screenshot]
 
+ifndef::server[]
 By default, artifact storage duration is set to 30 days. This can be customized on the link:https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls]. Currently, 30 days is also the maximum storage duration you can set.
+endif::server[]
+ifdef::server[]
+Your system administrator sets the artifact storage duration.
+endif::server[]
 
 For information on managing network and storage usage, see the xref:persist-data.adoc[Persisting Data] page.
 
@@ -203,7 +213,12 @@ You can read more about using CircleCI's API to interact with artifacts in the l
 | The personal API token you created above.
 
 | `:vcs-type`
+ifndef::server[]
 | The version control system (VCS) you are using. Either `github`, `bitbucket`, or `gitlab`.
+endif::server[]
+ifdef::server[]
+| The version control system (VCS) you are using. For CircleCI Server, `github`.
+endif::server[]
 
 | `:username`
 | The VCS project account username or organization name for the target project. Located at the top left of the screen in the CircleCI application.
@@ -216,6 +231,7 @@ You can read more about using CircleCI's API to interact with artifacts in the l
 |===
 --
 
+ifndef::server[]
 [#artifacts-and-self-hosted-runner]
 == Artifact storage customization
 
@@ -224,6 +240,7 @@ When using self-hosted runners, there is a network and storage usage limit inclu
 Retaining artifacts for long periods increases storage costs. Determine why you are retaining artifacts before setting retention periods. For example, you might retain artifacts to troubleshoot failing builds. Once the build passes, the artifact is likely not needed. Set a low storage retention period for artifacts if this suits your needs.
 
 You can customize storage usage retention periods for artifacts on the https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls]. For information on managing network and storage usage, see the xref:persist-data.adoc#managing-network-and-storage-usage[Persisting Data] page.
+endif::server[]
 
 [#artifacts-optimization]
 == Artifacts optimization

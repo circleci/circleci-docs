@@ -24,7 +24,12 @@ By default, Java is configured so that it will use:
 * More than `1/64th` of your total memory (for Docker Medium with 4GiB of RAM this will be 64 MiB).
 * Less than `1/4th` of your total memory (for Docker Medium with 4GiB of RAM this will be 1GiB).
 
+ifndef::server[]
 As of link:https://circleci.com/changelog/#container-cgroup-limits-now-visible-inside-the-docker-executor[June 3rd 2020], these limits are visible when using the Docker executor. This means that the recent versions of Java will correctly
+endif::server[]
+ifdef::server[]
+These limits are visible when using the Docker executor. This means that the recent versions of Java will correctly
+endif::server[]
 detect the number of CPUs and amount of RAM available to the job.
 
 For older versions of Java, this can lead to the JVM seeing a large amount of memory and CPUs
@@ -222,3 +227,7 @@ Even if the JVM's maximum heap size is larger than the job's limit, the garbage 
 
 If you are still consistently hitting memory limits,
 consider xref:reference:ROOT:configuration-reference.adoc#resourceclass[Increasing Your Job's RAM Allocation].
+
+ifdef::server[]
+Your system administrator sets the available resource class sizes.
+endif::server[]
