@@ -14,7 +14,9 @@ When using project SSH keys, CircleCI holds the private key. The target system (
 [#github-projects]
 == GitHub projects
 
+ifndef::server[]
 include::ROOT:partial$tips/check-github-type-org.adoc[]
+endif::server[]
 
 Go to menu:Project Settings[SSH Keys] to view SSH keys set up for your project.
 

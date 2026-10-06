@@ -7,7 +7,9 @@
 :page-description: Edit your CircleCI configuration files in the web app with the in-app configuration editor, which offers auto-completion and a save and run option.
 :experimental:
 
+ifndef::server[]
 include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab or GitHub App]
+endif::server[]
 
 With the CircleCI configuration editor, you can modify your configuration files without the use of the xref:toolkit:local-cli.adoc[CircleCI CLI] or a text editor.
 

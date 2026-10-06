@@ -402,5 +402,7 @@ images.
 == Next steps
 
 * See xref:private-images.adoc[Using Docker Authenticated Pulls] for information about how to authorize your build to use an image in a private repository or in Amazon ECR.
+ifndef::server[]
 * For information about macOS images for iOS, see the xref:test:testing-ios.adoc[Testing iOS] page.
+endif::server[]
 * See xref:building-docker-images.adoc[Running Docker Commands] for information about how to build Docker images.
