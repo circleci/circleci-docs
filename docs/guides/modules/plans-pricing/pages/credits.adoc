@@ -20,7 +20,7 @@ The right plan for you and your team will depend on several factors:
 - If you want access to different machine types and resource classes
 - If you want a limited or unlimited number of self-hosted runners
 
-View the xref:plan-overview.adoc[Plans Overview] page for details on what features are available per plan, including the Free, Performance, Scale, and Server plans. For the xref:plan-server.adoc[Server Plan], see the dedicated page.
+View the xref:plan-overview.adoc[Plans Overview] page for details on what features are available per plan, including the Free, Performance, Scale, and Server plans.
 
 Take a look at the CircleCI link:https://circleci.com/pricing/[Pricing] page, and the link:https://circleci.com/product/features/resource-classes/[resource class comparison table], to learn more about how credits are distributed across different machine types and resource classes.
 
