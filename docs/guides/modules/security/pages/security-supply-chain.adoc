@@ -57,8 +57,13 @@ yarn add express
 yarn install  --frozen-lockfile
 ----
 
+ifndef::server[]
 Many tools for scanning dependency files exist, and many are first-party for a given language or tool chain. On CircleCI, there are orbs available that offer
 link:https://circleci.com/developer/orbs?query=&category=Security[dependency scanning], and cron jobs for periodic scanning to ensure your applications are scanning more often than your pushes.
+endif::server[]
+ifdef::server[]
+Many tools for scanning dependency files exist, and many are first-party for a given language or tool chain. You can import orbs that offer dependency scanning into your Server installation.
+endif::server[]
 
 Using dependency pinning with hashes like this prevents malicious binaries or packages from silently replacing known good versions. It protects against a narrow range of attacks where the upstream repository is compromised. This can protect your workstation and CI builds.
 
