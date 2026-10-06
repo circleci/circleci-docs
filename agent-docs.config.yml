@@ -48,6 +48,8 @@ options:
     - '/server-admin/server-4.6/**'
     - '/server-admin/server-4.7/**'
     - '/server-admin/server-4.8/**'
+    # The guides Server build repeats the Cloud guides; llms.txt lists its start page only
+    - '/guides/server/**'
 
   # Exclude <img> tags from markdown-content-parity check
   # Our markdown converter automatically strips out img tags

@@ -3,6 +3,7 @@ const fs = require('fs');
 const fsPromises = fs.promises;
 const path = require('path');
 const { algoliasearch } = require('algoliasearch');
+const { isGuidesServerBuild } = require('./lib/guides-server');
 
 /**
  * An Antora extension that exports page content to JSON and indexes it in Algolia.
@@ -57,6 +58,14 @@ function collectPages(contentCatalog, siteUrl) {
 
   contentCatalog.getComponents().forEach(({ name: comp, versions }) => {
     versions.forEach(({ version }) => {
+      // The guides Server build (guides-versions-extension.js) repeats the
+      // Cloud guides with small differences, so it stays out of search. Server
+      // readers find the Cloud page and use the version switcher.
+      if (isGuidesServerBuild(comp, version)) {
+        console.log('Skipping Algolia indexing for the guides Server build')
+        return
+      }
+
       if (comp === 'server-admin' && excludedServerAdminVersions.includes(version)) {
         console.log(`Skipping Algolia indexing for server-admin version: ${version}`);
         return;

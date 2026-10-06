@@ -7,6 +7,8 @@
  * they're a one-file edit.
  */
 
+const { versionNum } = require('./guides-server')
+
 const ALL_PLANS = ['Free', 'Performance', 'Scale']
 
 const VCS_DISPLAY_NAMES = {
@@ -21,6 +23,7 @@ const VCS_DISPLAY_NAMES = {
 const LABELS = {
   plan: 'Cloud plans',
   vcs: 'Version control',
+  server: 'Server version',
 }
 
 const VCS_ALL_TEXT = 'All supported providers'
@@ -29,6 +32,17 @@ const VCS_OVERVIEW_PATH = '/guides/integration/version-control-system-integratio
 
 // Antora components in scope for the sidebar (checked via page-component-name).
 const SCOPED_COMPONENTS = ['guides', 'reference']
+
+// Returns the sidebar text for a Server build, or null when the page is
+// available from the baseline (the earliest covered version, set by
+// guides-versions-extension.js as the server-baseline-version attribute).
+function getServerVersionAvailability(rawMin, rawBaseline) {
+  const min = typeof rawMin === 'string' ? rawMin.replace(/"/g, '').trim() : ''
+  if (!/^\d+\.\d+$/.test(min)) return null
+  const baseline = typeof rawBaseline === 'string' ? rawBaseline.trim() : ''
+  if (/^\d+\.\d+$/.test(baseline) && versionNum(min) <= versionNum(baseline)) return null
+  return `${min} and later`
+}
 
 function parseList(rawValue) {
   if (!rawValue || typeof rawValue !== 'string') return []
@@ -93,4 +107,5 @@ module.exports = {
   parseList,
   getPlanAvailability,
   getVcsAvailability,
+  getServerVersionAvailability,
 }
