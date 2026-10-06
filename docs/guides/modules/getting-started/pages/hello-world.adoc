@@ -290,7 +290,7 @@ TIP: If you get a `No Config Found` error, it may be that you used `.yaml` file 
 [#next-steps]
 ## Next steps
 
-* See the xref:about-circleci:concepts.adoc[Concepts] page for a summary of CircleCI-specific concepts.
+* See the xref:reference:ROOT:concepts.adoc[Concepts] page for a summary of CircleCI-specific concepts.
 
 * Refer to the xref:orchestrate:workflows.adoc[Workflows] page for examples of orchestrating job runs with concurrent, sequential, scheduled, and manual approval workflows.
 

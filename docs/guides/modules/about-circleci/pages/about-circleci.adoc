@@ -62,4 +62,4 @@ Other cloud service deployments can be scripted using SSH, or by installing the 
 == Next steps
 
 * xref:benefits-of-circleci.adoc[Benefits of CircleCI]
-* xref:concepts.adoc[CircleCI Concepts]
+* xref:reference:ROOT:concepts.adoc[CircleCI Concepts]

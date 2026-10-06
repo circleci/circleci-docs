@@ -40,7 +40,7 @@
         // Pages excluded from dd_docs_page tracking because heavy automated/bot
         // traffic skews analytics and inflates Segment usage. Paths are matched
         // against window.location.pathname with any trailing slash removed.
-        const trackingExcludedPaths = ["/docs/guides/about-circleci/concepts"];
+        const trackingExcludedPaths = ["/docs/guides/about-circleci/concepts", "/docs/reference/concepts"];
         const normalizedPath = window.location.pathname.replace(/\/$/, "");
         if (!trackingExcludedPaths.includes(normalizedPath)) {
             analytics.track("dd_docs_page", {

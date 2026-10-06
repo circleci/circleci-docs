@@ -370,5 +370,5 @@ image::guides:ROOT:web_ui_plan_controls.png[Usage Controls]
 
 == Next steps
 
-- xref:concepts.adoc[CircleCI Concepts]
+- xref:reference:ROOT:concepts.adoc[CircleCI Concepts]
 - xref:getting-started:config-editor.adoc[Using the CircleCI Configuration Editor]

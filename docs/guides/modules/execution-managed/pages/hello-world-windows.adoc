@@ -108,6 +108,6 @@ In our last step, we store the build executable as an artifact, making it access
 
 Consider reading documentation on some of CircleCI's features:
 
-* See the xref:about-circleci:concepts.adoc[Concepts] document for a summary of configuration and the hierarchy of top-level keys in a `.circleci/config.yml` file.
+* See the xref:reference:ROOT:concepts.adoc[Concepts] document for a summary of configuration and the hierarchy of top-level keys in a `.circleci/config.yml` file.
 * Refer to the xref:orchestrate:workflows.adoc[Workflows] document for examples of orchestrating job runs with concurrent, sequential, scheduled, and manual approval workflows.
 * Find complete reference information for all keys and pre-built Docker images in the xref:reference:ROOT:configuration-reference.adoc[Configuring CircleCI] and xref:circleci-images.adoc[CircleCI Images] documentation, respectively.
