@@ -1,8 +1,7 @@
 = Migrate from AWS
-:page-platform: Cloud, Server
+:page-platform: Cloud
 :page-vcs: all
 :page-plan: Free, Performance, Scale
-:page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: This document provides an overview of how to migrate from AWS CodeCommit to CircleCI.
 :experimental:

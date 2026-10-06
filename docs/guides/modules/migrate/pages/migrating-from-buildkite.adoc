@@ -1,8 +1,7 @@
 = Migrate from Buildkite
-:page-platform: Cloud, Server
+:page-platform: Cloud
 :page-vcs: all
 :page-plan: Free, Performance, Scale
-:page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Migrate from Buildkite to CircleCI, with guidance on source control setup and a side-by-side comparison of build configuration syntax.
 :experimental:
