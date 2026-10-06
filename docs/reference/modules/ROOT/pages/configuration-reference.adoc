@@ -1879,7 +1879,7 @@ workflows:
 
 A step registers its teardown steps when it starts, before its command runs, so the teardown steps still run if the job is canceled part way through the step. A step that CircleCI skips, for example because of its <<the-when-attribute,`when` attribute>>, never reaches registration and registers nothing. A step that is retried through `max_auto_reruns` registers its teardown steps once, not once per attempt.
 
-Teardown steps run in reverse order of registration across the whole job: the teardown steps from the last step to start run first. For example, if step A starts a database and step B starts a server, B's teardown (stop the server) runs before A's teardown (stop the database).
+Teardown steps run in reverse order of registration across the whole job. The teardown steps from the last step to start run first. For example, if step A starts a database and step B starts a server, B's teardown (stop the server) runs before A's teardown (stop the database).
 
 CircleCI allows 10 minutes in total for a job's teardown steps, not 10 minutes each. Teardown steps that have not run when that time is up do not run.
 
