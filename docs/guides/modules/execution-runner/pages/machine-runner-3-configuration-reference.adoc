@@ -350,7 +350,7 @@ runner:
 === `runner.ssh.advertise_addr`
 `$CIRCLECI_RUNNER_SSH_ADVERTISE_ADDR`
 
-This parameter enables the “Rerun job with SSH” feature. Before enabling this feature, review the <<#considerations-before-enabling-ssh-debugging,*important considerations*>>. Rerun with SSH is not currently available on container runner.
+This parameter enables the “Rerun job with SSH” feature. Before enabling this feature, review the <<#considerations-before-enabling-ssh-debugging,*important considerations*>>. This parameter applies to machine runner 3 only. For container runner, refer to xref:container-runner-installation.adoc#enable-rerun-job-with-ssh[Enable Rerun Job With SSH].
 
 The address is of the form `*host:port*` and is displayed in the “Enable SSH” and “Wait for SSH” sections for a job that is rerun.
 

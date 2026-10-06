@@ -113,7 +113,7 @@ ConfigMap
 /b[Cc]ontainer [Rr]egistry/b
 Coreutils
 CPUs
-CRD
+CRDs?
 crontab
 CTest
 Cucumber
@@ -448,3 +448,4 @@ DMs
 Automations
 Create_secret_yourself
 iFrame
+Istio
