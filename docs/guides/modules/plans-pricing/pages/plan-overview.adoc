@@ -98,8 +98,6 @@ CircleCI Server is an on-premises CI/CD platform for enterprise customers who ha
 
 See the xref:server-admin:overview:circleci-server-overview.adoc[Server Documentation] for more information.
 
-The Server plan offers custom credit options that can be used across all CircleCI resource classes, per month, depending on your build configuration and execution environment.
-
 The Server plan adds the following options.
 
 [#custom-user-seat-count]
@@ -110,7 +108,7 @@ Customize the number of active users based on your needs.
 [#custom-storage-retention]
 === Custom storage retention
 
-The link:https://app.circleci.com/[CircleCI web app] allows for the customization of the storage retention periods of artifact, workspace, and cache objects. Lowering storage retention periods can also reduce your monthly bill.
+Administrators set retention periods for PostgreSQL, MongoDB and object storage in the Server installation. See the xref:server-admin:operator:data-retention.adoc[Data Retention in Server] page.
 
 [#additional-support-options]
 === Additional support options
