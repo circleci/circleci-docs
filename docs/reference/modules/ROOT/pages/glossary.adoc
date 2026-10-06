@@ -27,7 +27,7 @@ A record of significant events in a CircleCI organization, available to organiza
 
 == Build agent
 
-On CircleCI Server, the CircleCI program that executes the steps within a job and reports the results. The build agent runs as the main process inside a Nomad job allocation. See the xref:guides:plans-pricing:plan-server.adoc[CircleCI Server] page.
+On CircleCI Server, the CircleCI program that executes the steps within a job and reports the results. The build agent runs as the main process inside a Nomad job allocation. See the xref:server-admin:overview:circleci-server-overview.adoc[CircleCI Server] page.
 
 == Built-in environment variable
 
@@ -47,7 +47,7 @@ The command-line interface you install on your local machine to validate and deb
 
 == CircleCI Server
 
-CircleCI's on-premises CI/CD platform for organizations that must operate within their own firewall, private cloud, or data center. CircleCI Server runs in a Kubernetes cluster and provides the same core features as CircleCI Cloud. See the xref:guides:plans-pricing:plan-server.adoc[CircleCI Server] page.
+CircleCI's on-premises CI/CD platform for organizations that must operate within their own firewall, private cloud, or data center. CircleCI Server runs in a Kubernetes cluster and provides the same core features as CircleCI Cloud. See the xref:server-admin:overview:circleci-server-overview.adoc[CircleCI Server] page.
 
 == Command
 
@@ -188,7 +188,7 @@ A prebuilt virtual machine image for the <<machine-executor>>, available for Lin
 
 == Machine provisioner
 
-On CircleCI Server, the service that dynamically provisions and manages the virtual machines used by jobs configured for the machine execution environment, as well as Remote Docker jobs. See the xref:guides:plans-pricing:plan-server.adoc[CircleCI Server] page.
+On CircleCI Server, the service that dynamically provisions and manages the virtual machines used by jobs configured for the machine execution environment, as well as Remote Docker jobs. See the xref:server-admin:overview:circleci-server-overview.adoc[CircleCI Server] page.
 
 == Machine runner
 

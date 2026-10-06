@@ -5,7 +5,7 @@
 :page-audience: developer
 :page-description: An overview of CircleCI's credit-based plans, including features available at each plan tier.
 :experimental:
-:page-aliases: plan-free.adoc, plan-performance.adoc, plan-scale.adoc
+:page-aliases: plan-free.adoc, plan-performance.adoc, plan-scale.adoc, plan-server.adoc
 
 CircleCI offers credit-based usage plans that let you pay only for what you use, with the flexibility to scale as your team and project needs grow. This page explains how the plan system works and what features are available at each tier.
 
@@ -90,7 +90,32 @@ To set up a Scale plan, link:https://circleci.com/talk-to-us/[contact us].
 [#server-plan]
 == Server plan
 
-The Server plan is an on-premises CI/CD option for enterprise customers with compliance or security requirements that require operation within a private network or behind a firewall. Refer to the xref:plan-server.adoc[Server Plan] page for details.
+CircleCI Server is an on-premises CI/CD platform for enterprise customers who have compliance or security needs that require operation:
+
+* Within a firewall.
+* In a private cloud.
+* In a data center.
+
+See the xref:server-admin:overview:circleci-server-overview.adoc[Server Documentation] for more information.
+
+The Server plan offers custom credit options that can be used across all CircleCI resource classes, per month, depending on your build configuration and execution environment.
+
+The Server plan gives you access to a few additional upgrades over some of the other plans:
+
+[#custom-user-seat-count]
+=== Custom user seat count
+
+Customize the number of active users based on your needs.
+
+[#custom-storage-retention]
+=== Custom storage retention
+
+The link:https://app.circleci.com/[CircleCI web app] allows for the customization of the storage retention periods of artifact, workspace, and cache objects. This allows you to determine how to store each of these object types in a way that best suits your project. Lowering storage retention periods can also reduce your monthly bill.
+
+[#additional-support-options]
+=== Additional support options
+
+Additional support through expanded SLAs, an available account team, training and onboarding options, all of which are expandable with available support package add-ons. The Server plan also has access to the link:https://discuss.circleci.com/[community forums], link:https://support.circleci.com/hc/en-us[support portal], and our link:https://support.circleci.com/hc/en-us/requests/new[global ticket-based system].
 
 [#features-available-on-all-plans]
 == Features available on all plans
