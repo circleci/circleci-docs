@@ -62,7 +62,7 @@ The CircleCI plugin currently includes the following eight skills. Your agent pi
 | Set up Chunk sidecars for this project.
 
 | `circleci-testsuite`
-| Get set up for Smarter Testing by using `.circleci/test-suites.yml` and switch tests to `circleci testsuite run`. The manual setup is described on the xref:guides:test:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] page.
+| Get set up for Smarter Testing by using `.circleci/test-suites.yml` and switch tests to `circleci testsuite run`. The manual setup is described on the xref:guides:test:getting-started-with-circleci-testing-tool.adoc[Getting Started With CircleCI's Testing Tool] page.
 | Set up a testsuite for this project.
 
 | `circleci-smarter-testing`
@@ -218,5 +218,5 @@ CircleCI agent skills, MCP servers, and Chunk work together in an agentic CI/CD 
 * xref:connecting-to-the-circleci-mcp-server.adoc[Connecting to the CircleCI MCP Server]
 * xref:chunk-setup-and-overview.adoc[Chunk Overview and Setup]
 * xref:install-and-configure-the-chunk-cli.adoc[Install and Configure the Chunk CLI]
-* xref:guides:test:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing]
+* xref:guides:test:getting-started-with-circleci-testing-tool.adoc[Getting Started With CircleCI's Testing Tool]
 * link:https://github.com/CircleCI-Public/skills[CircleCI Public Skills repository]

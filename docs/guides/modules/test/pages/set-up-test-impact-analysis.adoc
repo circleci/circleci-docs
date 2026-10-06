@@ -121,7 +121,7 @@ The selection rules can be extended to select tests beyond those identified in t
 
 == Prerequisites
 
-Before enabling test impact analysis, ensure you have completed the xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] guide and have:
+Before enabling test impact analysis, ensure you have completed the xref:getting-started-with-circleci-testing-tool.adoc[Getting Started With CircleCI's Testing Tool] guide and have:
 
 * Configured your `.circleci/test-suites.yml` with `discover` and `run` commands.
 * Verified your tests run successfully with the `testsuite` command.
