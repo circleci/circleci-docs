@@ -61,7 +61,9 @@ For information on viewing your storage usage, and calculating your monthly stor
 [#test-insights]
 == Test Insights
 
+ifndef::server[]
 include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab or GitHub App]
+endif::server[]
 
 See the xref:insights:insights-tests.adoc[Test Insights] page for information on using the Insights feature to gather information about your tests.
 This includes flaky test detection, viewing tests that failed most often, slowest tests, and an overall performance summary.

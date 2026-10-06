@@ -77,6 +77,7 @@ git push --follow-tags
 
 If tests passed, CircleCI will publish the package to npm automatically.
 
+ifndef::server[]
 [#track-deployments-with-deploy-markers]
 == Track your deployments with deploy markers
 
@@ -89,3 +90,4 @@ You have two options for setting up deploy markers:
 * *Manual setup*: Add deploy marker commands directly to your `.circleci/config.yml` file by following the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
 
 Both approaches will enable you to track deployment history and manage rollbacks directly from the CircleCI web app.
+endif::server[]
