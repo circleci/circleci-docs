@@ -280,5 +280,4 @@ The `chunk` CLI collects anonymous usage telemetry. After you authenticate with 
 * xref:how-to-use-chunk-cli.adoc#run-validation[Validate Your Changes]
 * xref:how-to-use-chunk-cli.adoc#monitor-sidecars-with-chunk-watch[Monitor Sidecars With Chunk Watch]
 * xref:how-to-use-chunk-cli.adoc#find-test-coverage-gaps[Find Test Coverage Gaps]
-* xref:how-to-use-chunk-cli.adoc#run-chunk-factory[Run Chunk Factory]
 * xref:how-to-use-chunk-cli.adoc#trigger-chunk-tasks[Trigger Chunk Tasks]
