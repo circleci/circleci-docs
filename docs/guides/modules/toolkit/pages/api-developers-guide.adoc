@@ -29,7 +29,12 @@ The current categories of API v2 endpoints are:
 * Usage
 * Schedule
 
+ifndef::server[]
 NOTE: Personal API tokens are the only supported tokens on API v2. Project tokens are not supported on API v2. You can create a personal API token manually through the web app (see xref:managing-api-tokens.adoc#creating-a-personal-api-token[Managing API Tokens]) or programmatically using the xref:oauth-dynamic-client-registration.adoc[OAuth 2.0 Dynamic Client Registration] flow.
+endif::server[]
+ifdef::server[]
+NOTE: Personal API tokens are the only supported tokens on API v2. Project tokens are not supported on API v2. You can create a personal API token manually through the web app (see xref:managing-api-tokens.adoc#creating-a-personal-api-token[Managing API Tokens]).
+endif::server[]
 
 [#authentication-and-authorization]
 == Authentication and authorization
@@ -52,8 +57,14 @@ CircleCI encourages security best practices when using cURL with the API. Visit 
 
 To add an API token, perform the steps listed below.
 
+ifndef::server[]
 . Log in to the https://app.circleci.com[CircleCI web application].
 . xref:toolkit:managing-api-tokens.adoc#creating-a-personal-api-token[Create a Personal API Token] by visiting the link:https://app.circleci.com/settings/user/tokens[Personal API Tokens] page, and follow the steps to add an API token.
+endif::server[]
+ifdef::server[]
+. Log in to the CircleCI web application.
+. xref:toolkit:managing-api-tokens.adoc#creating-a-personal-api-token[Create a Personal API Token] by visiting the Personal API Tokens page, and follow the steps to add an API token.
+endif::server[]
 . To test your token, call the API using the command below. You will need to set your API token as an environment variable before making a cURL call.
 +
 [,shell]
@@ -119,6 +130,7 @@ To find your project slug, follow these steps:
 
 The `project_slug` is also included in the response payload when looking up a link:https://circleci.com/docs/api/v2/#tag/Pipeline/operation/getPipelineById[pipeline] or link:https://circleci.com/docs/api/v2/#tag/Workflow/operation/getWorkflowById[workflow] by ID. The project slug can then be used to get information about the project.
 
+ifndef::server[]
 === GitHub OAuth and Bitbucket Cloud
 If you integrate your code via the GitHub OAuth app or Bitbucket Cloud, your project slug is in a human readable format: `vcs_type/org_name/repo_name` (VCS type can be `github`/`bitbucket` or `gh`/`bb`).
 
@@ -147,6 +159,7 @@ Each `RateLimit-Limit` or `X-RateLimit-Limit` header will also have a related `R
 Similarly, there are `RateLimit-Reset` and `X-RateLimit-Reset` headers that will give you the number of seconds until the current rate limit window will reset.
 
 NOTE: As we transition some APIs from one rate limit system to another, a different limit may appear in the `RateLimit` header compared to the `X-RateLimit` header. In these cases, the lower limit will be enforced.
+endif::server[]
 
 [#pagination]
 == Pagination
@@ -251,13 +264,23 @@ You will get a list of pipelines for your project using link:https://circleci.co
 [#prerequisites]
 === Prerequisites
 
+ifndef::server[]
 * A GitHub, Bitbucket, or GitLab account with a repository to set up with CircleCI.
+endif::server[]
+ifdef::server[]
+* A GitHub account with a repository to set up with CircleCI.
+endif::server[]
 
 [#steps]
 === Steps
 
 . In your VCS, create a repository (or use an existing one if you prefer). The repository for this how-to guide will be called `hello-world`. Create a README for your repository so that it is not empty.
+ifndef::server[]
 . Set up your new project on the link:https://app.circleci.com/[CircleCI web app]. Refer to the xref:getting-started:create-project.adoc[Create a Project] guide for steps.
+endif::server[]
+ifdef::server[]
+. Set up your new project in the CircleCI web app. Refer to the xref:getting-started:create-project.adoc[Create a Project] guide for steps.
+endif::server[]
 +
 After completing the steps for setting up your project, you will have a valid `config.yml` file in a `.circleci` folder at the root of your repository. Something like the following:
 +
@@ -293,7 +316,12 @@ workflows:
       - say-hello
 ----
 
+ifndef::server[]
 . Add an API token to your account from the link:https://circleci.com/account/api[Personal API Tokens page]. Be sure to save your API token in a secure place once you generate it.
+endif::server[]
+ifdef::server[]
+. Add an API token to your account from the Personal API Tokens page. Be sure to save your API token in a secure place once you generate it.
+endif::server[]
 . Find your project slug from the <<getting-started-with-the-api,project settings overview page>>.
 . Now you are ready to test out your API token using `curl` to make sure everything works. The following code snippets demonstrate querying all pipelines on a project. Note that in the example below, the values within curly braces (`{}`) need to be replaced with your values.
 +
@@ -344,8 +372,10 @@ You will likely receive a long string of unformatted JSON. After formatting, it 
 ----
 
 . One of the benefits of the CircleCI API v2 is the ability to remotely trigger pipelines with parameters. The following code snippet triggers a pipeline via `curl` without any body parameters:
+ifndef::server[]
 +
 CAUTION: For GitHub App or GitLab pipelines, use the link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/triggerPipelineRun[Trigger a new pipeline endpoint] rather than the endpoint used in this example.
+endif::server[]
 +
 [,shell]
 ----
@@ -627,7 +657,12 @@ NOTE: `grep` is used to locate all the URLs for downloading the job artifacts, w
 
 The CircleCI API v2 also includes several endpoints that enable you to retrieve detailed insights into your workflows and individual jobs. Read the xref:insights:insights.adoc[Using Insights] page to learn more about insights data.
 
+ifndef::server[]
 The example below describes how you can return information about a single workflow containing information about metrics and credit usage.
+endif::server[]
+ifdef::server[]
+The example below describes how you can return information about a single workflow containing information about metrics.
+endif::server[]
 
 [#returning-workflow-metrics]
 ==== Returning workflow metrics
@@ -719,6 +754,10 @@ curl -X GET https://circleci.com/api/v2/insights/{project-slug}/workflows
 }
 ----
 
+ifdef::server[]
+NOTE: CircleCI Server responses do not include credit fields such as `total_credits_used`.
+
+endif::server[]
 Notice that in this JSON response, you will receive detailed metrics for the set of workflows that ran, including:
 
 * `success_rate` - The ratio of successful runs (only those with a "success" status) over the total number of runs (any status) in the aggregation window.
@@ -728,7 +767,9 @@ Notice that in this JSON response, you will receive detailed metrics for the set
 * `throughput` - The average number of builds per day.
 * `mttr` - The Mean Time to Recovery (MTTR). MTTR is the average time it takes to get a failed CI build back to a "success" status.
 * `duration_metrics` - A collection of specific metrics and measurements that provide the duration of the workflow. This includes `min`, `max`, `median`, `mean`, `p95`, and `standard_deviation`.
+ifndef::server[]
 * `total credits used` - The total number of credits used during the build.
+endif::server[]
 * `windows_start & windows_end` - The time the build was initiated and then completed.
 
 NOTE: The above example only shows a small number of builds. When you run this command, you may receive up to 250 individual builds that you can review in much more detail.
@@ -805,6 +846,10 @@ Now that you have retrieved aggregated data for up to 250 different jobs, you ma
   },
 ----
 
+ifdef::server[]
+NOTE: CircleCI Server responses do not include credit fields such as `credits_used`.
+
+endif::server[]
 The following information is returned for each job:
 
 * `id` - The ID associated with the individual job.
@@ -812,7 +857,9 @@ The following information is returned for each job:
 * `duration` - The total time of the job, in seconds.
 * `created_at` - The time the job started.
 * `stopped_at` - The time the job ended.
+ifndef::server[]
 * `credits_used` - The number of credits used during the job.
+endif::server[]
 
 [#reference]
 == Reference

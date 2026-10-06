@@ -303,6 +303,11 @@ This example shows a sequential workflow with the `test` job configured to run o
 
 Below are two sample configurations for a Fan-in/Fan-out workflow.
 
+ifdef::server[]
+NOTE: On CircleCI Server, set the `machine` executor image to `default` in these examples.
+
+endif::server[]
+
 .Fan-in-out
 image::guides:ROOT:fan-in-out-example.png[Fan-in-out]
 
@@ -441,6 +446,7 @@ workflows:
 NOTE: A job can only run when its dependencies are satisfied therefore it requires the dependencies of all upstream jobs. This means only the immediate upstream dependencies need to be specified in the `requires:` blocks.
 
 [#sample-configuration-with-multiple-executor-types]
+ifndef::server[]
 == Sample configuration with multiple executor types
 
 It is possible to use multiple xref:execution-managed:executor-intro.adoc[Executor Types]
@@ -774,6 +780,7 @@ workflows:
 ----
 --
 ====
+endif::server[]
 
 [#see-also]
 == See also
