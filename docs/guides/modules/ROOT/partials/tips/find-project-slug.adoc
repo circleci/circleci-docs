@@ -14,6 +14,6 @@ endif::server[]
 
 ifndef::server[]
 * **GitHub App**: Project slug starts with `circleci` followed by UUIDs. For example, `circleci/34R3kN5RtfEE7v4sa4nWAU/4nYdoKGkb6RXn7JGt8SQtg`.
-endif::server[]
 * **GitHub OAuth app**: Project slug is human readable. For example, `github/circleci/circleci-demo-workflows`.
+endif::server[]
 ****

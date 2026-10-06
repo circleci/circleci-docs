@@ -386,7 +386,7 @@ ifndef::server[]
 NOTE: The steps described in this section apply to all CircleCI accounts. If you are using Bitbucket Cloud, or your account is integrated through the GitHub OAuth app, you can add an SSH key to your VCS account (https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/[GitHub] or https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html[Bitbucket]). Do this rather than adding it in the CircleCI app under https://app.circleci.com/settings/user/job-ssh-keys[User Settings], if you prefer.
 endif::server[]
 ifdef::server[]
-NOTE: The steps described in this section apply to all CircleCI accounts. If your account is integrated through the GitHub OAuth app, you can add an SSH key to your VCS account (https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/[GitHub]). Do this rather than adding it in the CircleCI app under *User Settings*, if you prefer.
+NOTE: The steps described in this section apply to all CircleCI accounts. You can add an SSH key to your VCS account (https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/[GitHub]). Do this rather than adding it in the CircleCI app under *User Settings*, if you prefer.
 endif::server[]
 
 ifndef::server[]

@@ -104,7 +104,6 @@ ifndef::server[]
 == Limitations
 
 Using `docker compose` with the `macos` executor is not supported.
-See link:https://support.circleci.com/hc/en-us/articles/360045029591-Can-I-use-Docker-within-the-macOS-executor-[our support article for more information].
 endif::server[]
 
 [#see-also]

@@ -16,7 +16,7 @@ ifndef::server[]
 * A CircleCI account and organization. See the xref:create-an-organization.adoc[Create an Organization] page if you have not created one yet.
 endif::server[]
 ifdef::server[]
-* A CircleCI Server account. Your organizations are the GitHub organizations you belong to.
+* A CircleCI Server account.
 endif::server[]
 * Code you want to build on CircleCI.
 
