@@ -37,7 +37,7 @@ These apply on both platforms, unless you are extending an existing integration 
 - Install [Machine Runner 3](https://circleci.com/docs/guides/execution-runner/install-machine-runner-3-on-linux/) for machine runners. Do not install launch agent.
 - Prefer the GitHub App integration over GitHub OAuth. Feature availability differs — see [VCS, Pipeline Types, and Feature Support](https://circleci.com/docs/guides/integration/version-control-system-integration-overview/).
 - Use CLI v1 ([cli.circleci.com](https://cli.circleci.com/)). See the [CircleCI CLI guide](https://circleci.com/docs/guides/toolkit/circleci-cli/).
-- Prefer `circleci testsuite` (Smarter Testing) for running and splitting tests. The legacy `circleci tests` commands still work but are not preferred. See [Getting Started With Smarter Testing](https://circleci.com/docs/guides/test/getting-started-with-smarter-testing/).
+- Prefer `circleci testsuite` (Smarter Testing) for running and splitting tests. The legacy `circleci tests` commands still work but are not preferred. See [Getting started with CircleCI's testing tool](https://circleci.com/docs/guides/test/getting-started-with-circleci-testing-tool/).
 
 ### Server
 
