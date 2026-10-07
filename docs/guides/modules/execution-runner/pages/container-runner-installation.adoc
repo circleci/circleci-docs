@@ -179,7 +179,7 @@ Other link:https://gateway-api.sigs.k8s.io/implementations/[Gateway API implemen
 
 
 [#install-gateway-api-implementation]
-=== [[1-install-envoy-gateway-to-your-cluster]]A. Install a Gateway API implementation
+=== 3.1 Install a Gateway API implementation
 
 Install one of the supported implementations.
 
