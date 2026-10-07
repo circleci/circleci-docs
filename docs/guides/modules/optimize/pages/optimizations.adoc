@@ -12,12 +12,14 @@ This page provides an overview of the various ways you can optimize your CircleC
 [#data]
 == Optimize your data usage
 
+ifndef::server[]
 [#custom-storage-controls]
 === Custom storage controls
 
 The https://app.circleci.com/[CircleCI web app] provides controls to customize the storage retention period for workspaces, caches, and artifacts. You can find these settings by navigating to menu:Plan[Usage Controls]. By default, the storage periods are set to the maximum: 30 days for artifacts, and 15 days for caches and workspaces.
 
 See the xref:persist-data.adoc#custom-storage-usage[Persisting Data] page for more information on custom storage settings.
+endif::server[]
 
 [#workspaces]
 === Workspaces
@@ -55,12 +57,14 @@ Caching is one of the first optimizations to consider for your jobs. If a job fe
 
 * Read more on the xref:caching.adoc[Caching Dependencies] page.
 
+ifndef::server[]
 [#build-tool-cache]
 === Build tool cache
 
 Some build tools (Gradle, Bazel, Turborepo, and Xcode) have their own built-in remote caching mechanisms for build outputs, separate from dependency caching. Use the `with_tool_cache` step to back these with a CircleCI-managed remote cache instead of hand-rolling `save_cache`/`restore_cache` steps for tool-specific build outputs.
 
 * Read more on the xref:build-tool-cache.adoc[Build Tool Cache] page.
+endif::server[]
 
 [#workflows]
 === Workflows
@@ -78,17 +82,24 @@ If your project has a large test suite, configure your build to use xref:referen
 * Refer to the xref:use-the-circleci-cli-to-split-tests.adoc[Use the CircleCI CLI to Split Tests] how-to guide.
 * Follow the xref:parallelism-faster-jobs.adoc[Parallelism and Test Splitting] page.
 
+ifndef::server[]
 [#rerun-failed-tests]
 === Rerun failed tests
 
 Use the rerun failed tests feature to only rerun a subset of tests when a transient test failure arises, rather than rerunning the entire test suite.
 
 * For more information, see the xref:test:rerun-failed-tests.adoc[Rerun Failed Tests] page.
+endif::server[]
 
 [#resource-class]
 === Resource class
 
+ifndef::server[]
 Using `resource_class`, it is possible to specify CPU and RAM resources for each job. For a full list of available resource class options for CircleCI Cloud, see the xref:reference:ROOT:configuration-reference.adoc#resourceclass[Configuration Reference]. For an equivalent list for CircleCI Server installations, contact your system administrator.
+endif::server[]
+ifdef::server[]
+Using `resource_class`, it is possible to specify CPU and RAM resources for each job. For a list of available resource class options, contact your system administrator.
+endif::server[]
 
 Examples of how to set a resource class:
 
@@ -122,6 +133,7 @@ jobs:
     #  ...  other config
 ----
 --
+ifndef::server[]
 macOS::
 +
 --
@@ -136,6 +148,7 @@ jobs:
     #  ...  other config
 ----
 --
+endif::server[]
 Windows::
 +
 --
@@ -164,6 +177,7 @@ jobs:
     #  ...  other config
 ----
 --
+ifndef::server[]
 GPU::
 +
 --
@@ -180,8 +194,13 @@ jobs:
 
 NOTE: Open a link:https://support.circleci.com/hc/en-us/requests/new[Support ticket] if you would like access to the GPU execution environment.
 --
+endif::server[]
 ====
 
+ifdef::server[]
+NOTE: On CircleCI Server, use `image: default` for the Linux VM, `image: windows-default` for Windows, and `image: arm-default` for Arm.
+
+endif::server[]
 * Read more about resource classes on the xref:execution-managed:resource-class-overview.adoc[Resource Class Overview] page.
 
 [#configuration]
@@ -194,7 +213,9 @@ Use dynamic configuration to generate CircleCI config files dynamically, dependi
 
 * Execute conditional workflows/commands.
 * Pass pipeline parameter values and/or generate additional configuration.
+ifndef::server[]
 * Trigger separate config.yml configurations, which exist outside the default parent `.circleci/` directory.
+endif::server[]
 
 Read more about dynamic configuration on the xref:orchestrate:dynamic-config.adoc[Dynamic Configuration] overview page.
 

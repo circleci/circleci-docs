@@ -12,8 +12,14 @@ This quickstart guide covers integrating a Go project with CircleCI. This guide 
 [#prerequisites]
 == Prerequisites
 
+ifndef::server[]
 * xref:first-steps.adoc[A CircleCI Account]
 * A Go project located in a supported VCS.
+endif::server[]
+ifdef::server[]
+* An account on your CircleCI Server instance.
+* A Go project located in a GitHub repository.
+endif::server[]
 
 [#configuration-walkthrough-new]
 == Configuration walkthrough
@@ -35,7 +41,12 @@ version: 2.1
 [#use-the-go-orb]
 === 2. Use the Go orb
 
+ifndef::server[]
 The Go link:https://circleci.com/developer/orbs/orb/circleci/go[orb] contains a set of prepackaged CircleCI configurations you can use to perform common CircleCI tasks for the Go programming language. It supports Linux x86_64, macOS x86_64, and Arm64. Learn more about xref:orbs:use:orb-intro.adoc[Orbs].
+endif::server[]
+ifdef::server[]
+The Go link:https://circleci.com/developer/orbs/orb/circleci/go[orb] contains a set of prepackaged CircleCI configurations you can use to perform common CircleCI tasks for the Go programming language. It supports Linux x86_64. Learn more about xref:orbs:use:orb-intro.adoc[Orbs].
+endif::server[]
 
 To add the orb to your config, insert:
 

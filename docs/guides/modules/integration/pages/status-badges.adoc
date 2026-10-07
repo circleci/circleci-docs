@@ -41,9 +41,13 @@ include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 
 == Manually generate status badge code
 
+ifndef::server[]
 If your project is integrated with CircleCI through GitHub OAuth or Bitbucket Cloud, you can manually generate a status badge for your project. To check which method of GitHub authorization you have, see the xref:github-integration.adoc[GitHub Integration] guide.
+endif::server[]
 
+ifndef::server[]
 The manual steps in this section will not work if your project is integrated with GitHub App or GitLab.
+endif::server[]
 
 [#generating-a-status-badge]
 === Generate a status badge
@@ -52,11 +56,20 @@ To generate your own status badge, you will need to know, and substitute, the fo
 
 * `<PROJECT_NAME>` - Your project's name. Example: `circleci-docs`
 * `<ORG_NAME>` - The organization or user name the project in question belongs to.
+ifndef::server[]
 * `<VCS>` - your VCS provider (`gh` for "GitHub" and `bb` for Bitbucket Cloud).
+endif::server[]
+ifdef::server[]
+* `<VCS>`: Your VCS provider (`gh` for GitHub).
+endif::server[]
 * `<LINK>` - The link you want the status badge to go to when clicked (example: the pipeline overview page).
 * Optional: an API token (to create badges for private projects).
 
 The following examples demonstrate how to generate a status badge for various template languages. Each example also provides a status badge code for a specific branch.
+
+ifdef::server[]
+NOTE: Replace `circleci.com` in the following examples with your CircleCI Server hostname.
+endif::server[]
 
 [tabs]
 ====
@@ -165,7 +178,12 @@ NOTE: To create a status badge for a private project, create an API token scoped
 [![CircleCI](https://circleci.com/<VCS>/<ORG_NAME>/<PROJECT_NAME>.svg?style=svg&circle-token=<YOUR_STATUS_API_TOKEN>)](<LINK>)
 ----
 
+ifndef::server[]
 To create a status API token, go to the link:https://app.circleci.com/[CircleCI web app], navigate to a specific project, go to menu:Project Settings[API Permissions], and create a token scoped to `status`.
+endif::server[]
+ifdef::server[]
+To create a status API token, go to the CircleCI web app, navigate to a specific project, go to menu:Project Settings[API Permissions], and create a token scoped to `status`.
+endif::server[]
 
 [#badge-styles]
 == Badge styles

@@ -26,9 +26,16 @@ For a full list of built-in environment variables, see the xref:reference:ROOT:v
 [#private-keys-and-secrets]
 == Private keys and secrets
 
+ifndef::server[]
 To add private keys or secrets as environment variables for use throughout your project, navigate to menu:Project Settings[Environment Variables] in the link:https://app.circleci.com/[CircleCI web app]. You can find step-by-step instructions of this process on the xref:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Environment Variables] page. The variable values are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable, and add it again with the new value.
+endif::server[]
+ifdef::server[]
+To add private keys or secrets as environment variables for use throughout your project, navigate to menu:Project Settings[Environment Variables] in the CircleCI web app. You can find step-by-step instructions of this process on the xref:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Environment Variables] page. The variable values are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable, and add it again with the new value.
+endif::server[]
 
+ifndef::server[]
 Private environment variables enable you to store secrets safely, even when your project is public. Refer to the xref:integration:oss.adoc[Building Open Source Projects] page for associated security and settings information.
+endif::server[]
 
 include::ROOT:partial$shared-sections/secrets-masking.adoc[]
 
@@ -280,7 +287,12 @@ Do not add secrets or keys inside the `.circleci/config.yml` file. The full text
 * In xref:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Project Settings].
 * In a xref:set-environment-variable.adoc#set-an-environment-variable-in-a-context[Context].
 
+ifndef::server[]
 For more information, see the xref:security.adoc#encryption[Encryption] section of the security page.
+endif::server[]
+ifdef::server[]
+For more information, see the xref:server-admin:operator:circleci-server-security-features.adoc#encryption[Encryption] section of the Server security features page.
+endif::server[]
 
 Running scripts within configuration may expose secret environment variables. See the xref:orchestrate:using-shell-scripts.adoc#shell-script-best-practices[Using Shell Scripts] page for best practices for secure scripts.
 

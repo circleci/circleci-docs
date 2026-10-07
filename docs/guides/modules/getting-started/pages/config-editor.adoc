@@ -24,7 +24,12 @@ The benefits of using the CircleCI configuration editor include:
 [#getting-started-with-the-circleci-configuration-editor]
 == Getting started with the CircleCI configuration editor
 
+ifndef::server[]
 In the link:https://app.circleci.com/[CircleCI web UI], select a pipeline in the *Dashboard's All Pipelines* view.
+endif::server[]
+ifdef::server[]
+In the CircleCI web app, select a pipeline in the *Dashboard's All Pipelines* view.
+endif::server[]
 
 To access the CircleCI configuration editor, select your desired branch from the *All Branches* drop-down menu near the top of the screen. Once you select a branch, the btn:[Edit Config] button will become enabled, and you can access the configuration editor.
 
