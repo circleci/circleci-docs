@@ -9,6 +9,7 @@
 ** xref:docs-style:using-tables.adoc[Using tables]
 ** xref:docs-style:using-code-samples.adoc[Using code samples]
 ** xref:docs-style:title-badges.adoc[Page title badges]
+** xref:docs-style:cloud-and-server-content.adoc[Writing for Cloud and Server]
 * Content templates
 ** xref:templates:template-conceptual.adoc[Template for a conceptual page]
 ** xref:templates:template-how-to.adoc[Template for a how-to page]
