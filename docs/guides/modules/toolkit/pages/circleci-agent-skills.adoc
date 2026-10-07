@@ -66,7 +66,7 @@ The CircleCI plugin currently includes the following eight skills. Your agent pi
 | Set up a testsuite for this project.
 
 | `circleci-smarter-testing`
-| Enables Smarter Testing capabilities: test skipping, dynamic test splitting, and auto-rerun of failed tests. Using this skill, your agent asks you to confirm which of the Smarter Testing capabilities you want to set up.
+| Enables Smarter Testing capabilities: intelligent test selection, dynamic test splitting, and auto-rerun of failed tests. Using this skill, your agent asks you to confirm which of the Smarter Testing capabilities you want to set up.
 | Set up CircleCI Smarter Testing for running tests in this project.
 |===
 --

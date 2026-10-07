@@ -8,7 +8,7 @@
 
 Test impact analysis speeds up CI by running only the tests affected by your code changes. CircleCI tracks which tests exercise which source files, then uses that analysis to skip tests that cover unchanged source files.
 
-Test impact analysis is required for test skipping, a paid Smarter Testing capability.
+Test impact analysis is required for intelligent test selection, a paid Smarter Testing capability.
 
 == Is my project a good fit for test impact analysis?
 

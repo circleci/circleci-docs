@@ -1,5 +1,5 @@
 = Getting started with Smarter Testing
-:page-description: Install and configure Smarter Testing for your project: the foundation for static test splitting, rerun failed tests, test skipping, dynamic test splitting, and auto rerun failed tests.
+:page-description: Install and configure Smarter Testing for your project: the foundation for static test splitting, rerun failed tests, intelligent test selection, dynamic test splitting, and auto rerun failed tests.
 :page-platform: Cloud
 :page-vcs: all
 :page-plan: Free, Performance, Scale
@@ -17,7 +17,7 @@ The following capabilities are free and built in:
 
 The following paid capabilities build on top of them. You can enable each one independently:
 
-* *Test skipping*: run only the tests impacted by your code changes, using test impact analysis.
+* *Intelligent test selection*: run only the tests impacted by your code changes, using test impact analysis.
 * *Dynamic test splitting*: evenly distribute tests across parallel execution nodes as they run.
 * *Auto rerun failed tests*: automatically retry failed tests during the same run.
 
@@ -160,7 +160,7 @@ To keep parallel nodes evenly loaded as they run, use the paid Smarter Testing c
 
 All of your tests now run locally and in CI using the `testsuite` command. Next, enable the Smarter Testing features that fit your needs. Each feature can be enabled independently:
 
-* xref:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis] to enable test skipping and run only impacted tests based on code changes.
+* xref:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis] to enable intelligent test selection and run only impacted tests based on code changes.
 * xref:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting] to evenly split tests across parallel nodes.
 * xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] to automatically retry flaky tests.
 

@@ -352,7 +352,7 @@ A map of option fields that configure how the test suite is run.
 [#test-impact-analysis]
 === *`test-impact-analysis`*
 
-Enable test impact analysis, which is required for test skipping, a paid Smarter Testing capability. Test skipping runs only the test atoms relevant to your changes.
+Enable test impact analysis, which is required for intelligent test selection, a paid Smarter Testing capability. Intelligent test selection runs only the test atoms relevant to your changes.
 
 [.table-scroll]
 --
@@ -363,7 +363,7 @@ Enable test impact analysis, which is required for test skipping, a paid Smarter
 | `test-impact-analysis`
 | N
 | Boolean
-| Set `true` to enable test impact analysis and test skipping.
+| Set `true` to enable test impact analysis and intelligent test selection.
 |===
 --
 
