@@ -16,7 +16,7 @@ This section outlines several project features that indicate your project is a g
 
 === Built-in coverage support
 
-Test impact analysis relies on code coverage data to determine which tests affect which files. Frameworks with built-in coverage support - Jest, pytest, Go test, Vitest and RSpec - make this straightforward.
+Test impact analysis relies on code coverage data to determine which tests affect which files. Frameworks with built-in coverage support - Jest, pytest, Go test, Vitest, RSpec, Mocha, and Cypress - make this straightforward.
 
 If your framework has no native coverage support, generating the data test impact analysis needs may require significant rework of your test setup.
 
