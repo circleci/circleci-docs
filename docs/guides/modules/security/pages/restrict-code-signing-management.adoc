@@ -34,7 +34,14 @@ Managing code signing includes the following actions:
 * Uploading or deleting certificates.
 * Updating or removing provisioning profiles.
 
-Every member of your organization can still view certificates and signing bundles, regardless of the setting. For more information about roles, see the xref:guides:permissions-authentication:roles-and-permissions-overview.adoc#organization-role-permissions-matrix[Organization Role Permissions Matrix].
+Every member of your organization can still view certificates and signing bundles, regardless of the setting.
+
+Your role depends on your organization type:
+
+* `github` and `bitbucket` type organizations: CircleCI uses your role in the VCS provider. GitHub organization owners and Bitbucket workspace owners are organization admins. Other members of the organization or workspace are contributors.
+* `circleci` type organizations: You manage roles in CircleCI.
+
+For more information, see the xref:guides:permissions-authentication:users-organizations-and-integrations-guide.adoc#organizations[Users, Organizations, and Integrations Guide] and the xref:guides:permissions-authentication:roles-and-permissions-overview.adoc#organization-role-permissions-matrix[Organization Role Permissions Matrix].
 
 [#restrict-code-signing-management-to-organization-admins]
 == Restrict code signing management to organization admins
@@ -43,7 +50,6 @@ Only organization admins can change this setting.
 
 include::ROOT:partial$app-navigation/steps-to-org-settings.adoc[]
 
-[start=3]
 . Select **Security**.
 . In the **Code Signing Security Settings** section, turn on **Restrict code signing management to organization admins only**.
 
@@ -54,6 +60,6 @@ NOTE: CircleCI records changes to organization settings in your audit logs as th
 [#understand-how-the-restriction-applies-to-the-api]
 == Understand how the restriction applies to the API
 
-CircleCI enforces the setting on the server, so it applies to the web app and to API requests. When the setting is on, a request from a non-admin user to change code signing assets returns an HTTP 403 response. Requests that list certificates and signing bundles are not affected.
+CircleCI enforces the setting on the server, so it applies to the web app, CLI, and API requests. When the setting is on, a request from a non-admin user to change code signing assets returns an HTTP 403 response. Requests that list certificates and signing bundles are not affected.
 
 For the API requests used to manage code signing, see xref:guides:execution-managed:ios-codesigning.adoc#code-signing-api[Code Signing API].
