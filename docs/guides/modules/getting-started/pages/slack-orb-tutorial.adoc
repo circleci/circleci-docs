@@ -9,7 +9,9 @@
 
 This guide gets you started with the CircleCI Slack orb.
 
+ifndef::server[]
 NOTE: *Using CircleCI Cloud?* We recommend the xref:guides:integration:slack-integration.adoc[Slack Integration] for workflow-status notifications instead of using the Slack orb. Set up once for your organization, no `config.yml` changes needed.
+endif::server[]
 
 [#introduction]
 == Introduction
@@ -28,7 +30,12 @@ In this tutorial, you will learn how to:
 
 To follow this tutorial, you need:
 
+ifndef::server[]
 * A CircleCI account (you can link:https://circleci.com/signup/[sign up for free]) connected to either GitHub, Bitbucket, or GitLab.
+endif::server[]
+ifdef::server[]
+* An account on your CircleCI Server instance connected to GitHub.
+endif::server[]
 * A https://slack.com[Slack workspace] (you can create your own for testing purposes, if you do not want to use your company workspace).
 * A project you are following in CircleCI for which you want to integrate Slack notifications. See the xref:getting-started.adoc[Quickstart Guide] for help with following a project.
 
