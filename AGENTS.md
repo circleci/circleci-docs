@@ -523,6 +523,43 @@ Content for Tab B
 ====
 ```
 
+### Cloud and Server Content
+
+The `guides` component builds twice from one set of source files: a Cloud build (the unversioned default) and a Server build (latest release). The Server build sets the AsciiDoc attribute `server`. The Cloud build does not. There is no `cloud` attribute. The `enabled` setting on the `guides-versions-extension.js` entry in `antora-playbook.yml` turns the Server build on or off. The human-facing version of this section is `docs/contributors/modules/docs-style/pages/cloud-and-server-content.adoc`.
+
+**Decide first.** Most content is the same on both platforms, so use as few conditionals as possible.
+
+- If the text is correct for both platforms, leave it alone. Do not hide Cloud examples or comparison tables from Server readers.
+- If a feature does not exist on Server, wrap it in `ifndef::server[]`.
+- If Server works differently, keep the Cloud text unchanged and add a Server variant in `ifdef::server[]`.
+- If only the version differs, state the version in the text ("from Server 4.9"). Do not branch on version, and do not use `ifeval`.
+
+**Syntax.** Put each directive on its own line.
+
+```adoc
+ifndef::server[]
+Cloud-only content.
+endif::server[]
+ifdef::server[]
+Server-only content.
+endif::server[]
+```
+
+**Rules:**
+
+- Use `ifndef::server[]` for Cloud-only content and `ifdef::server[]` for Server-only content. Never test for a `cloud` attribute, because partials are shared with the `reference` component.
+- **Cloud output must not change** when you add conditionals to an existing page. Keep the original Cloud text byte-for-byte inside `ifndef::server[]`. Put wanted Cloud wording changes in a separate commit or pull request.
+- Whole-page availability comes from metadata (`:page-platform:`, `:page-server-min-version:`, `:page-server-deprecated-in:`), not conditionals. Never wrap page attributes, such as `:page-description:`, in conditionals.
+- Do not put conditionals inside `[tabs]` blocks. Move the tab body into a partial and include it in the tab and in an `ifdef::server[]` block.
+- Do not put a directive mid-sentence. Write two complete sentences.
+- Keep one explicit kebab-case heading ID for both builds. Do not wrap the `[#id]` line.
+- Close every directive. Unbalanced conditionals fail Vale (`AsciiDoc.ValidConditions`).
+- Wrap an xref to a Cloud-only page (`:page-platform: Cloud`) in `ifndef::server[]`. The Server build replaces unwrapped links with plain text and lists them in `extensions/.temp/guides-server-unlinked.md`. The `maxunlinkedxrefs` setting in `antora-playbook.yml` fails the build if the count rises.
+- On Server, name the web app without a link. Link to `app.circleci.com` only on Cloud. When an example uses `circleci.com`, add a Server note to replace it with the Server hostname.
+- The pipeline type table in `docs/guides/modules/integration/pages/version-control-system-integration-overview.adoc` ("GitHub OAuth on Server" column) is the source of truth for Server support. If unsure, ask rather than guess.
+
+**Verify.** Build `main` and your branch with `npm run build:docs`, then diff the HTML in `build/`. Ignore `edit/<branch>/` URLs and timestamps in the sitemap and `llms.txt`. Treat any other difference as a real change to Cloud output. To preview the Server build, set `enabled: true` on the `guides-versions-extension.js` entry in `antora-playbook.yml`, and do not commit that change.
+
 ## Common Mistakes to Avoid
 
 1. Passive voice constructions
