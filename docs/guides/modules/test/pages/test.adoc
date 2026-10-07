@@ -77,7 +77,7 @@ For a more in-depth look at workflows functionality, visit the xref:orchestrate:
 If you need to restrict the connections allowed in your test jobs, consider enabling xref:security:ip-ranges.adoc[IP Ranges]. This enables CircleCI jobs to go through a set of well-defined IP address ranges.
 
 ifndef::server[]
-This gets your tests running with your native test library, directly through the `run` step. On Cloud, `circleci testsuite` builds on this same `run` step and includes static test splitting and rerun failed tests for free. The paid Smarter Testing capabilities add test impact analysis, dynamic test splitting, and auto rerun failed tests. See xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing].
+This gets your tests running with your native test library, directly through the `run` step. On Cloud, `circleci testsuite` builds on this same `run` step and includes static test splitting and rerun failed tests for free. The paid Smarter Testing capabilities add test skipping, dynamic test splitting, and auto rerun failed tests. See xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing].
 endif::server[]
 ifdef::server[]
 This gets your tests running with your native test library, directly through the `run` step.
