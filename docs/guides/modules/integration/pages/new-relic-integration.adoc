@@ -17,7 +17,12 @@ The link:https://newrelic.com/instant-observability/circleci[New Relic CircleCI 
 
 Complete the following steps to set up a CircleCI webhook to forward your logs to New Relic. For more information, refer to the New Relic CircleCI link:https://docs.newrelic.com/docs/logs/forward-logs/circleci-logs/[installation docs].
 
+ifndef::server[]
 . Log in to the link:https://app.circleci.com[CircleCI web app].
+endif::server[]
+ifdef::server[]
+. Log in to the CircleCI web app.
+endif::server[]
 
 . Access one of your CircleCI projects.
 
