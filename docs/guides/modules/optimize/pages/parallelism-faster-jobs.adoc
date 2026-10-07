@@ -55,6 +55,7 @@ The `parallelism` key specifies how many independent executors are set up to run
 
 To run a job's steps in multiple, parallel execution environments, set the `parallelism` key to a value greater than `1`. In the example below, `parallelism` is set to `4`, meaning four identical execution environments will be set up for the job, in this case, four Docker containers using the `cimg/base:2023.09` image.
 
+ifndef::server[]
 Use the `circleci tests run` command to split _and_ run your tests. Your tests will be split up, and a portion of your tests run in each execution environment. This reduces the overall time taken to run the full test suite. In this example tests will be split up into four, and the split points are calculated based on historic timing data.
 
 NOTE: `circleci tests run`, used in the examples below, is available on CircleCI Cloud only. If you are on CircleCI Server, use `circleci tests split` instead. See <<the-tests-split-command,The tests split command>>.
@@ -71,6 +72,23 @@ jobs:
     steps:
       - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --" --split-by=timings --timings-type=name
 ----
+endif::server[]
+ifdef::server[]
+Use the `circleci tests split` command to split your tests, then run them. Your tests will be split up, and a portion of your tests run in each execution environment. This reduces the overall time taken to run the full test suite.
+
+[,yaml]
+----
+# ~/.circleci/config.yml
+jobs:
+  build:
+    docker:
+      - image: cimg/go:1.18.1
+    parallelism: 4
+    resource_class: large
+    steps:
+      - run: go test -v $(go list ./... | circleci tests split --split-by=timings)
+----
+endif::server[]
 
 .Diagram showing how parallelism works for different executor types
 image::guides:ROOT:executor_types_plus_parallelism.png[Parallelism]
@@ -94,6 +112,7 @@ CircleCI's intelligent test splitting allows you to:
 
 Test splitting reduces the length of time taken for testing in your pipelines.
 
+ifndef::server[]
 You can split your tests up in a few different ways:
 
 * Alphabetically, by name, which is the default:
@@ -140,6 +159,17 @@ jobs:
       - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --" --split-by=timings --timings-type=name
 ----
 
+endif::server[]
+ifdef::server[]
+You can split your tests up in a few different ways:
+
+* Alphabetically, by name, which is the default.
+* By size, with the `--split-by=filesize` flag.
+* By using historic timing data, with the `--split-by=timings` flag.
+
+See <<the-tests-split-command,The tests split command>> for an example.
+
+endif::server[]
 CircleCI attempts to detect the granularity of the test split (for example, to split by file name, or down to class name) based on the input to the split command. You may need to choose a different timing type depending on how your test coverage output is formatted, using the `--timings-type` option. Valid timing types are:
 
 * `name` - test name
@@ -169,6 +199,7 @@ jobs:
       - run: go test
 ----
 
+ifndef::server[]
 To split these tests using timing data:
 
 . Introduce parallelism to spin up a number of identical test environments (4 in this example).
@@ -186,8 +217,30 @@ jobs:
       - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --" --split-by=timings --timings-type=name
 ----
 
+endif::server[]
+ifdef::server[]
+To split these tests using timing data:
+
+. Introduce parallelism to spin up a number of identical test environments (four in this example).
+. Use the `circleci tests split` command, with the `--split-by=timings` flag to split the tests evenly across all executors.
+
+[,yaml]
+----
+# ~/.circleci/config.yml
+jobs:
+  build:
+    docker:
+      - image: cimg/go:1.18.1
+    parallelism: 4
+    resource_class: large
+    steps:
+      - run: go test -v $(go list ./... | circleci tests split --split-by=timings)
+----
+
+endif::server[]
 The first time the tests are run there will be no timing data for the command to use, but on subsequent runs the test time will be optimized.
 
+ifndef::server[]
 [#the-tests-run-command]
 === The tests run command
 
@@ -233,6 +286,7 @@ The following table shows a full list of option flags available when using `circ
 | No
 |===
 --
+endif::server[]
 
 [#the-tests-split-command]
 === The tests split command
@@ -251,9 +305,14 @@ jobs:
       - run: go test -v $(go list ./... | circleci tests split --split-by=timings)
 ----
 
+ifndef::server[]
 On CircleCI Cloud, `circleci tests split` has been superseded by `circleci tests run`, as this command also gives you access to the xref:test:rerun-failed-tests.adoc[Rerun Failed Tests] options. `circleci tests run` is *not* available on CircleCI Server, so if you are on CircleCI Server, continue to use `circleci tests split`.
 
 Integrating with some <<other-ways-to-split-tests,third party tools>> might still require you to use `circleci tests split`. For usage steps, see xref:use-the-circleci-cli-to-split-tests.adoc#tests-split-examples[Use the CircleCI CLI to Split Tests].
+endif::server[]
+ifdef::server[]
+For usage steps, see xref:use-the-circleci-cli-to-split-tests.adoc#tests-split-examples[Use the CircleCI CLI to Split Tests].
+endif::server[]
 
 [#junit-xml-reports]
 === JUnit XML report formatting
@@ -293,10 +352,18 @@ The number of containers is specified by the xref:reference:ROOT:configuration-r
 
 The current container index is automatically picked up from the `$CIRCLE_NODE_INDEX` environment variable, but can be manually set by using the `--index` flag.
 
+ifndef::server[]
 [,shell]
 ----
 cat test_filenames.txt | circleci tests run --command=">index0.txt xargs echo" --index=0 --split-by=name
 ----
+endif::server[]
+ifdef::server[]
+[,shell]
+----
+cat test_filenames.txt | circleci tests split --index=0 --split-by=name > index0.txt
+----
+endif::server[]
 
 Refer to the xref:reference:ROOT:variables.adoc#built-in-environment-variables[Project Values and Variables] page for more details.
 
@@ -333,4 +400,6 @@ job-name:
 * xref:parallelism-faster-jobs.adoc[Parallelism and Test Splitting]
 * xref:test:troubleshoot-test-splitting.adoc[Troubleshooting Test Splitting]
 * xref:test:collect-test-data.adoc[Collecting Test Data]
+ifndef::server[]
 * xref:insights:insights-tests.adoc[Test Insights]
+endif::server[]
