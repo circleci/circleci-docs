@@ -12,10 +12,21 @@
 
 CircleCI allows you to automatically test your code before changes are merged. You can integrate testing tools and frameworks such as Jest, Mocha, `pytest`, JUnit, Selenium, XCTest, and more.
 
+ifndef::server[]
 When you integrate your tests into your CircleCI pipelines, you deliver software to your users more reliably and efficiently, and get faster feedback. This also means you can fix issues and failed tests faster. Test output data becomes available in CircleCI to help debug failed tests. If you save your test data in CircleCI, you can also take advantage of Test Insights as well as parallelism features to identify opportunities to further optimize your pipelines.
+endif::server[]
+ifdef::server[]
+When you integrate your tests into your CircleCI pipelines, you deliver software to your users more reliably and efficiently, and get faster feedback. This also means you can fix issues and failed tests faster. Test output data becomes available in CircleCI to help debug failed tests. If you save your test data in CircleCI, you can also take advantage of parallelism features to identify opportunities to further optimize your pipelines.
+endif::server[]
 
+ifndef::server[]
 <<basics,Basics>> below covers running your test suite using your native test library and the `run` step, which works with any test runner. On Cloud, `circleci testsuite` is CircleCI's preferred way to run that test command. Static test splitting and rerunning failed tests are built in and free. `circleci testsuite` also includes commands such as `list-tests` for introspecting which tests will run.
+endif::server[]
+ifdef::server[]
+<<basics,Basics>> below covers running your test suite using your native test library and the `run` step, which works with any test runner.
+endif::server[]
 
+ifndef::server[]
 Smarter Testing adds three features on top of `circleci testsuite`, each usable on its own:
 
 * *Test impact analysis*: skip tests that your code changes cannot have affected, based on real coverage data rather than heuristics.
@@ -23,6 +34,10 @@ Smarter Testing adds three features on top of `circleci testsuite`, each usable 
 * *Auto rerun failed tests*: automatically retry failed tests to absorb flaky failures without manual re-runs.
 
 On Cloud, see xref:getting-started-with-circleci-testing-tool.adoc[Getting Started With CircleCI's Testing Tool]. On CircleCI Server, see xref:optimize:parallelism-faster-jobs.adoc[Test Splitting and Parallelism].
+endif::server[]
+ifdef::server[]
+To split your tests across parallel nodes, see xref:optimize:parallelism-faster-jobs.adoc[Test Splitting and Parallelism].
+endif::server[]
 
 [#basics]
 == Basics
@@ -50,13 +65,23 @@ jobs:
 
 `run` is a built-in step that runs commands in a shell. To read more about the `run` step for executing tests and other commands, go to the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference] page.
 
+ifndef::server[]
 Depending on your requirements, you might have more complex workflows that orchestrate multiple jobs. For example, you might have several concurrent jobs for building and testing your project in separate Linux, macOS, and Windows execution environments. You might also want to require that a test job is run only if a preceding build job is successful.
+endif::server[]
+ifdef::server[]
+Depending on your requirements, you might have more complex workflows that orchestrate multiple jobs. For example, you might have several concurrent jobs for building and testing your project in separate Linux and Windows execution environments. You might also want to require that a test job is run only if a preceding build job is successful.
+endif::server[]
 
 For a more in-depth look at workflows functionality, visit the xref:orchestrate:workflows.adoc[Workflows] page. You can also refer to the xref:toolkit:sample-config.adoc[Sample configuration] page for more workflow examples.
 
 If you need to restrict the connections allowed in your test jobs, consider enabling xref:security:ip-ranges.adoc[IP Ranges]. This enables CircleCI jobs to go through a set of well-defined IP address ranges.
 
+ifndef::server[]
 This gets your tests running with your native test library, directly through the `run` step. On Cloud, `circleci testsuite` builds on this same `run` step and adds static test splitting and rerun failed tests. The Smarter Testing features add test impact analysis, dynamic test splitting, and auto rerun failed tests. See xref:getting-started-with-circleci-testing-tool.adoc[Getting Started With CircleCI's Testing Tool].
+endif::server[]
+ifdef::server[]
+This gets your tests running with your native test library, directly through the `run` step.
+endif::server[]
 
 [#store-test-data]
 == Store test data
@@ -99,13 +124,19 @@ For more detailed examples of storing test data with different testing framework
 [#timing-tab]
 == Timing tab
 
+ifndef::server[]
 When a job runs with xref:getting-started-with-circleci-testing-tool.adoc#test-splitting[Parallelism and Test Splitting] enabled, the *Timing* tab in the *Job Details* UI shows the timing of each parallel run.
+endif::server[]
+ifdef::server[]
+When a job runs with xref:optimize:parallelism-faster-jobs.adoc[Parallelism and Test Splitting] enabled, the *Timing* tab in the *Job Details* UI shows the timing of each parallel run.
+endif::server[]
 
 .Timing tab, parallel runs
 image::guides:ROOT:parallel-runs-timing-tests.png[Timing tab, parallel runs]
 
 The Timing tab lets you identify which steps are taking the most time in a given parallel run so that you can make targeted improvements to reduce overall runtime.
 
+ifndef::server[]
 [#test-insights]
 == Test insights
 
@@ -114,11 +145,14 @@ include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supp
 When test results are stored, test analytics also become available on the *Tests* tab of the *Insights* page in the web app. Metrics for flaky tests, tests with the lowest success rates, and slow tests help you identify opportunities to optimize pipelines as well as further improve your testing strategy.
 
 More information is available on the xref:insights:insights-tests.adoc[Test Insights] page.
+endif::server[]
 
 [#next-steps]
 == Next steps
 
+ifndef::server[]
 * Follow xref:getting-started-with-circleci-testing-tool.adoc[Getting Started With CircleCI's Testing Tool] end to end.
 * Integrate tests for xref:testing-macos.adoc[macOS] or xref:testing-ios.adoc[iOS] apps.
+endif::server[]
 * Read our xref:browser-testing.adoc[Browser Testing] guide to common methods for running and debugging browser tests in CircleCI.
 * To get event-based notifications in Slack about your pipelines (for example, if a job passes or fails), try our xref:getting-started:slack-orb-tutorial.adoc[Slack Orb] tutorial.
