@@ -1,0 +1,119 @@
+= Writing for Cloud and Server
+
+pass:[<!-- vale off -->]
+The guides component serves two audiences from one set of source files: CircleCI Cloud readers and CircleCI Server readers. This page explains how to write content that works for both, and how to use `ifndef::server[]` and `ifdef::server[]` when the two differ.
+
+[#how-it-works]
+== How it works
+
+* The `guides` component builds twice from the same files. The Cloud build is the unversioned default and keeps its current URLs. The Server build covers the latest Server release.
+* The Server build sets the AsciiDoc attribute `server`. The Cloud build does not set it. There is no `cloud` attribute.
+* Page metadata decides which pages exist in each build. See <<page-level-availability,Page-level availability>>.
+* The `enabled` setting on the `guides-versions-extension.js` entry in `antora-playbook.yml` turns the Server build on or off.
+
+[#decide-first]
+== Decide whether you need a conditional
+
+Most content is the same on Cloud and Server. Conditional content costs reviewers time and drifts out of date, so use as little as you can.
+
+* If the text is correct for both platforms, leave it alone. Server readers can read Cloud-leaning examples and comparison tables. You do not need to hide that Cloud exists.
+* If a feature, setting, or page does not exist on Server, hide it from the Server build with `ifndef::server[]`.
+* If Server works differently, write a Server variant with `ifdef::server[]` next to the Cloud text.
+* If only a version number differs, state the version in the text, for example "from Server 4.9". Do not branch on version.
+
+[#page-level-availability]
+== Page-level availability
+
+Use page metadata, not conditionals, to say where a whole page is available.
+
+* `:page-platform: Cloud` removes the page from the Server build. Use `:page-platform: Cloud, Server` when both builds include it.
+* `:page-server-min-version:` and `:page-server-deprecated-in:` control which Server versions include the page.
+
+Do not wrap page attributes, such as `:page-description:`, in conditionals. Metadata must be the same in every build. See the page attribute reference in `AGENTS.md` for the full list.
+
+[#syntax]
+== Syntax
+
+Put each directive on its own line. Do not put a directive on the same line as text.
+
+Hide content from the Server build:
+
+[source,adoc]
+----
+\ifndef::server[]
+This paragraph appears on Cloud only.
+\endif::server[]
+----
+
+Show content on Server only:
+
+[source,adoc]
+----
+\ifdef::server[]
+This paragraph appears on Server only.
+\endif::server[]
+----
+
+Show different text on each platform. Keep the Cloud text unchanged and add the Server variant after it:
+
+[source,adoc]
+----
+\ifndef::server[]
+Select **Org** from the sidebar.
+\endif::server[]
+\ifdef::server[]
+Select **Organization Settings** from the sidebar.
+\endif::server[]
+----
+
+Conditionals work around a paragraph, list item, table row, section, or single line inside a code block. Close every directive: unbalanced conditionals fail the Vale check.
+
+[#where-not-to-use-them]
+== Where not to use conditionals
+
+* *Inside `[tabs]` blocks.* Conditionals inside tabs break the tab markup. Move the tab body into a partial, then include it in the tab and in an `ifdef::server[]` block.
+* *In the middle of a sentence.* Write two complete sentences instead.
+* *In page attributes and heading IDs.* Headings keep one explicit ID for both builds, for example `[#create-a-context]`. Use kebab-case IDs.
+* *In shared partials that other components include.* The `reference` component includes some partials, so a conditional there must keep the Cloud output unchanged.
+
+[#common-patterns]
+== Common patterns
+
+[#web-app-links]
+=== Links to the web app
+
+Server has no fixed hostname. Link to `app.circleci.com` on Cloud, and name the web app without a link on Server:
+
+[source,adoc]
+----
+\ifndef::server[]
+Log in to the link:https://app.circleci.com/[CircleCI web app].
+\endif::server[]
+\ifdef::server[]
+Log in to the CircleCI web app.
+\endif::server[]
+----
+
+[#api-examples]
+=== API hostnames
+
+When an example uses `circleci.com`, add a Server note telling readers to replace it with their Server hostname.
+
+[#links-to-pages-server-lacks]
+=== Links to pages the Server build does not include
+
+If a page has `:page-platform: Cloud`, the Server build drops it. Wrap any xref to it in `ifndef::server[]`. Otherwise the Server build shows the link text without a link. The build lists these links, with file and line numbers, in `extensions/.temp/guides-server-unlinked.md`. The `maxunlinkedxrefs` setting in `antora-playbook.yml` fails the build when the count goes up.
+
+[#unsupported-features]
+=== Features Server does not have
+
+The pipeline type table in the xref:guides:integration:version-control-system-integration-overview.adoc[version control systems overview] is the source of truth for what Server supports, using the *GitHub OAuth on Server* column. Hide anything that table marks as unsupported. Do not rely on memory.
+
+[#check-your-work]
+== Check your work
+
+* *Cloud must not change.* When you add conditionals to an existing page, the Cloud output must stay the same. Build `main` and your branch with `npm run build:docs`, then compare the HTML in `build/`. Ignore the `edit/<branch>/` URLs and timestamps in the sitemap and `llms.txt`. Treat any other difference as a real change.
+* *Keep Cloud edits separate.* If you also want to reword Cloud text, put those edits in their own pull request so reviewers can approve them independently.
+* *Preview the Server build.* Set `enabled: true` on the `guides-versions-extension.js` entry in `antora-playbook.yml`, then run `npm run start:dev`. Do not commit that change.
+* *Run Vale.* The Vale check lints the whole file, so fix existing errors in any file you touch. See the Linting section in `AGENTS.md`.
+pass:[<!-- vale on -->]
