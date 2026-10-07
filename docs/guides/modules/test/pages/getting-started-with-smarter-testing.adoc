@@ -1,5 +1,5 @@
-= Getting started with CircleCI's testing tool
-:page-description: Install and configure `circleci testsuite`, the foundation for test impact analysis, dynamic test splitting, and auto rerun failed tests.
+= Getting started with Smarter Testing
+:page-description: Install and configure Smarter Testing for your project: the foundation for static test splitting, rerun failed tests, test skipping, dynamic test splitting, and auto rerun failed tests.
 :page-platform: Cloud
 :page-vcs: all
 :page-plan: Free, Performance, Scale
@@ -7,20 +7,21 @@
 :experimental:
 :page-show-readtime: true
 :tabs-sync-option:
-:page-aliases: getting-started-with-smarter-testing.adoc
 
-CircleCI's testing tool, `circleci testsuite`, discovers and runs your tests. The following features are built-in and free:
+Smarter Testing reduces test execution time while maintaining test confidence. It is built on `circleci testsuite`, which discovers and runs your tests, and includes free and paid capabilities.
+
+The following capabilities are free and built in:
 
 * *<<test-splitting,Static test splitting>>*: split tests across parallel execution nodes using timing data from previous runs.
 * *<<rerun-failed-tests,Rerun failed tests>>*: rerun only the failed tests when you rerun a workflow from failed.
 
-Smarter Testing adds three features on top of `circleci testsuite`. You can enable each one independently:
+The following paid capabilities build on top of them. You can enable each one independently:
 
-* *Test impact analysis*: run only the tests impacted by your code changes.
+* *Test skipping*: run only the tests impacted by your code changes, using test impact analysis.
 * *Dynamic test splitting*: evenly distribute tests across parallel execution nodes as they run.
 * *Auto rerun failed tests*: automatically retry failed tests during the same run.
 
-This guide walks you through the foundational setup that the built-in features and Smarter Testing features build on:
+This guide walks you through the foundational setup that the free and paid capabilities build on:
 
 . Configure a `.circleci/test-suites.yml` file to discover and run your tests.
 . Validate and run your tests using the `testsuite` command.
@@ -31,11 +32,11 @@ You need a repository with an existing test suite. The following setup process g
 
 You can complete local steps (setup and run locally) without a CircleCI account. A CircleCI account with a project connected to your VCS is only required when you run tests in CI.
 
-TIP: You can use the xref:guides:toolkit:circleci-agent-skills.adoc[CircleCI Agent Skills] to get set up for CircleCI's testing tool. Install the link:https://github.com/CircleCI-Public/skills[CircleCI Public Skills] plugin to your AI coding agent and ask your agent to get set up for CircleCI's testing tool.
+TIP: You can use the xref:guides:toolkit:circleci-agent-skills.adoc[CircleCI Agent Skills] to get set up for Smarter Testing. Install the link:https://github.com/CircleCI-Public/skills[CircleCI Public Skills] plugin to your AI coding agent and ask your agent to get set up for Smarter Testing.
 
 === Terminology
 
-The following terms are used throughout the CircleCI testing tool documentation:
+The following terms are used throughout the Smarter Testing documentation:
 
 Test atom:: The smallest unit of work your test runner can execute independently - typically a test file (for example, `tests/auth_test.py`), but can also be a test package or module.
 Test suite:: A named configuration in `.circleci/test-suites.yml` that defines how to discover and run your test atoms.
@@ -146,20 +147,20 @@ Rerunning only failed tests is built in to `circleci testsuite run` and is free,
 * *API*: Use the link:++https://circleci.com/docs/api/v3#tag/workflows/POST/api/v3/workflows/{id}/rerun.body.is_from_failed++[rerun workflow endpoint] with `is_from_failed` set to `true`.
 * *CLI*: Run `circleci workflow rerun <workflow-id> --from-failed`.
 
-To rerun failed tests automatically during the same run, use the Smarter Testing feature xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests].
+To rerun failed tests automatically during the same run, use the paid Smarter Testing capability xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests].
 
 [#test-splitting]
 == Test splitting
 
 Static test splitting is built in to `circleci testsuite run` and is free. `circleci testsuite run` splits your tests across parallel nodes when `parallelism` is set on your job, using the durations reported in your JUnit results.
 
-To keep parallel nodes evenly loaded as they run, use the Smarter Testing feature xref:use-dynamic-test-splitting.adoc[Dynamic Test Splitting].
+To keep parallel nodes evenly loaded as they run, use the paid Smarter Testing capability xref:use-dynamic-test-splitting.adoc[Dynamic Test Splitting].
 
 == Next steps
 
 All of your tests now run locally and in CI using the `testsuite` command. Next, enable the Smarter Testing features that fit your needs. Each feature can be enabled independently:
 
-* xref:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis] to run only impacted tests based on code changes.
+* xref:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis] to enable test skipping and run only impacted tests based on code changes.
 * xref:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting] to evenly split tests across parallel nodes.
 * xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] to automatically retry flaky tests.
 

@@ -7,7 +7,7 @@
 :page-description: Automatically detect and retry failed tests during a test run to reduce the impact of flaky tests. Enable the feature in your test-suites.yml file.
 :page-show-readtime: true
 
-Auto rerun failed tests automatically detects and retries test failures during your test run. Compared with manually xref:getting-started-with-circleci-testing-tool.adoc#rerun-failed-tests[Rerunning Failed Tests] from a workflow, auto rerun failed tests eliminates the need to:
+Auto rerun failed tests automatically detects and retries test failures during your test run. Compared with manually xref:getting-started-with-smarter-testing.adoc#rerun-failed-tests[Rerunning Failed Tests] from a workflow, auto rerun failed tests eliminates the need to:
 
 * Manually identify which jobs failed.
 * Manually select btn:[Rerun workflow from failed] in the CircleCI web app.
@@ -76,7 +76,7 @@ flowchart LR
 
 == Prerequisites
 
-Before enabling auto rerun failed tests, ensure you have completed the xref:getting-started-with-circleci-testing-tool.adoc[Getting Started With CircleCI's Testing Tool] guide and have:
+Before enabling auto rerun failed tests, ensure you have completed the xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] guide and have:
 
 * Configured your `.circleci/test-suites.yml` with `discover` and `run` commands.
 * Verified your tests run successfully with the `testsuite` command.

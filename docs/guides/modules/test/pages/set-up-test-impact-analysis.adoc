@@ -6,7 +6,9 @@
 :page-audience: developer
 :experimental:
 
-Test impact analysis speeds up CI by running only the tests affected by your code changes. CircleCI tracks which tests exercise which source files, then skips tests that cover unchanged source files.
+Test impact analysis speeds up CI by running only the tests affected by your code changes. CircleCI tracks which tests exercise which source files, then uses that analysis to skip tests that cover unchanged source files.
+
+Test impact analysis is required for test skipping, a paid Smarter Testing capability.
 
 == Is my project a good fit for test impact analysis?
 
@@ -121,7 +123,7 @@ The selection rules can be extended to select tests beyond those identified in t
 
 == Prerequisites
 
-Before enabling test impact analysis, ensure you have completed the xref:getting-started-with-circleci-testing-tool.adoc[Getting Started With CircleCI's Testing Tool] guide and have:
+Before enabling test impact analysis, ensure you have completed the xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] guide and have:
 
 * Configured your `.circleci/test-suites.yml` with `discover` and `run` commands.
 * Verified your tests run successfully with the `testsuite` command.

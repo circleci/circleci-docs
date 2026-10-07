@@ -339,10 +339,13 @@ A single executable action within a <<job>>, such as a `run`, `checkout`, `save_
 
 A <<workflow,workflow>> marked with `setup: true` that runs first in a <<dynamic-configuration,dynamic configuration>>. A setup workflow can compute pipeline parameters and select which configuration to continue with, enabling conditional execution of the remaining workflows. See the xref:guides:orchestrate:dynamic-config.adoc[Dynamic Configuration] page.
 
-[badge="Beta"]
 == Test impact analysis
 
-A feature that runs only the tests affected by a code change. Test impact analysis maps which tests exercise which source files and skips tests covering unchanged files, to speed up CI. See the xref:guides:test:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis] page.
+The analysis that maps which tests exercise which source files, using code coverage data. Test impact analysis is required for <<test-skipping,test skipping>>. See the xref:guides:test:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis] page.
+
+== Test skipping
+
+A paid Smarter Testing capability that runs only the tests affected by a code change. Test skipping uses <<test-impact-analysis,test impact analysis>> to skip tests covering unchanged files, to speed up CI. See the xref:guides:test:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis] page.
 
 == Test splitting
 
