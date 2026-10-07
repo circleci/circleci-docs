@@ -146,6 +146,8 @@ Approval job notifications are delivered through the same categories as your oth
 
 Each approval job notification includes a link to the workflow in the CircleCI web app. Select the link to open the workflow, where you can approve or cancel it.
 
+If you have linked your Slack identity, you can also approve or cancel the workflow directly from a Slack approval job notification. For details, see the xref:integration:slack-integration.adoc#approve-or-cancel-workflows-from-slack[Approve or Cancel Workflows From Slack] section.
+
 == Organization-level contacts
 
 Organization-level contacts are different from user-level notifications. These contacts are used by CircleCI to reach designated administrators during security events, deprecation notices, and platform-level changes. They ensure your organization has a reliable point of contact for critical communications that affect your entire team, not just individual developers.
