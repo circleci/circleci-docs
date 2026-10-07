@@ -38,7 +38,12 @@ image::guides:ROOT:eval-test-diagram-concepts.png[Evaluation testing: Concepts d
 
 == Prerequisites
 
+ifndef::server[]
 * A CircleCI account connected to your code. You can sign up xref:getting-started:first-steps.adoc[For Free].
+endif::server[]
+ifdef::server[]
+* An account on your CircleCI Server instance, connected to your code.
+endif::server[]
 * A CircleCI project with a workflow configured to build your code.
 * CircleCI xref:security:contexts.adoc[Contexts] relevant for your workflow, which includes tools such as pre-trained model providers like OpenAI.
 * Existing LLM evaluations on an open source library or third-party tools such as Braintrust or LangSmith.
