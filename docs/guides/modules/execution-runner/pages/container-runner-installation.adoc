@@ -229,7 +229,7 @@ kubectl wait --timeout=5m -n istio-system deployment/istiod --for=condition=Avai
 ----
 
 [#enable-ssh-feature]
-=== B. Enable the Rerun job with SSH feature
+=== 3.2 Enable the Rerun job with SSH feature
 
 . Once all Gateway API prerequisites are installed and available, add the `agent.ssh.enabled = true` parameter to the container runner configuration:
 +
