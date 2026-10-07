@@ -12,12 +12,20 @@ This page provides configuration examples to get started with a basic pipeline u
 [#prerequisites]
 == Prerequisites
 
+ifndef::server[]
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
 * A code repository you want to build on CircleCI.
 * Follow the xref:create-project.adoc[Create a Project] guide to connect your repository to CircleCI. You can then use the examples below to configure a basic pipeline using any execution environment.
+endif::server[]
+ifdef::server[]
+* An account on your CircleCI Server instance, connected to your code.
+* A code repository you want to build on CircleCI.
+* Follow the xref:create-project.adoc#set-up-a-project[Set Up a Project] steps to connect your repository to CircleCI. You can then use the examples below to configure a basic pipeline using any execution environment.
+endif::server[]
 
 include::ROOT:partial$notes/docker-auth.adoc[]
 
+ifndef::server[]
 [#echo-hello-world-cloud]
 == Echo hello world
 
@@ -179,6 +187,8 @@ workflows:
 
 TIP: If you get a `No Config Found` error, it may be that you used `.yaml` file extension. Be sure to use `.yml` file extension to resolve this error.
 
+endif::server[]
+
 [#echo-hello-world-server]
 == Echo hello world on CircleCI Server
 
@@ -222,7 +232,8 @@ version: 2.1
 
 jobs:
   hello-job:
-    machine: true
+    machine:
+      image: default
     steps:
       - checkout # check out the code in the project directory
       - run: echo "hello world" # run the `echo` command
@@ -286,6 +297,7 @@ workflows:
 ====
 
 TIP: If you get a `No Config Found` error, it may be that you used `.yaml` file extension. Be sure to use `.yml` file extension to resolve this error.
+
 
 [#next-steps]
 ## Next steps
