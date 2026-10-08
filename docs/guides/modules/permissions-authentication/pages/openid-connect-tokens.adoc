@@ -619,10 +619,10 @@ CircleCI's OpenID Connect ID tokens also contain some https://openid.net/specs/o
 | A boolean indicating if the CI job is started using the SSH rerun feature.
 
 | `oidc.circleci.com/vcs-origin`
-| The URL of the repository that triggered the pipeline, without a scheme prefix. The format is `<host>/<org-or-group>/<repo>`. The host depends on your VCS provider. See <<vcs-origin-and-vcs-ref-values-by-provider,VCS-Origin and VCS-Ref Values by Provider>> for per-provider examples. The claim is absent for pipelines triggered by custom webhooks.
+| The repository URL that triggered the pipeline, without the `https://` scheme. The exact format varies by VCS provider. See <<vcs-origin-and-vcs-ref-values-by-provider,VCS-Origin and VCS-Ref Values by Provider>> for per-provider examples. The claim is absent for pipelines triggered by custom webhooks.
 
 | `oidc.circleci.com/vcs-ref`
-| The Git reference to the change that triggered the pipeline. For branches, the value is `refs/heads/<branch-name>`, for example `refs/heads/main`. For tags, the value is `refs/tags/<tag-name>`. The claim is absent for pipelines triggered by custom webhooks.
+| The Git reference to the change that triggered the pipeline. For branch triggers, the value is `refs/heads/<branch-name>`, for example `refs/heads/main`. For tag triggers, the value is `refs/tags/<tag-name>`, for example `refs/tags/v1.2.0`. When both a branch and tag are present, the branch is used. The claim is absent when neither is set, for example in pipelines triggered by custom webhooks.
 
 | `oidc.circleci.com/workflow-id`
 | The unique identifier for the workflow running the job. Its value is a string containing a UUID identifying the CircleCI workflow.
@@ -632,7 +632,7 @@ CircleCI's OpenID Connect ID tokens also contain some https://openid.net/specs/o
 [#vcs-origin-and-vcs-ref-values-by-provider]
 === VCS-origin and VCS-ref values by provider
 
-The `oidc.circleci.com/vcs-origin` and `oidc.circleci.com/vcs-ref` claims are included in `$CIRCLE_OIDC_TOKEN_V2` for all trigger types except custom webhooks. The host portion of `vcs-origin` depends on where your code is stored.
+The `oidc.circleci.com/vcs-origin` and `oidc.circleci.com/vcs-ref` claims are included in `$CIRCLE_OIDC_TOKEN_V2` for all trigger types except custom webhooks. The `vcs-origin` value is the repository URL without the `https://` scheme. The `vcs-ref` value follows the same format for every provider.
 
 [.table-scroll]
 --
@@ -669,10 +669,12 @@ The `oidc.circleci.com/vcs-origin` and `oidc.circleci.com/vcs-ref` claims are in
 | Bitbucket Cloud
 | `bitbucket.org/my-workspace/my-repo`
 | `refs/heads/main`
+
+| Cursor Origin
+| `cursor.com/codebase/my-org/my-repo`
+| `refs/heads/main`
 |===
 --
-
-NOTE: Cursor Origin support for `vcs-origin` and `vcs-ref` is not yet confirmed. Do not rely on these claims being present in Cursor Origin pipelines.
 
 [#oidc-in-open-source-projects]
 == OIDC in open source projects
