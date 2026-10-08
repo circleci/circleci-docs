@@ -167,6 +167,8 @@ To enable this optional feature, follow the instructions below **after reading t
 
 The rerun job with SSH feature makes use of the link:https://gateway-api.sigs.k8s.io/[Gateway API] to facilitate SSH access from outside your cluster. To enable this feature, Gateway API resources must first be provisioned on your cluster, and the CircleCI container agent configuration must be updated.
 
+IMPORTANT: From container runner Helm chart version 101.2.0, the chart creates `TCPRoute` resources with the `gateway.networking.k8s.io/v1` API version. Rerun job with SSH therefore requires Gateway API v1.6 or later, using either the standard or experimental channel CRDs. Earlier chart versions create `TCPRoute` resources with the `v1alpha2` API version, which only the experimental channel CRDs serve.
+
 ****
 **Supported Gateway API implementations:**
 CircleCI has tested, and currently supports, the following implementations of the link:https://gateway-api.sigs.k8s.io/[Gateway API]:
@@ -187,7 +189,7 @@ Install one of the supported implementations.
 ==== Option 1: Envoy Gateway (recommended)
 
 . First, install the Gateway API `CRDs` and Envoy Gateway as defined in the link:https://gateway.envoyproxy.io/latest/install/install-helm/[Envoy Gateway Helm installation document].
-. Replace `<version>` with the link:https://gateway.envoyproxy.io/news/releases/matrix/[most recent stable release] compatible with your cluster, then run the following command:
+. Replace `<version>` with the link:https://gateway.envoyproxy.io/news/releases/matrix/[most recent stable release] compatible with your cluster, then run the following command. The Envoy Gateway release must bundle Gateway API v1.6 or later (Envoy Gateway v1.9 or later). Refer to the compatibility matrix to confirm the bundled Gateway API version.
 +
 [source,shell]
 ----
@@ -204,23 +206,21 @@ kubectl wait --timeout=5m -n envoy-gateway-system deployment/envoy-gateway --for
 [#install-istio-gateway]
 ==== Option 2: Istio
 
-Rerun job with SSH requires the experimental Gateway API CRDs because the container runner Helm chart creates `TCPRoute` resources with the `v1alpha2` API version, which the standard CRDs do not serve. For background, refer to the link:https://istio.io/latest/docs/tasks/traffic-management/tcp-traffic-shifting/[Istio TCP traffic shifting documentation].
+Rerun job with SSH requires Istio 1.31 or later, which supports `TCPRoute` at the `v1` API version without additional configuration.
 
 . Install `istioctl` by following the link:https://istio.io/latest/docs/setup/getting-started/#download[Istio download instructions].
-. Replace `<version>` with a link:https://github.com/kubernetes-sigs/gateway-api/releases[Gateway API release] supported by your Istio version, then install the experimental Gateway API CRDs, which include `TCPRoute`:
+. Replace `<version>` with a link:https://github.com/kubernetes-sigs/gateway-api/releases[Gateway API release] of v1.6.0 or later that is supported by your Istio version, then install the standard Gateway API CRDs:
 +
 [source,shell]
 ----
-kubectl kustomize "github.com/kubernetes-sigs/gateway-api/config/crd/experimental?ref=<version>" | kubectl apply -f -
+kubectl apply --server-side -f https://github.com/kubernetes-sigs/gateway-api/releases/download/<version>/standard-install.yaml
 ----
-. Install Istio with alpha Gateway API resources enabled:
+. Install Istio:
 +
 [source,shell]
 ----
-istioctl install --set values.pilot.env.PILOT_ENABLE_ALPHA_GATEWAY_API=true --set profile=minimal -y
+istioctl install --set profile=minimal -y
 ----
-+
-NOTE: Istio 1.30 and earlier require `PILOT_ENABLE_ALPHA_GATEWAY_API=true` to support `TCPRoute`. From Istio 1.31, `TCPRoute` support is enabled by default and this setting is optional.
 . Wait for Istio to become available:
 +
 [source,shell]
