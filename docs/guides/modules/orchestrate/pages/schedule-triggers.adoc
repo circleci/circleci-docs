@@ -3,7 +3,7 @@
 :page-vcs: github, github-enterprise, bitbucket, cursor-origin
 :page-plan: Free, Performance, Scale
 :page-audience: developer
-:page-description: Use schedule triggers to run pipelines in your CircleCI projects periodically, and configure them in the web app or with the API.
+:page-description: Use schedule triggers to trigger pipelines in your CircleCI projects periodically, and configure them in the web app or with the API.
 :experimental:
 :page-aliases: scheduled-pipelines.adoc
 
@@ -51,7 +51,7 @@ If your project has no scheduled workflows, and you would like to try out schedu
 
 [tabs]
 ====
-GitHub App and Cursor Origin::
+GitHub App, GitHub Enterprise Server, and Cursor Origin::
 +
 --
 . Have your CircleCI token ready, or create a new token by following the steps on the xref:toolkit:managing-api-tokens.adoc[Managing API Tokens] page.
@@ -83,9 +83,12 @@ $ curl --request POST \
           "type": "schedule",
           "schedule": {
             "name": "nightly-build",
-            "cron_expression": "0 2 * * *",
+            "cron_expression": "<CRON_EXPRESSION>",
             "attribution_actor": "current"
           }
+        },
+        "parameters": {
+          "<key>": "<value>"
         }
       },
       "references": {
@@ -129,13 +132,13 @@ All the following fields must be present. The API returns a `400` if any are mis
 - `config.ref`: The branch or tag to use as the config source.
 - `checkout.ref`: The branch or tag to check out.
 - `schedule.name`: A unique name for the schedule.
-- `schedule.cron_expression`: A 5-field cron expression. The API rejects a wildcard in the minute field, such as `* * * * *`.
-- `schedule.attribution_actor`: Use `"current"` to run pipelines as the token owner, or `"system"` for the scheduling system. The API rejects user UUIDs.
+- `schedule.cron_expression`: A 5-field cron expression. The API rejects a wildcard in the minute field, such as `* * * * *`. When listing multiple minute values using comma-separated syntax (such as `10,20,30`), each value must be at least five minutes apart.
+- `schedule.attribution_actor`: Use `"current"` to attribute pipeline runs to the token owner, or `"system"` for the scheduling system. The API rejects user UUIDs.
 
 Optional fields:
 
 - `attributes.is_disabled`: Set to `true` to create the schedule in a disabled state.
-- `attributes.parameters`: Pipeline parameters to pass when the schedule triggers.
+- `attributes.parameters`: Key-value pairs of pipeline parameters to pass when the schedule triggers. Values can be strings, integers, or booleans.
 
 For additional information, refer to the link:https://circleci.com/docs/api/v3#tag/triggers/POST/api/v3/triggers[API v3 Triggers Reference].
 --

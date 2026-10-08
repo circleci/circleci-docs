@@ -54,7 +54,7 @@ Have your CircleCI token ready, or create a new token by following the steps on 
 
 [tabs]
 ====
-GitHub App and Cursor Origin::
+GitHub App, GitHub Enterprise Server, and Cursor Origin::
 +
 --
 . Find your project ID. See xref:toolkit:api-v3-developers-guide.adoc#getting-started-with-api-v3[Getting Started With API V3] for steps to list your organizations and projects and retrieve your project ID.
@@ -102,7 +102,7 @@ For additional information, refer to the link:https://circleci.com/docs/api/v3#t
 GitHub OAuth and Bitbucket Cloud::
 +
 --
-. Create a new schedule using the link:https://circleci.com/docs/api/v2/index.html#operation/createSchedule[API v2 Create Schedule] endpoint. Replace `<project-slug>` with your project slug and `<CRON_EXPRESSION>` with your schedule's cron expression:
+. Create a new schedule using the link:https://circleci.com/docs/api/v2/index.html#operation/createSchedule[API v2 Create Schedule] endpoint. The v2 API uses a `timetable` object instead of a cron expression. Translate the hours and days from your cron expression into the `hours-of-day` and `days-of-week` fields. Replace `<project-slug>` with your project slug and `<SCHEDULE_NAME>` with a name for your schedule:
 +
 [source,console]
 ----
