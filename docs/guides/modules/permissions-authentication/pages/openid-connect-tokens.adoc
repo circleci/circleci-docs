@@ -238,6 +238,8 @@ This uses https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_el
 
 You can also restrict access to specific branches. The following is an example of a trust policy with restrictions. The `AssumeRoleWithWebIdentity` action is restricted to pipelines running only on the `main` branch in the `my-org` GitHub organization and the CircleCI organization with the ID `organization_id`. Note that the `sub` claim uses the `$CIRCLE_OIDC_TOKEN_V2` format.
 
+The `vcs-origin` portion of the `sub` claim contains a host prefix that depends on your VCS provider. Replace `github.com/my-org/` with the appropriate value for your provider. See <<vcs-origin-and-vcs-ref-values-by-provider,VCS-Origin and VCS-Ref Values by Provider>> for the full list. For example, a GitLab.com project would use `gitlab.com/my-group/` and a Bitbucket Cloud project would use `bitbucket.org/my-workspace/`.
+
 ```json
 {
     "Version": "2012-10-17",
@@ -561,7 +563,7 @@ For `$CIRCLE_OIDC_TOKEN` its value is:
 
 For `$CIRCLE_OIDC_TOKEN_V2` its value depends on the trigger type:
 
-*If the trigger is a* xref:orchestrate:triggers-overview.adoc#trigger-a-pipeline-from-a-custom-webhook[Custom Webhook]:
+*If the trigger is a* xref:orchestrate:triggers-overview.adoc#trigger-a-pipeline-from-a-custom-webhook[Custom Webhook] *or a Cursor Origin pipeline*:
 
 `"org/<organization_id>/project/<project-id>/user/<user_id>"`
 
@@ -571,7 +573,7 @@ A string in which `organization_id`, `project-id`, and `user_id` are UUIDs that 
 
 `"org/<organization_id>/project/<project-id>/user/<user_id>/vcs-origin/<vcs_origin>/vcs-ref/<vcs_ref>"`
 
-A string in which `organization_id`, `project-id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run. `vcs_origin` and `vcs_ref` are strings that identify the repository URL and reference to the change that caused the job to run.
+A string in which `organization_id`, `project-id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run. `vcs_origin` is the repository URL without a scheme prefix (for example, `github.com/my-org/my-repo`), and `vcs_ref` is the Git reference (for example, `refs/heads/main`). See <<vcs-origin-and-vcs-ref-values-by-provider,VCS-Origin and VCS-Ref Values by Provider>> for the exact format per VCS provider.
 
 | `aud`
 | The audience. By default, this is `ORGANIZATION_ID`, a string containing a UUID that identifies the job's project's organization. To customize the audience you can generate an OIDC token with a custom audience. See xref:oidc-tokens-with-custom-claims.adoc[OIDC Tokens With Custom Claims] for more information.
@@ -617,13 +619,60 @@ CircleCI's OpenID Connect ID tokens also contain some https://openid.net/specs/o
 | A boolean indicating if the CI job is started using the SSH rerun feature.
 
 | `oidc.circleci.com/vcs-origin`
-| The URL of the repository that triggered the pipeline. Its value is a string similar to `github.com/organization-123/repo-1`. The claim is absent for pipelines triggered by custom webhooks.
+| The URL of the repository that triggered the pipeline, without a scheme prefix. The format is `<host>/<org-or-group>/<repo>`. The host depends on your VCS provider. See <<vcs-origin-and-vcs-ref-values-by-provider,VCS-Origin and VCS-Ref Values by Provider>> for per-provider examples. The claim is absent for pipelines triggered by custom webhooks or from Cursor Origin projects.
 
 | `oidc.circleci.com/vcs-ref`
-| The reference to the change that triggered the pipeline. Its value is a string similar to `refs/heads/main`. The claim is absent for pipelines triggered by custom webhooks.
+| The Git reference to the change that triggered the pipeline. For branches, the value is `refs/heads/<branch-name>`, for example `refs/heads/main`. For tags, the value is `refs/tags/<tag-name>`. The claim is absent for pipelines triggered by custom webhooks or from Cursor Origin projects.
 
 | `oidc.circleci.com/workflow-id`
 | The unique identifier for the workflow running the job. Its value is a string containing a UUID identifying the CircleCI workflow.
+|===
+--
+
+[#vcs-origin-and-vcs-ref-values-by-provider]
+=== VCS-origin and VCS-ref values by provider
+
+The `oidc.circleci.com/vcs-origin` and `oidc.circleci.com/vcs-ref` claims are included in `$CIRCLE_OIDC_TOKEN_V2` for all trigger types except custom webhooks and Cursor Origin projects. The host portion of `vcs-origin` depends on where your code is stored.
+
+[.table-scroll]
+--
+[cols="2,3,2", options="header"]
+|===
+| VCS provider
+| `vcs-origin` example
+| `vcs-ref` example
+
+| GitHub App (`github.com`)
+| `github.com/my-org/my-repo`
+| `refs/heads/main`
+
+| GitHub App Server (GitHub Enterprise)
+| `<your-github-hostname>/my-org/my-repo`
+| `refs/heads/main`
+
+| GitHub OAuth (`github.com`)
+| `github.com/my-org/my-repo`
+| `refs/heads/main`
+
+| GitHub OAuth on Server (GitHub Enterprise)
+| `<your-github-hostname>/my-org/my-repo`
+| `refs/heads/main`
+
+| GitLab.com
+| `gitlab.com/my-group/my-repo`
+| `refs/heads/main`
+
+| GitLab self-managed
+| `<your-gitlab-hostname>/my-group/my-repo`
+| `refs/heads/main`
+
+| Bitbucket Cloud
+| `bitbucket.org/my-workspace/my-repo`
+| `refs/heads/main`
+
+| Cursor Origin
+| Absent
+| Absent
 |===
 --
 

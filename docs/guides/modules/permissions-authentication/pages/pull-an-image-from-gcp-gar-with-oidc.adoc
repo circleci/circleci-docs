@@ -79,12 +79,14 @@ Either modify your attribute mapping or the incoming assertion to produce
 a mapped attribute that is less than 127 bytes.
 ----
 
-The CircleCI OIDC V2 token's `sub` claim includes VCS information and can exceed GCP's 127-byte limit for `google.subject`. For example:
+The CircleCI OIDC V2 token's `sub` claim includes VCS information and can exceed GCP's 127-byte limit for `google.subject`. For example, a GitHub project produces a `sub` value like:
 
 [source,plaintext]
 ----
 org/<org_id>/project/<project_id>/user/<user_id>/vcs-origin/github.com/<org>/<repo>/vcs-ref/refs/heads/<branch>
 ----
+
+The host portion of `vcs-origin` (here `github.com`) differs per VCS provider. For GitLab.com it is `gitlab.com`, for Bitbucket Cloud it is `bitbucket.org`, and for self-managed instances it is your own hostname. See the xref:permissions-authentication:openid-connect-tokens.adoc#vcs-origin-and-vcs-ref-values-by-provider[VCS Origin and VCS Ref Values by Provider] table for the full list.
 
 To resolve this, update the `google.subject` attribute mapping in your GCP Workload Identity pool to derive a shorter value. For more information on attribute mappings, see the https://docs.cloud.google.com/iam/docs/workload-identity-federation-with-other-clouds#mappings-and-conditions[GCP attribute mappings and conditions documentation]. The recommended mapping extracts the user UUID from `sub` using the `extract` function, prefixed with the org ID:
 
