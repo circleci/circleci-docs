@@ -15,6 +15,10 @@ The CircleCI API enables you to interact with your pipelines, projects, and orga
 * link:../../../api/v1/[API v1.1 Reference] (Legacy)
 * xref:reference:ROOT:runner-api.adoc[Runner API Reference] (Self-hosted runners)
 
+ifdef::server[]
+NOTE: API v3 is not yet available on CircleCI Server. CircleCI Server will support API v3 in a future release.
+endif::server[]
+
 [#api-version-overview]
 == API overview
 
@@ -53,7 +57,12 @@ a| * Maintaining existing integrations that you have not yet updated.
 
 | xref:reference:ROOT:runner-api.adoc[Runner API]
 | Specialized (separate API)
+ifndef::server[]
 a| * Hosted separately at `runner.circleci.com`
+endif::server[]
+ifdef::server[]
+a| * Hosted at your CircleCI Server hostname, without the `runner.` prefix
+endif::server[]
 * Manages and executes self-hosted runner tasks.
 * Supports Circle-Token, Bearer, and resource class token authentication.
 a| * Managing self-hosted runner resource classes and tasks.
