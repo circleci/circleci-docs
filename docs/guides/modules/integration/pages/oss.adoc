@@ -1,6 +1,6 @@
 = Build open source projects
 :page-platform: Cloud
-:page-vcs: github, github-enterprise, gitlab, bitbucket
+:page-vcs: github, github-enterprise, gitlab, bitbucket, cursor-origin
 :page-plan: Free, Performance, Scale
 :page-audience: developer
 :page-description: Follow best practices for building open source projects on CircleCI, including credits, security, and features and settings for public projects.
@@ -88,13 +88,26 @@ image::guides:ROOT:triggers/gitlab-cloud-trigger-filter-only-mr.png[Set the Only
 .Trigger page for GitLab self-managed
 image::guides:ROOT:triggers/gitlab-self-managed-trigger-filter-only-mr.png[Set the Only Build Merge Requests option in GitLab self-managed trigger]
 --
+Cursor Origin::
++
+--
+NOTE: The Cursor Origin integration is in beta.
+
+include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[Insert steps from selecting an organization up to the Project Settings page]
+
+. In the sidebar, click *Triggers*.
+. Edit an existing Cursor Origin trigger or add a new Cursor Origin trigger.
+. In the *Run on* dropdown list, select *PR opened or pushed to, default branch and tag pushes*.
+
+For the full list of trigger event options available for Cursor Origin, see the xref:orchestrate:cursor-origin-trigger-event-options.adoc[Cursor Origin Trigger Event Options] page.
+--
 ====
 
 
 [#build-pull-requests-from-forked-repositories]
 === Build pull requests from forked repositories
 
-include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab or GitHub App]
+include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App, or Cursor Origin]
 
 Many open source projects accept PRs from forked repositories. Building these PRs is an effective way to catch bugs before manually reviewing changes.
 
@@ -105,7 +118,7 @@ Sometimes a user submits a pull request to your repository from a fork, but no p
 [#pass-secrets-to-builds-from-forked-pull-requests]
 === Pass secrets to builds from forked pull requests
 
-include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab or GitHub App]
+include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App, or Cursor Origin]
 
 Running an unrestricted build in a parent repository can be dangerous. Projects often contain sensitive information, and this information is freely available to anyone who can push code that triggers a build.
 
