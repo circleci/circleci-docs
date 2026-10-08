@@ -71,7 +71,7 @@ The following steps show you how to set up budget controls for your organization
 
 . In the link:https://app.circleci.com[CircleCI web app], select your organization.
 . Navigate to *Plan* in the CircleCI web app sidebar and select *Usage Controls*.
-. Go to the *Credit Budget* section.
+. Go to the *Credit Budgets* section.
 . Select btn:[Add organization budget] to open the add organization budget modal.
 . Enter your weekly credit limit in the text field.
 . Select btn:[Save].
@@ -80,7 +80,7 @@ The following steps show you how to set up budget controls for your organization
 
 . In the link:https://app.circleci.com[CircleCI web app], select your organization.
 . Navigate to *Plan* in the CircleCI web app sidebar and select *Usage Controls*.
-. Go to the *Credit Budget* section.
+. Go to the *Credit Budgets* section.
 . Select btn:[Add project budget] to open the add project budget modal.
 . Search for your project by name.
 . Enter your weekly credit limit in the text field.
@@ -90,7 +90,7 @@ The following steps show you how to set up budget controls for your organization
 
 . In the link:https://app.circleci.com[CircleCI web app], select your organization.
 . Navigate to *Plan* in the CircleCI web app sidebar and select *Usage Controls*.
-. Go to the *Credit Budget* section.
+. Go to the *Credit Budgets* section.
 . Locate the budget you want to edit (organization or project).
 . Select the corresponding budget edit icon icon:edit-solid[Edit icon].
 . Update the credit budget limit in the text field.
@@ -100,7 +100,7 @@ The following steps show you how to set up budget controls for your organization
 
 . In the link:https://app.circleci.com[CircleCI web app], select your organization.
 . Navigate to *Plan* in the CircleCI web app sidebar and select *Usage Controls*.
-. Go to the *Credit Budget* section.
+. Go to the *Credit Budgets* section.
 . Locate the budget you want to delete (organization or project).
 . Select the corresponding budget trash bin icon icon:delete[Trash bin icon].
 . Confirm the deletion by selecting btn:[Delete budget].
