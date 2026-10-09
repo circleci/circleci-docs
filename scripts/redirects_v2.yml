@@ -1159,3 +1159,6 @@
 
 - old: /environment-variables/
   new: /guides/security/env-vars/
+
+- old: /2.0/gh-bb-integration/
+  new: /guides/permissions-authentication/users-organizations-and-integrations-guide/
