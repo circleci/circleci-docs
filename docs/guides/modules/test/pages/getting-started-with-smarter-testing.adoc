@@ -1,5 +1,5 @@
 = Getting started with Smarter Testing
-:page-description: Install and configure Smarter Testing for your project: the foundation for static test splitting, rerun failed tests, intelligent test selection, dynamic test splitting, and auto rerun failed tests.
+:page-description: Install and configure Smarter Testing: free static test splitting, rerun failed tests, and test uploads, plus paid test selection and splitting.
 :page-platform: Cloud
 :page-vcs: all
 :page-plan: Free, Performance, Scale
