@@ -84,6 +84,7 @@ This page offers a comparison of the features available for CircleCI machine run
 * Ideal for workflows requiring VM-level isolation.
 * Consistent xref:reference:ROOT:variables.adoc#built-in-environment-variables[Environment Variables] with `CIRCLECI_RUNNER_*` prefix.
 * Supports SSH connectivity for debugging.
+* Support for spot instances via unsafe retries.
 
 *Container Runner*
 
