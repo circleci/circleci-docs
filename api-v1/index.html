@@ -2544,7 +2544,11 @@ In most cases, the HTTP 429 response code will be accompanied by the <a href="ht
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><strong><code>GET</code> Request:</strong> Returns the full details for a single job. The response includes all of the fields from the job summary.</p>
-<h2 id='retry-a-job'>Retry a Job</h2><div class="highlight"><pre class="highlight sh tab-shell"><code>curl <span class="nt">-X</span> POST https://circleci.com/api/v1.1/project/:vcs-type/:org_name/:project/:build_num/retry <span class="nt">-H</span> <span class="s2">"Circle-Token: &lt;circle-token&gt;"</span>
+<h2 id='retry-a-job'>Retry a Job</h2>
+<aside class="warning">
+<strong>Deprecated:</strong> The <code>POST /api/v1.1/project/:vcs-type/:username/:project/:build_num/retry</code> and <code>POST /api/v1.1/project/:vcs-type/:username/:project/:build_num/ssh</code> endpoints (and their v1 equivalents) will be removed on 1 February 2027. Use the API v2 <a href="https://circleci.com/docs/api/v2/#tag/Workflow/operation/rerunWorkflow">rerun a workflow</a> endpoint instead. To rerun a job with SSH enabled, use the <code>enable_ssh</code> option in the rerun workflow request body.
+</aside>
+<div class="highlight"><pre class="highlight sh tab-shell"><code>curl <span class="nt">-X</span> POST https://circleci.com/api/v1.1/project/:vcs-type/:org_name/:project/:build_num/retry <span class="nt">-H</span> <span class="s2">"Circle-Token: &lt;circle-token&gt;"</span>
 
 </code></pre></div>
 <blockquote>
@@ -2691,7 +2695,7 @@ https://circleci.com/api/v1.1/project/:vcs-type/:username/:project
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <aside class="warning">
-We recommend migrating from this endpoint to use API v2  <a href="https://circleci.com/docs/api/v2/#operation/triggerPipeline">trigger a pipeline</a>.
+<strong>Deprecated:</strong> This endpoint (<code>POST /api/v1.1/project/:vcs-type/:username/:project</code> and its v1 equivalent) will be removed on 1 February 2027. Migrate to the API v2 <a href="https://circleci.com/docs/api/v2/#tag/Pipeline/operation/triggerPipelineRun">trigger a pipeline</a> endpoint instead.
 </aside>
 
 <p><strong><code>POST</code> Request:</strong> Triggers a new job and then returns a summary of the job run.</p>
@@ -2800,7 +2804,7 @@ https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:branch
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <aside class="warning">
-We recommend migrating from this endpoint to use API v2  <a href="https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline">trigger a pipeline</a>.
+<strong>Deprecated:</strong> This endpoint (<code>POST /api/v1.1/project/:vcs-type/:username/:project/tree/:branch</code> and its v1 equivalent) will be removed on 1 February 2027. Migrate to the API v2 <a href="https://circleci.com/docs/api/v2/#tag/Pipeline/operation/triggerPipelineRun">trigger a pipeline</a> endpoint instead.
 </aside>
 
 <p><strong><code>POST</code> Request:</strong> Triggers a new job and then returns a summary of the job run.</p>
@@ -2824,7 +2828,7 @@ We recommend migrating from this endpoint to use API v2  <a href="https://circle
 <p><strong>Note</strong> Triggering a new job with a branch is not currently supported with configurations that specify <code>version: 2.1</code>.</p>
 <h2 id='trigger-a-new-pipeline-by-project'>Trigger a new Pipeline by Project</h2>
 <aside class="warning">
-We recommend migrating from this endpoint to use API v2  <a href="https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline">trigger a pipeline</a>.
+<strong>Deprecated:</strong> This endpoint (<code>POST /api/v1.1/project/:vcs-type/:username/:project/build</code> and its v1 equivalent) will be removed on 1 February 2027. Migrate to the API v2 <a href="https://circleci.com/docs/api/v2/#tag/Pipeline/operation/triggerPipelineRun">trigger a pipeline</a> endpoint instead.
 </aside>
 <div class="highlight"><pre class="highlight sh tab-shell"><code>curl <span class="nt">-X</span> POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/build <span class="nt">-H</span> <span class="s2">"Circle-Token: &lt;circle-token&gt;"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
