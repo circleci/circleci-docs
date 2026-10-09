@@ -327,6 +327,8 @@ Draining can end in one of two ways:
 * The task has been in the draining state for longer than the configured `max_run_time`.
 * An additional TERM signal is received by the machine runner during _draining_.
 
+NOTE: With <<runner-enable-unsafe-retries,unsafe retries>> enabled, the machine runner does not drain. It releases the active job for a retry and exits.
+
 ---
 
 [#runner-idle-timeout]
@@ -342,6 +344,35 @@ Example:
 ```yaml
 runner:
   idle_timeout: 1h
+```
+
+---
+
+[#runner-enable-unsafe-retries]
+=== runner.enable_unsafe_retries
+
+`$CIRCLECI_RUNNER_ENABLE_UNSAFE_RETRIES`
+
+This flag enables machine runner to release a running job for a retry when the runner shuts down, instead of failing the job. Available from machine runner 3.1.13.
+
+CAUTION: A retried job reruns from the start, including steps that already ran. Only enable this flag for idempotent jobs, which are safe to run more than once. Avoid it for jobs with side effects such as deployments or database changes.
+
+Unsafe retries suit hosts on spot instances. Most cloud providers offer spot instances. They cost less than dedicated instances, but the provider can reclaim them with little warning.
+
+With unsafe retries enabled:
+
+* When the runner receives a `SIGINT`, `SIGTERM`, or `SIGHUP` signal, it releases the running job. The runner does not wait for the job to finish.
+* Any runner for the same resource class can claim the released job.
+* CircleCI allows up to three retries per job. After that, the job fails.
+* Any other error still fails the job. This includes errors in job steps and jobs that exceed `max_run_time`.
+
+NOTE: The default value is `false`.
+
+Example:
+
+```yaml
+runner:
+  enable_unsafe_retries: true
 ```
 
 ---

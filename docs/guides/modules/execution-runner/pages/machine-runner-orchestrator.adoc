@@ -779,6 +779,10 @@ The namespace part of the key may contain lowercase letters, numbers, underscore
 | `runner.grantSudo`
 | `false`
 | Grant the `circleci` task user root access without a password. See <<granting-sudo,Running Jobs With Elevated Privileges>>.
+
+| `runner.enableUnsafeRetries`
+| `false`
+| Release a running job for a retry when its VM shuts down, instead of failing the job. See <<spot-nodes,Running VMs on Spot Nodes>>.
 |===
 --
 
@@ -790,6 +794,33 @@ By default the runner agent runs as a dedicated `circleci-runner` user and steps
 Set `runner.grantSudo: true` (on a class or in `resourceClassDefaults`) to give the `circleci` task user root access without a password. It applies to jobs run under the default `commandPrefix` step-down. A custom `commandPrefix` is responsible for its own privileges.
 
 `grantSudo` requires `sidecar.enabled: true`, since otherwise a root job could read the resource-class token from the VM. The chart rejects `grantSudo: true` when the sidecar is disabled. Everything else on the VM is still exposed to the job, so use this setting with care.
+
+[#spot-nodes]
+=== Running VMs on spot nodes
+
+Most cloud providers offer spot nodes. They cost less than dedicated nodes, but the provider can reclaim them with little warning. A job running on a reclaimed node fails unless the class enables unsafe retries.
+
+CAUTION: A retried job reruns from the start, including steps that already ran. Only enable unsafe retries for idempotent jobs, which are safe to run more than once. Avoid it for jobs with side effects such as deployments or database changes.
+
+Set `runner.enableUnsafeRetries: true` on the class, and use `spec.nodeSelector` or `spec.tolerations` to schedule its VMs on your spot node pool:
+
+.`my-values.yaml`
+[source,yaml]
+----
+provisioner:
+  resourceClasses:
+    "my-org/spot":
+      token: "your-runner-token"
+      runner:
+        enableUnsafeRetries: true
+      spec:
+        nodeSelector:
+          eks.amazonaws.com/capacityType: SPOT  # GKE: cloud.google.com/gke-spot: "true"
+----
+
+When the provider reclaims a spot node, the runner on each affected VM releases its job. The pool replaces the VM, and the job reruns on a new VM. CircleCI allows up to three retries per job. After that, the job fails. Unsafe retries also cover VMs shut down by a node drain. For the full retry behavior, see the xref:machine-runner-3-configuration-reference.adoc#runner-enable-unsafe-retries[Machine Runner 3 Configuration Reference].
+
+Unsafe retries require machine runner 3.1.13 or later. The default `runnerBundle.image.tag` of `3` picks this up automatically.
 
 [#empty-disk-mounts]
 === Mounting extra disks
@@ -1243,7 +1274,7 @@ Per-VM settings are different. The VM `spec` and `userData` are baked into each 
 ** You cannot interrupt in-progress jobs.
 ** The deployment is slow and completes only once every existing VM has either run a job to completion or timed out.
 
-*Immediate deployment — jobs will be interrupted*:: Delete all VMs after upgrading. The pool recreates them immediately with the updated config. Any jobs running on deleted VMs will fail and must be rerun.
+*Immediate deployment — jobs will be interrupted*:: Delete all VMs after upgrading. The pool recreates them immediately with the updated config. Any jobs running on deleted VMs will fail and must be rerun, unless the class enables <<spot-nodes,unsafe retries>>.
 +
 [source,console]
 ----
