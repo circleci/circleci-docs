@@ -3,7 +3,7 @@
 :page-vcs: github, github-enterprise, bitbucket, cursor-origin
 :page-plan: Free, Performance, Scale
 :page-audience: developer
-:page-description: Use schedule triggers to run pipelines in your CircleCI projects periodically, and configure them in the web app or with the API.
+:page-description: Use schedule triggers to trigger pipelines in your CircleCI projects periodically, and configure them in the web app or with the API.
 :experimental:
 :page-aliases: scheduled-pipelines.adoc
 
@@ -18,7 +18,7 @@ Schedule triggers allow you to trigger pipelines periodically based on a schedul
 - Specify xref:pipeline-variables.adoc#pipeline-parameters-in-configuration[Pipeline Parameters] associated with a schedule.
 - Manage common schedules, for example, across workflows.
 
-Configure schedule triggers from menu:Project Settings[Project Setup] or menu:Project Settings[Triggers] in the web app, or via the API for GitHub OAuth or Bitbucket Cloud pipelines.
+Configure schedule triggers from menu:Project Settings[Project Setup] or menu:Project Settings[Triggers] in the web app, or via the API.
 
 NOTE: A schedule trigger can only be configured for one branch. If you need to schedule for two branches, you would need to set up two schedules.
 
@@ -47,37 +47,134 @@ If you would like to manage common schedules for multiple workflows, you will ne
 [#use-the-api]
 === Use the API
 
-NOTE: Setting up schedule triggers via the API is not yet available for GitHub App pipelines.
+If your project has no scheduled workflows, and you would like to try out schedule triggers, select the tab for your pipeline type:
 
-If your project has no scheduled workflows, and you would like to try out schedule triggers:
-
-. Have your CircleCI token ready, or create a new token by following the steps on the xref:toolkit:managing-api-tokens.adoc[Managing API Tokens] page.
-. Create a new schedule link:https://circleci.com/docs/api/v2/index.html#operation/createSchedule[using the API]. For example:
+[tabs]
+====
+GitHub App, GitHub Enterprise Server, and Cursor Origin::
 +
-[source,shell]
+--
+. Have your CircleCI token ready, or create a new token by following the steps on the xref:toolkit:managing-api-tokens.adoc[Managing API Tokens] page.
+. Find your project ID. See xref:toolkit:api-v3-developers-guide.adoc#getting-started-with-api-v3[Getting Started With API V3] for steps to list your organizations and projects and retrieve your project ID.
+. Get your pipeline definition ID. Replace `<PROJECT_ID>` with your project ID:
++
+[source,console]
 ----
-curl --location --request POST "https://circleci.com/api/v2/project/<project-slug>/schedule" \
---header "circle-token: <PERSONAL_API_KEY>" \
---header "Content-Type: application/json" \
---data-raw '{
+$ curl -g \
+  --url "https://circleci.com/api/v3/pipelines?filter[project_id]=<PROJECT_ID>" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN"
+----
++
+Locate your pipeline in the response and copy its `id` value.
+. Create a new schedule trigger. Replace `<PIPELINE_ID>` with your pipeline definition ID, and update `config.ref` and `checkout.ref` with your target branch:
++
+[source,console]
+----
+$ curl --request POST \
+  --url https://circleci.com/api/v3/triggers \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "data": {
+      "attributes": {
+        "config":   { "ref": "main" },
+        "checkout": { "ref": "main" },
+        "event": {
+          "type": "schedule",
+          "schedule": {
+            "name": "nightly-build",
+            "cron_expression": "<CRON_EXPRESSION>",
+            "attribution_actor": "current"
+          }
+        },
+        "parameters": {
+          "<key>": "<value>"
+        }
+      },
+      "references": {
+        "pipeline": { "id": "<PIPELINE_ID>" }
+      }
+    }
+  }'
+----
++
+A successful call returns a `201 Created` response:
++
+[source,json]
+----
+{
+  "data": {
+    "id": "<TRIGGER_ID>",
+    "attributes": {
+      "is_disabled": false,
+      "created_at": "2026-10-01T11:39:37.619Z",
+      "event": {
+        "type": "schedule",
+        "schedule": {
+          "name": "nightly-build",
+          "cron_expression": "0 2 * * *",
+          "attribution_actor": { "id": "<YOUR_USER_ID>" }
+        }
+      },
+      "config":   { "ref": "main" },
+      "checkout": { "ref": "main" }
+    },
+    "references": {
+      "project":  { "id": "<PROJECT_ID>" },
+      "pipeline": { "id": "<PIPELINE_ID>" }
+    }
+  }
+}
+----
+
+All the following fields must be present. The API returns a `400` if any are missing:
+
+- `config.ref`: The branch or tag to use as the config source.
+- `checkout.ref`: The branch or tag to check out.
+- `schedule.name`: A unique name for the schedule.
+- `schedule.cron_expression`: A 5-field cron expression. The API rejects a wildcard in the minute field, such as `* * * * *`. When listing multiple minute values using comma-separated syntax (such as `10,20,30`), each value must be at least five minutes apart.
+- `schedule.attribution_actor`: Use `"current"` to attribute pipeline runs to the token owner, or `"system"` for the scheduling system. The API rejects user UUIDs.
+
+Optional fields:
+
+- `attributes.is_disabled`: Set to `true` to create the schedule in a disabled state.
+- `attributes.parameters`: Key-value pairs of pipeline parameters to pass when the schedule triggers. Values can be strings, integers, or booleans.
+
+For additional information, refer to the link:https://circleci.com/docs/api/v3#tag/triggers/POST/api/v3/triggers[API v3 Triggers Reference].
+--
+GitHub OAuth and Bitbucket Cloud::
++
+--
+. Have your CircleCI token ready, or create a new token by following the steps on the xref:toolkit:managing-api-tokens.adoc[Managing API Tokens] page.
+. Create a new schedule using the link:https://circleci.com/docs/api/v2/index.html#operation/createSchedule[API v2 Create Schedule] endpoint. Replace `<project-slug>` with your project slug:
++
+[source,console]
+----
+$ curl --request POST "https://circleci.com/api/v2/project/<project-slug>/schedule" \
+  --header "Circle-Token: $CIRCLE_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{
     "name": "my schedule name",
     "description": "some description",
     "attribution-actor": "system",
     "parameters": {
       "branch": "main"
-      <additional pipeline parameters can be added here>
     },
     "timetable": {
-        "per-hour": 3,
-        "hours-of-day": [1,15],
-        "days-of-week": ["MON", "WED"]
+      "per-hour": 3,
+      "hours-of-day": [1,15],
+      "days-of-week": ["MON", "WED"]
     }
 }'
 ----
 
 include::ROOT:partial$tips/find-project-slug.adoc[]
 
-For additional information, refer to the **Schedule** section under the link:https://circleci.com/docs/api/v2/[API v2 docs]. Also see the xref:toolkit:api-developers-guide.adoc#getting-started-with-the-api[Getting Started With the API] section of the API Developer's Guide for more guidance on making requests.
+For additional information, refer to the **Schedule** section under the link:https://circleci.com/docs/api/v2/[API v2 Reference].
+--
+====
+
+Also see the xref:toolkit:api-developers-guide.adoc#getting-started-with-the-api[Getting Started With the API] section of the API Developer's Guide for more guidance on making requests.
 
 == Migrate scheduled workflows to schedule triggers
 
