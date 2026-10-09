@@ -1,0 +1,35 @@
+NOTE: **Arm gen2 for Docker is currently in beta.** Performance and pricing are tentative and may change when this feature becomes generally available.
+
+NOTE: For credit and access information, see the link:https://circleci.com/product/features/resource-classes/[Resource classes page]. Resource class access is dependent on your xref:guides:plans-pricing:plan-overview.adoc[Plan].
+
+[.table-scroll]
+--
+[cols=5*, options="header"]
+|===
+| Class | vCPUs | RAM | Cloud | Server
+
+| `arm.medium.gen2`
+| 2
+| 8 GB
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `arm.large.gen2`
+| 4
+| 16 GB
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `arm.xlarge.gen2`
+| 8
+| 32 GB
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `arm.2xlarge.gen2`
+| 16
+| 64 GB
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+|===
+--
