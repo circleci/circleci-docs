@@ -1,0 +1,60 @@
+= Use static test splitting
+:page-platform: Cloud
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-audience: developer
+:experimental:
+:page-description: Split your tests across parallel nodes with the free, built-in static test splitting in Smarter Testing.
+
+Static test splitting reduces overall job time by dividing your tests across parallel execution nodes. It is built in to `circleci testsuite run` and is free, with no extra configuration in `test-suites.yml`.
+
+NOTE: Static test splitting is a *free* Smarter Testing capability. It is included with every project.
+
+== How it works
+
+When `parallelism` is set on your job, `circleci testsuite run` splits your tests across the parallel nodes up front, using the durations reported in your JUnit results from previous runs.
+
+Because the split is assigned before the tests run, it cannot account for fixed costs such as runner startup and per-node setup. Nodes can still finish at noticeably different times. To keep nodes evenly loaded as they run, use the paid Smarter Testing capability xref:use-dynamic-test-splitting.adoc[Dynamic Test Splitting].
+
+== Prerequisites
+
+Before using static test splitting, ensure you have completed the xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] guide and have:
+
+* Configured your `.circleci/test-suites.yml` with `discover` and `run` commands.
+* Verified your tests run successfully with the `testsuite` command.
+* Added a `store_test_results` step to your job, so CircleCI has the JUnit timing data it uses to split your tests. See xref:collect-test-data.adoc[Collecting Test Data].
+
+== 1. Set parallelism on your job
+
+Set `parallelism` to a value greater than 1 on the job that runs `circleci testsuite run`. See the xref:reference:ROOT:configuration-reference.adoc#parallelism[Configuration Reference] for more information.
+
+[source,yaml]
+----
+jobs:
+  build-and-test:
+    parallelism: 4
+    # ...
+    steps:
+      - checkout
+      - run:
+          name: Run tests
+          command: circleci testsuite run "ci tests"
+      - store_test_results:
+          # Must match outputs.junit in test-suites.yml
+          path: test-reports
+----
+
+== 2. Verify the split
+
+Commit your configuration to your feature branch and push to your VCS. Then verify that your tests are split across nodes by looking at the *Timings* tab in the UI:
+
+. Navigate to your pipeline in the CircleCI web app and open the test job.
+. Open the *Timings* tab.
+. Confirm that each parallel node ran a share of your tests.
+
+The first run on a branch might split less evenly, because timing data from earlier runs is not yet available.
+
+== Next steps
+
+* xref:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting] to evenly split tests across parallel nodes as they run.
+* xref:rerun-only-failed-tests.adoc[Rerun Only Failed Tests] to rerun only the tests that failed when you rerun a workflow from failed.

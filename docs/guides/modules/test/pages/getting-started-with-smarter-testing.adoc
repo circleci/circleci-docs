@@ -12,8 +12,8 @@ Smarter Testing reduces test execution time while maintaining test confidence. I
 
 The following capabilities are free and built in:
 
-* *<<test-splitting,Static test splitting>>*: split tests across parallel execution nodes using timing data from previous runs.
-* *<<rerun-failed-tests,Rerun failed tests>>*: rerun only the failed tests when you rerun a workflow from failed.
+* *xref:use-static-test-splitting.adoc[Static test splitting]*: split tests across parallel execution nodes using timing data from previous runs.
+* *xref:rerun-only-failed-tests.adoc[Rerun failed tests]*: rerun only the failed tests when you rerun a workflow from failed.
 
 The following paid capabilities build on top of them. You can enable each one independently:
 
@@ -141,25 +141,19 @@ After your pipeline runs, verify the test job behaves as expected before merging
 [#rerun-failed-tests]
 == Rerun failed tests
 
-Rerunning only failed tests is built in to `circleci testsuite run` and is free, with no extra configuration. When you rerun a workflow from failed, `circleci testsuite run` reruns only the tests that failed in the previous run, instead of your entire test suite. You can rerun a workflow from failed in any of the following ways:
-
-* *Web app*: Select btn:[Rerun workflow from failed]. See xref:orchestrate:workflows.adoc#rerunning-a-workflows-failed-jobs[Rerunning a Workflow's Failed Jobs].
-* *API*: Use the link:++https://circleci.com/docs/api/v3#tag/workflows/POST/api/v3/workflows/{id}/rerun.body.is_from_failed++[rerun workflow endpoint] with `is_from_failed` set to `true`.
-* *CLI*: Run `circleci workflow rerun <workflow-id> --from-failed`.
-
-To rerun failed tests automatically during the same run, use the paid Smarter Testing capability xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests].
+Rerunning only failed tests is built in to `circleci testsuite run` and is free, with no extra configuration. See xref:rerun-only-failed-tests.adoc[Rerun Only Failed Tests].
 
 [#test-splitting]
 == Test splitting
 
-Static test splitting is built in to `circleci testsuite run` and is free. `circleci testsuite run` splits your tests across parallel nodes when `parallelism` is set on your job, using the durations reported in your JUnit results.
-
-To keep parallel nodes evenly loaded as they run, use the paid Smarter Testing capability xref:use-dynamic-test-splitting.adoc[Dynamic Test Splitting].
+Static test splitting is built in to `circleci testsuite run` and is free. It splits your tests across parallel nodes when `parallelism` is set on your job. See xref:use-static-test-splitting.adoc[Use Static Test Splitting].
 
 == Next steps
 
-All of your tests now run locally and in CI using the `testsuite` command. Next, enable the Smarter Testing features that fit your needs. Each feature can be enabled independently:
+All of your tests now run locally and in CI using the `testsuite` command. Next, use the free capabilities and enable the paid Smarter Testing capabilities that fit your needs. Each can be used independently:
 
+* xref:use-static-test-splitting.adoc[Use Static Test Splitting] to split tests across parallel nodes.
+* xref:rerun-only-failed-tests.adoc[Rerun Only Failed Tests] to rerun only failed tests when you rerun a workflow from failed.
 * xref:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis] to enable intelligent test selection and run only impacted tests based on code changes.
 * xref:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting] to evenly split tests across parallel nodes.
 * xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] to automatically retry flaky tests.
