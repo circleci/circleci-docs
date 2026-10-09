@@ -49,8 +49,6 @@ IgnoreURLs:
   # MCP server endpoints reject unauthenticated GET (401/405) but URLs are valid:
   - "^https://circleci\\.mcp\\.kapa\\.ai"
   - "^https://mcp\\.circleci\\.com"
-  # Placeholder host used in examples; it is not meant to resolve:
-  - "^https://circleci\\.example\\.com"
   # Canonical Ubuntu release page; times out from CI but resolves normally:
   - "^https://ubuntu\\.com/about/release-cycle"
 IgnoreDirs:
