@@ -1153,3 +1153,9 @@
 
 - old: /toolkit/oauth-dynamic-client-registration/
   new: /guides/toolkit/oauth-dynamic-client-registration/
+
+- old: /api/v1-reference/
+  new: /api/v1/
+
+- old: /environment-variables/
+  new: /guides/security/env-vars/
