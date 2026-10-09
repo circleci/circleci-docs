@@ -338,7 +338,7 @@ circleci-v0 setup
 . When prompted, provide the following:
 +
 * A personal API token from your Server web app. Go to menu:User Settings[Personal API Tokens] to create one.
-* Your Server host URL, for example `https://circleci.example.com`. Do not use `https://circleci.com`.
+* Your Server host URL, for example `\https://circleci.example.com`. Do not use `\https://circleci.com`.
 +
 CLI v0 saves this configuration to `~/.circleci/cli.yml`.
 

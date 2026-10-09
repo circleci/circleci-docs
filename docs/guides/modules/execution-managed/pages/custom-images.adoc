@@ -74,7 +74,7 @@ To use a custom Docker image as a primary container on CircleCI, install the fol
 
 * Bash (usually already installed or available via your package manager).
 * https://git-scm.com/book/en/v2/Getting-Started-Installing-Git[git]
-* https://help.ubuntu.com/lts/serverguide/openssh-server.html.en#openssh-installation[SSH]
+* https://ubuntu.com/server/docs/how-to/security/openssh-server/[SSH]
 * https://www.howtoforge.com/tutorial/linux-tar-command/#installing-tar[tar]
 * https://www.gzip.org/[Gzip]
 * https://packages.debian.org/sid/ca-certificates[ca-certificates]
