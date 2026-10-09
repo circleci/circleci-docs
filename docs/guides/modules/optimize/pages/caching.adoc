@@ -5,6 +5,7 @@
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Speed up CircleCI jobs by caching dependencies. See how caching works, how to save and restore caches, and how to design your cache keys.
+:page-aliases: caching-strategy.adoc
 :experimental:
 
 Caching is a highly effective way to make jobs faster on CircleCI. By storing the results of expensive operations, typically dependency downloads, subsequent job runs can skip work they have already done.
