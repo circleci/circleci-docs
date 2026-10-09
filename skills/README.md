@@ -30,6 +30,11 @@ A skill the CircleCI docs team use to create a newsletter each month to showcase
 ### partials
 Discovers, previews, and inserts reusable AsciiDoc partials and shared code examples with the correct `include::` syntax. Also proposes when new or existing content should become a shared partial or example, then creates it and replaces duplicates after confirmation. Use when writing or editing docs that need shared navigation steps, notes, FAQs, resource tables, config snippets, or other repeated content. Other docs-authoring skills should follow this skill instead of copying reusable content.
 
+### kapa-docs-review
+Reviews recent conversations with the CircleCI docs bot (Kapa) to find content gaps, wrong answers, and questions the bot could not answer. Opens docs fix PRs where the correct answer can be verified, and reports feature requests, support article issues, and anything unclear. Needs the Kapa MCP connected.
+
+**Output:** Saves a markdown report to `~/kapa-reviews/kapa-review-[since]-[until].md`, outside the repository, because it contains customer details. Also creates a redacted weekly ticket in the "Kapa review" project of the DOCS Linear team, so it needs the Linear MCP connected.
+
 ## Installation (Claude Code)
 
 Skills need to be installed in Claude Code's skills directory to be recognized.
@@ -50,6 +55,7 @@ If you're actively developing skills, symlink them so changes sync automatically
 ln -s "$(pwd)/skills/content-review" ~/.claude/skills/content-review
 ln -s "$(pwd)/skills/vale-linter" ~/.claude/skills/vale-linter
 ln -s "$(pwd)/skills/partials" ~/.claude/skills/partials
+ln -s "$(pwd)/skills/kapa-docs-review" ~/.claude/skills/kapa-docs-review
 ```
 
 ## Usage
