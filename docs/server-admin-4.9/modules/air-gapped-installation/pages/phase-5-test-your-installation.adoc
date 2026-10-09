@@ -1,5 +1,8 @@
 = Phase 5 - Test your installation
-:page-platform: Server 4.9, Server Admin
+:page-platform: Server
+:page-vcs: github, github-enterprise
+:page-server-min-version: "4.9"
+:page-audience: admin
 :page-description: How to test your CircleCI Server 4.9 installation in an air-gapped environment.
 :experimental:
 

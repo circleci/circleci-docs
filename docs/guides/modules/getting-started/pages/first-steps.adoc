@@ -1,6 +1,9 @@
 = Sign up and try CircleCI
 :page-platform: Cloud
-:page-description: First step for using CircleCI.
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-audience: developer
+:page-description: Sign up for CircleCI in the web app or with the CLI, then create an organization for your team or join teammates who already use CircleCI.
 :experimental:
 
 To start building on CircleCI, sign up for an account, then create an organization for your team, or join teammates who are already using CircleCI. CircleCI supports GitHub, Bitbucket, GitLab, and Cursor Origin projects.
@@ -134,6 +137,6 @@ By signing up, you are agreeing to our link:https://circleci.com/terms-of-servic
 
 - Read the xref:invite-your-team.adoc[Invite Your Team] page for steps on adding team members to your CircleCI org.
 - Go to the xref:hello-world.adoc[Hello World] page to learn the basics of setting up a CircleCI configuration file.
-- Read the xref:about-circleci:concepts.adoc[Concepts] page for an overview of foundational CircleCI concepts such as pipelines and executors.
+- Read the xref:reference:ROOT:concepts.adoc[Concepts] page for an overview of foundational CircleCI concepts such as pipelines and executors.
 - Refer to the full xref:reference:ROOT:configuration-reference.adoc[CircleCI Configuration Reference] for creating a `.circleci/config.yml` file, which determines your execution environment and automates your tests.
 - Explore the xref:toolkit:circleci-cli.adoc[CircleCI CLI] for a terminal-first way to manage projects, runs, and configuration.

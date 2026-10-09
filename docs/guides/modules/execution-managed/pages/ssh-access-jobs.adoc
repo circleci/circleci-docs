@@ -1,6 +1,10 @@
 = Debug jobs with SSH rerun
-:page-platform: Cloud, Server v4+
-:page-description: How to access a build container using SSH on CircleCI
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Rerun a job with SSH to inspect log files, running processes, and directory paths, and troubleshoot permission denied errors when you connect.
 :experimental:
 
 Troubleshoot problems in a job using  the *Rerun job with SSH* option. Using this feature you can inspect log files, running processes, and directory paths.
@@ -73,7 +77,7 @@ Or, for Bitbucket, run:
 +
 [source,console]
 ----
-$ ssh -Tv git@bitbucket.org
+$ ssh -Tv git@ssh.bitbucket.org
 ----
 . Check the output for the following messages:
 +
@@ -115,7 +119,7 @@ Or,
 +
 [source,console]
 ----
-$ ssh -v git@bitbucket.com
+$ ssh -v git@ssh.bitbucket.org
 ----
 
 . In the output, look for a sequence like this:

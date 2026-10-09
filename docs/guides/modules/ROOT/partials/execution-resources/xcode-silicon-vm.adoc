@@ -1,6 +1,6 @@
 [.table-scroll]
 --
-[cols="1,1,1,2,1,1", options="header"]
+[cols="1,1,1,2,1,1,1", options="header"]
 |===
 | Config
 | Xcode Version
@@ -8,14 +8,16 @@
 | Supported Resource Classes
 | VM Software Manifest
 | Release Notes
+| Other Notes
 
 | `27.2`
-| Xcode 27.2 (27B5019j)
+| Xcode 27.2 (27B5028f)
 | 26.6.2
 a| `m4pro.medium` +
    `m4pro.large`
-| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v19494/manifest.txt[Installed software]
-| link:https://circleci.com/changelog/xcode-27-2-beta-available/[Release Notes]
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v19652/manifest.txt[Installed software]
+| link:https://circleci.com/changelog/xcode-27-2-beta-2-available/[Release Notes]
+| -
 
 | `27.1`
 | Xcode 27.1 (27A9269)
@@ -24,6 +26,7 @@ a| `m4pro.medium` +
    `m4pro.large`
 | link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v19591/manifest.txt[Installed software]
 | link:https://circleci.com/changelog/xcode-27-1-beta-1-available/[Release Notes]
+| -
 
 | `27.0`
 | Xcode 27.0 (27A266a)
@@ -32,6 +35,7 @@ a| `m4pro.medium` +
    `m4pro.large`
 | link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v19446/manifest.txt[Installed software]
 | link:https://circleci.com/changelog/xcode-27-0-available/[Release Notes]
+| -
 
 | `26.6`
 | Xcode 26.6 (17F113)
@@ -40,6 +44,7 @@ a| `m4pro.medium` +
    `m4pro.large`
 | link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v18807/manifest.txt[Installed software]
 | link:https://circleci.com/changelog/xcode-26-6-available/[Release Notes]
+| -
 
 | `26.5`
 | Xcode 26.5 (17F42)
@@ -48,6 +53,7 @@ a| `m4pro.medium` +
    `m4pro.large`
 | link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v18380/manifest.txt[Installed software]
 | link:https://circleci.com/changelog/xcode-26-5-available/[Release Notes]
+| -
 
 | `26.4.1`
 | Xcode 26.4.1 (17E202)
@@ -56,6 +62,7 @@ a| `m4pro.medium` +
    `m4pro.large`
 | link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v17723/manifest.txt[Installed software]
 | link:https://circleci.com/changelog/xcode-26-4-1-available/[Release Notes]
+| -
 
 | `26.3.0`
 | Xcode 26.3.0 (17C529)
@@ -64,6 +71,7 @@ a| `m4pro.medium` +
    `m4pro.large`
 | link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v16344/manifest.txt[Installed software]
 | link:https://circleci.com/changelog/xcode-26-3-0-available/[Release Notes]
+| link:https://circleci.com/changelog/deprecation-of-xcode-14-3-1-26-3-0-26-2-0-and-26-1-1/[ Deprecated October 30th, 2026]
 
 | `26.2.0`
 | Xcode 26.2.0 (17C52)
@@ -72,6 +80,7 @@ a| `m4pro.medium` +
    `m4pro.large`
 | link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15949/manifest.txt[Installed software]
 | link:https://circleci.com/changelog/xcode-26-2-0-gm-available/[Release Notes]
+| link:https://circleci.com/changelog/deprecation-of-xcode-14-3-1-26-3-0-26-2-0-and-26-1-1/[Deprecated October 30th, 2026]
 
 | `26.1.1`
 | Xcode 26.1.1 (17B100)
@@ -80,6 +89,7 @@ a| `m4pro.medium` +
    `m4pro.large`
 | link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15895/manifest.txt[Installed software]
 | link:https://circleci.com/changelog/xcode-26-1-1-available/[Release Notes]
+| link:https://circleci.com/changelog/deprecation-of-xcode-14-3-1-26-3-0-26-2-0-and-26-1-1/[Deprecated October 30th, 2026]
 
 | `16.4.0`
 | Xcode 16.4 (16F6)
@@ -88,6 +98,7 @@ a| `m4pro.medium` +
    `m4pro.large`
 | link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15338/manifest.txt[Installed software]
 | link:https://circleci.com/changelog/xcode-16-4-ga-available/[Release Notes]
+| -
 
 | `15.4.0`
 | Xcode 15.4 (15F31d)
@@ -96,6 +107,7 @@ a| `m4pro.medium` +
    `m4pro.large`
 | link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v14775/manifest.txt[Installed software]
 | link:https://discuss.circleci.com/t/xcode-15-4-0-ga-released/50897[Release Notes]
+| -
 
 | `14.3.1`
 | Xcode 14.3.1 (14E300b)
@@ -104,5 +116,6 @@ a| `m4pro.medium` +
    `m4pro.large`
 | link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v12128/manifest.txt[Installed software]
 | link:https://discuss.circleci.com/t/xcode-14-3-1-rc-released/48152[Release Notes]
+| link:https://circleci.com/changelog/deprecation-of-xcode-14-3-1-26-3-0-26-2-0-and-26-1-1/[Deprecated October 30th, 2026]
 |===
 --

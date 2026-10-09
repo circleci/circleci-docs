@@ -1,5 +1,9 @@
 = CircleCI's self-hosted runner overview
-:page-platform: Cloud, Server v4+
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: Learn how CircleCI's self-hosted runners enable you to use your own infrastructure for running jobs.
 :experimental:
 :page-aliases: runner-on-kubernetes.adoc
@@ -32,11 +36,6 @@ Machine runner::
 image::guides:ROOT:runner-overview-diagram.png[CircleCI's machine runner architecture]
 --
 ====
-
-[#circleci-launch-agent-1-1-deprecated]
-== Launch agent 1.1 deprecated
-
-Launch agent 1.1 has been deprecated. Machine Runner 3.0 is the recommended replacement. Launch agent 1.1 will cease to be supported as of July 31, 2024.
 
 [#circleci-self-hosted-runner-operation]
 == CircleCI's self-hosted runner operation
@@ -134,7 +133,7 @@ Using a supported platform, you get the following:
 **Machine runners:**
 
 * macOS X 11.2+ (Intel, Apple silicon).
-* Windows Server 2019, 2016 (x86_64).
+* Windows Server 2019 or later (x86_64).
 * Linux distributions - RHEL8, SUSE, Debian, etc (x86_64, ARM64, s390x, ppc64le).
 
 CircleCI sometimes offers a **preview** level platform when a new platform for self-hosted runner is in active development. If there is a platform in a preview level, this section will be updated with information and limitations for that platform.

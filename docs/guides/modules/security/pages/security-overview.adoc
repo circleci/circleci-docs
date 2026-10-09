@@ -1,5 +1,9 @@
 = Security overview
-:page-platform: Cloud, Server v4+, Server Admin
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: admin
 :page-description: This document provides an introduction to security features at CircleCI.
 :experimental:
 
@@ -21,9 +25,11 @@ Follow the advice in xref:security-recommendations.adoc[Secure Secrets Handling]
 
 Use xref:security:contexts.adoc#restrict-a-context[Restricted Contexts] with teams to share environment variables with a select security group.
 
+ifndef::server[]
 If your project is **open source and public**, make note of whether or not you want to share environment variables.
 
 On CircleCI, you can change a project's settings to control whether your environment variables can pass on to _forked versions of your repo_. This setting is **not enabled** by default. You can read more about these settings and open source security in our xref:integration:oss.adoc#security[Open Source Projects Document].
+endif::server[]
 
 [#secure-your-vcs]
 ## Secure your VCS
@@ -33,17 +39,26 @@ Consult your VCS provider's permissions for your organization (if you are in an 
 Ensure that your team is using two-factor authentication (2FA) with your VCS:
 
 - link:https://help.github.com/en/articles/securing-your-account-with-two-factor-authentication-2fa[GitHub 2FA]
+ifndef::server[]
 - link:https://confluence.atlassian.com/bitbucket/two-step-verification-777023203.html[Bitbucket 2FA]
 - link:https://docs.gitlab.com/ee/user/profile/account/two_factor_authentication.html[GitLab 2FA]
+endif::server[]
 
 If a VCS account is compromised, a nefarious actor could push code or potentially steal secrets.
 
 ## See also
 
+ifndef::server[]
 - xref:security.adoc[Security Features]
+endif::server[]
+ifdef::server[]
+- xref:server-admin:operator:circleci-server-security-features.adoc#encryption[Server Security Features]
+endif::server[]
 - xref:security-recommendations.adoc[Secure Secrets Handling]
 - xref:contexts.adoc[Contexts]
+ifndef::server[]
 - xref:ip-ranges.adoc[IP Ranges]
+endif::server[]
 - xref:permissions-authentication:openid-connect-tokens.adoc[Open ID Connect Tokens]
 - xref:env-vars.adoc[Using Environment Variables]
 

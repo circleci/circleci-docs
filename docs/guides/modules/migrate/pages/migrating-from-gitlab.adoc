@@ -1,6 +1,9 @@
 = Migrate from GitLab
-:page-platform: Cloud, Server v4+
-:page-description: An overview of how to migrate from GitLab to CircleCI.
+:page-platform: Cloud
+:page-vcs: gitlab, gitlab-self-hosted
+:page-plan: Free, Performance, Scale
+:page-audience: developer
+:page-description: Move your CI/CD from GitLab to CircleCI. Sign up, then compare your GitLab configuration with the equivalent CircleCI configuration.
 :experimental:
 
 This document provides an overview of how to migrate from GitLab to CircleCI.

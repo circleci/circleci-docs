@@ -1,6 +1,9 @@
 = Resource consumption and cost management
-:page-platform: Server 4.9, Server Admin
-:page-description: Learn how CircleCI Server consumes cloud resources and how to monitor costs.
+:page-platform: Server
+:page-vcs: github, github-enterprise
+:page-server-min-version: "4.9"
+:page-audience: admin
+:page-description: Learn how CircleCI Server 4.9 consumes cloud resources and how to monitor costs.
 :experimental:
 
 Understanding how CircleCI Server consumes cloud resources helps you plan capacity, set appropriate budgets, and detect cost anomalies.

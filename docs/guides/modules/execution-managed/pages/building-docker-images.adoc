@@ -1,6 +1,10 @@
 = Run Docker commands
-:page-platform: Cloud, Server v4+
-:page-description: How to build Docker images using the Docker execution environment
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Build Docker images and run Docker commands within the Docker execution environment using remote Docker and the setup_remote_docker key.
 :experimental:
 
 Use the remote Docker environment to build Docker images within the Docker execution environment.
@@ -226,7 +230,7 @@ To use Docker 27, use the following tag:
 
 * `docker27`
 
-To use Docker 24, use the following tag:
+To use Docker 26, use the following tag:
 
 * `docker26`
 

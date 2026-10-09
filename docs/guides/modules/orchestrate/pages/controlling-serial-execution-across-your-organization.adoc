@@ -1,6 +1,10 @@
 = Controlling serial execution across your organization
-:page-platform: Cloud, Server v4.9+
-:page-description: An overview of controlling serial execution across a CircleCI org.
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.9"
+:page-audience: developer
+:page-description: Use serial groups to run CircleCI jobs one at a time across your organization, preventing conflicts when jobs access shared resources.
 :experimental:
 
 Serial groups enable controlled, sequential execution of CircleCI jobs across your organization to prevent conflicts when multiple jobs need to access shared resources or when operation order is critical.

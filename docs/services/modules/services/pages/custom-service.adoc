@@ -1,5 +1,8 @@
 = Custom service
-:page-description: Custom service
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-audience: developer
+:page-description: Work with your field engineer to build a custom service that supports your DevOps goals, such as adding a tool or a security practice.
 
 The custom service is an engagement where your field engineer works with your team to build a service that supports your DevOps goals. Examples include a adding new tool, adding a security practice, or a CircleCI feature migration.
 

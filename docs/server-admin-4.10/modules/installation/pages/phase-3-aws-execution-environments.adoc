@@ -1,6 +1,9 @@
 = Phase 3 AWS - execution environments
-:page-platform: Server 4.10, Server Admin
-:page-description: Installation guide for CircleCI server 4.10 execution environments.
+:page-platform: Server
+:page-vcs: github, github-enterprise
+:page-server-min-version: "4.10"
+:page-audience: admin
+:page-description: Set up CircleCI Server 4.10 execution environments on AWS, including Nomad clients and servers, machine provisioner, and runner.
 :env-aws:
 :experimental:
 

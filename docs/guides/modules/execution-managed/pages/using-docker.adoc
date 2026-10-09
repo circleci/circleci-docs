@@ -1,5 +1,9 @@
 = Using the Docker execution environment
-:page-platform: Cloud, Server v4+
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: Learn how to configure your jobs to run in the Docker execution environment
 :experimental:
 
@@ -88,10 +92,13 @@ For the Docker execution environment, the following resource classes are availab
 
 include::ROOT:partial$execution-resources/docker-resource-table.adoc[]
 
+ifndef::server[]
 ==== Gen2
 
 include::ROOT:partial$execution-resources/docker-gen2-resource-table.adoc[]
 
+endif::server[]
+ifndef::server[]
 [#arm]
 === Arm
 
@@ -111,6 +118,7 @@ include::ROOT:partial$execution-resources/docker-arm-gen2-resource-table.adoc[]
 
 include::ROOT:partial$execution-resources/resource-class-view.adoc[]
 
+ifndef::server[]
 [#docker-gen2-benefits]
 == Docker gen2
 
@@ -147,6 +155,7 @@ jobs:
       # ... steps for your job
 ----
 
+endif::server[]
 [#docker-benefits-and-limitations]
 == Docker benefits and limitations
 
@@ -232,13 +241,17 @@ For more information on `machine`, see the next section below.
 
 * If you encounter problems with rate limits imposed by your registry provider, using xref:private-images.adoc[Authenticated Docker Pulls] may grant higher limits.
 
-* CircleCI has partnered with Docker to ensure that our users can continue to access Docker Hub without rate limits. Rate limits do not affect you when pulling images from Docker Hub through CircleCI. We encourage you to xref:private-images.adoc[Add Docker Hub Authentication] to your CircleCI configuration and consider upgrading your Docker Hub plan, as appropriate, to prevent any impact from rate limits.
+ifndef::server[]
+* CircleCI has partnered with Docker to ensure that our users can continue to access Docker Hub without rate limits. You are not impacted by rate limits when pulling images from Docker Hub through CircleCI. We encourage you to xref:private-images.adoc[Add Docker Hub Authentication] to your CircleCI configuration and consider upgrading your Docker Hub plan, as appropriate, to prevent any impact from rate limits.
+endif::server[]
 
 * Avoid using mutable tags like `latest` or `1` as the image version in your `config.yml` file. It is best practice to use precise image versions or digests, like `redis:3.2.7` or `+redis@sha256:95f0c9434f37db0a4f...+` as shown in the examples. Mutable tags often lead to unexpected changes in your job environment.  CircleCI cannot guarantee that mutable tags return an up-to-date version of an image. You may specify `alpine:latest` and actually get a stale cache from a month ago.
 
 * If you experience increases in your run times due to installing additional tools during execution, consider creating and using a custom-built image that comes with those tools pre-installed. See the xref:custom-images.adoc[Using Custom-Built Docker Images] page for more information.
 
+ifndef::server[]
 * When you use xref:private-images.adoc#aws-ecr[AWS ECR] images, it is best practice to use `us-east-1` region. Our job execution infrastructure is in `us-east-1` region, so having your image on the same region reduces the image download time.
+endif::server[]
 
 * If your pipelines fail despite little to no changes in your project, you may need to investigate upstream issues with the Docker images you use.
 

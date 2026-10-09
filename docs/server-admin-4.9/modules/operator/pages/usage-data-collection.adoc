@@ -1,5 +1,8 @@
 = Usage data collection
-:page-platform: Server 4.9, Server Admin
+:page-platform: Server
+:page-vcs: github, github-enterprise
+:page-server-min-version: "4.9"
+:page-audience: admin
 :page-description: Learn about CircleCI Server 4.9 usage data collection for the purpose of improving our product and services.
 :experimental:
 

@@ -1,6 +1,9 @@
 = CircleCI image updater
 :page-platform: Cloud
-:page-description: The CircleCI tool to help customers update images in config.
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-audience: developer
+:page-description: The CircleCI image updater is an Alpha script that finds deprecated machine images you need to update across your organization's repositories.
 :experimental:
 
 [#notice]

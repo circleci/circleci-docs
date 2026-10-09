@@ -1,5 +1,8 @@
 = Notifications overview
 :page-platform: Cloud
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-audience: developer
 :page-description: Learn how to get CircleCI notifications through Slack, IRC and email notifications.
 :experimental:
 
@@ -142,6 +145,8 @@ Approval job notifications are delivered through the same categories as your oth
 === Approve or cancel an on-hold workflow
 
 Each approval job notification includes a link to the workflow in the CircleCI web app. Select the link to open the workflow, where you can approve or cancel it.
+
+If you have linked your Slack identity, you can also approve or cancel the workflow directly from a Slack approval job notification. For details, see the xref:integration:slack-integration.adoc#approve-or-cancel-workflows-from-slack[Approve or Cancel Workflows From Slack] section.
 
 == Organization-level contacts
 

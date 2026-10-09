@@ -1,5 +1,8 @@
 = Using the macOS execution environment
 :page-platform: Cloud
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-audience: developer
 :page-description: "Learn how to configure a your jobs to run in the macOS execution environment."
 :experimental:
 

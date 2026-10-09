@@ -1,6 +1,10 @@
 = Self-hosted runner concepts
-:page-platform: Cloud, Server v4+
-:page-description: Conceptual Overview for CircleCI's self-hosted runner.
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Understand the core concepts behind CircleCI's self-hosted runner, including namespaces, resource classes, task-agent, container-agent, and concurrency.
 :experimental:
 
 [#namespaces-and-resource-classes]

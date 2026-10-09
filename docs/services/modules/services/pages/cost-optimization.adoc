@@ -1,5 +1,8 @@
 = Cost optimization analysis service
-:page-description: Cost optimization service
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-audience: developer
+:page-description: Reduce credit spend for high-usage jobs. Your field engineer reviews jobs across projects and recommends optimizations using CircleCI data.
 
 The cost optimization analysis service helps reduce credit spend for jobs with high usage. Your field engineer reviews jobs across projects and recommends optimizations using CircleCI data. The service highlights credit-saving opportunities and recommends best practices.
 

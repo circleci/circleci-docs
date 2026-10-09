@@ -1,5 +1,8 @@
 = Manage virtual machines with machine provisioner
-:page-platform: Server 4.10, Server Admin
+:page-platform: Server
+:page-vcs: github, github-enterprise
+:page-server-min-version: "4.10"
+:page-audience: admin
 :page-description: CircleCI Server 4.10 machine provisioner service controls how machine executor (Linux and Windows images) and Remote Docker jobs are run.
 :experimental:
 
@@ -514,7 +517,7 @@ For an example of how developers reference these images and the resource classes
 [#instance-preallocation]
 == Instance preallocation
 
-CAUTION: When using preallocated instances be aware that a cron job is scheduled to cycle through these instances once per minute to ensure they do not end up in an unworkable state.
+CAUTION: When using preallocated instances, be aware that a cron job cycles through these instances once per minute. This ensures they do not end up in an unworkable state.
 
 To configure server to keep instances preallocated, use the keys shown in the following `machine-provisioner-config.yaml` example.
 

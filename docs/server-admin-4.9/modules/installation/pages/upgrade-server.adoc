@@ -1,5 +1,8 @@
 = Upgrade server
-:page-platform: Server 4.9, Server Admin
+:page-platform: Server
+:page-vcs: github, github-enterprise
+:page-server-min-version: "4.9"
+:page-audience: admin
 :page-description: "This document lists the steps required to upgrade a CircleCI Server 4.9 installation."
 :experimental:
 
@@ -51,6 +54,17 @@ helm diff upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n 
 +
 [source,shell,subs=attributes+]
 helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion49} -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
+
+. Delete the unused RabbitMQ email notification queues. Earlier server versions removed all consumers for these queues, so you can delete them when upgrading to 4.9. Replace `<namespace>` with your CircleCI Server namespace and run these commands:
++
+[source,console]
+----
+$ kubectl -n <namespace> exec rabbitmq-0 -- rabbitmqctl delete_queue email-notifications-queue
+$ kubectl -n <namespace> exec rabbitmq-0 -- rabbitmqctl delete_queue retry.email-notifications-queue
+$ kubectl -n <namespace> exec rabbitmq-0 -- rabbitmqctl delete_queue dead.email-notifications-queue
+----
++
+NOTE: If a queue never existed or is already deleted, the command returns `Error: Queue not found`. You can ignore this error.
 
 . Deploy and run link:https://github.com/circleci/realitycheck[`reality check`] in your test environment to ensure your installation is fully operational.
 

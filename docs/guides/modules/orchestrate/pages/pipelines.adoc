@@ -1,5 +1,9 @@
 = Pipelines overview and setup
-:page-platform: Cloud, Server v4+
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: This document introduces the concept of pipelines and shows how pipelines can be triggered and what they include.
 :experimental:
 :page-aliases: troubleshoot-pipelines.adoc
@@ -142,8 +146,10 @@ include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 ** Select a checkout source for this pipeline. This repository will be checked out when a xref:reference:ROOT:configuration-reference.adoc#checkout[Checkout Step] is run. If your config is stored in the same repository as your code, pick the same repository you selected for the config source.
 . Select btn:[Save].
 
+ifndef::server[]
 For Cursor Origin, commit the config file to your repository yourself before your pipeline can run. See the xref:getting-started:create-project.adoc#create-a-project[Create a Project] page.
 
+endif::server[]
 Once you have set up a pipeline you need to set up a trigger to connect it to. Setting up a trigger is covered in the xref:set-up-triggers.adoc[Set Up Triggers] page.
 --
 ====

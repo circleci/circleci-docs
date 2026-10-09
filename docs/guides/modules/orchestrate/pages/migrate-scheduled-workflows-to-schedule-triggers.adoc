@@ -1,6 +1,9 @@
 = Migrate scheduled workflows to schedule triggers
 :page-platform: Cloud
-:page-description: Migrate scheduled workflows to schedule triggers
+:page-vcs: github, github-enterprise, bitbucket
+:page-plan: Free, Performance, Scale
+:page-audience: developer
+:page-description: Migrate your scheduled workflows to schedule triggers: find your schedule workflow, create the new trigger, and remove the triggers section.
 :experimental:
 :page-aliases: migrate-scheduled-workflows-to-scheduled-pipelines.adoc
 

@@ -1,6 +1,10 @@
 = CircleCI convenience images support policy
-:page-platform: Cloud, Server v4+
-:page-description: CircleCI Convenience Images release, update, and deprecation policy
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Read the CircleCI policy for releasing, tagging, patching, and deprecating the Docker convenience images published to the cimg namespace on Docker Hub.
 :experimental:
 
 [#overview]

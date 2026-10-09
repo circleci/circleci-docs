@@ -1,6 +1,10 @@
 = CircleCI environment CLI usage guide
-:page-platform: Cloud, Server v4+
-:page-description: Using the CircleCI environment CLI in your CI/CD pipeline
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Reference for the CircleCI environment CLI available in your pipelines, with subcommands, flags and usage examples, and how it differs from the local CLI.
 :page-aliases: guides:toolkit:environment-cli-usage-guide.adoc
 :experimental:
 

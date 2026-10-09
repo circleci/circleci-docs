@@ -1,6 +1,10 @@
 = Workflow orchestration
-:page-platform: Cloud, Server v4+
-:page-description: Learn about using CircleCI workflows to orchestrate jobs
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Use CircleCI workflows to orchestrate jobs: control which jobs run, in what order, and under what conditions, with approvals, filters, and schedules.
 :experimental:
 
 Use workflows to orchestrate jobs in CircleCI. A workflow defines which jobs run, in what order, and under what conditions. This page shows you how to configure workflows to control job execution, manage dependencies between jobs, schedule builds, and apply filters to run different jobs for different branches or tags.

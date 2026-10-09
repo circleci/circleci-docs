@@ -1,6 +1,8 @@
 = Create, test, and use URL orbs
 :page-platform: Cloud
-:page-description: How to author URL orbs for your organization
+:page-vcs: github, github-enterprise, bitbucket, cursor-origin
+:page-audience: developer
+:page-description: Create URL orbs to share reusable CircleCI configuration across your organization from a location such as a Git repository. Test, update and version them.
 :experimental:
 :page-show-readtime: true
 

@@ -1,11 +1,21 @@
 = Use the CircleCI CLI for config and policy development
-:page-platform: Cloud, Server v4+
-:page-description: Learn about developing your config policies using the CLI.
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Use the CircleCI CLI to develop and test configs and config policies locally, and to retrieve policy decision audit logs for your organization.
 :experimental:
 
+ifndef::server[]
 NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI Server v4.2.
+endif::server[]
 
 CAUTION: Ensure you have authenticated your version of the CLI with a token, and updated the CLI, before attempting to use the CLI with config policies. See the xref:toolkit:local-cli.adoc[Installing the Local CLI] page for more information.
+
+ifdef::server[]
+NOTE: When using the `circleci policy decide` and `circleci policy logs` commands with CircleCI Server, use the `policy-base-url` flag to provide your CircleCI Server domain.
+endif::server[]
 
 [#develop-configs]
 == Develop configs

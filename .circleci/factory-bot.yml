@@ -5,4 +5,4 @@ review:
         author-membership:
           mode: specific-users
           specific-users:
-            - rosieyohannan
+            - "@rosieyohannan"

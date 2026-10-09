@@ -1,6 +1,10 @@
 = Automate LLM evaluation testing with the CircleCI Evals orb
-:page-platform: Cloud, Server v4+
-:page-description: How to use CircleCI Evals orb.
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Use the CircleCI Evals orb to automate LLM evaluations in your pipeline, define test cases and review evaluation results in the CircleCI web app.
 :experimental:
 
 CircleCI supports running automatic large language model (LLM) evaluations and evaluation testing using your preferred GenAI application evaluation framework. Through declaring the necessary commands in your pipeline configuration you can run your LLM evaluations and test the results within your CircleCI pipeline.
@@ -34,7 +38,12 @@ image::guides:ROOT:eval-test-diagram-concepts.png[Evaluation testing: Concepts d
 
 == Prerequisites
 
+ifndef::server[]
 * A CircleCI account connected to your code. You can sign up xref:getting-started:first-steps.adoc[For Free].
+endif::server[]
+ifdef::server[]
+* An account on your CircleCI Server instance, connected to your code.
+endif::server[]
 * A CircleCI project with a workflow configured to build your code.
 * CircleCI xref:security:contexts.adoc[Contexts] relevant for your workflow, which includes tools such as pre-trained model providers like OpenAI.
 * Existing LLM evaluations on an open source library or third-party tools such as Braintrust or LangSmith.
@@ -86,7 +95,7 @@ jobs:
 * In the `.json` file you just created, define your test cases.
 * Each test case is composed of a name and an assertion.
 * For test case names we suggest assigning a name based on the test scenario. For example, using the name of a metric: `correctness` or `toxicity`.
-* Assertions are expressed using the link:https://cel.dev/[Common Expression Language] (CEL). For more information, see the link:https://github.com/google/cel-spec/blob/master/doc/langdef.md[specification]. All values from the results `.json` file are available as global variables. Try out CEL link:https://playcel.undistro.io/[here].
+* Assertions are expressed using the link:https://cel.dev/[Common Expression Language] (CEL). For more information, see the link:https://github.com/google/cel-spec/blob/master/doc/langdef.md[specification]. All values from the results `.json` file are available as global variables. Try out CEL in the link:https://playcel.undistro.io/[CEL Playground].
 
 === Test case examples
 
@@ -165,7 +174,7 @@ image::guides:ROOT:llmops/eval-test-fail-detail.png[Evaluation testing: Test Fai
 == Examples
 
 === Example pipeline configuration
-Here’s an example of a pipeline configuration set up with the CircleCI evals orb and job. In the following pipeline configuration example, the job `eval-test` will:
+The following example shows a pipeline configuration set up with the CircleCI evals orb and job. In this example, the job `eval-test` will:
 
 * Checkout the project repository
 * Run LLM evaluations and store the results.

@@ -1,6 +1,10 @@
 = Language guide: Go
-:page-platform: Cloud, Server v4+
-:page-description: Learn how to set up a Go project with CircleCI.
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Set up a Go project with CircleCI. Follow a configuration walkthrough to create a basic config.yml file that builds, tests, and deploys your project.
 :experimental:
 
 This quickstart guide covers integrating a Go project with CircleCI. This guide is designed to help you create a basic CircleCI configuration file to build, test, and deploy your Go project. After completing this quickstart, you can edit and optimize the config to fit the requirements of your project.
@@ -8,8 +12,14 @@ This quickstart guide covers integrating a Go project with CircleCI. This guide 
 [#prerequisites]
 == Prerequisites
 
+ifndef::server[]
 * xref:first-steps.adoc[A CircleCI Account]
 * A Go project located in a supported VCS.
+endif::server[]
+ifdef::server[]
+* An account on your CircleCI Server instance.
+* A Go project located in a GitHub repository.
+endif::server[]
 
 [#configuration-walkthrough-new]
 == Configuration walkthrough
@@ -31,7 +41,12 @@ version: 2.1
 [#use-the-go-orb]
 === 2. Use the Go orb
 
+ifndef::server[]
 The Go link:https://circleci.com/developer/orbs/orb/circleci/go[orb] contains a set of prepackaged CircleCI configurations you can use to perform common CircleCI tasks for the Go programming language. It supports Linux x86_64, macOS x86_64, and Arm64. Learn more about xref:orbs:use:orb-intro.adoc[Orbs].
+endif::server[]
+ifdef::server[]
+The Go link:https://circleci.com/developer/orbs/orb/circleci/go[orb] contains a set of prepackaged CircleCI configurations you can use to perform common CircleCI tasks for the Go programming language. It supports Linux x86_64. Learn more about xref:orbs:use:orb-intro.adoc[Orbs].
+endif::server[]
 
 To add the orb to your config, insert:
 
@@ -41,7 +56,7 @@ orbs:
   go: circleci/go@3.0.2
 ----
 
-NOTE: When using an orb, it is a good idea to check the link:https://circleci.com/developer/orbs[Orb Registry] to ensure you are using the most recent version, or the version that fits best with your specific project.
+NOTE: When using an orb, check the link:https://circleci.com/developer/orbs[Orb Registry] to confirm you are using the most recent version. Alternatively, use the version that best fits your specific project.
 
 [#create-jobs]
 === 3. Create jobs

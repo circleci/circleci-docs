@@ -1,16 +1,27 @@
 = Rotate project SSH keys
-:page-platform: Cloud, Server v4+
-:page-description: How to rotate your project SSH keys.
+:page-platform: Cloud, Server
+:page-vcs: github, github-enterprise, gitlab, gitlab-self-hosted, bitbucket
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Rotate project SSH keys for GitHub, Bitbucket Cloud and GitLab projects by removing and replacing both the private and public keys.
 :experimental:
 
+ifndef::server[]
 To revoke usage of a project SSH key, rotate the key pairs by following the steps outlined below. Separate instructions exist for each supported version control system (VCS).
+endif::server[]
+ifdef::server[]
+To revoke usage of a project SSH key, rotate the key pairs by following the steps outlined below.
+endif::server[]
 
 When using project SSH keys, CircleCI holds the private key. The target system (typically a VCS, machine, or another SSH-based system) holds the matching public key via its authorization system. To rotate SSH keys, both the private and public keys need to be removed.
 
 [#github-projects]
 == GitHub projects
 
+ifndef::server[]
 include::ROOT:partial$tips/check-github-type-org.adoc[]
+endif::server[]
 
 Go to menu:Project Settings[SSH Keys] to view SSH keys set up for your project.
 
@@ -56,6 +67,7 @@ If you are using additional SSH keys in your project, follow these steps:
 . Remove the authorization to use the old key from the target system. Typically, the public key will be authorized in the target system, and the configuration varies depending on the target system.
 . Authorize the target system to use the new key.
 
+ifndef::server[]
 [#bitbucket-projects]
 == Bitbucket Cloud projects
 
@@ -118,3 +130,4 @@ In some scenarios, you might also be using additional SSH keys that are not tied
 . Add the new key to CircleCI by clicking **Add SSH Key** under the Additional SSH Keys section. The hostname can be the same as for the old key you just removed. Paste in the private key you created in the step above and click **Add SSH Key** again to finalize.
 . Remove the authorization to use the old key from the target system. Typically, the public key will be authorized in the target system, and the configuration varies depending on the target systems.
 . Authorize the target system to use the new key.
+endif::server[]

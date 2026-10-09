@@ -1,5 +1,8 @@
 = User types and registration in CircleCI
 :page-platform: Cloud
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-audience: developer
 :page-description: Learn about registered users, active users, and unregistered users in CircleCI, and how to register for an account.
 :experimental:
 

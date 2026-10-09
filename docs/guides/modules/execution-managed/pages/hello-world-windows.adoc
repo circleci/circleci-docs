@@ -1,6 +1,10 @@
 = Hello world on Windows
-:page-platform: Cloud, Server v4+
-:page-description: First Windows project on CircleCI
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Get started with continuous integration on the Windows execution environment by setting up your first Windows project with an example application.
 :experimental:
 
 This document describes how to get started with continuous integration on *Windows execution environments* on CircleCI. If this is your first time setting up CircleCI, we recommend checking out the xref:getting-started:getting-started.adoc[Getting Started Guide].
@@ -20,7 +24,7 @@ To follow along with this document you will need:
 
 Let us consider a more advanced (but still introductory) "hello world" application using the Windows executor. This link:https://github.com/CircleCI-Public/circleci-demo-windows[example application] still prints "Hello World" to the console, but does so using .NET core to create an executable, uses dependency caching, and creates an artifact on every build.
 
-You can view the entire configuration link:https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml[here]. It also includes browser and UI testing, but we will focus on the `hello-world` workflow for now.
+You can view the link:https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml[entire configuration file]. It also includes browser and UI testing, but we will focus on the `hello-world` workflow for now.
 
 [,yaml]
 ----
@@ -104,6 +108,6 @@ In our last step, we store the build executable as an artifact, making it access
 
 Consider reading documentation on some of CircleCI's features:
 
-* See the xref:about-circleci:concepts.adoc[Concepts] document for a summary of configuration and the hierarchy of top-level keys in a `.circleci/config.yml` file.
+* See the xref:reference:ROOT:concepts.adoc[Concepts] document for a summary of configuration and the hierarchy of top-level keys in a `.circleci/config.yml` file.
 * Refer to the xref:orchestrate:workflows.adoc[Workflows] document for examples of orchestrating job runs with concurrent, sequential, scheduled, and manual approval workflows.
 * Find complete reference information for all keys and pre-built Docker images in the xref:reference:ROOT:configuration-reference.adoc[Configuring CircleCI] and xref:circleci-images.adoc[CircleCI Images] documentation, respectively.

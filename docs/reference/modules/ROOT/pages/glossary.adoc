@@ -1,5 +1,9 @@
 = Glossary
-:page-platform: Cloud, Server v4+
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: A glossary of CircleCI-specific and CI/CD terminology used across the CircleCI product and documentation.
 :experimental:
 
@@ -23,7 +27,7 @@ A record of significant events in a CircleCI organization, available to organiza
 
 == Build agent
 
-On CircleCI Server, the CircleCI program that executes the steps within a job and reports the results. The build agent runs as the main process inside a Nomad job allocation. See the xref:guides:plans-pricing:plan-server.adoc[CircleCI Server] page.
+On CircleCI Server, the CircleCI program that executes the steps within a job and reports the results. The build agent runs as the main process inside a Nomad job allocation. See the xref:server-admin:overview:circleci-server-overview.adoc[CircleCI Server] page.
 
 == Built-in environment variable
 
@@ -43,7 +47,7 @@ The command-line interface you install on your local machine to validate and deb
 
 == CircleCI Server
 
-CircleCI's on-premises CI/CD platform for organizations that must operate within their own firewall, private cloud, or data center. CircleCI Server runs in a Kubernetes cluster and provides the same core features as CircleCI Cloud. See the xref:guides:plans-pricing:plan-server.adoc[CircleCI Server] page.
+CircleCI's on-premises CI/CD platform for organizations that must operate within their own firewall, private cloud, or data center. CircleCI Server runs in a Kubernetes cluster and provides the same core features as CircleCI Cloud. See the xref:server-admin:overview:circleci-server-overview.adoc[CircleCI Server] page.
 
 == Command
 
@@ -55,7 +59,7 @@ In the context of <<deployment,deployments>>, a collection of code and configura
 
 == Concurrency
 
-Running multiple jobs at the same time, either multiple jobs within a single <<workflow>> or multiple workflows running across an organization. Free, Performance, and Custom plans each have a concurrency limit that varies by <<resource-class>> and plan tier. Scale plan organizations have no concurrency limit, except for macOS resource classes, which retain a custom concurrency limit. Concurrency is _not_ the same as <<parallelism>>, which splits the tests of a single job across multiple containers. See the xref:guides:optimize:concurrency.adoc[Concurrency] page.
+Running multiple jobs at the same time, either multiple jobs within a single <<workflow>> or multiple workflows running across an organization. Free and Performance plans each have a concurrency limit that varies by <<resource-class>> and plan tier. Scale plan organizations have no concurrency limit, except for macOS resource classes, which retain a custom concurrency limit. Concurrency is _not_ the same as <<parallelism>>, which splits the tests of a single job across multiple containers. See the xref:guides:optimize:concurrency.adoc[Concurrency] page.
 
 == Config policies
 
@@ -184,7 +188,7 @@ A prebuilt virtual machine image for the <<machine-executor>>, available for Lin
 
 == Machine provisioner
 
-On CircleCI Server, the service that dynamically provisions and manages the virtual machines used by jobs configured for the machine execution environment, as well as Remote Docker jobs. See the xref:guides:plans-pricing:plan-server.adoc[CircleCI Server] page.
+On CircleCI Server, the service that dynamically provisions and manages the virtual machines used by jobs configured for the machine execution environment, as well as Remote Docker jobs. See the xref:server-admin:overview:circleci-server-overview.adoc[CircleCI Server] page.
 
 == Machine runner
 

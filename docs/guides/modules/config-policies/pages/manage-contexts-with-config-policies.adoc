@@ -1,12 +1,19 @@
 = Manage contexts with config policies
-:page-platform: Cloud, Server v4+
-:page-description: Learn how to manage the use of contexts with config policies.
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Write config policies that control context use in your organization by defining which contexts are allowed, blocked, or reserved by a project or branch.
 :experimental:
 
+ifndef::server[]
 NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI Server v4.2.
+endif::server[]
 
 Follow this how-to guide to create config policies for managing the use of contexts in your organization. For more information about config policies, see the xref:config-policy-management-overview.adoc[Config Policies Overview].
 
+ifndef::server[]
 ****
 **Using server?** When using the `circleci policy` commands with CircleCI Server, you will need to use the `policy-base-url` flag to provide your CircleCI Server domain. For example:
 [source,shell]
@@ -14,6 +21,16 @@ Follow this how-to guide to create config policies for managing the use of conte
 circleci policy push ./config-policies --owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
 ----
 ****
+endif::server[]
+ifdef::server[]
+****
+When using the `circleci policy` commands, use the `policy-base-url` flag to provide your CircleCI Server domain. For example:
+[source,shell]
+----
+circleci policy push ./config-policies --owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
+----
+****
+endif::server[]
 
 [#introduction]
 == Introduction

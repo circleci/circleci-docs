@@ -1,6 +1,10 @@
 = Container runner performance benchmarks
-:page-platform: Cloud, Server v4.3+
-:page-description: Performance benchmarks and tuning.
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.3"
+:page-audience: developer
+:page-description: Review container runner performance benchmarks and recommendations for agent replica count, concurrent tasks per replica, and node types.
 :experimental:
 :container:
 

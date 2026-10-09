@@ -1,6 +1,10 @@
 = Generate code coverage metrics
-:page-platform: Cloud, Server v4+
-:page-description: Generate code coverage metrics for different languages.
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Generate code coverage metrics for Ruby, Python, Java, JavaScript, PHP and Go, then view reports on CircleCI or send them to Codecov or Coveralls.
 :experimental:
 
 [#introduction]

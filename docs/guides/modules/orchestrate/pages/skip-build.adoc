@@ -1,5 +1,9 @@
 = Skip CI, auto-cancel, and block new pipelines
-:page-platform: Cloud, Server v4+
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: Skip CI builds, auto-cancel redundant workflows, and block new work for your CircleCI organization or project.
 :experimental:
 
@@ -37,8 +41,13 @@ A few points to note regarding the scope of the `ci skip` feature:
 * If you push multiple commits at once, and the latest commit includes a `[ci skip]` or `[skip ci]` tag, it will skip the pipeline execution for all commits in that push.
 * The entire commit message is checked, including the title and body. If you squash commits when merging, your VCS provider may concatenate all individual commit messages into the body of the squashed commit. If any of the original commit messages contain a skip tag, the resulting pipeline will be skipped. Review your squashed commit message before merging.
 * This feature is not supported for fork PRs. Scheduled workflows will run even if you push a commit with `[ci skip]` message. Changing the config file is the way to upgrade the current schedule.
+ifndef::server[]
 * For GitHub OAuth and Bitbucket Cloud pipelines, this functionality applies also when the pipeline is triggered via API, manually via the web app, or via schedule.
 * GitHub App pipelines triggered via Custom webhook, schedule or API are never skipped.
+endif::server[]
+ifdef::server[]
+* For GitHub OAuth pipelines, this functionality applies also when the pipeline is triggered via API, manually via the web app, or via schedule.
+endif::server[]
 
 === Example commit title
 
@@ -85,7 +94,12 @@ To save time, you can configure CircleCI to automatically cancel any non-termina
 A few points to note regarding the use of the auto-cancel feature:
 
 * Pipelines targeting the default branch (usually `main`) are never auto-cancelled.
+ifndef::server[]
 * Auto-cancel affects pipelines triggered by pushes to a VCS, via the API, or by custom webhooks. For custom webhooks, we compare the trigger's checkout branch to the checkout repository's default branch to determine whether auto-cancel applies.
+endif::server[]
+ifdef::server[]
+* Auto-cancel affects pipelines triggered by pushes to a VCS or via the API.
+endif::server[]
 * Only workflows that are triggered when the feature is enabled will be auto-cancelled.
 
 ### Enable auto-cancel
@@ -106,7 +120,7 @@ Projects which have auto-cancel enabled will have pipelines and workflows on non
 [#block-all-new-work]
 == Block all new work
 
-NOTE: For server customers, this feature will be available in Server 4.10+.
+NOTE: For CircleCI Server customers, this feature requires Server 4.10 or later.
 
 Use this setting to immediately stop all new work from starting during an incident or emergency. When enabled, new pipelines are not created and users cannot rerun workflows.
 
@@ -129,5 +143,10 @@ This setting is designed for situations where you need to quickly halt all CI/CD
 . Select **Advanced**.
 . Toggle the **Block all new work from starting for this project** switch to the on position.
 
+ifndef::server[]
 NOTE: **Block all new work** prevents new pipelines (and reruns) but does **not** cancel workflows that are already running. If you also need to **cancel running workflows** and fully disconnect a **GitHub OAuth** or **Bitbucket Cloud** project (removing the webhook and deploy key), use xref:security:stop-building-a-project-on-circleci.adoc[Stop Building] instead.
+endif::server[]
+ifdef::server[]
+NOTE: **Block all new work** prevents new pipelines (and reruns) but does **not** cancel workflows that are already running. If you also need to **cancel running workflows** and fully disconnect a **GitHub OAuth** project (removing the webhook and deploy key), use xref:security:stop-building-a-project-on-circleci.adoc[Stop Building] instead.
+endif::server[]
 

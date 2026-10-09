@@ -1,6 +1,10 @@
 = Get started with the VS Code extension
-:page-platform: Cloud, Server v4+
-:page-description: A quickstart tutorial for the CircleCI VS Code extension.
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: A quickstart for the CircleCI VS Code extension: install it, authenticate, set up your project, and configure the pipelines panel and notifications.
 :experimental:
 
 This tutorial is a quickstart guide to setting up and using the official CircleCI VS Code extension. You can read more about the extension's capabilities in the xref:vs-code-extension-overview.adoc[Overview].
@@ -12,7 +16,12 @@ Before starting this tutorial, make sure you have:
 
 * Installed VS Code (version `1.67` or above).
 
+ifndef::server[]
 * A CircleCI account (you can link:https://circleci.com/signup/[sign up for free]).
+endif::server[]
+ifdef::server[]
+* A CircleCI Server account.
+endif::server[]
 
 * A xref:getting-started:create-project.adoc[Project] you follow that is building on CircleCI.
 
@@ -32,7 +41,12 @@ You can install the CircleCI extension in two ways:
 
 . In VS Code, open the CircleCI panel by clicking on the CircleCI icon on the activity bar, then click **Log in**.
 
+ifndef::server[]
 . You will be prompted to enter a xref:managing-api-tokens.adoc#overview[Personal API Token]. You may create one in your CircleCI link:https://app.circleci.com/settings/user/tokens[**User Settings > Personal API Tokens**].
+endif::server[]
+ifdef::server[]
+. You will be prompted to enter a xref:managing-api-tokens.adoc#overview[Personal API Token]. You may create one in your CircleCI menu:User Settings[Personal API Tokens].
+endif::server[]
 +
 **CircleCI Server**: Make sure to check **I'm a CircleCI Server customer**, then enter your self-hosted server URL.
 +
@@ -46,7 +60,9 @@ If your VS Code workspace contains one or more CircleCI projects, the extension 
 
 If no project is detected, open the extension settings page and select your projects manually. You can open it through the VS Code command `CircleCI: Open Settings`, or by clicking the settings icon icon:settings[Settings icon] at the top of the pipelines panel. Only projects you follow are listed.
 
+ifndef::server[]
 NOTE: **GitHub App and GitLab projects:** The pipelines manager does not yet support automatic detection for projects in a `circleci` type organization. Select your project manually from the settings page. For more information on organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
+endif::server[]
 
 .The Pipelines Panel
 image::guides:ROOT:vs_code_extension_pipelines_panel_zoomed.png[The pipelines panel displays pipelines you follow.]
@@ -88,7 +104,9 @@ Alternatively, you can configure SSH keys for the extension manually through the
 
 To open an SSH session in a dedicated VS Code remote window, you need to install the link:https://marketplace.visualstudio.com/items?itemName=ms-vscode.remote-explorer[official Remote Explorer extension for VS Code].
 
+ifndef::server[]
 NOTE: **GitHub App and GitLab projects:** Re-run with SSH from VS Code is not yet available for projects in a `circleci` type organization. For more information on organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
+endif::server[]
 
 .VS Code Remote Development Window
 image::guides:ROOT:vs_code_extension_ssh_remote_window.png[VS Code with remote development window]

@@ -1,6 +1,10 @@
 = Android images with the machine executor
-:page-platform: Cloud, Server v4+
-:page-description: Using the Android image on the machine executor
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Use the Android machine image on the Linux machine executor with the Android orb or manual configuration, and review resource classes and preinstalled tools.
 :experimental:
 
 [#overview]

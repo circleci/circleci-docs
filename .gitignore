@@ -11,3 +11,6 @@
 /.vscode/
 /.htmltest
 /test-reports
+
+# Local planning and audit notes, not published
+/planning/

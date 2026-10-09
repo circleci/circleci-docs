@@ -1,6 +1,10 @@
 = Benefits of CircleCI
-:page-platform: Cloud, Server v4+
-:page-description: Benefits of choosing CircleCI for CI/CD
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Find out why teams choose CircleCI for CI/CD, including fast jobs, caching and parallelism options, and pricing plans to suit your needs.
 :experimental:
 
 
@@ -15,7 +19,12 @@ As a developer using CircleCI you can:
 - Set up xref:optimize:parallelism-faster-jobs.adoc[Parallelism] in your `.circleci/config.yml` file to run test jobs faster.
 - Configure xref:optimize:caching.adoc[Caching] with two simple keys to reuse data from previous jobs in your xref:orchestrate:workflows.adoc[Workflow].
 - Configure self-hosted xref:execution-runner:runner-overview.adoc[Runners] for unique platform support.
+ifndef::server[]
 - Access xref:execution-managed:using-arm.adoc[Arm VM Resources] and xref:execution-managed:using-docker.adoc#arm[Arm on Docker].
+endif::server[]
+ifdef::server[]
+- Access xref:execution-managed:using-arm.adoc[Arm VM Resources].
+endif::server[]
 - Use xref:orbs:use:orb-intro.adoc[Orbs], reusable packages of configuration, to integrate with third parties.
 - Use pre-built Docker xref:execution-managed:circleci-images.adoc[Images] in a variety of languages.
 - Use the link:https://www.circleci.com/docs/api/v2/[API] to retrieve information about jobs and workflows.

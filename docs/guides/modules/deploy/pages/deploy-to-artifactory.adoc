@@ -1,6 +1,10 @@
 = Deploy to Artifactory
-:page-platform: Cloud, Server v4+
-:page-description: How to upload artifacts to Artifactory in CircleCI
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Upload artifacts such as JAR and WAR files to Artifactory from CircleCI using Artifactory plugins for Maven and Gradle, or the JFrog CLI.
 :experimental:
 
 In this how-to guide, you will learn how to upload artifacts to Artifactory in CircleCI.
@@ -139,6 +143,7 @@ workflows:
           context: artifactory
 ----
 
+ifndef::server[]
 [#track-deployments-with-deploy-markers]
 == Track your deployments with deploy markers
 
@@ -151,6 +156,7 @@ You have two options for setting up deploy markers:
 * *Manual setup*: Add deploy marker commands directly to your `.circleci/config.yml` file by following the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
 
 Both approaches will enable you to track deployment history and manage rollbacks directly from the CircleCI web app.
+endif::server[]
 
 [#see-also]
 == See also

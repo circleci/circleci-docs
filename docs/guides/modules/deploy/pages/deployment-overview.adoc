@@ -1,7 +1,10 @@
 = Deployment and deploy management overview
 :page-aliases: deploys-overview.adoc, deploy:deploy-to-amazon-sagemaker.adoc
 :page-platform: Cloud
-:page-description: Learn the basics of deployment and deploys management with CircleCI.
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-audience: developer
+:page-description: Get an overview of deploying to any target with CircleCI and managing deployments with deploy markers, rollbacks, Smart Deployments, and the release agent.
 :experimental:
 
 With CircleCI you can deploy to any target and manage your deployments in the CircleCI web app.

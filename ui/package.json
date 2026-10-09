@@ -14,7 +14,7 @@
     "last 2 versions"
   ],
   "devDependencies": {
-    "@asciidoctor/core": "~4.0.0",
+    "@asciidoctor/core": "~4.1.0",
     "@eslint/js": "~10.0.0",
     "@fontsource/roboto": "~5.3.0",
     "@fontsource/roboto-mono": "~5.3.0",
@@ -22,7 +22,7 @@
     "autoprefixer": "~10.6.0",
     "browser-pack-flat": "~3.5.0",
     "browserify": "~17.0.0",
-    "cssnano": "~8.0.0",
+    "cssnano": "~9.3.0",
     "eslint": "~10.11.0",
     "fancy-log": "~2.0.0",
     "fs-extra": "~11.4.0",

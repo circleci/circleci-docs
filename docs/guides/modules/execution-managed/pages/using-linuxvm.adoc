@@ -1,5 +1,9 @@
 = Using the Linux VM execution environment
-:page-platform: Cloud, Server v4+
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: Learn how to configure your jobs to run in the Linux VM execution environment using the machine executor.
 :experimental:
 You can run your jobs in the Linux VM (virtual machine) execution environment by using the machine executor and specifying a Linux image. Using the machine executor runs your jobs in a dedicated, ephemeral VM.
@@ -7,12 +11,6 @@ You can run your jobs in the Linux VM (virtual machine) execution environment by
 Using the machine executor gives your application full access to OS resources and provides you with full control over the job environment. This control can be useful when you need full access to the network stack. For example, you can listen on a network interface or change the system with `sysctl` commands.
 
 To use the machine executor, use the xref:reference:ROOT:configuration-reference.adoc#machine[`machine` key] in your job configuration and specify an image:
-
-****
-
-* Self-hosted runners
-* The machine executor on CircleCI Server.
-****
 
 [tabs]
 ====

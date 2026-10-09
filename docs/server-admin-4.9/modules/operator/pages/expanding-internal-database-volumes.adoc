@@ -1,6 +1,9 @@
 = Expanding internal database volumes
-:page-platform: Server 4.9, Server Admin
-:page-description: Expanding internal database volumes for CircleCI Server 4.9.
+:page-platform: Server
+:page-vcs: github, github-enterprise
+:page-server-min-version: "4.9"
+:page-audience: admin
+:page-description: Resize the persistent volume claims for internal PostgreSQL and MongoDB databases when CircleCI Server 4.9 needs more database storage.
 :experimental:
 
 [#overview]

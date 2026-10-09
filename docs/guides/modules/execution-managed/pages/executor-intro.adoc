@@ -1,6 +1,10 @@
 = Execution environments overview
-:page-platform: Cloud, Server v4+
-:page-description: An overview of all CircleCI execution environments.
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Compare the CircleCI execution environments: Docker, Linux VM, macOS, Windows, GPU, and Arm VM, and learn how images and resource classes apply.
 :experimental:
 
 CircleCI offers several execution environments:

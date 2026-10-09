@@ -1,6 +1,10 @@
 = Secure secrets handling
-:page-platform: Cloud, Server v4+
-:page-description: Learn how to handle secrets securely with CircleCI.
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Protect secrets at the boundary between CircleCI and your systems. Understand command-line risks and apply mitigations such as protecting API tokens.
 :experimental:
 
 Many builds must reference secret values entrusted to CircleCI. CircleCI understands that security is critical to every organization's success. However, you can also take a few steps to help protect secrets at the boundary between CircleCI's systems and yours.
@@ -81,6 +85,9 @@ When calling the CircleCI API with `curl` commands, you need to provide an API t
 * Use a `.netrc` file: The link:https://everything.curl.dev/usingcurl/netrc.html[`.netrc` file format], which is supported by several different tools, allows you to provide HTTP basic auth credentials in a file, rather than at the command-line.
 ** Create a file at a location of your choosing. The default used by some tools is `~/.netrc`. Be sure to `chmod 0600` this file before adding the secret, to prevent other users from viewing its contents.
 ** Add a line in the following format: `machine circleci.com login <your token> password`
+ifdef::server[]
+** On CircleCI Server, use your Server hostname instead of `circleci.com` for `machine`.
+endif::server[]
 ** When invoking `curl` commands, tell it to look in your `.netrc` file for credentials: `curl --netrc-file ~/.netrc`
 * Write the `Circle-Token` header into a file. This requires cURL 7.55 or later, but is a more reliable solution than `.netrc`, because some tools that use `.netrc` files do not understand an empty password field:
 ** Create a file at a location of your choosing. Be sure to `chmod 0600` the file to prevent other users from viewing its contents.

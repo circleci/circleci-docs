@@ -1,6 +1,9 @@
 = Create, test, and publish a registry orb
-:page-platform: Cloud, Server v4+
-:page-description: Tutorial showing how to create an orb using the orb development kit.
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Follow this tutorial to create, test and publish a new registry orb using the orb development kit, starting from a new GitHub repository.
 :experimental:
 :page-aliases: create-an-orb, creating-orbs, publishing-orbs-to-the-registry
 :page-show-readtime: true

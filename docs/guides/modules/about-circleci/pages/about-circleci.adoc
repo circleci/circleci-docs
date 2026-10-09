@@ -1,5 +1,9 @@
 = CircleCI overview
-:page-platform: Cloud, Server v4+
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: An overview of CircleCI, continuous integration and continuous delivery
 :experimental:
 
@@ -58,4 +62,4 @@ Other cloud service deployments can be scripted using SSH, or by installing the 
 == Next steps
 
 * xref:benefits-of-circleci.adoc[Benefits of CircleCI]
-* xref:concepts.adoc[CircleCI Concepts]
+* xref:reference:ROOT:concepts.adoc[CircleCI Concepts]

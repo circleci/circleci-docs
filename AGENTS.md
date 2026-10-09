@@ -47,7 +47,7 @@ If there is no issue ID, use a short description only.
 - `template-conceptual.adoc` - Explanatory content
 - `template-tutorial.adoc` - Learning-oriented tutorials
 
-All pages require standard attributes (`:page-platform:`, `:page-description:`, `:experimental:`) at the top. See the "Working with the Docs Site" section for complete details on templates and page attributes.
+All pages require standard attributes (`:page-platform:`, `:page-audience:`, `:page-description:`, `:experimental:`) at the top. See the "Working with the Docs Site" section for complete details on templates and page attributes.
 
 ## Voice and Style
 
@@ -523,6 +523,43 @@ Content for Tab B
 ====
 ```
 
+### Cloud and Server Content
+
+The `guides` component builds twice from one set of source files: a Cloud build (the unversioned default) and a Server build (latest release). The Server build sets the AsciiDoc attribute `server`. The Cloud build does not. There is no `cloud` attribute. The `enabled` setting on the `guides-versions-extension.js` entry in `antora-playbook.yml` turns the Server build on or off. The human-facing version of this section is `docs/contributors/modules/docs-style/pages/cloud-and-server-content.adoc`.
+
+**Decide first.** Most content is the same on both platforms, so use as few conditionals as possible.
+
+- If the text is correct for both platforms, leave it alone. Do not hide Cloud examples or comparison tables from Server readers.
+- If a feature does not exist on Server, wrap it in `ifndef::server[]`.
+- If Server works differently, keep the Cloud text unchanged and add a Server variant in `ifdef::server[]`.
+- If only the version differs, state the version in the text ("from Server 4.9"). Do not branch on version, and do not use `ifeval`.
+
+**Syntax.** Put each directive on its own line.
+
+```adoc
+ifndef::server[]
+Cloud-only content.
+endif::server[]
+ifdef::server[]
+Server-only content.
+endif::server[]
+```
+
+**Rules:**
+
+- Use `ifndef::server[]` for Cloud-only content and `ifdef::server[]` for Server-only content. Never test for a `cloud` attribute, because partials are shared with the `reference` component.
+- **Cloud output must not change** when you add conditionals to an existing page. Keep the original Cloud text byte-for-byte inside `ifndef::server[]`. Put wanted Cloud wording changes in a separate commit or pull request.
+- Whole-page availability comes from metadata (`:page-platform:`, `:page-server-min-version:`, `:page-server-deprecated-in:`), not conditionals. Never wrap page attributes, such as `:page-description:`, in conditionals.
+- Do not put conditionals inside `[tabs]` blocks. Move the tab body into a partial and include it in the tab and in an `ifdef::server[]` block.
+- Do not put a directive mid-sentence. Write two complete sentences.
+- Keep one explicit kebab-case heading ID for both builds. Do not wrap the `[#id]` line.
+- Close every directive. Unbalanced conditionals fail Vale (`AsciiDoc.ValidConditions`).
+- Wrap an xref to a Cloud-only page (`:page-platform: Cloud`) in `ifndef::server[]`. The Server build replaces unwrapped links with plain text and lists them in `extensions/.temp/guides-server-unlinked.md`. The `maxunlinkedxrefs` setting in `antora-playbook.yml` fails the build if the count rises.
+- On Server, name the web app without a link. Link to `app.circleci.com` only on Cloud. When an example uses `circleci.com`, add a Server note to replace it with the Server hostname.
+- The pipeline type table in `docs/guides/modules/integration/pages/version-control-system-integration-overview.adoc` ("GitHub OAuth on Server" column) is the source of truth for Server support. If unsure, ask rather than guess.
+
+**Verify.** Build `main` and your branch with `npm run build:docs`, then diff the HTML in `build/`. Ignore `edit/<branch>/` URLs and timestamps in the sitemap and `llms.txt`. Treat any other difference as a real change to Cloud output. To preview the Server build, set `enabled: true` on the `guides-versions-extension.js` entry in `antora-playbook.yml`, and do not commit that change.
+
 ## Common Mistakes to Avoid
 
 1. Passive voice constructions
@@ -537,7 +574,7 @@ Content for Tab B
 10. Inline code in headings
 11. More than 3 commas in a sentence
 12. Sentences over 25 words (affects readability)
-13. Missing page attributes (`:page-platform:`, `:page-description:`, `:experimental:`)
+13. Missing page attributes (`:page-platform:`, `:page-audience:`, `:page-description:`, `:experimental:`)
 14. Not using appropriate page templates for new content
 15. Using xrefs without verifying the target file exists and path is correct
 16. **Committing without running Vale and fixing linting errors**
@@ -718,6 +755,7 @@ Before committing documentation changes:
 4. ✅ Check `:page-description:` is 70-160 characters
 5. ✅ Ensure link text uses title case
 6. ✅ Confirm page is added to `nav.adoc` if new
+7. ✅ **REQUIRED**: Run `npm run check:metadata` and fix any page attribute errors (see Page Attributes section)
 
 **Alternative for local agents**: If CircleCI CLI is available and authenticated, you can also check Vale errors from CI runs using `circleci run get` and `circleci job output get`, but running Vale locally is still the recommended approach.
 
@@ -815,24 +853,52 @@ npm run build:api-docs # API docs only
 
 All documentation pages must include attributes at the top of the file, before the main content. These attributes provide metadata and enable certain AsciiDoc features.
 
+The full metadata contract is defined in `schemas/docs-metadata.schema.json` (DOC-269). This section summarizes it; if the two ever disagree, the schema file wins.
+
+The `check-metadata` CI job validates every page against the schema. Run the same check locally with `npm run check:metadata`, or pass file paths to check only those files (`node scripts/check-metadata.js <file>...`). To run it automatically on staged `.adoc` files before each commit, run `npm run hooks:install` once.
+
 **Required attributes:**
 
 ```adoc
 = Page Title
-:page-platform: Cloud, Server v4+
+:page-platform: Cloud, Server
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: A brief description for SEO and metadata (70-160 characters)
 :experimental:
 ```
 
 **Attribute descriptions:**
 
-- `:page-platform:` - Indicates which CircleCI platforms support the feature. Displays as badges under the page title.
-  - Options: `Cloud`, `Server v4+`, `Server v3`, or combinations like `Cloud, Server v4+`
-  - If feature is Cloud-only, use `:page-platform: Cloud`
-  - If feature is available on all platforms, use `:page-platform: Cloud, Server v4+`
+- `:page-platform:` - Which CircleCI platform(s) support the feature. Displays as badges under the page title.
+  - Comma-separated, capitalized: `Cloud`, `Server`, or `Cloud, Server`
+  - Do not put a version number here — use `:page-server-min-version:` instead
+
+- `:page-server-min-version:` - Only when `server` is in `:page-platform:`. The minimum Server version the feature is available from, e.g. `"4.7"`.
+  - **Always quote the value.** An unquoted `4.10` is parsed as the number `4.1`, silently dropping the trailing zero.
+
+- `:page-server-deprecated-in:` - Optional. Same format and quoting rule as above, for a feature deprecated or removed in Server, e.g. `"5.0"`.
+
+- `:page-audience:` - Who the page is for.
+  - `admin` - Server operators/administrators (installation, cluster management, upgrades)
+  - `developer` - everyone else; this is the default for Cloud-only and general content
+
+- `:page-content-type:` - Optional. One or more Diátaxis types, comma-separated: `tutorial`, `how-to`, `reference`, `explanation`. A page can legitimately carry more than one.
+
+- `:page-vcs:` - Optional. Comma-separated VCS providers the feature supports: `all`, `github`, `github-enterprise`, `gitlab`, `gitlab-self-hosted`, `bitbucket`, `cursor-origin`. Use `all` on its own — never combine it with specific providers.
+
+- `:page-badge:` - Optional. One of `Beta`, `Preview`, `Deprecated`. Never `New` — it's date-relative and goes stale as soon as someone forgets to remove it.
+
+- `:page-plan:` - Optional. Which CircleCI cloud plan(s) the page's functionality is available on: one to three of `Free`, `Performance`, `Scale`, comma-separated, in that order, e.g. `Performance, Scale`.
+  - Title case, unlike the other enum attributes — it matches the product's own plan names.
+  - No `all` shorthand — a page available on every plan lists all three: `Free, Performance, Scale`.
+  - Not used on Server-only pages (`:page-platform: server` with no `cloud`); Server is a separate plan covered by `page-platform`, not by `page-plan`.
+  - A page gets a plan if the feature is available on it at all, even at a lower limit (e.g. capped flaky test detection). If only a section of the page is gated, the page still lists all three plans and the gated section carries its own inline note.
+  - On `guides` and `reference` pages, `page-plan` and `page-vcs` drive a generated availability sidebar (Cloud plans / Version control) — don't write one by hand as a `****` sidebar or NOTE. It's built at build time from these attributes; see `extensions/page-availability-extension.js`.
 
 - `:page-description:` - Used for SEO meta descriptions and page previews
-  - **Must be between 70-160 characters** (Vale enforced)
+  - **Must be between 70-160 characters** (enforced by `check-metadata`)
+  - Must be unique across the site. On `server-admin-*` pages, include the Server version (for example `CircleCI Server 4.10`), since each version has its own copy of the page
   - Write a clear, concise summary of what the page covers
   - Use active voice
 

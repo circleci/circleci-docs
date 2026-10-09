@@ -1,6 +1,9 @@
 = Set up a deploy pipeline
 :page-platform: Cloud
-:page-description:
+:page-vcs: github, github-enterprise
+:page-plan: Free, Performance, Scale
+:page-audience: developer
+:page-description: Configure a CircleCI deploy pipeline to support manual deployment of a component to a target environment.
 :experimental:
 
 Deploy pipelines allow you to deploy your components to a target environment as fast as possible. This guide covers how to configure your CircleCI pipeline to support manual deployment capabilities using a deploy pipeline.

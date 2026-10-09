@@ -1,6 +1,10 @@
 = Deploy to Heroku
-:page-platform: Cloud, Server v4+
-:page-description: This document provides examples of deploying to Heroku.
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Configure CircleCI to deploy your application to Heroku, either with the Heroku orb or with a custom deploy job and environment variables.
 :experimental:
 
 In this how-to guide, you will learn how to configure CircleCI to deploy to Heroku.
@@ -104,6 +108,7 @@ workflows:
 
 NOTE: Heroku provides the option "Wait for CI to pass before deploy" under deploy / automatic deploys. See the link:https://devcenter.heroku.com/articles/github-integration#automatic-deploys[Heroku documentation] for details.
 
+ifndef::server[]
 [#track-deployments-with-deploy-markers]
 == Track your deployments with deploy markers
 
@@ -116,3 +121,4 @@ You have two options for setting up deploy markers:
 * *Manual setup*: Add deploy marker commands directly to your `.circleci/config.yml` file by following the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
 
 Both approaches will enable you to track deployment history and manage rollbacks directly from the CircleCI web app.
+endif::server[]

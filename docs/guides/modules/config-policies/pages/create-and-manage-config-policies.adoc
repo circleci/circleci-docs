@@ -1,12 +1,22 @@
 = Create and manage config policies
-:page-platform: Cloud, Server v4+
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: Learn how to write and manage config policies for CircleCI project configurations.
 :experimental:
 
+ifndef::server[]
 NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI Server v4.2. You must be an organization admin in order to create and manage config policies.
+endif::server[]
+ifdef::server[]
+NOTE: You must be an organization admin to create and manage config policies.
+endif::server[]
 
 Follow the how-to guides on this page to manage, create, and use config policies.
 
+ifndef::server[]
 ****
 **Using server?** When using the `circleci policy` commands with CircleCI Server, you will need to use the `policy-base-url` flag to provide your CircleCI Server domain. For example:
 [source,shell]
@@ -14,6 +24,16 @@ Follow the how-to guides on this page to manage, create, and use config policies
 circleci policy settings --enabled=true --owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
 ----
 ****
+endif::server[]
+ifdef::server[]
+****
+When using the `circleci policy` commands, use the `policy-base-url` flag to provide your CircleCI Server domain. For example:
+[source,shell]
+----
+circleci policy settings --enabled=true --owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
+----
+****
+endif::server[]
 
 [#config-policy-management-enablement]
 == Enable or disable policy evaluation for an organization

@@ -1,6 +1,10 @@
 = Sample config.yml Files
-:page-platform: Cloud, Server v4+
-:page-description: Sample config.yml File
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Sample .circleci/config.yml files to start from, with examples of concurrent, sequential, approval and fan-in/fan-out workflows and multiple executors.
 :experimental:
 :page-aliases: example-configs.adoc
 
@@ -299,6 +303,11 @@ This example shows a sequential workflow with the `test` job configured to run o
 
 Below are two sample configurations for a Fan-in/Fan-out workflow.
 
+ifdef::server[]
+NOTE: On CircleCI Server, set the `machine` executor image to `default` in these examples.
+
+endif::server[]
+
 .Fan-in-out
 image::guides:ROOT:fan-in-out-example.png[Fan-in-out]
 
@@ -437,6 +446,7 @@ workflows:
 NOTE: A job can only run when its dependencies are satisfied therefore it requires the dependencies of all upstream jobs. This means only the immediate upstream dependencies need to be specified in the `requires:` blocks.
 
 [#sample-configuration-with-multiple-executor-types]
+ifndef::server[]
 == Sample configuration with multiple executor types
 
 It is possible to use multiple xref:execution-managed:executor-intro.adoc[Executor Types]
@@ -770,10 +780,11 @@ workflows:
 ----
 --
 ====
+endif::server[]
 
 [#see-also]
 == See also
 
-* See the xref:about-circleci:concepts.adoc#configuration[Concepts] page and xref:orchestrate:workflows.adoc[Workflows] for more details of the concepts covered in this example.
+* See the xref:reference:ROOT:concepts.adoc#configuration[Concepts] page and xref:orchestrate:workflows.adoc[Workflows] for more details of the concepts covered in this example.
 * See the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference] document for full details of each individual configuration key.
 * See the xref:examples-and-guides-overview.adoc[Example Public Repos] document for a list of public projects that use CircleCI.

@@ -1,0 +1,8 @@
+#!/bin/sh
+# Opt-in pre-commit checks. Enable with: npm run hooks:install
+
+files=$(git diff --cached --name-only --diff-filter=ACMR -- '*.adoc')
+[ -z "$files" ] && exit 0
+
+# shellcheck disable=SC2086
+node scripts/check-metadata.js $files

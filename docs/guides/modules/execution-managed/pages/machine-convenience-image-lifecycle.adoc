@@ -1,6 +1,9 @@
 = CircleCI machine/convenience image lifecycle: A complete guide
 :page-platform: Cloud
-:page-description: CircleCI Machine/Convenience Image Lifecycle
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-audience: developer
+:page-description: Understand how CircleCI deprecates machine and convenience images, how image brownouts work, and how you can minimize their impact on your jobs.
 :experimental:
 
 CircleCI prioritizes support for the most recent stable releases of the following image families:

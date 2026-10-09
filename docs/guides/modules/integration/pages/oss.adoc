@@ -1,6 +1,9 @@
 = Build open source projects
 :page-platform: Cloud
-:page-description: Best practices for building open source projects
+:page-vcs: github, github-enterprise, gitlab, bitbucket
+:page-plan: Free, Performance, Scale
+:page-audience: developer
+:page-description: Follow best practices for building open source projects on CircleCI, including credits, security, and features and settings for public projects.
 :experimental:
 
 This document provides tips and best practices for building your open source project on CircleCI.

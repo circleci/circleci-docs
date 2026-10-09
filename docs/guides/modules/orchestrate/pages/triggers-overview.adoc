@@ -1,6 +1,10 @@
 = Trigger options
-:page-platform: Cloud, Server v4+
-:page-description: "A guide to the various ways to manage pipeline triggering in CircleCI"
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Explore the ways to trigger pipelines in CircleCI, from repository events and custom webhooks to the web app, the API, and schedules.
 :experimental:
 
 Pipelines are triggered in response to actions or scheduled to run at specific times and frequencies. Each method of triggering a pipeline is described below.

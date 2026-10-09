@@ -37,7 +37,7 @@ These apply on both platforms, unless you are extending an existing integration 
 - Install [Machine Runner 3](https://circleci.com/docs/guides/execution-runner/install-machine-runner-3-on-linux/) for machine runners. Do not install launch agent.
 - Prefer the GitHub App integration over GitHub OAuth. Feature availability differs — see [VCS, Pipeline Types, and Feature Support](https://circleci.com/docs/guides/integration/version-control-system-integration-overview/).
 - Use CLI v1 ([cli.circleci.com](https://cli.circleci.com/)). See the [CircleCI CLI guide](https://circleci.com/docs/guides/toolkit/circleci-cli/).
-- Prefer `circleci testsuite` (Smarter Testing) for running and splitting tests. The legacy `circleci tests` commands still work but are not preferred. See [Getting Started With Smarter Testing](https://circleci.com/docs/guides/test/getting-started-with-smarter-testing/).
+- Prefer `circleci testsuite` (Smarter Testing) for running and splitting tests. The legacy `circleci tests` commands still work but are not preferred. See [Getting started with CircleCI's testing tool](https://circleci.com/docs/guides/test/getting-started-with-circleci-testing-tool/).
 
 ### Server
 
@@ -50,11 +50,11 @@ These apply on both platforms, unless you are extending an existing integration 
 
 ## Avoid mixing up these concepts
 
-- **Pipeline, workflow, job, step.** A pipeline is the full configuration. A workflow orchestrates jobs. A job runs steps in one executor. A step is a command or built-in action such as `checkout`, `run`, or `save_cache`. See [Concepts](https://circleci.com/docs/guides/about-circleci/concepts/).
+- **Pipeline, workflow, job, step.** A pipeline is the full configuration. A workflow orchestrates jobs. A job runs steps in one executor. A step is a command or built-in action such as `checkout`, `run`, or `save_cache`. See [Concepts](https://circleci.com/docs/reference/concepts/).
 - **Run vs pipeline in API v3.** A run records one trigger firing. A pipeline is the definition. Do not treat them as synonyms. See the [Runs](https://circleci.com/docs/api/v3/runs.md) and [Pipelines](https://circleci.com/docs/api/v3/pipelines.md) API pages. This distinction is Cloud only — Server's API v2 and v1.1 use "pipeline" for both.
 - **Hosted MCP vs CLI MCP vs Docs MCP.** The hosted MCP server inspects and acts on CI runs. The CLI MCP exposes the CircleCI CLI on your machine. The Docs MCP searches documentation. All three are Cloud only. Do not configure the old `npx` local MCP server.
 - **CircleCI CLI vs environment CLI vs Chunk CLI.** The CircleCI CLI runs on a developer machine. The environment CLI runs inside a job. The Chunk CLI is for AI code review and sidecar workflows. See [The CircleCI CLI](https://circleci.com/docs/guides/toolkit/circleci-cli/).
-- **Workspaces vs caches vs artifacts.** Workspaces pass files between jobs in the same workflow. Caches persist dependencies across runs. Artifacts are long-lived job outputs. See [Concepts](https://circleci.com/docs/guides/about-circleci/concepts/).
+- **Workspaces vs caches vs artifacts.** Workspaces pass files between jobs in the same workflow. Caches persist dependencies across runs. Artifacts are long-lived job outputs. See [Concepts](https://circleci.com/docs/reference/concepts/).
 - **Docker executor vs Remote Docker vs machine.** `docker:` runs the job in a container. `setup_remote_docker` adds a remote Docker engine so that container can run Docker commands. `machine:` is a full VM. See [Execution Environments Overview](https://circleci.com/docs/guides/execution-managed/executor-intro/).
 - **CircleCI Cloud vs CircleCI Server vs self-hosted runner.** Cloud is CircleCI-hosted. Server is CircleCI installed in your Kubernetes cluster. A self-hosted runner executes jobs on your infrastructure. The control plane stays Cloud or Server.
 - **Contexts vs project environment variables vs pipeline parameters.** Contexts share secrets across projects. Project environment variables are per-project. Pipeline parameters pass typed values when you trigger a pipeline. They are not secrets.

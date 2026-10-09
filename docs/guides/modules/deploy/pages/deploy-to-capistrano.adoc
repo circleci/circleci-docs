@@ -1,6 +1,10 @@
 = Deploy to Capistrano
-:page-platform: Cloud, Server v4+
-:page-description: This is document provides examples of deploying to Capistrano.
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Use this example CircleCI configuration to run Capistrano deployment commands from a job once your project is set up to use Capistrano.
 :experimental:
 
 This how-to guide covers an example CircleCI configuration to deploy to Capistrano.
@@ -41,6 +45,7 @@ jobs:
           command: bundle exec cap production deploy
 ```
 
+ifndef::server[]
 [#track-deployments-with-deploy-markers]
 == Track your deployments with deploy markers
 
@@ -53,3 +58,4 @@ You have two options for setting up deploy markers:
 * *Manual setup*: Add deploy marker commands directly to your `.circleci/config.yml` file by following the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
 
 Both approaches will enable you to track deployment history and manage rollbacks directly from the CircleCI web app.
+endif::server[]

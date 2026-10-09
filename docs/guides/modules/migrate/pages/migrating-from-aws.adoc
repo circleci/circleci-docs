@@ -1,6 +1,9 @@
 = Migrate from AWS
-:page-platform: Cloud, Server v4+
-:page-description: This overview provides instructions for installing CircleCI Server on Amazon Web Services (AWS) with Terraform.
+:page-platform: Cloud
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-audience: developer
+:page-description: This document provides an overview of how to migrate from AWS CodeCommit to CircleCI.
 :experimental:
 
 This document provides an overview of how to migrate from AWS CodeCommit to CircleCI.

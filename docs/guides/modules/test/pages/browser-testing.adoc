@@ -1,6 +1,10 @@
 = Browser testing
-:page-platform: Cloud, Server v4+
-:page-description: Browser Testing on CircleCI
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Run and debug browser tests on CircleCI with Selenium, LambdaTest, Sauce Labs, BrowserStack, Appium or Cypress, using screenshots, artifacts and VNC.
 :experimental:
 
 This page describes common methods for running and debugging browser testing in your CircleCI config.

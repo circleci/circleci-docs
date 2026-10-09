@@ -116,7 +116,7 @@
   new: /guides/test/collect-test-data/
 
 - old: /concepts/
-  new: /guides/about-circleci/concepts/
+  new: /reference/concepts/
 
 - old: /concurrency/
   new: /guides/optimize/concurrency/
@@ -901,3 +901,270 @@
 - old: /xcode-policy/
   new: /guides/execution-managed/xcode-policy/
 
+
+- old: /2.0/circleci-images/
+  new: /guides/execution-managed/circleci-images/
+
+- old: /2.0/caching/
+  new: /guides/optimize/caching/
+
+- old: /style/style-guide-overview/
+  new: /contributors/docs-style/
+
+- old: /webhooks/
+  new: /guides/integration/outbound-webhooks/
+
+- old: /server/latest/operator/monitoring-stack-reference-helm-chart/
+  new: /server-admin/latest/operator/monitoring-stack-reference-helm-chart/
+
+- old: /2.0/executor-types/
+  new: /guides/execution-managed/executor-intro/
+
+- old: /server/server-4.8/overview/circleci-server-overview/
+  new: /server-admin/server-4.8/overview/circleci-server-overview/
+
+- old: /analyze-pipelines-during-an-incident/
+  new: /guides/orchestrate/analyze-pipelines-during-an-incident/
+
+- old: /executor-types/
+  new: /guides/execution-managed/executor-intro/
+
+- old: /orbs/author/orb-concepts/
+  new: /orbs/use/orb-concepts/
+
+- old: /set-a-nightly-schedule-trigger/
+  new: /guides/orchestrate/set-a-nightly-schedule-trigger/
+
+- old: /resource-class-lifecycle/
+  new: /guides/execution-managed/resource-class-lifecycle/
+
+- old: /set-up-cross-repo-triggers-for-library-consumers/
+  new: /guides/orchestrate/set-up-cross-repo-triggers-for-library-consumers/
+
+- old: /2.0/webhooks/
+  new: /guides/integration/outbound-webhooks/
+
+- old: /auto-rerun-failed-tests/
+  new: /guides/test/auto-rerun-failed-tests/
+
+- old: /server/server-4.7/overview/circleci-server-overview/
+  new: /server-admin/server-4.7/overview/circleci-server-overview/
+
+- old: /2.0/local-cli/
+  new: /guides/toolkit/circleci-cli/
+
+- old: /2.0/triggers/
+  new: /guides/orchestrate/triggers-overview/
+
+- old: /about-circleci/open-source/
+  new: /guides/about-circleci/open-source/
+
+- old: /deploy-a-component/
+  new: /guides/deploy/deploy-a-component/
+
+- old: /migrate-scheduled-workflows-to-schedule-triggers/
+  new: /guides/orchestrate/migrate-scheduled-workflows-to-schedule-triggers/
+
+- old: /2.0/contexts/
+  new: /guides/security/contexts/
+
+- old: /automatic-reruns/
+  new: /guides/orchestrate/automatic-reruns/
+
+- old: /config-policies/manage-contexts-with-config-policies/
+  new: /guides/config-policies/manage-contexts-with-config-policies/
+
+- old: /cursor-origin-trigger-event-options/
+  new: /guides/orchestrate/cursor-origin-trigger-event-options/
+
+- old: /deploy/deploy-to-azure-container-registry/
+  new: /guides/deploy/deploy-to-azure-container-registry/
+
+- old: /execution-managed/android-images-support-policy/
+  new: /guides/execution-managed/android-images-support-policy/
+
+- old: /machine-convenience-image-lifecycle/
+  new: /guides/execution-managed/machine-convenience-image-lifecycle/
+
+- old: /pause-pipelines-during-an-incident/
+  new: /guides/orchestrate/pause-pipelines-during-an-incident/
+
+- old: /plans-pricing/plan-overview/
+  new: /guides/plans-pricing/plan-overview/
+
+- old: /set-up-deploys/
+  new: /guides/deploy/set-up-deploys/
+
+- old: /test/rerun-failed-tests/
+  new: /guides/test/rerun-failed-tests/
+
+- old: /2.0/language-javascript/
+  new: /guides/getting-started/language-javascript/
+
+- old: /2.0/reusing-config/
+  new: /reference/reusing-config/
+
+- old: /delete-organizations-and-projects/
+  new: /guides/security/delete-organizations-and-projects/
+
+- old: /execution-managed/private-images/
+  new: /guides/execution-managed/private-images/
+
+- old: /execution-runner/machine-runner-3-manual-installation-on-windows/
+  new: /guides/execution-runner/machine-runner-3-manual-installation-on-windows/
+
+- old: /how-to-find-ids/
+  new: /guides/toolkit/how-to-find-ids/
+
+- old: /optimize/artifacts/
+  new: /guides/optimize/artifacts/
+
+- old: /release-validation-reference/
+  new: /guides/deploy/release-validation-reference/
+
+- old: /rollback-a-deployment/
+  new: /guides/deploy/rollback-a-deployment/
+
+- old: /schedule-triggers-with-multiple-workflows/
+  new: /guides/orchestrate/schedule-triggers-with-multiple-workflows/
+
+- old: /schedule-triggers/
+  new: /guides/orchestrate/schedule-triggers/
+
+- old: /server-3-overview/
+  new: /server-admin/latest/overview/circleci-server-overview/
+
+- old: /deploy/smart-deployments-overview/
+  new: /guides/deploy/smart-deployments-overview/
+
+- old: /execution-managed/linux-vm-support-policy/
+  new: /guides/execution-managed/linux-vm-support-policy/
+
+- old: /fix-flaky-tests/
+  new: /guides/test/fix-flaky-tests/
+
+- old: /integration/authorize-google-cloud-sdk/
+  new: /guides/integration/authorize-google-cloud-sdk/
+
+- old: /set-up-rollbacks/
+  new: /guides/deploy/set-up-rollbacks/
+
+- old: /set-up-test-impact-analysis/
+  new: /guides/test/set-up-test-impact-analysis/
+
+- old: /set-up-the-circleci-release-agent/
+  new: /guides/deploy/set-up-the-circleci-release-agent/
+
+- old: /set-up-triggers/
+  new: /guides/orchestrate/set-up-triggers/
+
+- old: /sso-group-mapping/
+  new: /guides/permissions-authentication/sso-group-mapping/
+
+- old: /toolkit/connecting-to-the-circleci-mcp-server/
+  new: /guides/toolkit/connecting-to-the-circleci-mcp-server/
+
+- old: /toolkit/vs-code-extension-overview/
+  new: /guides/toolkit/vs-code-extension-overview/
+
+- old: /use-dynamic-test-splitting/
+  new: /guides/test/use-dynamic-test-splitting/
+
+- old: /about-circleci/concepts/
+  new: /reference/concepts/
+
+- old: /caching-strategy/
+  new: /guides/optimize/caching/
+
+- old: /circleci-cli/
+  new: /guides/toolkit/circleci-cli/
+
+- old: /execution-managed/android-machine-image/
+  new: /guides/execution-managed/android-machine-image/
+
+- old: /execution-runner/runner-scaling/
+  new: /guides/execution-runner/runner-scaling/
+
+- old: /getting-started/language-javascript/
+  new: /guides/getting-started/language-javascript/
+
+- old: /migrate/migrating-from-azuredevops/
+  new: /guides/migrate/migrating-from-azuredevops/
+
+- old: /orchestrate/analyze-pipelines-during-an-incident/
+  new: /guides/orchestrate/analyze-pipelines-during-an-incident/
+
+- old: /orchestrate/pipeline-variables/
+  new: /guides/orchestrate/pipeline-variables/
+
+- old: /rerun-failed-tests-only/
+  new: /guides/test/rerun-failed-tests/
+
+- old: /security/set-environment-variable/
+  new: /guides/security/set-environment-variable/
+
+- old: /toolkit/examples-and-guides-overview/
+  new: /guides/toolkit/examples-and-guides-overview/
+
+- old: /toolkit/managing-api-tokens/
+  new: /guides/toolkit/managing-api-tokens/
+
+- old: /circleci-mcp-overview/
+  new: /guides/toolkit/circleci-mcp-overview/
+
+- old: /configure-deploy-markers/
+  new: /guides/deploy/configure-deploy-markers/
+
+- old: /deploy/deploy-a-component/
+  new: /guides/deploy/deploy-a-component/
+
+- old: /execution-managed/using-macos/
+  new: /guides/execution-managed/using-macos/
+
+- old: /getting-started/create-project/
+  new: /guides/getting-started/create-project/
+
+- old: /integration/datadog-integration/
+  new: /guides/integration/datadog-integration/
+
+- old: /integration/status-updates/
+  new: /guides/integration/status-updates/
+
+- old: /oauth-dynamic-client-registration/
+  new: /guides/toolkit/oauth-dynamic-client-registration/
+
+- old: /orchestrate/automatic-reruns/
+  new: /guides/orchestrate/automatic-reruns/
+
+- old: /orchestrate/set-up-multiple-configuration-files-for-a-project/
+  new: /guides/orchestrate/set-up-multiple-configuration-files-for-a-project/
+
+- old: /orchestrate/using-branch-filters/
+  new: /guides/orchestrate/using-branch-filters/
+
+- old: /orchestrate/workflows/
+  new: /guides/orchestrate/workflows/
+
+- old: /security/rename-organizations-and-repositories/
+  new: /guides/security/rename-organizations-and-repositories/
+
+- old: /server/latest/operator/data-retention/
+  new: /server-admin/latest/operator/data-retention/
+
+- old: /toolkit/oauth-dynamic-client-registration/
+  new: /guides/toolkit/oauth-dynamic-client-registration/
+
+- old: /api/v1-reference/
+  new: /api/v1/
+
+- old: /environment-variables/
+  new: /guides/security/env-vars/
+
+- old: /2.0/gh-bb-integration/
+  new: /guides/permissions-authentication/users-organizations-and-integrations-guide/
+
+- old: /ja/webhooks/
+  new: /guides/orchestrate/custom-webhooks/
+
+- old: /runner-installation/
+  new: /guides/execution-runner/runner-overview/

@@ -1,6 +1,10 @@
 = Introduction to YAML configuration
-:page-platform: Cloud, Server v4+
-:page-description: "Overview of CircleCI configuration written in YAML"
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Get an overview of CircleCI configuration written in YAML, including the CircleCI version, execution environment, jobs, and workflows.
 :experimental:
 
 The crux of connecting CircleCI to your project is a `config.yml`, which is held in a `.circleci` directory. CircleCI configuration files are written in https://yaml.org/[YAML], a more human-friendly data serialization format for programming languages. YAML is a strict superset of JSON, so anything you can do in JSON, you can also do in YAML. CircleCI YAML configurations will largely consist of key-value pairs, and nested key-value pairs.
@@ -10,7 +14,7 @@ The most basic configuration file will need a CircleCI version, an execution env
 [#circleci-version]
 == CircleCI version
 
-Your `.circleci/config.yml` will start off with the version of CircleCI you wish to use. CircleCI Cloud and newer server versions use CircleCI `2.1`.
+Your `.circleci/config.yml` will start off with the version of CircleCI you wish to use. Use CircleCI `2.1`.
 
 ```yaml
 # CircleCI configuration file
@@ -25,9 +29,13 @@ Next, your configuration needs a job to run, and an execution environment for th
 
 - Docker
 - Linux VM (virtual machine)
+ifndef::server[]
 - macOS
+endif::server[]
 - Windows
+ifndef::server[]
 - GPU
+endif::server[]
 - Arm
 
 Some limitations exist depending on the execution environment in your configuration. Visit the xref:execution-managed:executor-intro.adoc[Introduction to Execution Environments] page to get started and find information on each execution environment.
@@ -49,6 +57,7 @@ jobs:
 
 `jobs` is a collection of steps which are executed as a unit, either within a fresh container, or a virtual machine. In this example, `jobs` is being built within a Docker container, which is set up in the configuration using nested key-pairs. `docker` is calling a pre-built CircleCI Docker image, `cimg/base`, an Ubuntu Docker image. The image in this example contains the minimum tools required to operate a build on CircleCI, as well as Docker.
 
+ifndef::server[]
 Images are used by either a Docker or machine executor. In our example, we are using a Docker **convenience image** that spins up an Ubuntu environment. If we used macOS as an execution environment, we could use a **machine image** instead. This would spin up a dedicated virtual machine with Xcode preinstalled, as in the example below.
 
 [,yaml,subs=attributes+]
@@ -61,6 +70,10 @@ jobs:
     macos:
       xcode: {xcodeversion}
 ----
+endif::server[]
+ifdef::server[]
+Images are used by either a Docker or machine executor. In our example, we are using a Docker **convenience image** that spins up an Ubuntu environment.
+endif::server[]
 
 You will notice that the key-value pairs do not follow the same syntax. Each execution environment will be set up a little differently. You can refer to our execution environment documentation, or visit the CircleCI developer hub to find a list of https://circleci.com/developer/images?imageType=docker[convenience images] and https://circleci.com/developer/images?imageType=machine[machine images], and their syntax.
 

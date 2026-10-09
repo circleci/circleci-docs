@@ -1,5 +1,8 @@
 version: 2.1
 
+functions:
+  setup-go: github.com/circleci-functions/setup-go@v0.5.4-2ad832a
+
 parameters:
   force-ui-rebuild:
     type: boolean
@@ -43,6 +46,16 @@ commands:
             echo "[ERROR] << parameters.message >>"
 
 jobs:
+  check-metadata:
+    docker:
+      - image: cimg/node:24.21.0
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          name: Check page metadata against schema
+          command: node scripts/check-metadata.js
+
   build:
     executor: node_executor
     steps:
@@ -135,9 +148,10 @@ jobs:
           paths:
             - ui-bundle.zip
             - ui/node_modules
-      - run:
-          name: Install Go
-          command: circleci run circleci/setup-go@0.0.6-2f4558a -- --version 1.25.0 --go-cache-checksum '{{ checksum "go.sum" }}'
+      - setup-go:
+          with:
+            version: 1.25.0
+            checksum: '{{ checksum "go.sum" }}'
       - run:
           name: Verify Go Installation
           command: |
@@ -200,6 +214,8 @@ workflows:
           reference_branch: main
           base_dir: docs
           filters: pipeline.git.branch != "main"
+
+      - check-metadata
 
       - build:
           filters: pipeline.git.branch == "main"

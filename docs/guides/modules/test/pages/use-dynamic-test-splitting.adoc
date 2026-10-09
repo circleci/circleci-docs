@@ -1,7 +1,10 @@
 = Use dynamic test splitting
 :page-platform: Cloud
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-audience: developer
 :experimental:
-:page-description: Evenly distribute tests across parallel execution nodes
+:page-description: Distribute tests across parallel nodes so they all finish at the same time. Enable dynamic test splitting in your test-suites.yml file.
 
 Dynamic test splitting reduces overall pipeline time by distributing test atoms across parallel nodes so all nodes finish at the same time. Unlike static test splitting, which pre-assigns tests upfront, dynamic test splitting redistributes work to nodes that are ready. Dynamic test splitting prevents nodes from sitting idle while others finish late.
 
@@ -50,7 +53,7 @@ image::guides:ROOT:test/dynamic-test-splitting-uneven-nodes-dark.png[Job timings
 
 == Prerequisites
 
-Before enabling dynamic test splitting, ensure you have completed the xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] guide and have:
+Before enabling dynamic test splitting, ensure you have completed the xref:getting-started-with-circleci-testing-tool.adoc[Getting Started With CircleCI's Testing Tool] guide and have:
 
 * Configured your `.circleci/test-suites.yml` with `discover` and `run` commands.
 * Verified your tests run successfully with the `testsuite` command.

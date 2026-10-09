@@ -1,6 +1,9 @@
 = Configuring a macOS application on CircleCI
 :page-platform: Cloud
-:page-description: First macOS project on CircleCI
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-audience: developer
+:page-description: Get started with CI/CD on the macOS execution environment by walking through an example application and configuration file for your first macOS project.
 :experimental:
 
 This document describes how to get started with CI/CD using a *macOS execution environment* on CircleCI.

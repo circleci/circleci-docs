@@ -1,6 +1,10 @@
 = Configuration introduction
-:page-platform: Cloud, Server v4+
-:page-description: "Learn how to get started with the CircleCI config.yml file."
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Get started with the CircleCI config.yml file by using the shell, running code from your repository, creating workflows, and adding a manual approval.
 :experimental:
 
 This guide gets you started with the CircleCI `config.yml` file.
@@ -22,9 +26,19 @@ CircleCI believes in *configuration as code*. The entire delivery process from b
 
 == Prerequisites
 
+ifndef::server[]
 * A CircleCI account. You can link:https://circleci.com/signup/[sign up for free].
+endif::server[]
+ifdef::server[]
+* An account on your CircleCI Server instance.
+endif::server[]
 * A code repository you want to build on CircleCI.
+ifndef::server[]
 * Follow the xref:create-project.adoc[Create a Project] guide to connect your repository to CircleCI. You can then use the examples below to configure a basic pipeline using any execution environment.
+endif::server[]
+ifdef::server[]
+* Follow the xref:create-project.adoc#set-up-a-project[Set Up a Project] steps to connect your repository to CircleCI. You can then use the examples below to configure a basic pipeline using any execution environment.
+endif::server[]
 
 [#part-1-using-the-shell]
 == Part 1: Using the shell
@@ -69,7 +83,12 @@ As mentioned in the note above the sample code, you may optionally supply your D
 
 . Commit your `config.yml` file (and push, if you are working remotely).
 
+ifndef::server[]
 . A new pipeline is triggered in CircleCI. You can see the output in the link:https://app.circleci.com/[CircleCI dashboard]. A green tick denotes a successful pipeline. A red exclamation mark alerts you to a failure. Click on the job for more details. You can see your step - The First Step - along with the output of the commands.
+endif::server[]
+ifdef::server[]
+. A new pipeline is triggered in CircleCI. You can see the output in the CircleCI web app. A green tick denotes a successful pipeline. A red exclamation mark alerts you to a failure. Click on the job for more details. You can see your step - The First Step - along with the output of the commands.
+endif::server[]
 
 NOTE: Although the `config.yml` syntax itself is straightforward, the indentation is more complicated. Incorrect indentation is the most common error. If you are experiencing problems with this example, check your indentation carefully, or copy and paste the sample code.
 

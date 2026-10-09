@@ -1,5 +1,8 @@
 = Introduction to the CircleCI Web App
-:page-platform: Cloud, Server
+:page-platform: Cloud
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-audience: developer
 :page-description: This document describes the basic features and settings available in the CircleCI web app.
 :experimental:
 
@@ -367,5 +370,5 @@ image::guides:ROOT:web_ui_plan_controls.png[Usage Controls]
 
 == Next steps
 
-- xref:concepts.adoc[CircleCI Concepts]
+- xref:reference:ROOT:concepts.adoc[CircleCI Concepts]
 - xref:getting-started:config-editor.adoc[Using the CircleCI Configuration Editor]

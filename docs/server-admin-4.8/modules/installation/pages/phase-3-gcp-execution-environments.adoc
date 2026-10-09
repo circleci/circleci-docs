@@ -1,7 +1,10 @@
 = Phase 3 GCP - execution environments
 :page-noindex: true
-:page-platform: Server v4.8, Server Admin
-:page-description: Installation guide for CircleCI server v4.8 execution environments.
+:page-platform: Server
+:page-vcs: github, github-enterprise
+:page-server-min-version: "4.8"
+:page-audience: admin
+:page-description: Set up CircleCI Server 4.8 execution environments on GCP, including Nomad clients and servers, machine provisioner, and runner.
 :experimental:
 :env-gcp:
 

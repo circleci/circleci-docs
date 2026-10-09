@@ -1,6 +1,9 @@
 = Testing iOS applications on macOS
 :page-platform: Cloud
-:page-description: Testing iOS applications on macOS.
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-audience: developer
+:page-description: Set up and customize iOS application testing on macOS with CircleCI, including supported Xcode versions, Fastlane, code signing and Ruby.
 :experimental:
 
 This document describes how to set up and customize testing for an iOS application with CircleCI.

@@ -1,6 +1,10 @@
 = Using contexts
-:page-platform: Cloud, Server v4+
-:page-description: Secured, cross-project resources
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Create and use contexts to secure and share environment variables across projects, and restrict contexts by security group, project or expression.
 :experimental:
 
 Contexts provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime. This document describes creating and using contexts in CircleCI.
@@ -8,7 +12,12 @@ Contexts provide a mechanism for securing and sharing environment variables acro
 [#overview]
 == Introduction
 
+ifndef::server[]
 Manage contexts using the xref:toolkit:circleci-cli.adoc[CircleCI CLI], link:https://circleci.com/docs/api/v2/#tag/Context[API], or on the *Organization Settings* page of the https://app.circleci.com[CircleCI web app]. You must be an organization member to view, create, or edit contexts.
+endif::server[]
+ifdef::server[]
+Manage contexts using the xref:toolkit:circleci-cli.adoc[CircleCI CLI], link:https://circleci.com/docs/api/v2/#tag/Context[API], or on the *Organization Settings* page of the CircleCI web app. You must be an organization member to view, create, or edit contexts.
+endif::server[]
 
 Create a context and add your environment variables. You can use the `context` key in the workflows section of a project's configuration file to give any job(s) access to the environment variables associated with the context. See the xref:reference:ROOT:configuration-reference.adoc#context[Configuration Reference] page for more information.
 
@@ -22,7 +31,12 @@ NOTE: Context names must be unique for each VCS organization. The default name f
 [#create-and-use-a-context]
 == Quickstart: Create and use a context
 
+ifndef::server[]
 NOTE: Organization members can create contexts, but only organization administrators can restrict them using security groups. Bitbucket organizations are an exception. Organization members must also have the `create repositories` workspace permission, regardless of their other permissions on the workspace or the repositories it contains.
+endif::server[]
+ifdef::server[]
+NOTE: Organization members can create contexts, but only organization administrators can restrict them using security groups.
+endif::server[]
 
 [tabs]
 ====
@@ -155,7 +169,12 @@ workflows:
 == Restrict a context
 
 
+ifndef::server[]
 NOTE: Bitbucket repositories do *not* provide an API that allows CircleCI contexts to be restricted. Only `github` type organizations support security group restrictions, including GitHub App pipelines on `github` type organizations. To find out which organization type you have, refer to the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organizations[Users, Organizations, and Integrations Guide]. Restricting contexts for custom webhook triggers is not currently supported.
+endif::server[]
+ifdef::server[]
+NOTE: Only `github` type organizations support security group restrictions.
+endif::server[]
 
 CircleCI enables you to restrict contexts at run time in the following ways:
 
@@ -216,14 +235,16 @@ workflows:
             - test
 ----
 
-In this example, the jobs `test` and `deploy` are restricted, and `deploy` will only run if the user who approves the `hold` job is a member of the security group assigned to the context _and_ `deploy-key-restricted-context`. When the workflow `build-test-deploy` runs, the jobs `build` and `test` will run, then the `hold` job will run, which will present a manual approval button in the CircleCI application. This approval job may be approved by _any_ member of the project, but the `deploy` job will fail as `unauthorized` if the approver is not part of the restricted context security group.
+In this example, the jobs `test` and `deploy` are restricted. The `deploy` job only runs if the user who approves the `hold` job is a member of the security group assigned to the context _and_ `deploy-key-restricted-context`. When the workflow `build-test-deploy` runs, the jobs `build` and `test` run, then the `hold` job runs and presents a manual approval button in the CircleCI application. _Any_ member of the project can approve this job, but the `deploy` job fails as `unauthorized` if the approver is not part of the restricted context security group.
 
 [#security-group-restrictions]
 == Security group restrictions
 
 NOTE: Restricting the use of contexts using security groups is available for `github` type organizations only. For more information on organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organizations[Users, Organizations, and Integrations Guide].
 
+ifndef::server[]
 A context security setting is available for `github` type organizations to require all newly-created contexts in the organization to be group-restricted. Contexts can still be created, but an administrator must assign at least one security group before the context will be available for use in workflows. This setting can be found in menu:Org[Security].
+endif::server[]
 
 [#restrict-a-context-to-a-security-group-or-groups]
 === Restrict a context to a security group or groups
@@ -262,7 +283,7 @@ Web app::
 +
 --
 . Navigate to menu:Org[Contexts] in the CircleCI web app to see the list of contexts. The default security group is `All members`, and allows all users in the organization to invoke jobs with that context.
-. Select *Create Context* if you wish to use a new context, or select the name of an existing context (if using an existing context, you will need to remove the `All members` security group before adding a new one).
+. Select *Create Context* to use a new context, or select the name of an existing context. If you use an existing context, remove the `All members` security group before adding a new one.
 . Select *Add Security Group* button to view the dialog box.
 . Make your choices in the dialog box and then select the *Add Security Group* or *Add Project Restriction* button to finalize. Contexts will now be restricted to the selections you have made.
 . Select *Add Environment Variables* to add environment variables to the context. Fill out your desired name and value in the dialog box, then select *Add Environment Variables* again to finalize. Use of the environment variables for this context is now limited to members of the security groups.
@@ -275,9 +296,16 @@ Only members of the selected groups may now use the context in their workflows o
 [#make-changes-to-context-restrictions]
 === Make changes to security group context restrictions
 
+ifndef::server[]
 Changes to security group restrictions for contexts might not take effect immediately due to caching. To make sure settings are applied immediately, it is best practice for the organization administrator to refresh permissions once the change has been made. The *Refresh Permissions* button can be found on the https://app.circleci.com/settings/user[Account Integrations] page.
+endif::server[]
+ifdef::server[]
+Changes to security group restrictions for contexts might not take effect immediately due to caching. To make sure settings are applied immediately, it is best practice for the organization administrator to refresh permissions once the change has been made. The *Refresh Permissions* button can be found at menu:User Settings[Account Integrations].
+endif::server[]
 
+ifndef::server[]
 Administrators of CircleCI Server installations can find the *Refresh Permissions* button at `<circleci-hostname>/account`.
+endif::server[]
 
 [#remove-groups-from-contexts]
 === Remove groups from contexts
@@ -449,7 +477,12 @@ API::
 include::ROOT:partial$notes/server-api-examples.adoc[]
 
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
+ifndef::server[]
 . You are going to need your organization ID. In the link:https://app.circleci.com/[CircleCI web app] select **Org** in the sidebar and copy your "Organization ID" somewhere safe.
+endif::server[]
+ifdef::server[]
+. You are going to need your organization ID. In the CircleCI web app select **Org** in the sidebar and copy your "Organization ID" somewhere safe.
+endif::server[]
 . To get the ID for your context, list your contexts, as follows, substituting your organization ID:
 +
 [,shell]

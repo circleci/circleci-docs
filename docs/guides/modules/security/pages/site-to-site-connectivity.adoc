@@ -1,6 +1,9 @@
 = Site-to-site connectivity
 :page-badge: Preview
 :page-platform: Cloud
+:page-vcs: all
+:page-plan: Scale
+:page-audience: developer
 :page-description: Run CircleCI Cloud jobs that reach private infrastructure without opening your firewall to the internet.
 :experimental:
 

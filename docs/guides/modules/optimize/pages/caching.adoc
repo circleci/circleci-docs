@@ -1,6 +1,11 @@
 = Caching dependencies
-:page-platform: Cloud, Server v4+
-:page-description: A guide to caching dependencies in CircleCI pipelines.
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Speed up CircleCI jobs by caching dependencies. See how caching works, how to save and restore caches, and how to design your cache keys.
+:page-aliases: caching-strategy.adoc
 :experimental:
 
 Caching is a highly effective way to make jobs faster on CircleCI. By storing the results of expensive operations, typically dependency downloads, subsequent job runs can skip work they have already done.
@@ -12,7 +17,9 @@ Caching is most valuable with *package dependency managers* such as Yarn, Bundle
 
 WARNING: Caching files between different executor types can cause file permission and path errors. Affected combinations include Docker and machine executors, Linux and macOS, and CircleCI images with non-CircleCI images. Use extra care when caching across executor types.
 
+ifndef::server[]
 NOTE: The Docker images used for CircleCI jobs are automatically cached on the server infrastructure where possible. For reuse of unchanged layers within a Docker image, see xref:docker-layer-caching.adoc[Docker Layer Caching].
+endif::server[]
 
 [#how-caching-works]
 == How caching works
@@ -31,7 +38,12 @@ Caching is about achieving a balance between reliability and performance. Priori
 [#storage-and-retention]
 === Storage and retention
 
+ifndef::server[]
 By default, CircleCI stores caches for 15 days, the maximum retention period. You can set a lower retention period in the link:https://app.circleci.com/[CircleCI web app] under menu:Plan[Usage Controls]. Shorter retention reduces storage costs when caches change frequently.
+endif::server[]
+ifdef::server[]
+On CircleCI Server, your system administrator sets the cache retention period.
+endif::server[]
 
 To set a shorter retention period for a specific job, use the `retention` key in your `.circleci/config.yml`. Valid values range from `1d` to `15d`. Job-level retention overrides the organization default for caches produced by that job:
 
@@ -55,7 +67,9 @@ jobs:
           key: node-v1-{{ checksum "package-lock.json" }}
 ----
 
+ifndef::server[]
 When using self-hosted runners, cache network and storage usage counts against your plan. For more information, see the xref:persist-data.adoc#managing-network-and-storage-usage[Persisting Data] page.
+endif::server[]
 
 [#setting-up-caching]
 == Setting up caching
@@ -606,6 +620,7 @@ jobs:
 Package installation with `uv` is faster than with pip, which reduces the absolute time saving from caching. Whether caching is worthwhile depends on your dependency tree size and how frequently it changes.
 ====
 
+ifndef::server[]
 [#xcode]
 === Xcode
 
@@ -657,6 +672,7 @@ jobs:
 ----
 
 NOTE: Xcode's own build cache (DerivedData) is large, tied to absolute build paths, and a poor fit for `save_cache`/`restore_cache`. To cache Xcode's Swift/Clang compilation cache instead, use xref:build-tool-cache.adoc[`with_tool_cache` with `tool: xcode`].
+endif::server[]
 
 [#yarn-node]
 === Yarn (Node)
@@ -863,7 +879,12 @@ Use only `[a-zA-Z0-9-_]` characters in cache key prefixes. Special characters ma
 [#cache-size]
 === Viewing cache size and storage usage
 
+ifndef::server[]
 The `restore_cache` step output on the CircleCI jobs page shows the restored cache size. For fleet-wide storage usage and overage cost calculations, see the xref:persist-data.adoc#managing-network-and-storage-usage[Persisting Data] page.
+endif::server[]
+ifdef::server[]
+The `restore_cache` step output on the CircleCI jobs page shows the restored cache size.
+endif::server[]
 
 [#advanced-patterns]
 == Advanced patterns
@@ -917,5 +938,7 @@ jobs:
 * xref:artifacts.adoc[Artifacts]
 * xref:optimizations.adoc[Optimizations Overview]
 * xref:docker-layer-caching.adoc[Docker Layer Caching]
+ifndef::server[]
 * xref:build-tool-cache.adoc[Build Tool Cache]
+endif::server[]
 * xref:toolkit:examples-and-guides-overview.adoc[Language Guides and Demo Projects]

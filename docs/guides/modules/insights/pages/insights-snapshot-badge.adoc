@@ -1,6 +1,9 @@
 = Insights snapshot badge
 :page-platform: Cloud
-:page-description: Generate a badge that displays Insights metrics for a project.
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-audience: developer
+:page-description: Generate a badge that displays Insights metrics for a project. The Insights snapshot badge feature is set to be deprecated.
 :experimental:
 
 NOTE: The Insights snapshot badge feature is set to be deprecated. Further details will be posted here when available.

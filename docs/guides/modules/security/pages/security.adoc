@@ -1,6 +1,9 @@
 = How CircleCI handles security
-:page-platform: Server v4+, Server Admin
-:page-description: An overview of security measures taken at CircleCI.
+:page-platform: Cloud
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-audience: admin
+:page-description: How CircleCI approaches security, including encryption, sandboxing and integrations, and how to report a security issue to the security team.
 :experimental:
 
 This document outlines security initiatives taken by CircleCI.

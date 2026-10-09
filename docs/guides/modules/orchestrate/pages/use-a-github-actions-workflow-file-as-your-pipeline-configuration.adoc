@@ -1,5 +1,8 @@
 = Use a GitHub Actions workflow file as your pipeline configuration
 :page-platform: Cloud
+:page-vcs: github
+:page-plan: Free, Performance, Scale
+:page-audience: developer
 :page-badge: Preview
 :page-description: Set up a CircleCI pipeline that runs an existing GitHub Actions workflow file, and check which GitHub Actions features are supported.
 :experimental:
@@ -441,7 +444,7 @@ If a feature does not appear in this section, treat it as unsupported.
 
 | `set-env` and `add-path` workflow commands
 | [.circle-red]#**Not supported**#
-| Disabled for security reasons, following link:https://github.com/advisories/GHSA-mfq2-61fr-9j23[CVE-2020-15228]. CircleCI logs a warning and does not apply the value. Use the `GITHUB_ENV` and `GITHUB_PATH` environment files instead. See <<actions-that-set-the-path,Actions That Set the Path>> for the effect this has on some common actions.
+| Disabled for security reasons, following link:https://github.com/advisories/GHSA-mfwh-5m23-j46w[CVE-2020-15228]. CircleCI logs a warning and does not apply the value. Use the `GITHUB_ENV` and `GITHUB_PATH` environment files instead. See <<actions-that-set-the-path,Actions That Set the Path>> for the effect this has on some common actions.
 
 | `set-output` and `save-state` workflow commands
 | **No effect**

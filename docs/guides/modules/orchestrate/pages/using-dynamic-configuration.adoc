@@ -1,6 +1,10 @@
 = Using dynamic configuration
-:page-platform: Cloud, Server v4+
-:page-description: A how to guide for using CircleCI dynamic configuration.
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Follow examples of CircleCI dynamic configuration, such as passing parameters to a continuation workflow and running work based on modified files.
 :experimental:
 
 This page covers some dynamic configuration examples. The following examples are provided below:
@@ -16,6 +20,9 @@ This page covers some dynamic configuration examples. The following examples are
 
 * The content on this page assumes you have already read the xref:dynamic-config.adoc[Dynamic Configuration] page.
 * If your project was created before December 1st 2023 you will need to enable dynamic configuration in your xref:dynamic-config.adoc#enable-dynamic-config[Project Settings].
+ifdef::server[]
+* If you are using CircleCI Server, you need to import the continuation and path-filtering orbs first. See xref:dynamic-config.adoc#using-dynamic-configuration-on-circleci-server[Using Dynamic Configuration on CircleCI Server].
+endif::server[]
 
 [#pass-parameters-to-continuation-workflow]
 == Pass parameters from setup to continuation workflow
@@ -237,6 +244,10 @@ workflows:
           # complete.
           config-path: .circleci/continue_config.yml # this is the default so not actually required but left in to illustrate options
 ----
+
+ifdef::server[]
+NOTE: If you are using CircleCI Server, also add the `circleci_domain` parameter, set to your Server domain, to every `path-filtering` job in this guide. See xref:dynamic-config.adoc#using-dynamic-configuration-on-circleci-server[Using Dynamic Configuration on CircleCI Server].
+endif::server[]
 
 [#continueconfig]
 === Continuation configuration: `continue_config.yml`

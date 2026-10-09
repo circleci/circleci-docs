@@ -1,6 +1,9 @@
 = Create an inline orb
-:page-platform: Cloud, Server v4+
-:page-description: How to author inline orbs for your projects
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Create inline orbs to package reusable configuration elements directly in your project config file, then validate and test them.
 :experimental:
 :page-show-readtime: true
 
@@ -31,7 +34,7 @@ For a complete comparison of all three orb types, see the xref:use:orb-concepts.
 
 == Prerequisites
 
-Before creating an inline orb, you should be familiar with:
+Before creating an inline orb, make sure you are familiar with:
 
 * xref:guides:getting-started:config-intro.adoc[CircleCI Configuration Basics].
 * xref:reference:ROOT:reusing-config.adoc[Reusable Configuration Elements] (commands, jobs, executors).

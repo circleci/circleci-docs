@@ -1,6 +1,9 @@
 = Deploy a component
 :page-platform: Cloud
-:page-description:
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-audience: developer
+:page-description: Deploy a component to a target environment using a CircleCI deploy pipeline.
 :experimental:
 :page-show-readtime: true
 

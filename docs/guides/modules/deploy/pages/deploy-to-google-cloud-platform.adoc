@@ -1,5 +1,9 @@
 = Deploy to Google Cloud Platform
-:page-platform: Cloud, Server v4+
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: This document provides examples of deploying to Google Cloud Platform.
 :experimental:
 
@@ -74,6 +78,7 @@ workflows:
 
 For another example, see our link:https://github.com/CircleCI-Public/circleci-demo-k8s-gcp-hello-app[CircleCI Google Cloud deployment example project].
 
+ifndef::server[]
 [#track-deployments-with-deploy-markers]
 == Track your deployments with deploy markers
 
@@ -86,3 +91,4 @@ You have two options for setting up deploy markers:
 * *Manual setup*: Add deploy marker commands directly to your `.circleci/config.yml` file by following the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
 
 Both approaches will enable you to track deployment history and manage rollbacks directly from the CircleCI web app.
+endif::server[]

@@ -1,6 +1,10 @@
 = Collect test data
-:page-platform: Cloud, Server v4+
-:page-description: A guide to collecting test data in your CircleCI projects.
+:page-platform: Cloud, Server
+:page-vcs: github, bitbucket
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Store test results with the store_test_results step so CircleCI can collect test data for Test Insights. Includes test runner examples by language.
 :experimental:
 
 [#introduction]
@@ -13,12 +17,19 @@ When you save test data using the `store_test_results` step, CircleCI collects d
 Using the *`store_test_results` step* gives you access to:
 
 * The *Tests tab* in the CircleCI web app.
+ifndef::server[]
 * Test insights and flaky test detection.
+endif::server[]
 * Test splitting.
 
 You can also store test results as *artifacts*, which means you can look at the raw XML. Using artifacts can be useful when debugging issues with setting up your project's test results handling, for example, finding incorrectly uploaded files.
 
+ifndef::server[]
 To see test results as build artifacts, upload them using the xref:reference:ROOT:configuration-reference.adoc#storeartifacts[`store_artifacts` Step]. Storing artifacts has associated costs due to the use of storage. See the xref:optimize:persist-data.adoc#custom-storage-usage[Persisting Data] page for information on how to customize storage retention periods for objects like artifacts.
+endif::server[]
+ifdef::server[]
+To see test results as build artifacts, upload them using the xref:reference:ROOT:configuration-reference.adoc#storeartifacts[`store_artifacts` Step].
+endif::server[]
 
 TIP: You can choose to upload your test results using both `store_test_results` and `store_artifacts`.
 
@@ -49,20 +60,26 @@ The `path` key is an absolute or relative path to your `working_directory`. It c
 
 CAUTION: Make sure that your `path` value is not a hidden folder. For example, `.my_hidden_directory` would be an invalid format.
 
+ifndef::server[]
 [#viewing-storage-usage]
 == Viewing storage usage
 
 For information on viewing your storage usage, and calculating your monthly storage overage costs, see the xref:optimize:persist-data.adoc#managing-network-and-storage-usage[Persisting Data] guide.
+endif::server[]
 
+ifndef::server[]
 [#test-insights]
 == Test Insights
 
+ifndef::server[]
 include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab or GitHub App]
+endif::server[]
 
 See the xref:insights:insights-tests.adoc[Test Insights] page for information on using the Insights feature to gather information about your tests.
 This includes flaky test detection, viewing tests that failed most often, slowest tests, and an overall performance summary.
 
 Also, see the link:https://circleci.com/docs/api/v2/#tag/Insights[API v2 Insights endpoints] to find test failure information.
+endif::server[]
 
 [#enabling-formatters]
 == Enabling formatters
@@ -85,7 +102,9 @@ gem 'minitest-ci'
 
 * Configure Django using the link:https://github.com/django-nose/django-nose[`django-nose`] test runner.
 
+ifndef::server[]
 For detailed information on how to test your iOS applications, refer to the xref:testing-ios.adoc[Testing iOS Applications] page.
+endif::server[]
 
 [#test-runner-examples-by-language]
 == Test runner examples by language
@@ -726,6 +745,7 @@ link:https://github.com/google/googletest[GoogleTest] provides an XML option for
 
 You can see a full example on this link:https://levelup.gitconnected.com/how-to-combine-c-cmake-googletest-circleci-docker-and-why-e02d76c060a3[third party resource].
 
+ifndef::server[]
 [#xcode]
 === Xcode
 
@@ -734,6 +754,7 @@ Xcode generates test results in a Xcode Test Results (`.xcresult`) bundle format
 To integrate with CircleCI's test results features you will need to convert your Xcode Test Result bundle to the JUnit XML format.
 
 To convert your Xcode Test Result bundle you can use a third party tool, for example, link:https://fastlane.tools/[Fastlane] or link:https://github.com/xcpretty/xcpretty[`xcpretty`]. Once your test results are converted you can use `store_test_results` to upload the results to CircleCI.
+endif::server[]
 
 [#playwright]
 === Playwright
@@ -813,4 +834,6 @@ To access test metadata for a job from the API, refer to the link:https://circle
 == See Also
 
 * xref:insights:insights.adoc[Using Insights]
+ifndef::server[]
 * xref:insights:insights-tests.adoc[Test Insights]
+endif::server[]

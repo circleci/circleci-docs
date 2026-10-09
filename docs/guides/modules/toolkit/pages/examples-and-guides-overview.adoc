@@ -1,6 +1,10 @@
 = Examples and guides overview
-:page-platform: Cloud, Server v4+
-:page-description: Resources for learning CircleCI using examples.
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Examples and guides for building, testing and deploying applications on CircleCI, organized by programming language, framework and platform.
 :experimental:
 
 This page provides a collection of examples to help you learn how to build, test, and deploy applications written in the most common programming languages, frameworks, and platforms on CircleCI.
@@ -64,11 +68,13 @@ Use the tutorial associated with your platform to learn about the customization 
 | Platform guide
 | Description
 
+ifndef::server[]
 | xref:execution-managed:hello-world-macos.adoc#example-application[macOS Project Tutorial]
 | Set up a macOS project in CircleCI.
 
 | xref:test:testing-ios.adoc[Testing iOS]
 | Set up and test iOS projects in CircleCI.
+endif::server[]
 
 | xref:execution-managed:hello-world-windows.adoc#example-application[Windows Project Tutorial]
 | Full example of setting up a .NET project in CircleCI.

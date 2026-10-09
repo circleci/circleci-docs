@@ -1,6 +1,10 @@
 = CircleCI remote Docker images support policy
-:page-platform: Cloud, Server v4+
-:page-description: CircleCI remote Docker images release, update, and deprecation policy
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Read the CircleCI policy for releasing, tagging, patching, and deprecating the remote Docker images used by the setup_remote_docker feature.
 :experimental:
 
 [#overview]

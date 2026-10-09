@@ -1,5 +1,10 @@
 = Scaling self-hosted runners
-:page-platform: Cloud, Server v4+
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Scale self-hosted machine and container runners to match job demand, so you avoid paying for a fixed compute fleet when your workload fluctuates.
 :experimental:
 
 [#introduction]

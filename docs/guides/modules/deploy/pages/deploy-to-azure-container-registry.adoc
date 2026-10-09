@@ -1,5 +1,9 @@
 = Deploy to Azure Container Registry
-:page-platform: Cloud, Server v4+
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: This document provides examples of deploying to Azure Container Registry.
 :experimental:
 
@@ -59,6 +63,7 @@ workflows:
 
 If pushing to your repository is required, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#enable-project-to-check-out-additional-private-repositories[Users, Organizations, and Integrations Guide]. Then, configure the Azure Web App to use your production branch.
 
+ifndef::server[]
 [#track-deployments-with-deploy-markers]
 == Track your deployments with deploy markers
 
@@ -71,3 +76,4 @@ You have two options for setting up deploy markers:
 * *Manual setup*: Add deploy marker commands directly to your `.circleci/config.yml` file by following the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
 
 Both approaches will enable you to track deployment history and manage rollbacks directly from the CircleCI web app.
+endif::server[]

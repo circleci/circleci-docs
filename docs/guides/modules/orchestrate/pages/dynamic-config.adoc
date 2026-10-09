@@ -1,6 +1,10 @@
 = Dynamic configuration overview
-:page-platform: Cloud, Server v4+
-:page-description: A guide to using CircleCI's dynamic configuration features
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Get an overview of CircleCI dynamic configuration, which lets you generate or assemble configuration at runtime to match your project's needs.
 :experimental:
 
 Dynamic configuration in CircleCI is the process of describing a pipeline in which the work done is dynamically determined. Dynamic configuration is flexible. The features described in this guide allow you to create a configuration to match the requirements of your specific project.

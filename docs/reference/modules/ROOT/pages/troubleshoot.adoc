@@ -1,6 +1,10 @@
 = Troubleshoot
-:page-platform: Cloud, Server v4+
-:page-description: Troubleshoot CircleCI and various setups and integrations.
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Troubleshoot common problems with CircleCI orbs, pipelines, self-hosted runners and releases, with suggested fixes for each issue.
 :experimental:
 
 This page offers troubleshooting suggestions for the following aspects of CircleCI:

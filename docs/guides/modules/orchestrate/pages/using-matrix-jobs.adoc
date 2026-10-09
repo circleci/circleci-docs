@@ -1,5 +1,9 @@
 = Using matrix jobs
-:page-platform: Cloud, Server v4+
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: "A how to guide for using matrix jobs to simplify your CircleCI configuration."
 :experimental:
 
@@ -8,10 +12,17 @@ Matrix jobs provide a way to run a job multiple times with arguments that are su
 [#use-matrix-jobs-to-run-multiple-os-tests]
 == Use matrix jobs to run multiple OS tests
 
+ifndef::server[]
 In the following example, the `test` job runs across a Linux Docker container, Linux VM, and macOS environments. It uses two different versions of Node.js. On each run of the `test` job, different parameters are passed to set the OS and Node.js version:
 
+endif::server[]
+ifdef::server[]
+In the following example, the `test` job runs across a Linux Docker container and a Linux VM. It uses two different versions of Node.js. On each run of the `test` job, different parameters are passed to set the OS and Node.js version:
+
+endif::server[]
 include::ROOT:partial$notes/docker-auth.adoc[]
 
+ifndef::server[]
 [source,yaml,subs=attributes+]
 ----
 version: 2.1
@@ -53,7 +64,49 @@ workflows:
               os: [docker, linux, macos]
               node-version: ["14.17.6", "16.9.0"]
 ----
+endif::server[]
+ifdef::server[]
+[source,yaml]
+----
+version: 2.1
 
+orbs:
+  node: circleci/node@4.7
+
+executors:
+  docker: # Docker using the Base Convenience Image
+    docker:
+      - image: cimg/base:stable
+  linux: # a Linux VM
+    machine:
+      image: default
+
+jobs:
+  test:
+    parameters:
+      os:
+        type: executor
+      node-version:
+        type: string
+    executor: << parameters.os >>
+    steps:
+      - checkout
+      - node/install:
+          node-version: << parameters.node-version >>
+          install-yarn: true
+
+workflows:
+  all-tests:
+    jobs:
+      - test:
+          matrix:
+            parameters:
+              os: [docker, linux]
+              node-version: ["14.17.6", "16.9.0"]
+----
+endif::server[]
+
+ifndef::server[]
 [#list-jobs-that-will-run]
 === List jobs that will run
 
@@ -68,6 +121,21 @@ The expanded version of this matrix runs the following list of jobs under the `a
     - test-14.17.6-macos
     - test-16.9.0-macos
 ----
+endif::server[]
+ifdef::server[]
+[#list-jobs-that-will-run]
+=== List jobs that will run
+
+The expanded version of this matrix runs the following list of jobs under the `all-tests` workflow:
+
+[source,yaml]
+----
+    - test-14.17.6-docker
+    - test-16.9.0-docker
+    - test-14.17.6-linux
+    - test-16.9.0-linux
+----
+endif::server[]
 
 [#next-steps]
 == Next steps

@@ -1,4 +1,8 @@
 = Welcome to CircleCI Documentation
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-audience: developer
+:page-description: Welcome to the CircleCI documentation. Find guides, tutorials and reference material to help you build, test and deploy with CircleCI.
 :page-layout: home
 
-Test out adding some content here.
+Welcome to the CircleCI documentation. Find guides, tutorials and reference material to help you build, test and deploy with CircleCI.

@@ -1,5 +1,9 @@
 = Datadog integration
-:page-platform: Cloud, Server v4+
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: Learn how to integrate CircleCI with Datadog for monitoring and observability.
 :experimental:
 
@@ -15,7 +19,12 @@ The link:https://docs.datadoghq.com/integrations/circleci/[Datadog CircleCI inte
 
 Complete the following steps to set up a CircleCI webhook to forward your logs to Datadog.
 
+ifndef::server[]
 . Log in to the link:https://app.circleci.com/projects[CircleCI web app].
+endif::server[]
+ifdef::server[]
+. Log in to the CircleCI web app.
+endif::server[]
 
 . Access one of your CircleCI projects.
 
@@ -33,7 +42,7 @@ Complete the following steps to set up a CircleCI webhook to forward your logs t
 
 . Select **Add Webhook** to save the new webhook.
 
-NOTE: Webhook payload may be different depending on the integration used by the pipeline that emits the webhook. Check out the xref:reference:ROOT:outbound-webhooks-reference.adoc#sample-webhook-payloads[sample webhook payloads] for each integration for more information.
+NOTE: Webhook payload may be different depending on the integration used by the pipeline that emits the webhook. Check out the xref:reference:ROOT:outbound-webhooks-reference.adoc#sample-webhook-payloads[Sample Webhook Payloads] for each integration for more information.
 
 [#visualize-pipeline-data-in-datadog]
 === Visualize pipeline data in Datadog

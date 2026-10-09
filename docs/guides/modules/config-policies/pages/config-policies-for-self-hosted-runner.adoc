@@ -1,12 +1,19 @@
 = Config policies for self-hosted runner
-:page-platform: Cloud, Server v4+
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: Learn how to write a policy to restrict which projects can run jobs on a self-hosted runner.
 :experimental:
 
+ifndef::server[]
 NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI Server v4.2.
+endif::server[]
 
 Follow this how-to guide to learn how to create a config policy to restrict which projects can run jobs on a self-hosted runner resource class. For more information about config policies, see the xref:config-policy-management-overview.adoc[Config Policies Overview].
 
+ifndef::server[]
 ****
 **Using Server?** When using the `circleci policy` commands with CircleCI Server, you will need to use the `policy-base-url` flag to provide your CircleCI Server domain. For example:
 
@@ -15,6 +22,17 @@ Follow this how-to guide to learn how to create a config policy to restrict whic
 circleci policy push ./config-policies --owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
 ----
 ****
+endif::server[]
+ifdef::server[]
+****
+When using the `circleci policy` commands, use the `policy-base-url` flag to provide your CircleCI Server domain. For example:
+
+[source,shell]
+----
+circleci policy push ./config-policies --owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
+----
+****
+endif::server[]
 
 [#prerequisites]
 == Prerequisites

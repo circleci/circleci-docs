@@ -1,12 +1,19 @@
 = Test config policies
-:page-platform: Cloud, Server v4+
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
 :page-description: Open preview of config policies for CircleCI. Learn about testing your policies.
 :experimental:
 
+ifndef::server[]
 NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI Server v4.2.
+endif::server[]
 
 Follow the how-to guides on this page to write and set up tests for your config policies.
 
+ifndef::server[]
 ****
 **Using server?** When using the `circleci policy` commands with CircleCI Server, you will need to use the `policy-base-url` flag to provide your CircleCI Server domain. For example:
 [source,shell]
@@ -14,6 +21,16 @@ Follow the how-to guides on this page to write and set up tests for your config 
 circleci policy test ./config-policies --policy-base-url <your-circleci-server-domain>
 ----
 ****
+endif::server[]
+ifdef::server[]
+****
+When using the `circleci policy` commands, use the `policy-base-url` flag to provide your CircleCI Server domain. For example:
+[source,shell]
+----
+circleci policy test ./config-policies --policy-base-url <your-circleci-server-domain>
+----
+****
+endif::server[]
 
 This guide assumes you are familiar with writing config policies. If you would like more information on configuration policies, or the process of creating policies, see the xref:config-policy-management-overview.adoc[Config Policies Overview] and xref:create-and-manage-config-policies.adoc[Create and Manage Config Policies] pages.
 
@@ -28,7 +45,7 @@ The instructions on this page assume you have followed and completed the xref:cr
 [#write-a-policy-test]
 == Write a policy test
 
-In this section you will add a test for your existing `version.rego` policy to test how the policy will operate in practice, and check that the _decisions_ it will provide are valid.
+In this section, you add a test for your existing `version.rego` policy. The test shows how the policy operates in practice and checks that its _decisions_ are valid.
 
 . Create a policy test file in your `./config-policies` directory. This file will contain a series of _expectations_ for the policy. Create the file: `./config-policies/version_test.yaml`.
 

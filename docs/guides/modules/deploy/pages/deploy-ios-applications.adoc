@@ -1,6 +1,9 @@
 = Deploy iOS applications
 :page-platform: Cloud
-:page-description: Deploy iOS Applications
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-audience: developer
+:page-description: Configure Fastlane to automatically deploy iOS apps from CircleCI to App Store Connect, TestFlight, Firebase, and other distribution services.
 :experimental:
 
 In this how-to guide, you will learn how to configure link:https://fastlane.tools/[Fastlane] to automatically deploy iOS apps from CircleCI to a distribution service.

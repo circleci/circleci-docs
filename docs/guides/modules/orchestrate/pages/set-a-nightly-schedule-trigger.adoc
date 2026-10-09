@@ -1,6 +1,9 @@
 = Set a nightly schedule trigger
 :page-platform: Cloud
-:page-description: "Learn how to create schedule triggers on a specific timetable."
+:page-vcs: github, github-enterprise, bitbucket, cursor-origin
+:page-plan: Free, Performance, Scale
+:page-audience: developer
+:page-description: Create a schedule trigger that runs your pipeline at midnight every night. You can set the schedule in the CircleCI web app or with the API.
 :experimental:
 :page-aliases: set-a-nightly-scheduled-pipeline.adoc
 

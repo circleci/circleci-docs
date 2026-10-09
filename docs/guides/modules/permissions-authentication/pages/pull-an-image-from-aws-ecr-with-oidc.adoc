@@ -1,6 +1,9 @@
 = Pull an image from AWS ECR with OIDC
 :page-platform: Cloud
-:page-description: Learn how to pull an image from AWS ECR using OIDC authentication
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-audience: developer
+:page-description: Configure a Docker job to pull an image from AWS ECR using OIDC authentication. Set up an IAM role, then update your config to pull the image.
 :experimental:
 
 Follow this how-to guide to configure a `docker` job to pull an image from AWS ECR using OIDC authentication.

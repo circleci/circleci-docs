@@ -1,7 +1,10 @@
 = Installation reference
 :page-noindex: true
-:page-platform: Server v4.8, Server Admin
-:page-description: Reference documentation for installing CircleCI server v4.8.
+:page-platform: Server
+:page-vcs: github, github-enterprise
+:page-server-min-version: "4.8"
+:page-audience: admin
+:page-description: Example AWS and GCP Helm manifests for a CircleCI Server 4.8 installation, plus a reference of all available values.yaml options.
 :experimental:
 
 [#example-manifests]

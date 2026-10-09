@@ -1,7 +1,10 @@
 = Pipeline values and parameters
-:page-platform: Cloud, Server v4+
-:experimental:
-:page-description: This document describes the Free Plan available to developers on CircleCI.
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Learn about pipeline values and pipeline parameters, and how to use them in your CircleCI configuration.
 :experimental:
 
 [#introduction]
@@ -19,7 +22,9 @@ Pipeline values are available to all pipeline configurations and can be used wit
 
 For a full list of values and built-in environment variables, see the xref:reference:ROOT:variables.adoc[Project Values and Variables] guide.
 
+ifndef::server[]
 include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration type]
+endif::server[]
 
 include::ROOT:partial$pipelines-and-triggers/pipeline-values.adoc[]
 
@@ -98,7 +103,9 @@ The `parameters` key passed in this `POST` request is *NOT* secret.
 
 The example below triggers a pipeline with the parameters described in the above configuration example. If you run a command to trigger a pipeline, and the parameter has not been declared in the configuration file, you will receive an error response message, such as `Project not found`.
 
+ifndef::server[]
 CAUTION: For GitHub App, GitLab, or Cursor Origin pipelines, use the link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/triggerPipelineRun[Trigger a new pipeline endpoint] rather than the endpoint used in this example.
+endif::server[]
 
 ```shell
 curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
@@ -124,7 +131,9 @@ In addition to using the API, you can also trigger a pipeline with parameters fr
 . Use the *Add Parameters* dropdown to specify the type, name, and value of your desired parameters.
 . Select *Trigger Pipeline*.
 
+ifndef::server[]
 Parameters can also be passed when setting up a schedule trigger in the web app. The parameters are part of the trigger form in menu:Project Settings[Triggers] or menu:Project Settings[Project Setup]. Any parameter set up as a part of a schedule trigger will also need to be declared in the configuration file, otherwise the pipeline will fail with the error `Unexpected argument(s)`.
+endif::server[]
 
 [#configuration-processing-stages]
 == Configuration processing stages

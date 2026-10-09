@@ -1,6 +1,10 @@
 = Set an environment variable
-:page-platform: Cloud, Server v4+
-:page-description: How to set environment variables for use in your CircleCI pipelines.
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Set environment variables for your CircleCI pipelines in a shell command, step, job, context, project or container, and encode multi-line values.
 :experimental:
 
 Environment variables can be stored and configured for use in CircleCI jobs in several ways to provide variety in scope and authorization level.

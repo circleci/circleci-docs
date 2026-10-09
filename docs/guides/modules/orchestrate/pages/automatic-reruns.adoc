@@ -1,5 +1,9 @@
 = Automatic reruns
-:page-platform: Cloud, Server v4.9+
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.9"
+:page-audience: developer
 :page-description: Configure automatic reruns for failed workflows to reduce manual intervention and improve pipeline reliability
 :experimental:
 

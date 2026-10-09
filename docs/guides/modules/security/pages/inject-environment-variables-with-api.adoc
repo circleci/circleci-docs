@@ -1,6 +1,10 @@
 = Inject environment variables with the CircleCI API
-:page-platform: Cloud, Server v4+
-:page-description: How to inject env var values using the API.
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Pass variable values into your pipelines with the CircleCI API, using pipeline parameters in API v2 or build parameters in API v1.
 :experimental:
 
 include::ROOT:partial$notes/server-api-examples.adoc[]
@@ -18,7 +22,9 @@ The example below triggers a pipeline with parameter values for `workingdir` and
 
 NOTE: In order to pass a parameter when triggering a pipeline via the API, the parameter must be declared in the configuration file. See the  xref:reference:ROOT:reusing-config.adoc#using-the-parameters-declaration[Configuration Reference] for more information.
 
+ifndef::server[]
 CAUTION: For GitHub App or GitLab pipelines, use the link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/triggerPipelineRun[Trigger a new pipeline endpoint] rather than the endpoint used in this example.
+endif::server[]
 
 ```shell
 curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{

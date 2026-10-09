@@ -1,9 +1,15 @@
 = Using the CircleCI in-app configuration editor
-:page-platform: Cloud, Server v4+
-:page-description: Docs page on In-app configuration editor use and features
+:page-platform: Cloud, Server
+:page-vcs: github, bitbucket
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Edit your CircleCI configuration files in the web app with the in-app configuration editor, which offers auto-completion and a save and run option.
 :experimental:
 
+ifndef::server[]
 include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab or GitHub App]
+endif::server[]
 
 With the CircleCI configuration editor, you can modify your configuration files without the use of the xref:toolkit:local-cli.adoc[CircleCI CLI] or a text editor.
 
@@ -18,7 +24,12 @@ The benefits of using the CircleCI configuration editor include:
 [#getting-started-with-the-circleci-configuration-editor]
 == Getting started with the CircleCI configuration editor
 
+ifndef::server[]
 In the link:https://app.circleci.com/[CircleCI web UI], select a pipeline in the *Dashboard's All Pipelines* view.
+endif::server[]
+ifdef::server[]
+In the CircleCI web app, select a pipeline in the *Dashboard's All Pipelines* view.
+endif::server[]
 
 To access the CircleCI configuration editor, select your desired branch from the *All Branches* drop-down menu near the top of the screen. Once you select a branch, the btn:[Edit Config] button will become enabled, and you can access the configuration editor.
 

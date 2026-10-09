@@ -1,5 +1,8 @@
 = Publish to npm using OIDC trusted publishing
 :page-platform: Cloud
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-audience: developer
 :page-description: Publish packages to npm from CircleCI using OIDC trusted publishing, the recommended tokenless approach.
 :experimental:
 

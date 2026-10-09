@@ -1,6 +1,9 @@
 = Orbs overview
-:page-platform: Cloud, Server v4+
-:page-description: Starting point for using CircleCI orbs
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Get started with CircleCI orbs, reusable packages of parameterizable configuration. Choose an orb type and use registry, URL or inline orbs in your config.
 :experimental:
 
 Orbs are reusable packages of parameterizable configuration. Use orbs to:

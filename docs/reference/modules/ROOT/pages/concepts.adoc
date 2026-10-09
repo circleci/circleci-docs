@@ -1,6 +1,11 @@
 = Concepts
-:page-platform: Cloud, Server v4+
-:page-description: CircleCI concepts
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-aliases: guides:about-circleci:concepts.adoc
+:page-description: Get to know the core CircleCI concepts, such as concurrency, configuration, contexts, jobs, orbs, executors and workflows, and how they fit together.
 :experimental:
 
 [#introduction]
@@ -11,11 +16,11 @@ This guide introduces the core concepts you need to understand how CircleCI work
 [#concurrency]
 == Concurrency
 
-In CircleCI, _concurrency_ refers to utilizing multiple containers to run multiple jobs at the same time. Concurrency is different from CircleCI _parallelism_, which splits the tests of a single job across multiple containers. Free, Performance, and Custom plans each have a set concurrency limit based on your plan tier. Scale plan organizations have no concurrency limit, except for macOS xref:reference:ROOT:configuration-reference.adoc#resourceclass[Resource Classes], which retain a custom concurrency limit.
+In CircleCI, _concurrency_ refers to utilizing multiple containers to run multiple jobs at the same time. Concurrency is different from CircleCI _parallelism_, which splits the tests of a single job across multiple containers. Free and Performance plans each have a set concurrency limit based on your plan tier. Scale plan organizations have no concurrency limit, except for macOS xref:reference:ROOT:configuration-reference.adoc#resourceclass[Resource Classes], which retain a custom concurrency limit.
 
-If you experience queueing on your jobs and are on a Free, Performance, or Custom plan, you may be hitting your plan's concurrency limit. Customers on annual plans can request an increase to their limit at no extra charge. For more information about plan tiers, see the xref:guides:plans-pricing:plan-overview.adoc[Plans Overview] page.
+If you experience queueing on your jobs and are on a Free or Performance plan, you may be hitting your plan's concurrency limit. Customers on annual plans can request an increase to their limit at no extra charge. For more information about plan tiers, see the xref:guides:plans-pricing:plan-overview.adoc[Plans Overview] page.
 
-See the xref:optimize:concurrency.adoc[Concurrency] page for more information.
+See the xref:guides:optimize:concurrency.adoc[Concurrency] page for more information.
 
 [#configuration]
 == Configuration
@@ -43,7 +48,7 @@ The following illustration uses an link:https://github.com/CircleCI-Public/circl
 .Configuration elements
 image::guides:ROOT:config-elements.png[configuration elements]
 
-CircleCI configurations use YAML. See the xref:getting-started:introduction-to-yaml-configurations.adoc[Introduction to YAML Configurations] page for basic guidance. For a full overview of what is possible in a configuration file, see the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference] page.
+CircleCI configurations use YAML. See the xref:guides:getting-started:introduction-to-yaml-configurations.adoc[Introduction to YAML Configurations] page for basic guidance. For a full overview of what is possible in a configuration file, see the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference] page.
 
 [#contexts]
 == Contexts
@@ -57,7 +62,7 @@ Contexts provide a mechanism for securing and sharing environment variables acro
 .Contexts overview
 image::guides:ROOT:contexts_cloud.png[Contexts Overview]
 
-See the xref:security:contexts.adoc[Using Contexts] page for more information.
+See the xref:guides:security:contexts.adoc[Using Contexts] page for more information.
 
 [#data-persistence]
 == Data persistence
@@ -147,14 +152,14 @@ workflows:
             - build2
 ----
 
-See the xref:optimize:artifacts.adoc[Storing Build Artifacts] page for more information.
+See the xref:guides:optimize:artifacts.adoc[Storing Build Artifacts] page for more information.
 
 [#caches]
 === Caches
 
 A cache stores a file or directory of files such as dependencies or source code in object storage. To speed up the build, each job may contain special steps for caching dependencies from previous jobs.
 
-If you need to clear your cache, refer to the xref:optimize:caching.adoc#clearing-cache[Caching Dependencies] page for more information.
+If you need to clear your cache, refer to the xref:guides:optimize:caching.adoc#clearing-cache[Caching Dependencies] page for more information.
 
 [,yaml]
 ----
@@ -194,14 +199,14 @@ workflows:
             - build1
 ----
 
-For more information see the xref:optimize:caching.adoc[Caching Dependencies] page.
+For more information see the xref:guides:optimize:caching.adoc[Caching Dependencies] page.
 
 [#workspaces]
 === Workspaces
 
 Workspaces are a workflow-aware storage mechanism. A workspace stores data unique to the job, which downstream jobs may need. Each workflow has a temporary workspace associated with it. Use the workspace to pass along unique data built during a job to other jobs in the same workflow.
 
-See the xref:orchestrate:workspaces.adoc[Using Workspaces] page for more information.
+See the xref:guides:orchestrate:workspaces.adoc[Using Workspaces] page for more information.
 
 [#docker-layer-caching]
 == Docker layer caching
@@ -233,14 +238,14 @@ workflows:
 
 On subsequent commits, if the Dockerfile has not changed, DLC pulls each Docker image layer from cache during the `build Elixir image` step and the image builds faster.
 
-See the xref:optimize:docker-layer-caching.adoc[Docker Layer Caching] page for more information.
+See the xref:guides:optimize:docker-layer-caching.adoc[Docker Layer Caching] page for more information.
 
 [#dynamic-configuration]
 == Dynamic configuration
 
 Instead of manually creating your configuration for each CircleCI project, you can generate this configuration dynamically, based on specific pipeline parameters or file paths. Dynamic configuration is helpful where your team is working on a monorepo (or a single repository). Dynamic configuration allows you to trigger builds from _specific_ parts of your project, rather than rebuilding everything each time.
 
-See the xref:orchestrate:dynamic-config.adoc[Dynamic Configuration] page for more information.
+See the xref:guides:orchestrate:dynamic-config.adoc[Dynamic Configuration] page for more information.
 
 [#events]
 == Events
@@ -254,7 +259,7 @@ An event is the inbound occurrence that prompts CircleCI to act, for example:
 
 Events are the starting point of the entity chain. When CircleCI receives an event, it checks whether any <<triggers,triggers>> match and, if so, initiates a <<runs,run>>.
 
-See the xref:orchestrate:triggers-overview.adoc[Triggers Overview] page for more information.
+See the xref:guides:orchestrate:triggers-overview.adoc[Triggers Overview] page for more information.
 
 [#execution-environments]
 == Execution environments
@@ -266,7 +271,7 @@ image::guides:ROOT:executor_types.png[Illustration of a CircleCI job]
 
 An _image_ is a packaged system that includes instructions for creating a running container or virtual machine, and you can define an image for each executor. CircleCI provides a range of images for use with the Docker executor, called _convenience images_ (details in the <<images,images>> section).
 
-include::ROOT:partial$notes/docker-auth.adoc[]
+include::guides:ROOT:partial$notes/docker-auth.adoc[]
 
 [tabs]
 ====
@@ -356,18 +361,18 @@ workflows:
 
 The first image listed in the `.circleci/config.yml` file defines the primary container. CircleCI executes commands in the primary container. The Docker executor spins up a container with a Docker image. The machine executor spins up a complete Ubuntu virtual machine image. You can add further images to spin up secondary/service containers.
 
-For added security when using the Docker executor and running Docker commands, use the `setup_remote_docker` key to spin up another Docker container in which to run these commands. For more information see the xref:execution-managed:building-docker-images.adoc[Running Docker Commands] page.
+For added security when using the Docker executor and running Docker commands, use the `setup_remote_docker` key to spin up another Docker container in which to run these commands. For more information see the xref:guides:execution-managed:building-docker-images.adoc[Running Docker Commands] page.
 
-For more information, see the xref:execution-managed:executor-intro.adoc[Execution Environments Overview] page.
+For more information, see the xref:guides:execution-managed:executor-intro.adoc[Execution Environments Overview] page.
 
 [#images]
 == Images
 
 An image is a packaged system that includes instructions for creating a running container. The first image listed in a `.circleci/config.yml` file defines the primary container. CircleCI executes commands for jobs in the primary container, using the Docker or machine executor.
 
-The *Docker executor* spins up a container with a Docker image. CircleCI maintains xref:execution-managed:circleci-images.adoc[Convenience Images] for popular languages on Docker Hub.
+The *Docker executor* spins up a container with a Docker image. CircleCI maintains xref:guides:execution-managed:circleci-images.adoc[Convenience Images] for popular languages on Docker Hub.
 
-include::ROOT:partial$notes/docker-auth.adoc[]
+include::guides:ROOT:partial$notes/docker-auth.adoc[]
 
 The *machine executor* spins up a complete Ubuntu virtual machine image, giving you full access to OS resources and complete control over the job environment. For more information, see the xref:reference:ROOT:configuration-reference.adoc#machine[Using Machine] page.
 
@@ -413,17 +418,17 @@ workflows:
       - build3
 ----
 
-See the xref:execution-managed:circleci-images.adoc[CircleCI Images] page for more information.
+See the xref:guides:execution-managed:circleci-images.adoc[CircleCI Images] page for more information.
 
 [#jobs]
 == Jobs
 
-Jobs are the building blocks of your configuration. Jobs are collections of <<steps,steps>>, which run commands/scripts as required. Each job must declare an executor that is either `docker`, `machine`, `windows`, or `macos`. For `docker` you must xref:execution-managed:executor-intro.adoc#docker[Specify an Image] to use for the primary container. For `macos` you must specify an xref:execution-managed:executor-intro.adoc#macos[Xcode Version]. For `windows` you must use the xref:execution-managed:executor-intro.adoc#windows[Windows Orb].
+Jobs are the building blocks of your configuration. Jobs are collections of <<steps,steps>>, which run commands/scripts as required. Each job must declare an executor that is either `docker`, `machine`, `windows`, or `macos`. For `docker` you must xref:guides:execution-managed:executor-intro.adoc#docker[Specify an Image] to use for the primary container. For `macos` you must specify an xref:guides:execution-managed:executor-intro.adoc#macos[Xcode Version]. For `windows` you must use the xref:guides:execution-managed:executor-intro.adoc#windows[Windows Orb].
 
 .Illustration of a CircleCI job
 image::guides:ROOT:job.png[Illustration of a CircleCI job]
 
-For more information, see the xref:orchestrate:jobs-steps.adoc[Jobs and Steps] page.
+For more information, see the xref:guides:orchestrate:jobs-steps.adoc[Jobs and Steps] page.
 
 [#orbs]
 == Orbs
@@ -444,7 +449,7 @@ See xref:orbs:use:orb-concepts.adoc[Using Orbs] for details on how to use orbs i
 
 The more tests your project involves, the longer it takes for them to complete on a single machine. Using _test splitting_ and _parallelism_, you can spread your tests across a specified number of separate executors.
 
-You conventionally define test suites at the xref:orchestrate:jobs-steps.adoc[Job] level in your `.circleci/config.yml` file. The `parallelism` key specifies how CircleCI sets up independent executors to run the steps of a job. On CircleCI Cloud, use `circleci testsuite` to run and split your tests across your parallel executors; on CircleCI Server, use the `circleci tests` commands.
+You conventionally define test suites at the xref:guides:orchestrate:jobs-steps.adoc[Job] level in your `.circleci/config.yml` file. The `parallelism` key specifies how CircleCI sets up independent executors to run the steps of a job. On CircleCI Cloud, use `circleci testsuite` to run and split your tests across your parallel executors; on CircleCI Server, use the `circleci tests` commands.
 
 To run a job's steps in parallel, set the `parallelism` key to a value greater than `1`.
 
@@ -488,7 +493,7 @@ jobs:
 .Executor types with parallelism
 image::guides:ROOT:executor_types_plus_parallelism.png[Executor types with parallelism]
 
-See xref:optimize:parallelism-faster-jobs.adoc[Test Splitting and Parallelism] page for more information.
+See xref:guides:optimize:parallelism-faster-jobs.adoc[Test Splitting and Parallelism] page for more information.
 
 [#pipelines]
 == Pipelines
@@ -497,9 +502,9 @@ A pipeline is a definition that specifies where your CircleCI configuration is s
 
 Pipelines are distinct from the work they produce. When an <<events,event>> matches a trigger, CircleCI uses the pipeline definition to fetch your configuration and create a run. That run then executes the <<workflows,workflows>>, <<jobs,jobs>>, and <<steps,steps>> defined in your configuration file.
 
-You can use xref:orchestrate:pipeline-variables.adoc#conditional-workflows[Pipeline Parameters] to control which workflows run when a run is initiated.
+You can use xref:guides:orchestrate:pipeline-variables.adoc#conditional-workflows[Pipeline Parameters] to control which workflows run when a run is initiated.
 
-See the xref:orchestrate:pipelines.adoc[Pipelines Overview] page for more information.
+See the xref:guides:orchestrate:pipelines.adoc[Pipelines Overview] page for more information.
 
 [#projects]
 == Projects
@@ -524,12 +529,12 @@ A standalone project can have:
 Select *Projects* in the CircleCI web app sidebar to enter the projects dashboard. On the dashboard, you can set up and follow any project you have access to.
 
 * _Set Up_ or _Create_ any project that you are the owner of in your VCS.
-* _Follow_ any project in your organization to gain access to its pipelines and to subscribe to xref:integration:notifications.adoc[Email Notifications] for the project's status.
+* _Follow_ any project in your organization to gain access to its pipelines and to subscribe to xref:guides:integration:notifications.adoc[Email Notifications] for the project's status.
 
 .The projects dashboard in the CircleCI web app for a circleci organization
 image::guides:ROOT:projects-dashboard-circleci-org.png[Projects dashboard for a circleci organization]
 
-If you do not see the btn:[Create project] button you are in a `GitHub` or `Bitbucket` organization. You can use the btn:[Set up] button to start building your project on CircleCI. For more information on organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide] page.
+If you do not see the btn:[Create project] button you are in a `GitHub` or `Bitbucket` organization. You can use the btn:[Set up] button to start building your project on CircleCI. For more information on organization types, see the xref:guides:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide] page.
 
 .The projects dashboard in the CircleCI web app for a GitHub or bitbucket organization
 image::guides:ROOT:projects-dashboard-set-up.png[Projects dashboard for a GitHub or Bitbucket organization]
@@ -557,18 +562,18 @@ jobs:
 
 Examples for all execution environments are available on the following pages:
 
-* xref:execution-managed:using-docker.adoc[Using the Docker Execution Environment]
-* xref:execution-managed:using-linuxvm.adoc[Using the LinuxVM Execution Environment]
-* xref:execution-managed:using-macos.adoc[Using the macOS Execution Environment]
-* xref:execution-managed:using-windows.adoc[Using the Windows Execution Environment]
-* xref:execution-managed:using-gpu.adoc[Using the GPU Execution Environment]
-* xref:execution-managed:using-arm.adoc[Using the Arm VM Execution Environment]
+* xref:guides:execution-managed:using-docker.adoc[Using the Docker Execution Environment]
+* xref:guides:execution-managed:using-linuxvm.adoc[Using the LinuxVM Execution Environment]
+* xref:guides:execution-managed:using-macos.adoc[Using the macOS Execution Environment]
+* xref:guides:execution-managed:using-windows.adoc[Using the Windows Execution Environment]
+* xref:guides:execution-managed:using-gpu.adoc[Using the GPU Execution Environment]
+* xref:guides:execution-managed:using-arm.adoc[Using the Arm VM Execution Environment]
 
 Pricing and plans information for the various resource classes can be found on the link:https://circleci.com/product/features/resource-classes/[Resource classes] product page.
 
-The `resource_class` key is also used to configure a xref:execution-runner:runner-concepts.adoc#namespaces-and-resource-classes[Self-Hosted Runner Instance].
+The `resource_class` key is also used to configure a xref:guides:execution-runner:runner-concepts.adoc#namespaces-and-resource-classes[Self-Hosted Runner Instance].
 
-For full details on both uses of resource classes, see the xref:execution-managed:resource-class-overview.adoc[Resource Class Overview] page.
+For full details on both uses of resource classes, see the xref:guides:execution-managed:resource-class-overview.adoc[Resource Class Overview] page.
 
 [#runs]
 == Runs
@@ -577,7 +582,7 @@ A run is the instance produced when an <<events,event>> matches a <<triggers,tri
 
 A run is created on every trigger match, even if a configuration error prevents any workflows from starting. In that case, the run records the error rather than leaving no trace.
 
-See the xref:orchestrate:pipelines.adoc[Pipelines Overview] page for more information.
+See the xref:guides:orchestrate:pipelines.adoc[Pipelines Overview] page for more information.
 
 [#steps]
 == Steps
@@ -602,7 +607,7 @@ jobs:
           # by default.
 ----
 
-See the xref:orchestrate:jobs-steps.adoc[Jobs and Steps] page for more information.
+See the xref:guides:orchestrate:jobs-steps.adoc[Jobs and Steps] page for more information.
 
 [#triggers]
 == Triggers
@@ -611,14 +616,14 @@ A trigger is a matching rule that watches for <<events,events>> and, when matche
 
 Triggers can respond to events from VCS activity such as pushes and pull requests, scheduled times, API calls, or actions in the web app or CLI.
 
-See the xref:orchestrate:triggers-overview.adoc[Triggers Overview] page for more information.
+See the xref:guides:orchestrate:triggers-overview.adoc[Triggers Overview] page for more information.
 
 [#user-types]
 == User roles
 
-CircleCI sets up roles differently depending on your xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organizations[Organization Type].
+CircleCI sets up roles differently depending on your xref:guides:permissions-authentication:users-organizations-and-integrations-guide.adoc#organizations[Organization Type].
 
-include::ROOT:partial$tips/check-org-type.adoc[]
+include::guides:ROOT:partial$tips/check-org-type.adoc[]
 
 === GitHub App, GitLab, and Cursor Origin users
 For `circleci` type organizations, you set roles at the organization and project level. These roles are separate from permissions and roles in your version control system. The available roles are:
@@ -627,9 +632,9 @@ For `circleci` type organizations, you set roles at the organization and project
 * Contributor
 * Viewer
 
-For an overview of organization and project role permissions, see the xref:permissions-authentication:roles-and-permissions-overview.adoc#organization-role-permissions-matrix[Roles and Permissions Overview] page.
+For an overview of organization and project role permissions, see the xref:guides:permissions-authentication:roles-and-permissions-overview.adoc#organization-role-permissions-matrix[Roles and Permissions Overview] page.
 
-See the xref:permissions-authentication:manage-roles-and-permissions.adoc[Manage Roles and Permissions] page for steps to add, remove, and change org and project level roles. You can also manage roles and permissions in xref:permissions-authentication:manage-groups.adoc[Groups].
+See the xref:guides:permissions-authentication:manage-roles-and-permissions.adoc[Manage Roles and Permissions] page for steps to add, remove, and change org and project level roles. You can also manage roles and permissions in xref:guides:permissions-authentication:manage-groups.adoc[Groups].
 
 === GitHub OAuth app and Bitbucket Cloud users
 CircleCI has various user roles with permissions inherited from VCS accounts.
@@ -651,7 +656,7 @@ The following configuration example shows two workflows with modern features:
 * `build_and_test` runs on every commit with concurrent job execution.
 * `deploy` is a conditional workflow that includes manual approval and flexible job dependencies.
 
-include::ROOT:partial$notes/docker-auth.adoc[]
+include::guides:ROOT:partial$notes/docker-auth.adoc[]
 
 [,yaml]
 ----
@@ -752,9 +757,9 @@ workflows:
               - canceled
 ----
 
-See the xref:orchestrate:workflows.adoc[Using Workflows] page for more information.
+See the xref:guides:orchestrate:workflows.adoc[Using Workflows] page for more information.
 
 [#see-also]
 == See also
 
-* Follow our xref:getting-started:getting-started.adoc[Quickstart] guide to walk through setting up a working pipeline.
+* Follow our xref:guides:getting-started:getting-started.adoc[Quickstart] guide to walk through setting up a working pipeline.

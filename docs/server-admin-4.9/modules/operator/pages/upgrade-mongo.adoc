@@ -1,5 +1,8 @@
 = Upgrade MongoDB
-:page-platform: Server 4.9, Server Admin
+:page-platform: Server
+:page-vcs: github, github-enterprise
+:page-server-min-version: "4.9"
+:page-audience: admin
 :page-description: Learn how to upgrade MongoDB up to v7.0.15 in an installation of CircleCI Server 4.9.
 :experimental:
 
@@ -20,7 +23,7 @@ MongoDB `3.6.22` is shipped with CircleCI Server 4.9.
 
 [#script-upgrade-4.4]
 === Scripted upgrade
-We have created a shell script that you can use to upgrade your cluster's MongoDB instance link:https://github.com/CircleCI-Public/server-scripts/tree/main/upgrade-mongo-to-4.4[here].
+We have created a link:https://github.com/CircleCI-Public/server-scripts/tree/main/upgrade-mongo-to-4.4[shell script] that you can use to upgrade your cluster's MongoDB instance.
 
 Alternatively, you can use the following instructions to manually upgrade your cluster's MongoDB:
 
@@ -119,7 +122,7 @@ db.adminCommand( { setFeatureCompatibilityVersion: "4.4" } )
 
 [#script-upgrade-7.0]
 === Scripted upgrade
-We have created a shell script that you can use to upgrade your cluster's MongoDB instance link:https://github.com/CircleCI-Public/server-scripts/tree/main/upgrade-mongo-to-7.0[here].
+We have created a link:https://github.com/CircleCI-Public/server-scripts/tree/main/upgrade-mongo-to-7.0[shell script] that you can use to upgrade your cluster's MongoDB instance.
 
 Alternatively, you can use the following instructions to manually upgrade your cluster's MongoDB:
 

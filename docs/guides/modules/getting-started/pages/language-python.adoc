@@ -1,6 +1,10 @@
 = Configure a Python application on CircleCI
-:page-platform: Cloud, Server v4+
-:page-description: Continuous integration with Python on CircleCI
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Set up continuous integration for a Python application on CircleCI. Follow a configuration walkthrough to create a basic config.yml file.
 :experimental:
 
 This quickstart guide covers integrating a Python project with CircleCI. This guide is designed to help you create a basic CircleCI configuration file to build, test and deploy your Python project. After completing this quickstart, you can edit and optimize the config to fit the requirements of your project.
@@ -8,8 +12,14 @@ This quickstart guide covers integrating a Python project with CircleCI. This gu
 [#prerequisites]
 == Prerequisites
 
+ifndef::server[]
 * xref:first-steps.adoc[A CircleCI Account]
 * A Python project located in a supported VCS.
+endif::server[]
+ifdef::server[]
+* An account on your CircleCI Server instance.
+* A Python project located in a GitHub repository.
+endif::server[]
 
 [#configuration-walkthrough-new]
 == Configuration walkthrough
@@ -31,7 +41,12 @@ version: 2.1
 [#use-the-python-orb]
 === 2. Use the Python orb
 
+ifndef::server[]
 The Python link:https://circleci.com/developer/orbs/orb/circleci/python[orb] contains a set of prepackaged CircleCI configurations you can use to do common CircleCI tasks for the Python programming language. It supports Linux x86_64, macOS x86_64, and Arm64. Learn more about xref:orbs:use:orb-intro.adoc[Orbs].
+endif::server[]
+ifdef::server[]
+The Python link:https://circleci.com/developer/orbs/orb/circleci/python[orb] contains a set of prepackaged CircleCI configurations you can use to do common CircleCI tasks for the Python programming language. It supports Linux x86_64. Learn more about xref:orbs:use:orb-intro.adoc[Orbs].
+endif::server[]
 
 To add the orb to your config, insert:
 
@@ -41,7 +56,7 @@ orbs:
   python: circleci/python@2.0.3
 ----
 
-NOTE: When using an orb, it is a good idea to check the link:https://circleci.com/developer/orbs[Orb Registry] to ensure you are using the most recent version, or the version that fits best with your specific project.
+NOTE: When using an orb, check the link:https://circleci.com/developer/orbs[Orb Registry] to confirm you are using the most recent version. Alternatively, use the version that best fits your specific project.
 
 [#create-jobs]
 === 3. Create jobs

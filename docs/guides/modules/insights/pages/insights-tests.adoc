@@ -1,6 +1,9 @@
 = Test Insights
 :page-platform: Cloud
-:page-description: Analyze your test performance using test Insights.
+:page-vcs: github, bitbucket
+:page-plan: Free, Performance, Scale
+:page-audience: developer
+:page-description: Analyze your test performance with Test Insights. Review recent runs and find flaky, failing and slow tests to identify opportunities for optimization.
 :experimental:
 
 include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab or GitHub App]

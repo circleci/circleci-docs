@@ -1,12 +1,15 @@
 = Example `values.yaml`
 :page-noindex: true
-:page-platform: Server v4.7, Server Admin
+:page-platform: Server
+:page-vcs: github, github-enterprise
+:page-server-min-version: "4.7"
+:page-audience: admin
 :page-description: This page presents an example values.yaml file to help with setting up an air-gapped installation of CircleCI server v4.7.
 :icons: font
 :toc: macro
 :toc-title:
 
-The following snippet shows an example `values.yaml` file for a Helm installation of CircleCI server in an air-gapped environment.
+The following snippet shows an example `values.yaml` file for a Helm installation of CircleCI Server in an air-gapped environment.
 
 [#resources]
 == Resources
@@ -21,8 +24,8 @@ The chart assumes an environment with the following resources:
 
 For more information about specific values, see the standard installation documentation, starting with the following:
 
-* xref:server-admin:installation:phase-2-aws-core-services.adoc[Phase 2 AWS - Core services]
-* xref:server-admin:installation:phase-2-gcp-core-services.adoc[Phase 2 GCP - Core services]
+* xref:server-admin:installation:phase-2-aws-core-services.adoc[Phase 2 AWS - Core Services]
+* xref:server-admin:installation:phase-2-gcp-core-services.adoc[Phase 2 GCP - Core Services]
 
 [#values]
 == `Values.yaml`

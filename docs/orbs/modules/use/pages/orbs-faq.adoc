@@ -1,6 +1,9 @@
 = Orbs FAQ
-:page-platform: Cloud, Server v4+
-:page-description: This page answers the most frequently asked questions about orbs.
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Find answers to frequently asked questions and common technical issues that come up when you use CircleCI orbs in your projects.
 :experimental:
 
 This document describes various questions and technical issues that you may find helpful when working with orbs.

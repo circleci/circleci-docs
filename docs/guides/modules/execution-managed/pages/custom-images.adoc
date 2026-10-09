@@ -1,6 +1,10 @@
 = Using custom-built Docker images
-:page-platform: Cloud, Server v4+
-:page-description: Why and how to create custom Docker images
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Create a custom Docker image for your CircleCI jobs when convenience images do not suit your needs, then build it and store it in a Docker registry.
 :experimental:
 
 This page describes how to create and use custom Docker images with CircleCI.
@@ -70,7 +74,7 @@ To use a custom Docker image as a primary container on CircleCI, install the fol
 
 * Bash (usually already installed or available via your package manager).
 * https://git-scm.com/book/en/v2/Getting-Started-Installing-Git[git]
-* https://help.ubuntu.com/lts/serverguide/openssh-server.html.en#openssh-installation[SSH]
+* https://ubuntu.com/server/docs/how-to/security/openssh-server/[SSH]
 * https://www.howtoforge.com/tutorial/linux-tar-command/#installing-tar[tar]
 * https://www.gzip.org/[Gzip]
 * https://packages.debian.org/sid/ca-certificates[ca-certificates]

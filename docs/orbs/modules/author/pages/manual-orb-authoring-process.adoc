@@ -1,6 +1,9 @@
 = Registry orb authoring process (manual)
-:page-platform: Cloud, Server v4+
-:page-description: Authoring simple orbs manually without the orb development kit.
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Author a simple registry orb manually without the orb development kit: create a namespace, write and pack your orb, then validate and publish it.
 :experimental:
 :page-aliases: orb-author-validate-publish
 

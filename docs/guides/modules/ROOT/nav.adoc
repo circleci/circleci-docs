@@ -1,7 +1,6 @@
 * About CircleCI
 ** xref:about-circleci:about-circleci.adoc[CircleCI overview]
 ** xref:about-circleci:benefits-of-circleci.adoc[Benefits of CircleCI]
-** xref:about-circleci:concepts.adoc[Concepts]
 ** xref:about-circleci:introduction-to-the-circleci-web-app.adoc[Intro to the CircleCI web app]
 ** xref:about-circleci:open-source.adoc[Open source acknowledgements]
 
@@ -150,14 +149,14 @@
 * Testing on CircleCI
 ** Run tests on CircleCI
 *** xref:test:test.adoc[Automated testing]
+*** xref:test:getting-started-with-circleci-testing-tool.adoc[Getting started with CircleCI's testing tool]
 *** xref:test:collect-test-data.adoc[Collecting test data]
 *** xref:insights:insights-tests.adoc[Test Insights]
+*** xref:reference:ROOT:testsuite-configuration-reference.adoc[Test suite Config Reference]
 ** Smarter Testing
-*** xref:test:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing]
 *** xref:test:set-up-test-impact-analysis.adoc[Set up Test Impact Analysis]
 *** xref:test:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting]
 *** xref:test:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests]
-*** xref:test:testsuite-configuration-reference.adoc[Test suite Config Reference]
 ** Legacy test split tooling
 *** xref:optimize:parallelism-faster-jobs.adoc[Test splitting and parallelism]
 *** xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the environment CLI to split tests]
@@ -265,6 +264,7 @@
 *** xref:security:security.adoc[How CircleCI handles security]
 *** xref:security:env-vars.adoc[Intro to environment variables]
 *** xref:security:contexts.adoc[Using contexts]
+*** xref:security:restrict-code-signing-management.adoc[Restrict code signing management]
 *** xref:security:ip-ranges.adoc[IP ranges]
 *** xref:security:site-to-site-connectivity.adoc[Site-to-site connectivity]
 *** xref:security:audit-logs.adoc[Audit logs]
@@ -376,4 +376,3 @@
 ** xref:plans-pricing:credits.adoc[Credits overview]
 ** xref:plans-pricing:user-types-and-registration.adoc[User types and registration]
 ** xref:plans-pricing:manage-budgets.adoc[Manage budgets]
-** xref:plans-pricing:plan-server.adoc[Server Plan overview]

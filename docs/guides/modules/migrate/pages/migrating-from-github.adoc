@@ -1,6 +1,9 @@
 = Migrate from GitHub Actions
-:page-platform: Cloud, Server v4+
-:page-description: An overview of how to migrate from GitHub Actions to CircleCI.
+:page-platform: Cloud
+:page-vcs: github, github-enterprise
+:page-plan: Free, Performance, Scale
+:page-audience: developer
+:page-description: Migrate from GitHub Actions to CircleCI. Compare jobs and workflows, actions and orbs, runners and executors, and configuration syntax.
 :experimental:
 
 This document provides an overview of how to migrate from GitHub Actions to CircleCI.
@@ -287,7 +290,7 @@ For more configuration examples on CircleCI, visit our xref:toolkit:examples-and
 
 Since the configuration between GitHub Actions and CircleCI is similar, migrating your jobs and workflows is straightforward. For best chances of success, we recommend migrating over items in the following order:
 
-. xref:about-circleci:concepts.adoc[Jobs, Steps, and Workflows]
+. xref:reference:ROOT:concepts.adoc[Jobs, Steps, and Workflows]
 . xref:orchestrate:workflows.adoc[More Advanced Workflow and Job Dependency Configuration]
 . xref:orbs:use:orb-intro.adoc[Actions to Orbs]. Our registry can be found https://circleci.com/developer/orbs?filterBy=all[here].
 . xref:optimize:optimizations.adoc[Optimizations Like Caching, Workspaces, and Parallelism]
