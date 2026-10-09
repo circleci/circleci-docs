@@ -16,7 +16,7 @@ The following capabilities are free and built in:
 * *xref:rerun-only-failed-tests.adoc[Rerun failed tests]*: rerun only the failed tests when you rerun a workflow from failed.
 * *xref:collect-test-data.adoc[Test uploads]*: upload your test results with the `store_test_results` step to access more test analytics, such as the *Tests* tab and Test Insights.
 
-The following paid capabilities build on top of them. Each requires xref:set-up-test-impact-analysis.adoc[test impact analysis]. You can enable each one independently once it is set up:
+The following paid capabilities build on top of them. You can enable each one independently:
 
 * *Intelligent test selection*: run only the tests impacted by your code changes, using test impact analysis.
 * *Dynamic test splitting*: evenly distribute tests across parallel execution nodes as they run.

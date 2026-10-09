@@ -352,7 +352,7 @@ A map of option fields that configure how the test suite is run.
 [#test-impact-analysis]
 === *`test-impact-analysis`*
 
-Enable test impact analysis, which is required for all paid Smarter Testing capabilities: intelligent test selection, dynamic test splitting, and auto rerun failed tests. Intelligent test selection runs only the test atoms relevant to your changes.
+Enable test impact analysis, which is required for intelligent test selection, a paid Smarter Testing capability. Intelligent test selection runs only the test atoms relevant to your changes.
 
 [.table-scroll]
 --

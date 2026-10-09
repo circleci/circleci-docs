@@ -82,7 +82,6 @@ Before enabling auto rerun failed tests, ensure you have completed the xref:gett
 
 * Configured your `.circleci/test-suites.yml` with `discover` and `run` commands.
 * Verified your tests run successfully with the `testsuite` command.
-* Set up xref:set-up-test-impact-analysis.adoc[test impact analysis], which is required for all paid Smarter Testing capabilities.
 * Correctly configured JUnit XML output in `.circleci/test-suites.yml`.
 
 TIP: You can use the xref:guides:toolkit:circleci-agent-skills.adoc[CircleCI Agent Skills] get Smarter Testing set up. Install the link:https://github.com/CircleCI-Public/skills[CircleCI Public Skills] plugin to your AI coding agent and ask your agent to get set up for Smarter Testing.

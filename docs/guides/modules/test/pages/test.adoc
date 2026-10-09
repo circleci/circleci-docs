@@ -27,7 +27,7 @@ ifdef::server[]
 endif::server[]
 
 ifndef::server[]
-The paid Smarter Testing capabilities add three features on top of `circleci testsuite`, each usable on its own. All of them require xref:set-up-test-impact-analysis.adoc[test impact analysis]:
+The paid Smarter Testing capabilities add three features on top of `circleci testsuite`, each usable on its own:
 
 * *Intelligent test selection*: skip tests that your code changes cannot have affected, based on test impact analysis of real coverage data rather than heuristics.
 * *Dynamic test splitting*: keep parallel execution nodes evenly loaded by pulling tests from a shared queue as work becomes available, instead of assigning a fixed split up front.
