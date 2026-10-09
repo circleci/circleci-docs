@@ -147,16 +147,17 @@
 *** xref:execution-runner:runner-scaling.adoc[Scaling self-hosted runner]
 
 * Testing on CircleCI
-** Run tests on CircleCI
+** Smarter Testing
 *** xref:test:test.adoc[Automated testing]
-*** xref:test:getting-started-with-circleci-testing-tool.adoc[Getting started with CircleCI's testing tool]
+*** xref:test:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing]
+**** xref:test:use-static-test-splitting.adoc[Use Static Test Splitting]
+**** xref:test:rerun-only-failed-tests.adoc[Rerun Only Failed Tests]
+**** xref:test:set-up-test-impact-analysis.adoc[Set up Test Impact Analysis]
+**** xref:test:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting]
+**** xref:test:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests]
 *** xref:test:collect-test-data.adoc[Collecting test data]
 *** xref:insights:insights-tests.adoc[Test Insights]
 *** xref:reference:ROOT:testsuite-configuration-reference.adoc[Test suite Config Reference]
-** Smarter Testing
-*** xref:test:set-up-test-impact-analysis.adoc[Set up Test Impact Analysis]
-*** xref:test:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting]
-*** xref:test:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests]
 ** Legacy test split tooling
 *** xref:optimize:parallelism-faster-jobs.adoc[Test splitting and parallelism]
 *** xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the environment CLI to split tests]

@@ -1,0 +1,37 @@
+= Rerun only failed tests
+:page-platform: Cloud
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-audience: developer
+:experimental:
+:page-description: Rerun only the tests that failed when you rerun a workflow from failed. This free, built-in Smarter Testing capability needs no extra configuration.
+
+Rerunning only failed tests is built in to `circleci testsuite run` and is free, with no extra configuration. When you rerun a workflow from failed, `circleci testsuite run` reruns only the tests that failed in the previous run, instead of your entire test suite. This shortens time-to-feedback and avoids spending credits on tests that already passed.
+
+NOTE: Rerunning only failed tests is a *free* Smarter Testing capability. It is included with every project.
+
+== Prerequisites
+
+Before rerunning only failed tests, ensure you have completed the xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] guide and have:
+
+* Configured your `.circleci/test-suites.yml` with `discover` and `run` commands.
+* Replaced your test command with `circleci testsuite run`.
+
+== Rerun a workflow from failed
+
+You can rerun a workflow from failed in any of the following ways:
+
+* *Web app*: Select btn:[Rerun workflow from failed]. See xref:orchestrate:workflows.adoc#rerunning-a-workflows-failed-jobs[Rerunning a Workflow's Failed Jobs].
+* *API*: Use the link:++https://circleci.com/docs/api/v3#tag/workflows/POST/api/v3/workflows/{id}/rerun.body.is_from_failed++[rerun workflow endpoint] with `is_from_failed` set to `true`.
+* *CLI*: Run `circleci workflow rerun <workflow-id> --from-failed`.
+
+== Rerun failed tests automatically
+
+To rerun failed tests automatically during the same run, without rerunning the workflow, use the paid Smarter Testing capability xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests].
+
+NOTE: This page covers `circleci testsuite`. If you use the legacy `circleci tests run` command, see xref:rerun-failed-tests.adoc[Rerun Failed Tests Overview].
+
+== Next steps
+
+* xref:use-static-test-splitting.adoc[Use Static Test Splitting] to split your tests across parallel nodes.
+* xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] to automatically retry flaky tests.

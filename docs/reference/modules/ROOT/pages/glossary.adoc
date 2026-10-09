@@ -170,6 +170,10 @@ A packaged system that includes the instructions for creating a running <<contai
 
 CircleCI's dashboards that report time-series and aggregated data on credit usage, success rates, duration, and test performance across your projects, workflows, jobs, and tests. See the xref:guides:insights:insights.adoc[Insights] page and the xref:reference:ROOT:insights-glossary.adoc[Insights Metrics Glossary] for metric definitions such as throughput, P95 duration, and mean time to recovery.
 
+== Intelligent test selection
+
+A paid Smarter Testing capability that runs only the tests affected by a code change. Intelligent test selection uses <<test-impact-analysis,test impact analysis>> to skip tests covering unchanged files, to speed up CI. See the xref:guides:test:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis] page.
+
 == IP ranges
 
 A feature that routes a job's traffic through a set of well-defined CircleCI IP addresses, so jobs can reach systems protected by IP allow lists. See the xref:guides:security:ip-ranges.adoc[IP Ranges] page.
@@ -339,10 +343,9 @@ A single executable action within a <<job>>, such as a `run`, `checkout`, `save_
 
 A <<workflow,workflow>> marked with `setup: true` that runs first in a <<dynamic-configuration,dynamic configuration>>. A setup workflow can compute pipeline parameters and select which configuration to continue with, enabling conditional execution of the remaining workflows. See the xref:guides:orchestrate:dynamic-config.adoc[Dynamic Configuration] page.
 
-[badge="Beta"]
 == Test impact analysis
 
-A feature that runs only the tests affected by a code change. Test impact analysis maps which tests exercise which source files and skips tests covering unchanged files, to speed up CI. See the xref:guides:test:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis] page.
+The analysis that maps which tests exercise which source files, using code coverage data. Test impact analysis is required for <<intelligent-test-selection,intelligent test selection>>. See the xref:guides:test:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis] page.
 
 == Test splitting
 

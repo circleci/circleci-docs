@@ -14,6 +14,10 @@ When you run tests in CircleCI, there are two ways to store your test results. Y
 
 When you save test data using the `store_test_results` step, CircleCI collects data from XML files and uses it to provide insights into your job. This page describes how to configure CircleCI to output test data as XML for some common test runners and store reports with the `store_test_results` step.
 
+ifndef::server[]
+Uploading test results with the `store_test_results` step is a *free* Smarter Testing capability, called test uploads.
+
+endif::server[]
 Using the *`store_test_results` step* gives you access to:
 
 * The *Tests tab* in the CircleCI web app.

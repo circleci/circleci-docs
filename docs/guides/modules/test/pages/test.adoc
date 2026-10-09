@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: An overview of setting up testing automation, integration, and analytics with CircleCI's testing tool.
+:page-description: An overview of setting up testing automation, integration, and analytics with Smarter Testing.
 :experimental:
 
 [#introduction]
@@ -20,20 +20,20 @@ When you integrate your tests into your CircleCI pipelines, you deliver software
 endif::server[]
 
 ifndef::server[]
-<<basics,Basics>> below covers running your test suite using your native test library and the `run` step, which works with any test runner. On Cloud, `circleci testsuite` is CircleCI's preferred way to run that test command. Static test splitting and rerunning failed tests are built in and free. `circleci testsuite` also includes commands such as `list-tests` for introspecting which tests will run.
+<<basics,Basics>> below covers running your test suite using your native test library and the `run` step, which works with any test runner. On Cloud, `circleci testsuite` is CircleCI's preferred way to run that test command. `circleci testsuite` is the foundation of Smarter Testing, with free and paid capabilities. Static test splitting, rerunning failed tests, and test uploads are included for free. `circleci testsuite` also includes commands such as `list-tests` for introspecting which tests will run.
 endif::server[]
 ifdef::server[]
 <<basics,Basics>> below covers running your test suite using your native test library and the `run` step, which works with any test runner.
 endif::server[]
 
 ifndef::server[]
-Smarter Testing adds three features on top of `circleci testsuite`, each usable on its own:
+The paid Smarter Testing capabilities add three features on top of `circleci testsuite`, each usable on its own:
 
-* *Test impact analysis*: skip tests that your code changes cannot have affected, based on real coverage data rather than heuristics.
+* *Intelligent test selection*: skip tests that your code changes cannot have affected, based on test impact analysis of real coverage data rather than heuristics.
 * *Dynamic test splitting*: keep parallel execution nodes evenly loaded by pulling tests from a shared queue as work becomes available, instead of assigning a fixed split up front.
 * *Auto rerun failed tests*: automatically retry failed tests to absorb flaky failures without manual re-runs.
 
-On Cloud, see xref:getting-started-with-circleci-testing-tool.adoc[Getting Started With CircleCI's Testing Tool]. On CircleCI Server, see xref:optimize:parallelism-faster-jobs.adoc[Test Splitting and Parallelism].
+On Cloud, see xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing]. On CircleCI Server, see xref:optimize:parallelism-faster-jobs.adoc[Test Splitting and Parallelism].
 endif::server[]
 ifdef::server[]
 To split your tests across parallel nodes, see xref:optimize:parallelism-faster-jobs.adoc[Test Splitting and Parallelism].
@@ -77,7 +77,7 @@ For a more in-depth look at workflows functionality, visit the xref:orchestrate:
 If you need to restrict the connections allowed in your test jobs, consider enabling xref:security:ip-ranges.adoc[IP Ranges]. This enables CircleCI jobs to go through a set of well-defined IP address ranges.
 
 ifndef::server[]
-This gets your tests running with your native test library, directly through the `run` step. On Cloud, `circleci testsuite` builds on this same `run` step and adds static test splitting and rerun failed tests. The Smarter Testing features add test impact analysis, dynamic test splitting, and auto rerun failed tests. See xref:getting-started-with-circleci-testing-tool.adoc[Getting Started With CircleCI's Testing Tool].
+This gets your tests running with your native test library, directly through the `run` step. On Cloud, `circleci testsuite` builds on this same `run` step and includes static test splitting and rerun failed tests for free. The paid Smarter Testing capabilities add intelligent test selection, dynamic test splitting, and auto rerun failed tests. See xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing].
 endif::server[]
 ifdef::server[]
 This gets your tests running with your native test library, directly through the `run` step.
@@ -125,7 +125,7 @@ For more detailed examples of storing test data with different testing framework
 == Timing tab
 
 ifndef::server[]
-When a job runs with xref:getting-started-with-circleci-testing-tool.adoc#test-splitting[Parallelism and Test Splitting] enabled, the *Timing* tab in the *Job Details* UI shows the timing of each parallel run.
+When a job runs with xref:getting-started-with-smarter-testing.adoc#test-splitting[Parallelism and Test Splitting] enabled, the *Timing* tab in the *Job Details* UI shows the timing of each parallel run.
 endif::server[]
 ifdef::server[]
 When a job runs with xref:optimize:parallelism-faster-jobs.adoc[Parallelism and Test Splitting] enabled, the *Timing* tab in the *Job Details* UI shows the timing of each parallel run.
@@ -147,11 +147,36 @@ When test results are stored, test analytics also become available on the *Tests
 More information is available on the xref:insights:insights-tests.adoc[Test Insights] page.
 endif::server[]
 
+[#tests-command]
+== Run tests with the `circleci tests` commands
+
+NOTE: `circleci tests glob` and `circleci tests split` are the test tooling for CircleCI Server projects. `circleci tests run` is *not* supported on CircleCI Server, even though it is part of the same command family; see <<tests-command-rerun,Re-run failed tests only>> below. On Cloud, `circleci testsuite` is the preferred option. See xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing].
+
+The `circleci tests` commands (`glob`, `run`, and `split`) discover, run, split, and re-run your tests. You wire them up as individual steps in your job. They are provided by the environment CLI, which is injected into every job automatically, so there is nothing to install.
+
+[#tests-command-splitting]
+=== Test splitting and parallelism (`circleci tests split`)
+
+Splitting your test suite across parallel execution nodes reduces the time it takes to run your tests. Set `parallelism` on your job, then use `circleci tests split` to divide your test files across those nodes by name, by file size, or by historical timing data.
+
+See xref:optimize:parallelism-faster-jobs.adoc[Test Splitting and Parallelism] and xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the Environment CLI to Split Tests] for setup details.
+
+[#tests-command-rerun]
+=== Re-run failed tests only (`circleci tests run`)
+
+NOTE: `circleci tests run` is available on CircleCI Cloud only, for existing configurations. It is *not* supported on CircleCI Server. If you are on CircleCI Server, use `circleci tests split` (see <<tests-command-splitting,Test splitting and parallelism>> above) instead.
+
+You can configure jobs to re-run failed tests only. Using this option, when a transient test failure arises, only a subset of tests are re-run instead of the entire test suite. Also, only failed tests from the same commit are re-run, not new ones.
+
+Historically, when your testing job in a workflow has flaky tests, the only option to get to a successful workflow was to re-run your workflow from failed. This type of re-run executes all tests from your testing job, including tests that passed, which prolongs time-to-feedback and consumes credits unnecessarily.
+
+More information on how to use this option is available on the xref:rerun-failed-tests.adoc[Rerun Failed Tests Overview] page.
+
 [#next-steps]
 == Next steps
 
 ifndef::server[]
-* Follow xref:getting-started-with-circleci-testing-tool.adoc[Getting Started With CircleCI's Testing Tool] end to end.
+* Get started with xref:getting-started-with-smarter-testing.adoc[Smarter Testing] end to end.
 * Integrate tests for xref:testing-macos.adoc[macOS] or xref:testing-ios.adoc[iOS] apps.
 endif::server[]
 * Read our xref:browser-testing.adoc[Browser Testing] guide to common methods for running and debugging browser tests in CircleCI.
