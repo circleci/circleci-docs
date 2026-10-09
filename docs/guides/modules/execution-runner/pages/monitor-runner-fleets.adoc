@@ -1,0 +1,172 @@
+= Monitor self-hosted runner fleets
+:page-platform: Cloud
+:page-badge: Preview
+:page-audience: developer
+:page-description: View the state of your self-hosted runner fleets with the CircleCI CLI or API v3, including agent counts, running tasks, and queued tasks.
+:experimental:
+
+[#introduction]
+== Introduction
+
+A fleet is the set of runner agents attached to one resource class. Use fleet data to see the number of connected agents, whether they are busy, and the number of tasks waiting for an agent. This helps you decide when to add capacity or investigate agents that have gone offline.
+
+You can view fleets with the CircleCI CLI or with the API v3 fleet endpoints. A fleet shares the ID of its resource class, so you can use either the `namespace/name` of a resource class or its ID to identify a fleet.
+
+[NOTE]
+====
+Fleet visibility is in preview. The API v3 fleet endpoints are experimental, and the CLI commands that use them inherit that status. Field names, response shapes, and pagination may change without notice.
+====
+
+[#what-you-can-see]
+== What you can see about a fleet
+
+For every fleet, you can see the following information:
+
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+| Data
+| Description
+
+| Active agents
+| The number of agents that are currently running a task.
+
+| Idle agents
+| The number of agents that have connected and are waiting for a task.
+
+| Disconnected agents
+| The number of agents that have stopped reporting to CircleCI.
+
+| Total agents
+| The total number of agents in the fleet.
+
+| Last task claimed
+| The time an agent in the fleet last claimed a task. This is `never` if no agent has claimed a task.
+|===
+--
+
+When you view a single fleet, you also see the following information:
+
+* The number of running tasks.
+* The number of queued tasks, which are tasks that are waiting for an agent.
+* The agents attached to the fleet, with their names and IDs.
+
+The total agent count includes agents seen in the last 7 days. The active, idle, and disconnected counts leave out agents that have been silent for 10 minutes or more. A fleet can show a total of four agents with all three state counts at zero.
+
+[#view-fleets-with-the-cli]
+== View fleets with the CLI
+
+The `circleci runner fleet` commands wrap the API v3 fleet endpoints. Refer to xref:toolkit:circleci-cli.adoc[The CircleCI CLI] for how to install and authenticate the CLI.
+
+[#list-fleets]
+=== List fleets
+
+Use `circleci runner fleet list` to list fleets. Filter the list by one of the following. You can use only one filter at a time.
+
+* `--org`: An organization slug, such as `gh/my-org`, or an organization ID. If you do not set a filter, the CLI uses the organization from your git remote.
+* `--namespace`: A resource class namespace.
+* `--resource-class`: A single resource class, as `namespace/name` or an ID.
+
+The command has the alias `circleci runner fleet ls`.
+
+[source,console]
+----
+$ circleci runner fleet list --namespace <my-namespace>
+----
+
+The output is a table with one row for each fleet.
+
+[source,console]
+----
+Resource Class      | Active | Idle | Disconnected | Agents | Last Task Claimed
+my-org/linux-runner | 2      | 1    | 1            | 4      | 2026-04-18T12:00:00Z
+my-org/arm-runner   | 0      | 0    | 0            | 0      | never
+----
+
+[#get-a-fleet]
+=== Get a fleet
+
+Use `circleci runner fleet get <resource-class>` to view one fleet. Pass the resource class as `namespace/name` or as its ID.
+
+[source,console]
+----
+$ circleci runner fleet get <my-namespace>/<my-resource-class>
+----
+
+Along with the data returned by `list`, this command shows running and queued task counts and the agents attached to the fleet.
+
+[source,console]
+----
+Resource Class: my-org/linux-runner
+ID: 11111111-1111-4111-8111-111111111111
+Active: 2
+Idle: 1
+Disconnected: 1
+Agents: 4
+Running Tasks: 2
+Queued Tasks: 5
+Last Task Claimed: 2026-04-18T12:00:00Z
+
+Agent    | ID
+runner-1 | aaaaaaaa-1111-4111-8111-aaaaaaaaaaaa
+runner-2 | aaaaaaaa-2222-4222-8222-aaaaaaaaaaaa
+runner-3 | aaaaaaaa-3333-4333-8333-aaaaaaaaaaaa
+runner-4 | aaaaaaaa-4444-4444-8444-aaaaaaaaaaaa
+----
+
+If a fleet has more agents than the response includes, the command displays a message. Run `circleci runner instance list` to see every agent for the resource class.
+
+[#script-with-json-and-jq]
+=== Script with JSON output
+
+Both commands support the `--json` and `--jq` flags, so you can use them in scripts. Run `circleci runner fleet list --help` or `circleci runner fleet get --help` to see the JSON fields for each command.
+
+Find the resource classes that have no connected agents.
+
+[source,console]
+----
+$ circleci runner fleet list --json --jq '.[] | select(.agent_count == 0) | .resource_class'
+----
+
+Check the number of tasks waiting for an agent in one resource class.
+
+[source,console]
+----
+$ circleci runner fleet get <my-namespace>/<my-resource-class> --json --jq '.queued_tasks'
+----
+
+Find fleets that have no idle agents.
+
+[source,console]
+----
+$ circleci runner fleet list --namespace <my-namespace> --json --jq '.[] | select(.idle_agents == 0) | .resource_class'
+----
+
+[#view-fleets-with-the-api]
+== View fleets with the API
+
+The following API v3 endpoints return fleet data. They are experimental.
+
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+| Endpoint
+| Description
+
+| `GET /api/v3/runner/fleets`
+| Lists fleets. Filter by one, and only one, of organization, namespace, or resource class. Each fleet includes agent counts by state and the time a task was last claimed.
+
+| `GET /api/v3/runner/fleets/:id`
+| Returns one fleet. The `:id` is the ID of the resource class. The response also includes running and queued task counts and the attached agents.
+|===
+--
+
+Only the single-fleet endpoint returns task counts. To get task counts for every fleet, request each fleet individually.
+
+[#next-steps]
+== Next steps
+
+* Use fleet data to build a scaling solution. Refer to xref:execution-runner:runner-scaling.adoc[Scaling Self-hosted Runners].
+* Learn how resource classes and agents relate. Refer to xref:execution-runner:runner-concepts.adoc[Self-hosted Runner Concepts].

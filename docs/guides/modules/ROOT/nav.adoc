@@ -145,6 +145,7 @@
 *** xref:execution-runner:runner-faqs.adoc[Self-hosted runner FAQ]
 *** xref:execution-runner:troubleshoot-self-hosted-runner.adoc[Troubleshoot self-hosted runner]
 *** xref:execution-runner:runner-scaling.adoc[Scaling self-hosted runner]
+*** xref:execution-runner:monitor-runner-fleets.adoc[Monitor self-hosted runner fleets]
 
 * Testing on CircleCI
 ** Run tests on CircleCI
