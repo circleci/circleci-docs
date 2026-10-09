@@ -345,7 +345,7 @@ A <<workflow,workflow>> marked with `setup: true` that runs first in a <<dynamic
 
 == Test impact analysis
 
-The analysis that maps which tests exercise which source files, using code coverage data. Test impact analysis is required for <<intelligent-test-selection,intelligent test selection>>. See the xref:guides:test:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis] page.
+The analysis that maps which tests exercise which source files, using code coverage data. Test impact analysis is required for all paid Smarter Testing capabilities, including <<intelligent-test-selection,intelligent test selection>>. See the xref:guides:test:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis] page.
 
 == Test splitting
 
