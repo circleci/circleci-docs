@@ -12,7 +12,15 @@ The link:https://circleci-public.github.io/circleci-cli/[CLI] enables you to run
 [#prerequisites]
 == Prerequisites
 
-You will need to have link:https://www.docker.com/products/docker-desktop[Docker] installed on your system, as well as the most recent version of the CLI. You will also need to have a project with a valid `.circleci/config.yml` file in it.
+You need link:https://www.docker.com/products/docker-desktop[Docker] installed on your system, and the legacy CLI (v0.1.x). You also need a project with a valid `.circleci/config.yml` file in it.
+
+[NOTE]
+====
+CLI v1 removed the `circleci local execute` command, so you need the legacy CLI to follow this page.
+ifndef::server[]
+For more information, see the xref:toolkit:cli-migration-guide.adoc#local-job-execution[CLI Command Migration Guide].
+endif::server[]
+====
 
 [#running-a-job]
 == Running a job
