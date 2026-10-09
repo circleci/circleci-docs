@@ -14,6 +14,7 @@ The following capabilities are free and built in:
 
 * *xref:use-static-test-splitting.adoc[Static test splitting]*: split tests across parallel execution nodes using timing data from previous runs.
 * *xref:rerun-only-failed-tests.adoc[Rerun failed tests]*: rerun only the failed tests when you rerun a workflow from failed.
+* *xref:collect-test-data.adoc[Test uploads]*: upload your test results with the `store_test_results` step to access more test analytics, such as the *Tests* tab and Test Insights.
 
 The following paid capabilities build on top of them. You can enable each one independently:
 

@@ -20,7 +20,7 @@ When you integrate your tests into your CircleCI pipelines, you deliver software
 endif::server[]
 
 ifndef::server[]
-<<basics,Basics>> below covers running your test suite using your native test library and the `run` step, which works with any test runner. On Cloud, `circleci testsuite` is CircleCI's preferred way to run that test command. `circleci testsuite` is the foundation of Smarter Testing, with free and paid capabilities. Static test splitting and rerunning failed tests are included for free. `circleci testsuite` also includes commands such as `list-tests` for introspecting which tests will run.
+<<basics,Basics>> below covers running your test suite using your native test library and the `run` step, which works with any test runner. On Cloud, `circleci testsuite` is CircleCI's preferred way to run that test command. `circleci testsuite` is the foundation of Smarter Testing, with free and paid capabilities. Static test splitting, rerunning failed tests, and test uploads are included for free. `circleci testsuite` also includes commands such as `list-tests` for introspecting which tests will run.
 endif::server[]
 ifdef::server[]
 <<basics,Basics>> below covers running your test suite using your native test library and the `run` step, which works with any test runner.
