@@ -73,8 +73,6 @@ include::ROOT:partial$execution-resources/resource-class-view.adoc[]
 [badge="Beta"]
 === Gen2
 
-NOTE: **Arm gen2 for the machine executor is currently in beta.** Performance and pricing are tentative and may change when this feature becomes generally available.
-
 Resource classes running on gen2 infrastructure offer significant performance and cost improvements over their gen1 equivalents.
 
 [#arm-vm-performance-improvements]

@@ -127,6 +127,7 @@ NOTE: **Arm gen2 is currently in beta.** Performance and pricing are tentative a
 |===
 --
 
+[badge="Beta"]
 ==== Arm gen2 architecture
 
 [.table-scroll]

@@ -136,8 +136,6 @@ Actual performance gains depend on your specific workloads.
 
 x86 gen2 resources have a higher cost in credits per minute than their gen1 equivalents. See our link:https://circleci.com/pricing/price-list/[Pricing Page] for details.
 
-NOTE: **Arm gen2 for Docker is currently in beta.** The performance figure above comes from benchmarks measured during the beta period, and both performance and pricing are tentative and may change when Arm gen2 becomes generally available.
-
 [#using-docker-gen2]
 === Using gen2
 
