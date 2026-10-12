@@ -174,7 +174,7 @@ my-cache-{{ checksum "package-lock.json" }}
 | Template | Description | Use for caching?
 
 | `{{ checksum "filename" }}`
-| Base64-encoded SHA256 hash of the file contents. Changes when the file changes. Commit this file to your repository.
+| Base64-encoded SHA256 hash of the file contents. Changes when the file changes. Commit this file to your repository. Reference it as an absolute path, or as a path relative to the current working directory.
 | ✓ Primary choice. Use your dependency manifest or lock file.
 
 | `{{ .Branch }}`
