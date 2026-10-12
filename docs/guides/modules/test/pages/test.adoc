@@ -125,7 +125,7 @@ For more detailed examples of storing test data with different testing framework
 == Timing tab
 
 ifndef::server[]
-When a job runs with xref:getting-started-with-smarter-testing.adoc#test-splitting[Parallelism and Test Splitting] enabled, the *Timing* tab in the *Job Details* UI shows the timing of each parallel run.
+When a job runs with xref:use-static-test-splitting.adoc[Parallelism and Test Splitting] enabled, the *Timing* tab in the *Job Details* UI shows the timing of each parallel run.
 endif::server[]
 ifdef::server[]
 When a job runs with xref:optimize:parallelism-faster-jobs.adoc[Parallelism and Test Splitting] enabled, the *Timing* tab in the *Job Details* UI shows the timing of each parallel run.

@@ -1,5 +1,5 @@
 = Getting started with Smarter Testing
-:page-description: Install and configure Smarter Testing: free static test splitting, rerun failed tests, and test uploads, plus capabilities with a credit charge.
+:page-description: Set up circleci testsuite for Smarter Testing: configure test-suites.yml, validate it with the doctor command, and run your tests locally and in CI.
 :page-platform: Cloud
 :page-vcs: all
 :page-plan: Free, Performance, Scale
@@ -8,23 +8,9 @@
 :page-show-readtime: true
 :tabs-sync-option:
 
-Smarter Testing reduces test execution time while maintaining test confidence. It is built on `circleci testsuite`, which discovers and runs your tests, and includes free capabilities plus capabilities with a credit charge above your plan's allowance.
+This guide sets up `circleci testsuite`, the foundation that every Smarter Testing capability builds on. For an introduction to Smarter Testing, including which capabilities are free and which have a credit charge, see the xref:smarter-testing-overview.adoc[Smarter Testing Overview].
 
-The following capabilities are free and built in:
-
-* *xref:use-static-test-splitting.adoc[Static Test Splitting]*: split tests across parallel execution nodes using timing data from previous runs.
-* *xref:rerun-only-failed-tests.adoc[Rerun Only Failed Tests]*: rerun only the failed tests when you rerun a workflow from failed.
-* *xref:collect-test-data.adoc[Test Uploads]*: upload your test results with the `store_test_results` step to access more test analytics, such as the *Tests* tab and Test Insights.
-
-The following capabilities build on top of them and have a credit charge above your plan's allowance. You can enable each one independently:
-
-* *Test impact analysis*: learn which tests are impacted by which source files, then run only the tests impacted by your code changes.
-* *Dynamic test splitting*: evenly distribute tests across parallel execution nodes as they run.
-* *Auto rerun failed tests*: automatically retry failed tests during the same run.
-
-include::ROOT:partial$notes/smarter-testing-credit-charge.adoc[]
-
-This guide walks you through the foundational setup that all Smarter Testing capabilities build on:
+This guide walks you through the following steps:
 
 . Configure a `.circleci/test-suites.yml` file to discover and run your tests.
 . Validate and run your tests using the `testsuite` command.
@@ -138,24 +124,20 @@ After your pipeline runs, verify the test job behaves as expected before merging
 . Check the *Tests* tab and confirm the number of test results matches what you see when running tests without the `testsuite` command. A difference in test results could indicate a misconfiguration in your `discover` command.
 . Compare the job duration to a recent run without the `testsuite` command. The runtime is expected to be similar. A significant difference may indicate a misconfiguration in your `test-suites.yml`.
 
-[#rerun-failed-tests]
-== Rerun failed tests
+[#free-capabilities]
+== Free capabilities now available
 
-Rerunning only failed tests is built in to `circleci testsuite run` and is free, with no extra configuration. See xref:rerun-only-failed-tests.adoc[Rerun Only Failed Tests].
+Now that your tests run with `circleci testsuite run`, the following free capabilities work with no extra configuration in `test-suites.yml`:
 
-[#test-splitting]
-== Test splitting
-
-Static test splitting is built in to `circleci testsuite run` and is free. It splits your tests across parallel nodes when `parallelism` is set on your job. See xref:use-static-test-splitting.adoc[Use Static Test Splitting].
+* *Rerun only failed tests*: when you rerun a workflow from failed, only the failed tests rerun. See xref:rerun-only-failed-tests.adoc[Rerun Only Failed Tests].
+* *Static test splitting*: when you set `parallelism` on your job, your tests split across the parallel nodes. See xref:use-static-test-splitting.adoc[Use Static Test Splitting].
 
 == Next steps
 
-All of your tests now run locally and in CI using the `testsuite` command. Next, use the free capabilities, and enable the capabilities with a credit charge that fit your needs. Each can be used independently:
+All of your tests now run locally and in CI using the `testsuite` command. Next, enable the capabilities with a credit charge that fit your needs. Each can be used independently:
 
-* xref:use-static-test-splitting.adoc[Use Static Test Splitting] to split tests across parallel nodes.
-* xref:rerun-only-failed-tests.adoc[Rerun Only Failed Tests] to rerun only failed tests when you rerun a workflow from failed.
 * xref:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis] to run only the tests impacted by your code changes.
 * xref:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting] to evenly split tests across parallel nodes.
 * xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] to automatically retry flaky tests.
 
-For the full set of configuration keys available in `test-suites.yml`, refer to the xref:reference:ROOT:testsuite-configuration-reference.adoc[Test Suite Config Reference].
+For the full set of configuration keys available in `test-suites.yml`, refer to the xref:reference:ROOT:testsuite-configuration-reference.adoc[Testsuite Configuration Reference].
