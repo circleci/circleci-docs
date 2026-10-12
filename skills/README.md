@@ -33,7 +33,7 @@ Discovers, previews, and inserts reusable AsciiDoc partials and shared code exam
 ### kapa-docs-review
 Reviews recent conversations with the CircleCI docs bot (Kapa) to find content gaps, wrong answers, and questions the bot could not answer. Opens docs fix PRs where the correct answer can be verified, and reports feature requests, support article issues, and anything unclear. Needs the Kapa MCP connected.
 
-**Output:** Saves a markdown report to `~/kapa-reviews/kapa-review-[since]-[until].md`, outside the repository, because it contains customer details. Also creates a redacted weekly ticket in the "Kapa review" project of the DOCS Linear team, so it needs the Linear MCP connected.
+**Output:** A local report that stays outside the repository, because it contains customer details, and a redacted weekly Linear ticket. The Linear MCP must be connected. `SKILL.md` says where each one goes.
 
 ## Installation (Claude Code)
 
