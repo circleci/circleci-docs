@@ -387,6 +387,10 @@ Dividing a test suite across multiple parallel execution environments, by name, 
 
 include::guides:ROOT:partial$glossary/smarter-testing.adoc[tag=test-suite]
 
+== Test uploads
+
+include::guides:ROOT:partial$glossary/smarter-testing.adoc[tag=test-uploads]
+
 == Testsuite command
 
 include::guides:ROOT:partial$glossary/smarter-testing.adoc[tag=testsuite-command]
