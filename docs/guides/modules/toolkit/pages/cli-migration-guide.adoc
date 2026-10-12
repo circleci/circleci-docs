@@ -5,6 +5,7 @@
 :page-audience: developer
 :page-description: A mapping of legacy CircleCI CLI commands to their equivalents in CircleCI CLI v1.
 :experimental:
+:page-aliases: execution-managed:run-a-job-in-a-container.adoc
 
 This guide covers CircleCI CLI commands that changed between the legacy CLI (v0.1.x) and link:https://cli.circleci.com/[CLI v1], plus capabilities that are new in v1. Commands not listed here are unchanged. Use it as a reference when updating scripts or workflows that use the legacy CLI.
 
