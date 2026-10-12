@@ -28,7 +28,9 @@ jobs:
             - node_modules
       - run:
           name: Run AF Docs Check
-          command: npx vitest run agent-docs.test.ts --reporter=verbose
+          command: npx vitest run agent-docs.test.ts --reporter=verbose --reporter=junit --outputFile=test-results/results.xml
+      - store_test_results:
+          path: test-results
 
 workflows:
   agent-docs-workflow:
