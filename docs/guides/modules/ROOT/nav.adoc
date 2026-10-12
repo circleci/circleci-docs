@@ -149,6 +149,7 @@
 * Testing on CircleCI
 ** Smarter Testing
 *** xref:test:test.adoc[Automated testing]
+*** xref:test:smarter-testing-overview.adoc[Smarter Testing overview]
 *** xref:test:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing]
 **** xref:test:use-static-test-splitting.adoc[Use Static Test Splitting]
 **** xref:test:rerun-only-failed-tests.adoc[Rerun Only Failed Tests]
