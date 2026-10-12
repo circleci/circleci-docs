@@ -162,7 +162,7 @@
 *** xref:optimize:parallelism-faster-jobs.adoc[Test splitting and parallelism]
 *** xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the environment CLI to split tests]
 *** xref:test:troubleshoot-test-splitting.adoc[Troubleshoot test splitting]
-*** xref:test:rerun-failed-tests.adoc[Re-run failed tests overview]
+*** xref:test:rerun-failed-tests.adoc[Rerun failed tests with the tests run command]
 ** Manage and optimize tests
 *** xref:test:fix-flaky-tests.adoc[Fix flaky tests]
 *** xref:test:automate-llm-evaluation-testing-with-the-circleci-evals-orb.adoc[Automate LLM evaluation testing with the CircleCI Evals orb]

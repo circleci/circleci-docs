@@ -170,7 +170,7 @@ You can configure jobs to re-run failed tests only. Using this option, when a tr
 
 Historically, when your testing job in a workflow has flaky tests, the only option to get to a successful workflow was to re-run your workflow from failed. This type of re-run executes all tests from your testing job, including tests that passed, which prolongs time-to-feedback and consumes credits unnecessarily.
 
-More information on how to use this option is available on the xref:rerun-failed-tests.adoc[Rerun Failed Tests Overview] page.
+More information on how to use this option is available on the xref:rerun-failed-tests.adoc[Rerun Failed Tests With the Tests Run Command] page.
 
 [#next-steps]
 == Next steps

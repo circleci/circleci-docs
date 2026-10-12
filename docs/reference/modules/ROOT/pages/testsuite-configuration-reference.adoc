@@ -365,7 +365,7 @@ Enable test impact analysis, which has a credit charge above your plan's allowan
 | `test-impact-analysis`
 | N
 | Boolean
-| Set `true` to enable test impact analysis and intelligent test selection.
+| Set `true` to enable test impact analysis, including analysis and test selection.
 |===
 --
 

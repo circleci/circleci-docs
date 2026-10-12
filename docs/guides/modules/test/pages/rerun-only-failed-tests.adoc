@@ -29,7 +29,7 @@ You can rerun a workflow from failed in any of the following ways:
 
 To rerun failed tests automatically during the same run, without rerunning the workflow, use xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests], which has a credit charge above your plan's allowance.
 
-NOTE: This page covers `circleci testsuite`. If you use the legacy `circleci tests run` command, see xref:rerun-failed-tests.adoc[Rerun Failed Tests Overview].
+NOTE: This page covers `circleci testsuite`. If you use the legacy `circleci tests run` command, see xref:rerun-failed-tests.adoc[Rerun Failed Tests With the Tests Run Command].
 
 == Next steps
 

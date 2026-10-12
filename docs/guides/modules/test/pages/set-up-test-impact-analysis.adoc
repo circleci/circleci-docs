@@ -33,18 +33,18 @@ When tests call code running in separate containers or services, collecting and 
 Test impact analysis is split into two phases:
 
 - *Analysis* runs on your default branch with coverage instrumentation, producing *impact data*. Impact data describes the relationship between files and tests.
-- *Selection* runs on feature branches, using the impact data to choose which tests to run based on what changed.
+- *Test selection* runs on feature branches, using the impact data to choose which tests to run based on what changed.
 
 [TIP]
 ====
-Analysis and selection can be configured to run on any change through CLI flags.
+Analysis and test selection can be configured to run on any change through CLI flags.
 ====
 
 === Analysis on default branches
 
 The analysis phase is run on your default branch (or the base branch of a pull request). It runs tests with coverage instrumentation and updates the impact data with the latest test-to-file relationships.
 
-Keeping impact data fresh on the default branch allows the selection phase to select fewer tests without other unrelated changes interfering.
+Keeping impact data fresh on the default branch allows the test selection phase to select fewer tests without other unrelated changes interfering.
 
 For each file found during coverage analysis, a fast non-cryptographic hash of its contents is stored in the impact data. The data also tracks which files impact the tests being selected.
 
@@ -83,10 +83,10 @@ For each file found during coverage analysis, a fast non-cryptographic hash of i
 
 [NOTE]
 ====
-The analysis phase typically runs slower than a normal test run because it executes tests with coverage instrumentation. However, this cost pays for itself by enabling the selection phase to skip unaffected tests on subsequent runs.
+The analysis phase typically runs slower than a normal test run because it executes tests with coverage instrumentation. However, this cost pays for itself by enabling the test selection phase to skip unaffected tests on subsequent runs.
 ====
 
-=== Selection on feature branches
+=== Test selection on feature branches
 
 By default, all tests run on default branches. Test selection runs only affected tests on feature branches, using the impact data produced by analysis on the default branch.
 

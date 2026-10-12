@@ -146,5 +146,5 @@ Verify auto rerun failed tests is working as expected in CI by checking the *Tes
 
 == Next steps
 
-* xref:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis] to enable intelligent test selection and run only impacted tests based on code changes.
+* xref:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis] to run only the tests impacted by your code changes.
 * xref:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting] to evenly split tests across parallel nodes.
