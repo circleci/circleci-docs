@@ -14,7 +14,7 @@ NOTE: Static test splitting is a *free* Smarter Testing capability. It is includ
 
 When `parallelism` is set on your job, `circleci testsuite run` splits your tests across the parallel nodes up front, using the durations reported in your JUnit results from previous runs.
 
-Because the split is assigned before the tests run, it cannot account for fixed costs such as runner startup and per-node setup. Nodes can still finish at noticeably different times. To keep nodes evenly loaded as they run, use the paid Smarter Testing capability xref:use-dynamic-test-splitting.adoc[Dynamic Test Splitting].
+Because the split is assigned before the tests run, it cannot account for fixed costs such as runner startup and per-node setup. Nodes can still finish at noticeably different times. To keep nodes evenly loaded as they run, use xref:use-dynamic-test-splitting.adoc[Dynamic Test Splitting], which has a credit charge above your plan's allowance.
 
 == Prerequisites
 

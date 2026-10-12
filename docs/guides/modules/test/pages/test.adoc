@@ -20,16 +20,16 @@ When you integrate your tests into your CircleCI pipelines, you deliver software
 endif::server[]
 
 ifndef::server[]
-<<basics,Basics>> below covers running your test suite using your native test library and the `run` step, which works with any test runner. On Cloud, `circleci testsuite` is CircleCI's preferred way to run that test command. `circleci testsuite` is the foundation of Smarter Testing, with free and paid capabilities. Static test splitting, rerunning failed tests, and test uploads are included for free. `circleci testsuite` also includes commands such as `list-tests` for introspecting which tests will run.
+<<basics,Basics>> below covers running your test suite using your native test library and the `run` step, which works with any test runner. On Cloud, `circleci testsuite` is CircleCI's preferred way to run that test command. `circleci testsuite` is the foundation of Smarter Testing. Static test splitting, rerunning failed tests, and test uploads are included for free. `circleci testsuite` also includes commands such as `list-tests` for introspecting which tests will run.
 endif::server[]
 ifdef::server[]
 <<basics,Basics>> below covers running your test suite using your native test library and the `run` step, which works with any test runner.
 endif::server[]
 
 ifndef::server[]
-The paid Smarter Testing capabilities add three features on top of `circleci testsuite`, each usable on its own:
+Three more Smarter Testing capabilities build on `circleci testsuite`, each usable on its own. These have a credit charge above your plan's allowance:
 
-* *Intelligent test selection*: skip tests that your code changes cannot have affected, based on test impact analysis of real coverage data rather than heuristics.
+* *Test impact analysis*: skip tests that your code changes cannot have affected, based on real coverage data rather than heuristics.
 * *Dynamic test splitting*: keep parallel execution nodes evenly loaded by pulling tests from a shared queue as work becomes available, instead of assigning a fixed split up front.
 * *Auto rerun failed tests*: automatically retry failed tests to absorb flaky failures without manual re-runs.
 
@@ -77,7 +77,7 @@ For a more in-depth look at workflows functionality, visit the xref:orchestrate:
 If you need to restrict the connections allowed in your test jobs, consider enabling xref:security:ip-ranges.adoc[IP Ranges]. This enables CircleCI jobs to go through a set of well-defined IP address ranges.
 
 ifndef::server[]
-This gets your tests running with your native test library, directly through the `run` step. On Cloud, `circleci testsuite` builds on this same `run` step and includes static test splitting and rerun failed tests for free. The paid Smarter Testing capabilities add intelligent test selection, dynamic test splitting, and auto rerun failed tests. See xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing].
+This gets your tests running with your native test library, directly through the `run` step. On Cloud, `circleci testsuite` builds on this same `run` step and includes static test splitting and rerun failed tests for free. Test impact analysis, dynamic test splitting, and auto rerun failed tests have a credit charge above your plan's allowance. See xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing].
 endif::server[]
 ifdef::server[]
 This gets your tests running with your native test library, directly through the `run` step.

@@ -12,7 +12,7 @@ Auto rerun failed tests automatically detects and retries test failures during y
 * Manually identify which jobs failed.
 * Manually select btn:[Rerun workflow from failed] in the CircleCI web app.
 
-NOTE: Auto rerun failed tests is a *paid* Smarter Testing capability.
+include::ROOT:partial$notes/smarter-testing-credit-charge.adoc[]
 
 == Is my project a good fit for auto rerun failed tests?
 

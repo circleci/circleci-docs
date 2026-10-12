@@ -347,12 +347,14 @@ outputs:
 
 A map of option fields that configure how the test suite is run.
 
+include::guides:ROOT:partial$notes/smarter-testing-credit-charge.adoc[]
+
 '''
 
 [#test-impact-analysis]
 === *`test-impact-analysis`*
 
-Enable test impact analysis, which is required for intelligent test selection, a paid Smarter Testing capability. Intelligent test selection runs only the test atoms relevant to your changes.
+Enable test impact analysis, which has a credit charge above your plan's allowance. Test impact analysis analyzes which test atoms are impacted by which source files, then selects only the test atoms relevant to your changes. When enabled, every discovered test atom is counted, whether the run performs analysis, test selection, or neither.
 
 [.table-scroll]
 --
@@ -454,7 +456,7 @@ options:
 [#dynamic-test-splitting]
 === *`dynamic-test-splitting`*
 
-Enable dynamic test splitting, a paid Smarter Testing capability, to run test atoms from a shared queue, reducing the impact of slow parallel nodes.
+Enable dynamic test splitting, which has a credit charge above your plan's allowance, to run test atoms from a shared queue, reducing the impact of slow parallel nodes.
 
 [.table-scroll]
 --
@@ -593,7 +595,7 @@ options:
 [#max-auto-rerun]
 === *`max-auto-rerun`*
 
-Set `max-auto-rerun` to use auto rerun failed tests, a paid Smarter Testing capability, to automatically rerun failed test atoms up to a maximum number of attempts. Test atoms will run once initially, then up to a further `max-auto-rerun` times.
+Set `max-auto-rerun` to use auto rerun failed tests, which has a credit charge above your plan's allowance, to automatically rerun failed test atoms up to a maximum number of attempts. Test atoms will run once initially, then up to a further `max-auto-rerun` times.
 
 [.table-scroll]
 --
@@ -626,7 +628,7 @@ options:
 [#auto-rerun-duration]
 === *`auto-rerun-duration`*
 
-Set `auto-rerun-duration` to use auto rerun failed tests, a paid Smarter Testing capability, to automatically rerun failed test atoms until either they all pass, or the rerun duration is reached.
+Set `auto-rerun-duration` to use auto rerun failed tests, which has a credit charge above your plan's allowance. Failed test atoms rerun automatically until either they all pass, or the rerun duration is reached.
 
 NOTE: Test atoms will rerun a maximum of 10 times even if the rerun duration is not reached.
 

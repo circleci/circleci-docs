@@ -172,7 +172,7 @@ CircleCI's dashboards that report time-series and aggregated data on credit usag
 
 == Intelligent test selection
 
-A paid Smarter Testing capability that runs only the tests affected by a code change. Intelligent test selection uses <<test-impact-analysis,test impact analysis>> to skip tests covering unchanged files, to speed up CI. See the xref:guides:test:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis] page.
+The phase of <<test-impact-analysis,test impact analysis>> that runs only the tests affected by a code change. Intelligent test selection uses <<test-impact-analysis,test impact analysis>> to skip tests covering unchanged files, to speed up CI. See the xref:guides:test:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis] page.
 
 == IP ranges
 
@@ -345,7 +345,7 @@ A <<workflow,workflow>> marked with `setup: true` that runs first in a <<dynamic
 
 == Test impact analysis
 
-The analysis that maps which tests exercise which source files, using code coverage data. Test impact analysis is required for <<intelligent-test-selection,intelligent test selection>>. See the xref:guides:test:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis] page.
+A Smarter Testing capability that runs in two phases. Analysis maps which tests exercise which source files, using code coverage data. <<intelligent-test-selection,Test selection>> then runs only the tests impacted by a code change. Test impact analysis has a credit charge for usage above your plan's allowance. See the xref:guides:test:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis] page.
 
 == Test splitting
 
