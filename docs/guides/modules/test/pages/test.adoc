@@ -28,7 +28,7 @@ include::ROOT:partial$notes/docker-auth.adoc[]
 jobs:
   build-and-test:
     docker:
-      - image: cimg/node:16.10
+      - image: cimg/node:24.16.0
     steps:
       - checkout
       - node/install-packages:
@@ -51,7 +51,7 @@ For example, for a project that uses Vitest, the job runs `circleci testsuite ru
 jobs:
   build-and-test:
     docker:
-      - image: cimg/node:16.10
+      - image: cimg/node:24.16.0
     steps:
       - checkout
       - node/install-packages:
@@ -87,7 +87,7 @@ For example, for a project that uses Vitest, the following job splits the test f
 jobs:
   build-and-test:
     docker:
-      - image: cimg/node:16.10
+      - image: cimg/node:24.16.0
     parallelism: 4
     steps:
       - checkout
