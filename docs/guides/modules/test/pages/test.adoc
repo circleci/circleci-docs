@@ -1,46 +1,21 @@
 = Automated testing in CircleCI
 :page-platform: Cloud, Server
-:page-vcs: github, bitbucket
+:page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: An overview of running automated tests in CircleCI pipelines, storing test results, and choosing the right test tooling for your platform.
 :experimental:
 
-[#introduction]
-== Introduction
+CircleCI allows you to automatically test your code before changes are merged. You can integrate testing tools and frameworks such as Jest, Mocha, `pytest`, JUnit, Selenium, XCTest, and more. This page covers the basics that apply to every project, then helps you <<choose-your-test-tooling,choose your test tooling>>.
 
-CircleCI allows you to automatically test your code before changes are merged. You can integrate testing tools and frameworks such as Jest, Mocha, `pytest`, JUnit, Selenium, XCTest, and more.
+[#run-tests-in-ci]
+== Run tests in CI
 
+When you integrate your tests into your CircleCI pipelines, you deliver software to your users more reliably and efficiently, and get faster feedback. This also means you can fix issues and failed tests faster. Test output data becomes available in CircleCI to help debug failed tests. If you save your test data in CircleCI, you can also split your tests across parallel execution nodes to reduce test time.
 ifndef::server[]
-When you integrate your tests into your CircleCI pipelines, you deliver software to your users more reliably and efficiently, and get faster feedback. This also means you can fix issues and failed tests faster. Test output data becomes available in CircleCI to help debug failed tests. If you save your test data in CircleCI, you can also take advantage of Test Insights as well as parallelism features to identify opportunities to further optimize your pipelines.
+Test Insights then helps you find flaky and slow tests.
 endif::server[]
-ifdef::server[]
-When you integrate your tests into your CircleCI pipelines, you deliver software to your users more reliably and efficiently, and get faster feedback. This also means you can fix issues and failed tests faster. Test output data becomes available in CircleCI to help debug failed tests. If you save your test data in CircleCI, you can also take advantage of parallelism features to identify opportunities to further optimize your pipelines.
-endif::server[]
-
-ifndef::server[]
-<<basics,Basics>> below covers running your test suite using your native test library and the `run` step, which works with any test runner. On Cloud, `circleci testsuite` is CircleCI's preferred way to run that test command. `circleci testsuite` is the foundation of Smarter Testing. Static test splitting, rerunning failed tests, and test uploads are included for free. `circleci testsuite` also includes commands such as `list-tests` for introspecting which tests will run.
-endif::server[]
-ifdef::server[]
-<<basics,Basics>> below covers running your test suite using your native test library and the `run` step, which works with any test runner.
-endif::server[]
-
-ifndef::server[]
-Three more Smarter Testing capabilities build on `circleci testsuite`, each usable on its own. These have a credit charge above your plan's allowance:
-
-* *Test impact analysis*: skip tests that your code changes cannot have affected, based on real coverage data rather than heuristics.
-* *Dynamic test splitting*: keep parallel execution nodes evenly loaded by pulling tests from a shared queue as work becomes available, instead of assigning a fixed split up front.
-* *Auto rerun failed tests*: automatically retry failed tests to absorb flaky failures without manual re-runs.
-
-On Cloud, see xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing]. On CircleCI Server, see xref:optimize:parallelism-faster-jobs.adoc[Test Splitting and Parallelism].
-endif::server[]
-ifdef::server[]
-To split your tests across parallel nodes, see xref:optimize:parallelism-faster-jobs.adoc[Test Splitting and Parallelism].
-endif::server[]
-
-[#basics]
-== Basics
 
 To automatically run your test suites in a project pipeline, you will add configuration keys in your `.circleci/config.yml` file. These would typically be defined as a *step* or collection of steps to be executed in a *job*.
 
@@ -66,6 +41,69 @@ jobs:
 `run` is a built-in step that runs commands in a shell. To read more about the `run` step for executing tests and other commands, go to the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference] page.
 
 ifndef::server[]
+This example runs your test command directly. On CircleCI Cloud, the recommended way to run tests is to replace that command with `circleci testsuite run`, which adds Smarter Testing capabilities such as test splitting and rerunning only failed tests. See <<choose-your-test-tooling,Choose your test tooling>>.
+
+For example, for a project that uses Vitest, the job runs `circleci testsuite run` in place of the test command:
+
+.`.circleci/config.yml`
+[,yaml]
+----
+jobs:
+  build-and-test:
+    docker:
+      - image: cimg/node:16.10
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - run:
+          name: Run tests
+          command: circleci testsuite run "ci tests"
+      - store_test_results:
+          # Must match outputs.junit in test-suites.yml
+          path: test-reports
+----
+
+A `.circleci/test-suites.yml` file tells `circleci testsuite` how to discover and run your tests:
+
+.`.circleci/test-suites.yml`
+[,yaml]
+----
+name: ci tests
+discover: npx vitest list --filesOnly
+run: npx vitest run --reporter=junit --outputFile="<< outputs.junit >>" --silent --bail 0 << test.atoms >>
+outputs:
+  junit: test-reports/junit.xml
+----
+endif::server[]
+ifdef::server[]
+This example runs your test command directly. To split your tests across parallel execution nodes, see <<choose-your-test-tooling,Choose your test tooling>>.
+
+For example, for a project that uses Vitest, the following job splits the test files across four parallel execution nodes using timing data from previous runs:
+
+.`.circleci/config.yml`
+[,yaml]
+----
+jobs:
+  build-and-test:
+    docker:
+      - image: cimg/node:16.10
+    parallelism: 4
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - run:
+          name: Run tests
+          command: |
+            TESTFILES=$(circleci tests glob "src/**/*.test.js" | circleci tests split --split-by=timings)
+            npx vitest run --reporter=junit --outputFile=test-results/junit.xml $TESTFILES
+      - store_test_results:
+          path: test-results
+----
+endif::server[]
+
+ifndef::server[]
 Depending on your requirements, you might have more complex workflows that orchestrate multiple jobs. For example, you might have several concurrent jobs for building and testing your project in separate Linux, macOS, and Windows execution environments. You might also want to require that a test job is run only if a preceding build job is successful.
 endif::server[]
 ifdef::server[]
@@ -76,20 +114,26 @@ For a more in-depth look at workflows functionality, visit the xref:orchestrate:
 
 If you need to restrict the connections allowed in your test jobs, consider enabling xref:security:ip-ranges.adoc[IP Ranges]. This enables CircleCI jobs to go through a set of well-defined IP address ranges.
 
+[#timing-tab]
+=== Timing tab
+
+The *Timing* tab in the *Job Details* UI shows how long each step of a job took. Use it to identify which steps take the most time, so that you can make targeted improvements to reduce overall runtime.
+
 ifndef::server[]
-This gets your tests running with your native test library, directly through the `run` step. On Cloud, `circleci testsuite` builds on this same `run` step and includes static test splitting and rerun failed tests for free. Test impact analysis, dynamic test splitting, and auto rerun failed tests have a credit charge above your plan's allowance. See xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing].
+When a job runs with xref:use-static-test-splitting.adoc[Parallelism and Test Splitting] enabled, the *Timing* tab shows the timing of each parallel run.
 endif::server[]
 ifdef::server[]
-This gets your tests running with your native test library, directly through the `run` step.
+When a job runs with xref:optimize:parallelism-faster-jobs.adoc[Parallelism and Test Splitting] enabled, the *Timing* tab shows the timing of each parallel run.
 endif::server[]
 
-[#store-test-data]
-== Store test data
+.Timing tab, parallel runs
+image::guides:ROOT:parallel-runs-timing-tests.png[Timing tab, parallel runs]
 
-Results from testing can be saved in CircleCI in two different ways.
+[#test-uploads]
+== Test uploads
 
-* Use the `store_test_results` step:
-+
+Use the `store_test_results` step to upload your test results to CircleCI:
+
 [,yaml]
 ----
 steps:
@@ -97,44 +141,10 @@ steps:
   - store_test_results:
       path: test-results
 ----
-+
+
 This step uploads and stores test results, and also enables direct access to output from failed tests on the *Tests* tab of a job in the web app.
-+
-More details on `store_test_results` can be found on the xref:reference:ROOT:configuration-reference.adoc#storetestresults[Configuration Reference] page.
 
-* Store test results as artifacts:
-+
-Test results can also be stored as artifacts using the `store_artifacts` step.
-+
-[,yaml]
-----
-steps:
-  ... # Steps to build and test your application
-  - store_artifacts:
-      path: test-results
-      destination: junit
-----
-+
-Results can later be accessed or downloaded as files via the *Artifacts* section of a job in the CircleCI web app, or through the API.
-+
-More details on `store_artifacts` can be found in the xref:reference:ROOT:configuration-reference.adoc#storeartifacts[Configuration Reference] page. You can also read more in the xref:optimize:artifacts.adoc[Storing Build Artifacts] guide.
-
-For more detailed examples of storing test data with different testing frameworks, refer to the xref:collect-test-data.adoc[Collect Test Data] page.
-
-[#timing-tab]
-== Timing tab
-
-ifndef::server[]
-When a job runs with xref:use-static-test-splitting.adoc[Parallelism and Test Splitting] enabled, the *Timing* tab in the *Job Details* UI shows the timing of each parallel run.
-endif::server[]
-ifdef::server[]
-When a job runs with xref:optimize:parallelism-faster-jobs.adoc[Parallelism and Test Splitting] enabled, the *Timing* tab in the *Job Details* UI shows the timing of each parallel run.
-endif::server[]
-
-.Timing tab, parallel runs
-image::guides:ROOT:parallel-runs-timing-tests.png[Timing tab, parallel runs]
-
-The Timing tab lets you identify which steps are taking the most time in a given parallel run so that you can make targeted improvements to reduce overall runtime.
+More details on `store_test_results` can be found on the xref:reference:ROOT:configuration-reference.adoc#storetestresults[Configuration Reference] page. For more detailed examples of storing test data with different testing frameworks, refer to the xref:collect-test-data.adoc[Collect Test Data] page.
 
 ifndef::server[]
 [#test-insights]
@@ -147,37 +157,54 @@ When test results are stored, test analytics also become available on the *Tests
 More information is available on the xref:insights:insights-tests.adoc[Test Insights] page.
 endif::server[]
 
-[#tests-command]
-== Run tests with the `circleci tests` commands
+[#store-test-results-as-artifacts]
+== Store test results as artifacts
 
-NOTE: `circleci tests glob` and `circleci tests split` are the test tooling for CircleCI Server projects. `circleci tests run` is *not* supported on CircleCI Server, even though it is part of the same command family; see <<tests-command-rerun,Re-run failed tests only>> below. On Cloud, `circleci testsuite` is the preferred option. See xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing].
+You can also store test results as artifacts using the `store_artifacts` step. Artifacts are files you can download later. They do not appear on the *Tests* tab.
 
-The `circleci tests` commands (`glob`, `run`, and `split`) discover, run, split, and re-run your tests. You wire them up as individual steps in your job. They are provided by the environment CLI, which is injected into every job automatically, so there is nothing to install.
+[,yaml]
+----
+steps:
+  ... # Steps to build and test your application
+  - store_artifacts:
+      path: test-results
+      destination: junit
+----
 
-[#tests-command-splitting]
-=== Test splitting and parallelism (`circleci tests split`)
+Results can later be accessed or downloaded as files via the *Artifacts* section of a job in the CircleCI web app, or through the API.
 
-Splitting your test suite across parallel execution nodes reduces the time it takes to run your tests. Set `parallelism` on your job, then use `circleci tests split` to divide your test files across those nodes by name, by file size, or by historical timing data.
+More details on `store_artifacts` can be found in the xref:reference:ROOT:configuration-reference.adoc#storeartifacts[Configuration Reference] page. You can also read more in the xref:optimize:artifacts.adoc[Storing Build Artifacts] guide.
 
-See xref:optimize:parallelism-faster-jobs.adoc[Test Splitting and Parallelism] and xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the Environment CLI to Split Tests] for setup details.
+[#choose-your-test-tooling]
+== Choose your test tooling
 
-[#tests-command-rerun]
-=== Re-run failed tests only (`circleci tests run`)
+ifndef::server[]
+On CircleCI Cloud, use Smarter Testing to run your tests. Smarter Testing replaces your test command with `circleci testsuite run`, which discovers and runs your tests. You get the following benefits:
 
-NOTE: `circleci tests run` is available on CircleCI Cloud only, for existing configurations. It is *not* supported on CircleCI Server. If you are on CircleCI Server, use `circleci tests split` (see <<tests-command-splitting,Test splitting and parallelism>> above) instead.
+* *Free capabilities with no extra configuration*: static test splitting across parallel nodes, rerunning only failed tests when you rerun a workflow from failed, and test uploads.
+* *Faster test runs when you need them*: test impact analysis runs only the tests impacted by your code changes. Dynamic test splitting keeps parallel nodes evenly loaded. Auto rerun failed tests retries flaky tests automatically. These capabilities have a credit charge above your plan's allowance.
+* *The same command locally and in CI*: run and validate your test setup on your own machine before you push.
 
-You can configure jobs to re-run failed tests only. Using this option, when a transient test failure arises, only a subset of tests are re-run instead of the entire test suite. Also, only failed tests from the same commit are re-run, not new ones.
+To learn more, read the xref:smarter-testing-overview.adoc[Smarter Testing Overview], then follow xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing].
 
-Historically, when your testing job in a workflow has flaky tests, the only option to get to a successful workflow was to re-run your workflow from failed. This type of re-run executes all tests from your testing job, including tests that passed, which prolongs time-to-feedback and consumes credits unnecessarily.
+TIP: You can use the xref:toolkit:circleci-agent-skills.adoc[CircleCI Agent Skills] to get set up for Smarter Testing. Install the link:https://github.com/CircleCI-Public/skills[CircleCI Public Skills] plugin to your AI coding agent and ask your agent to get set up for Smarter Testing.
 
-More information on how to use this option is available on the xref:rerun-failed-tests.adoc[Rerun Failed Tests With the Tests Run Command] page.
+If your project already uses the `circleci tests glob`, `circleci tests split`, or `circleci tests run` commands, they continue to work. See xref:optimize:parallelism-faster-jobs.adoc[Test Splitting and Parallelism] and xref:rerun-failed-tests.adoc[Rerun Failed Tests With the Tests Run Command].
+endif::server[]
+ifdef::server[]
+To split your tests across parallel execution nodes, use the `circleci tests glob` and `circleci tests split` commands. These commands are part of the environment CLI, which is available in every job, so there is nothing to install. See xref:optimize:parallelism-faster-jobs.adoc[Test Splitting and Parallelism] and xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the Environment CLI to Split Tests].
+
+The `circleci tests run` command and Smarter Testing are available on CircleCI Cloud only.
+endif::server[]
 
 [#next-steps]
 == Next steps
 
 ifndef::server[]
-* Get started with xref:getting-started-with-smarter-testing.adoc[Smarter Testing] end to end.
+* Read the xref:smarter-testing-overview.adoc[Smarter Testing Overview].
 * Integrate tests for xref:testing-macos.adoc[macOS] or xref:testing-ios.adoc[iOS] apps.
 endif::server[]
+ifdef::server[]
+* Split your tests across parallel nodes with xref:optimize:parallelism-faster-jobs.adoc[Test Splitting and Parallelism].
+endif::server[]
 * Read our xref:browser-testing.adoc[Browser Testing] guide to common methods for running and debugging browser tests in CircleCI.
-* To get event-based notifications in Slack about your pipelines (for example, if a job passes or fails), try our xref:getting-started:slack-orb-tutorial.adoc[Slack Orb] tutorial.
