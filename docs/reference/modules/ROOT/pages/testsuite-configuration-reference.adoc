@@ -258,9 +258,9 @@ The test atom to analyze can be specified in one of two ways:
 
 Different template variables are available for coverage output, depending on the format of the coverage data produced by the test runner:
 
-* *LCOV* `<< outputs.lcov >>` -- analyses one test atom at a time.
-* *Go coverage format* `<< outputs.go-coverage >>` -- analyses one test atom at a time.
-* *CircleCI coverage format* `<< outputs.circleci-coverage >>` -- analyses all test atoms in a single pass.
+* *LCOV* `<< outputs.lcov >>`: analyses one test atom at a time.
+* *Go coverage format* `<< outputs.go-coverage >>`: analyses one test atom at a time.
+* *CircleCI coverage format* `<< outputs.circleci-coverage >>`: analyses all test atoms in a single pass.
 
 Your `analysis` command must use the output variable for the coverage format it produces.
 

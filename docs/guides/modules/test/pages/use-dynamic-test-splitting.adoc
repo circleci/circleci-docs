@@ -61,7 +61,7 @@ Before enabling dynamic test splitting, ensure you have completed the xref:getti
 * Verified your tests run successfully with the `testsuite` command.
 * Set parallelism greater than 1 for the test jobs that you want to split. See the xref:reference:ROOT:configuration-reference.adoc#parallelism[Configuration Reference] for more information.
 
-TIP: You can use the xref:guides:toolkit:circleci-agent-skills.adoc[CircleCI Agent Skills] get Smarter Testing set up. Install the link:https://github.com/CircleCI-Public/skills[CircleCI Public Skills] plugin to your AI coding agent and ask your agent to get set up for Smarter Testing.
+TIP: You can use the xref:guides:toolkit:circleci-agent-skills.adoc[CircleCI Agent Skills] to get Smarter Testing set up. Install the link:https://github.com/CircleCI-Public/skills[CircleCI Public Skills] plugin to your AI coding agent and ask your agent to get set up for Smarter Testing.
 
 == 1. Enable dynamic test splitting in your test-suites.yml file
 
@@ -94,7 +94,7 @@ Commit `.circleci/test-suites.yml` to your feature branch and push to your VCS.
 Verify dynamic test splitting is working as expected in CI by looking at the "timings" tab in the UI:
 
 . Navigate to your pipeline in the CircleCI web app and open the test job.
-. Open the **Timings** tab. Confirm that test distribution across nodes is more even than before enabling dynamic test splitting.
+. Open the *Timing* tab. Confirm that test distribution across nodes is more even than before enabling dynamic test splitting.
 . Check that no single node finishes significantly earlier or later than the others.
 
 == Next steps

@@ -106,7 +106,7 @@ CI::
 +
 --
 
-In your CircleCI configuration file, replace your existing test command with `circleci testsuite run "ci tests"` -- the same command you used to setup. Keep all other job steps the same.
+In your CircleCI configuration file, replace your existing test command with `circleci testsuite run "ci tests"`, the same command you used during setup. Keep all other job steps the same.
 
 Verify that `store_test_results` points to the directory that matches `outputs.junit` in your `test-suites.yml` file.
 

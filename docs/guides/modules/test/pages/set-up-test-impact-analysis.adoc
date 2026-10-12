@@ -130,7 +130,7 @@ Before enabling test impact analysis, ensure you have completed the xref:getting
 * Configured your `.circleci/test-suites.yml` with `discover` and `run` commands.
 * Verified your tests run successfully with the `testsuite` command.
 
-TIP: You can use the xref:guides:toolkit:circleci-agent-skills.adoc[CircleCI Agent Skills] get Smarter Testing set up. Install the link:https://github.com/CircleCI-Public/skills[CircleCI Public Skills] plugin to your AI coding agent and ask your agent to get set up for Smarter Testing.
+TIP: You can use the xref:guides:toolkit:circleci-agent-skills.adoc[CircleCI Agent Skills] to get Smarter Testing set up. Install the link:https://github.com/CircleCI-Public/skills[CircleCI Public Skills] plugin to your AI coding agent and ask your agent to get set up for Smarter Testing.
 
 == 1. Enable test impact analysis in your test-suites.yml file
 
@@ -247,7 +247,7 @@ Each flag accepts three values:
 | Value | Meaning for `--analyze-tests` | Meaning for `--run-tests`
 
 | `impacted`
-| Analyze only test atoms whose impact data needs updating -- either the test changed, or the files it covers changed.
+| Analyze only test atoms whose impact data needs updating, because either the test changed or the files it covers changed.
 | Select and run only the test atoms impacted by a change.
 
 | `none`
@@ -255,7 +255,7 @@ Each flag accepts three values:
 | Skip running tests entirely.
 
 | `all`
-| Analyze ALL discovered test atoms. *Rarely needed* -- only use to rebuild impact data from scratch.
+| Analyze ALL discovered test atoms. *Rarely needed*: only use to rebuild impact data from scratch.
 | Select and run all discovered test atoms (full test suite).
 |===
 --
@@ -282,7 +282,7 @@ By default, feature branches run only impacted tests, and the default branch run
 
 === Analyze impacted tests and run all tests on your default branch
 
-No changes are required -- the default behavior already handles both.
+No changes are required. The default behavior already handles both.
 
 === Analyze impacted tests as a non-blocking job in the same workflow
 

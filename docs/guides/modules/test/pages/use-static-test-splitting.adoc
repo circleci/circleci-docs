@@ -46,10 +46,10 @@ jobs:
 
 == 2. Verify the split
 
-Commit your configuration to your feature branch and push to your VCS. Then verify that your tests are split across nodes by looking at the *Timings* tab in the UI:
+Commit your configuration to your feature branch and push to your VCS. Then verify that your tests are split across nodes by looking at the *Timing* tab in the UI:
 
 . Navigate to your pipeline in the CircleCI web app and open the test job.
-. Open the *Timings* tab.
+. Open the *Timing* tab.
 . Confirm that each parallel node ran a share of your tests.
 
 The first run on a branch might split less evenly, because timing data from earlier runs is not yet available.
