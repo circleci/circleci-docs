@@ -144,7 +144,7 @@ go test -v $(go list ./... | circleci tests split)
 [#next-steps]
 ## Next steps
 
-* xref:collect-test-data.adoc[Collect Test Data]
+* xref:collect-test-data.adoc[Upload Test Results]
 ifndef::server[]
 * xref:insights:insights-tests.adoc[Test Insights]
 endif::server[]

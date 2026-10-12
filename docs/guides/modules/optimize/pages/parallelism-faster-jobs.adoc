@@ -399,7 +399,7 @@ job-name:
 * xref:use-the-circleci-cli-to-split-tests.adoc[Use the CircleCI CLI to Split Tests]
 * xref:parallelism-faster-jobs.adoc[Parallelism and Test Splitting]
 * xref:test:troubleshoot-test-splitting.adoc[Troubleshooting Test Splitting]
-* xref:test:collect-test-data.adoc[Collecting Test Data]
+* xref:test:collect-test-data.adoc[Upload Test Results]
 ifndef::server[]
 * xref:insights:insights-tests.adoc[Test Insights]
 endif::server[]

@@ -60,7 +60,7 @@ A named configuration in the `.circleci/test-suites.yml` file that defines how S
 
 Test uploads::
 // tag::test-uploads[]
-A free Smarter Testing capability that uploads your JUnit XML test results to CircleCI with the `store_test_results` step. Uploaded results appear on the job's *Tests* tab, and on CircleCI Cloud they also feed Test Insights. See the xref:guides:test:collect-test-data.adoc[Collect Test Data] page.
+A free Smarter Testing capability that uploads your JUnit XML test results to CircleCI with the `store_test_results` step. Uploaded results appear on the job's *Tests* tab, and on CircleCI Cloud they also feed Test Insights. See the xref:guides:test:collect-test-data.adoc[Upload Test Results] page.
 // end::test-uploads[]
 
 Testsuite command::

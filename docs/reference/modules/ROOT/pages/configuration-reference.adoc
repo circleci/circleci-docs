@@ -2541,7 +2541,7 @@ Artifact storage retention can be customized on the link:https://app.circleci.co
 [#storetestresults]
 === *`store_test_results`*
 
-Special step used to upload and store test results for a build. Test results are visible on the CircleCI web application under each build's *Test Summary* section. Storing test results is useful for timing analysis of your test suites. For more information on storing test results, see the xref:guides:test:collect-test-data.adoc#[Collecting Test Data] page.
+Special step used to upload and store test results for a build. Test results are visible on the CircleCI web application under each build's *Test Summary* section. Storing test results is useful for timing analysis of your test suites. For more information on storing test results, see the xref:guides:test:collect-test-data.adoc#[Upload Test Results] page.
 
 You can also store test results as build artifacts. For steps, refer to <<storeartifacts,the `store_artifacts` step>> section.
 

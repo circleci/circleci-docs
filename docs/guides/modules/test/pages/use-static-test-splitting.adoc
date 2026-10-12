@@ -22,7 +22,7 @@ Before using static test splitting, ensure you have completed the xref:getting-s
 
 * Configured your `.circleci/test-suites.yml` with `discover` and `run` commands.
 * Verified your tests run successfully with the `testsuite` command.
-* Added a `store_test_results` step to your job, so CircleCI has the JUnit timing data it uses to split your tests. See xref:collect-test-data.adoc[Collecting Test Data].
+* Added a `store_test_results` step to your job, so CircleCI has the JUnit timing data it uses to split your tests. See xref:collect-test-data.adoc[Upload Test Results].
 
 == 1. Set parallelism on your job
 

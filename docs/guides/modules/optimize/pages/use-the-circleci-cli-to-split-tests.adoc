@@ -36,7 +36,7 @@ endif::server[]
 ifdef::server[]
 * A CircleCI Server account connected to your code.
 endif::server[]
-* A project in CircleCI where you run tests. See the xref:getting-started:create-project.adoc[Create a Project] page to get set up, and xref:test:collect-test-data.adoc[Collect Test Data] page for information about tests in your CI/CD pipeline.
+* A project in CircleCI where you run tests. See the xref:getting-started:create-project.adoc[Create a Project] page to get set up, and xref:test:collect-test-data.adoc[Upload Test Results] page for information about tests in your CI/CD pipeline.
 
 ifndef::server[]
 == Use the tests run command
@@ -131,7 +131,7 @@ jobs:
 +
 ** `--format RspecJunitFormater` must come after any other `--format` RSpec argument.
 ** Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
-** Update the `glob` command to match your use case. See the RSpec section in the xref:test:collect-test-data.adoc#rspec[Collect Test Data] document for details on how to output test results in an acceptable format for `rspec`.
+** Update the `glob` command to match your use case. See the RSpec section in the xref:test:collect-test-data.adoc#rspec[Upload Test Results] document for details on how to output test results in an acceptable format for `rspec`.
 
 [#configure-a-job-running-ruby-cucumber-tests]
 === Ruby (Cucumber)
@@ -156,7 +156,7 @@ jobs:
 ```
 
 * Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
-* Update the `glob` command to match your use case. See the Cucumber section in the xref:test:collect-test-data.adoc#cucumber[Collect Test Data] document for details on how to output test results in an acceptable format for `Cucumber`.
+* Update the `glob` command to match your use case. See the Cucumber section in the xref:test:collect-test-data.adoc#cucumber[Upload Test Results] document for details on how to output test results in an acceptable format for `Cucumber`.
 
 [#cypress-tests]
 === Cypress
@@ -239,7 +239,7 @@ jobs:
 ```
 +
 ** Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
-** Update the `npx jest --listTests` command to match your use case. See the Jest section in the xref:test:collect-test-data.adoc#jest[Collect Test Data] document for details on how to output test results in an acceptable format for `jest`.
+** Update the `npx jest --listTests` command to match your use case. See the Jest section in the xref:test:collect-test-data.adoc#jest[Upload Test Results] document for details on how to output test results in an acceptable format for `jest`.
 ** `JEST_JUNIT_ADD_FILE_ATTRIBUTE=true` is added to ensure that the `file` attribute is present. `JEST_JUNIT_ADD_FILE_ATTRIBUTE=true` can also be added to your `jest.config.js` file instead of including it in `.circleci/config.yml`, by using the following attribute: `addFileAttribute="true"`.
 
 [#playwright-tests]

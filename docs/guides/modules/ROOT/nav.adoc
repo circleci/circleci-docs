@@ -148,7 +148,7 @@
 
 * Testing on CircleCI
 ** xref:test:test.adoc[Automated testing]
-** xref:test:collect-test-data.adoc[Collect test data]
+** xref:test:collect-test-data.adoc[Upload test results]
 ** Smarter Testing
 *** xref:test:smarter-testing-overview.adoc[Smarter Testing overview]
 *** xref:test:getting-started-with-smarter-testing.adoc[Get started with Smarter Testing]

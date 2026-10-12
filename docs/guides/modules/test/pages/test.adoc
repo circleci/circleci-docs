@@ -144,7 +144,7 @@ steps:
 
 This step uploads and stores test results, and also enables direct access to output from failed tests on the *Tests* tab of a job in the web app.
 
-More details on `store_test_results` can be found on the xref:reference:ROOT:configuration-reference.adoc#storetestresults[Configuration Reference] page. For more detailed examples of storing test data with different testing frameworks, refer to the xref:collect-test-data.adoc[Collect Test Data] page.
+More details on `store_test_results` can be found on the xref:reference:ROOT:configuration-reference.adoc#storetestresults[Configuration Reference] page. For more detailed examples of storing test data with different testing frameworks, refer to the xref:collect-test-data.adoc[Upload Test Results] page.
 
 ifndef::server[]
 [#test-insights]
