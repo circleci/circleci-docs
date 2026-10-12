@@ -116,6 +116,7 @@ Commit both `.circleci/test-suites.yml` and `.circleci/config.yml` to your featu
 --
 ====
 
+[#verify-in-ci]
 == 3. Verify in CI
 
 After your pipeline runs, verify the test job behaves as expected before merging:

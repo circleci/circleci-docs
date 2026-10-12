@@ -158,6 +158,7 @@
 *** xref:test:set-parallelism-dynamically.adoc[Set parallelism dynamically]
 *** xref:test:use-dynamic-test-splitting.adoc[Use dynamic test splitting]
 *** xref:test:auto-rerun-failed-tests.adoc[Auto rerun failed tests]
+*** xref:test:migrate-to-smarter-testing.adoc[Migrate from the tests commands]
 *** xref:reference:ROOT:testsuite-configuration-reference.adoc[Testsuite configuration reference]
 ** Legacy test split tooling
 *** xref:optimize:parallelism-faster-jobs.adoc[Test splitting and parallelism]

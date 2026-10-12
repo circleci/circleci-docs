@@ -189,7 +189,7 @@ To learn more, read the xref:smarter-testing-overview.adoc[Smarter Testing Overv
 
 TIP: You can use the xref:toolkit:circleci-agent-skills.adoc[CircleCI Agent Skills] to get set up for Smarter Testing. Install the link:https://github.com/CircleCI-Public/skills[CircleCI Public Skills] plugin to your AI coding agent and ask your agent to get set up for Smarter Testing.
 
-If your project already uses the `circleci tests glob`, `circleci tests split`, or `circleci tests run` commands, they continue to work. See xref:optimize:parallelism-faster-jobs.adoc[Test Splitting and Parallelism] and xref:rerun-failed-tests.adoc[Rerun Failed Tests With the Tests Run Command].
+If your project already uses the `circleci tests glob`, `circleci tests split`, or `circleci tests run` commands, they continue to work. To move them to Smarter Testing, see xref:migrate-to-smarter-testing.adoc[Migrate From the Tests Commands to Smarter Testing].
 endif::server[]
 ifdef::server[]
 To split your tests across parallel execution nodes, use the `circleci tests glob` and `circleci tests split` commands. These commands are part of the environment CLI, which is available in every job, so there is nothing to install. See xref:optimize:parallelism-faster-jobs.adoc[Test Splitting and Parallelism] and xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the Environment CLI to Split Tests].
