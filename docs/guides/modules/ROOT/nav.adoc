@@ -154,6 +154,7 @@
 **** xref:test:use-static-test-splitting.adoc[Use Static Test Splitting]
 **** xref:test:rerun-only-failed-tests.adoc[Rerun Only Failed Tests]
 **** xref:test:set-up-test-impact-analysis.adoc[Set up Test Impact Analysis]
+***** xref:test:set-parallelism-dynamically.adoc[Set parallelism dynamically]
 **** xref:test:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting]
 **** xref:test:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests]
 *** xref:test:collect-test-data.adoc[Collecting test data]
