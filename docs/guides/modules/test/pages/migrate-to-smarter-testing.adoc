@@ -39,8 +39,8 @@ To migrate by hand, follow xref:getting-started-with-smarter-testing.adoc[Gettin
 | `circleci tests run --command="..."` or `circleci tests split` passes the test files to your test runner.
 | The `run` command in `.circleci/test-suites.yml` runs your test runner, with the `<< test.atoms >>` placeholder in place of the file list.
 
-| `--split-by=timings` splits by timing data.
-| Static test splitting is built in. Set `parallelism` on the job and `circleci testsuite run` splits by timing data from previous runs.
+| `--split-by` and `--timings-type` choose how to split tests.
+| Static test splitting is built in, with no options to set. Set `parallelism` on the job, and `circleci testsuite run` splits by timing data from previous runs, or by name when no timing data is available.
 
 | *Rerun failed tests* in the web app reruns only failed tests.
 | Select *Rerun workflow from failed*. `circleci testsuite run` reruns only the failed tests.
@@ -49,8 +49,6 @@ To migrate by hand, follow xref:getting-started-with-smarter-testing.adoc[Gettin
 | The `store_test_results` path must match the directory of `outputs.junit` in `.circleci/test-suites.yml`.
 |===
 --
-
-#TODO: Confirm with engineering whether `circleci testsuite` has an equivalent of `--split-by=name`, `--split-by=filesize`, and `--timings-type`.#
 
 == Next steps
 
