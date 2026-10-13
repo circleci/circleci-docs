@@ -11,7 +11,7 @@ Dynamic parallelism sets the `parallelism` of a test job when your pipeline runs
 You can set parallelism dynamically in two ways:
 
 * *Scale with the selected tests.* CircleCI scales your maximum parallelism by the share of the test suite that the test job will run. Use this with xref:set-up-test-impact-analysis.adoc[Test Impact Analysis], so that the test job uses fewer parallel nodes when fewer test atoms are selected. See <<use-with-test-impact-analysis>>.
-* *Target a duration for each node.* You set a `target` duration, and CircleCI sets enough parallel nodes for each node to run for about that long. Use this with any test splitting, static or dynamic, to keep a test job near a desired duration as your test suite grows or shrinks, without adjusting `parallelism` by hand. See <<target-a-duration>>.
+* *Target a duration for each node.* You set a `target` duration, and CircleCI sets enough parallel nodes to run for about that long. Use this with any test splitting, static or dynamic, to keep a test job near a desired duration as your test suite grows or shrinks, without adjusting `parallelism` by hand. See <<target-a-duration>>.
 
 include::ROOT:partial$notes/smarter-testing-credit-charge.adoc[]
 
