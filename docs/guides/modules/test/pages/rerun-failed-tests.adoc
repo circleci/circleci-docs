@@ -368,7 +368,7 @@ You can also add it to your `jest.config.js` file by following these link:https:
 
 . Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
 
-. Note that this example uses a utility named link:https://github.com/previousnext/phpunit-finder[`phpunit-finder`] which is a third party tool that is not supported by CircleCI, use at your own risk. If your current job is using xref:optimize:parallelism-faster-jobs.adoc[Test Splitting to Speed Up Your Pipelines], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter. If you are not using test splitting, `--split-by=timings` can be omitted.
+. This example uses link:https://github.com/previousnext/phpunit-finder[`phpunit-finder`], a third-party tool that CircleCI does not support. Use it at your own risk. If your current job uses xref:optimize:parallelism-faster-jobs.adoc[Test Splitting to Speed Up Your Pipelines], change `circleci tests split` to `circleci tests run`. Add the `--split-by=timings` parameter. If you are not using test splitting, `--split-by=timings` can be omitted.
 
 [#configure-a-job-running-playwright-tests]
 === Configure a job running Playwright tests
