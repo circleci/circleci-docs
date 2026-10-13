@@ -4,13 +4,13 @@
 :page-plan: Free, Performance, Scale
 :page-audience: developer
 :experimental:
-:page-description: Set a test job's parallelism when the pipeline runs, either from the share of the test suite selected or from a target duration for each node, with experimental dynamic parallelism.
+:page-description: Set a test job's parallelism when the pipeline runs, from the selected tests or a target duration for each node, with experimental dynamic parallelism.
 
 Dynamic parallelism sets the `parallelism` of a test job when your pipeline runs, instead of using a fixed value in your configuration. An upstream job lists the test atoms that the test job will run. CircleCI then sets the test job's parallelism from the test timings of those test atoms, within a minimum and maximum that you choose.
 
 You can set parallelism dynamically in two ways:
 
-* *Scale with the selected tests.* CircleCI scales your maximum parallelism by the share of the test suite that the test job will run. Use this with xref:set-up-test-impact-analysis.adoc[test impact analysis], so that the test job uses fewer parallel nodes when fewer test atoms are selected. See <<use-with-test-impact-analysis>>.
+* *Scale with the selected tests.* CircleCI scales your maximum parallelism by the share of the test suite that the test job will run. Use this with xref:set-up-test-impact-analysis.adoc[Test Impact Analysis], so that the test job uses fewer parallel nodes when fewer test atoms are selected. See <<use-with-test-impact-analysis>>.
 * *Target a duration for each node.* You set a `target` duration, and CircleCI sets enough parallel nodes for each node to run for about that long. Use this with any test splitting, static or dynamic, to keep a test job near a desired duration as your test suite grows or shrinks, without adjusting `parallelism` by hand. See <<target-a-duration>>.
 
 include::ROOT:partial$notes/smarter-testing-credit-charge.adoc[]
@@ -28,9 +28,9 @@ Before you set parallelism dynamically, ensure you have:
 [#how-it-works]
 == How it works
 
-Use the `circleci testsuite list-tests` command in an upstream job to select test atoms, then run the test atoms in a downstream job with parallelism set from the number of selected test atoms.
+Use the `circleci testsuite list-tests` command in an upstream job to select test atoms. A downstream test job then runs them, with parallelism set from the test timings of the selected test atoms.
 
-The `list-tests` command selects test atoms without running them, applying the same selection rules as `circleci testsuite run`. The count reflects what the test job runs. The `--run-tests` and `--analyze-tests` flags accept the same values as `run`. If your test job passes either flag, pass the same flags to `list-tests` so the count matches. See xref:set-up-test-impact-analysis.adoc#overriding-tests-selected-for-run-and-analysis[Overriding Tests Selected for Run and Analysis].
+The `list-tests` command selects test atoms without running them, applying the same selection rules as `circleci testsuite run`. The selection reflects what the test job runs. The `--run-tests` and `--analyze-tests` flags accept the same values as `run`. If your test job passes either flag, pass the same flags to `list-tests` so the selection matches. See xref:set-up-test-impact-analysis.adoc#overriding-tests-selected-for-run-and-analysis[Overriding Tests Selected for Run and Analysis].
 
 Pass a unique key to `list-tests` with the `--key` flag. Then add an `experimental.dynamic-parallelism` stanza to your configuration, including the following:
 
@@ -98,13 +98,13 @@ experimental:
 
 With a fixed `parallelism`, a test job gets slower as you add tests, and you must keep adjusting the value to hold the job near a desired duration. Set a `target` instead, and CircleCI sets enough parallel nodes for each node to run the selected test atoms in about that time. Set `max` to cap the number of parallel nodes the test job can use.
 
-A `target` works with both xref:use-static-test-splitting.adoc[static test splitting] and xref:use-dynamic-test-splitting.adoc[dynamic test splitting], and does not require test impact analysis. If you also use test impact analysis, CircleCI sets the parallelism from the runtime of the selected test atoms only.
+A `target` works with both xref:use-static-test-splitting.adoc[Static Test Splitting] and xref:use-dynamic-test-splitting.adoc[Dynamic Test Splitting], and does not require test impact analysis. If you also use test impact analysis, CircleCI sets the parallelism from the runtime of the selected test atoms only.
 
 NOTE: The `target` is compared against test runtimes from your JUnit test results, which are not always close to the wall clock time of each node. For example, JUnit runtimes do not always include test runner startup or setup steps. With dynamic test splitting, CircleCI accounts for this difference. With static test splitting, you may need to tune the `target` until the test job's nodes run for your desired wall clock time.
 
 Set `target` to a duration between `8s` and `5h`, written as a number followed by a time unit, for example `5m` or `1m30s`. Valid time units are `s`, `m`, and `h`. If the `target` is outside this range or invalid, the test job uses the `parallelism` value in its configuration.
 
-.CircleCI configuration that sets parallelism to run each node for about 5 minutes
+.CircleCI configuration that sets parallelism to run each node for about 2 minutes
 [source,yaml]
 ----
 # .circleci/config.yml
