@@ -97,6 +97,13 @@ google.subject=assertion.org_id + "/" + assertion.sub.extract('/user/{user_id}/'
 
 This produces a value like `<org_uuid>/<user_uuid>` (73 bytes), which is well within the limit and works consistently across all trigger types.
 
+The CircleCI OIDC V3 token's `sub` claim is longer still, because it also includes the config source and ref. V3 also separates values with `:` instead of `/`. For a V3 token, use this mapping instead:
+
+[source,plaintext]
+----
+google.subject=assertion.org_id + "/" + assertion.sub.extract(':user:{user_id}:')
+----
+
 If your IAM conditions reference `google.subject`, update them to match the new format. To preserve the full `sub` for use in conditions, add it as a custom attribute:
 
 [source,plaintext]
