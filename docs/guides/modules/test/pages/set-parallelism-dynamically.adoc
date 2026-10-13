@@ -102,7 +102,7 @@ A `target` works with both xref:use-static-test-splitting.adoc[static test split
 
 NOTE: The `target` is compared against test runtimes from your JUnit test results, which are not always close to the wall clock time of each node. For example, JUnit runtimes do not always include test runner startup or setup steps. With dynamic test splitting, CircleCI accounts for this difference. With static test splitting, you may need to tune the `target` until the test job's nodes run for your desired wall clock time.
 
-Set `target` to a duration between `8s` and `5h`, written as a number followed by a time unit, for example `5m` or `1m30s`. Valid time units are `ns`, `us` (or `µs`), `ms`, `s`, `m`, and `h`. If the `target` is outside this range or invalid, the test job uses the `parallelism` value in its configuration.
+Set `target` to a duration between `8s` and `5h`, written as a number followed by a time unit, for example `5m` or `1m30s`. Valid time units are `s`, `m`, and `h`. If the `target` is outside this range or invalid, the test job uses the `parallelism` value in its configuration.
 
 .CircleCI configuration that sets parallelism to run each node for about 5 minutes
 [source,yaml]
