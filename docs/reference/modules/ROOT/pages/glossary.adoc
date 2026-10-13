@@ -134,6 +134,10 @@ Docker Layer Caching (DLC) lets builds reuse Docker image layers from previous b
 
 A feature that lets a run determine the work it executes at runtime, based on pipeline parameters, changed file paths, or other conditions, rather than using fully static configuration. Dynamic configuration is enabled with a <<setup-workflow>> (`setup: true`). See the xref:guides:orchestrate:dynamic-config.adoc[Dynamic Configuration] page.
 
+== Dynamic parallelism
+
+include::guides:ROOT:partial$glossary/smarter-testing.adoc[tag=dynamic-parallelism]
+
 == Dynamic test splitting
 
 include::guides:ROOT:partial$glossary/smarter-testing.adoc[tag=dynamic-test-splitting]

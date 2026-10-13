@@ -10,12 +10,17 @@ The phase of test impact analysis that runs your tests with coverage instrumenta
 
 Auto rerun failed tests::
 // tag::auto-rerun-failed-tests[]
-A Smarter Testing capability that automatically reruns failed test atoms during the same job, until they pass or a rerun limit is reached. Auto rerun failed tests has a credit charge above your plan's allowance. See the xref:guides:test:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] page.
+A Smarter Testing capability with a credit charge. Auto rerun failed tests automatically reruns failed test atoms during the same job, until they pass or a rerun limit is reached. See the xref:guides:test:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] page.
 // end::auto-rerun-failed-tests[]
+
+Dynamic parallelism::
+// tag::dynamic-parallelism[]
+A Smarter Testing capability with a credit charge. Dynamic parallelism sets a test job's parallelism when the pipeline runs, either by scaling it with the selected test atoms or by targeting a duration for each parallel node. Dynamic parallelism is experimental. See the xref:guides:test:set-parallelism-dynamically.adoc[Set Parallelism Dynamically] page.
+// end::dynamic-parallelism[]
 
 Dynamic test splitting::
 // tag::dynamic-test-splitting[]
-A Smarter Testing capability that distributes test atoms from a shared queue across parallel nodes as the job runs, so that all nodes finish at about the same time. Dynamic test splitting has a credit charge above your plan's allowance. See the xref:guides:test:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting] page.
+A Smarter Testing capability with a credit charge. Dynamic test splitting distributes test atoms from a shared queue across parallel nodes as the job runs, so that all nodes finish at about the same time. See the xref:guides:test:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting] page.
 // end::dynamic-test-splitting[]
 
 Impact data::
@@ -30,7 +35,7 @@ A free Smarter Testing capability. When you rerun a workflow from failed, `circl
 
 Smarter Testing::
 // tag::smarter-testing[]
-CircleCI's set of capabilities for running tests on CircleCI Cloud, built on the `circleci testsuite` command. Static test splitting, rerun only failed tests, and test uploads are free. Test impact analysis, dynamic test splitting, and auto rerun failed tests have a credit charge above your plan's allowance.
+CircleCI's set of capabilities for running tests on CircleCI Cloud, built on the `circleci testsuite` command. Static test splitting, rerun only failed tests, and test uploads are free. Test impact analysis, dynamic test splitting, dynamic parallelism, and auto rerun failed tests have a credit charge above your plan's allowance.
 // end::smarter-testing[]
 
 Static test splitting::
@@ -45,7 +50,7 @@ The smallest unit of work your test runner can execute independently. A test ato
 
 Test impact analysis::
 // tag::test-impact-analysis[]
-A Smarter Testing capability that runs in two phases. Analysis maps which test atoms cover which source files, using code coverage data. Test selection then runs only the test atoms impacted by a code change. Test impact analysis has a credit charge above your plan's allowance. See the xref:guides:test:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis] page.
+A Smarter Testing capability with a credit charge. Test impact analysis runs in two phases. Analysis maps which test atoms cover which source files, using code coverage data. Test selection then runs only the test atoms impacted by a code change. See the xref:guides:test:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis] page.
 // end::test-impact-analysis[]
 
 Test selection::
