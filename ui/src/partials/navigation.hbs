@@ -1,27 +1,40 @@
-<div data-page-navigation class="{{#if class}}{{class}}{{/if}} h-full border-r border-vapor fixed lg:sticky inset-0 lg:top-0 lg:h-screen transform -translate-x-full lg:translate-x-0 transition-transform duration-300 z-50 lg:z-auto bg-body-bg" {{#if page.component}} data-tcomponent="{{page.component.name}}" data-tversion="{{page.version}}"{{/if}}>
-  <aside class="relative h-full py-6 px-6 overflow-y-scroll scrollbar-thin scrollbar-thumb-rounded-xl scrollbar-thumb-fog scrollbar-track-vapor scrollbar-track-border">
-    <div class="flex items-center justify-between lg:hidden text-terminal-black mb-10">
-      <img data-page-navigation-back-button src="{{{uiRootPath}}}/img/arrow-back.svg" alt="Arrow Back" class="invisible lg:hidden h-4 w-4">
-      <h3 class="font-medium"> {{page.component.title}}</h3>
-      <svg data-page-navigation-toggle width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" aria-label="Close Navigation">
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9864 2.45711C13.3769 2.06658 13.3769 1.43342 12.9864 1.04289C12.5959 0.652369 11.9627 0.652369 11.5722 1.04289L7.0293 5.58579L2.4864 1.04289C2.09588 0.652369 1.46271 0.652369 1.07219 1.04289C0.681666 1.43342 0.681666 2.06658 1.07219 2.45711L5.61508 7L1.07219 11.5429C0.681666 11.9334 0.681666 12.5666 1.07219 12.9571C1.46271 13.3476 2.09588 13.3476 2.4864 12.9571L7.0293 8.41421L11.5722 12.9571C11.9627 13.3476 12.5959 13.3476 12.9864 12.9571C13.3769 12.5666 13.3769 11.9334 12.9864 11.5429L8.44351 7L12.9864 2.45711Z" fill="currentColor"/>
+<div data-page-navigation data-nav-view="{{#if page.navigation.length}}component{{else}}top{{/if}}" class="{{#if class}}{{class}}{{/if}} h-full border-r border-vapor fixed lg:sticky inset-0 lg:top-0 lg:h-screen transform -translate-x-full lg:translate-x-0 transition-transform duration-300 z-50 lg:z-auto bg-body-bg" {{#if page.component}} data-component-title="{{page.component.title}}" data-tcomponent="{{page.component.name}}" data-tversion="{{page.version}}"{{/if}}>
+  <aside class="relative h-full pt-[18px] pb-6 px-6 lg:py-6 overflow-y-scroll scrollbar-thin scrollbar-thumb-rounded-xl scrollbar-thumb-fog scrollbar-track-vapor scrollbar-track-border">
+    <div class="flex items-center justify-between gap-2 lg:hidden text-terminal-black mb-[30px]">
+      {{!-- Empty spacer the width of the close button, so the title stays centred --}}
+      <span class="h-6 w-6 flex-shrink-0" aria-hidden="true"></span>
+      <h3 data-nav-title class="flex-1 min-w-0 truncate text-center text-xl leading-6 font-medium">{{#if page.navigation.length}}{{page.component.title}}{{else}}Docs{{/if}}</h3>
+      <svg data-page-navigation-toggle width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-shrink-0 cursor-pointer" aria-label="Close Navigation">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M17.9865 7.45711C18.3771 7.06658 18.3771 6.43342 17.9865 6.04289C17.596 5.65237 16.9628 5.65237 16.5723 6.04289L12.0294 10.5858L7.48653 6.04289C7.096 5.65237 6.46284 5.65237 6.07231 6.04289C5.68179 6.43342 5.68179 7.06658 6.07231 7.45711L10.6152 12L6.07231 16.5429C5.68179 16.9334 5.68179 17.5666 6.07231 17.9571C6.46284 18.3476 7.096 18.3476 7.48653 17.9571L12.0294 13.4142L16.5723 17.9571C16.9628 18.3476 17.596 18.3476 17.9865 17.9571C18.377 17.5666 18.377 16.9334 17.9865 16.5429L13.4436 12L17.9865 7.45711Z" fill="currentColor"/>
       </svg>
     </div>
-    <div class="md:hidden mb-12 flex items-center gap-3">
+    <div class="md:hidden mb-6 flex items-center gap-[10px]">
       {{> search-bar class="flex-1" hideShortcut=true}}
       {{> ask-ai-button}}
     </div>
     {{> search-results class="hidden"}}
-    <div class="hidden">
-      {{> component-explorer-nav options=(components-to-nav-list)}}
-    </div>
-    <div class="flex flex-col justify-between">
-      {{> left-side-nav}}
-      {{> external-nav-links ulClass="flex flex-col gap-1 mt-4 lg:hidden" linkClass="inline-block py-2 ml-2 font-medium" showArrows=true}}
-      <a data-go-to-app-mobile href="https://app.circleci.com/" class="flex items-center mt-4 ml-2 gap-2 font-medium lg:hidden bg-body-bg" >
-        Go to Application
-        <div class="inline-flex h-[24px] w-[24px] rounded items-center justify-center bg-slime-green border border-accent-green text-dark-green">
-          {{> arrow-back-icon class="rotate-180" width="13" height="13" ariaLabel="Go to Application"}}
+    <div data-nav-panels class="flex flex-col justify-between">
+      {{!-- Below lg the drawer drills down one level at a time instead of using accordions:
+            top (all components) > component (its sections) > section (its pages, grouped).
+            06-navigation.js builds the component and section views from the tree in left-side-nav. --}}
+      <div data-nav-panel="top" class="lg:hidden">
+        {{> mobile-component-list}}
+        {{> external-nav-links ulClass="flex flex-col mt-8 text-terminal-black" linkClass="block w-full px-1 py-2 leading-5 tracking-[0.1px]"}}
+      </div>
+      <div data-nav-panel="component">
+        {{!-- Up one level: to the section list from a section, to all components from the section list --}}
+        <button type="button" data-mobile-nav-back class="flex items-center gap-3 lg:hidden text-terminal-black leading-normal">
+          {{> icon-arrow-left}}
+          <span data-mobile-nav-back-label>Docs</span>
+        </button>
+        {{> left-side-nav}}
+        <div data-mobile-nav class="hidden lg:hidden mt-6 text-terminal-black"></div>
+        <template data-mobile-nav-icon-right>{{> icon-arrow-right}}</template>
+      </div>
+      <a data-go-to-app-mobile href="https://app.circleci.com/" class="flex items-center self-start mt-10 py-2 pl-2 pr-3 gap-3 text-xl leading-6 font-medium lg:hidden bg-body-bg">
+        Go to application
+        <div class="inline-flex p-1 rounded-lg items-center justify-center bg-slime-green border border-accent-green text-dark-green">
+          {{> arrow-back-icon class="rotate-180 mx-1 my-[6px]" width="16" height="12" ariaLabel="Go to application"}}
         </div>
       </a>
     </div>
