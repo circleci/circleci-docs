@@ -35,6 +35,35 @@ The following capabilities build on top of them and have a credit charge above y
 
 include::ROOT:partial$notes/smarter-testing-credit-charge.adoc[]
 
+[#credit-charge]
+== Credit charge
+
+Test impact analysis, dynamic test splitting, dynamic parallelism, and auto rerun failed tests count test atoms toward your plan's monthly allowance. The allowance depends on your plan:
+
+[.table-scroll]
+--
+[cols="1,1", options="header"]
+|===
+| Plan | Monthly allowance (test atoms)
+
+| Free
+| 1,000
+
+| Performance
+| 10,000
+
+| Scale
+| 100,000
+|===
+--
+
+Overall usage above your plan's allowance has a credit charge of 3,000 credits per 100,000 test atoms. See xref:plans-pricing:credits.adoc[Credits].
+
+[#how-test-atoms-are-counted]
+=== How test atoms are counted
+
+Each `circleci testsuite run` with one or more of these capabilities enabled counts its discovered test atoms once. Enabling one capability or several makes no difference, and neither does the job's parallelism. If a job runs more than one test suite, each run counts separately.
+
 [#get-started]
 == Get started
 
