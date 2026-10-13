@@ -8,7 +8,7 @@
 
 Use rerun failed tests to only rerun a subset of tests, instead of an entire test suite, when a transient test failure arises.
 
-NOTE: This page covers rerunning failed tests with the `circleci tests run` command. CircleCI's preferred way to rerun failed tests is Smarter Testing, which offers two options. xref:rerun-only-failed-tests.adoc[Rerun Only Failed Tests] is free and is the equivalent of this page. xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] retries failed tests automatically during the same run, and has a credit charge above your plan's allowance. To move to Smarter Testing, see xref:migrate-to-smarter-testing.adoc[Migrate From the Tests Commands to Smarter Testing].
+NOTE: This page covers rerunning failed tests with the `circleci tests run` command. CircleCI's preferred way to rerun failed tests is Smarter Testing, which offers two options. xref:rerun-only-failed-tests.adoc[Rerun Only Failed Tests] is free and is the equivalent of this page. xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] retries failed tests automatically during the same run, and has a credit charge above your plan's allowance. To move to Smarter Testing, follow xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing].
 
 The *Rerun failed tests* option in the web app is deprecated. It appears only for projects that already use `circleci tests run`. With Smarter Testing, use *Rerun workflow from failed* instead.
 

@@ -40,7 +40,7 @@ include::ROOT:partial$notes/smarter-testing-credit-charge.adoc[]
 
 To set up `circleci testsuite` for your project, follow the xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] guide.
 
-If your project already uses the `circleci tests glob`, `circleci tests split`, or `circleci tests run` commands, see xref:migrate-to-smarter-testing.adoc[Migrate From the Tests Commands to Smarter Testing].
+If your project already uses the `circleci tests glob`, `circleci tests split`, or `circleci tests run` commands, follow the same guide to migrate them.
 
 TIP: You can use the xref:toolkit:circleci-agent-skills.adoc[CircleCI Agent Skills] to get set up for Smarter Testing. Install the link:https://github.com/CircleCI-Public/skills[CircleCI Public Skills] plugin to your AI coding agent and ask your agent to get set up for Smarter Testing.
 
