@@ -189,7 +189,7 @@ NOTE: The `Rerun job with SSH` feature is disabled by default. To enable this fe
 [#oidc-tokens-missing]
 === OIDC tokens missing from jobs
 
-If the link:https://circleci.com/docs/openid-connect-tokens/[OIDC token] environment variables (`$CIRCLE_OIDC_TOKEN`, `$CIRCLE_OIDC_TOKEN_V2`) are missing from jobs, check the default temporary directory. A common cause is that it (for example, `/tmp`) is not writable or is mounted as `noexec`. The system's temporary directory needs to be writable and allow execution for the OIDC plugin to be downloaded and executed from it.
+If the link:https://circleci.com/docs/openid-connect-tokens/[OIDC token] environment variables (`$CIRCLE_OIDC_TOKEN`, `$CIRCLE_OIDC_TOKEN_V2`, `$CIRCLE_OIDC_TOKEN_V3`) are missing from jobs, check the default temporary directory. A common cause is that it (for example, `/tmp`) is not writable or is mounted as `noexec`. The system's temporary directory needs to be writable and allow execution for the OIDC plugin to be downloaded and executed from it.
 
 [#runners-queueing]
 === Runner tasks queueing despite idle runners
