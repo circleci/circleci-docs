@@ -1,0 +1,74 @@
+// Single source for Smarter Testing terms. The Smarter Testing overview
+// includes this whole file as a definition list. The reference glossary
+// includes each definition by tag under its own heading, so keep tags around
+// the definition text only, and use fully qualified xrefs.
+
+Analysis::
+// tag::analysis[]
+The phase of test impact analysis that runs your tests with coverage instrumentation to produce impact data. By default, analysis runs on your default branch, using the `analysis` command in `test-suites.yml`. See the xref:guides:test:set-up-test-impact-analysis.adoc#analysis-on-default-branches[Set Up Test Impact Analysis] page.
+// end::analysis[]
+
+Auto rerun failed tests::
+// tag::auto-rerun-failed-tests[]
+A Smarter Testing capability with a credit charge. Auto rerun failed tests automatically reruns failed test atoms during the same job, until they pass or a rerun limit is reached. See the xref:guides:test:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] page.
+// end::auto-rerun-failed-tests[]
+
+Dynamic parallelism::
+// tag::dynamic-parallelism[]
+A Smarter Testing capability with a credit charge. Dynamic parallelism sets a test job's parallelism when the pipeline runs, either by scaling it with the selected test atoms or by targeting a duration for each parallel node. Dynamic parallelism is experimental. See the xref:guides:test:set-parallelism-dynamically.adoc[Set Parallelism Dynamically] page.
+// end::dynamic-parallelism[]
+
+Dynamic test splitting::
+// tag::dynamic-test-splitting[]
+A Smarter Testing capability with a credit charge. Dynamic test splitting distributes test atoms from a shared queue across parallel nodes as the job runs, so that all nodes finish at about the same time. See the xref:guides:test:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting] page.
+// end::dynamic-test-splitting[]
+
+Impact data::
+// tag::impact-data[]
+The data that analysis produces. Impact data records which source files each test atom covers, and a hash of each file's contents. Test selection compares your code against impact data to choose which test atoms to run. See the xref:guides:test:set-up-test-impact-analysis.adoc#analysis-on-default-branches[Set Up Test Impact Analysis] page.
+// end::impact-data[]
+
+Rerun only failed tests::
+// tag::rerun-only-failed-tests[]
+A free Smarter Testing capability. When you rerun a workflow from failed, `circleci testsuite run` reruns only the test atoms that failed, instead of the whole test suite. See the xref:guides:test:rerun-only-failed-tests.adoc[Rerun Only Failed Tests] page.
+// end::rerun-only-failed-tests[]
+
+Smarter Testing::
+// tag::smarter-testing[]
+CircleCI's set of capabilities for running tests on CircleCI Cloud, built on the `circleci testsuite` command. Static test splitting, rerun only failed tests, and test uploads are free. Test impact analysis, dynamic test splitting, dynamic parallelism, and auto rerun failed tests have a credit charge above your plan's allowance.
+// end::smarter-testing[]
+
+Static test splitting::
+// tag::static-test-splitting[]
+A free Smarter Testing capability that splits test atoms across parallel nodes before they run, using timing data from previous runs. Set `parallelism` on your job to use static test splitting. See the xref:guides:test:use-static-test-splitting.adoc[Use Static Test Splitting] page.
+// end::static-test-splitting[]
+
+Test atom::
+// tag::test-atom[]
+The smallest unit of work your test runner can execute independently. A test atom is typically a test file, for example `tests/auth_test.py`, but can also be a test package or module. Smarter Testing credit charges are counted in test atoms.
+// end::test-atom[]
+
+Test impact analysis::
+// tag::test-impact-analysis[]
+A Smarter Testing capability with a credit charge. Test impact analysis runs in two phases. Analysis maps which test atoms cover which source files, using code coverage data. Test selection then runs only the test atoms impacted by a code change. See the xref:guides:test:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis] page.
+// end::test-impact-analysis[]
+
+Test selection::
+// tag::test-selection[]
+The phase of test impact analysis that runs only the test atoms affected by a code change. Test selection compares your checked-out code against impact data. It selects new test atoms, test atoms that failed on the previous run, and test atoms whose covered files have changed or no longer exist. By default, test selection runs on feature branches. See the xref:guides:test:set-up-test-impact-analysis.adoc#test-selection-on-feature-branches[Set Up Test Impact Analysis] page.
+// end::test-selection[]
+
+Test suite::
+// tag::test-suite[]
+A named configuration in the `.circleci/test-suites.yml` file that defines how Smarter Testing discovers, runs, and analyzes a set of test atoms. See the xref:reference:ROOT:testsuite-configuration-reference.adoc[Testsuite Configuration Reference].
+// end::test-suite[]
+
+Test uploads::
+// tag::test-uploads[]
+A free Smarter Testing capability that uploads your JUnit XML test results to CircleCI with the `store_test_results` step. Uploaded results appear on the job's *Tests* tab, and on CircleCI Cloud they also feed Test Insights. See the xref:guides:test:collect-test-data.adoc[Upload Test Results] page.
+// end::test-uploads[]
+
+Testsuite command::
+// tag::testsuite-command[]
+The `circleci testsuite` command that runs Smarter Testing, available in every CircleCI job and in the latest CircleCI CLI. Its subcommands include `doctor`, which checks your `test-suites.yml` setup, `run`, which runs a test suite, and `list-tests`, which lists the test atoms a run would select without running them. See the xref:guides:test:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] page.
+// end::testsuite-command[]

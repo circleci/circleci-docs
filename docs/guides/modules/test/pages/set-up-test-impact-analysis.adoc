@@ -6,7 +6,11 @@
 :page-audience: developer
 :experimental:
 
-Test impact analysis speeds up CI by running only the tests affected by your code changes. CircleCI tracks which tests exercise which source files, then skips tests that cover unchanged source files.
+Test impact analysis speeds up CI by running only the tests affected by your code changes. CircleCI tracks which tests exercise which source files, then uses that analysis to skip tests that cover unchanged source files.
+
+include::ROOT:partial$notes/smarter-testing-credit-charge.adoc[]
+
+Setting `options.test-impact-analysis: true` counts every test atom that `circleci testsuite run` discovers, whether the run performs analysis, test selection, or neither.
 
 == Is my project a good fit for test impact analysis?
 
@@ -14,7 +18,7 @@ This section outlines several project features that indicate your project is a g
 
 === Built-in coverage support
 
-Test impact analysis relies on code coverage data to determine which tests affect which files. Frameworks with built-in coverage support - Jest, pytest, Go test, Vitest and RSpec - make this straightforward.
+Test impact analysis relies on code coverage data to determine which tests affect which files. Frameworks with built-in coverage support, such as Jest, pytest, Go test, Vitest, RSpec, Mocha, and Cypress, make this straightforward.
 
 If your framework has no native coverage support, generating the data test impact analysis needs may require significant rework of your test setup.
 
@@ -29,18 +33,18 @@ When tests call code running in separate containers or services, collecting and 
 Test impact analysis is split into two phases:
 
 - *Analysis* runs on your default branch with coverage instrumentation, producing *impact data*. Impact data describes the relationship between files and tests.
-- *Selection* runs on feature branches, using the impact data to choose which tests to run based on what changed.
+- *Test selection* runs on feature branches, using the impact data to choose which tests to run based on what changed.
 
 [TIP]
 ====
-Analysis and selection can be configured to run on any change through CLI flags.
+Analysis and test selection can be configured to run on any change through CLI flags.
 ====
 
 === Analysis on default branches
 
 The analysis phase is run on your default branch (or the base branch of a pull request). It runs tests with coverage instrumentation and updates the impact data with the latest test-to-file relationships.
 
-Keeping impact data fresh on the default branch allows the selection phase to select fewer tests without other unrelated changes interfering.
+Keeping impact data fresh on the default branch allows the test selection phase to select fewer tests without other unrelated changes interfering.
 
 For each file found during coverage analysis, a fast non-cryptographic hash of its contents is stored in the impact data. The data also tracks which files impact the tests being selected.
 
@@ -79,10 +83,10 @@ For each file found during coverage analysis, a fast non-cryptographic hash of i
 
 [NOTE]
 ====
-The analysis phase typically runs slower than a normal test run because it executes tests with coverage instrumentation. However, this cost pays for itself by enabling the selection phase to skip unaffected tests on subsequent runs.
+The analysis phase typically runs slower than a normal test run because it executes tests with coverage instrumentation. However, this cost pays for itself by enabling the test selection phase to skip unaffected tests on subsequent runs.
 ====
 
-=== Selection on feature branches
+=== Test selection on feature branches
 
 By default, all tests run on default branches. Test selection runs only affected tests on feature branches, using the impact data produced by analysis on the default branch.
 
@@ -121,12 +125,12 @@ The selection rules can be extended to select tests beyond those identified in t
 
 == Prerequisites
 
-Before enabling test impact analysis, ensure you have completed the xref:getting-started-with-circleci-testing-tool.adoc[Getting Started With CircleCI's Testing Tool] guide and have:
+Before enabling test impact analysis, ensure you have completed the xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] guide and have:
 
 * Configured your `.circleci/test-suites.yml` with `discover` and `run` commands.
 * Verified your tests run successfully with the `testsuite` command.
 
-TIP: You can use the xref:guides:toolkit:circleci-agent-skills.adoc[CircleCI Agent Skills] get Smarter Testing set up. Install the link:https://github.com/CircleCI-Public/skills[CircleCI Public Skills] plugin to your AI coding agent and ask your agent to get set up for Smarter Testing.
+TIP: You can use the xref:guides:toolkit:circleci-agent-skills.adoc[CircleCI Agent Skills] to get Smarter Testing set up. Install the link:https://github.com/CircleCI-Public/skills[CircleCI Public Skills] plugin to your AI coding agent and ask your agent to get set up for Smarter Testing.
 
 == 1. Enable test impact analysis in your test-suites.yml file
 
@@ -177,6 +181,7 @@ If these defaults do not suit your project, see the <<advanced-configuration,Adv
 
 * xref:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting] to evenly split tests across parallel nodes.
 * xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] to automatically retry flaky tests.
+* xref:set-parallelism-dynamically.adoc[Set Parallelism Dynamically] to set job parallelism from the number of selected tests.
 
 
 [#advanced-configuration]
@@ -242,7 +247,7 @@ Each flag accepts three values:
 | Value | Meaning for `--analyze-tests` | Meaning for `--run-tests`
 
 | `impacted`
-| Analyze only test atoms whose impact data needs updating -- either the test changed, or the files it covers changed.
+| Analyze only test atoms whose impact data needs updating, because either the test changed or the files it covers changed.
 | Select and run only the test atoms impacted by a change.
 
 | `none`
@@ -250,7 +255,7 @@ Each flag accepts three values:
 | Skip running tests entirely.
 
 | `all`
-| Analyze ALL discovered test atoms. *Rarely needed* -- only use to rebuild impact data from scratch.
+| Analyze ALL discovered test atoms. *Rarely needed*: only use to rebuild impact data from scratch.
 | Select and run all discovered test atoms (full test suite).
 |===
 --
@@ -277,7 +282,7 @@ By default, feature branches run only impacted tests, and the default branch run
 
 === Analyze impacted tests and run all tests on your default branch
 
-No changes are required -- the default behavior already handles both.
+No changes are required. The default behavior already handles both.
 
 === Analyze impacted tests as a non-blocking job in the same workflow
 
@@ -404,66 +409,4 @@ jobs:
 [#dynamic-parallelism]
 === Set parallelism from the number of selected tests
 
-NOTE: Dynamic parallelism is experimental. The `experimental.dynamic-parallelism` configuration will be replaced in a future release. You will be required to update your configuration when the syntax changes.
-
-Use the `circleci testsuite list-tests` command in an upstream job to select test atoms, then run the test atoms in a downstream job with parallelism set from the number of selected test atoms.
-
-The `list-tests` command selects test atoms without running them, applying the same selection rules as `circleci testsuite run`. The count reflects what the test job runs. The `--run-tests` and `--analyze-tests` flags accept the same values as `run`. If your test job passes either flag, pass the same flags to `list-tests` so the count matches. See <<overriding-tests-selected-for-run-and-analysis>>.
-
-To get set up, pass a unique key to `list-tests` with the `--key` flag. Then add an `experimental.dynamic-parallelism` stanza to your configuration, including the following:
-
-* The name of the downstream test job.
-* The unique key.
-* Minimum and maximum parallelism for the job.
-
-.CircleCI configuration that sets parallelism from the selected test atoms
-[source,yaml]
-----
-# .circleci/config.yml
-version: 2.1
-
-jobs:
-  list-tests:
-    executor: my-executor
-    steps:
-      # Check out the code and install the dependencies the discover command needs.
-      - setup
-      # List the test atoms that would be selected, without running them.
-      - run: circleci testsuite list-tests "ci tests" --key=ci-tests-parallelism-key
-
-  test:
-    executor: my-executor
-    # Set job parallelism to the maximum parallelism for a full suite to run.
-    # Any failures will fall back to this value.
-    # This is optional but recommended.
-    parallelism: 20
-    steps:
-      - setup
-      - run: circleci testsuite run "ci tests"
-      - store_test_results:
-          path: test-reports
-
-workflows:
-  test-workflow:
-    jobs:
-      - list-tests
-      - test:
-          requires:
-            - list-tests
-
-experimental:
-  dynamic-parallelism:
-    # The name of the job to set parallelism for.
-    test:
-      # Must match the key passed to list-tests.
-      key: ci-tests-parallelism-key
-      min: 1
-      max: 20
-----
-
-[TIP]
-====
-The `list-tests` job runs your `discover` command, so it needs a checkout and any dependencies that command relies on.
-
-Dynamic parallelism requires test timings to work, these are generated whenever the full test suite is run with Smarter Testing. Merging to your default branch or running the test suite once with the `--run-tests=all` flag will generate timings for dynamic parallelism.
-====
+To set a test job's parallelism from the number of test atoms that test selection chooses, see xref:set-parallelism-dynamically.adoc[Set Parallelism Dynamically].

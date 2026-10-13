@@ -1,49 +1,29 @@
-= Collect test data
+= Upload test results
 :page-platform: Cloud, Server
-:page-vcs: github, bitbucket
+:page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Store test results with the store_test_results step so CircleCI can collect test data for Test Insights. Includes test runner examples by language.
+:page-description: Upload test results with the store_test_results step to see them in CircleCI. Includes JUnit XML formatter setup and test runner examples by language.
 :experimental:
 
-[#introduction]
-== Introduction
+Upload your test results to CircleCI with the xref:reference:ROOT:configuration-reference.adoc#storetestresults[`store_test_results` step]. CircleCI reads the JUnit XML files that your test runner writes, and uses them to show your test results and power its testing features. This page describes how to configure common test runners to output JUnit XML, and how to upload the results.
 
-When you run tests in CircleCI, there are two ways to store your test results. You can either use xref:optimize:artifacts.adoc[Artifacts] or the xref:reference:ROOT:configuration-reference.adoc#storetestresults[`store_test_results` step]. Each of these methods has advantages, so the decision needs to be made for each project.
+Uploading test results gives you access to:
 
-When you save test data using the `store_test_results` step, CircleCI collects data from XML files and uses it to provide insights into your job. This page describes how to configure CircleCI to output test data as XML for some common test runners and store reports with the `store_test_results` step.
-
-Using the *`store_test_results` step* gives you access to:
-
-* The *Tests tab* in the CircleCI web app.
+* The *Tests* tab in the CircleCI web app, which shows the passing and failing tests for each job.
+* Timing data for test splitting.
 ifndef::server[]
-* Test insights and flaky test detection.
+* Test Insights and flaky test detection.
 endif::server[]
-* Test splitting.
-
-You can also store test results as *artifacts*, which means you can look at the raw XML. Using artifacts can be useful when debugging issues with setting up your project's test results handling, for example, finding incorrectly uploaded files.
-
-ifndef::server[]
-To see test results as build artifacts, upload them using the xref:reference:ROOT:configuration-reference.adoc#storeartifacts[`store_artifacts` Step]. Storing artifacts has associated costs due to the use of storage. See the xref:optimize:persist-data.adoc#custom-storage-usage[Persisting Data] page for information on how to customize storage retention periods for objects like artifacts.
-endif::server[]
-ifdef::server[]
-To see test results as build artifacts, upload them using the xref:reference:ROOT:configuration-reference.adoc#storeartifacts[`store_artifacts` Step].
-endif::server[]
-
-TIP: You can choose to upload your test results using both `store_test_results` and `store_artifacts`.
-
-Using the xref:reference:ROOT:configuration-reference.adoc#storetestresults[`store_test_results` Step] allows you to do the following:
-
-* Upload and store test results.
-* Get a view of your passing/failing tests in the CircleCI web app.
-
-Access test results from the *Tests tab* when viewing a job, as shown below.
 
 .Test summary view
 image::guides:ROOT:test-summary.png[store-test-results-view]
 
-Below is an example of using the xref:reference:ROOT:configuration-reference.adoc#storetestresults[`store_test_results` Key] in your `.circleci/config.yml`.
+[#configure-test-uploads]
+== Configure test uploads
+
+Add a `store_test_results` step to your job in `.circleci/config.yml`, after the step that runs your tests:
 
 [,yml]
 ----
@@ -53,7 +33,7 @@ steps:
   # run tests and store XML files to a subdirectory, for example, test-results
   #...
   - store_test_results:
-    path: test-results
+      path: test-results
 ----
 
 The `path` key is an absolute or relative path to your `working_directory`. It can contain JUnit XML test metadata files directly in the directory, in subdirectories, or point to a single file containing all test results.
@@ -61,19 +41,16 @@ The `path` key is an absolute or relative path to your `working_directory`. It c
 CAUTION: Make sure that your `path` value is not a hidden folder. For example, `.my_hidden_directory` would be an invalid format.
 
 ifndef::server[]
-[#viewing-storage-usage]
-== Viewing storage usage
-
-For information on viewing your storage usage, and calculating your monthly storage overage costs, see the xref:optimize:persist-data.adoc#managing-network-and-storage-usage[Persisting Data] guide.
+If you use Smarter Testing, the `path` must match the directory of `outputs.junit` in your `.circleci/test-suites.yml` file. See xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing].
 endif::server[]
+
+To look at the raw XML files, for example when debugging your test uploads, you can also store test results as artifacts with the `store_artifacts` step. See the xref:optimize:artifacts.adoc[Storing Build Artifacts] page.
 
 ifndef::server[]
 [#test-insights]
 == Test Insights
 
-ifndef::server[]
 include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab or GitHub App]
-endif::server[]
 
 See the xref:insights:insights-tests.adoc[Test Insights] page for information on using the Insights feature to gather information about your tests.
 This includes flaky test detection, viewing tests that failed most often, slowest tests, and an overall performance summary.
@@ -123,6 +100,11 @@ This section provides the following test runner examples:
 | <<jest,example>>
 
 | JavaScript
+| Vitest
+| built-in
+| <<vitest,example>>
+
+| JavaScript
 | Mocha
 | link:https://www.npmjs.com/package/mocha-junit-reporter[`mocha-junit-reporter`]
 | <<mocha-for-node,example>>, <<mocha-with-nyc,example with nyc>>
@@ -159,7 +141,7 @@ This section provides the following test runner examples:
 
 | Ruby
 | RSpec
-| link:https://rubygems.org/gems/rspec_junit_formatter/versions/0.2.3[`rspec_junit_formatter`]
+| link:https://rubygems.org/gems/rspec_junit_formatter[`rspec_junit_formatter`]
 | <<rspec,example>>
 
 | Ruby
@@ -221,6 +203,28 @@ This section provides the following test runner examples:
 | CTest
 | link:https://cmake.org/cmake/help/latest/manual/ctest.1.html#cmdoption-ctest-output-junit[CTest]
 | <<ctest-for-c-cxx-tests,example>>
+
+| C{pp}
+| GoogleTest
+| built-in
+| <<googletest,example>>
+
+| Go
+| go test
+| link:https://github.com/gotestyourself/gotestsum[gotestsum]
+| <<go,example>>
+
+| Bash
+| Bats
+| built-in
+| <<bats-for-bash,example>>
+ifndef::server[]
+
+| Swift, Objective-C
+| Xcode
+| link:https://fastlane.tools/[Fastlane] or link:https://github.com/xcpretty/xcpretty[`xcpretty`]
+| <<xcode,example>>
+endif::server[]
 |===
 --
 
@@ -252,6 +256,21 @@ For a full walkthrough, refer to this article link:https://www.viget.com/article
 When running Jest tests, use the `--runInBand` flag. Without this flag, Jest will try to allocate the CPU resources of the entire virtual machine in which your job is running. Using `--runInBand` will force Jest to use only the virtualized build environment within the virtual machine.
 
 For more details on `--runInBand`, refer to the link:https://jestjs.io/docs/cli#--runinband[Jest CLI] documentation. For more information on these issues, see link:https://github.com/jestjs/jest/issues/1524#issuecomment-262366820[Issue 1524] and link:https://github.com/jestjs/jest/issues/5239#issuecomment-355867359[Issue 5239] of the official Jest repository.
+
+[#vitest]
+=== Vitest
+
+Vitest has a built-in JUnit reporter. Set the reporter and output file on the command line:
+
+[,yml]
+----
+    steps:
+      - run:
+          name: Run tests with JUnit as reporter
+          command: npx vitest run --reporter=default --reporter=junit --outputFile.junit=test-results/junit.xml
+      - store_test_results:
+          path: test-results
+----
 
 [#mocha-for-node]
 === Mocha for Node.js
@@ -745,6 +764,23 @@ link:https://github.com/google/googletest[GoogleTest] provides an XML option for
 
 You can see a full example on this link:https://levelup.gitconnected.com/how-to-combine-c-cmake-googletest-circleci-docker-and-why-e02d76c060a3[third party resource].
 
+[#go]
+=== Go
+
+To output JUnit XML for Go tests, use link:https://github.com/gotestyourself/gotestsum[gotestsum]. Add it to your module as a tool dependency with `go get -tool gotest.tools/gotestsum`, then run your tests through it:
+
+[,yml]
+----
+    steps:
+      - run:
+          name: Run tests with JUnit output
+          command: |
+            mkdir -p test-results
+            go tool gotestsum --junitfile=test-results/junit.xml -- ./...
+      - store_test_results:
+          path: test-results
+----
+
 ifndef::server[]
 [#xcode]
 === Xcode
@@ -831,7 +867,7 @@ Update your `.circleci/config.yml` to upload the test results to CircleCI.
 To access test metadata for a job from the API, refer to the link:https://circleci.com/docs/api/v2/#operation/getTests[test-metadata API documentation].
 
 [#see-also]
-== See Also
+== See also
 
 * xref:insights:insights.adoc[Using Insights]
 ifndef::server[]

@@ -13,6 +13,10 @@ This glossary defines terms used across the CircleCI product and documentation. 
 
 Any user, registered or unregistered, who triggers the use of compute resources on projects that are not open source during a billing period. Commits, reruns, approvals, scheduled triggers, and machine users can all make a user active. Active users are counted for billing. See the xref:guides:plans-pricing:user-types-and-registration.adoc[User Types and Registration] page.
 
+== Analysis
+
+include::guides:ROOT:partial$glossary/smarter-testing.adoc[tag=analysis]
+
 == Approval job
 
 A special job, configured with `type: approval`, that pauses a <<workflow>> until a user with the required permissions manually approves it. An approval job runs no steps of its own. It acts as a manual gate before downstream jobs continue. See the xref:guides:orchestrate:workflows.adoc[Workflows] page.
@@ -24,6 +28,10 @@ A file or directory that persists after a <<job>> finishes, such as a compiled b
 == Audit log
 
 A record of significant events in a CircleCI organization, available to organization admins for audit and forensic analysis. See the xref:guides:security:audit-logs.adoc[Audit Logs] page.
+
+== Auto rerun failed tests
+
+include::guides:ROOT:partial$glossary/smarter-testing.adoc[tag=auto-rerun-failed-tests]
 
 == Build agent
 
@@ -126,6 +134,14 @@ Docker Layer Caching (DLC) lets builds reuse Docker image layers from previous b
 
 A feature that lets a run determine the work it executes at runtime, based on pipeline parameters, changed file paths, or other conditions, rather than using fully static configuration. Dynamic configuration is enabled with a <<setup-workflow>> (`setup: true`). See the xref:guides:orchestrate:dynamic-config.adoc[Dynamic Configuration] page.
 
+== Dynamic parallelism
+
+include::guides:ROOT:partial$glossary/smarter-testing.adoc[tag=dynamic-parallelism]
+
+== Dynamic test splitting
+
+include::guides:ROOT:partial$glossary/smarter-testing.adoc[tag=dynamic-test-splitting]
+
 == Environment
 
 In the Deploys feature, a named deployment target represented in the CircleCI UI, such as staging or production. Environments can be a custom type or a Kubernetes cluster type. Ordered into an <<environment-hierarchy>>, they define a promotion path. See the xref:guides:deploy:deployment-overview.adoc[Deployment Overview] page.
@@ -160,11 +176,15 @@ The mechanisms for controlling whether a <<job>>, <<workflow>>, or <<step>> runs
 
 == Flaky test
 
-A test that passes and fails inconsistently without changes to the code under test. CircleCI identifies a test as flaky when it both fails and passes on the same commit within a set time window. See the xref:guides:test:fix-flaky-tests.adoc[Identify and Fix Flaky Tests] page.
+A test that passes and fails inconsistently without changes to the code under test. CircleCI identifies a test as flaky when it both fails and passes on the same commit within a set time window. See the xref:guides:test:fix-flaky-tests.adoc[Identify and Fix Flaky Tests] page. To retry flaky tests automatically, see <<auto-rerun-failed-tests>>.
 
 == Image
 
 A packaged system that includes the instructions for creating a running <<container>>. The <<primary-container>> is defined by the first image listed in your <<configuration,configuration file>>. Visit the https://circleci.com/developer/images[CircleCI Developer Hub] to browse available convenience and machine images. See also <<convenience-image>>, <<machine-image>>, and <<custom-image>>.
+
+== Impact data
+
+include::guides:ROOT:partial$glossary/smarter-testing.adoc[tag=impact-data]
 
 == Insights
 
@@ -292,7 +312,11 @@ A feature that enables building, running, and pushing Docker images to registrie
 
 == Rerun
 
-Re-executing a failed <<workflow>>, or individual failed <<job,jobs>> within it, to recover from transient failures without initiating a new <<run>>. See the xref:guides:orchestrate:workflows.adoc[Workflows] page. For tests specifically, see <<test-splitting>> and the xref:guides:test:rerun-failed-tests.adoc[Rerun Failed Tests] page.
+Re-executing a failed <<workflow>>, or individual failed <<job,jobs>> within it, to recover from transient failures without initiating a new <<run>>. See the xref:guides:orchestrate:workflows.adoc[Workflows] page. For tests specifically, see <<rerun-only-failed-tests>> and <<auto-rerun-failed-tests>>.
+
+== Rerun only failed tests
+
+include::guides:ROOT:partial$glossary/smarter-testing.adoc[tag=rerun-only-failed-tests]
 
 == Resource class
 
@@ -327,9 +351,17 @@ An additional <<image>> listed in a job's configuration that runs alongside the 
 
 An authentication method that lets users authenticate once through an identity provider, using the SAML 2.0 protocol, to access an organization's CircleCI resources. See the xref:guides:permissions-authentication:sso-overview.adoc[SSO Overview] page.
 
+== Smarter Testing
+
+include::guides:ROOT:partial$glossary/smarter-testing.adoc[tag=smarter-testing] See the xref:guides:test:smarter-testing-overview.adoc[Smarter Testing Overview] page.
+
 == SSH key
 
 A cryptographic key pair used for authentication in CircleCI. A deploy key gives CircleCI access to check out a single repository. A user key is associated with a user account and can give access to multiple repositories. See the xref:guides:security:rotate-project-ssh-keys.adoc[Rotate Project SSH Keys] page.
+
+== Static test splitting
+
+include::guides:ROOT:partial$glossary/smarter-testing.adoc[tag=static-test-splitting]
 
 == Step
 
@@ -339,14 +371,33 @@ A single executable action within a <<job>>, such as a `run`, `checkout`, `save_
 
 A <<workflow,workflow>> marked with `setup: true` that runs first in a <<dynamic-configuration,dynamic configuration>>. A setup workflow can compute pipeline parameters and select which configuration to continue with, enabling conditional execution of the remaining workflows. See the xref:guides:orchestrate:dynamic-config.adoc[Dynamic Configuration] page.
 
-[badge="Beta"]
+== Test atom
+
+include::guides:ROOT:partial$glossary/smarter-testing.adoc[tag=test-atom]
+
 == Test impact analysis
 
-A feature that runs only the tests affected by a code change. Test impact analysis maps which tests exercise which source files and skips tests covering unchanged files, to speed up CI. See the xref:guides:test:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis] page.
+include::guides:ROOT:partial$glossary/smarter-testing.adoc[tag=test-impact-analysis]
+
+== Test selection
+
+include::guides:ROOT:partial$glossary/smarter-testing.adoc[tag=test-selection]
 
 == Test splitting
 
-Dividing a test suite across multiple parallel execution environments, by name, file size, or historical timing data, to reduce overall test time. Test splitting works together with <<parallelism>>. See the xref:guides:optimize:parallelism-faster-jobs.adoc[Running Tests in Parallel] page.
+Dividing a test suite across multiple parallel execution environments, by name, file size, or historical timing data, to reduce overall test time. Test splitting works together with <<parallelism>>. See the xref:guides:optimize:parallelism-faster-jobs.adoc[Running Tests in Parallel] page. With Smarter Testing, see <<static-test-splitting>> and <<dynamic-test-splitting>>.
+
+== Test suite
+
+include::guides:ROOT:partial$glossary/smarter-testing.adoc[tag=test-suite]
+
+== Test uploads
+
+include::guides:ROOT:partial$glossary/smarter-testing.adoc[tag=test-uploads]
+
+== Testsuite command
+
+include::guides:ROOT:partial$glossary/smarter-testing.adoc[tag=testsuite-command]
 
 == Trigger
 

@@ -88,7 +88,7 @@ ifndef::server[]
 
 Use the rerun failed tests feature to only rerun a subset of tests when a transient test failure arises, rather than rerunning the entire test suite.
 
-* For more information, see the xref:test:rerun-failed-tests.adoc[Rerun Failed Tests] page.
+* For more information, see the xref:test:rerun-only-failed-tests.adoc[Rerun Only Failed Tests] page. If you use the `circleci tests run` command, see the xref:test:rerun-failed-tests.adoc[Rerun Failed Tests With the Tests Run Command] page.
 endif::server[]
 
 [#resource-class]

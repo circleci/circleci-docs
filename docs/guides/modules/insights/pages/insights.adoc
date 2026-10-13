@@ -94,7 +94,7 @@ endif::server[]
 == See also
 
 ifndef::server[]
-Refer to the xref:test:collect-test-data.adoc[Collect Test Data] document for guidance on configuring Insights into your most consistently failing tests.
+Refer to the xref:test:collect-test-data.adoc[Upload Test Results] document for guidance on configuring Insights into your most consistently failing tests.
 endif::server[]
 
 See the link:https://circleci.com/docs/api/v2/#tag/Insights[Insights API reference].

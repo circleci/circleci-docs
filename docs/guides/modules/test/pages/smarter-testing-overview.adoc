@@ -1,0 +1,79 @@
+= Smarter Testing overview
+:page-platform: Cloud
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-audience: developer
+:page-description: Learn what Smarter Testing is, which capabilities are free and which have a credit charge, and the terms used across the Smarter Testing docs.
+:experimental:
+
+Smarter Testing is CircleCI's way to run tests on CircleCI Cloud. It reduces test execution time while maintaining test confidence. Smarter Testing is built on the `circleci testsuite` command, which discovers and runs your tests.
+
+[#why-use-smarter-testing]
+== Why use Smarter Testing
+
+Smarter Testing gives you the following benefits:
+
+* *Free capabilities with no extra configuration*: static test splitting across parallel nodes, rerunning only failed tests when you rerun a workflow from failed, and test uploads.
+* *Faster test runs when you need them*: run only the tests impacted by your code changes, and keep parallel nodes evenly loaded. You can also set the number of parallel nodes to match the work, and retry flaky tests automatically. You enable each of these capabilities on its own, and they have a credit charge above your plan's allowance.
+* *The same command locally and in CI*: run and validate your test setup on your own machine before you push.
+
+[#capabilities]
+== Capabilities
+
+The following capabilities are free and built in:
+
+* *xref:use-static-test-splitting.adoc[Static Test Splitting]*: split tests across parallel execution nodes using timing data from previous runs.
+* *xref:rerun-only-failed-tests.adoc[Rerun Only Failed Tests]*: rerun only the failed tests when you rerun a workflow from failed.
+* *xref:collect-test-data.adoc[Test Uploads]*: upload your test results with the `store_test_results` step to access more test analytics, such as the *Tests* tab and Test Insights.
+
+The following capabilities build on top of them and have a credit charge above your plan's allowance. You can enable each one independently:
+
+* *xref:set-up-test-impact-analysis.adoc[Test Impact Analysis]*: learn which tests are impacted by which source files, then run only the tests impacted by your code changes.
+* *xref:use-dynamic-test-splitting.adoc[Dynamic Test Splitting]*: evenly distribute tests across parallel execution nodes as they run.
+* *xref:set-parallelism-dynamically.adoc[Dynamic Parallelism]*: set a test job's parallelism when the pipeline runs, from the selected tests or a target duration for each node.
+* *xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests]*: automatically retry failed tests during the same run.
+
+[#credit-charge]
+== Credit charge
+
+Test impact analysis, dynamic test splitting, dynamic parallelism, and auto rerun failed tests count test atoms toward your plan's monthly allowance. The allowance depends on your plan:
+
+[.table-scroll]
+--
+[cols="1,1", options="header"]
+|===
+| Plan | Monthly allowance (test atoms)
+
+| Free
+| 1,000
+
+| Performance
+| 10,000
+
+| Scale
+| 100,000
+|===
+--
+
+Overall usage above your plan's allowance has a credit charge of 3,000 credits per 100,000 test atoms. See xref:plans-pricing:credits.adoc[Credits].
+
+[#how-test-atoms-are-counted]
+=== How test atoms are counted
+
+Each `circleci testsuite run` with one or more of these capabilities enabled counts its discovered test atoms once. Enabling one capability or several makes no difference, and neither does the job's parallelism. If a job runs more than one test suite, each run counts separately.
+
+[#get-started]
+== Get started
+
+To set up `circleci testsuite` for your project, follow the xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] guide.
+
+If your project already uses the `circleci tests glob`, `circleci tests split`, or `circleci tests run` commands, follow the same guide to migrate them.
+
+TIP: You can use the xref:toolkit:circleci-agent-skills.adoc[CircleCI Agent Skills] to get set up for Smarter Testing. Install the link:https://github.com/CircleCI-Public/skills[CircleCI Public Skills] plugin to your AI coding agent and ask your agent to get set up for Smarter Testing.
+
+[#glossary]
+== Smarter Testing glossary
+
+The following terms are used throughout the Smarter Testing documentation. They also appear in the main xref:reference:ROOT:glossary.adoc[Glossary].
+
+include::ROOT:partial$glossary/smarter-testing.adoc[]

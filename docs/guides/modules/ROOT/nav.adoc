@@ -147,30 +147,31 @@
 *** xref:execution-runner:runner-scaling.adoc[Scaling self-hosted runner]
 
 * Testing on CircleCI
-** Run tests on CircleCI
-*** xref:test:test.adoc[Automated testing]
-*** xref:test:getting-started-with-circleci-testing-tool.adoc[Getting started with CircleCI's testing tool]
-*** xref:test:collect-test-data.adoc[Collecting test data]
-*** xref:insights:insights-tests.adoc[Test Insights]
-*** xref:reference:ROOT:testsuite-configuration-reference.adoc[Test suite Config Reference]
+** xref:test:test.adoc[Automated testing]
+** xref:test:collect-test-data.adoc[Upload test results]
 ** Smarter Testing
-*** xref:test:set-up-test-impact-analysis.adoc[Set up Test Impact Analysis]
-*** xref:test:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting]
-*** xref:test:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests]
+*** xref:test:smarter-testing-overview.adoc[Smarter Testing overview]
+*** xref:test:getting-started-with-smarter-testing.adoc[Get started with Smarter Testing]
+*** xref:test:use-static-test-splitting.adoc[Use static test splitting]
+*** xref:test:rerun-only-failed-tests.adoc[Rerun only failed tests]
+*** xref:test:set-up-test-impact-analysis.adoc[Set up test impact analysis]
+*** xref:test:set-parallelism-dynamically.adoc[Set parallelism dynamically]
+*** xref:test:use-dynamic-test-splitting.adoc[Use dynamic test splitting]
+*** xref:test:auto-rerun-failed-tests.adoc[Auto rerun failed tests]
+*** xref:reference:ROOT:testsuite-configuration-reference.adoc[Testsuite configuration reference]
 ** Legacy test split tooling
 *** xref:optimize:parallelism-faster-jobs.adoc[Test splitting and parallelism]
 *** xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the environment CLI to split tests]
+*** xref:test:rerun-failed-tests.adoc[Rerun failed tests with the tests run command]
 *** xref:test:troubleshoot-test-splitting.adoc[Troubleshoot test splitting]
-*** xref:test:rerun-failed-tests.adoc[Re-run failed tests overview]
-** Manage and optimize tests
-*** xref:test:fix-flaky-tests.adoc[Fix flaky tests]
-*** xref:test:automate-llm-evaluation-testing-with-the-circleci-evals-orb.adoc[Automate LLM evaluation testing with the CircleCI Evals orb]
 ** Testing strategies
-*** xref:test:testing-llm-enabled-applications-through-evaluations.adoc[Testing LLM-enabled applications through evaluations]
+*** xref:test:fix-flaky-tests.adoc[Fix flaky tests]
 *** xref:test:browser-testing.adoc[Browser testing]
 *** xref:test:code-coverage.adoc[Generate code coverage metrics]
 *** xref:test:testing-ios.adoc[Testing iOS applications]
 *** xref:test:testing-macos.adoc[Testing macOS applications]
+*** xref:test:testing-llm-enabled-applications-through-evaluations.adoc[Testing LLM-enabled applications through evaluations]
+*** xref:test:automate-llm-evaluation-testing-with-the-circleci-evals-orb.adoc[Automate LLM evaluation testing with the CircleCI Evals orb]
 
 * Deploy with CircleCI
 ** Deployment management

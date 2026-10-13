@@ -1,0 +1,1 @@
+NOTE: Test impact analysis, dynamic test splitting, dynamic parallelism, and auto rerun failed tests have a credit charge above your plan's allowance. See xref:guides:test:smarter-testing-overview.adoc#credit-charge[Credit Charge].
