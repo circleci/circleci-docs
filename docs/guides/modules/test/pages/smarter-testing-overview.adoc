@@ -33,8 +33,6 @@ The following capabilities build on top of them and have a credit charge above y
 * *xref:set-parallelism-dynamically.adoc[Dynamic Parallelism]*: set a test job's parallelism when the pipeline runs, from the selected tests or a target duration for each node.
 * *xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests]*: automatically retry failed tests during the same run.
 
-include::ROOT:partial$notes/smarter-testing-credit-charge.adoc[]
-
 [#credit-charge]
 == Credit charge
 

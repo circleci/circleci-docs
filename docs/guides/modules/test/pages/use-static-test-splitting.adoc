@@ -8,8 +8,6 @@
 
 Static test splitting reduces overall job time by dividing your tests across parallel execution nodes. It is built in to `circleci testsuite run` and is free, with no extra configuration in `test-suites.yml`.
 
-NOTE: Static test splitting is a *free* Smarter Testing capability. It is included with every project.
-
 == How it works
 
 When `parallelism` is set on your job, `circleci testsuite run` splits your tests across the parallel nodes up front, using the durations reported in your JUnit results from previous runs.
