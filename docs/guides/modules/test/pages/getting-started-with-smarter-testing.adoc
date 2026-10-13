@@ -139,6 +139,7 @@ All of your tests now run locally and in CI using the `testsuite` command. Next,
 
 * xref:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis] to run only the tests impacted by your code changes.
 * xref:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting] to evenly split tests across parallel nodes.
+* xref:set-parallelism-dynamically.adoc[Set Parallelism Dynamically] to set parallelism from the selected tests or a target duration for each node.
 * xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] to automatically retry flaky tests.
 
 For the full set of configuration keys available in `test-suites.yml`, refer to the xref:reference:ROOT:testsuite-configuration-reference.adoc[Testsuite Configuration Reference].

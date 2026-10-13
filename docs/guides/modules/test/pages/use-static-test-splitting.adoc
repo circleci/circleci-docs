@@ -58,3 +58,4 @@ The first run on a branch might split less evenly, because timing data from earl
 
 * xref:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting] to evenly split tests across parallel nodes as they run.
 * xref:rerun-only-failed-tests.adoc[Rerun Only Failed Tests] to rerun only the tests that failed when you rerun a workflow from failed.
+* xref:set-parallelism-dynamically.adoc[Set Parallelism Dynamically] to set parallelism from a target duration for each node, instead of a fixed value.

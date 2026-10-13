@@ -101,3 +101,4 @@ Verify dynamic test splitting is working as expected in CI by looking at the "ti
 
 * xref:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis] to run only the tests impacted by your code changes.
 * xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] to automatically retry flaky tests.
+* xref:set-parallelism-dynamically.adoc[Set Parallelism Dynamically] to set parallelism from a target duration for each node, instead of a fixed value.

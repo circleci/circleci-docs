@@ -21,6 +21,7 @@ The following capabilities build on top of them and have a credit charge above y
 
 * *xref:set-up-test-impact-analysis.adoc[Test Impact Analysis]*: learn which tests are impacted by which source files, then run only the tests impacted by your code changes.
 * *xref:use-dynamic-test-splitting.adoc[Dynamic Test Splitting]*: evenly distribute tests across parallel execution nodes as they run.
+* *xref:set-parallelism-dynamically.adoc[Dynamic Parallelism]*: set a test job's parallelism when the pipeline runs, from the selected tests or a target duration for each node.
 * *xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests]*: automatically retry failed tests during the same run.
 
 include::ROOT:partial$notes/smarter-testing-credit-charge.adoc[]

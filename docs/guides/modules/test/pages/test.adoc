@@ -182,7 +182,7 @@ ifndef::server[]
 On CircleCI Cloud, use Smarter Testing to run your tests. Smarter Testing replaces your test command with `circleci testsuite run`, which discovers and runs your tests. You get the following benefits:
 
 * *Free capabilities with no extra configuration*: static test splitting across parallel nodes, rerunning only failed tests when you rerun a workflow from failed, and test uploads.
-* *Faster test runs when you need them*: test impact analysis runs only the tests impacted by your code changes. Dynamic test splitting keeps parallel nodes evenly loaded. Auto rerun failed tests retries flaky tests automatically. These capabilities have a credit charge above your plan's allowance.
+* *Faster test runs when you need them*: test impact analysis runs only the tests impacted by your code changes. Dynamic test splitting keeps parallel nodes evenly loaded. Dynamic parallelism sets the number of parallel nodes when the pipeline runs. Auto rerun failed tests retries flaky tests automatically. These capabilities have a credit charge above your plan's allowance.
 * *The same command locally and in CI*: run and validate your test setup on your own machine before you push.
 
 To learn more, read the xref:smarter-testing-overview.adoc[Smarter Testing Overview], then follow xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing].
