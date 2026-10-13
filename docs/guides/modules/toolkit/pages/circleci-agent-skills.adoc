@@ -62,7 +62,7 @@ The CircleCI plugin currently includes the following eight skills. Your agent pi
 | Set up Chunk sidecars for this project.
 
 | `circleci-testsuite`
-| Get set up for Smarter Testing by using `.circleci/test-suites.yml` and switch tests to `circleci testsuite run`. The manual setup is described on the xref:guides:test:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] page.
+| Get set up for Smarter Testing by using `.circleci/test-suites.yml` and switch tests to `circleci testsuite run`. This skill also migrates jobs that use the `circleci tests` commands. The manual setup is described on the xref:guides:test:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] page. For migration, see the xref:guides:test:migrate-to-smarter-testing.adoc[Migrate From the Tests Commands to Smarter Testing] page.
 | Set up a testsuite for this project.
 
 | `circleci-smarter-testing`
