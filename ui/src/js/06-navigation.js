@@ -24,6 +24,7 @@
   // page. Another component's tree isn't in this page, so tapping it fetches
   // that component's start page and reads the tree from there.
   const mobileNav = navigation?.querySelector('[data-mobile-nav]')
+  const navPanels = navigation?.querySelector('[data-nav-panels]')
   const navTitle = navigation?.querySelector('[data-nav-title]')
   const backButton = navigation?.querySelector('[data-mobile-nav-back]')
   const backLabel = navigation?.querySelector('[data-mobile-nav-back-label]')
@@ -39,6 +40,8 @@
   // the component most recently tapped, so a slower earlier fetch can't override it
   let pendingComponent = null
   let currentView = { view: navigation?.dataset.navView, section: -1 }
+  const viewDepth = { top: 0, component: 1, section: 2 }
+  const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')
 
   function childMatching (el, selector) {
     return el ? Array.from(el.children).find((child) => child.matches(selector)) : undefined
@@ -129,7 +132,7 @@
         const label = document.createElement('span')
         label.textContent = section.label
         button.append(label, arrowRightTemplate.content.cloneNode(true))
-        button.addEventListener('click', (event) => showView('section', index, isKeyboard(event)))
+        button.addEventListener('click', (event) => showView('section', index, { moveFocus: isKeyboard(event) }))
         li.append(button)
       } else {
         li.append(pageLink(section))
@@ -158,8 +161,9 @@
     mobileNav.replaceChildren(...parts)
   }
 
-  function showView (view, sectionIndex = -1, moveFocus = false) {
+  function showView (view, sectionIndex = -1, { moveFocus = false, animate = true } = {}) {
     if (!navigation || !view) return
+    const fromDepth = viewDepth[currentView.view]
     const { title, sections } = activeComponent
     const section = sections[sectionIndex]
     if (view === 'section' && section) {
@@ -176,6 +180,7 @@
     }
     currentView = { view, section: sectionIndex }
     navigation.dataset.navView = view
+    if (animate && viewDepth[view] !== fromDepth) slideIn(viewDepth[view] > fromDepth ? 1 : -1)
     const aside = navigation.querySelector('aside')
     const current = view === 'top' ? null : mobileNav?.querySelector('[aria-current="page"], [data-active]')
     aside.scrollTop = current ? Math.max(0, current.offsetTop - aside.clientHeight / 3) : 0
@@ -187,13 +192,23 @@
     }
   }
 
+  // the new view slides in from the right going down a level, from the left going back up,
+  // like the drawer itself sliding open
+  function slideIn (direction) {
+    if (!navPanels?.animate || reducedMotion?.matches) return
+    navPanels.animate(
+      [{ transform: `translateX(${direction * 100}%)` }, { transform: 'none' }],
+      { duration: 300, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' }
+    )
+  }
+
   // the drawer opens on the section that holds the current page
   function resetView () {
     activeComponent = pageComponent
     const { sections } = pageComponent
     const index = sections.findIndex((section) => section.children.length && containsCurrent(section))
-    if (index !== -1) showView('section', index)
-    else showView(sections.length ? 'component' : 'top')
+    if (index !== -1) showView('section', index, { animate: false })
+    else showView(sections.length ? 'component' : 'top', -1, { animate: false })
   }
 
   // tapping a component in the top view drills into its sections. The link
@@ -204,7 +219,7 @@
     pendingComponent = name
     if (name === pageComponent.name && pageComponent.sections.length) {
       activeComponent = pageComponent
-      return showView('component', -1, moveFocus)
+      return showView('component', -1, { moveFocus })
     }
     link.setAttribute('aria-busy', 'true')
     try {
@@ -212,7 +227,7 @@
       if (!sections.length) throw new Error(`no nav tree on ${link.href}`)
       if (pendingComponent !== name) return
       activeComponent = { name, title, sections }
-      showView('component', -1, moveFocus)
+      showView('component', -1, { moveFocus })
     } catch {
       if (pendingComponent === name) window.location.href = link.href
     } finally {
@@ -239,8 +254,8 @@
   }
 
   backButton?.addEventListener('click', (event) => {
-    if (currentView.view === 'section') showView('component', -1, isKeyboard(event))
-    else showView('top', -1, isKeyboard(event))
+    if (currentView.view === 'section') showView('component', -1, { moveFocus: isKeyboard(event) })
+    else showView('top', -1, { moveFocus: isKeyboard(event) })
   })
 
   // opens and closes individual nav submenus inside the nav treed
