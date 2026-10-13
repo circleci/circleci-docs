@@ -7,6 +7,7 @@
 :experimental:
 :page-show-readtime: true
 :tabs-sync-option:
+:page-aliases: getting-started-with-circleci-testing-tool.adoc
 
 This guide sets up `circleci testsuite`, the foundation that every Smarter Testing capability builds on. For an introduction to Smarter Testing, including which capabilities are free and which have a credit charge, see the xref:smarter-testing-overview.adoc[Smarter Testing Overview].
 
