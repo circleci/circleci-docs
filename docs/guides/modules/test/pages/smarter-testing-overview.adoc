@@ -11,7 +11,7 @@ Smarter Testing is CircleCI's way to run tests on CircleCI Cloud. It reduces tes
 [#why-use-smarter-testing]
 == Why use Smarter Testing
 
-If your project is on CircleCI Cloud, use Smarter Testing to run your tests. You get the following benefits:
+Smarter Testing gives you the following benefits:
 
 * *Free capabilities with no extra configuration*: static test splitting across parallel nodes, rerunning only failed tests when you rerun a workflow from failed, and test uploads.
 * *Faster test runs when you need them*: run only the tests impacted by your code changes, and keep parallel nodes evenly loaded. You can also set the number of parallel nodes to match the work, and retry flaky tests automatically. You enable each of these capabilities on its own, and they have a credit charge above your plan's allowance.
