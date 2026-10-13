@@ -20,12 +20,12 @@ a| `m4pro.medium` +
 | -
 
 | `27.1`
-| Xcode 27.1 (27A9269)
+| Xcode 27.1 (27A9275)
 | 26.6.2
 a| `m4pro.medium` +
    `m4pro.large`
-| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v19591/manifest.txt[Installed software]
-| link:https://circleci.com/changelog/xcode-27-1-beta-1-available/[Release Notes]
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v19712/manifest.txt[Installed software]
+| link:https://circleci.com/changelog/xcode-27-1-available/[Release Notes]
 | -
 
 | `27.0`
