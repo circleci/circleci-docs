@@ -1,0 +1,176 @@
+= Run jobs on self-hosted runners
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-content-type: how-to
+:page-description: Send CircleCI jobs to self-hosted runners that your admin has set up, using a runner resource class with the machine or Docker executor.
+:experimental:
+
+Self-hosted runners run your jobs on infrastructure that your organization manages, instead of on CircleCI-hosted compute. Once an admin has installed a runner, you send a job to it by naming its resource class in your configuration. This page shows you how to target a runner from a job, and what changes when a job runs on a runner.
+
+To install or operate runners, see the xref:runner:ROOT:runner-overview.adoc[Self-Hosted Runner Overview].
+
+[#prerequisites]
+== Prerequisites
+
+* An organization admin has installed a self-hosted runner and created a resource class for it.
+* Your project belongs to the organization that owns the resource class. Jobs from projects in other organizations cannot use it.
+* If your project is public, the **Build forked pull requests** setting is off. Self-hosted runners are not available to projects with this setting enabled.
+ifndef::server[]
+* Your organization has at least one credit. Runner compute does not use credits, but jobs that use storage or networking do.
+endif::server[]
+
+[#get-runner-details-from-your-admin]
+== 1. Get runner details from your admin
+
+Ask the admin who set up the runner for the following details:
+
+* The resource class name, in the form `<namespace>/<resource-class>`. For example, `my-org/linux-large`.
+* The runner type: machine runner or container runner. The runner type decides which executor your job uses.
+* The operating system and CPU architecture of the runner.
+* For a machine runner, the tools installed on the host, and whether the runner cleans up its working directory between jobs.
+* For a container runner, any limits on the images your jobs can use, such as an approved private registry.
+
+Organization admins create and manage resource classes on the **Runners** page of the CircleCI web app.
+
+[#add-the-resource-class-to-your-job]
+== 2. Add the resource class to your job
+
+Set the `resource_class` key on the job to the runner resource class. The executor key depends on the runner type.
+
+[tabs]
+====
+Machine runner::
++
+--
+Use `machine: true` with the runner resource class. Machine runner jobs run directly on the runner host, so the job has no image key.
+
+.Run a job on a machine runner
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  build:
+    machine: true
+    resource_class: <namespace>/<resource-class> # The runner resource class from your admin
+    steps:
+      - checkout
+      - run: echo "Running on a self-hosted runner"
+
+workflows:
+  build-workflow:
+    jobs:
+      - build
+----
+
+Replace `<namespace>/<resource-class>`, including the angle brackets, with your runner resource class.
+--
+Container runner::
++
+--
+Use the `docker` executor with the runner resource class. Container runner runs each job in a pod in your Kubernetes cluster, using the image you list.
+
+.Run a job on a container runner
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:current
+    resource_class: <namespace>/<resource-class> # The runner resource class from your admin
+    steps:
+      - checkout
+      - run: echo "Running on a self-hosted runner"
+
+workflows:
+  build-workflow:
+    jobs:
+      - build
+----
+
+Replace `<namespace>/<resource-class>`, including the angle brackets, with your runner resource class.
+--
+====
+
+You can send some jobs in a workflow to a runner and others to CircleCI-hosted compute. Set the executor and resource class for each job separately.
+
+For the full syntax, see the xref:reference:ROOT:configuration-reference.adoc#self-hosted-runner[Configuration Reference].
+
+[#push-and-check-the-job]
+== 3. Push your configuration and check the job
+
+Commit and push your `.circleci/config.yml` file. When the pipeline triggers, a runner in the resource class claims the job and runs it.
+
+ifndef::server[]
+To watch the job from your terminal, use this xref:toolkit:circleci-cli.adoc[CircleCI CLI] command in your project directory:
+
+[source,console]
+----
+$ circleci run watch
+----
+
+With no run ID, `circleci run watch` watches the latest run for your project. For other options, see the link:https://cli.circleci.com/reference/#circleci-run-watch-run-id-flags[CircleCI CLI Reference]. You can also open the pipeline on the link:https://app.circleci.com/[CircleCI web app].
+endif::server[]
+ifdef::server[]
+To check the job, open the pipeline in the CircleCI web app and select the job to see its step output.
+endif::server[]
+
+If the job stays queued, ask your admin to check that a runner in the resource class is online. Also check that the resource class name in your configuration is correct.
+
+[#how-runner-jobs-differ]
+== How runner jobs differ from CircleCI-hosted jobs
+
+Most CircleCI features work the same way on self-hosted runners, including caches, workspaces, and artifacts. The following differences apply.
+
+[#compute-resources]
+=== Compute resources
+
+On a runner, the resource class names a pool of runners, not a compute size. The CPU and memory available to a job come from the runner host, or from the pod settings your admin configures for a container runner. Because `resource_class` holds the runner resource class, you cannot also set a size such as `large` or `xlarge`.
+
+Runner jobs count toward your organization's self-hosted runner concurrency limit, which covers all runner jobs across the organization.
+
+[#machine-runner-jobs]
+=== Machine runner jobs
+
+* Machine runner jobs cannot use CircleCI convenience images or custom Docker images. The job uses the tools installed on the runner host. Ask your admin to add any tools your jobs need, or install them in a job step.
+* Files from earlier jobs can remain on the host, depending on how your admin configures the runner. Put cleanup steps at the start of a job so it does not depend on what a previous job left behind. For more information, see the xref:runner:ROOT:runner-faqs.adoc#what-are-the-best-practices-for-managing-state-between-jobs[Runner FAQ].
+
+[#container-runner-jobs]
+=== Container runner jobs
+
+* Container runner jobs can use CircleCI convenience images and custom Docker images.
+* The `setup_remote_docker` step is not supported. To build container images, see xref:runner:ROOT:container-runner.adoc#building-container-images[Building Container Images].
+* The `aws_auth.oidc_role_arn` key is not supported. Use the other `aws_auth` fields instead.
+
+For the full list, see the xref:runner:ROOT:container-runner.adoc#limitations[Container Runner Limitations].
+
+[#features-not-available-on-runners]
+=== Features not available on runners
+
+* xref:optimize:docker-layer-caching.adoc[Docker Layer Caching].
+* The `CIRCLE_PREVIOUS_BUILD_NUM` built-in environment variable, and deprecated built-in environment variables.
+
+For the current list, see the xref:runner:ROOT:runner-overview.adoc#limitations[Self-Hosted Runner Limitations].
+
+[#circleci-commands-in-runner-jobs]
+=== CircleCI commands in runner jobs
+
+In a runner job, `circleci` is an alias of `circleci-agent`, the agent that runs your job. Commands such as test splitting and `circleci-agent step halt` work as they do on CircleCI-hosted compute. To use the full CircleCI CLI in a runner job, install it on the runner host or include it in your image. For more information, see the xref:runner:ROOT:runner-faqs.adoc#why-did-my-test-splitting-job-step-error-with-circleci-command-not-found[Runner FAQ].
+
+[#ssh-reruns]
+=== Rerun jobs with SSH
+
+You can xref:ssh-access-jobs.adoc[Debug Jobs With SSH] on self-hosted runners once your admin enables SSH reruns for the runner. SSH reruns on container runner are in preview.
+
+[#next-steps]
+== Next steps
+
+* xref:runner:ROOT:runner-concepts.adoc[Self-Hosted Runner Concepts]
+* xref:runner:ROOT:runner-feature-comparison-matrix.adoc[Runner Feature Comparison Matrix]
+* xref:runner:ROOT:troubleshoot-self-hosted-runner.adoc[Troubleshoot Self-Hosted Runner]
+* xref:resource-class-overview.adoc[Resource Class Overview]

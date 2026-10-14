@@ -100,6 +100,7 @@
 ** GPU
 *** xref:execute:using-gpu.adoc[Using the GPU execution environment]
 ** Self-hosted runners
+*** xref:execute:run-jobs-on-self-hosted-runners.adoc[Run jobs on self-hosted runners]
 *** xref:runner:ROOT:runner-overview.adoc[Self-hosted runner overview]
 *** xref:runner:ROOT:runner-feature-comparison-matrix.adoc[Runner feature comparison matrix]
 ** How-to guides
