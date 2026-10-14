@@ -13,7 +13,7 @@ The link:https://github.com/CircleCI-Public/chunk-cli[`chunk` CLI] is a develope
 . *Finds testing gaps*: uses mutation testing on a pool of sidecars to show which behavior your tests do not check.
 . *Runs implementation loops*: sends a prompt to an agent on a sidecar and iterates on review and validation feedback with Chunk factory (preview).
 
-After following these steps, say "validate on the sidecar" in your AI coding agent to run checks in a CircleCI Cloud environment. Say "review my changes" to get a review against your team's standards.
+After following the installation and setup steps, say "validate on the sidecar" in your AI coding agent to run checks in a CircleCI Cloud environment. Say "review my changes" to get a review against your team's standards.
 
 NOTE: **Chunk CLI vs Chunk by CircleCI.** The `chunk` CLI is a local developer tool. It is separate from xref:toolkit:chunk-setup-and-overview.adoc[Chunk by CircleCI], the AI-powered CI/CD assistant in the CircleCI web app.
 
@@ -62,7 +62,7 @@ If you are new to CircleCI:
 $ chunk auth signup
 ----
 
-Both commands open your browser for a secure login flow. Pass `--no-browser` to print the URL instead of opening it. If you sign up and your new account belongs to no organization, the CLI offers to create a standalone one. You can also create one later with `chunk org create <name>`.
+Both commands open your browser for a secure login flow. Pass `--no-browser` to print the URL instead of opening it. If you sign up and your new account belongs to no organization, the CLI offers to create a new CircleCI organization for you. You can also create one later with `chunk org create <name>`.
 
 If you prefer to use a personal API token instead:
 
@@ -119,7 +119,7 @@ $ chunk init
 
 * Detects your build, test, lint, and format commands.
 * Creates a `.chunk/config.json` file with the detected commands.
-* Detects your CircleCI organization ID and saves it to `.chunk/config.json`. If you belong to several organizations, the command shows a picker.
+* Detects your CircleCI organization ID and saves it to `.chunk/config.json`. If you belong to several organizations, you are prompted to pick one.
 * Installs shell completions.
 * Generates hook configuration in `.claude/settings.json` for Claude Code, and in `.codex/hooks.json` if Codex is installed.
 * Installs a git pre-commit hook that runs `chunk validate`.
