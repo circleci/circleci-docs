@@ -67,6 +67,7 @@
 *** xref:orchestrate:orchestration-cookbook.adoc[Orchestration cookbook]
 *** xref:orchestrate:dynamic-config.adoc[Dynamic configuration overview]
 *** xref:orchestrate:using-dynamic-configuration.adoc[Using dynamic configuration]
+*** xref:orchestrate:centralized-config-management-overview.adoc[Centralized config management overview]
 *** xref:orchestrate:how-to-override-config.adoc[Override configuration]
 *** xref:orchestrate:set-up-multiple-configuration-files-for-a-project.adoc[Set up multiple configuration files for a project]
 *** xref:orchestrate:databases.adoc[Configure databases]
