@@ -96,9 +96,9 @@ image::guides:ROOT:executor_types_plus_parallelism.png[Parallelism]
 [#use-parallelism-with-self-hosted-runners]
 === Use parallelism with self-hosted runners
 
-To use parallelism with jobs that use xref:execution-runner:runner-overview.adoc[Self-Hosted Runners], ensure that you have at least two runners associated with the resource class that your job uses. If you set the parallelism value to be greater than the number of active runners, the excess parallel tasks will queue until a runner is available.
+To use parallelism with jobs that use xref:runner:ROOT:runner-overview.adoc[Self-Hosted Runners], ensure that you have at least two runners associated with the resource class that your job uses. If you set the parallelism value to be greater than the number of active runners, the excess parallel tasks will queue until a runner is available.
 
-If you are using parallelism on xref:execution-runner:container-runner.adoc[Container Runner], you will need to make sure that `agent.maxConcurrentTasks` and your Kubernetes cluster can accommodate the number of parallel tasks you want to run. If you do not have adequate resources, your parallel runs will be subject to queuing.
+If you are using parallelism on xref:runner:ROOT:container-runner.adoc[Container Runner], you will need to make sure that `agent.maxConcurrentTasks` and your Kubernetes cluster can accommodate the number of parallel tasks you want to run. If you do not have adequate resources, your parallel runs will be subject to queuing.
 
 For more information, see the xref:reference:ROOT:configuration-reference.adoc#parallelism[Configuration Reference] page.
 

@@ -34,7 +34,7 @@ If your task does not match this guide, use this table to find the right page in
 | xref:orchestrate:triggers-overview.adoc[Trigger Options]. On Cloud, use xref:orchestrate:schedule-triggers.adoc[Schedule Triggers]. Server does not support Schedule Triggers; use a `triggers.schedule` block under the workflow instead.
 
 | Install a self-hosted runner
-| xref:execution-runner:runner-overview.adoc[Self-hosted Runner Overview]. Then install xref:execution-runner:install-machine-runner-3-on-linux.adoc[Machine Runner 3] on a VM (Server needs v4.4+), or xref:execution-runner:container-runner-installation.adoc[Container Runner] on Kubernetes.
+| xref:runner:ROOT:runner-overview.adoc[Self-hosted Runner Overview]. Then install xref:runner:ROOT:install-machine-runner-3-on-linux.adoc[Machine Runner 3] on a VM (Server needs v4.4+), or xref:runner:ROOT:container-runner-installation.adoc[Container Runner] on Kubernetes.
 
 | Move from another CI tool
 | xref:migrate:migration-intro.adoc[Introduction to CircleCI Migration], then the matching migrate-from page. Use the link:https://circleci.com/developer/tools/configTranslator[CircleCI configuration translator] for GitHub Actions or GitLab.

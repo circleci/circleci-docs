@@ -140,13 +140,13 @@
   new: /reference/configuration-reference/
 
 - old: /container-runner/
-  new: /guides/execution-runner/container-runner/
+  new: /runner/container-runner/
 
 - old: /container-runner-installation/
-  new: /guides/execution-runner/container-runner-installation/
+  new: /runner/container-runner-installation/
 
 - old: /container-runner-performance-benchmarks/
-  new: /guides/execution-runner/container-runner-performance-benchmarks/
+  new: /runner/container-runner-performance-benchmarks/
 
 - old: /contexts/
   new: /guides/security/contexts/
@@ -341,16 +341,16 @@
   new: /guides/insights/insights-tests/
 
 - old: /install-machine-runner-3-on-docker/
-  new: /guides/execution-runner/install-machine-runner-3-on-docker/
+  new: /runner/install-machine-runner-3-on-docker/
 
 - old: /install-machine-runner-3-on-linux/
-  new: /guides/execution-runner/install-machine-runner-3-on-linux/
+  new: /runner/install-machine-runner-3-on-linux/
 
 - old: /install-machine-runner-3-on-macos/
-  new: /guides/execution-runner/install-machine-runner-3-on-macos/
+  new: /runner/install-machine-runner-3-on-macos/
 
 - old: /install-machine-runner-3-on-windows/
-  new: /guides/execution-runner/install-machine-runner-3-on-windows/
+  new: /runner/install-machine-runner-3-on-windows/
 
 - old: /intelligent-summaries/
   new: /guides/toolkit/intelligent-summaries/
@@ -398,13 +398,13 @@
   new: /guides/toolkit/local-cli/
 
 - old: /machine-runner-3-configuration-reference/
-  new: /guides/execution-runner/machine-runner-3-configuration-reference/
+  new: /runner/machine-runner-3-configuration-reference/
 
 - old: /machine-runner-3-manual-installation/
-  new: /guides/execution-runner/machine-runner-3-manual-installation/
+  new: /runner/machine-runner-3-manual-installation/
 
 - old: /machine-runner-3-manual-installation-on-windows/
-  new: /guides/execution-runner/machine-runner-3-manual-installation-on-windows/
+  new: /runner/machine-runner-3-manual-installation-on-windows/
 
 - old: /manage-contexts-with-config-policies/
   new: /guides/config-policies/manage-contexts-with-config-policies/
@@ -425,13 +425,13 @@
   new: /guides/orchestrate/migrate-from-deploy-to-run/
 
 - old: /migrate-from-launch-agent-to-machine-runner-3-on-linux/
-  new: /guides/execution-runner/migrate-from-launch-agent-to-machine-runner-3-on-linux/
+  new: /runner/migrate-from-launch-agent-to-machine-runner-3-on-linux/
 
 - old: /migrate-from-launch-agent-to-machine-runner-3-on-macos/
-  new: /guides/execution-runner/migrate-from-launch-agent-to-machine-runner-3-on-macos/
+  new: /runner/migrate-from-launch-agent-to-machine-runner-3-on-macos/
 
 - old: /migrate-from-launch-agent-to-machine-runner-3-on-windows/
-  new: /guides/execution-runner/migrate-from-launch-agent-to-machine-runner-3-on-windows/
+  new: /runner/migrate-from-launch-agent-to-machine-runner-3-on-windows/
 
 - old: /migrate-scheduled-workflows-to-scheduled-pipelines/
   new: /guides/orchestrate/migrate-scheduled-workflows-to-scheduled-pipelines/
@@ -590,22 +590,22 @@
   new: /guides/execution-managed/run-a-job-in-a-container/
 
 - old: /runner-api/
-  new: /guides/execution-runner/runner-api/
+  new: /reference/runner-api/
 
 - old: /runner-concepts/
-  new: /guides/execution-runner/runner-concepts/
+  new: /runner/runner-concepts/
 
 - old: /runner-faqs/
-  new: /guides/execution-runner/runner-faqs/
+  new: /runner/runner-faqs/
 
 - old: /runner-feature-comparison-matrix/
-  new: /guides/execution-runner/runner-feature-comparison-matrix/
+  new: /runner/runner-feature-comparison-matrix/
 
 - old: /runner-overview/
-  new: /guides/execution-runner/runner-overview/
+  new: /runner/runner-overview/
 
 - old: /runner-scaling/
-  new: /guides/execution-runner/runner-scaling/
+  new: /runner/runner-scaling/
 
 - old: /sample-config/
   new: /guides/toolkit/sample-config/
@@ -830,7 +830,7 @@
   new: /reference/troubleshoot/
 
 - old: /troubleshoot-self-hosted-runner/
-  new: /guides/execution-runner/troubleshoot-self-hosted-runner/
+  new: /runner/troubleshoot-self-hosted-runner/
 
 - old: /troubleshoot-test-splitting/
   new: /guides/test/troubleshoot-test-splitting/
@@ -1011,7 +1011,7 @@
   new: /guides/execution-managed/private-images/
 
 - old: /execution-runner/machine-runner-3-manual-installation-on-windows/
-  new: /guides/execution-runner/machine-runner-3-manual-installation-on-windows/
+  new: /runner/machine-runner-3-manual-installation-on-windows/
 
 - old: /how-to-find-ids/
   new: /guides/toolkit/how-to-find-ids/
@@ -1083,7 +1083,7 @@
   new: /guides/execution-managed/android-machine-image/
 
 - old: /execution-runner/runner-scaling/
-  new: /guides/execution-runner/runner-scaling/
+  new: /runner/runner-scaling/
 
 - old: /getting-started/language-javascript/
   new: /guides/getting-started/language-javascript/
@@ -1167,4 +1167,4 @@
   new: /guides/orchestrate/custom-webhooks/
 
 - old: /runner-installation/
-  new: /guides/execution-runner/runner-overview/
+  new: /runner/runner-overview/

@@ -12,7 +12,7 @@ Use the `resource_class` key in your `.circleci/config.yml` to control the compu
 Use resource classes to:
 
 * Specify compute resource size (CPU and RAM) for running a job.
-* Configure xref:execution-runner:runner-concepts.adoc#namespaces-and-resource-classes[Self-Hosted Runners] for use in your `.circleci/config.yml` file.
+* Configure xref:runner:ROOT:runner-concepts.adoc#namespaces-and-resource-classes[Self-Hosted Runners] for use in your `.circleci/config.yml` file.
 * Specify an execution environment.
 
 The most common usage is to specify CPU and RAM requirements for a job by configuring the `resource_class` key for an executor.
@@ -33,7 +33,7 @@ Executor resource classes are specified by size, for example, `small` or `medium
 
 NOTE: **For a full list of available resource class options,** see the xref:reference:ROOT:configuration-reference.adoc#resourceclass[Configuration Reference]. The link:https://circleci.com/product/features/resource-classes[resource class product page] provides information on credit usage per resource class, and resource class availability for each plan type.
 
-When using CircleCI's self-hosted runners, use the `resource_class` key in your project configuration to specify which runner to use for a job. Self-hosted runner resource classes are assigned and configured during the xref:execution-runner:runner-overview.adoc#getting-started[Runner Installation Process].
+When using CircleCI's self-hosted runners, use the `resource_class` key in your project configuration to specify which runner to use for a job. Self-hosted runner resource classes are assigned and configured during the xref:runner:ROOT:runner-overview.adoc#getting-started[Runner Installation Process].
 
 .Self-hosted runner resource class
 [source,yaml]
@@ -75,7 +75,7 @@ For config examples showing how to use the `resource_class` key to **specify CPU
 ** xref:reference:ROOT:configuration-reference.adoc#gpu-execution-environment-windows[Windows]
 * xref:reference:ROOT:configuration-reference.adoc#arm-execution-environment-linux[Arm Resource Classes]
 
-NOTE: **To get started setting up a self-hosted runner**, see the xref:execution-runner:runner-overview.adoc#getting-started[Getting Started] section of the Self-hosted runners overview.
+NOTE: **To get started setting up a self-hosted runner**, see the xref:runner:ROOT:runner-overview.adoc#getting-started[Getting Started] section of the Self-hosted runners overview.
 
 [#default-resource-class]
 == Default resource class

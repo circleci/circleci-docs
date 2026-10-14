@@ -21,6 +21,7 @@ The CircleCI documentation is organized into logical components, each focusing o
 | `root` | Home and landing pages | `docs/root/` |
 | `guides` | Feature and usage docs, how-to guides and tutorials | `docs/guides/` |
 | `reference` | API and configuration references | `docs/reference/` |
+| `runner` | Self-hosted runner installation and operation | `docs/runner/` |
 | `orbs` | CircleCI orbs documentation | `docs/orbs/` |
 | `server-admin` | Server administration guides | `docs/server-admin-4.*/` |
 | `services` | Field engineering service information | `docs/services` |

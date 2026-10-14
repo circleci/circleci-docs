@@ -107,7 +107,7 @@ Find out more about the Linux VM execution environment on the xref:using-linuxvm
 
 To access the macOS execution environment, use the `macos` executor and specify an image using the `xcode` key. For a full list of macOS images, see the link:https://circleci.com/developer/machine/image/macos[CircleCI Developer Hub].
 
-NOTE: If you want to run a macOS build on CircleCI Server, you will need to use xref:execution-runner:runner-overview.adoc[Self-hosted Runner].
+NOTE: If you want to run a macOS build on CircleCI Server, you will need to use xref:runner:ROOT:runner-overview.adoc[Self-hosted Runner].
 
 [,yml,subs=attributes+]
 ----
@@ -342,8 +342,8 @@ Find out more about the Arm VM execution environment on the xref:using-arm.adoc[
 
 CircleCI provides the ability to have self-hosted runners:
 
-* xref:execution-runner:container-runner.adoc[Container Runner] using Kubernetes.
-* xref:execution-runner:runner-overview.adoc#machine-runner-use-case[Machine Runner] using Linux, Windows, and macOS virtual machines.
+* xref:runner:ROOT:container-runner.adoc[Container Runner] using Kubernetes.
+* xref:runner:ROOT:runner-overview.adoc#machine-runner-use-case[Machine Runner] using Linux, Windows, and macOS virtual machines.
 
 [#port-ranges]
 == Port ranges

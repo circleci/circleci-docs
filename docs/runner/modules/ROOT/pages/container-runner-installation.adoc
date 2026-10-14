@@ -1,0 +1,271 @@
+= Container runner installation (Kubernetes)
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.3"
+:page-audience: developer
+:page-description: Install CircleCI's container runner on Kubernetes: create a namespace and resource class, then install the runner using the web app or the CLI.
+:page-aliases: guides:execution-runner:container-runner-installation.adoc
+:experimental:
+:container:
+
+This page describes how to install CircleCI's container runner.
+
+[#prerequisites]
+== Prerequisites
+
+include::ROOT:partial$runner/container-runner-prereq.adoc[]
+
+[#self-hosted-runner-terms-agreement]
+== Self-hosted runner terms agreement
+
+include::ROOT:partial$runner/terms.adoc[]
+
+[#create-namespace-and-resource-class]
+== 1. Create namespace and resource class
+
+[tabs]
+====
+Web app installation::
++
+--
+include::ROOT:partial$runner/install-with-web-app-steps.adoc[]
+--
+CLI installation::
++
+--
+include::ROOT:partial$runner/install-with-cli-steps.adoc[]
+--
+====
+
+[#container-runner-installation]
+== 2. Container runner installation
+
+. Add the container runner Helm repository by running the following command:
++
+[source,shell]
+----
+helm repo add container-agent https://packagecloud.io/circleci/container-agent/helm
+----
+
+. Next, run the following:
++
+[source,shell]
+----
+helm repo update
+----
+
+. Next, run the following command to create the `circleci` Kubernetes namespace:
++
+[source,shell]
+----
+kubectl create namespace circleci
+----
+
+. Create a file called `values.yaml` containing the following, substituting your namespace and resource class and token:
++
+```yaml
+agent:
+  resourceClasses:
+    <your-namespace>/<your-resource-class-name>:
+      token: <your-resource_class_token>
+```
+
+. **If you are using CircleCI Server**, you will need to provide the URL for your install. You can do this by setting the runnerAPI in your `values.yaml`:
++
+```yaml
+agent:
+  runnerAPI: https://your.domain.here
+  resourceClasses:
+    <your-namespace>/<your-resource-class-name>:
+      token: <your-resource_class_token>
+```
+
+. Finally, run the following command:
++
+[source,shell]
+----
+helm install container-agent container-agent/container-agent -n circleci -f values.yaml
+----
+
+[#private-container-registry]
+=== Using a private container registry (optional)
+
+If your cluster cannot pull images from Docker Hub, mirror the CircleCI container runner images to your own registry or configure a pull-through cache. This applies in air-gapped environments or when outbound registry access is restricted. Then point the Helm chart at those locations.
+
+Container runner uses three separate images. Configure each image with a top-level key in `values.yaml` (not nested under `agent`):
+
+[cols="1,1,1",options="header"]
+|===
+| Helm key | Default image | Where it runs
+| `agent.image` | `circleci/runner-agent` | container-agent deployment
+| `orchestrator.image` | `circleci/runner-init` | init container on each task pod
+| `logging.image` | `circleci/logging-collector` | sidecar on task pods that use service containers
+|===
+
+Setting `agent.image` alone does not override the orchestrator or logging sidecar image settings. Task pods may still try to pull from Docker Hub and fail with `ImagePullBackOff` if you omit those keys.
+
+Add the following to your `values.yaml`, substituting your registry host, repository path, and tags (tags must match your container-agent chart version for compatibility):
+
+[source,yaml]
+----
+agent:
+  image:
+    registry: registry.example.com
+    repository: circleci/runner-agent
+    tag: kubernetes-3
+  resourceClasses:
+    <your-namespace>/<your-resource-class-name>:
+      token: <your-resource_class_token>
+
+orchestrator:
+  image:
+    registry: registry.example.com
+    repository: circleci/runner-init
+    tag: agent-server-4.7
+
+logging:
+  image:
+    registry: registry.example.com
+    repository: circleci/logging-collector
+    tag: 3.1.9-9141-f95ed2b
+----
+
+If you use CircleCI Server, include `agent.runnerAPI` as shown in the CircleCI Server step above. Adjust the `runner-init` tag to match your Server version.
+
+After updating `values.yaml`, upgrade the release:
+
+[source,shell]
+----
+helm upgrade container-agent container-agent/container-agent -n circleci -f values.yaml
+----
+
+Verify the container-agent pod exposes your registry paths (not Docker Hub defaults):
+
+[source,shell]
+----
+kubectl describe pod -n circleci -l app=container-agent | grep -E 'KUBE_LOGGING_IMAGE|KUBE_RUNNER_INIT_IMAGE'
+----
+
+For job images (not CircleCI runner components), use `imagePullSecrets` on the resource class pod spec. See xref:container-runner.adoc#resource-class-configuration-custom-pod[Resource Class Configuration] and the link:https://support.circleci.com/hc/en-us/articles/20665530773403[Support Center article on imagePullSecrets for container runner].
+
+[#enable-rerun-job-with-ssh]
+[badge="Open preview"]
+== 3. Enable rerun job with SSH (optional)
+
+NOTE: The ability to rerun a job with SSH for CircleCI container runner is in **open preview**.
+
+To enable this optional feature, follow the instructions below **after reading through the considerations**. Rerunning jobs with SSH allows you to troubleshoot problems through inspecting log files, running processes, and directory paths.
+
+****
+**Retry with SSH considerations**
+
+- Task-agent runs an embedded SSH server and agent on a dedicated port when the “Rerun job with SSH” option is activated. This feature will not affect any other SSH servers or agents on the cluster that container runner is installed on.
+
+- The SSH server is configured for public key authentication. Anyone with permission to initiate a job can rerun it with SSH. However, only the user who initiated the rerun will have their SSH public keys added to the server for the duration of the SSH session.
+
+- Rerunning a job with SSH holds the job open for up to **two hours** if a connection is made to the SSH server. If no connection is made, the job stays open for up to **ten minutes**, unless canceled. While in this state, the job is counted against an organization’s concurrency limit, and the task-agent will be unavailable to handle other jobs. Therefore, it is recommended to cancel an SSH rerun job explicitly (through the web UI or CLI) when you have finished debugging.
+
+- When establishing a SSH connection, you may experience a warning relating to a host change, due to the reuse of a previously used port to connect to a different pod. RSA host fingerprints can be cross-referenced with the output in the console for verification.
+****
+
+The rerun job with SSH feature makes use of the link:https://gateway-api.sigs.k8s.io/[Gateway API] to facilitate SSH access from outside your cluster. To enable this feature, Gateway API resources must first be provisioned on your cluster, and the CircleCI container agent configuration must be updated.
+
+****
+**Supported Gateway API implementations:**
+CircleCI has tested, and currently supports link:https://gateway.envoyproxy.io/[Envoy Gateway] as an implementation for the link:https://gateway-api.sigs.k8s.io/[Gateway API]. Other link:https://gateway-api.sigs.k8s.io/implementations/[Gateway API implementations] that support TCPRoute resources are likely to be compatible, but not all of these implementations have been tested, and therefore compatibility is not guaranteed. Our recommendation is to use Envoy Gateway as your implementation. Envoy Gateway is currently in beta and is under development.
+****
+
+
+=== A. Install Envoy Gateway to your cluster
+. First, install the Gateway API `CRDs` and Envoy Gateway as defined in the link:https://gateway.envoyproxy.io/latest/install/install-helm/[Envoy Gateway Helm installation document].
+. Replace `<version>` with the link:https://gateway.envoyproxy.io/news/releases/matrix/[most recent stable release] compatible with your cluster, then run the following command:
++
+[source,shell]
+----
+helm install eg oci://docker.io/envoyproxy/gateway-helm --version <version> -n envoy-gateway-system --create-namespace
+----
+. Finally, wait for Envoy Gateway to become available:
++
+[source,shell]
+----
+kubectl wait --timeout=5m -n envoy-gateway-system deployment/envoy-gateway --for=condition=Available
+----
+
+
+=== B. Enable the Rerun job with SSH feature
+
+. Once all Gateway API prerequisites are installed and available, add the `agent.ssh.enabled = true` parameter to the container runner configuration:
++
+[source,yaml]
+----
+agent:
+  ssh:
+    enabled: true
+----
++
+For a full list of SSH configuration options, refer to the link:https://github.com/circleci-public/container-runner-helm-chart#values[Helm chart values].
+
+. Redeploy the updated manifest:
++
+[source,shell]
+----
+helm upgrade --wait --timeout=5m <release-name> container-agent/container-agent -n <namespace> -f values.yaml
+----
+
+. Wait for the SSH link:https://gateway-api.sigs.k8s.io/reference/api-types/gateway/#gateway[Gateway] to be programmed:
++
+[source,shell]
+----
+kubectl wait gateway --timeout=5m --all --for=condition=Programmed -n <namespace>
+----
++
+Container runner is now ready for rerunning jobs with SSH.
+
+[#container-runner-configuration-example]
+== Container runner configuration example
+
+Once you have installed container runner, select btn:[Continue] in the CircleCI web app.
+You will see an example configuration snippet showing a job configured to use your new self-hosted runner resource class.
+
+.Container runner configuration example
+image::runner/container-runner-config-example.png[Runner set up, copy code to config file]
+
+Once you have installed the container runner within your cluster, create and trigger a CircleCI job that uses the Docker executor to validate the installation. The fields you must set for a specific job to run using your container runners are:
+
+* `image:`
+* `resource_class: <namespace>/<resource-class>`
+
+Simple example of how you could set up a job (`cimg/base:2021.11` is a commonly used CircleCI Docker image):
+
+```yaml
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2021.11
+    resource_class: <namespace>/<resource-class>
+    steps:
+      - checkout
+      - run: echo "Hi I'm on Runners!"
+
+workflows:
+  build-workflow:
+    jobs:
+      - build
+```
+
+CAUTION: **Do not** use an existing job that uses xref:guides:execution-managed:building-docker-images.adoc[Building Docker Images] (see xref:container-runner.adoc#building-container-images[Building Container Images] for more information).
+
+[#troubleshooting]
+== Troubleshooting
+
+Refer to the <<troubleshoot-self-hosted-runner#container-runner,Troubleshoot Container Runner section>> of the Troubleshoot Self-hosted Runner guide if you encounter issues installing or running container runner.
+
+[#additional-resources]
+== Additional resources
+
+- xref:container-runner.adoc[Container Runner Reference Guide]
+- xref:runner-concepts.adoc[Runner Concepts]
+- xref:runner-faqs.adoc[Self-Hosted Runner FAQ]

@@ -18,7 +18,7 @@ As a developer using CircleCI you can:
 - xref:execution-managed:ssh-access-jobs.adoc[SSH Into Any Job] to debug your build issues.
 - Set up xref:optimize:parallelism-faster-jobs.adoc[Parallelism] in your `.circleci/config.yml` file to run test jobs faster.
 - Configure xref:optimize:caching.adoc[Caching] with two simple keys to reuse data from previous jobs in your xref:orchestrate:workflows.adoc[Workflow].
-- Configure self-hosted xref:execution-runner:runner-overview.adoc[Runners] for unique platform support.
+- Configure self-hosted xref:runner:ROOT:runner-overview.adoc[Runners] for unique platform support.
 ifndef::server[]
 - Access xref:execution-managed:using-arm.adoc[Arm VM Resources] and xref:execution-managed:using-docker.adoc#arm[Arm on Docker].
 endif::server[]

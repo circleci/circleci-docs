@@ -1225,7 +1225,7 @@ NOTE: If you want to confirm how much memory you have been allocated, you can ch
 [#self-hosted-runner]
 === Self-hosted runner
 
-Use the `resource_class` key to configure a xref:guides:execution-runner:runner-overview.adoc#[Self-hosted Runner Instance].
+Use the `resource_class` key to configure a xref:runner:ROOT:runner-overview.adoc#[Self-hosted Runner Instance].
 
 For example:
 
@@ -1409,7 +1409,7 @@ jobs:
 [#macos-server]
 === macOS execution environment on server
 
-If you are working on CircleCI Server you can access the macOS execution environment using xref:guides:execution-runner:runner-overview.adoc#[Self-hosted Runner].
+If you are working on CircleCI Server you can access the macOS execution environment using xref:runner:ROOT:runner-overview.adoc#[Self-hosted Runner].
 
 '''
 
