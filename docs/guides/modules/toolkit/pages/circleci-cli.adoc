@@ -226,7 +226,7 @@ The CircleCI CLI:: The development tool used on your local machine for day-to-da
 The CircleCI environment CLI:: A specialized command-line interface that retrieves and configures a task. It manages the execution of the job within a chosen compute environment.
 
 ifndef::server[]
-The Chunk CLI:: A developer tool that brings AI-powered code review and remote validation to your local workflow. The `chunk` CLI works with AI coding agents such as Claude Code, Cursor, and VS Code Copilot.
+The Chunk CLI:: A developer tool that brings remote validation in Chunk sidecars, AI-powered code review, and mutation testing to your local workflow. The `chunk` CLI works with AI coding agents such as Claude Code, Cursor, and Codex.
 endif::server[]
 
 == Install CLI v0 for CircleCI Server
