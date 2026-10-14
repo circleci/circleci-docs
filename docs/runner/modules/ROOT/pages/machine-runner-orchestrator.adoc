@@ -374,7 +374,7 @@ Clients must reach the Gateway load-balancer address on the SSH port range. That
 
 If TCP reaches Envoy but no sidecar or SSH session is live, the proxy accepts then closes. The client often shows `kex_exchange_identification: Connection closed by remote host`. That is not the same as "SSH disabled" in the CircleCI web app.
 
-For hold times, public-key auth, and how to start a rerun from the web app, see the xref:guides:execution-managed:ssh-access-jobs.adoc[Debug Jobs With SSH] page. The same product caveats as container runner apply.
+For hold times, public-key auth, and how to start a rerun from the web app, see the xref:guides:execute:ssh-access-jobs.adoc[Debug Jobs With SSH] page. The same product caveats as container runner apply.
 
 ****
 **Retry with SSH considerations**
@@ -1453,5 +1453,5 @@ Two factors can push latency toward the higher end or cause provisioning to fail
 * link:https://gateway.envoyproxy.io/latest/install/install-helm/[Envoy Gateway Helm Installation]
 * link:https://gateway-api.sigs.k8s.io/guides/tcp/[Gateway API TCPRoute]
 * xref:container-runner-installation.adoc#enable-rerun-job-with-ssh[Enable Rerun Job With SSH] on container runner
-* xref:guides:execution-managed:ssh-access-jobs.adoc[Debug Jobs With SSH]
+* xref:guides:execute:ssh-access-jobs.adoc[Debug Jobs With SSH]
 * xref:machine-runner-3-configuration-reference.adoc[Machine Runner 3 Configuration Reference]

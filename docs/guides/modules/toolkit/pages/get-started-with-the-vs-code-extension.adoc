@@ -91,7 +91,7 @@ You can configure specific workflow status changes you want to be notified for i
 [#configure-ssh-keys]
 == 6. Configure SSH keys
 
-The extension allows you to xref:execution-managed:ssh-access-jobs.adoc[Rerun Jobs With SSH] directly from within VS Code, either in the terminal or in a link:https://code.visualstudio.com/docs/remote/ssh[remote VS Code window].
+The extension allows you to xref:execute:ssh-access-jobs.adoc[Rerun Jobs With SSH] directly from within VS Code, either in the terminal or in a link:https://code.visualstudio.com/docs/remote/ssh[remote VS Code window].
 
 The SSH functionality uses the same key that you use for your VCS. The easiest way to configure SSH keys for the extension is to try re-running a job with SSH, by clicking on the action icon next to the job.
 

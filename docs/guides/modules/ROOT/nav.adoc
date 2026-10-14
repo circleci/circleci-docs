@@ -73,51 +73,50 @@
 *** xref:orchestrate:migrate-from-deploy-to-run.adoc[Migrate from deploy to run]
 *** xref:orchestrate:using-shell-scripts.adoc[Using shell scripts]
 
-* Execute on managed compute
-** xref:execution-managed:executor-intro.adoc[Execution environments overview]
-** xref:execution-managed:resource-class-overview.adoc[Resource class overview]
-** xref:execution-managed:resource-class-lifecycle.adoc[Resource class lifecycle]
+* Execution environments
+** Overview
+*** xref:execute:executor-intro.adoc[Execution environments overview]
+*** xref:execute:resource-class-overview.adoc[Resource class overview]
+*** xref:execute:resource-class-lifecycle.adoc[Resource class lifecycle]
 ** Docker
-*** xref:execution-managed:using-docker.adoc[Using Docker]
-*** xref:execution-managed:circleci-images.adoc[Convenience images]
-*** xref:execution-managed:next-gen-migration-guide.adoc[Migrating to next-gen images]
-*** xref:execution-managed:custom-images.adoc[Using custom-built Docker images]
-*** xref:execution-managed:private-images.adoc[Docker authenticated pulls]
-*** xref:execution-managed:building-docker-images.adoc[Running Docker commands]
+*** xref:execute:using-docker.adoc[Using Docker]
+*** xref:execute:circleci-images.adoc[Convenience images]
+*** xref:execute:next-gen-migration-guide.adoc[Migrating to next-gen images]
+*** xref:execute:custom-images.adoc[Using custom-built Docker images]
+*** xref:execute:private-images.adoc[Docker authenticated pulls]
+*** xref:execute:building-docker-images.adoc[Running Docker commands]
 ** Linux VM
-*** xref:execution-managed:using-linuxvm.adoc[Using the Linux VM execution environment]
-*** xref:execution-managed:android-machine-image.adoc[Using Android images with the machine executor]
+*** xref:execute:using-linuxvm.adoc[Using the Linux VM execution environment]
+*** xref:execute:android-machine-image.adoc[Using Android images with the machine executor]
 ** macOS
-*** xref:execution-managed:using-macos.adoc[Using the macOS execution environment]
-*** xref:execution-managed:hello-world-macos.adoc[Configuring a macOS app]
-*** xref:execution-managed:ios-codesigning.adoc[iOS and macOS code signing]
+*** xref:execute:using-macos.adoc[Using the macOS execution environment]
+*** xref:execute:hello-world-macos.adoc[Configuring a macOS app]
+*** xref:execute:ios-codesigning.adoc[iOS and macOS code signing]
 ** Windows
-*** xref:execution-managed:using-windows.adoc[Using the Windows execution environment]
-*** xref:execution-managed:hello-world-windows.adoc[Hello world Windows]
+*** xref:execute:using-windows.adoc[Using the Windows execution environment]
+*** xref:execute:hello-world-windows.adoc[Hello world Windows]
 ** Arm
-*** xref:execution-managed:using-arm.adoc[Using the Arm VM execution environment]
+*** xref:execute:using-arm.adoc[Using the Arm VM execution environment]
 ** GPU
-*** xref:execution-managed:using-gpu.adoc[Using the GPU execution environment]
+*** xref:execute:using-gpu.adoc[Using the GPU execution environment]
+** Self-hosted runners
+*** xref:runner:ROOT:runner-overview.adoc[Self-hosted runner overview]
+*** xref:runner:ROOT:runner-feature-comparison-matrix.adoc[Runner feature comparison matrix]
 ** How-to guides
 *** xref:permissions-authentication:pull-an-image-from-aws-ecr-with-oidc.adoc[Pull an image from AWS ECR with OIDC]
 *** xref:permissions-authentication:pull-an-image-from-gcp-gar-with-oidc.adoc[Pull an image from GCP Artifact Registry with OIDC]
-*** xref:execution-managed:run-a-job-in-a-container.adoc[Run a job in a container on your machine with Docker]
-*** xref:execution-managed:docker-compose.adoc[Installing and using Docker Compose]
-*** xref:execution-managed:high-uid-error.adoc[Debugging container ID cannot be mapped to host ID error]
-*** xref:execution-managed:docker-to-machine.adoc[Migrating between the Docker machine executors]
+*** xref:execute:docker-compose.adoc[Installing and using Docker Compose]
+*** xref:execute:high-uid-error.adoc[Debugging container ID cannot be mapped to host ID error]
+*** xref:execute:docker-to-machine.adoc[Migrating between the Docker machine executors]
 ** Image support policies
-*** xref:execution-managed:android-images-support-policy.adoc[Android images support policy]
-*** xref:execution-managed:convenience-images-support-policy.adoc[Convenience images support policy]
-*** xref:execution-managed:linux-vm-support-policy.adoc[Linux VM images support policy]
-*** xref:execution-managed:linux-cuda-images-support-policy.adoc[Linux CUDA images support policy]
-*** xref:execution-managed:remote-docker-images-support-policy.adoc[Remote Docker images support policy]
-*** xref:execution-managed:windows-images-support-policy.adoc[Windows images support policy]
-*** xref:execution-managed:xcode-policy.adoc[Xcode image policy]
-*** xref:execution-managed:machine-convenience-image-lifecycle.adoc[CircleCI image lifecycle: A complete guide]
-
-* Execute jobs on self-hosted runners
-** xref:runner:ROOT:runner-overview.adoc[Self-hosted runner overview]
-** xref:runner:ROOT:runner-feature-comparison-matrix.adoc[Runner feature comparison matrix]
+*** xref:execute:android-images-support-policy.adoc[Android images support policy]
+*** xref:execute:convenience-images-support-policy.adoc[Convenience images support policy]
+*** xref:execute:linux-vm-support-policy.adoc[Linux VM images support policy]
+*** xref:execute:linux-cuda-images-support-policy.adoc[Linux CUDA images support policy]
+*** xref:execute:remote-docker-images-support-policy.adoc[Remote Docker images support policy]
+*** xref:execute:windows-images-support-policy.adoc[Windows images support policy]
+*** xref:execute:xcode-policy.adoc[Xcode image policy]
+*** xref:execute:machine-convenience-image-lifecycle.adoc[CircleCI image lifecycle: A complete guide]
 
 * Testing on CircleCI
 ** xref:test:test.adoc[Automated testing]
@@ -252,7 +251,7 @@
 ** How-to guides
 *** xref:security:set-environment-variable.adoc[Set an environment variable]
 *** xref:security:inject-environment-variables-with-api.adoc[Inject environment variables with the API]
-*** xref:execution-managed:ssh-access-jobs.adoc[Debug jobs with SSH rerun]
+*** xref:execute:ssh-access-jobs.adoc[Debug jobs with SSH rerun]
 *** xref:security:rotate-project-ssh-keys.adoc[Rotate project SSH keys]
 *** xref:security:stop-building-a-project-on-circleci.adoc[Stop building a project on CircleCI]
 *** xref:security:rename-organizations-and-repositories.adoc[Rename organizations and repositories]

@@ -6,7 +6,7 @@
 :page-description: CircleCI Server 4.10 machine provisioner service controls how machine executor (Linux and Windows images) and Remote Docker jobs are run.
 :experimental:
 
-Machine provisioner controls how xref:reference:ROOT:configuration-reference.adoc#machine[`machine`] executor and xref:guides:execution-managed:building-docker-images.adoc#[Remote Docker] jobs are run.
+Machine provisioner controls how xref:reference:ROOT:configuration-reference.adoc#machine[`machine`] executor and xref:guides:execute:building-docker-images.adoc#[Remote Docker] jobs are run.
 
 This section describes the available configuration options for machine provisioner.
 
@@ -436,7 +436,7 @@ The machine provisioner ships a fixed set of default images. Share the following
 * `ubuntu-2404`
 * `ubuntu-2604`
 * `default` - alias that resolves to `ubuntu-2204`.
-* `docker-default` - alias used by xref:guides:execution-managed:building-docker-images.adoc#[Remote Docker] jobs that resolves to `ubuntu-2204`.
+* `docker-default` - alias used by xref:guides:execute:building-docker-images.adoc#[Remote Docker] jobs that resolves to `ubuntu-2204`.
 
 [discrete]
 ===== Linux (Arm)
@@ -498,7 +498,7 @@ The machine provisioner ships a fixed set of default images. Share the following
 * `ubuntu-2404`
 * `ubuntu-2604`
 * `default` - alias that resolves to `ubuntu-2204`.
-* `docker-default` - alias used by xref:guides:execution-managed:building-docker-images.adoc#[Remote Docker] jobs that resolves to `ubuntu-2204`.
+* `docker-default` - alias used by xref:guides:execute:building-docker-images.adoc#[Remote Docker] jobs that resolves to `ubuntu-2204`.
 
 [discrete]
 ===== Windows

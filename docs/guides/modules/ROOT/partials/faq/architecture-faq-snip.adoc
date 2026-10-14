@@ -1,16 +1,16 @@
 [#operating-systems-circleci-20-support]
 === What operating systems does CircleCI support?
 
-- xref:guides:execution-managed:using-linuxvm.adoc[Linux]
-- xref:guides:execution-managed:android-machine-image.adoc[Android]
-- xref:guides:execution-managed:using-macos.adoc[macOS]
+- xref:guides:execute:using-linuxvm.adoc[Linux]
+- xref:guides:execute:android-machine-image.adoc[Android]
+- xref:guides:execute:using-macos.adoc[macOS]
 - xref:guides:test:testing-ios.adoc[iOS]
-- xref:guides:execution-managed:using-windows.adoc[Windows]
+- xref:guides:execute:using-windows.adoc[Windows]
 
 [#cpu-architecture-circleci-support]
 === Which CPU architectures does CircleCI support?
 
-CircleCI supports `amd64` for Docker jobs, and both `amd64` and xref:guides:execution-managed:using-arm.adoc[Arm Resources] for machine jobs.
+CircleCI supports `amd64` for Docker jobs, and both `amd64` and xref:guides:execute:using-arm.adoc[Arm Resources] for machine jobs.
 
 [#ipv6-in-tests]
 === Can I use IPv6 in my tests?
