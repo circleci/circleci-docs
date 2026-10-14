@@ -1,7 +1,6 @@
-* Self-hosted runner
-** xref:runner-overview.adoc[Self-hosted runner overview]
-** xref:runner-concepts.adoc[Self-hosted runner concepts]
-** xref:runner-feature-comparison-matrix.adoc[Runner feature comparison matrix]
+* xref:runner-overview.adoc[Self-hosted runner overview]
+* xref:runner-concepts.adoc[Self-hosted runner concepts]
+* xref:runner-feature-comparison-matrix.adoc[Runner feature comparison matrix]
 
 * Machine Runner Orchestrator
 ** xref:machine-runner-orchestrator.adoc[Machine Runner Orchestrator overview]
