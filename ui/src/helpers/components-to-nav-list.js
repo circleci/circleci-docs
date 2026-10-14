@@ -17,6 +17,7 @@ module.exports = ({ data: { root } }) => {
     'ROOT',
     'guides',
     'reference',
+    'runner',
     'server-admin',
     'orbs',
     'services',

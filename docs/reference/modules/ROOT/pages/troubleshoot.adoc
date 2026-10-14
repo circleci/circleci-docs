@@ -33,7 +33,7 @@ include::guides:ROOT:partial$troubleshoot/orb-troubleshoot-snip.adoc[]
 include::guides:ROOT:partial$troubleshoot/pipelines-troubleshoot-snip.adoc[]
 
 // Self-hosted runner (H2s need to be in the snippet for now)
-include::guides:ROOT:partial$troubleshoot/self-hosted-runner-troubleshoot-snip.adoc[]
+include::runner:ROOT:partial$troubleshoot/self-hosted-runner-troubleshoot-snip.adoc[]
 
 == Releases
 

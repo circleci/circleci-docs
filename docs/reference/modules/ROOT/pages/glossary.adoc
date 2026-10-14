@@ -83,7 +83,7 @@ A running instance of an <<image>>.
 
 == Container runner
 
-A type of <<self-hosted-runner>> installed in a Kubernetes cluster that runs containerized jobs in ephemeral pods. Container runner complements the <<machine-runner>> for high-concurrency, container-based workloads. See the xref:guides:execution-runner:container-runner.adoc[Container Runner] page.
+A type of <<self-hosted-runner>> installed in a Kubernetes cluster that runs containerized jobs in ephemeral pods. Container runner complements the <<machine-runner>> for high-concurrency, container-based workloads. See the xref:runner:ROOT:container-runner.adoc[Container Runner] page.
 
 == Context
 
@@ -212,7 +212,7 @@ On CircleCI Server, the service that dynamically provisions and manages the virt
 
 == Machine runner
 
-A type of <<self-hosted-runner>> installed directly on a Linux, macOS, or Windows machine, where it executes jobs in the same environment the runner binary is installed in. The current version is machine runner 3, which replaces the deprecated launch agent. See the xref:guides:execution-runner:runner-overview.adoc[CircleCI Runner Overview] page.
+A type of <<self-hosted-runner>> installed directly on a Linux, macOS, or Windows machine, where it executes jobs in the same environment the runner binary is installed in. The current version is machine runner 3, which replaces the deprecated launch agent. See the xref:runner:ROOT:runner-overview.adoc[CircleCI Runner Overview] page.
 
 == macOS executor
 
@@ -233,7 +233,7 @@ An additional layer of account security that requires a second verification fact
 
 == Namespace
 
-A unique, immutable identifier that groups an organization's resources under a single owner. Each user or organization claims one namespace, typically the lowercase VCS organization name. The same namespace groups your registry <<orbs>> by author and identifies your <<self-hosted-runner,self-hosted runners>>. For runners, it is combined with a resource-class name to form the full runner <<resource-class>> label. See the xref:orbs:use:orb-concepts.adoc[Orb Concepts] and xref:guides:execution-runner:runner-concepts.adoc[Runner Concepts] pages.
+A unique, immutable identifier that groups an organization's resources under a single owner. Each user or organization claims one namespace, typically the lowercase VCS organization name. The same namespace groups your registry <<orbs>> by author and identifies your <<self-hosted-runner,self-hosted runners>>. For runners, it is combined with a resource-class name to form the full runner <<resource-class>> label. See the xref:orbs:use:orb-concepts.adoc[Orb Concepts] and xref:runner:ROOT:runner-concepts.adoc[Runner Concepts] pages.
 
 [#oidc-token]
 == OpenID Connect (OIDC) token
@@ -340,7 +340,7 @@ A security feature that obscures environment variable and context values in job 
 
 == Self-hosted runner
 
-A CircleCI agent installed on your own infrastructure, such as Kubernetes, virtual machines, or physical hardware, that claims and executes jobs on hardware or architectures you control. The two types are <<container-runner>> and <<machine-runner>>. See the xref:guides:execution-runner:runner-overview.adoc[CircleCI Runner Overview] page.
+A CircleCI agent installed on your own infrastructure, such as Kubernetes, virtual machines, or physical hardware, that claims and executes jobs on hardware or architectures you control. The two types are <<container-runner>> and <<machine-runner>>. See the xref:runner:ROOT:runner-overview.adoc[CircleCI Runner Overview] page.
 
 == Service container
 

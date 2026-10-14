@@ -192,7 +192,7 @@ endif::server[]
 [#echo-hello-world-server]
 == Echo hello world on CircleCI Server
 
-NOTE: To build in a macOS execution environment on server use xref:execution-runner:runner-overview.adoc[Self-Hosted Runner].
+NOTE: To build in a macOS execution environment on server use xref:runner:ROOT:runner-overview.adoc[Self-Hosted Runner].
 
 These examples add a job called `hello-job` that prints `hello world` to the console.
 

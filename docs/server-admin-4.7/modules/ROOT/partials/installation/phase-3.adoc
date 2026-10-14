@@ -22,7 +22,7 @@ Execution environments in CircleCI Server are resourced in the following ways:
 
 * <<machine-provisioner,Machine provisioner>> is used in AWS/GCP installations to provision resources and run jobs that are configured to use the `machine` execution environment, including Linux and Windows VMs, including Arm resources, if your server installation is within AWS. If you install outside AWS or GCP (that is, a local installation) you will use self-hosted runners to run VM-configured jobs.
 
-* xref:guides:execution-runner:runner-overview.adoc[Runner] can be used for all execution environments, including macOS.
+* xref:runner:ROOT:runner-overview.adoc[Runner] can be used for all execution environments, including macOS.
 
 [#nomad-clients]
 == 1. Nomad clients
@@ -1153,7 +1153,7 @@ Once you have configured and deployed CircleCI Server, you should validate that 
 [#overview]
 === Overview
 
-CircleCI runner does not require any additional server configuration. CircleCI Server ships ready to work with runner. However, you need to create a runner and configure the runner agent to be aware of your server installation. For complete instructions for setting up runner, see the xref:guides:execution-runner:runner-overview.adoc[Runner Documentation].
+CircleCI runner does not require any additional server configuration. CircleCI Server ships ready to work with runner. However, you need to create a runner and configure the runner agent to be aware of your server installation. For complete instructions for setting up runner, see the xref:runner:ROOT:runner-overview.adoc[Runner Documentation].
 
 NOTE: Runner requires a namespace per organization. CircleCI Server can have many organizations. If your company has multiple organizations within your CircleCI installation, you need to set up a runner namespace for each organization within your server installation.
 

@@ -71,7 +71,7 @@ include::guides:ROOT:partial$faq/orb-author-faq-snip.adoc[]
 [#self-hosted-runner]
 == Self-hosted runner
 
-include::guides:ROOT:partial$faq/self-hosted-runner-faq-snip.adoc[]
+include::runner:ROOT:partial$faq/self-hosted-runner-faq-snip.adoc[]
 
 [#pipelines]
 == Pipelines

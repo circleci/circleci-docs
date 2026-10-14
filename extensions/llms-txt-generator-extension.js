@@ -150,7 +150,7 @@ function generateLlmsTxt (playbook, contentCatalog) {
 
   const components = contentCatalog.getComponents()
 
-  const componentOrder = ['root', 'guides', 'reference', 'orbs', 'server-admin']
+  const componentOrder = ['root', 'guides', 'reference', 'runner', 'orbs', 'server-admin']
   const excludedComponents = ['services', 'contributors']
   const sortedComponents = [...components]
     .filter(c => !excludedComponents.includes(c.name))
@@ -224,6 +224,7 @@ function generateLlmsTxt (playbook, contentCatalog) {
   const hasGuidesServer = contentCatalog.getComponents().some((c) => c.versions.some((v) => isGuidesServerBuild(c.name, v.version)))
   if (hasGuidesServer) sections.push(`- Guides for CircleCI Server (latest release): ${siteUrl}/guides/server/<topic>/`)
   sections.push(`- Reference: ${siteUrl}/reference/<topic>/`)
+  sections.push(`- Runner: ${siteUrl}/runner/<topic>/`)
   sections.push(`- Orbs: ${siteUrl}/orbs/<topic>/`)
   sections.push(`- Server Admin: ${siteUrl}/server-admin-<version>/<topic>/`)
   sections.push(`- API: ${siteUrl}/api/<version>/`)

@@ -112,7 +112,7 @@ From your organization home page you have access to org-level options. You can c
 
 **Insights**: Provides you with time-series data overviews of credit usage, success rates, pipeline duration, and more. For full details of the Insights feature, see the xref:insights:insights.adoc[Using Insights] page.
 
-**Runners**: Set up self-hosted runners to use your own infrastructure for running jobs. Once set up the self-hosted runners dashboard displays a list of your resource classes and self-hosted runners. For full details covering installation, setup, and usage, see the xref:execution-runner:runner-overview.adoc[Self-Hosted Runners Overview] page.
+**Runners**: Set up self-hosted runners to use your own infrastructure for running jobs. Once set up the self-hosted runners dashboard displays a list of your resource classes and self-hosted runners. For full details covering installation, setup, and usage, see the xref:runner:ROOT:runner-overview.adoc[Self-Hosted Runners Overview] page.
 
 **Org**: Settings for your organization including org roles and groups, contexts, security, orbs and more. You can find your organization ID and organization slug on this page.
 
@@ -283,7 +283,7 @@ The self-hosted runners page displays an inventory of your self-hosted runners a
 .Runner inventory
 image::guides:ROOT:web_ui_runner.png[Runner inventory]
 
-Learn more and get started with self-hosted runners on the xref:execution-runner:runner-overview.adoc[CircleCI Self-Hosted Runners Overview].
+Learn more and get started with self-hosted runners on the xref:runner:ROOT:runner-overview.adoc[CircleCI Self-Hosted Runners Overview].
 
 [#organization-settings]
 == Organization settings

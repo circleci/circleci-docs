@@ -571,7 +571,7 @@ Examples for all execution environments are available on the following pages:
 
 Pricing and plans information for the various resource classes can be found on the link:https://circleci.com/product/features/resource-classes/[Resource classes] product page.
 
-The `resource_class` key is also used to configure a xref:guides:execution-runner:runner-concepts.adoc#namespaces-and-resource-classes[Self-Hosted Runner Instance].
+The `resource_class` key is also used to configure a xref:runner:ROOT:runner-concepts.adoc#namespaces-and-resource-classes[Self-Hosted Runner Instance].
 
 For full details on both uses of resource classes, see the xref:guides:execution-managed:resource-class-overview.adoc[Resource Class Overview] page.
 

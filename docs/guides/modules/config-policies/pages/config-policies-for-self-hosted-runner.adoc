@@ -39,7 +39,7 @@ endif::server[]
 
 * Install/update the CircleCI CLI, and ensure you have authenticated with a token before attempting to use the CLI with config policies. See the xref:toolkit:local-cli.adoc[Installing the Local CLI] page for more information.
 
-* Set up a self-hosted runner. See the xref:execution-runner:runner-overview.adoc#getting-started[Getting Started] section of the Self-hosted runners overview.
+* Set up a self-hosted runner. See the xref:runner:ROOT:runner-overview.adoc#getting-started[Getting Started] section of the Self-hosted runners overview.
 
 * Ensure you have **enabled** config policy evaluation for your organization so that project configurations **will** be evaluated against your organization's policies when pipelines are triggered:
 +

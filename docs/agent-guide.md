@@ -34,7 +34,7 @@ These apply on both platforms, unless you are extending an existing integration 
 
 - Use API v3 for new API work. v3 uses UUID identifiers, next-page tokens, and a single error object. See the [OpenAPI specification](https://circleci.com/fullopenapi.yaml) and the [API v3 index](https://circleci.com/docs/api/v3/llms.txt).
 - Schedule pipelines with [Schedule Triggers](https://circleci.com/docs/guides/orchestrate/schedule-triggers/), not a `triggers.schedule` block under a workflow.
-- Install [Machine Runner 3](https://circleci.com/docs/guides/execution-runner/install-machine-runner-3-on-linux/) for machine runners. Do not install launch agent.
+- Install [Machine Runner 3](https://circleci.com/docs/runner/install-machine-runner-3-on-linux/) for machine runners. Do not install launch agent.
 - Prefer the GitHub App integration over GitHub OAuth. Feature availability differs — see [VCS, Pipeline Types, and Feature Support](https://circleci.com/docs/guides/integration/version-control-system-integration-overview/).
 - Use CLI v1 ([cli.circleci.com](https://cli.circleci.com/)). See the [CircleCI CLI guide](https://circleci.com/docs/guides/toolkit/circleci-cli/).
 - Prefer `circleci testsuite` (Smarter Testing) for running and splitting tests. The legacy `circleci tests` commands still work but are not preferred. See [Getting Started With Smarter Testing](https://circleci.com/docs/guides/test/getting-started-with-smarter-testing/).
@@ -43,7 +43,7 @@ These apply on both platforms, unless you are extending an existing integration 
 
 - Use API v2 and v1.1. API v3 is Cloud only. See the [API introduction](https://circleci.com/docs/guides/toolkit/api-intro/), the [API v2 reference](https://circleci.com/docs/api/v2/), and the [API v1.1 reference](https://circleci.com/docs/api/v1/).
 - Schedule pipelines with a `triggers.schedule` block under the workflow. Schedule Triggers are Cloud only.
-- Install [Machine Runner 3](https://circleci.com/docs/guides/execution-runner/install-machine-runner-3-on-linux/) on Server v4.4 and later. Earlier versions need launch agent.
+- Install [Machine Runner 3](https://circleci.com/docs/runner/install-machine-runner-3-on-linux/) on Server v4.4 and later. Earlier versions need launch agent.
 - Prefer GitHub App Server (Preview) over GitHub OAuth on Server, where it is available. See [VCS, Pipeline Types, and Feature Support](https://circleci.com/docs/guides/integration/version-control-system-integration-overview/).
 - Use CLI v0. CLI v1 is Cloud only. See [Get set up](#get-set-up) above for install instructions.
 - Use `circleci tests glob` and `circleci tests split` to split tests. `circleci tests run` is *not* supported on Server, even though it is part of the same command family. `circleci testsuite` is not available on Server either. See [Use the CircleCI CLI to Split Tests](https://circleci.com/docs/guides/optimize/use-the-circleci-cli-to-split-tests/#tests-split-examples).
@@ -64,7 +64,7 @@ These apply on both platforms, unless you are extending an existing integration 
 Do not add these to new configuration or integrations, on either platform:
 
 - The `deploy` step. Use `run`. If the job uses `parallelism` greater than one, split test and deploy into two jobs. See [Migrate From Deploy to Run](https://circleci.com/docs/guides/orchestrate/migrate-from-deploy-to-run/).
-- Launch agent, also called machine runner 1.x. Use [Migrate From Launch Agent to Machine Runner 3](https://circleci.com/docs/guides/execution-runner/migrate-from-launch-agent-to-machine-runner-3-on-linux/). Server needs v4.4+ first; earlier Server versions must stay on launch agent until upgrading.
+- Launch agent, also called machine runner 1.x. Use [Migrate From Launch Agent to Machine Runner 3](https://circleci.com/docs/runner/migrate-from-launch-agent-to-machine-runner-3-on-linux/). Server needs v4.4+ first; earlier Server versions must stay on launch agent until upgrading.
 - `version: 2` configuration. Use `version: 2.1`.
 - Legacy convenience images such as `circleci/node` or `circleci/python`. Use `cimg/` images. See [Migrating to Next-gen Images](https://circleci.com/docs/guides/execution-managed/next-gen-migration-guide/).
 - The local `npx` CircleCI MCP server. Use the hosted MCP server or CLI MCP instead. MCP servers are not available on Server yet.

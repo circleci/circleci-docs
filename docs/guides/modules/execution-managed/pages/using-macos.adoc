@@ -72,7 +72,7 @@ To read about CircleCI's customer support policy regarding beta images, check ou
 [#apple-silicon-support]
 === Apple silicon support
 
-Running or testing Apple silicon apps natively can be done on our silicon-based Macs or by using xref:execution-runner:runner-overview.adoc#available-self-hosted-runner-platforms[CircleCI Runner].
+Running or testing Apple silicon apps natively can be done on our silicon-based Macs or by using xref:runner:ROOT:runner-overview.adoc#available-self-hosted-runner-platforms[CircleCI Runner].
 
 It is also possible to build Apple silicon/universal binaries using Xcode `12.0.0` and higher, as Apple provides both the Intel (`x86_64`) and Apple silicon (`arm64`) toolchains in this release. Cross-compiling Apple silicon binaries on Intel hosts has an additional overhead, and, as a result, compilation times will be longer than native compilation for Intel.
 
