@@ -56,7 +56,7 @@ We announce the deprecation through the following channels:
 * The link:https://circleci.com/changelog/[CircleCI changelog].
 * An in-app banner, shown to the organizations and jobs affected by the deprecation.
 
-We never automatically redirect requests for specific Xcode images to a different major or minor version. When we remove an image, jobs using that image fail if you have not updated the `.circleci/config.yml`.
+We never automatically redirect requests for specific Xcode images to a different major or minor version. When we remove an image, jobs using that image fail if you have not updated your CircleCI configuration file.
 
 [#xcode-image-brownouts]
 === Brownouts
