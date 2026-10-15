@@ -66,7 +66,7 @@ version: 2.1
 jobs:
   build:
     machine: true
-    resource_class: <namespace>/<resource-class> # The runner resource class from your admin
+    resource_class: <namespace>/<resource-class>
     steps:
       - checkout
       - run: echo "Running on a self-hosted runner"
@@ -93,7 +93,7 @@ jobs:
   build:
     docker:
       - image: cimg/base:current
-    resource_class: <namespace>/<resource-class> # The runner resource class from your admin
+    resource_class: <namespace>/<resource-class>
     steps:
       - checkout
       - run: echo "Running on a self-hosted runner"
@@ -176,7 +176,7 @@ In a runner job, `circleci` is an alias of `circleci-agent`, the agent that runs
 [#ssh-reruns]
 === Rerun jobs with SSH
 
-You can xref:ssh-access-jobs.adoc[Debug Jobs With SSH] on self-hosted runners once your admin enables SSH reruns for the runner. SSH reruns on container runner are in preview.
+You can xref:ssh-access-jobs.adoc[Debug Jobs With SSH] on self-hosted runners once your admin enables SSH reruns for the runner. SSH reruns on container runner are in open preview. For setup, see xref:runner:ROOT:container-runner-installation.adoc#enable-rerun-job-with-ssh[Enable Rerun Job With SSH].
 
 [#next-steps]
 == Next steps
