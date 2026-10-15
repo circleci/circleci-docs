@@ -1,6 +1,6 @@
 = Add additional SSH keys to CircleCI
 :page-platform: Cloud, Server
-:page-vcs: github, github-enterprise, gitlab, gitlab-self-hosted, bitbucket, cursor-origin
+:page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
