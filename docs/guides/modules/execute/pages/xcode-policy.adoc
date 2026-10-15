@@ -19,7 +19,7 @@ You can find the most up-to-date information on these images on the link:https:/
 
 We support the three latest Xcode versions released. We also support the latest minor release of the last four major Xcode versions.
 
-For example, if Xcode 26 is the latest major version:
+For example, if Xcode 27 is the latest major version:
 
 .Xcode retention policy example
 [.table-scroll]
@@ -28,51 +28,43 @@ For example, if Xcode 26 is the latest major version:
 |===
 | Xcode Version | Action
 
-| Xcode 26
-| We retain the three latest major.minor versions at the latest patch version
-
-| Xcode 16
-| We retain the last major.minor version
-
-| Xcode 15
-| We retain the last major.minor version
-
-| Xcode 14
-| We retain the last major.minor version
-|===
---
-
-In the future when Xcode 27 releases:
-
-.Xcode retention policy future example
-[.table-scroll]
---
-[cols=2*, options="header"]
-|===
-| Xcode Version | Action
-
 | Xcode 27
-| We support Xcode 27.0
+| We retain the three latest `major.minor` versions at the latest patch version
 
 | Xcode 26
-| No change. We continue to support the latest 3 `major.minor` versions. We flag older images for deprecation and remove them as we release Xcode 27.1 and subsequent versions.
+| We retain the latest `major.minor` version
 
 | Xcode 16
-| No change. We continue to support the latest minor version release.
+| We retain the latest `major.minor` version
 
 | Xcode 15
-| No change. We continue to support the latest minor version release.
+| We retain the latest `major.minor` version
 
 | Xcode 14
-| We flag this version for deprecation and remove it entirely when Xcode 27 reaches GA
+| We flag this version for deprecation and remove it 30 days after we announce the deprecation
 |===
 --
 
 Apple ships betas of new major versions of Xcode during WWDC, which occurs in June each year.
 
-When we select an image for deprecation and removal, we create an announcement on our link:https://circleci.com/changelog/[changelog], along with additional outreach where possible. We aim to provide four weeks' notice where possible.
+[#deprecation-notice-and-retention]
+=== Deprecation notice and retention period
 
-We never automatically redirect requests for specific Xcode images to a different major or minor version. When we remove an image, jobs using that image fail if you have not updated the `.circleci/config.yml`.
+Once we select an Xcode image for deprecation, we retain it for 30 days before we remove it.
+
+We announce the deprecation through the following channels:
+
+* The link:https://circleci.com/changelog/[CircleCI changelog].
+* An in-app banner, shown to the organizations and jobs affected by the deprecation.
+
+We never automatically redirect requests for specific Xcode images to a different major or minor version. When we remove an image, jobs using that image fail if you have not updated your CircleCI configuration file.
+
+[#xcode-image-brownouts]
+=== Brownouts
+
+During the 30-day retention period, we schedule brownouts. A brownout is a temporary, planned period when we make a deprecated image unavailable on purpose. Jobs that use the image fail during a brownout. This warns you before we remove the image for good.
+
+For more information about how brownouts work and how to respond to them, see the xref:machine-convenience-image-lifecycle.adoc#image-brownouts[Image Brownouts] section of the image lifecycle page.
 
 [#xcode-patches]
 == Xcode patches
@@ -97,7 +89,7 @@ To read about our customer support policy for beta images, check out this link:h
 [#xcode-image-releases]
 == Xcode image releases
 
-CircleCI is committed to providing Xcode image updates within *2 business days* of Apple's official GA release, as announced on link:https://developer.apple.com/news/releases/rss/releases.rss[Apple's official RSS feed]. This commitment applies to stable, generally available Xcode releases only.
+CircleCI commits to providing Xcode image updates within *2 business days* of Apple's official GA release, as announced on link:https://developer.apple.com/news/releases/rss/releases.rss[Apple's official RSS feed]. This commitment applies to stable, generally available Xcode releases only.
 
 We announce all images on our link:https://circleci.com/changelog/[changelog] along with release notes. We also add them to the table of xref:using-macos.adoc#supported-xcode-versions[Xcode Versions in the Documentation].
 
@@ -107,12 +99,12 @@ We announce all images on our link:https://circleci.com/changelog/[changelog] al
 [#pre-release-builds]
 ==== Pre-release builds
 
-Beta releases and release candidates are not subject to the 2 business day commitment. Beta and RC images are published on a best-effort basis with no guaranteed timeline. See <<beta-image-support>> for more detail.
+Beta releases and release candidates are not subject to the 2 business day commitment. We publish Beta and RC images on a best-effort basis with no guaranteed timeline. See <<beta-image-support>> for more detail.
 
 [#macos-upgrade-required]
 ==== macOS upgrade required
 
-For major Xcode releases that require a corresponding macOS upgrade on our fleet, the standard 2 business day window does not apply. We aim to publish a projected availability date within *5 business days* of Apple's GA release. A notice is posted on our link:https://discuss.circleci.com/c/announcements/39[Discuss forum] and link:https://circleci.com/changelog/[changelog] when the image goes live.
+For major Xcode releases that require a corresponding macOS upgrade on our fleet, the standard 2 business day window does not apply. We aim to publish a projected availability date within *5 business days* of Apple's GA release. We post a notice on our link:https://circleci.com/changelog/[changelog] when the image goes live.
 
 [#image-quality-hold]
 ==== Image quality hold
@@ -123,7 +115,7 @@ In rare cases, CircleCI's validation process may identify critical issues with a
 * Simulator instability.
 * Build system defects introduced by Apple.
  
-When this occurs, availability may be delayed beyond the standard window. We aim to post a notice on our link:https://discuss.circleci.com/c/announcements/39[Discuss forum] within the original 2 business day window. The notice states that the release is under a quality hold and whether the issue is attributable to Apple or CircleCI. A projected timeline is provided once the scope of the fix is known.
+When this occurs, we may delay availability beyond the standard window. We aim to post a notice on our link:https://circleci.com/changelog/[changelog] within the original 2 business day window. The notice states that the release is under a quality hold. It also states whether Apple or CircleCI caused the issue. Once we know the scope of the fix, we share a projected timeline.
 
 [#macos-versions]
 == macOS versions
@@ -137,4 +129,4 @@ When Apple releases a new major version of macOS (ex: `27.0`), we start to use t
 [#exceptions]
 == Exceptions
 
-At any time, we reserve the right to work outside of the information in this document if the circumstances require. When we need to make an exception to the policy, we aim to provide as much notice and clarity as possible. In these cases, we post an announcement on our link:https://discuss.circleci.com/c/announcements/39[Discuss forum], along with additional outreach, such as an email notice, where possible.
+At any time, we reserve the right to work outside of the information in this document if the circumstances require. When we need to make an exception to the policy, we aim to provide as much notice and clarity as possible. In these cases, we post an announcement on our link:https://circleci.com/changelog/[changelog].
