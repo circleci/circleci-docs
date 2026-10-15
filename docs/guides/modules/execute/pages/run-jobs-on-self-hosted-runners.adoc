@@ -35,6 +35,17 @@ Ask the admin who set up the runner for the following details:
 
 Organization admins create and manage resource classes on the **Runners** page of the CircleCI web app.
 
+ifndef::server[]
+You do not need to be an admin to see which runners are available. To list the runner instances connected to your organization, with their resource classes and status, run this command in your project directory:
+
+[source,console]
+----
+$ circleci runner instance list
+----
+
+To filter the list, add `--resource-class <namespace>/<resource-class>`. For all options, see the link:https://cli.circleci.com/reference/#circleci-runner-instance-list-flags[CircleCI CLI Reference].
+endif::server[]
+
 [#add-the-resource-class-to-your-job]
 == 2. Add the resource class to your job
 
