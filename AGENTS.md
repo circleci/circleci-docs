@@ -65,7 +65,16 @@ All pages require standard attributes (`:page-platform:`, `:page-audience:`, `:p
 ### CircleCI-Specific Terminology
 - The CircleCI web interface is the "web app"
 - Use "CI/CD" to describe what we do
-- Pipelines are **triggered**, not "run"
+- A pipeline is the definition of what code to run and which config to use. It does not run and is not triggered
+- A **trigger** starts a **run** (the web app labels it "Pipeline run"). Write "trigger a pipeline run" or "a run is triggered", not "trigger a pipeline" or "run a pipeline"
+- **Workflows** and **jobs** run. Runs and pipelines do not
+- **Good**: Push a commit to trigger a pipeline run.
+- **Good**: Push a commit to trigger a run.
+- **Good**: The workflow starts once the pipeline run is triggered.
+- **Good**: The workflow starts once the run is triggered.
+- **Bad**: Push a commit to trigger your pipeline.
+- **Bad**: Run the pipeline to build your project.
+- **Bad**: The pipeline runs when you push a commit.
 - Feature names are rarely capitalized (exceptions: Insights)
 
 ## Numbers
