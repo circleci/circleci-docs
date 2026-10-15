@@ -28,3 +28,6 @@
 ** xref:runner-faqs.adoc[Self-hosted runner FAQ]
 ** xref:troubleshoot-self-hosted-runner.adoc[Troubleshoot self-hosted runner]
 ** xref:runner-scaling.adoc[Scaling self-hosted runner]
+ifndef::server[]
+** xref:monitor-runner-fleets.adoc[Monitor self-hosted runner fleets]
+endif::server[]
