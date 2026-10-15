@@ -449,7 +449,7 @@ NOTE: A job can only run when its dependencies are satisfied therefore it requir
 ifndef::server[]
 == Sample configuration with multiple executor types
 
-It is possible to use multiple xref:execution-managed:executor-intro.adoc[Executor Types]
+It is possible to use multiple xref:execute:executor-intro.adoc[Executor Types]
 in the same workflow.
 
 In Example 1 each push will build and test the project on Linux, Windows and macOS.

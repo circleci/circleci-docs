@@ -1,0 +1,161 @@
+= Using the Arm VM execution environment
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Learn how to configure a your jobs to run in the Arm VM execution environment.
+:page-aliases: guides:execution-managed:using-arm.adoc
+:experimental:
+
+You can access the Arm VM (virtual machine) execution environment for a job by using the machine executor and specifying a Linux virtual machine image that includes Arm resources. You then specify an Arm resource class.
+
+[tabs]
+====
+Cloud::
++
+--
+[,yaml]
+----
+# .circleci/config.yml
+jobs:
+  my-job:
+    machine:
+      image: ubuntu-2404:current
+    resource_class: arm.medium
+    steps:
+      - run: uname -a
+      - run: echo "Hello, Arm!"
+----
+--
+Server::
++
+--
+[,yaml]
+----
+# .circleci/config.yml
+jobs:
+  my-job:
+    machine:
+      image: arm-default
+    resource_class: arm.medium
+    steps:
+      - run: uname -a
+      - run: echo "Hello, Arm!"
+----
+--
+====
+
+[#available-resource-classes]
+== Available resource classes
+
+The following Arm resources are available as part of the xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[`machine` executor]:
+
+=== Gen1
+
+include::ROOT:partial$execution-resources/arm-resource-table.adoc[]
+
+[badge="Beta"]
+=== Gen2
+
+include::ROOT:partial$execution-resources/arm-gen2-resource-table.adoc[]
+
+For pricing and plans information, see the link:https://circleci.com/product/features/resource-classes/[resource class pricing overview].
+
+[#view-resource-usage]
+=== View resource usage
+
+include::ROOT:partial$execution-resources/resource-class-view.adoc[]
+
+[#arm-vm-generations]
+== Arm VM generations
+
+[#arm-vm-gen2-benefits]
+[badge="Beta"]
+=== Gen2
+
+Resource classes running on gen2 infrastructure offer significant performance and cost improvements over their gen1 equivalents.
+
+[#arm-vm-performance-improvements]
+==== Performance improvements
+
+Using more modern compute, gen2 instances deliver up to 73% faster performance compared to gen1 equivalents, based on benchmarks measured during the beta period. Actual performance gains depend on your specific workloads, and this figure may change when Arm gen2 becomes generally available.
+
+[#using-arm-vm-gen2]
+==== Using gen2
+
+To use a gen2 resource class, specify an `arm.large.gen2` or equivalent class in your job configuration:
+
+[,yaml]
+----
+# .circleci/config.yml
+jobs:
+  my-job:
+    machine:
+      image: ubuntu-2404:current
+    resource_class: arm.large.gen2
+    steps:
+      - run: uname -a
+      - run: echo "Hello, Arm!"
+----
+
+NOTE: Gen2 resource classes for the Arm VM execution environment are available on CircleCI Cloud only.
+
+== Images with Arm support
+
+Arm resources are accessible by using the machine executor when using one of the following images:
+
+=== Gen1
+
+[discrete]
+==== Ubuntu 20.04 - focal
+
+* `ubuntu-2004:current` - most recent, recommended for all users.
+* `ubuntu-2004:2023.07.1`
+* `ubuntu-2004:2023.04.2`
+* `ubuntu-2004:2023.02.1`
+* `ubuntu-2004:2022.10.1`
+* `ubuntu-2004:2022.07.1`
+* `ubuntu-2004:2022.04.1`
+* `ubuntu-2004:202201-02`
+* `ubuntu-2004:202201-01`
+* `ubuntu-2004:202111-02`
+* `ubuntu-2004:202111-01`
+* `ubuntu-2004:202107-01`
+* `ubuntu-2004:202104-01`
+* `ubuntu-2004:202101-01`
+* `ubuntu-2004:202011-01` - deprecated as of Feb 3, 2021.
+
+[discrete]
+==== Ubuntu 22.04 - jammy
+
+* `ubuntu-2204:current` - most recent, recommended for all users.
+* `ubuntu-2204:2023.07.1`
+* `ubuntu-2204:2023.04.2`
+* `ubuntu-2204:2023.02.1`
+* `ubuntu-2204:2022.10.2`
+* `ubuntu-2204:2022.07.2`
+
+[badge="Beta"]
+=== Gen2
+
+Arm gen2 resource classes are only supported on the following images and tags:
+
+* `ubuntu-2404:current`
+* `ubuntu-2404:edge`
+* `ubuntu-2604:current`
+* `ubuntu-2604:edge`
+
+For a full list of machine executor images, see the link:https://circleci.com/developer/images?imageType=machine[CircleCI Developer Hub]. And for announcements about image updates, see link:https://discuss.circleci.com/c/ecosystem/circleci-images/64[CircleCI Discuss].
+
+[#limitations]
+== Limitations
+
+* CircleCI supports only 64-bit `arm64` architectures.
+* In CircleCI Server, Arm resources are only available when using the EC2 provider for VM service or machine provisioner. No Arm instances are available in GCP.
+* If you run into issues with orbs, or if there is software you require that is not available in the image, link:https://circleci.canny.io/cloud-feature-requests[submit a feature request].
+
+[#arm-on-docker]
+== Arm on Docker
+
+For further information on using Arm with the Docker execution environment, see the xref:using-docker.adoc#arm[Using the Docker Execution Environment] page.

@@ -188,7 +188,7 @@ Credit usage covers access to compute. We prefer to keep usage costs as low as p
 An active user is any user who triggers the use of compute resources on non-OSS projects. This includes activities such as:
 
 - Commits from users that trigger builds, including PR Merge commits
-- Re-running jobs in the CircleCI web application, including xref:guides:execution-managed:ssh-access-jobs.adoc[SSH Debug]
+- Re-running jobs in the CircleCI web application, including xref:guides:execute:ssh-access-jobs.adoc[SSH Debug]
 - Approving xref:guides:orchestrate:workflows.adoc#holding-a-workflow-for-a-manual-approval[On-Hold Jobs] (approver will be considered the actor of all downstream jobs).
 - Using scheduled workflows
 - Machine users

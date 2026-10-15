@@ -47,10 +47,10 @@
   new: /guides/integration/add-ssh-key/
 
 - old: /android-images-support-policy/
-  new: /guides/execution-managed/android-images-support-policy/
+  new: /guides/execute/android-images-support-policy/
 
 - old: /android-machine-image/
-  new: /guides/execution-managed/android-machine-image/
+  new: /guides/execute/android-machine-image/
 
 - old: /api-developers-guide/
   new: /guides/toolkit/api-developers-guide/
@@ -98,7 +98,7 @@
   new: /guides/test/browser-testing/
 
 - old: /building-docker-images/
-  new: /guides/execution-managed/building-docker-images/
+  new: /guides/execute/building-docker-images/
 
 - old: /caching/
   new: /guides/optimize/caching/
@@ -107,7 +107,7 @@
   new: /guides/toolkit/circleci-config-sdk/
 
 - old: /circleci-images/
-  new: /guides/execution-managed/circleci-images/
+  new: /guides/execute/circleci-images/
 
 - old: /code-coverage/
   new: /guides/test/code-coverage/
@@ -155,7 +155,7 @@
   new: /guides/orchestrate/controlling-serial-execution-across-your-organization/
 
 - old: /convenience-images-support-policy/
-  new: /guides/execution-managed/convenience-images-support-policy/
+  new: /guides/execute/convenience-images-support-policy/
 
 - old: /create-an-orb/
   new: /orbs/author/create-an-orb/
@@ -173,7 +173,7 @@
   new: /guides/plans-pricing/credits/
 
 - old: /custom-images/
-  new: /guides/execution-managed/custom-images/
+  new: /guides/execute/custom-images/
 
 - old: /custom-webhooks/
   new: /guides/orchestrate/custom-webhooks/
@@ -251,13 +251,13 @@
   new: /guides/deploy/deployment-overview/
 
 - old: /docker-compose/
-  new: /guides/execution-managed/docker-compose/
+  new: /guides/execute/docker-compose/
 
 - old: /docker-layer-caching/
   new: /guides/optimize/docker-layer-caching/
 
 - old: /docker-to-machine/
-  new: /guides/execution-managed/docker-to-machine/
+  new: /guides/execute/docker-to-machine/
 
 - old: /dynamic-config/
   new: /guides/orchestrate/dynamic-config/
@@ -275,7 +275,7 @@
   new: /guides/toolkit/examples-and-guides-overview/
 
 - old: /executor-intro/
-  new: /guides/execution-managed/executor-intro/
+  new: /guides/execute/executor-intro/
 
 - old: /faq/
   new: /reference/faq/
@@ -311,13 +311,13 @@
   new: /guides/getting-started/hello-world/
 
 - old: /hello-world-macos/
-  new: /guides/execution-managed/hello-world-macos/
+  new: /guides/execute/hello-world-macos/
 
 - old: /hello-world-windows/
-  new: /guides/execution-managed/hello-world-windows/
+  new: /guides/execute/hello-world-windows/
 
 - old: /high-uid-error/
-  new: /guides/execution-managed/high-uid-error/
+  new: /guides/execute/high-uid-error/
 
 - old: /how-to-override-config/
   new: /guides/orchestrate/how-to-override-config/
@@ -365,7 +365,7 @@
   new: /guides/getting-started/invite-your-team/
 
 - old: /ios-codesigning/
-  new: /guides/execution-managed/ios-codesigning/
+  new: /guides/execute/ios-codesigning/
 
 - old: /ip-ranges/
   new: /guides/security/ip-ranges/
@@ -389,10 +389,10 @@
   new: /guides/getting-started/language-python/
 
 - old: /linux-cuda-images-support-policy/
-  new: /guides/execution-managed/linux-cuda-images-support-policy/
+  new: /guides/execute/linux-cuda-images-support-policy/
 
 - old: /linux-vm-support-policy/
-  new: /guides/execution-managed/linux-vm-support-policy/
+  new: /guides/execute/linux-vm-support-policy/
 
 - old: /local-cli/
   new: /guides/toolkit/local-cli/
@@ -467,7 +467,7 @@
   new: /guides/integration/new-relic-integration/
 
 - old: /next-gen-migration-guide/
-  new: /guides/execution-managed/next-gen-migration-guide/
+  new: /guides/execute/next-gen-migration-guide/
 
 - old: /notifications/
   new: /guides/integration/notifications/
@@ -557,7 +557,7 @@
   new: /guides/plans-pricing/prevent-unregistered-users-from-spending-credits/
 
 - old: /private-images/
-  new: /guides/execution-managed/private-images/
+  new: /guides/execute/private-images/
 
 - old: /publish-packages-to-packagecloud/
   new: /guides/deploy/publish-packages-to-packagecloud/
@@ -566,7 +566,7 @@
   new: /guides/permissions-authentication/pull-an-image-from-aws-ecr-with-oidc/
 
 - old: /remote-docker-images-support-policy/
-  new: /guides/execution-managed/remote-docker-images-support-policy/
+  new: /guides/execute/remote-docker-images-support-policy/
 
 - old: /rename-organizations-and-repositories/
   new: /guides/security/rename-organizations-and-repositories/
@@ -575,7 +575,7 @@
   new: /guides/test/rerun-failed-tests/
 
 - old: /resource-class-overview/
-  new: /guides/execution-managed/resource-class-overview/
+  new: /guides/execute/resource-class-overview/
 
 - old: /reusing-config/
   new: /reference/reusing-config/
@@ -587,7 +587,7 @@
   new: /guides/security/rotate-project-ssh-keys/
 
 - old: /run-a-job-in-a-container/
-  new: /guides/execution-managed/run-a-job-in-a-container/
+  new: /guides/toolkit/cli-migration-guide/
 
 - old: /runner-api/
   new: /reference/runner-api/
@@ -761,7 +761,7 @@
   new: /guides/getting-started/slack-orb-tutorial/
 
 - old: /ssh-access-jobs/
-  new: /guides/execution-managed/ssh-access-jobs/
+  new: /guides/execute/ssh-access-jobs/
 
 - old: /status-badges/
   new: /guides/integration/status-badges/
@@ -842,25 +842,25 @@
   new: /guides/config-policies/use-the-cli-for-config-and-policy-development/
 
 - old: /using-arm/
-  new: /guides/execution-managed/using-arm/
+  new: /guides/execute/using-arm/
 
 - old: /using-branch-filters/
   new: /guides/orchestrate/using-branch-filters/
 
 - old: /using-docker/
-  new: /guides/execution-managed/using-docker/
+  new: /guides/execute/using-docker/
 
 - old: /using-dynamic-configuration/
   new: /guides/orchestrate/using-dynamic-configuration/
 
 - old: /using-gpu/
-  new: /guides/execution-managed/using-gpu/
+  new: /guides/execute/using-gpu/
 
 - old: /using-linuxvm/
-  new: /guides/execution-managed/using-linuxvm/
+  new: /guides/execute/using-linuxvm/
 
 - old: /using-macos/
-  new: /guides/execution-managed/using-macos/
+  new: /guides/execute/using-macos/
 
 - old: /using-matrix-jobs/
   new: /guides/orchestrate/using-matrix-jobs/
@@ -872,7 +872,7 @@
   new: /guides/toolkit/using-the-circleci-mcp-server/
 
 - old: /using-windows/
-  new: /guides/execution-managed/using-windows/
+  new: /guides/execute/using-windows/
 
 - old: /variables/
   new: /reference/variables/
@@ -890,7 +890,7 @@
   new: /reference/outbound-webhooks-reference/
 
 - old: /windows-images-support-policy/
-  new: /guides/execution-managed/windows-images-support-policy/
+  new: /guides/execute/windows-images-support-policy/
 
 - old: /workflows/
   new: /guides/orchestrate/workflows/
@@ -899,11 +899,11 @@
   new: /guides/orchestrate/workspaces/
 
 - old: /xcode-policy/
-  new: /guides/execution-managed/xcode-policy/
+  new: /guides/execute/xcode-policy/
 
 
 - old: /2.0/circleci-images/
-  new: /guides/execution-managed/circleci-images/
+  new: /guides/execute/circleci-images/
 
 - old: /2.0/caching/
   new: /guides/optimize/caching/
@@ -918,7 +918,7 @@
   new: /server-admin/latest/operator/monitoring-stack-reference-helm-chart/
 
 - old: /2.0/executor-types/
-  new: /guides/execution-managed/executor-intro/
+  new: /guides/execute/executor-intro/
 
 - old: /server/server-4.8/overview/circleci-server-overview/
   new: /server-admin/server-4.8/overview/circleci-server-overview/
@@ -927,7 +927,7 @@
   new: /guides/orchestrate/analyze-pipelines-during-an-incident/
 
 - old: /executor-types/
-  new: /guides/execution-managed/executor-intro/
+  new: /guides/execute/executor-intro/
 
 - old: /orbs/author/orb-concepts/
   new: /orbs/use/orb-concepts/
@@ -936,7 +936,7 @@
   new: /guides/orchestrate/set-a-nightly-schedule-trigger/
 
 - old: /resource-class-lifecycle/
-  new: /guides/execution-managed/resource-class-lifecycle/
+  new: /guides/execute/resource-class-lifecycle/
 
 - old: /set-up-cross-repo-triggers-for-library-consumers/
   new: /guides/orchestrate/set-up-cross-repo-triggers-for-library-consumers/
@@ -981,10 +981,10 @@
   new: /guides/deploy/deploy-to-azure-container-registry/
 
 - old: /execution-managed/android-images-support-policy/
-  new: /guides/execution-managed/android-images-support-policy/
+  new: /guides/execute/android-images-support-policy/
 
 - old: /machine-convenience-image-lifecycle/
-  new: /guides/execution-managed/machine-convenience-image-lifecycle/
+  new: /guides/execute/machine-convenience-image-lifecycle/
 
 - old: /pause-pipelines-during-an-incident/
   new: /guides/orchestrate/pause-pipelines-during-an-incident/
@@ -1008,7 +1008,7 @@
   new: /guides/security/delete-organizations-and-projects/
 
 - old: /execution-managed/private-images/
-  new: /guides/execution-managed/private-images/
+  new: /guides/execute/private-images/
 
 - old: /execution-runner/machine-runner-3-manual-installation-on-windows/
   new: /runner/machine-runner-3-manual-installation-on-windows/
@@ -1038,7 +1038,7 @@
   new: /guides/deploy/smart-deployments-overview/
 
 - old: /execution-managed/linux-vm-support-policy/
-  new: /guides/execution-managed/linux-vm-support-policy/
+  new: /guides/execute/linux-vm-support-policy/
 
 - old: /fix-flaky-tests/
   new: /guides/test/fix-flaky-tests/
@@ -1080,7 +1080,7 @@
   new: /guides/toolkit/circleci-cli/
 
 - old: /execution-managed/android-machine-image/
-  new: /guides/execution-managed/android-machine-image/
+  new: /guides/execute/android-machine-image/
 
 - old: /execution-runner/runner-scaling/
   new: /runner/runner-scaling/
@@ -1119,7 +1119,7 @@
   new: /guides/deploy/deploy-a-component/
 
 - old: /execution-managed/using-macos/
-  new: /guides/execution-managed/using-macos/
+  new: /guides/execute/using-macos/
 
 - old: /getting-started/create-project/
   new: /guides/getting-started/create-project/

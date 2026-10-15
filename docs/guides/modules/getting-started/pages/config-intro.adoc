@@ -228,7 +228,7 @@ In this example, you have:
 * Created a workflow to define the order in which your jobs run.
 * Introduced some logic to ensure that the previous job must complete successfully before the next job is executed.
 
-TIP: To increase your understanding, experiment with other xref:execution-managed:circleci-images.adoc[CircleCI Images], or add some more jobs to your workflow.
+TIP: To increase your understanding, experiment with other xref:execute:circleci-images.adoc[CircleCI Images], or add some more jobs to your workflow.
 
 [#part-4-adding-a-manual-approval]
 == Part 4: Adding a manual approval
@@ -344,5 +344,5 @@ The CircleCI VS Code extension is available to download on the link:https://mark
 == See also
 
 * xref:reference:ROOT:configuration-reference.adoc[Configuring CircleCI]
-* xref:execution-managed:executor-intro.adoc[Executors and Images]
+* xref:execute:executor-intro.adoc[Executors and Images]
 * xref:orchestrate:workflows.adoc[Using Workflows to Orchestrate Jobs]

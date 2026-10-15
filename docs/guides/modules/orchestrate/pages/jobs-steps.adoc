@@ -27,7 +27,7 @@ Jobs can be run in Docker containers, using the Docker executor, or in virtual m
 
 When using the Docker executor, images listed under the `docker` key specify the containers you want to start for your job. Any public Docker images can be used with the Docker executor, but CircleCI provides convenience images for a variety of use-cases. Full lists of available convenience and VM images are available in the link:https://circleci.com/developer/images[CircleCI Developer Hub].
 
-See the xref:execution-managed:executor-intro.adoc[Introduction to Execution Environments] document for a comparison of the different executor types, and links to further information for each option.
+See the xref:execute:executor-intro.adoc[Introduction to Execution Environments] document for a comparison of the different executor types, and links to further information for each option.
 
 === Job naming
 

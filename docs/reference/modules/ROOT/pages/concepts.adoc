@@ -361,16 +361,16 @@ workflows:
 
 The first image listed in the `.circleci/config.yml` file defines the primary container. CircleCI executes commands in the primary container. The Docker executor spins up a container with a Docker image. The machine executor spins up a complete Ubuntu virtual machine image. You can add further images to spin up secondary/service containers.
 
-For added security when using the Docker executor and running Docker commands, use the `setup_remote_docker` key to spin up another Docker container in which to run these commands. For more information see the xref:guides:execution-managed:building-docker-images.adoc[Running Docker Commands] page.
+For added security when using the Docker executor and running Docker commands, use the `setup_remote_docker` key to spin up another Docker container in which to run these commands. For more information see the xref:guides:execute:building-docker-images.adoc[Running Docker Commands] page.
 
-For more information, see the xref:guides:execution-managed:executor-intro.adoc[Execution Environments Overview] page.
+For more information, see the xref:guides:execute:executor-intro.adoc[Execution Environments Overview] page.
 
 [#images]
 == Images
 
 An image is a packaged system that includes instructions for creating a running container. The first image listed in a `.circleci/config.yml` file defines the primary container. CircleCI executes commands for jobs in the primary container, using the Docker or machine executor.
 
-The *Docker executor* spins up a container with a Docker image. CircleCI maintains xref:guides:execution-managed:circleci-images.adoc[Convenience Images] for popular languages on Docker Hub.
+The *Docker executor* spins up a container with a Docker image. CircleCI maintains xref:guides:execute:circleci-images.adoc[Convenience Images] for popular languages on Docker Hub.
 
 include::guides:ROOT:partial$notes/docker-auth.adoc[]
 
@@ -418,12 +418,12 @@ workflows:
       - build3
 ----
 
-See the xref:guides:execution-managed:circleci-images.adoc[CircleCI Images] page for more information.
+See the xref:guides:execute:circleci-images.adoc[CircleCI Images] page for more information.
 
 [#jobs]
 == Jobs
 
-Jobs are the building blocks of your configuration. Jobs are collections of <<steps,steps>>, which run commands/scripts as required. Each job must declare an executor that is either `docker`, `machine`, `windows`, or `macos`. For `docker` you must xref:guides:execution-managed:executor-intro.adoc#docker[Specify an Image] to use for the primary container. For `macos` you must specify an xref:guides:execution-managed:executor-intro.adoc#macos[Xcode Version]. For `windows` you must use the xref:guides:execution-managed:executor-intro.adoc#windows[Windows Orb].
+Jobs are the building blocks of your configuration. Jobs are collections of <<steps,steps>>, which run commands/scripts as required. Each job must declare an executor that is either `docker`, `machine`, `windows`, or `macos`. For `docker` you must xref:guides:execute:executor-intro.adoc#docker[Specify an Image] to use for the primary container. For `macos` you must specify an xref:guides:execute:executor-intro.adoc#macos[Xcode Version]. For `windows` you must use the xref:guides:execute:executor-intro.adoc#windows[Windows Orb].
 
 .Illustration of a CircleCI job
 image::guides:ROOT:job.png[Illustration of a CircleCI job]
@@ -562,18 +562,18 @@ jobs:
 
 Examples for all execution environments are available on the following pages:
 
-* xref:guides:execution-managed:using-docker.adoc[Using the Docker Execution Environment]
-* xref:guides:execution-managed:using-linuxvm.adoc[Using the LinuxVM Execution Environment]
-* xref:guides:execution-managed:using-macos.adoc[Using the macOS Execution Environment]
-* xref:guides:execution-managed:using-windows.adoc[Using the Windows Execution Environment]
-* xref:guides:execution-managed:using-gpu.adoc[Using the GPU Execution Environment]
-* xref:guides:execution-managed:using-arm.adoc[Using the Arm VM Execution Environment]
+* xref:guides:execute:using-docker.adoc[Using the Docker Execution Environment]
+* xref:guides:execute:using-linuxvm.adoc[Using the LinuxVM Execution Environment]
+* xref:guides:execute:using-macos.adoc[Using the macOS Execution Environment]
+* xref:guides:execute:using-windows.adoc[Using the Windows Execution Environment]
+* xref:guides:execute:using-gpu.adoc[Using the GPU Execution Environment]
+* xref:guides:execute:using-arm.adoc[Using the Arm VM Execution Environment]
 
 Pricing and plans information for the various resource classes can be found on the link:https://circleci.com/product/features/resource-classes/[Resource classes] product page.
 
 The `resource_class` key is also used to configure a xref:runner:ROOT:runner-concepts.adoc#namespaces-and-resource-classes[Self-Hosted Runner Instance].
 
-For full details on both uses of resource classes, see the xref:guides:execution-managed:resource-class-overview.adoc[Resource Class Overview] page.
+For full details on both uses of resource classes, see the xref:guides:execute:resource-class-overview.adoc[Resource Class Overview] page.
 
 [#runs]
 == Runs

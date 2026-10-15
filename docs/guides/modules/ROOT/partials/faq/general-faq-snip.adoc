@@ -8,11 +8,11 @@ See the CircleCI xref:guides:security:security.adoc[Security Policy] for more de
 [#use-circleci-without-creating-base-images]
 === Can I use CircleCI without creating base images?
 
-Yes, CircleCI provides a selection of "convenience images" for use with the Docker executor. For a full list, along with usage instructions, visit the link:https://circleci.com/developer/images[CircleCI Developer Hub] and the xref:guides:execution-managed:circleci-images.adoc[CircleCI Images Guide].
+Yes, CircleCI provides a selection of "convenience images" for use with the Docker executor. For a full list, along with usage instructions, visit the link:https://circleci.com/developer/images[CircleCI Developer Hub] and the xref:guides:execute:circleci-images.adoc[CircleCI Images Guide].
 
 For the `machine` executor, see the xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[Available Machine Images] list.
 
-For an introduction to execution environments and images, see the xref:guides:execution-managed:executor-intro.adoc[Introduction to Execution Environments].
+For an introduction to execution environments and images, see the xref:guides:execute:executor-intro.adoc[Introduction to Execution Environments].
 
 [#request-new-features]
 === Can I request new features?

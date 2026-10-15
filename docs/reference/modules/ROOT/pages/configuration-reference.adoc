@@ -786,7 +786,7 @@ CircleCI offers several execution environments in which to run your jobs. To spe
 
 Set up your jobs to run using the `docker` (Linux), `machine` (LinuxVM, Windows, GPU, Arm), or `macos` executor. Then specify an image with the tools and packages you need, and a resource class.
 
-Learn more about execution environments and executors in the xref:guides:execution-managed:executor-intro.adoc#[Introduction to Execution Environments].
+Learn more about execution environments and executors in the xref:guides:execute:executor-intro.adoc#[Introduction to Execution Environments].
 
 '''
 
@@ -850,9 +850,9 @@ Configure a job to use the Docker execution environment using the `docker` key w
 
 For a xref:glossary.adoc#primary-container[Primary Container], (the first container in the list) if neither `command` nor `entrypoint` is specified in the configuration, then any `ENTRYPOINT` and `COMMAND` in the image are ignored. The primary container is typically only used for running the `steps` and not for its `ENTRYPOINT`, and an `ENTRYPOINT` may consume significant resources or exit prematurely.
 
-A xref:guides:execution-managed:custom-images.adoc#adding-an-entrypoint[Custom Image] may disable this behavior and force the `ENTRYPOINT` to run.
+A xref:guides:execute:custom-images.adoc#adding-an-entrypoint[Custom Image] may disable this behavior and force the `ENTRYPOINT` to run.
 
-You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about specifying images on the xref:guides:execution-managed:using-docker.adoc#[Using the Docker Execution Environment] page.
+You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about specifying images on the xref:guides:execute:using-docker.adoc#[Using the Docker Execution Environment] page.
 
 *Example:*
 
@@ -879,7 +879,7 @@ workflows:
 [#docker-auth]
 ==== Docker registry authentication
 
-Some registries, Docker Hub, for example, may rate limit anonymous Docker pulls. We recommend that you authenticate to pull private and public images. The username and password can be specified in the `auth` field. See xref:guides:execution-managed:private-images.adoc#[Using Docker Authenticated Pulls] for details.
+Some registries, Docker Hub, for example, may rate limit anonymous Docker pulls. We recommend that you authenticate to pull private and public images. The username and password can be specified in the `auth` field. See xref:guides:execute:private-images.adoc#[Using Docker Authenticated Pulls] for details.
 
 *Example:*
 
@@ -1089,7 +1089,7 @@ If you are using CircleCI Server, contact your system administrator for details 
 [#available-linux-gpu-images]
 ==== Linux GPU `machine` images
 
-When using the Linux xref:guides:execution-managed:using-gpu.adoc#[GPU Executor], the available images are:
+When using the Linux xref:guides:execute:using-gpu.adoc#[GPU Executor], the available images are:
 
 * `linux-cuda-11:default` v11.4, v11.6, v11.8 (default), Docker v20.10.24.
 * `linux-cuda-12:default` v12.0, v12.1 (default), Docker v20.10.24.
@@ -1115,9 +1115,9 @@ jobs:
 
 The Android image can also be accessed using the link:https://circleci.com/developer/orbs/orb/circleci/android[Android orb].
 
-Gen2 resource classes (for example, `large.gen2`) are also available for the Android machine image on CircleCI Cloud. See the xref:guides:execution-managed:android-machine-image.adoc#android-generations[Android Machine Image Generations] section for details.
+Gen2 resource classes (for example, `large.gen2`) are also available for the Android machine image on CircleCI Cloud. See the xref:guides:execute:android-machine-image.adoc#android-generations[Android Machine Image Generations] section for details.
 
-For examples, refer to the xref:guides:execution-managed:android-machine-image.adoc#[Using Android Images With the Machine Executor] page.
+For examples, refer to the xref:guides:execute:android-machine-image.adoc#[Using Android Images With the Machine Executor] page.
 
 '''
 
@@ -1133,7 +1133,7 @@ For a full list of supported images, refer to one of the following:
 
 More information on what software is available in each image can be found in our link:https://discuss.circleci.com/c/ecosystem/circleci-images/[Discuss forum].
 
-Alternatively, use the link:https://circleci.com/developer/orbs/orb/circleci/windows[Windows orb] to manage your Windows execution environment. For examples, see the xref:guides:execution-managed:using-windows.adoc#[Using the Windows Execution Environment] page.
+Alternatively, use the link:https://circleci.com/developer/orbs/orb/circleci/windows[Windows orb] to manage your Windows execution environment. For examples, see the xref:guides:execute:using-windows.adoc#[Using the Windows Execution Environment] page.
 
 '''
 
@@ -1147,7 +1147,7 @@ If you are using CircleCI Server, contact your system administrator for details 
 [#available-windows-gpu-image]
 ==== Windows GPU `machine` image
 
-When using the Windows xref:guides:execution-managed:using-gpu.adoc#[GPU Executor], the available image is:
+When using the Windows xref:guides:execute:using-gpu.adoc#[GPU Executor], the available image is:
 
 * link:https://circleci.com/developer/machine/image/windows-server-2019-cuda[`windows-server-2019-cuda`]
 
@@ -1179,12 +1179,12 @@ CircleCI supports running jobs on link:https://developer.apple.com/macos/[macOS]
 | `xcode`
 | Y
 | String
-| The version of Xcode that is installed on the virtual machine, see the xref:guides:execution-managed:using-macos.adoc#supported-xcode-versions[Supported Xcode Versions Section of the Testing iOS] document for the complete list.
+| The version of Xcode that is installed on the virtual machine, see the xref:guides:execute:using-macos.adoc#supported-xcode-versions[Supported Xcode Versions Section of the Testing iOS] document for the complete list.
 
 | `code_signing`
 | N
 | List
-| A list of signing bundle names to install onto the macOS virtual machine with the `install_signing_bundle` step. See xref:guides:execution-managed:ios-codesigning.adoc[Set Up Code Signing for iOS and macOS Projects].
+| A list of signing bundle names to install onto the macOS virtual machine with the `install_signing_bundle` step. See xref:guides:execute:ios-codesigning.adoc[Set Up Code Signing for iOS and macOS Projects].
 |===
 --
 
@@ -1210,7 +1210,7 @@ This key is deprecated. Use <<jobfilters,workflows filtering>> to control which 
 [#resourceclass]
 == *`resource_class`*
 
-The `resource_class` feature allows you to configure CPU and RAM resources for each job. Resource classes are available for each execution environment, as described in the tables below. A resource class is also used as a label to identify a pool of self-hosted runners and to route a job to that pool. For full details on both uses, see the xref:guides:execution-managed:resource-class-overview.adoc[Resource Class Overview] page.
+The `resource_class` feature allows you to configure CPU and RAM resources for each job. Resource classes are available for each execution environment, as described in the tables below. A resource class is also used as a label to identify a pool of self-hosted runners and to route a job to that pool. For full details on both uses, see the xref:guides:execute:resource-class-overview.adoc[Resource Class Overview] page.
 
 We implement soft concurrency limits for each resource class to ensure our system remains stable for all customers. If you are on a Performance Plan and experience queuing for certain resource classes, it is possible you are hitting these limits. link:https://support.circleci.com/hc/en-us/requests/new[Contact CircleCI support] to request a raise on these limits for your account.
 
@@ -2174,7 +2174,7 @@ NOTE: The `checkout` step configures Git to skip automatic garbage collection. I
 * The `version` key is not currently supported on CircleCI Server. Contact your system administrator for information about the Docker version installed in your remote Docker environment. If you are on server 4.x, find the xref:server-admin:operator:manage-virtual-machines-with-machine-provisioner.adoc#default-aws-ami-lists[Default AWS AMI Lists].
 ====
 
-Allows Docker commands to be run locally. See xref:guides:execution-managed:building-docker-images.adoc#[Running Docker Commands] for details.
+Allows Docker commands to be run locally. See xref:guides:execute:building-docker-images.adoc#[Running Docker Commands] for details.
 
 [.table-scroll]
 --
@@ -2195,7 +2195,7 @@ Allows Docker commands to be run locally. See xref:guides:execution-managed:buil
 | `version`
 | N
 | String
-| Version string of Docker you would like to use (default: `24.0.9`). View the list of xref:guides:execution-managed:building-docker-images.adoc#docker-version[Supported Docker Versions].
+| Version string of Docker you would like to use (default: `24.0.9`). View the list of xref:guides:execute:building-docker-images.adoc#docker-version[Supported Docker Versions].
 |===
 --
 
@@ -2777,7 +2777,7 @@ NOTE: Even though CircleCI uses `ssh-agent` to sign all added SSH keys, you *mus
 [#install-signing-bundle]
 === *`install_signing_bundle`*
 
-A special step that installs the code signing certificates and provisioning profiles from the signing bundles declared in the `code_signing` key of your `macos` executor. CircleCI installs them into a temporary keychain on the runner at build time and removes them when the job completes. See xref:guides:execution-managed:ios-codesigning.adoc[Set Up Code Signing for iOS and macOS Projects].
+A special step that installs the code signing certificates and provisioning profiles from the signing bundles declared in the `code_signing` key of your `macos` executor. CircleCI installs them into a temporary keychain on the runner at build time and removes them when the job completes. See xref:guides:execute:ios-codesigning.adoc[Set Up Code Signing for iOS and macOS Projects].
 
 In the case of `install_signing_bundle`, the step type is just a string with no additional attributes.
 

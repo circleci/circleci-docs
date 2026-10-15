@@ -51,12 +51,12 @@ If the entrypoint specified for the image is invalid, the task will fail with an
 could not run task: launch circleci-agent on "container-0" failed: command terminated with exit code 139.
 ```
 
-Container runner and CircleCI Cloud set the entrypoint of the xref:reference:ROOT:glossary.adoc#primary-container[Primary Container] in different ways. On cloud, the entrypoint of the primary container is ignored unless it is preserved using the `com.circleci.preserve-entrypoint=true LABEL` instruction (see: xref:guides:execution-managed:custom-images.adoc#adding-an-entrypoint[Adding an Entrypoint]). In contrast, container runner will always default to a shell (`/bin/sh`), or the entrypoint specified in the job configuration, if set.
+Container runner and CircleCI Cloud set the entrypoint of the xref:reference:ROOT:glossary.adoc#primary-container[Primary Container] in different ways. On cloud, the entrypoint of the primary container is ignored unless it is preserved using the `com.circleci.preserve-entrypoint=true LABEL` instruction (see: xref:guides:execute:custom-images.adoc#adding-an-entrypoint[Adding an Entrypoint]). In contrast, container runner will always default to a shell (`/bin/sh`), or the entrypoint specified in the job configuration, if set.
 
 NOTE: Entrypoints must be commands that run forever without failing. If the entrypoint fails or terminates in the middle of a build, the build will also terminate. If you need to access logs or build status, consider using a background step instead of an entrypoint.
 
-Specify an entrypoint using the xref:guides:execution-managed:custom-images.adoc#adding-an-entrypoint[Adding an Entrypoint] documentation to mitigate this error.
-You can set the entrypoint explicitly as described in xref:guides:execution-managed:custom-images.adoc#adding-an-entrypoint[Using Custom Built Docker Images].
+Specify an entrypoint using the xref:guides:execute:custom-images.adoc#adding-an-entrypoint[Adding an Entrypoint] documentation to mitigate this error.
+You can set the entrypoint explicitly as described in xref:guides:execute:custom-images.adoc#adding-an-entrypoint[Using Custom Built Docker Images].
 
 [#image-is-for-a-different-architecture]
 === Image is for a different architecture
@@ -91,7 +91,7 @@ No pod has been created in the Kubernetes cluster. You will need to correct the 
 "could not start task containers: exec into build container "container-0" failed: Internal error occurred: error executing command in container: failed to exec in container: failed to start exec "bb04485b9ef2386dee5e44a92bfe512ed786675611b6a518c3d94c1176f9a8aa": OCI runtime exec failed: exec failed: container_linux.go:380: starting container process caused: exec: "/bin/bash": stat /bin/bash: no such file or directory: unknown"
 ```
 
-xref:guides:execution-managed:custom-images.adoc#required-tools-for-primary-containers[Bash] is required for custom images used in jobs executed with a container runner.
+xref:guides:execute:custom-images.adoc#required-tools-for-primary-containers[Bash] is required for custom images used in jobs executed with a container runner.
 
 [#oops-there-was-an-issue-with-your-infrastructure]
 === Oops, there was an issue with your infrastructure
@@ -182,7 +182,7 @@ Cancel the job and rerun it. If your job is still not running, file a link:https
 [#debugging-with-ssh]
 === Debugging with SSH
 
-CircleCI's machine runners support rerunning a job with SSH for debugging purposes. Instructions on using this feature can be found at xref:guides:execution-managed:ssh-access-jobs.adoc[Debugging With SSH].
+CircleCI's machine runners support rerunning a job with SSH for debugging purposes. Instructions on using this feature can be found at xref:guides:execute:ssh-access-jobs.adoc[Debugging With SSH].
 
 NOTE: The `Rerun job with SSH` feature is disabled by default. To enable this feature, see the xref:runner:ROOT:machine-runner-3-configuration-reference.adoc#runner-ssh-advertise-addr[Machine Runner Configuration Reference] or the xref:runner:ROOT:container-runner-installation.adoc#enable-rerun-job-with-ssh[Container Runner Installation Guide].
 

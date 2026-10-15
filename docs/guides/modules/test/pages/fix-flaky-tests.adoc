@@ -211,7 +211,7 @@ a|* Daily (Sunday through Thursday at 22:00 UTC).
 
 === Unable to run verification tests
 
-Chunk runs in a xref:execution-managed:using-linuxvm.adoc[Linux VM] with link:https://discuss.circleci.com/t/ubuntu-20-04-22-04-24-04-q4-edge-release/52429[basic software installed by default, window=_blank]. To verify that a proposed fix resolves flakiness, it re-runs the affected test several times. To do this, Chunk may install additional software needed to set up the test environment, using clues from your CircleCI configuration file  to determine how to run the tests.
+Chunk runs in a xref:execute:using-linuxvm.adoc[Linux VM] with link:https://discuss.circleci.com/t/ubuntu-20-04-22-04-24-04-q4-edge-release/52429[basic software installed by default, window=_blank]. To verify that a proposed fix resolves flakiness, it re-runs the affected test several times. To do this, Chunk may install additional software needed to set up the test environment, using clues from your CircleCI configuration file  to determine how to run the tests.
 
 View attempts in the CircleCI web app as follows:
 

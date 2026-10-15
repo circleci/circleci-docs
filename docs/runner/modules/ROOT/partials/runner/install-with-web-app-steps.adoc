@@ -8,7 +8,7 @@ TIP: If you already create orb in your organization you will already have a name
 .Runner set up, step one - Get started
 image::runner/runner-ui-step-one.png[Runner set up, step one - Get started]
 
-. Create a custom xref:guides:execution-managed:resource-class-overview.adoc[Resource Class]. You will configure jobs to use this resource class when you want them to run on your self-hosted runner.
+. Create a custom xref:guides:execute:resource-class-overview.adoc[Resource Class]. You will configure jobs to use this resource class when you want them to run on your self-hosted runner.
 +
 We suggest using a lowercase representation of your CircleCI account name for your namespace. CircleCI will populate your org name as the suggested namespace by default in the UI.
 +
