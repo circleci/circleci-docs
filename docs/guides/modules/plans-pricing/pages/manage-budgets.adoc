@@ -45,8 +45,8 @@ At 70% of a budget:
 
 At 90% and 100% of a budget:
 
-* *In-app banner.* The banner copy updates to reflect the higher usage level.
-* *Build notification emails.* The budget warning in build notification emails updates to reflect the higher usage level.
+* *In-app banner.* The banner copy changes to reflect the higher usage level.
+* *Build notification emails.* Build notification emails include an updated budget warning for users who have opted in to My Work notifications.
 
 NOTE: Budgets are soft limits. Builds keep running after you reach or exceed your budget.
 
