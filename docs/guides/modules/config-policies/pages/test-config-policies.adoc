@@ -260,7 +260,7 @@ Expected output:
 
 [#add-another-policy-and-test]
 == Add another policy and test
-Next, add a second policy and test to your `config-policies` directory. The steps below show how to add a policy that specifies the minimum Docker version for xref:execution-managed:building-docker-images.adoc[Remote Docker], writing tests for that policy, and running those tests.
+Next, add a second policy and test to your `config-policies` directory. The steps below show how to add a policy that specifies the minimum Docker version for xref:execute:building-docker-images.adoc[Remote Docker], writing tests for that policy, and running those tests.
 
 . Inside your `config-policies` directory, create a Rego file for a new policy, call it: `docker.rego`.
 . Copy the following policy definition into `docker.rego`:

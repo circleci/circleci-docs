@@ -11,7 +11,7 @@
 Use parallelism and test splitting to:
 
 * Reduce the time taken for the testing portion of your CI/CD pipeline.
-* Specify a number of xref:execution-managed:executor-intro.adoc[Executors] across which to split your tests.
+* Specify a number of xref:execute:executor-intro.adoc[Executors] across which to split your tests.
 * Split your test suite using one of the options provided by the CircleCI CLI: by name, size or by using timing data.
 
 If you are interested to read about concurrent job runs, see the xref:concurrency.adoc[Concurrency Overview] page.

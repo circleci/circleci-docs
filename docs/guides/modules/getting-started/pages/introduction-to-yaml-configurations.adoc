@@ -38,7 +38,7 @@ ifndef::server[]
 endif::server[]
 - Arm
 
-Some limitations exist depending on the execution environment in your configuration. Visit the xref:execution-managed:executor-intro.adoc[Introduction to Execution Environments] page to get started and find information on each execution environment.
+Some limitations exist depending on the execution environment in your configuration. Visit the xref:execute:executor-intro.adoc[Introduction to Execution Environments] page to get started and find information on each execution environment.
 
 In the `.circleci/config.yml` file, we will add a Docker execution environment to our job `build`.
 

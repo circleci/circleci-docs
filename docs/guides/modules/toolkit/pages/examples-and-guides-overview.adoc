@@ -69,14 +69,14 @@ Use the tutorial associated with your platform to learn about the customization 
 | Description
 
 ifndef::server[]
-| xref:execution-managed:hello-world-macos.adoc#example-application[macOS Project Tutorial]
+| xref:execute:hello-world-macos.adoc#example-application[macOS Project Tutorial]
 | Set up a macOS project in CircleCI.
 
 | xref:test:testing-ios.adoc[Testing iOS]
 | Set up and test iOS projects in CircleCI.
 endif::server[]
 
-| xref:execution-managed:hello-world-windows.adoc#example-application[Windows Project Tutorial]
+| xref:execute:hello-world-windows.adoc#example-application[Windows Project Tutorial]
 | Full example of setting up a .NET project in CircleCI.
 |===
 --

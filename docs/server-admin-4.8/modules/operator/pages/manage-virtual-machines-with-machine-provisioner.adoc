@@ -7,7 +7,7 @@
 :page-description: CircleCI server v4.8 machine provisioner service controls how machine executor (Linux and Windows images) and Remote Docker jobs are run.
 :experimental:
 
-Machine provisioner controls how xref:reference:ROOT:configuration-reference.adoc#machine[`machine`] executor and xref:guides:execution-managed:building-docker-images.adoc#[Remote Docker] jobs are run.
+Machine provisioner controls how xref:reference:ROOT:configuration-reference.adoc#machine[`machine`] executor and xref:guides:execute:building-docker-images.adoc#[Remote Docker] jobs are run.
 
 This section describes the available configuration options for machine provisioner.
 

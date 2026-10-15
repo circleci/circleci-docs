@@ -91,7 +91,7 @@ A mechanism for securing and sharing <<environment-variable,environment variable
 
 == Convenience image
 
-A prebuilt Docker <<image>> maintained by CircleCI with popular languages and tools preinstalled. Next-generation convenience images use the `cimg/` namespace on Docker Hub and offer faster spin-up and improved stability over legacy images. See the xref:guides:execution-managed:circleci-images.adoc[CircleCI Images] page. Compare with <<custom-image>> and <<machine-image>>.
+A prebuilt Docker <<image>> maintained by CircleCI with popular languages and tools preinstalled. Next-generation convenience images use the `cimg/` namespace on Docker Hub and offer faster spin-up and improved stability over legacy images. See the xref:guides:execute:circleci-images.adoc[CircleCI Images] page. Compare with <<custom-image>> and <<machine-image>>.
 
 == Credit
 
@@ -103,7 +103,7 @@ A <<trigger>> that initiates a run in one repository when an event, such as a ta
 
 == Custom image
 
-A Docker <<image>> that you build and maintain yourself, typically from a Dockerfile stored in a registry. Use a custom image with the <<docker-executor>> when convenience images do not meet your needs. See the xref:guides:execution-managed:custom-images.adoc[Using Custom-Built Docker Images] page.
+A Docker <<image>> that you build and maintain yourself, typically from a Dockerfile stored in a registry. Use a custom image with the <<docker-executor>> when convenience images do not meet your needs. See the xref:guides:execute:custom-images.adoc[Using Custom-Built Docker Images] page.
 
 == Custom webhook
 
@@ -124,11 +124,11 @@ The act of putting a new <<component>> version into an <<environment>>, regardle
 [#docker-executor]
 == Docker executor
 
-The <<executor>> (`docker`) that runs a job inside one or more Docker containers, providing the Docker <<execution-environment,execution environment>>. The Docker executor is resource-efficient and well suited to most build and test jobs. See the xref:guides:execution-managed:executor-intro.adoc[Introduction to Execution Environments] page.
+The <<executor>> (`docker`) that runs a job inside one or more Docker containers, providing the Docker <<execution-environment,execution environment>>. The Docker executor is resource-efficient and well suited to most build and test jobs. See the xref:guides:execute:executor-intro.adoc[Introduction to Execution Environments] page.
 
 == Docker layer caching
 
-Docker Layer Caching (DLC) lets builds reuse Docker image layers from previous builds so that jobs which build Docker images run faster on subsequent runs. Layers can only be reused by builds from the same project. See the xref:guides:optimize:docker-layer-caching.adoc[Docker Layer Caching] and xref:guides:execution-managed:building-docker-images.adoc[Running Docker Commands] pages.
+Docker Layer Caching (DLC) lets builds reuse Docker image layers from previous builds so that jobs which build Docker images run faster on subsequent runs. Layers can only be reused by builds from the same project. See the xref:guides:optimize:docker-layer-caching.adoc[Docker Layer Caching] and xref:guides:execute:building-docker-images.adoc[Running Docker Commands] pages.
 
 == Dynamic configuration
 
@@ -160,11 +160,11 @@ The inbound occurrence that happened in the world. An event could be a webhook d
 
 == Execution environment
 
-The runtime in which a <<job>> runs, either a Docker container or a virtual machine. CircleCI offers the Docker, Linux VM, macOS, Windows, GPU, Android, and Arm VM execution environments. You choose an <<executor>> (`docker`, `machine`, or `macos`) and an image, and those together determine the environment. See the xref:guides:execution-managed:executor-intro.adoc[Introduction to Execution Environments] page.
+The runtime in which a <<job>> runs, either a Docker container or a virtual machine. CircleCI offers the Docker, Linux VM, macOS, Windows, GPU, Android, and Arm VM execution environments. You choose an <<executor>> (`docker`, `machine`, or `macos`) and an image, and those together determine the environment. See the xref:guides:execute:executor-intro.adoc[Introduction to Execution Environments] page.
 
 == Executor
 
-The type you assign to a <<job>> that defines the underlying technology used to run it. CircleCI has three executors: `docker`, `machine`, and `macos`. For example, the `machine` executor can run a job in the Linux VM, Windows, GPU, Android, or Arm VM execution environment. In configuration an `executor` is also a named, parameterizable definition that multiple jobs can share. See the xref:guides:execution-managed:executor-intro.adoc[Introduction to Execution Environments] and xref:reference:ROOT:reusing-config.adoc[Reusable Config Reference] pages.
+The type you assign to a <<job>> that defines the underlying technology used to run it. CircleCI has three executors: `docker`, `machine`, and `macos`. For example, the `machine` executor can run a job in the Linux VM, Windows, GPU, Android, or Arm VM execution environment. In configuration an `executor` is also a named, parameterizable definition that multiple jobs can share. See the xref:guides:execute:executor-intro.adoc[Introduction to Execution Environments] and xref:reference:ROOT:reusing-config.adoc[Reusable Config Reference] pages.
 
 == Fan-out/fan-in
 
@@ -200,11 +200,11 @@ A collection of <<step,steps>> that run in a single <<execution-environment>>. E
 
 == Machine executor
 
-The <<executor>> (`machine`) that runs a job in a dedicated, ephemeral virtual machine with full operating-system access. Depending on the image you specify, the machine executor provides the Linux VM, Windows, GPU, Android, or Arm VM <<execution-environment,execution environment>>. See the xref:guides:execution-managed:executor-intro.adoc[Introduction to Execution Environments] page.
+The <<executor>> (`machine`) that runs a job in a dedicated, ephemeral virtual machine with full operating-system access. Depending on the image you specify, the machine executor provides the Linux VM, Windows, GPU, Android, or Arm VM <<execution-environment,execution environment>>. See the xref:guides:execute:executor-intro.adoc[Introduction to Execution Environments] page.
 
 == Machine image
 
-A prebuilt virtual machine image for the <<machine-executor>>, available for Linux, macOS, Windows, Android, and GPU environments. See the xref:guides:execution-managed:executor-intro.adoc[Introduction to Execution Environments] page.
+A prebuilt virtual machine image for the <<machine-executor>>, available for Linux, macOS, Windows, Android, and GPU environments. See the xref:guides:execute:executor-intro.adoc[Introduction to Execution Environments] page.
 
 == Machine provisioner
 
@@ -216,7 +216,7 @@ A type of <<self-hosted-runner>> installed directly on a Linux, macOS, or Window
 
 == macOS executor
 
-The <<executor>> (`macos`) that runs a job in a macOS virtual machine with Xcode available, providing the macOS <<execution-environment,execution environment>>. Used for iOS and macOS development and testing. See the xref:guides:execution-managed:using-macos.adoc[Using the macOS Execution Environment] page.
+The <<executor>> (`macos`) that runs a job in a macOS virtual machine with Xcode available, providing the macOS <<execution-environment,execution environment>>. Used for iOS and macOS development and testing. See the xref:guides:execute:using-macos.adoc[Using the macOS Execution Environment] page.
 
 == Matrix job
 
@@ -278,7 +278,7 @@ Metadata about a pipeline that CircleCI makes available automatically, without d
 
 == Primary container
 
-The first <<image>> listed in your <<configuration,configuration file>> for a Docker job. The job's steps run in the primary container. See the xref:guides:execution-managed:executor-intro.adoc[Introduction to Execution Environments] page. Compare with <<service-container,service container>>.
+The first <<image>> listed in your <<configuration,configuration file>> for a Docker job. The job's steps run in the primary container. See the xref:guides:execute:executor-intro.adoc[Introduction to Execution Environments] page. Compare with <<service-container,service container>>.
 
 == Private orb
 
@@ -308,7 +308,7 @@ A tool installed in a Kubernetes cluster that lets you manage deployments throug
 
 == Remote Docker
 
-A feature that enables building, running, and pushing Docker images to registries from within a <<docker-executor>> job, using the `setup_remote_docker` key. See the xref:guides:execution-managed:building-docker-images.adoc[Running Docker Commands] page.
+A feature that enables building, running, and pushing Docker images to registries from within a <<docker-executor>> job, using the `setup_remote_docker` key. See the xref:guides:execute:building-docker-images.adoc[Running Docker Commands] page.
 
 == Rerun
 
@@ -320,7 +320,7 @@ include::guides:ROOT:partial$glossary/smarter-testing.adoc[tag=rerun-only-failed
 
 == Resource class
 
-A configuration option that specifies the compute resources, such as CPU and RAM, allocated to a <<job>>. A resource class is also used as a label to identify a pool of <<self-hosted-runner,self-hosted runners>> and to route a job to that pool. See the xref:guides:execution-managed:resource-class-overview.adoc[Resource Class Overview] page.
+A configuration option that specifies the compute resources, such as CPU and RAM, allocated to a <<job>>. A resource class is also used as a label to identify a pool of <<self-hosted-runner,self-hosted runners>> and to route a job to that pool. See the xref:guides:execute:resource-class-overview.adoc[Resource Class Overview] page.
 
 == Rollback
 
@@ -344,7 +344,7 @@ A CircleCI agent installed on your own infrastructure, such as Kubernetes, virtu
 
 == Service container
 
-An additional <<image>> listed in a job's configuration that runs alongside the <<primary-container>>, typically to provide a service such as a database. Also called a secondary container. See the xref:guides:execution-managed:executor-intro.adoc[Introduction to Execution Environments] page.
+An additional <<image>> listed in a job's configuration that runs alongside the <<primary-container>>, typically to provide a service such as a database. Also called a secondary container. See the xref:guides:execute:executor-intro.adoc[Introduction to Execution Environments] page.
 
 [#sso]
 == Single sign-on (SSO)
