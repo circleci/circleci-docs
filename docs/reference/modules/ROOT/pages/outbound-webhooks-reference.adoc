@@ -236,7 +236,7 @@ The following data about the trigger associated with the webhook event is provid
 [#trigger-parameters]
 === Trigger parameters
 
-NOTE: Data associated to the pipeline. Present for pipelines associated with GitLab or GitHub App. For parameters available for GitHub OAuth app and Bitbucket Cloud integrations, see <<#vcs>> below. Check menu:Project Settings[Project setup] or menu:Project Settings[Pipelines] to see your pipeline type.
+NOTE: Data associated to the pipeline. Present for pipelines associated with GitLab, GitHub App, or Cursor Origin. For parameters available for GitHub OAuth app and Bitbucket Cloud integrations, see <<#vcs>> below. Check menu:Project Settings[Project setup] or menu:Project Settings[Pipelines] to see your pipeline type.
 
 [.table-scroll]
 --
@@ -292,7 +292,7 @@ NOTE: Data associated to the pipeline. Present for pipelines associated with Git
 [#vcs]
 === VCS
 
-NOTE: The VCS map and its contents are always present for GitHub OAuth app and Bitbucket Cloud pipelines, but not for GitLab or GitHub App pipelines. See <<#trigger-parameters,trigger parameters>> above for GitLab or GitHub App parameters. To find out which pipeline type you have, check menu:Project Settings[Project setup] or menu:Project Settings[Pipelines].
+NOTE: The VCS map and its contents are always present for GitHub OAuth app and Bitbucket Cloud pipelines, but not for GitLab, GitHub App, or Cursor Origin pipelines. See <<#trigger-parameters,trigger parameters>> above for GitLab, GitHub App, or Cursor Origin parameters. To find out which pipeline type you have, check menu:Project Settings[Project setup] or menu:Project Settings[Pipelines].
 
 [.table-scroll]
 --
@@ -362,7 +362,7 @@ NOTE: The VCS map and its contents are always present for GitHub OAuth app and B
 NOTE: To find out which pipeline type you have, check menu:Project Settings[Project setup] or menu:Project Settings[Pipelines].
 
 [#workflow-completed-for-github-and-bitbucket]
-=== workflow-completed for GitHub OAuth and Bitbucket Cloud
+=== workflow-completed for GitHub OAuth app and Bitbucket Cloud
 
 ```json
 {
@@ -423,7 +423,7 @@ NOTE: To find out which pipeline type you have, check menu:Project Settings[Proj
 ```
 
 [#job-completed-for-github-and-bitbucket]
-=== job-completed for GitHub OAuth and Bitbucket Cloud
+=== job-completed for GitHub OAuth app and Bitbucket Cloud
 
 ```json
 {
@@ -491,7 +491,7 @@ NOTE: To find out which pipeline type you have, check menu:Project Settings[Proj
 ```
 
 [#workflow-completed-gitlab]
-=== workflow-completed for GitLab and GitHub App
+=== workflow-completed for GitLab, GitHub App, and Cursor Origin
 
 ```json
 {
@@ -566,7 +566,7 @@ NOTE: To find out which pipeline type you have, check menu:Project Settings[Proj
 ```
 
 [#job-completed-gitlab]
-=== job-completed for GitLab and GitHub App
+=== job-completed for GitLab, GitHub App, and Cursor Origin
 
 ```json
 {

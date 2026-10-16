@@ -36,6 +36,11 @@ If you only want to stop builds for a project and keep the complete build histor
 | [.circle-green]#Yes#
 | Deleting the organization removes all content from the organization. The organization will remain visible but without data underneath.
 
+| Cursor Origin
+| [.circle-green]#Yes#
+| [.circle-green]#Yes#
+| The organization will remain visible for several hours before disappearing.
+
 |===
 --
 
