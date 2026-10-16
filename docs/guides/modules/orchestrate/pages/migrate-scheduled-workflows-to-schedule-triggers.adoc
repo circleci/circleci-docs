@@ -14,7 +14,7 @@ Migrating to schedule triggers gives you more control over how and when your sch
 - Choose the actor (yourself, or the scheduling system), so scheduled pipelines can use restricted contexts.
 - Control how scheduled pipelines interact with auto-cancelling of pipelines (GitHub OAuth and Bitbucket Cloud only, as GitHub App schedule triggers are never auto-cancelled).
 - Use schedules together with dynamic configuration, with no workarounds.
-- Change or cancel a schedule on a branch without triggering a pipeline.
+- Change or cancel a schedule on a branch without triggering a pipeline run.
 - Kick off a test run of a schedule without changing it.
 - Keep scheduled workflows off PR branches while still running them on webhooks.
 

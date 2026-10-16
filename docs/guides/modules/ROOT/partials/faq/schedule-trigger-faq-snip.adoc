@@ -10,17 +10,19 @@ As schedule triggers are stored directly in CircleCI, there is a UUID associated
 
 You can also list schedules with the API. For GitHub OAuth and Bitbucket Cloud pipelines, list all the schedules under a single project with API v2:
 
-```shell
-curl --location --request GET "https://circleci.com/api/v2/project/<project-slug>/schedule" \
---header "circle-token: <PERSONAL_API_KEY>"
-```
+[source,console]
+----
+$ curl --location --request GET "https://circleci.com/api/v2/project/<project-slug>/schedule" \
+  --header "Circle-Token: $CIRCLE_TOKEN"
+----
 
 For GitHub App, GitHub App Server, and Cursor Origin pipelines, list the project's triggers with API v3. Replace `<PROJECT_ID>` with your project ID:
 
-```shell
-curl -g --url "https://circleci.com/api/v3/triggers?filter[project_id]=<PROJECT_ID>" \
---header "Authorization: Bearer $CIRCLE_TOKEN"
-```
+[source,console]
+----
+$ curl -g --url "https://circleci.com/api/v3/triggers?filter[project_id]=<PROJECT_ID>" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN"
+----
 
 Refer to the xref:guides:toolkit:api-developers-guide.adoc#getting-started-with-the-api[Getting Started With the API] section of the API Developer's Guide for more guidance on making requests.
 
