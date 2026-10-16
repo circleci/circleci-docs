@@ -38,7 +38,9 @@ NOTE: Schedule triggers are the new name for what was previously known as "sched
 [#get-started-with-schedule-triggers]
 == Get started with schedule triggers
 
-To get started with schedule triggers, you have the option of using the API, or using the CircleCI web app. Both methods are described below. Select the tab for the pipeline type you are using:
+To get started with schedule triggers, you have the option of using the API, or using the CircleCI web app. Both methods are described below. In each section, select the tab for the pipeline type you are using.
+
+=== Set up in the web app
 
 include::ROOT:partial$pipelines-and-triggers/set-up-schedule-trigger.adoc[]
 

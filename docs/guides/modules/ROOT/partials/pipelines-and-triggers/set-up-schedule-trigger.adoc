@@ -19,26 +19,7 @@ image::guides:ROOT:triggers/set-up-schedule-trigger.png[Schedule triggers web ap
 ** Enter a **Schedule (cron expression)**. Schedules must run at least 5 minutes apart. The start time can be offset by up to 10 minutes, but stays consistent across all runs.
 . Make sure **Trigger status** is enabled, then select btn:[Save].
 --
-GitHub OAuth::
-+
---
-include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
-
-. Select **Triggers** in the sidebar.
-. Select btn:[Add Trigger].
-+
-.Screenshot showing the schedule trigger form
-image::guides:ROOT:pipelines-scheduled-trigger-form.png[Schedule triggers web app form]
-** Give your trigger a descriptive name.
-** Enter an optional trigger description.
-** Select the pipeline to run.
-** Select a release frequency (weekly/monthly, which days/months/time etc.).
-** Enter a branch or tag name to determine when to trigger the pipeline.
-** Optionally, enter pipeline parameters. If you declare pipeline parameters in the form, you need to make sure they are configured in your project's `.circleci/config.yml`. See the xref:guides:orchestrate:pipeline-variables.adoc#pipeline-parameters-in-configuration[Pipeline Values and Parameters] page for more information.
-** Select an actor to initiate the trigger.
-. Define the new schedule by filling out the form, then select **Save Trigger**.
---
-Bitbucket Cloud::
+GitHub OAuth and Bitbucket Cloud::
 +
 --
 include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
