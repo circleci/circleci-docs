@@ -1,0 +1,175 @@
+= Centralized config management overview
+:page-platform: Cloud
+:page-vcs: github, github-enterprise, cursor-origin
+:page-plan: Free, Performance, Scale
+:page-audience: developer
+:page-description: Learn how CircleCI centralized config management helps platform teams standardize CI/CD pipelines across your organization while preserving team flexibility.
+:experimental:
+
+Centralized config management lets platform teams define and maintain a single source of truth for CI/CD pipeline configuration across multiple projects and repositories. Individual development teams inherit these standards automatically, and can customize specific parts of the pipeline where needed.
+
+== Introduction
+
+As organizations grow, managing CI/CD configuration across dozens or hundreds of projects becomes a significant challenge. Without a centralized approach, teams face the following common problems:
+
+* Configuration drift: each project develops its own conventions over time, making it hard to apply organization-wide changes.
+* Duplication: the same build, test, security-scan, and deploy logic gets copy-pasted into every repo.
+* Compliance gaps: security and quality standards are difficult to enforce when every team manages its own config.
+* Maintenance overhead: a dependency update or policy change requires updating every repository individually.
+
+Centralized config management addresses these challenges by separating the _what_ (the organization's standard pipeline) from the _where_ (the project repositories that run it). Platform teams maintain the standard pipeline in one place, and every project that uses it benefits from improvements and fixes automatically.
+
+At the same time, development teams retain the ability to customize specific jobs to meet the needs of their project. Standards by default with flexibility where teams need it: that balance is the goal of a centralized config management approach.
+
+[#how-centralized-config-management-works]
+== How centralized config management works
+
+In a centralized config management setup, your organization uses three distinct layers:
+
+[cols="1,2,1"]
+|===
+| Layer | Role | Example
+
+| Central config repository
+| A dedicated repository, maintained by the platform team, that holds the standard pipeline configuration template. All projects reference this as their config source.
+| `platform-team/ci-standards`
+
+| Per-project override files
+| Each development team can provide a URL orb in their own repository. Jobs in the central template can use the override when it exists, or fall back to the standard job when it does not.
+| `.circleci/team-config.yml` in each project repo
+
+| Governance layer
+| Config policies enforce organization-wide rules at job execution time, blocking pipelines that violate security or compliance standards.
+| OPA-based config policies on the Scale plan
+|===
+
+When a pipeline triggers, the following sequence occurs:
+
+. CircleCI reads the pipeline definition for the project. The definition points to the central config file rather than a config stored in the project repository.
+. The central config file imports the project team's override file as a URL orb.
+. For each job in the workflow, CircleCI checks whether the override orb provides a replacement job. If it does, the override runs. If it does not, the standard job from the central config runs as a fallback.
+. Config policies check the resolved configuration. CircleCI blocks pipelines that violate policy rules before any jobs run.
+
+The result is a pipeline that enforces organizational standards by default, allows targeted team customizations, and provides a transparent, traceable governance layer.
+
+[#tools-and-features]
+== Tools and features
+
+CircleCI provides a suite of tools that work together to make centralized config management practical at scale.
+
+=== Centralized config files and pipeline definitions
+
+CircleCI projects can use a config file stored outside the project repository, including a file in a dedicated platform team repository. The GitHub App integration enables this capability. One config file drives pipelines across all projects that reference it.
+
+See xref:orchestrate:set-up-multiple-configuration-files-for-a-project.adoc[Set Up Multiple Configuration Files for a Project] for how to configure a pipeline definition that references an external config file.
+
+=== URL orbs and overrides
+
+URL orbs allow you to share and reuse CircleCI job definitions across Git repositories without publishing to the Orb Registry. A URL orb is a YAML file accessible at a URL, and you import it directly into a pipeline config.
+
+The `override-with` key lets you mark a job in your central config as one that teams can override. When a development team provides an alternative job definition in their URL orb, CircleCI uses that override. When no override is present, the standard job runs. Teams gain the flexibility to customize specific jobs such as tests, linting, or builds, without touching the central config or forking the pipeline.
+
+Your organization controls which URL prefixes to trust through a URL orb allow-list, so teams can only provide overrides from approved locations.
+
+See xref:orchestrate:how-to-override-config.adoc[Override Configuration] for a step-by-step implementation guide. For URL orb authoring, see xref:orbs:author:create-test-and-use-url-orbs.adoc[Create, Test, and Use URL Orbs]. For allow-list management, see xref:orbs:use:managing-url-orbs-allow-lists.adoc[Managing URL Orbs Allow-Lists].
+
+=== Config policies
+
+Config policies let you define organization-level rules that govern what pipeline configurations can do. Write rules in Rego (the Open Policy Agent policy language) and run them against every pipeline configuration before jobs execute. Pipelines that violate a policy are blocked from running or generate a warning.
+
+Common policy use cases in a centralized config context include the following:
+
+* Requiring that all pipelines use approved executor images.
+* Preventing jobs from running with elevated privileges.
+* Enforcing the use of specific contexts for secrets.
+* Ensuring that a security scan job is always present in every workflow.
+
+Config policies are available on the Scale plan.
+
+See xref:config-policies:config-policy-management-overview.adoc[Config Policy Management Overview] for a full introduction.
+
+=== Terraform provider
+
+The CircleCI Terraform provider lets you manage CircleCI project settings, pipeline definitions, secrets, and contexts as code. For platform teams rolling out centralized config across multiple projects, Terraform automates the per-project setup that would otherwise require manual configuration in the web app.
+
+With Terraform, you can:
+
+* Create pipeline definitions pointing to the central config file across all projects.
+* Manage contexts and environment variables consistently.
+* Version-control all CircleCI project settings alongside your infrastructure code.
+
+See the link:https://github.com/CircleCI-Public/terraform-provider-circleci[CircleCI Terraform provider on GitHub] for setup and usage.
+
+=== Project administration APIs
+
+The CircleCI APIs let you automate project management tasks at scale. Platform teams can use the API to create projects, update pipeline settings, and rotate secrets. Apply configuration changes across all projects using scripts instead of manual work in the web app.
+
+See the xref:toolkit:api-developers-guide.adoc[API V2 Developers Guide] and xref:toolkit:api-v3-developers-guide.adoc[API V3 Developers Guide] for reference.
+
+[#prerequisites-and-requirements]
+== Prerequisites and requirements
+
+To adopt centralized config management in your organization, you need the following:
+
+* *GitHub App integration:* The GitHub App integration lets you configure a pipeline to use a config file stored outside the project repository. Without it, you cannot point a pipeline at a central config that lives in a different repository. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide] for details.
+* *URL orb allow-list:* To use URL orbs for team overrides, configure an allow-list that includes the URL prefix for your team repositories. See xref:orbs:use:managing-url-orbs-allow-lists.adoc[Managing URL Orbs Allow-Lists].
+* *A dedicated config repository:* Create a repository, typically managed by the platform team, to hold the central pipeline config template. The repository must be accessible to CircleCI.
+* *Scale plan (for config policies):* Config policy enforcement is available on the Scale plan only. URL orbs, pipeline definitions, and `override-with` are available on all plans.
+
+[#getting-started]
+== Getting started
+
+The following steps describe the recommended path to adopting centralized config management.
+
+. *Connect the GitHub App:* If your organization has not already done so, install the CircleCI GitHub App. Connecting the GitHub App unlocks the ability to use config files stored in repositories other than the project repository.
+. *Create a central config repository:* Set up a repository to hold your organization's pipeline template. The platform team authors and maintains the standard config in this repository.
+. *Author the central config template:* Define the standard jobs and workflows your organization uses. For jobs that teams need to customize, add the `override-with` key.
+. *Set up pipeline definitions:* For each project, create a pipeline definition that points to the central config file. Complete this step through the web app or automate it with the Terraform provider.
+. *Enable team overrides:* Add a URL orb allow-list entry for the location where teams store their override files. Document the expected file path and job naming conventions for teams.
+. *Apply config policies (Scale plan):* Once the standard pipeline is working, write config policies to enforce organizational standards and block non-compliant configurations.
+
+For a detailed walkthrough of steps two through five, see xref:orchestrate:how-to-override-config.adoc[Override Configuration].
+
+[#benefits-and-tradeoffs]
+== Benefits and tradeoffs
+
+[cols="1,2"]
+|===
+| Benefit | Detail
+
+| Reduced duplication
+| Standard jobs are defined once in the central config and inherited by all projects. Updates to a job propagate automatically to every pipeline that uses the central config.
+
+| Consistent security and compliance
+| Security scans, approved executors, and required steps are built into the standard template. Config policies add a governance layer that enforces these standards before any job runs.
+
+| Team autonomy
+| Development teams can customize specific jobs using URL orbs without modifying the central config or waiting for platform team approvals. The override mechanism is opt-in and scoped to individual jobs.
+
+| Simplified onboarding
+| New projects get a working, standards-compliant pipeline by pointing at the central config. Teams start with quality pipelines out of the box.
+
+| Lower maintenance overhead
+| A single change to the central config applies across all projects. No pull requests need to be opened in dozens of repositories to update a shared dependency or policy.
+|===
+
+The main consideration to plan for is the increased coordination required when the central config changes. Changes that affect all projects must be tested, communicated to teams in advance, and rolled out with appropriate lead time.
+
+[#limitations]
+== Limitations
+
+* The GitHub App integration is required. Centralized config files stored outside the project repository are not supported for GitLab, Bitbucket, or GitHub OAuth projects.
+* The `override-with` key supports job-level overrides only. Workflow configuration elements such as `requires`, `context`, `filters`, and `type` cannot be overridden by individual teams.
+* URL orbs require an allow-list entry for the URL prefix. Orbs from URLs not on the allow-list are rejected.
+* Config policies are available on the Scale plan only.
+* Schedule triggers are not supported for GitLab projects in centralized config scenarios.
+
+[#next-steps]
+== Next steps
+
+* xref:orchestrate:how-to-override-config.adoc[Override Configuration]: Use the `override-with` pattern with a step-by-step guide.
+* xref:orbs:author:create-test-and-use-url-orbs.adoc[Create, Test, and Use URL Orbs]: Author and test URL orbs for team-specific job overrides.
+* xref:orbs:use:managing-url-orbs-allow-lists.adoc[Managing URL Orbs Allow-Lists]: Configure which URL prefixes are trusted in your organization.
+* xref:config-policies:config-policy-management-overview.adoc[Config Policy Management Overview]: Enforce organization-wide pipeline rules with config policies.
+* xref:orchestrate:set-up-multiple-configuration-files-for-a-project.adoc[Set Up Multiple Configuration Files for a Project]: Configure pipeline definitions that reference external config files.
+* xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide]: Set up the GitHub App integration.
