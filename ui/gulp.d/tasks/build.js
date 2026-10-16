@@ -13,15 +13,19 @@ const postcssCalc = require('postcss-calc')
 const postcssImport = require('postcss-import')
 const postcssUrl = require('postcss-url')
 const postcssVar = require('postcss-custom-properties')
-const { Transform } = require('stream')
+const { PassThrough, Transform } = require('stream')
 const tailwindPlugin = require('@tailwindcss/postcss')
 const map = (transform) => new Transform({ objectMode: true, transform })
 const through = () => map((file, enc, next) => next(null, file))
 const uglify = require('gulp-uglify')
-const vfs = require('vinyl-fs')
+const vinylFs = require('vinyl-fs')
+
+// vinyl-fs 4 returns streamx streams, which end any destination they pipe to, so merge-stream would close
+// early. Piping through a Node stream restores the end: false behavior that merge-stream relies on.
+const vfs = { ...vinylFs, src: (...args) => vinylFs.src(...args).pipe(new PassThrough({ objectMode: true })) }
 
 module.exports = (src, dest, preview) => () => {
-  const opts = { base: src, cwd: src }
+  const opts = { base: src, cwd: src, encoding: false }
   const sourcemaps = preview || process.env.SOURCEMAPS === 'true'
   const postcssPlugins = [
     postcssImport,
