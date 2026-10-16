@@ -310,7 +310,6 @@ Or through npm scripts defined in `package.json`.
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `FORCE_NPM_INSTALL` | Force reinstallation of UI dependencies | `false` |
-| `LIVERELOAD` | Enable live reload for preview | `true` |
 | `ALGOLIA_APP_ID` | Algolia search app ID | - |
 | `ALGOLIA_API_KEY` | Algolia search API key | - |
 | `ALGOLIA_INDEX_NAME` | Algolia search index name | - |
