@@ -38,6 +38,43 @@ Pass this value to a variable and use the variable to call a cloud service for a
 
 CAUTION: **OIDC tokens** created using this method can be printed with no masking. Take care to not log/print the token in your job steps.
 
+[#select-a-token-version]
+=== Select a token version
+
+By default, the command returns a V2 token and falls back to V1 if it cannot create one. To request a specific version, pass one of the following flags. You can pass only one.
+
+[.table-scroll]
+--
+[cols="1,3", options="header"]
+|===
+| Flag
+| Description
+
+| `--v1`
+| Returns a V1 token.
+
+| `--v2`
+| Returns a V2 token.
+
+| `--v3`
+| Returns a V3 token.
+|===
+--
+
+If CircleCI cannot create the version you request, the command fails. It does not fall back to another version. See xref:openid-connect-tokens.adoc#choose-a-token-version[Choose a Token Version] for the differences between versions.
+
+[#set-the-audience-with-aud]
+=== Set the audience with the aud flag
+
+Use the `--aud` flag as a shorter way to set the `aud` claim.
+
+[source,shell]
+----
+circleci run oidc get --aud audience_name
+----
+
+You cannot combine `--aud` with `--claims`.
+
 [#example-configuration]
 == Example configuration
 
