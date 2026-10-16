@@ -76,8 +76,8 @@ jobs:
       - restore_cache:
           name: Restore UI bundle cache
           keys:
-            - ui-bundle-v2-{{ checksum "ui/package-lock.json" }}-{{ checksum "ui/gulpfile.js" }}
-            - ui-bundle-v2-{{ checksum "ui/package-lock.json" }}
+            - ui-bundle-v3-{{ checksum "ui/package-lock.json" }}-{{ checksum "ui/gulpfile.js" }}
+            - ui-bundle-v3-{{ checksum "ui/package-lock.json" }}
       - run:
           name: Check if UI rebuild needed
           command: |
@@ -142,9 +142,17 @@ jobs:
               npm run build:ui
               echo "[INFO] UI bundle built successfully"
             fi
+      - run:
+          name: Verify UI bundle
+          command: |
+            set -e
+            if ! unzip -Z1 ui-bundle.zip | grep -qx 'layouts/home.hbs'; then
+              echo "[ERROR] ui-bundle.zip is missing layouts/home.hbs, refusing to cache it"
+              exit 1
+            fi
       - save_cache:
           name: Save UI bundle cache
-          key: ui-bundle-v2-{{ checksum "ui/package-lock.json" }}-{{ checksum "ui/gulpfile.js" }}
+          key: ui-bundle-v3-{{ checksum "ui/package-lock.json" }}-{{ checksum "ui/gulpfile.js" }}
           paths:
             - ui-bundle.zip
             - ui/node_modules
