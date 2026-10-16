@@ -360,5 +360,5 @@ The build process includes these optimizations:
 
 - **CSS minification**: Reduces stylesheet size
 - **JavaScript bundling**: Combines and minifies scripts
-- **Image optimization**: Compresses images
+- **UI image optimization**: SVGs in `ui/src/img/` are committed pre-optimized. The build does not compress images, and docs screenshots are copied as they are
 - **HTML compression**: Reduces HTML size
