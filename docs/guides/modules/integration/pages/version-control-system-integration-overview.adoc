@@ -192,6 +192,17 @@ The table below is not a full list of CircleCI features. Only features where the
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 
+| *xref:status-updates.adoc#cursor-origin-checks[Cursor Origin checks] to track the status of your pipeline in the Cursor Origin UI. Reported for each workflow, on by default, and with no separate app to install.*
+| Notifications
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+
 | *xref:outbound-webhooks.adoc[Outbound Webhooks]. Send real-time information about your pipelines to external services. Payload varies depending on pipeline type.*
 | Notifications
 | [.circle-green]#**Yes**#
