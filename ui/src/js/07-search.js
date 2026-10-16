@@ -467,8 +467,8 @@
         elements.mobileClearButton.classList.add('flex')
       }
 
-      if (elements.navigation.classList.contains('-translate-x-full')) {
-        elements.navigation.classList.remove('-translate-x-full')
+      if (elements.navigation.classList.contains('translate-x-full')) {
+        elements.navigation.classList.remove('translate-x-full')
       }
     }
 

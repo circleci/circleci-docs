@@ -9,8 +9,8 @@
     if (!toggleButton || !navigation) return
 
     toggleButton.addEventListener('click', () => {
-      const isHidden = navigation.classList.contains('-translate-x-full')
-      navigation.classList.toggle('-translate-x-full', !isHidden)
+      const isHidden = navigation.classList.contains('translate-x-full')
+      navigation.classList.toggle('translate-x-full', !isHidden)
       navigation.classList.toggle('translate-x-0', isHidden)
       // reopen on the starting view; wait for the slide-out so the swap isn't visible
       if (!isHidden && navigation.hasAttribute('data-mobile-nav-ready')) setTimeout(resetView, 300)
@@ -193,12 +193,13 @@
   }
 
   // the new view slides in from the right going down a level, from the left going back up,
+  // with the same timing and easing as the drawer (navigation.hbs)
   // like the drawer itself sliding open
   function slideIn (direction) {
     if (!navPanels?.animate || reducedMotion?.matches) return
     navPanels.animate(
       [{ transform: `translateX(${direction * 100}%)` }, { transform: 'none' }],
-      { duration: 300, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' }
+      { duration: 300, easing: 'cubic-bezier(0.65, 0, 0.35, 1)' }
     )
   }
 
@@ -281,7 +282,7 @@
     if (wasInMobileView && isInDesktopView) {
       if (navigation.classList.contains('translate-x-0')) {
         navigation.classList.remove('translate-x-0')
-        navigation.classList.add('-translate-x-full')
+        navigation.classList.add('translate-x-full')
       }
     }
 
