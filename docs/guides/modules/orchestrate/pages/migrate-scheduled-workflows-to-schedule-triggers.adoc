@@ -45,7 +45,7 @@ daily-run-workflow:
 
 Before you create a new schedule, read the frequency and branch from your scheduled workflow. In the example from step 1, `21 4 * * *` runs every day at 04:21 UTC, and the `filters` section limits the schedule to the `main` branch. Use the same branch for the new schedule trigger.
 
-The API v3 accepts the cron expression as it is. The API v2 uses a timetable instead, so you translate the hours and days from the cron expression into timetable fields. Create the schedule using either the API or project settings in the CircleCI web app. Both methods are described below.
+The steps depend on your pipeline type. GitHub App, GitHub App Server, and Cursor Origin schedules use a cron expression, so you can reuse the expression from your scheduled workflow as it is. GitHub OAuth and Bitbucket Cloud schedules use a timetable instead, so you translate the hours and days from the cron expression into timetable fields. Create the schedule using either the API or project settings in the CircleCI web app. Both methods are described below.
 
 [#use-the-api]
 === 2.1. Option 1: Use the API
@@ -68,7 +68,7 @@ $ curl -g \
 ----
 +
 Locate your pipeline in the response and copy its `id` value.
-. Create a new schedule trigger. Replace `<PIPELINE_ID>` with your pipeline definition ID, `<SCHEDULE_NAME>` with a name for your schedule, and `<CRON_EXPRESSION>` with the cron expression from your scheduled workflow:
+. Create a new schedule trigger. Replace `<PIPELINE_ID>` with your pipeline definition ID, `<SCHEDULE_NAME>` with a name for your schedule, and `<CRON_EXPRESSION>` with the cron expression from your scheduled workflow. Update `config.ref` and `checkout.ref` to the branch from the `filters` section of your scheduled workflow:
 +
 [source,console]
 ----
@@ -98,6 +98,8 @@ $ curl --request POST \
 ----
 
 For additional information, refer to the link:https://circleci.com/docs/api/v3#tag/triggers/POST/api/v3/triggers[API v3 Triggers Reference].
+
+NOTE: You can also create schedule triggers for these pipeline types with the link:https://circleci.com/docs/api/v2/index.html#tag/Trigger/operation/createTrigger[API v2 Create Trigger] endpoint. The API v2 Create Schedule endpoint only supports GitHub OAuth and Bitbucket Cloud.
 --
 GitHub OAuth and Bitbucket Cloud::
 +

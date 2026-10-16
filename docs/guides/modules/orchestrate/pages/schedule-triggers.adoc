@@ -51,7 +51,7 @@ If your project has no scheduled workflows, and you would like to try out schedu
 
 [tabs]
 ====
-GitHub App, GitHub Enterprise Server, and Cursor Origin::
+GitHub App, GitHub App Server, and Cursor Origin::
 +
 --
 . Have your CircleCI token ready, or create a new token by following the steps on the xref:toolkit:managing-api-tokens.adoc[Managing API Tokens] page.
@@ -129,8 +129,8 @@ A successful call returns a `201 Created` response:
 
 All the following fields must be present. The API returns a `400` if any are missing:
 
-- `config.ref`: The branch or tag to use as the config source.
-- `checkout.ref`: The branch or tag to check out.
+- `config.ref`: The branch to use as the config source.
+- `checkout.ref`: The branch to check out.
 - `schedule.name`: A unique name for the schedule.
 - `schedule.cron_expression`: A 5-field cron expression. The API rejects a wildcard in the minute field, such as `* * * * *`. When listing multiple minute values using comma-separated syntax (such as `10,20,30`), each value must be at least five minutes apart.
 - `schedule.attribution_actor`: Use `"current"` to attribute pipeline runs to the token owner, or `"system"` for the scheduling system. The API rejects user UUIDs.

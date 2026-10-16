@@ -27,7 +27,7 @@ To set a schedule with the API, you will need your CircleCI personal API token. 
 
 [tabs]
 ====
-GitHub App, GitHub Enterprise Server, and Cursor Origin::
+GitHub App, GitHub App Server, and Cursor Origin::
 +
 --
 . Find your project ID. See xref:toolkit:api-v3-developers-guide.adoc#getting-started-with-api-v3[Getting Started With API V3] for steps to list your organizations and projects and retrieve your project ID.

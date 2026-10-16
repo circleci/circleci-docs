@@ -6,49 +6,18 @@ GitHub App, GitHub App Server, and Cursor Origin::
 include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 
 . Select **Project Setup** in the sidebar.
-Locate your pipeline and select btn:[Schedule +].
+. Locate your pipeline and select btn:[Schedule +].
 . Complete the schedule trigger form:
 +
 .Screenshot showing the schedule trigger form
 image::guides:ROOT:triggers/set-up-schedule-trigger.png[Schedule triggers web app form]
 ** Give your trigger a descriptive name.
-** Select a branch to tell CircleCI which code to checkout and where to find your config file.
-** Under Pipeline attribution, select the actor to initiate the trigger. You can choose yourself, one of your team, or the scheduling system if you want the trigger to be independent from individual users. If your project requires the use of environment variables stored in restricted contexts, you must assign someone who has access to those contexts.
-** Enter any pipeline parameters that you would like to set when triggering the pipeline. If you enter any new pipeline parameters make sure to also add them to your config file. You can select btn:[Populate from config] to automatically populate the parameters fields from your config file.
-** Select a trigger frequency and repeat options.
-+
-[options="header",cols="1,2"]
-|===
-|Field |Options
-
-|Repeats
-|Weekly, Monthly
-
-|Days of the week
-| Radio buttons for each or select all
-
-|Months
-| Radio buttons for each or select all
-
-|Start time (UTC)
-| Radio buttons for each hour or select all
-
-| Times per hour
-a|* 1 (once per hour)
-* 2 (every 30 minutes)
-* 3 (every 20 minutes)
-* 4 (every 15 minutes)
-* 5 (every 12 minutes)
-* 6 (every 10 minutes)
-* 7 (every 8.6 minutes)
-* 8 (every 7.5 minutes)
-* 9 (every 6.7 minutes)
-* 10 (every 6 minutes)
-* 11 (every 5.5 minutes)
-* 12 (every 5 minutes)
-|===
-
-. Enable the trigger and select btn:[Save].
+** Enter a **Config branch**. CircleCI fetches your config file from this branch.
+** Enter a **Checkout branch**. CircleCI checks out your code from this branch.
+** Under **Pipeline attribution**, select the actor to initiate the trigger. You can choose yourself, or the scheduling system if you want the trigger to be independent from individual users. If your project requires the use of environment variables stored in restricted contexts, you must assign someone who has access to those contexts.
+** Optionally, select btn:[Add parameter] to enter pipeline parameters to set when triggering the pipeline. If you enter any new pipeline parameters make sure to also add them to your config file. You can select btn:[Populate from config] to automatically populate the parameters fields from your config file.
+** Enter a **Schedule (cron expression)**. Schedules must run at least 5 minutes apart. The start time can be offset by up to 10 minutes, but stays consistent across all runs.
+. Make sure **Trigger status** is enabled, then select btn:[Save].
 --
 GitHub OAuth::
 +
