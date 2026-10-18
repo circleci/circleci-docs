@@ -450,3 +450,8 @@ Automations
 Create_secret_yourself
 iFrame
 Istio
+
+[Rr]sync
+[Gg]itignored
+[Ww]orktrees?
+[Ii]mplementer('s)?
