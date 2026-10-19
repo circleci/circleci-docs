@@ -65,7 +65,7 @@ NOTE: In a separate benchmark on a large, real-world iOS codebase (WordPress-iOS
 | Turborepo's remote cache.
 
 | `xcode`
-| Xcode's Swift/Clang compilation cache (object-level compiler outputs), enabled by pointing `xcodebuild`'s compilation cache build settings at the cache server. You still manage CocoaPods/Swift Package Manager dependency caches separately with xref:caching.adoc#xcode[`save_cache`/`restore_cache`].
+| Xcode's Swift/Clang compilation cache (object-level compiler outputs), enabled by pointing the `xcodebuild` compilation cache build settings at the cache server. You still manage CocoaPods/Swift Package Manager dependency caches separately with xref:caching.adoc#xcode[`save_cache`/`restore_cache`].
 |===
 --
 
