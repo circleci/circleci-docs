@@ -99,7 +99,7 @@ $ curl --request POST \
 
 For additional information, refer to the link:https://circleci.com/docs/api/v3#tag/triggers/POST/api/v3/triggers[API v3 Triggers Reference].
 
-NOTE: You can also create schedule triggers for these pipeline types with the link:https://circleci.com/docs/api/v2/index.html#tag/Trigger/operation/createTrigger[API v2 Create Trigger] endpoint. The API v2 Create Schedule endpoint only supports GitHub OAuth and Bitbucket Cloud.
+NOTE: We recommend using the CircleCI API v3 as described here but you can also create schedule triggers for these pipeline types with the link:https://circleci.com/docs/api/v2/index.html#tag/Trigger/operation/createTrigger[API v2 Create Trigger] endpoint. The API v2 link:https://circleci.com/docs/api/v2/#tag/Schedule/operation/createSchedule[Create Schedule endpoint] only supports GitHub OAuth and Bitbucket Cloud pipelines.
 --
 GitHub OAuth and Bitbucket Cloud::
 +
