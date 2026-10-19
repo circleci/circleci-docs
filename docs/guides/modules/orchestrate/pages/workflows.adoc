@@ -244,6 +244,13 @@ This pattern is useful when you want to send alerts, clean up resources, or log 
 
 TIP: Refer to the xref:reference:ROOT:configuration-reference.adoc#requires[Requires] section of the configuration reference.
 
+[#reuse-a-set-of-jobs-with-job-groups]
+=== Reuse a set of jobs with job groups
+
+Use the `job-groups` key to define a named set of jobs, and the dependencies between them, once. You then invoke the group in a workflow like a single job, and you can invoke the same group more than once. Job groups are available from Server 4.9.
+
+For syntax and examples, see the xref:controlling-serial-execution-across-your-organization.adoc#job-groups[Job Groups] section of the Controlling Serial Execution Across Your Organization page. For the key itself, see the `job-groups` section of the xref:reference:ROOT:configuration-reference.adoc#job-groups[Configuration Reference].
+
 [#holding-a-workflow-for-a-manual-approval]
 == Hold a workflow for a manual approval
 
