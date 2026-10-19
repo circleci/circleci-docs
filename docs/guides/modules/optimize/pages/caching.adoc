@@ -186,7 +186,7 @@ my-cache-{{ checksum "package-lock.json" }}
 | ✓ Required when caching compiled binaries that depend on OS or CPU.
 
 | `{{ .Environment.variableName }}`
-| Any CircleCI-exported environment variable or context variable.
+| A variable exported by CircleCI or added to a context. Arbitrary environment variables are not supported.
 | ⚠ Only appropriate if the variable changes at the same rate as your dependencies.
 
 | `{{ epoch }}`
