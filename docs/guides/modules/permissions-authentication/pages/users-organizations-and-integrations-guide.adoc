@@ -281,7 +281,7 @@ If you use SAML SSO with a `github` type organization, be aware that it can affe
 * GitHub Checks, from the GitHub website, select menu:Org[VCS > GitHub Checks]
 * GitHub status updates, from the CircleCI web app menu:Project Settings[Advanced > GitHub Status Updates]
 
-For more information on GitHub Checks and GitHub status updates, see the xref:integration:enable-checks.adoc#github-check-and-github-status-updates[Enabling GitHub Checks].
+For more information on GitHub Checks and GitHub status updates, see the xref:integration:status-updates.adoc#github-checks-and-status-updates[Status Updates Overview].
 
 
 == Rename an organization or project
