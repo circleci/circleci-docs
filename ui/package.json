@@ -54,7 +54,7 @@
     "minimatch": "^10.2.3",
     "cross-spawn": "~7.0.0",
     "got": "~15.1.0",
-    "http-cache-semantics": "~4.2.0",
+    "http-cache-semantics": "~4.3.0",
     "nth-check": "~3.0.0",
     "pbkdf2": "~3.1.7",
     "semver-regex": "~4.0.5",
