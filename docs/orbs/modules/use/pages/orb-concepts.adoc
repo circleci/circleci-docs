@@ -128,7 +128,7 @@ For more information, see the guide to xref:reference:ROOT:reusing-config.adoc#a
 [#jobs]
 === Jobs
 
-xref:reference:ROOT:reusing-config.adoc#authoring-parameterized-jobs[Jobs] define a collection of xref:reference:ROOT:configuration-reference.adoc#steps[steps] to be run within a given xref:use:orb-concepts.adoc#executors[executor], and are orchestrated using xref:guides:orchestrate:workflows.adoc[Workflows]. Jobs will also individually return their status via xref:guides:integration:enable-checks.adoc[GitHub Checks].
+xref:reference:ROOT:reusing-config.adoc#authoring-parameterized-jobs[Jobs] define a collection of xref:reference:ROOT:configuration-reference.adoc#steps[steps] to be run within a given xref:use:orb-concepts.adoc#executors[executor], and are orchestrated using xref:guides:orchestrate:workflows.adoc[Workflows]. Jobs will also individually return their status via xref:guides:integration:status-updates.adoc#github-checks[GitHub Checks].
 
 When importing an orb which has jobs, you can reference them directly from your workflows.
 

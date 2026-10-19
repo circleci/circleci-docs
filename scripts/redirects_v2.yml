@@ -266,7 +266,7 @@
   new: /guides/deploy/ecs-ecr/
 
 - old: /enable-checks/
-  new: /guides/integration/enable-checks/
+  new: /guides/integration/status-updates/
 
 - old: /env-vars/
   new: /guides/security/env-vars/
@@ -1168,3 +1168,6 @@
 
 - old: /runner-installation/
   new: /runner/runner-overview/
+
+- old: /guides/integration/enable-checks/
+  new: /guides/integration/status-updates/

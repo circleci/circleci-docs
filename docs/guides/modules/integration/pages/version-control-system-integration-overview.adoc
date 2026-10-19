@@ -181,7 +181,7 @@ The table below is not a full list of CircleCI features. Only features where the
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| *xref:enable-checks.adoc[GitHub Checks] to track the status of your pipeline in the GitHub UI*
+| *xref:status-updates.adoc#github-checks[GitHub Checks] to track the status of your pipeline in the GitHub UI*
 | Notifications
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
@@ -192,7 +192,7 @@ The table below is not a full list of CircleCI features. Only features where the
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 
-| *xref:status-updates.adoc#cursor-origin-checks[Cursor Origin checks] to track the status of your pipeline in the Cursor Origin UI. Reported for each workflow, on by default, and with no separate app to install.*
+| *xref:status-updates.adoc#cursor-origin-checks[Cursor Origin Checks] to track the status of your pipeline in the Cursor Origin UI.*
 | Notifications
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
