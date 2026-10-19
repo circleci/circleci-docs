@@ -30,22 +30,12 @@ To set a schedule with the API, you will need your CircleCI personal API token. 
 GitHub App, GitHub App Server, and Cursor Origin::
 +
 --
-. Find your project ID. See xref:toolkit:api-v3-developers-guide.adoc#getting-started-with-api-v3[Getting Started With API V3] for steps to list your organizations and projects and retrieve your project ID.
-. Get your pipeline definition ID. Replace `<PROJECT_ID>` with your project ID:
-+
-[source,console]
-----
-$ curl -g \
-  --url "https://circleci.com/api/v3/pipelines?filter[project_id]=<PROJECT_ID>" \
-  --header "Authorization: Bearer $CIRCLE_TOKEN"
-----
-+
-Locate your pipeline in the response and copy its `id` value.
+include::ROOT:partial$pipelines-and-triggers/find-pipeline-definition-id-api.adoc[]
 . Create the nightly schedule trigger. Replace `<PIPELINE_ID>` with your pipeline definition ID:
 +
-[source,console]
+[source,shell]
 ----
-$ curl --request POST \
+curl --request POST \
   --url https://circleci.com/api/v3/triggers \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
@@ -77,9 +67,9 @@ GitHub OAuth and Bitbucket Cloud::
 --
 . Create a nightly schedule using the link:https://circleci.com/docs/api/v2/index.html#operation/createSchedule[API v2 Create Schedule] endpoint. Replace `<project-slug>` with your project slug:
 +
-[source,console]
+[source,shell]
 ----
-$ curl --request POST "https://circleci.com/api/v2/project/<project-slug>/schedule" \
+curl --request POST "https://circleci.com/api/v2/project/<project-slug>/schedule" \
   --header "Circle-Token: $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
   --data '{

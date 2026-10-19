@@ -295,6 +295,16 @@ $ circleci version
 ----
 ```
 - The dollar sign won't be copied with the copy button
+- **For commands with a multi-line body**, such as a JSON payload or heredoc, use `shell` without a dollar sign. The copy button only copies lines that start with `$ `, so a `console` block would lose the body:
+```adoc
+[source,shell]
+----
+curl --request POST https://example.com/api \
+  --data '{
+    "key": "value"
+  }'
+----
+```
 - When users need to substitute data, use `<my-data>` format
 - Point out what needs replacement, including whether to replace `< >` or `" "`
 - **Show full job or workflow**, not just relevant lines
