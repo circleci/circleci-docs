@@ -171,10 +171,10 @@ Use the xref:toolkit:how-to-use-the-circleci-local-cli.adoc[CircleCI CLI] `dlc p
 
 [,shell]
 ----
-circleci dlc purge <vcs-type> <org-id> <project-id>
+circleci dlc purge --project <project-slug>
 ----
 
-The full `<vcs-type> <org-id> <project-id>` section of the subcommand is your project slug. You can find and copy the project slug from your project settings:
+Replace `<project-slug>` with your project slug, for example `gh/my-org/my-repo`. If you omit `--project`, the command uses the project for the git remote of your current directory. You can find and copy the project slug from your project settings:
 
 .The project slug available in project settings
 image::guides:ROOT:project-settings-overview.png[Screenshot showing where to find the project slug]
