@@ -167,6 +167,7 @@ include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 [#purge-dlc-cli]
 === CLI
 
+ifndef::server[]
 Use the xref:toolkit:how-to-use-the-circleci-local-cli.adoc[CircleCI CLI] `dlc purge` sub-command to purge DLC for a project:
 
 [,shell]
@@ -180,6 +181,15 @@ Replace `<project-slug>` with your project slug, for example `gh/my-org/my-repo`
 image::guides:ROOT:project-settings-overview.png[Screenshot showing where to find the project slug]
 
 For full details on the `dlc purge` sub-command, refer to the link:https://cli.circleci.com/reference/[CLI reference].
+endif::server[]
+ifdef::server[]
+CircleCI Server uses the legacy CircleCI CLI. Use the `project dlc purge` sub-command to purge DLC for a project:
+
+[,shell]
+----
+circleci project dlc purge <vcs-type> <org-name> <project-name>
+----
+endif::server[]
 
 
 
