@@ -62,6 +62,13 @@ All pages require standard attributes (`:page-platform:`, `:page-audience:`, `:p
 - Assume technical competence but explain concepts clearly and simply
 - Complex concepts should be accessible to non-technical readers
 
+### Current Product Behavior Only
+- Docs state what the product does now. Do not document planned, upcoming, or aspirational behavior
+- Do not write "will be supported from", "coming soon", or a future version number for a feature that is not yet available
+- If a feature is unavailable on a platform, say so plainly and leave out when it might arrive
+- **Good**: `$CIRCLE_OIDC_TOKEN_V3` is not available on server.
+- **Bad**: `$CIRCLE_OIDC_TOKEN_V3` will be supported from server v5.0+.
+
 ### CircleCI-Specific Terminology
 - The CircleCI web interface is the "web app"
 - Use "CI/CD" to describe what we do
@@ -342,6 +349,7 @@ some code
 ```
 - **Capitalize first word** of each list item
 - **Use periods** if item is a full sentence or completes the intro stem
+- **Split literal-heavy paragraphs into lists**: a paragraph with three or more inline code spans or literal values is hard to read. Use a bulleted or description list where it fits, for example one item per format or variant
 
 ### Tables
 - Wrap tables in scrollable container:
@@ -604,6 +612,8 @@ endif::server[]
 17. Using AsciiDoc underscore heading IDs (`<<_install_circleci_agent_skills>>`) instead of the site kebab-case ID (`<<install-circleci-agent-skills>>`)
 18. Unnecessary semicolons (prefer a period or a comma)
 19. En dashes, or dashes used to separate an item and its description
+20. Documenting planned or future behavior, such as "will be supported from v5.0"
+21. Paragraphs dense with inline code or literal values that should be a bulleted list
 
 ## AsciiDoc Validation Rules
 - Close all attribute blocks properly

@@ -20,16 +20,37 @@ Some advantages to using OIDC over using static credentials:
 [#openid-connect-id-token-availability]
 == OpenID Connect tokens
 
-CircleCI OpenID Connect ID tokens are available in the following environment variables:
+CircleCI provides three OpenID Connect ID tokens in environment variables. They differ in what the `sub` claim tells your cloud provider about where a job came from.
 
-* `$CIRCLE_OIDC_TOKEN`
+[.table-scroll]
+--
+[cols="2,3,3,3", options="header"]
+|===
+| Environment variable
+| What the `sub` claim identifies
+| Use it when
+| Availability
 
-* `$CIRCLE_OIDC_TOKEN_V2` - This token includes a different `sub` claim format to include a reference to the source of the change that triggered the job.
+| `$CIRCLE_OIDC_TOKEN`
+| Organization, project, and user.
+| Your trust policy only needs to check the project or user. The `sub` claim has no repository or branch, so use the `vcs-origin` and `vcs-ref` claims if your cloud provider supports claim conditions.
+| Cloud and Server v4.4+
 
-See <<format-of-the-openid-connect-id-token>> for full details on the Claims used in each token.
+| `$CIRCLE_OIDC_TOKEN_V2`
+| Organization, project, and user, plus the repository (`vcs-origin`) and Git reference (`vcs-ref`) that triggered the pipeline run.
+| Your trust policy needs to restrict access by repository or branch.
+| Cloud and Server v4.4+
 
+| `$CIRCLE_OIDC_TOKEN_V3`
+| Organization, project, and user, plus the checkout source and reference, and the config source and reference. Uses `:` as the separator instead of `/`.
+| Recommended for new setups. Your trust policy can check where the pipeline configuration comes from as well as the code it checks out.
+| Cloud only
+|===
+--
 
-CAUTION: **What about forks?** OIDC tokens will only be generated for forked builds if the **Pass secrets to builds from forked pull requests** setting is enabled. Find this option at **Project settings** > **Advanced**. See <<oidc-in-open-source-projects>>.
+Use `$CIRCLE_OIDC_TOKEN_V3` for new setups. If you already have trust policies that use `$CIRCLE_OIDC_TOKEN` or `$CIRCLE_OIDC_TOKEN_V2`, they continue to work. See <<format-of-the-openid-connect-id-token>> for the claims in each token. See <<choose-a-token-version>> for a detailed comparison and migration steps.
+
+NOTE: **What about forks?** OIDC tokens will only be generated for forked builds if the **Pass secrets to builds from forked pull requests** setting is enabled. See <<forked-builds-and-oidc-tokens,OIDC in open source projects>>.
 
 [#authenticate-jobs-with-cloud-providers]
 == Set up cloud provider authentication
@@ -164,10 +185,10 @@ jobs:
           role_session_name: ${CIRCLE_JOB}
           session_duration: "1800"
       - run:
-        name: Log-into-AWS-ECR
-        command: |
-          # must use same profile specified in the step above
-          aws ecr get-login-password --profile "OIDC-PROFILE"
+          name: Log-into-AWS-ECR
+          command: |
+            # must use same profile specified in the step above
+            aws ecr get-login-password --profile "OIDC-PROFILE"
 workflows:
   OIDC-with-AWS:
     jobs:
@@ -187,7 +208,7 @@ If a project needs to access only certain AWS resources, you can restrict your I
 
 To do this, edit your IAM role's trust policy so that only an OIDC token from your chosen project can assume that role. The trust policy determines under what conditions the role can be assumed.
 
-. Go to an individual project's page in the https://app.circleci.com/[CircleCI web app] and navigate to menu:Project Settings [Overview] to find your Project ID.
+. Go to an individual project's page in the https://app.circleci.com/[CircleCI web app] and navigate to menu:Project Settings[Overview] to find your Project ID.
 
 . Add the following condition to your role's trust policy, so that only jobs in your chosen project can assume that role. Replace `<organization_id>` with your CircleCI organization ID and `<project-id>` with your CircleCI project ID. See xref:toolkit:how-to-find-ids.adoc[How to Find IDs] for help.
 +
@@ -196,7 +217,7 @@ To do this, edit your IAM role's trust policy so that only an OIDC token from yo
 
 AWS STS maps CircleCI's `oidc.circleci.com/project-id` OIDC claim to a link:https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#condition-keys-wif[Web Identity Federation condition key]. This key identifies the CircleCI project in which the job is running. Its value is a string containing a UUID that uniquely identifies the CircleCI project. Use this condition key with string operators in your trust policy to restrict access to specific CircleCI projects.
 
-[source,yaml]
+[source,json]
 ----
 {
   "Version": "2012-10-17",
@@ -223,10 +244,20 @@ NOTE: The `oidc.circleci.com/project-id` condition key is evaluated during `sts:
 *Option 2: Using the sub claim*
 
 .Update trust policy to restrict access to specific project
-[source,yaml]
+[source,json]
 ----
 "StringLike": {
   "oidc.circleci.com/org/<organization_id>:sub": "org/<organization_id>/project/<project-id>/user/*"
+}
+----
+
+For `$CIRCLE_OIDC_TOKEN_V3`, which separates the parts of the `sub` claim with `:`, use this pattern instead:
+
+.Update trust policy to restrict access to specific project (V3)
+[source,json]
+----
+"StringLike": {
+  "oidc.circleci.com/org/<organization_id>:sub": "org:<organization_id>:project:<project-id>:user:*"
 }
 ----
 
@@ -236,9 +267,20 @@ This uses https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_el
 [#limit-role-access-based-on-branch]
 ==== Limit role access based on branch
 
-You can also restrict access to specific branches. The following is an example of a trust policy with restrictions. The `AssumeRoleWithWebIdentity` action is restricted to pipelines running only on the `main` branch in the `my-org` GitHub organization and the CircleCI organization with the ID `organization_id`. Note that the `sub` claim uses the `$CIRCLE_OIDC_TOKEN_V2` format.
+You can also restrict access to specific branches. For `$CIRCLE_OIDC_TOKEN_V3`, the `sub` claim includes the config source and ref as well as the checkout source and ref. The following `StringLike` condition restricts the role to pipeline runs in which both the checkout and the config come from the `main` branch of a repository in the `my-org` GitHub organization.
 
-The `vcs-origin` portion of the `sub` claim contains a host prefix that depends on your VCS provider. Replace `github.com/my-org/` with the appropriate value for your provider. See <<vcs-origin-and-vcs-ref-values-by-provider,VCS-Origin and VCS-Ref Values by Provider>> for the full list. For example, a GitLab.com project would use `gitlab.com/my-group/` and a Bitbucket Cloud project would use `bitbucket.org/my-workspace/`.
+[source,json]
+----
+"StringLike": {
+  "oidc.circleci.com/org/<organization_id>:sub": "org:<organization_id>:project:*:user:*:checkout-source:github.com/my-org/*:checkout-ref:refs/heads/main:config-source:github.com/my-org/*:config-ref:refs/heads/main"
+}
+----
+
+Checking `config-source` and `config-ref` as well as the checkout values stops a pipeline run from using configuration on an unprotected branch to get access that the checkout alone would not allow.
+
+The repository part of the `sub` claim contains a host prefix that depends on your VCS provider. Replace `github.com/my-org/` with the appropriate value for your provider. See <<vcs-origin-and-vcs-ref-values-by-provider,VCS-origin and VCS-ref values by provider>> for the full list. For example, a GitLab.com project would use `gitlab.com/my-group/` and a Bitbucket Cloud project would use `bitbucket.org/my-workspace/`.
+
+For `$CIRCLE_OIDC_TOKEN_V2`, the following trust policy restricts the `AssumeRoleWithWebIdentity` action to pipeline runs on the `main` branch in the `my-org` GitHub organization and the CircleCI organization with the ID `organization_id`. The `sub` claim uses the `$CIRCLE_OIDC_TOKEN_V2` format.
 
 ```json
 {
@@ -417,13 +459,15 @@ If your token comes from an API response, it might be useful to set up the confi
   }
 ----
 
-You will need to write one of CircleCI's OIDC tokens to a file in your job. You can use either $CIRCLE_OIDC_TOKEN or $CIRCLE_OIDC_TOKEN_V2. The V2 token includes additional VCS information (repository and branch) which allows for more granular access control in GCP. See <<format-of-the-openid-connect-id-token>> for details on the differences. For example:
+You will need to write one of CircleCI's OIDC tokens to a file in your job. You can use `$CIRCLE_OIDC_TOKEN`, `$CIRCLE_OIDC_TOKEN_V2`, or `$CIRCLE_OIDC_TOKEN_V3`. The V2 and V3 tokens include additional VCS information (repository and branch) which allows for more granular access control in GCP. The V3 `sub` claim is longer than the V2 `sub` claim and can exceed the 127-byte limit for `google.subject`. See the xref:pull-an-image-from-gcp-gar-with-oidc.adoc#google-subject-too-long[Google Subject Exceeds 127 Bytes] section for a mapping that avoids this. See <<format-of-the-openid-connect-id-token>> for details on the differences. For example:
 
 .Write the OIDC token to a file
 [source,shell]
 ----
 echo $CIRCLE_OIDC_TOKEN >> CIRCLE_OIDC_TOKEN_FILE
 ----
+
+The examples in this section use `$CIRCLE_OIDC_TOKEN`. To use `$CIRCLE_OIDC_TOKEN_V3`, which is recommended for new setups, replace the variable name in each example and update the `google.subject` mapping as described in the xref:pull-an-image-from-gcp-gar-with-oidc.adoc#google-subject-too-long[Google Subject Exceeds 127 Bytes] section.
 
 Add the following environment variables to a context. You will use this context in your CircleCI configuration to give your pipeline access to securely access the environment variables. See the xref:security:contexts.adoc[Contexts] page for more information.
 
@@ -461,7 +505,7 @@ Below is a full example configuration adding GCP to a job and demonstrating that
 version: 2.1
 
 orbs:
-  gcp-cli: circleci/gcp-cli@2.4.1
+  gcp-cli: circleci/gcp-cli@4.0.1
 
 commands:
   gcp-oidc-generate-cred-config-file:
@@ -542,146 +586,271 @@ CircleCI's OIDC tokens contain the following standard https://openid.net/specs/o
 
 [.table-scroll]
 --
-[cols="1,2", options="header"]
+[cols="1,4", options="header"]
 |===
-| Claims
+| Claim
 | Description
 
 | `iss`
-| The issuer, specific to the CircleCI organization in which the job is being run. Its value is `"https://oidc.circleci.com/org/<organization_id>"`, where `organization_id` is a UUID identifying the current job's project's organization. It is possible to generate a token manually with a root issuer using the `--root-issuer` flag. See xref:oidc-tokens-with-custom-claims.adoc[OIDC Tokens With Custom Claims] for more information.
+| The issuer, specific to the organization in which the job runs: `\https://oidc.circleci.com/org/<organization_id>`. `organization_id` is a UUID. You can generate a token with a root issuer using the `--root-issuer` flag. See xref:oidc-tokens-with-custom-claims.adoc[OIDC Tokens With Custom Claims].
 
 | `sub`
-a| The subject. This identifies who is running the CircleCI job and where. `$CIRCLE_OIDC_TOKEN_V2` also includes information about the source of change.
-
----
-
-For `$CIRCLE_OIDC_TOKEN` its value is:
-
-`"org/<organization_id>/project/<project-id>/user/<user_id>"`, a string, where `organization_id`, `project-id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run.
-
----
-
-For `$CIRCLE_OIDC_TOKEN_V2` its value depends on the trigger type:
-
-*If the trigger is a* xref:orchestrate:triggers-overview.adoc#trigger-a-pipeline-from-a-custom-webhook[Custom Webhook]:
-
-`"org/<organization_id>/project/<project-id>/user/<user_id>"`
-
-A string in which `organization_id`, `project-id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run.
-
-*All other trigger types*:
-
-`"org/<organization_id>/project/<project-id>/user/<user_id>/vcs-origin/<vcs_origin>/vcs-ref/<vcs_ref>"`
-
-A string in which `organization_id`, `project-id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run. `vcs_origin` is the repository URL without a scheme prefix (for example, `github.com/my-org/my-repo`), and `vcs_ref` is the Git reference (for example, `refs/heads/main`). See <<vcs-origin-and-vcs-ref-values-by-provider,VCS-Origin and VCS-Ref Values by Provider>> for the exact format per VCS provider.
+| The subject. Identifies who is running the job and where. The format depends on the token. See <<sub-claim-format>>.
 
 | `aud`
-| The audience. By default, this is `ORGANIZATION_ID`, a string containing a UUID that identifies the job's project's organization. To customize the audience you can generate an OIDC token with a custom audience. See xref:oidc-tokens-with-custom-claims.adoc[OIDC Tokens With Custom Claims] for more information.
+| The audience. By default, this is the organization ID (a UUID). To set a different audience, see xref:oidc-tokens-with-custom-claims.adoc[OIDC Tokens With Custom Claims].
 
 | `iat`
 | The time of issuance. CircleCI creates the token shortly before the job starts.
 
 | `exp`
-| The expiration time. Its value is one hour after the time of issuance.
-
+| The expiration time, one hour after issuance.
 |===
 --
 
-
-CircleCI's OpenID Connect ID tokens also contain some https://openid.net/specs/openid-connect-core-1_0.html#AdditionalClaims[additional claims] with extra metadata about the job:
+[#sub-claim-format]
+=== `sub` claim format
 
 [.table-scroll]
 --
-[cols="2,2", options="header"]
+[cols="2,5", options="header"]
 |===
-| Additional claims
-| Metadata
+| Token
+| `sub` value
+
+| `$CIRCLE_OIDC_TOKEN`
+| `org/<organization_id>/project/<project-id>/user/<user_id>`
+
+| `$CIRCLE_OIDC_TOKEN_V2`
+| `org/<organization_id>/project/<project-id>/user/<user_id>/vcs-origin/<vcs_origin>/vcs-ref/<vcs_ref>`
+
+Pipeline runs triggered by a xref:orchestrate:triggers-overview.adoc#trigger-a-pipeline-from-a-custom-webhook[Custom Webhook] have no repository information, so the value has the same format as `$CIRCLE_OIDC_TOKEN`.
+
+| `$CIRCLE_OIDC_TOKEN_V3`
+| `org:<organization_id>:project:<project-id>:user:<user_id>:checkout-source:<checkout_source>:checkout-ref:<checkout_ref>:config-source:<config_source>:config-ref:<config_ref>`
+|===
+--
+
+[.table-scroll]
+--
+[cols="2,5", options="header"]
+|===
+| Placeholder
+| Description
+
+| `organization_id`, `project-id`, `user_id`
+| UUIDs that identify the CircleCI organization, project, and user. The user is the CircleCI user that caused the job to run.
+
+| `vcs_origin`, `checkout_source`
+| The URL of the repository that triggered the pipeline run, without the `https://` scheme, for example `github.com/my-org/my-repo`. See <<vcs-origin-and-vcs-ref-values-by-provider,VCS-origin and VCS-ref values by provider>> for the format per VCS provider.
+
+| `vcs_ref`, `checkout_ref`
+| The Git reference of the code the job checks out, for example `refs/heads/main`.
+
+| `config_source`, `config_ref`
+| The repository URL (without the `https://` scheme) and Git reference of the pipeline configuration.
+|===
+--
+
+In `$CIRCLE_OIDC_TOKEN_V3`, CircleCI replaces any `:` inside a value with `%3A` so that it cannot be mistaken for a separator.
+
+Some pipelines have no configuration in a repository. For these pipeline runs, `config_source` and `config_ref` are set to `unknown`.
+
+The `$CIRCLE_OIDC_TOKEN_V3` value is empty when the pipeline has no checkout source.
+
+[#additional-claims]
+=== Additional claims
+
+CircleCI's OIDC tokens also contain some https://openid.net/specs/openid-connect-core-1_0.html#AdditionalClaims[additional claims] with extra metadata about the job. The Tokens column shows which tokens include each claim.
+
+[.table-scroll]
+--
+[cols="3,2,5", options="header"]
+|===
+| Claim
+| Tokens
+| Description
+
+| `oidc.circleci.com/checkout-ref`
+| V2, V3
+| The reference to the change that triggered the pipeline run, for example `refs/heads/main`. Same value as `oidc.circleci.com/vcs-ref`.
+
+| `oidc.circleci.com/checkout-source`
+| V2, V3
+| The URL of the repository that triggered the pipeline run, without the `https://` scheme, for example `github.com/organization-123/repo-1`. Same value as `oidc.circleci.com/vcs-origin`.
+
+| `oidc.circleci.com/config-ref`
+| V2, V3
+| The reference of the pipeline configuration, for example `refs/heads/main`. When the pipeline has no config reference, the value is `unknown` in V3 and the claim is absent in V2.
+
+| `oidc.circleci.com/config-source`
+| V2, V3
+| The URL of the repository that holds the pipeline configuration, without the `https://` scheme. Use with `config-ref` to check where your configuration comes from. When the pipeline has no config source, the value is `unknown` in V3 and the claim is absent in V2.
 
 | `oidc.circleci.com/context-ids`
-| An array of strings containing UUIDs that identify the context(s) used in the job.
+| All
+| An array of UUIDs that identify the contexts used in the job.
 
 | `oidc.circleci.com/job-id`
-| The unique identifier for the job. Its value is a string containing a UUID identifying the CircleCI job.
+| All
+| A UUID that identifies the job.
 
 | `oidc.circleci.com/org-id`
-| The unique identifier for the organization. Its value is a string containing a UUID identifying the CircleCI organization.
+| All
+| A UUID that identifies the organization.
 
 | `oidc.circleci.com/pipeline-definition-id`
-| The unique identifier for the pipeline definition that created the pipeline running the workflow. The value is a string containing a UUID identifying the CircleCI pipeline definition. Pipeline definitions are found in your project settings under Project Setup.
+| Not V3
+| A UUID that identifies the pipeline definition that created the pipeline. Pipeline definitions are found in your project settings under Project Setup. In V3, the pipeline definition is in `oidc.circleci.com/pipeline-id`.
 
 | `oidc.circleci.com/pipeline-id`
-| The unique identifier for the pipeline that triggered this job. Its value is a string containing a UUID identifying the CircleCI pipeline.
+| All
+| A UUID. In `$CIRCLE_OIDC_TOKEN` and `$CIRCLE_OIDC_TOKEN_V2`, it identifies the pipeline run that triggered the job. In `$CIRCLE_OIDC_TOKEN_V3`, it identifies the pipeline definition, and the pipeline run that triggered the job is in `oidc.circleci.com/run-id`.
 
 | `oidc.circleci.com/project-id`
-| The CircleCI project ID. Its value is a string containing a UUID that uniquely identifies the CircleCI project. Use this claim to restrict access to specific CircleCI projects. In AWS, this claim maps to a link:https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#condition-keys-wif[Web Identity Federation condition key] that works with string operators.
+| All
+| A UUID that identifies the CircleCI project. Use this claim to restrict access to specific projects. In AWS, it maps to a link:https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#condition-keys-wif[Web Identity Federation condition key] that works with string operators.
+
+| `oidc.circleci.com/run-id`
+| V3
+| A UUID that identifies the pipeline run that triggered the job. Same value as `oidc.circleci.com/pipeline-id` in the other tokens.
 
 | `oidc.circleci.com/ssh-rerun`
-| A boolean indicating if the CI job is started using the SSH rerun feature.
+| All
+| A boolean that indicates whether the job was started using the SSH rerun feature.
 
 | `oidc.circleci.com/vcs-origin`
-| The repository URL that triggered the pipeline, without the `https://` scheme. The exact format varies by VCS provider. See <<vcs-origin-and-vcs-ref-values-by-provider,VCS-Origin and VCS-Ref Values by Provider>> for per-provider examples. The claim is absent for pipelines triggered by custom webhooks.
+| Not V3
+| The URL of the repository that triggered the pipeline run, without the `https://` scheme. The format varies by VCS provider. See <<vcs-origin-and-vcs-ref-values-by-provider,VCS-origin and VCS-ref values by provider>>. Absent for pipeline runs triggered by custom webhooks. In V3, use `oidc.circleci.com/checkout-source`.
 
 | `oidc.circleci.com/vcs-ref`
-| The Git reference to the change that triggered the pipeline. For branch triggers, the value is `refs/heads/<branch-name>`, for example `refs/heads/main`. For tag triggers, the value is `refs/tags/<tag-name>`, for example `refs/tags/v1.2.0`. When both a branch and tag are present, the branch is used. The claim is absent when neither is set, for example in pipelines triggered by custom webhooks.
+| Not V3
+| The Git reference of the change that triggered the pipeline run: `refs/heads/<branch-name>` for branch triggers, or `refs/tags/<tag-name>` for tag triggers. If both a branch and a tag are present, the branch is used. Absent when neither is set, for example in pipeline runs triggered by custom webhooks. In V3, use `oidc.circleci.com/checkout-ref`.
 
 | `oidc.circleci.com/workflow-id`
-| The unique identifier for the workflow running the job. Its value is a string containing a UUID identifying the CircleCI workflow.
+| All
+| A UUID that identifies the workflow running the job.
 |===
 --
 
 [#vcs-origin-and-vcs-ref-values-by-provider]
 === VCS-origin and VCS-ref values by provider
 
-The `oidc.circleci.com/vcs-origin` and `oidc.circleci.com/vcs-ref` claims are included in `$CIRCLE_OIDC_TOKEN_V2` for all trigger types except custom webhooks. The `vcs-origin` value is the repository URL without the `https://` scheme. The `vcs-ref` value follows the same format for every provider.
+The `oidc.circleci.com/vcs-origin` and `oidc.circleci.com/vcs-ref` claims are included in `$CIRCLE_OIDC_TOKEN` and `$CIRCLE_OIDC_TOKEN_V2` for all trigger types except custom webhooks.
+
+`vcs-origin`::
+The repository URL without the `https://` scheme. The `oidc.circleci.com/checkout-source` claim uses the same format.
+
+`vcs-ref`::
+The Git reference. The format is the same for every provider.
++
+* `refs/heads/<branch-name>` for branches.
+* `refs/tags/<tag-name>` for tags.
+
+The `vcs-origin` value depends on your VCS provider:
 
 [.table-scroll]
 --
-[cols="2,3,2", options="header"]
+[cols="1,1", options="header"]
 |===
 | VCS provider
 | `vcs-origin` example
-| `vcs-ref` example
 
 | GitHub App (`github.com`)
 | `github.com/my-org/my-repo`
-| `refs/heads/main`
 
 | GitHub App Server (GitHub Enterprise)
 | `<your-github-hostname>/my-org/my-repo`
-| `refs/heads/main`
 
 | GitHub OAuth (`github.com`)
 | `github.com/my-org/my-repo`
-| `refs/heads/main`
 
 | GitHub OAuth on Server (GitHub Enterprise)
 | `<your-github-hostname>/my-org/my-repo`
-| `refs/heads/main`
 
 | GitLab.com
 | `gitlab.com/my-group/my-repo`
-| `refs/heads/main`
 
 | GitLab self-managed
 | `<your-gitlab-hostname>/my-group/my-repo`
-| `refs/heads/main`
 
 | Bitbucket Cloud
 | `bitbucket.org/my-workspace/my-repo`
-| `refs/heads/main`
 
 | Cursor Origin
 | `cursor.com/codebase/my-org/my-repo`
-| `refs/heads/main`
 |===
 --
 
-[#oidc-in-open-source-projects]
+[#choose-a-token-version]
+== Choose a token version
+
+Use `$CIRCLE_OIDC_TOKEN_V3` for new setups. For an existing trust policy, use the token that matches the `sub` format and claims in the policy until you migrate it.
+
+CircleCI sets all three variables in a job on Cloud. `$CIRCLE_OIDC_TOKEN_V3` is not available on Server. The `$CIRCLE_OIDC_TOKEN_V3` value is empty when the pipeline has no checkout source.
+
+[#compare-token-versions]
+=== Compare token versions
+
+[.table-scroll]
+--
+[cols="2,2,2,2", options="header"]
+|===
+|
+| `$CIRCLE_OIDC_TOKEN`
+| `$CIRCLE_OIDC_TOKEN_V2`
+| `$CIRCLE_OIDC_TOKEN_V3`
+
+| `sub` separator
+| `/`
+| `/`
+| `:`
+
+| Repository and reference in `sub`
+| None
+| `vcs-origin`, `vcs-ref`
+| `checkout-source`, `checkout-ref`, `config-source`, `config-ref`
+
+| `vcs-origin` and `vcs-ref` claims
+| Yes
+| Yes
+| No. Use `checkout-source` and `checkout-ref`.
+
+| `checkout-*` and `config-*` claims
+| No
+| Yes
+| Yes
+
+| `pipeline-id` identifies
+| Pipeline run
+| Pipeline run
+| Pipeline definition
+
+| `run-id` identifies
+| Not included
+| Not included
+| Pipeline run
+|===
+--
+
+NOTE: `$CIRCLE_OIDC_TOKEN_V3` is the only token with the config source in the `sub` claim. A trust policy that matches only the checkout source cannot tell which repository or branch holds the pipeline configuration. To check both, use `$CIRCLE_OIDC_TOKEN_V3`, or match the `config-source` and `config-ref` claims in `$CIRCLE_OIDC_TOKEN_V2` where your cloud provider supports claim conditions.
+
+[#migrate-to-the-v3-token]
+=== Migrate to the V3 token
+
+To move a trust policy from `$CIRCLE_OIDC_TOKEN_V2` to `$CIRCLE_OIDC_TOKEN_V3`, follow these steps.
+
+. Rewrite each `sub` pattern to use `:` as the separator, and add the `config-source` and `config-ref` parts.
+. Replace `vcs-origin` and `vcs-ref` with `checkout-source` and `checkout-ref`.
+. Replace any condition on `pipeline-id` with `run-id`, and any condition on `pipeline-definition-id` with `pipeline-id`.
+. Pass `$CIRCLE_OIDC_TOKEN_V3` to your cloud provider in your job. If you use the CLI, see xref:oidc-tokens-with-custom-claims.adoc#select-a-token-version[Select a Token Version].
+
+[#forked-builds-and-oidc-tokens]
 == OIDC in open source projects
 
 OIDC tokens will only be generated for forked builds if the **Pass secrets to builds from forked pull requests** setting is enabled. Find this option at **Project settings** > **Advanced**.
 
-If you allow OIDC tokens to be generated for forks, you **must** check the `oidc.circleci.com/vcs-origin` claims in your policies to prevent forked builds from accessing unauthorized resources.
+If you allow OIDC tokens to be generated for forks, you **must** check the repository claims in your policies to prevent forked builds from accessing unauthorized resources. For `$CIRCLE_OIDC_TOKEN_V3`, check `oidc.circleci.com/checkout-source`. If your pipeline configuration comes from a different repository than the code it checks out, also check `oidc.circleci.com/config-source`. For `$CIRCLE_OIDC_TOKEN` and `$CIRCLE_OIDC_TOKEN_V2`, check `oidc.circleci.com/vcs-origin`.
 
 For more information about building open source projects on CircleCI, see the xref:integration:oss.adoc[Build Open Source Projects] page.
 
@@ -689,6 +858,8 @@ For more information about building open source projects on CircleCI, see the xr
 == OIDC on CircleCI Server
 
 OIDC is supported from server v4.4+. However, OIDC is **not** supported if your server installation is in an air-gapped environment.
+
+`$CIRCLE_OIDC_TOKEN_V3` and the `--v3` CLI flag are not available on server.
 
 [#next-steps]
 == Next steps

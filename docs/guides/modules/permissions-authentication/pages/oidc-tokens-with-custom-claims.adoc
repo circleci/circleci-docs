@@ -7,7 +7,7 @@
 :page-description: Create CircleCI OIDC tokens with the environment CLI and customize the aud claim to connect your jobs to different cloud services without long-lived secrets.
 :experimental:
 
-Use OpenID Connect (OIDC) tokens to connect your pipelines to compatible cloud services without the need to manage long-lived secrets in CircleCI. Create CircleCI OIDC tokens, using the CircleCI environment CLI, and customize the `aud` claim to meet the unique needs of different cloud services.
+Use OpenID Connect (OIDC) tokens to connect your jobs to compatible cloud services without the need to manage long-lived secrets in CircleCI. Create CircleCI OIDC tokens, using the CircleCI environment CLI, and customize the `aud` claim to meet the unique needs of different cloud services.
 
 For more information on OIDC tokens, see the xref:openid-connect-tokens.adoc[OpenID Connect Tokens] overview.
 
@@ -37,6 +37,43 @@ The above command creates an OIDC token with the `aud` claim set to `audience_na
 Pass this value to a variable and use the variable to call a cloud service for authentication.
 
 CAUTION: **OIDC tokens** created using this method can be printed with no masking. Take care to not log/print the token in your job steps.
+
+[#select-a-token-version]
+=== Select a token version
+
+By default, the command returns a V2 token and falls back to V1 if it cannot create one. CircleCI recommends V3 for new setups on Cloud. To request a specific version, pass one of the following flags. You can pass only one.
+
+[.table-scroll]
+--
+[cols="1,3", options="header"]
+|===
+| Flag
+| Description
+
+| `--v1`
+| Returns a V1 token.
+
+| `--v2`
+| Returns a V2 token.
+
+| `--v3`
+| Returns a V3 token. Not available on Server.
+|===
+--
+
+If CircleCI cannot create the version you request, the command fails. It does not fall back to another version. See xref:openid-connect-tokens.adoc#choose-a-token-version[Choose a Token Version] for the differences between versions.
+
+[#set-the-audience-with-aud]
+=== Set the audience with the aud flag
+
+Use the `--aud` flag as a shorter way to set the `aud` claim.
+
+[source,shell]
+----
+circleci run oidc get --aud audience_name
+----
+
+You cannot combine `--aud` with `--claims`.
 
 [#example-configuration]
 == Example configuration

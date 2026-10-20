@@ -238,7 +238,7 @@ A unique, immutable identifier that groups an organization's resources under a s
 [#oidc-token]
 == OpenID Connect (OIDC) token
 
-A token issued by CircleCI that lets a job authenticate with a cloud provider without storing long-lived credentials. CircleCI provides OIDC tokens in the `CIRCLE_OIDC_TOKEN` and `CIRCLE_OIDC_TOKEN_V2` environment variables, with claims identifying the organization, project, and job. See the xref:guides:permissions-authentication:openid-connect-tokens.adoc[Using OpenID Connect Tokens] page.
+A token issued by CircleCI that lets a job authenticate with a cloud provider without storing long-lived credentials. CircleCI provides OIDC tokens in the `CIRCLE_OIDC_TOKEN`, `CIRCLE_OIDC_TOKEN_V2`, and `CIRCLE_OIDC_TOKEN_V3` environment variables, with claims identifying the organization, project, and job. See the xref:guides:permissions-authentication:openid-connect-tokens.adoc[Using OpenID Connect Tokens] page.
 
 == Orbs
 
