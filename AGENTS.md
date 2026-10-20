@@ -349,6 +349,7 @@ some code
 ```
 - **Capitalize first word** of each list item
 - **Use periods** if item is a full sentence or completes the intro stem
+- **Split literal-heavy paragraphs into lists**: a paragraph with three or more inline code spans or literal values is hard to read. Use a bulleted list where it fits, for example one item per format or variant
 
 ### Tables
 - Wrap tables in scrollable container:
@@ -612,6 +613,7 @@ endif::server[]
 18. Unnecessary semicolons (prefer a period or a comma)
 19. En dashes, or dashes used to separate an item and its description
 20. Documenting planned or future behavior, such as "will be supported from v5.0"
+21. Paragraphs dense with inline code or literal values that should be a bulleted list
 
 ## AsciiDoc Validation Rules
 - Close all attribute blocks properly
