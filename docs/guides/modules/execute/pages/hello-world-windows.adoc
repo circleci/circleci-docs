@@ -8,7 +8,10 @@
 :page-aliases: guides:execution-managed:hello-world-windows.adoc
 :experimental:
 
-This document describes how to get started with continuous integration on *Windows execution environments* on CircleCI. If this is your first time setting up CircleCI, we recommend checking out the xref:getting-started:getting-started.adoc[Getting Started Guide].
+This document describes how to get started with continuous integration on *Windows execution environments* on CircleCI.
+ifndef::server[]
+If this is your first time setting up CircleCI, we recommend checking out the xref:getting-started:getting-started.adoc[Getting Started Guide].
+endif::server[]
 
 A Windows Server 2022 image is available to CircleCI Cloud customers, read more on link:https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198[Discuss].
 

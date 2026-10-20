@@ -1,5 +1,5 @@
 = VS Code extension overview
-:page-platform: Cloud
+:page-platform: Cloud, Server
 :page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-audience: developer
@@ -16,7 +16,9 @@ The VS Code extension includes:
 - The **Pipeline Manager**, which lets you view and manage pipelines within the IDE (integrated development environment). The pipeline manager allows you to identify issues and take immediate action on your pipelines without switching between VS Code and your browser.
 - The **Config Helper**, which provides in-file help with navigating, writing, and editing configuration files.
 
+ifndef::server[]
 NOTE: Currently only the **Config Helper** is available for projects in a `circleci` type organization. For more information on organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
+endif::server[]
 
 [#install-the-vs-code-extension]
 == Install the VS Code extension
@@ -70,7 +72,9 @@ Expanding a job also lets you:
 [#re-run-with-ssh]
 === Re-run with SSH
 
+ifndef::server[]
 NOTE: **GitHub App and GitLab projects:** Re-run with SSH from VS Code is not yet available for projects in a `circleci` type organization. For more information on organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
+endif::server[]
 
 Re-run jobs with SSH directly from VS Code in one of two ways:
 
@@ -181,6 +185,7 @@ The config helper is based on a dedicated language server specific for CircleCI 
 
 You can also integrate the language server into any editor that supports the Language Server Protocol. Build your own plugin to benefit from config helper capabilities in your preferred editor.
 
+ifndef::server[]
 [#test-run-your-config-from-vs-code]
 == Test run your config from VS Code
 
@@ -272,3 +277,4 @@ Both the events above log:
 - Setting that was changed
 
 The events above do not call out the new value explicitly, but this is inferable by looking at the current setting state.
+endif::server[]

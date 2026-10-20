@@ -17,7 +17,9 @@ For example, you could use outbound webhooks to:
 
 * Build a custom dashboard to visualize or analyze workflow/job events.
 * Send data to incident management tools (such as link:https://www.pagerduty.com[PagerDuty]).
+ifndef::server[]
 * Use tools like xref:webhooks-airtable.adoc[Airtable] to capture data and visualize it.
+endif::server[]
 * Alert when a workflow is cancelled, then use the API to rerun the workflow.
 * Trigger notification systems to alert people when workflows/jobs complete.
 * Build your own automation plugins and tools.
@@ -230,4 +232,6 @@ a| * "success"
 == Next steps
 
 * See the xref:reference:ROOT:outbound-webhooks-reference.adoc[Webhooks Reference] page for key definitions and sample payloads.
+ifndef::server[]
 * Follow the xref:webhooks-airtable.adoc[Using Webhooks With Third Party Tools] tutorial.
+endif::server[]

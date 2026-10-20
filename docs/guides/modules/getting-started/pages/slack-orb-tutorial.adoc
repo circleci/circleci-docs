@@ -37,7 +37,10 @@ ifdef::server[]
 * An account on your CircleCI Server instance connected to GitHub.
 endif::server[]
 * A https://slack.com[Slack workspace] (you can create your own for testing purposes, if you do not want to use your company workspace).
-* A project you are following in CircleCI for which you want to integrate Slack notifications. See the xref:getting-started.adoc[Quickstart Guide] for help with following a project.
+* A project you are following in CircleCI for which you want to integrate Slack notifications.
+ifndef::server[]
+See the xref:getting-started.adoc[Quickstart Guide] for help with following a project.
+endif::server[]
 
 [#create-your-config-file]
 == 1. Create your config.yml file

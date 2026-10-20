@@ -73,7 +73,12 @@ a| * Managing self-hosted runner resource classes and tasks.
 
 NOTE: CircleCI recommends migrating to API v3 for all new work. API v1.1 is planned for End-Of-Life (EOL); CircleCI will communicate the discontinuation date in the future.
 
+ifndef::server[]
 To get started, see the xref:api-v3-developers-guide.adoc[API V3 Developers Guide], the xref:api-developers-guide.adoc[API V2 Developers Guide], or the xref:reference:ROOT:runner-api.adoc[Runner API Reference].
+endif::server[]
+ifdef::server[]
+To get started, see the xref:api-developers-guide.adoc[API V2 Developers Guide] or the xref:reference:ROOT:runner-api.adoc[Runner API Reference].
+endif::server[]
 
 [#authentication]
 == Authentication
@@ -121,7 +126,9 @@ NOTE: The xref:reference:ROOT:runner-api.adoc[Runner API] accepts these same per
 [#next-steps]
 == Next steps
 
+ifndef::server[]
 * Review the xref:api-v3-developers-guide.adoc[API V3 Developers Guide] for a detailed walkthrough on using the current API version.
+endif::server[]
 * Review the xref:api-developers-guide.adoc[API V2 Developers Guide] for information on the legacy v2 API.
 * Explore the link:../../../api/v3/[API V3 Reference] for complete endpoint documentation.
 * See the xref:reference:ROOT:runner-api.adoc[Runner API Reference] for self-hosted runner endpoints.
