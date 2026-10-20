@@ -1,37 +1,93 @@
 = Add additional SSH keys to CircleCI
 :page-platform: Cloud, Server
-:page-vcs: github, github-enterprise, gitlab, gitlab-self-hosted, bitbucket
+:page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Add additional SSH keys to your CircleCI project and jobs so you can deploy to other services or check out code from other repositories.
+:page-description: Add additional SSH keys to your CircleCI project so jobs can deploy to servers, push commits, and check out other private repositories.
 :experimental:
 
-Add additional SSH keys to your project for access to deploy to other services, or to write or check out code from other repositories.
+When CircleCI checks out your code, the credentials it uses reach only the repository that triggered the pipeline. If a job needs to deploy to a server, push a commit, or clone another private repository over SSH, the job needs a second set of credentials. Add an additional SSH key to your project to give your jobs that access.
+
+[#why-add-additional-ssh-keys]
+== Why add additional SSH keys to a project?
+
+The credentials CircleCI creates for code checkout are deliberately narrow. They are scoped to a single repository. Depending on your pipeline type, they are read-only or are not SSH credentials at all. See <<how-checkout-credentials-differ-by-pipeline-type>> for details. Any other SSH connection from a job needs a key that you provide.
+
+Add an additional SSH key when a job needs to do any of the following:
+
+* Deploy to a server or service. Hosts such as virtual machines, bastion hosts, and `git.heroku.com` authenticate deployments with an SSH key. See the xref:deploy:deploy-over-ssh.adoc[Deploy Over SSH] guide for an example.
+* Check out other private repositories. Private dependencies, submodules, and shared scripts live outside the repository that triggered the pipeline, so the checkout credentials cannot read them.
+* Push to a repository. Commits for a changelog update, a version bump, or a tag need write access, and checkout credentials are read-only.
+* Connect to any other SSH-only service, such as a backup host or an artifact server.
+
+Each key is stored encrypted in your project settings. A job can use a key only when its configuration lists that key's fingerprint, so you control which jobs get access.
+
+The following diagram shows what happens when a job uses an additional SSH key. The job checks out your repository using the access CircleCI set up for the project. The `add_ssh_keys` step then makes your key available to the job. When the job connects to a host over SSH, the target service accepts the connection only if it holds the matching public key.
+
+.What happens when a job uses an additional SSH key
+[mermaid]
+----
+flowchart LR
+    Add[Job checks out your repository,<br/>then add_ssh_keys writes<br/>your private key to ~/.ssh] --> Connect[Job connects over SSH<br/>and SSH offers<br/>your key for that host]
+    Connect --> Check{Target service has<br/>the matching<br/>public key?}
+    Check -->|Yes| Access[Access granted]
+    Check -->|No| Denied[Permission denied]
+----
+
+[#choose-a-key-type]
+=== Choose between a user key and an additional SSH key
 
 ifndef::server[]
-TIP: Do you have a `github` or `bitbucket` organization, and want to check out code from additional repositories in GitHub or Bitbucket Cloud? If so, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#create-a-user-key[Users, Organizations, and Integrations Guide] for steps to add a user key. Otherwise, follow the steps on this page to add additional SSH keys to your project.
+If you have a `github` or `bitbucket` organization and want to check out code from additional repositories in GitHub or Bitbucket Cloud, you can add a user key instead. A user key inherits the access of a VCS account. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#create-a-user-key[Create a User Key] section of the Users, Organizations, and Integrations Guide for steps.
+
+For all other cases, including `circleci` organizations, follow the steps on this page to add an additional SSH key. An additional SSH key can also be limited to one repository or one host.
 endif::server[]
 ifdef::server[]
-TIP: Do you want to check out code from additional repositories in GitHub? If so, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#create-a-user-key[Users, Organizations, and Integrations Guide] for steps to add a user key. Otherwise, follow the steps on this page to add additional SSH keys to your project.
+If you want to check out code from additional repositories in GitHub, you can add a user key instead. A user key inherits the access of a GitHub account. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#create-a-user-key[Create a User Key] section of the Users, Organizations, and Integrations Guide for steps.
+
+For all other cases, follow the steps on this page to add an additional SSH key. An additional SSH key can also be limited to one repository or one host.
 endif::server[]
 
-You may need to add the public key to `~/.ssh/authorized_keys` in order to add SSH keys.
+[#prerequisites]
+== Prerequisites
 
-****
-See the following VCS-specific docs for additional details on creating SSH keys:
+Before you add an additional SSH key, make sure you have the following:
 
-* link:https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/[GitHub]
-ifndef::server[]
-* link:https://support.atlassian.com/bitbucket-cloud/docs/configure-ssh-and-two-step-verification/[Bitbucket]
-* link:https://docs.gitlab.com/ee/user/ssh.html[GitLab]
-endif::server[]
-****
+* A project set up in CircleCI.
+* Access to the service the job connects to, so you can add the public key. For a deployment, that is the server's `~/.ssh/authorized_keys` file. For a repository, it is the repository or account settings on your VCS provider.
+* `ssh-keygen` installed on your local machine.
 
 [#steps-to-add-additional-ssh-keys]
-== Add an additional SSH key to your project
+== 1. Add the key to your project
 
-CircleCI cannot decrypt SSH keys, therefore every new key must have an empty passphrase. The below examples are for macOS.
+Add the private key to CircleCI, and add the matching public key to the service the job connects to.
+
+=== 1.1 Create an SSH key pair
+
+CircleCI cannot decrypt SSH keys, so the key must have an empty passphrase. The following command creates an ed25519 key pair with no passphrase.
+
+[source,console]
+----
+$ ssh-keygen -t ed25519 -C "<your-email>" -f ~/.ssh/<key-name> -N ""
+----
+
+Replace `<your-email>` and `<key-name>` with your own values, and keep the double quotes.
+
+=== 1.2 Add the public key to the service
+
+Add the public key (`~/.ssh/<key-name>.pub`) to the service the job connects to. The location depends on the service.
+
+* For a server you deploy to, append the public key to `~/.ssh/authorized_keys` for the user the job connects as.
+* For a repository, add the public key as a deploy key, or to a machine user account, on your VCS provider. For help generating and adding keys, see the following documentation:
+** link:https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent[GitHub]
+ifndef::server[]
+** link:https://support.atlassian.com/bitbucket-cloud/docs/configure-ssh-and-two-step-verification/[Bitbucket]
+** link:https://docs.gitlab.com/ee/user/ssh.html[GitLab]
+* For a Cursor Origin repository, add the public key to your Origin account with the `origin ssh-key add ~/.ssh/<key-name>.pub -t <title>` command. See the link:https://cursor.com/docs/origin/cli/reference/commands#ssh-keys[Cursor Origin CLI reference] for details.
+endif::server[]
+
+=== 1.3 Add the private key to CircleCI
 
 include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 
@@ -44,37 +100,97 @@ If you have a GitLab integration, you will find that an additional SSH key alrea
 endif::server[]
 . Select *Add SSH Key*.
 . In the *Hostname* field, enter the key's associated host (for example, `git.heroku.com`). If you do not specify a hostname, the key will be used for all hosts.
-. In the *Private Key* field, paste the SSH key you are adding.
+. In the *Private Key* field, paste the private key you created.
 . Select *Add SSH Key*.
 
+ifndef::server[]
+If you use GitHub Enterprise Server, see <<github-enterprise-server-ssh-keys>> for additional notes.
+
+endif::server[]
+Adding a key to your project does not give any job access to it. Next, add the key to each job that needs it. See <<add-ssh-keys-to-a-job>>.
+
 [#add-ssh-keys-to-a-job]
-== Add SSH keys to a job
+== 2. Add the key to a job
 
-Even though all CircleCI jobs use `ssh-agent` to automatically sign all added SSH keys, you *must* use the `add_ssh_keys` key to actually add keys to a container.
+After you add a key to your project, add it to each job that needs it. Even though all CircleCI jobs use `ssh-agent` to automatically sign all added SSH keys, you *must* use the `add_ssh_keys` key to actually add keys to a container.
 
-To add a set of SSH keys to a container, use the `add_ssh_keys` xref:reference:ROOT:configuration-reference.adoc#add-ssh-keys[Special Step] within the appropriate xref:orchestrate:jobs-steps.adoc[Job] in your configuration file. The fingerprint can be SHA256 or MD5. Prefix SHA256 fingerprints with `SHA256:`, and include the colons between character pairs for MD5 fingerprints. When you add your key to CircleCI in menu:Project Settings[SSH keys > Additional SSH keys] the SHA256 fingerprint will be visible.
-
-For a self-hosted runner, ensure that you have an `ssh-agent` on your system to successfully use the `add_ssh_keys` step. The SSH key is written to `$HOME/.ssh/id_rsa_<fingerprint>`, where `$HOME` is the home directory of the user configured to execute jobs, and `<fingerprint>` is the MD5 fingerprint of the key. A host entry is also appended to `$HOME/.ssh/config`, along with a relevant `IdentityFile` option to use the key.
-
+. Copy the key's fingerprint from menu:Project Settings[SSH Keys > Additional SSH Keys]. CircleCI shows the SHA256 fingerprint.
+. In your configuration file, add the `add_ssh_keys` xref:reference:ROOT:configuration-reference.adoc#add-ssh-keys[Special Step] to the appropriate xref:orchestrate:jobs-steps.adoc[Job], and list the fingerprint. The fingerprint can be SHA256 or MD5. Prefix SHA256 fingerprints with `SHA256:`, and include the colons between character pairs for MD5 fingerprints.
++
 [source,yaml]
 ----
 jobs:
   deploy-job:
     docker:
-      - image: cimg/base:2022.09
+      - image: cimg/base:2026.10
     steps:
       - add_ssh_keys:
           fingerprints:
+            # An MD5 fingerprint, with colons between character pairs
             - "SO:ME:FIN:G:ER:PR:IN:T"
+            # A SHA256 fingerprint, prefixed with SHA256:
             - "SHA256:NPj4IcXxqQEKGXOghi/QbG2sohoNfvZ30JwCcdSSNM0"
 ----
+. If the job checks out additional repositories, make sure the public key is added to each of those repositories. Run the `checkout` command *before* `add_ssh_keys`.
 
 All fingerprints in the `fingerprints` list must correspond to keys that have been added through the CircleCI application. Fingerprints in CircleCI environment variables will fail.
 
-To check out additional repositories from within your job, run the `checkout` command *before* `add_ssh_keys`; otherwise, `CIRCLE_CI_REPOSITORY_URL` will be empty. Also make sure the private key is added to the CircleCI project. The public key must also be added to the additional repositories that you want to check out from within your job.
+If the job cannot connect, or uses the wrong key, see the following sections:
+
+* <<add-the-host-to-known-hosts>>
+* <<adding-multiple-keys-with-blank-hostnames>>
+* <<using-specific-ssh-keys-for-a-job>>
+
+[#how-checkout-credentials-differ-by-pipeline-type]
+== How checkout credentials differ by pipeline type
+
+How much access a job already has depends on how your pipeline checks out code.
+
+ifndef::server[]
+* GitHub App, GitHub App Server (Preview), and Cursor Origin pipelines: CircleCI checks out code over HTTPS. CircleCI adds no SSH key or deploy key, so an additional SSH key is the way to give a job SSH access to other repositories or hosts.
+* GitHub OAuth and Bitbucket Cloud pipelines: CircleCI creates a read-only deploy key for the single repository that triggered the pipeline.
+* GitLab pipelines: CircleCI creates an SSH key to check out the repository that triggered the pipeline.
+endif::server[]
+ifdef::server[]
+* GitHub and GitHub Enterprise Server pipelines: CircleCI creates a read-only deploy key for the single repository that triggered the pipeline.
+endif::server[]
+
+For a full description of each pipeline type, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#how-circleci-checks-out-your-code[How CircleCI Checks Out Your Code] section of the Users, Organizations, and Integrations Guide.
+
+ifndef::server[]
+[badge="Preview"]
+[#github-enterprise-server-ssh-keys]
+== Add SSH keys for GitHub Enterprise Server
+
+GitHub App pipelines for GitHub Enterprise Server check out code over HTTPS, so CircleCI does not add an SSH key or deploy key to your project. Additional SSH keys work the same way as for other pipeline types, with the following differences:
+
+* In the *Hostname* field, enter the hostname of your instance, for example `github.example.com`.
+* Add the public key as a deploy key on each repository, or to a machine user account on your instance.
+* Because checkout does not use SSH, your job may need to add the host to `~/.ssh/known_hosts` before it connects. See <<add-the-host-to-known-hosts>>.
+
+For more on this integration, see the xref:integration:github-enterprise-server-integration.adoc[GitHub Enterprise Server Integration] guide.
+endif::server[]
+
+[#add-the-host-to-known-hosts]
+== Add the host to known_hosts
+
+SSH refuses to connect to a host that is not in `~/.ssh/known_hosts`, unless you disable host key checking. The `checkout` step adds the host keys for GitHub.com and Bitbucket Cloud automatically. You must add the host key yourself in the following cases:
+
+* You use a custom checkout command instead of the `checkout` step.
+ifndef::server[]
+* You use GitLab self-managed, GitHub Enterprise Server, or any other self-managed host.
+endif::server[]
+* Your job connects to any other host, such as a deployment target.
+
+To add a host key, run `ssh-keyscan <host> >> ~/.ssh/known_hosts` in your job before the SSH connection. For steps to verify a host key, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#establish-the-authenticity-of-an-ssh-host[Establish the Authenticity of an SSH Host] section of the Users, Organizations, and Integrations Guide.
+
+[#self-hosted-runner-ssh-keys]
+== Use SSH keys with a self-hosted runner
+
+For a self-hosted runner, ensure that you have an `ssh-agent` on your system to successfully use the `add_ssh_keys` step. The SSH key is written to `$HOME/.ssh/id_rsa_<fingerprint>`, where `$HOME` is the home directory of the user configured to execute jobs, and `<fingerprint>` is the MD5 fingerprint of the key. A host entry is also appended to `$HOME/.ssh/config`, along with a relevant `IdentityFile` option to use the key.
 
 [#adding-multiple-keys-with-blank-hostnames]
-=== Adding multiple keys with blank hostnames
+== Adding multiple keys with blank hostnames
 
 If you add multiple SSH keys with blank hostnames to your project, you will need to make some changes to the default SSH configuration provided by CircleCI.
 
@@ -83,37 +199,44 @@ If you have multiple SSH keys for different purposes that have access to the sam
 In this scenario, the first key is used regardless of whether it is the correct key. If you have added the SSH key to a container, either set `IdentitiesOnly yes` in the appropriate block, or remove all keys from the `ssh-agent` for the job using `ssh-add -D`. Then, read the added key using `ssh-add /path/to/key`.
 
 [#using-specific-ssh-keys-for-a-job]
-=== Using specific SSH keys for a job
+== Using specific SSH keys for a job
 
-[NOTE]
-====
-SSH keys are named using MD5 fingerprints with colons removed from the hash.
+If you have added multiple SSH keys for the same hostname to your project, SSH may offer the wrong key. To make a command use a specific key, point the command at that key's file and tell SSH to use only that key.
 
-To retrieve the MD5 fingerprint of an SSH key, run this command locally:
+CircleCI saves each key added with `add_ssh_keys` in `~/.ssh` on the job's executor. The filename is `id_rsa_` followed by the key's MD5 fingerprint with the colons removed. For example, the MD5 fingerprint `a3:f9:82:c5:1d:47:9b:e6:88:32:a1:bc:f4:29:7e:15` is saved as `id_rsa_a3f982c51d479be68832a1bcf4297e15`.
 
-`ssh-keygen -l -E md5 -f ~/.ssh/your_key_name`
-
-The filename follows this format:
-
-`id_rsa_[MD5_fingerprint_without_colons]`
-
-Example:
-
-- SSH key MD5 fingerprint: `a3:f9:82:c5:1d:47:9b:e6:88:32:a1:bc:f4:29:7e:15`.
-
-- SSH key filename: `id_rsa_a3f982c51d479be68832a1bcf4297e15`.
-====
-
-
-If you have added multiple SSH keys for the same hostname to your project and want to use a specific key in your SSH commands, follow these steps:
-
-. Add the SSH key to the job using the `add_ssh_keys` step.
-. Use the `-i` parameter to specify the exact SSH key file path in your SSH commands.
-. Add the `-o "IdentitiesOnly=yes"` option to prevent SSH from using other keys from the SSH agent.
-
-Example:
-
-[source,bash]
+. Find the MD5 fingerprint of the key. Run the following command on your local machine, using the path to the private key you created. The fingerprint follows `MD5:` in the output.
++
+[source,console]
 ----
-ssh -i ~/.ssh/id_rsa_a3f982c51d479be68832a1bcf4297e15 -o "IdentitiesOnly=yes" user@hostname
+$ ssh-keygen -l -E md5 -f ~/.ssh/<key-name>
+----
+. Remove the colons from the fingerprint, and add `id_rsa_` to the start. The result is the filename of the key on the executor.
+. In your configuration file, add the key to the job with the `add_ssh_keys` step. Then, in a later `run` step, add the following to your SSH command:
+** `-i ~/.ssh/<filename>` to specify the key file from the previous step.
+** `-o "IdentitiesOnly=yes"` to stop SSH from trying other keys from the SSH agent.
+
+The following job adds a key and uses it to connect to a host. Replace `<user>@<hostname>` with your own values, and replace the fingerprint and key filename with those of your key.
+
+[source,yaml]
+----
+version: 2.1
+jobs:
+  deploy-job:
+    docker:
+      - image: cimg/base:2026.10
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            # The fingerprint of the key as shown in Project Settings
+            - "a3:f9:82:c5:1d:47:9b:e6:88:32:a1:bc:f4:29:7e:15"
+      - run:
+          name: Connect with a specific key
+          # -i selects the key file, saved as id_rsa_ plus the MD5 fingerprint without colons
+          # IdentitiesOnly=yes stops SSH from trying other keys in the agent
+          command: ssh -i ~/.ssh/id_rsa_a3f982c51d479be68832a1bcf4297e15 -o "IdentitiesOnly=yes" <user>@<hostname> "echo connected"
+workflows:
+  deploy:
+    jobs:
+      - deploy-job
 ----
