@@ -33,12 +33,12 @@ From the pipelines dashboard you can find the _pipeline ID_. The pipeline ID is 
 .Location of the pipeline ID in the CircleCI web app
 image::guides:ROOT:pipeline-id.png[Screenshot showing the location on the pipeline ID]
 
+ifndef::server[]
 Each pipeline also has a _Definition ID_, which is a UUID for the pipeline, which can be used to refer to a specific pipeline when triggering it xref:triggers-overview.adoc#run-a-pipeline-using-the-api[Via the API].
 
 .Project setup page
 image::guides:ROOT:orchestrate-and-trigger/pipeline-definition-id.png[Project setup page]
 
-ifndef::server[]
 == Set up pipelines
 
 NOTE: **Using CircleCI Server?** The Pipeline and Trigger pages under Project Settings and pipeline and trigger add/edit functionality is **not** available. CircleCI Server pipelines are set up when a project is set up and cannot be edited. CircleCI Server requires CircleCI configuration files to be stored in the same repository as your code at `.circleci/config.yml`.
