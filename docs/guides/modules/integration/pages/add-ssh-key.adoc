@@ -23,6 +23,18 @@ Add an additional SSH key when a job needs to do any of the following:
 
 Each key is stored encrypted in your project settings. A job can use a key only when its configuration lists that key's fingerprint, so you control which jobs get access.
 
+The following diagram shows what happens when a job uses an additional SSH key. The job checks out your repository using the access CircleCI set up for the project. The `add_ssh_keys` step then makes your key available to the job. When the job connects to a host over SSH, the target service accepts the connection only if it holds the matching public key.
+
+.What happens when a job uses an additional SSH key
+[mermaid]
+----
+flowchart LR
+    Add[Job checks out your repository,<br/>then add_ssh_keys writes<br/>your private key to ~/.ssh] --> Connect[Job connects over SSH<br/>and SSH offers<br/>your key for that host]
+    Connect --> Check{Target service has<br/>the matching<br/>public key?}
+    Check -->|Yes| Access[Access granted]
+    Check -->|No| Denied[Permission denied]
+----
+
 [#choose-a-key-type]
 === Choose between a user key and an additional SSH key
 
@@ -73,6 +85,7 @@ Add the public key (`~/.ssh/<key-name>.pub`) to the service the job connects to.
 ifndef::server[]
 ** link:https://support.atlassian.com/bitbucket-cloud/docs/configure-ssh-and-two-step-verification/[Bitbucket]
 ** link:https://docs.gitlab.com/ee/user/ssh.html[GitLab]
+* For a Cursor Origin repository, add the public key to your Origin account with the `origin ssh-key add ~/.ssh/<key-name>.pub -t <title>` command. See the link:https://cursor.com/docs/origin/cli/reference/commands#ssh-keys[Cursor Origin CLI reference] for details.
 endif::server[]
 
 === 1.3 Add the private key to CircleCI
@@ -92,7 +105,7 @@ endif::server[]
 . Select *Add SSH Key*.
 
 ifndef::server[]
-If you use GitHub Enterprise Server or Cursor Origin, see <<ssh-keys-for-https-checkout-pipelines>> for additional notes.
+If you use GitHub Enterprise Server, see <<github-enterprise-server-ssh-keys>> for additional notes.
 
 endif::server[]
 Adding a key to your project does not give any job access to it. Next, add the key to each job that needs it. See <<add-ssh-keys-to-a-job>>.
@@ -123,15 +136,14 @@ jobs:
 
 All fingerprints in the `fingerprints` list must correspond to keys that have been added through the CircleCI application. Fingerprints in CircleCI environment variables will fail.
 
-For problems connecting after you add a key, and for options such as using a specific key, see <<ssh-key-reference>>.
+If the job cannot connect, or uses the wrong key, see the following sections:
 
-[#ssh-key-reference]
-== SSH key reference
-
-The following sections cover how checkout credentials work, platform-specific notes, and how to control which key a job uses.
+* <<add-the-host-to-known-hosts>>
+* <<adding-multiple-keys-with-blank-hostnames>>
+* <<using-specific-ssh-keys-for-a-job>>
 
 [#how-checkout-credentials-differ-by-pipeline-type]
-=== How checkout credentials differ by pipeline type
+== How checkout credentials differ by pipeline type
 
 How much access a job already has depends on how your pipeline checks out code.
 
@@ -147,20 +159,21 @@ endif::server[]
 For a full description of each pipeline type, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#how-circleci-checks-out-your-code[How CircleCI Checks Out Your Code] section of the Users, Organizations, and Integrations Guide.
 
 ifndef::server[]
-[#ssh-keys-for-https-checkout-pipelines]
-=== SSH keys for GitHub Enterprise Server and Cursor Origin
+[badge="Preview"]
+[#github-enterprise-server-ssh-keys]
+== Add SSH keys for GitHub Enterprise Server
 
-GitHub App pipelines for GitHub Enterprise Server and Cursor Origin pipelines check out code over HTTPS, so CircleCI does not add an SSH key or deploy key to your project. Additional SSH keys work the same way as on any other pipeline type, but note the following:
+GitHub App pipelines for GitHub Enterprise Server check out code over HTTPS, so CircleCI does not add an SSH key or deploy key to your project. Additional SSH keys work the same way as for other pipeline types, with the following differences:
 
-* For GitHub Enterprise Server, enter the hostname of your instance in the *Hostname* field, for example `github.example.com`. Add the public key as a deploy key on each repository, or to a machine user account on your instance.
-* Cursor Origin organizations are `circleci` type organizations, so the user key option is not available. To use a key with Cursor Origin, add the public key to your Origin account with the `origin ssh-key add` command. See the link:https://cursor.com/docs/origin/cli/reference/commands#ssh-keys[Cursor Origin CLI reference] for details.
+* In the *Hostname* field, enter the hostname of your instance, for example `github.example.com`.
+* Add the public key as a deploy key on each repository, or to a machine user account on your instance.
 * Because checkout does not use SSH, your job may need to add the host to `~/.ssh/known_hosts` before it connects. See <<add-the-host-to-known-hosts>>.
 
-For more on these integrations, see the xref:integration:github-enterprise-server-integration.adoc[GitHub Enterprise Server Integration] guide and the xref:integration:version-control-system-integration-overview.adoc[Version Control Systems, Pipeline Types, and Feature Support] page.
+For more on this integration, see the xref:integration:github-enterprise-server-integration.adoc[GitHub Enterprise Server Integration] guide.
 endif::server[]
 
 [#add-the-host-to-known-hosts]
-=== Add the host to known_hosts
+== Add the host to known_hosts
 
 SSH refuses to connect to a host that is not in `~/.ssh/known_hosts`, unless you disable host key checking. The `checkout` step adds the host keys for GitHub.com and Bitbucket Cloud automatically. You must add the host key yourself in the following cases:
 
@@ -173,12 +186,12 @@ endif::server[]
 To add a host key, run `ssh-keyscan <host> >> ~/.ssh/known_hosts` in your job before the SSH connection. For steps to verify a host key, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#establish-the-authenticity-of-an-ssh-host[Establish the Authenticity of an SSH Host] section of the Users, Organizations, and Integrations Guide.
 
 [#self-hosted-runner-ssh-keys]
-=== Use SSH keys with a self-hosted runner
+== Use SSH keys with a self-hosted runner
 
 For a self-hosted runner, ensure that you have an `ssh-agent` on your system to successfully use the `add_ssh_keys` step. The SSH key is written to `$HOME/.ssh/id_rsa_<fingerprint>`, where `$HOME` is the home directory of the user configured to execute jobs, and `<fingerprint>` is the MD5 fingerprint of the key. A host entry is also appended to `$HOME/.ssh/config`, along with a relevant `IdentityFile` option to use the key.
 
 [#adding-multiple-keys-with-blank-hostnames]
-=== Adding multiple keys with blank hostnames
+== Adding multiple keys with blank hostnames
 
 If you add multiple SSH keys with blank hostnames to your project, you will need to make some changes to the default SSH configuration provided by CircleCI.
 
@@ -187,7 +200,7 @@ If you have multiple SSH keys for different purposes that have access to the sam
 In this scenario, the first key is used regardless of whether it is the correct key. If you have added the SSH key to a container, either set `IdentitiesOnly yes` in the appropriate block, or remove all keys from the `ssh-agent` for the job using `ssh-add -D`. Then, read the added key using `ssh-add /path/to/key`.
 
 [#using-specific-ssh-keys-for-a-job]
-=== Using specific SSH keys for a job
+== Using specific SSH keys for a job
 
 If you have added multiple SSH keys for the same hostname to your project, SSH may offer the wrong key. To make a command use a specific key, point the command at that key's file and tell SSH to use only that key.
 
