@@ -625,7 +625,7 @@ CircleCI's OIDC tokens contain the following standard https://openid.net/specs/o
 | `$CIRCLE_OIDC_TOKEN_V2`
 | `org/<organization_id>/project/<project-id>/user/<user_id>/vcs-origin/<vcs_origin>/vcs-ref/<vcs_ref>`
 
-Pipelines triggered by a xref:orchestrate:triggers-overview.adoc#trigger-a-pipeline-from-a-custom-webhook[custom webhook] have no repository information, so the value has the same format as `$CIRCLE_OIDC_TOKEN`.
+Pipelines triggered by a xref:orchestrate:triggers-overview.adoc#trigger-a-pipeline-from-a-custom-webhook[Custom Webhook] have no repository information, so the value has the same format as `$CIRCLE_OIDC_TOKEN`.
 
 | `$CIRCLE_OIDC_TOKEN_V3`
 | `org:<organization_id>:project:<project-id>:user:<user_id>:checkout-source:<checkout_source>:checkout-ref:<checkout_ref>:config-source:<config_source>:config-ref:<config_ref>`
