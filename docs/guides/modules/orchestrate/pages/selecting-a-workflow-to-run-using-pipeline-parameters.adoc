@@ -62,7 +62,9 @@ ifndef::server[]
 CAUTION: For GitHub App or GitLab pipelines, use the link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/triggerPipelineRun[Trigger a new pipeline endpoint] rather than the endpoint used in this example.
 endif::server[]
 
+ifdef::server[]
 include::ROOT:partial$notes/server-api-examples.adoc[]
+endif::server[]
 
 [source,shell]
 ----

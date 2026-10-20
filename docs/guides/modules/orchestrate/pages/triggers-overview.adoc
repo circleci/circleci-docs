@@ -70,7 +70,9 @@ endif::server[]
 GitHub, Bitbucket, and Cursor Origin::
 +
 --
+ifdef::server[]
 include::ROOT:partial$notes/server-api-examples.adoc[]
+endif::server[]
 
 This method is supported for GitHub (OAuth and App), Bitbucket (Cloud and Data Center), and Cursor Origin orgs.
 
