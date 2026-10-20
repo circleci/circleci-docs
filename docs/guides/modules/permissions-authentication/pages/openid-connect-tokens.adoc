@@ -733,47 +733,38 @@ CircleCI's OIDC tokens also contain some https://openid.net/specs/openid-connect
 [#vcs-origin-and-vcs-ref-values-by-provider]
 === VCS-origin and VCS-ref values by provider
 
-The `oidc.circleci.com/vcs-origin` and `oidc.circleci.com/vcs-ref` claims are included in `$CIRCLE_OIDC_TOKEN` and `$CIRCLE_OIDC_TOKEN_V2` for all trigger types except custom webhooks. The `vcs-origin` value is the repository URL without the `https://` scheme. The `vcs-ref` value follows the same format for every provider.
+The `oidc.circleci.com/vcs-origin` and `oidc.circleci.com/vcs-ref` claims are included in `$CIRCLE_OIDC_TOKEN` and `$CIRCLE_OIDC_TOKEN_V2` for all trigger types except custom webhooks. The `vcs-origin` value is the repository URL without the `https://` scheme. The `vcs-ref` value is the same format for every provider: `refs/heads/<branch-name>` for branches, or `refs/tags/<tag-name>` for tags. The `oidc.circleci.com/checkout-source` claim uses the same format as `vcs-origin`.
 
 [.table-scroll]
 --
-[cols="2,3,2", options="header"]
+[cols="1,1", options="header"]
 |===
 | VCS provider
 | `vcs-origin` example
-| `vcs-ref` example
 
 | GitHub App (`github.com`)
 | `github.com/my-org/my-repo`
-| `refs/heads/main`
 
 | GitHub App Server (GitHub Enterprise)
 | `<your-github-hostname>/my-org/my-repo`
-| `refs/heads/main`
 
 | GitHub OAuth (`github.com`)
 | `github.com/my-org/my-repo`
-| `refs/heads/main`
 
 | GitHub OAuth on Server (GitHub Enterprise)
 | `<your-github-hostname>/my-org/my-repo`
-| `refs/heads/main`
 
 | GitLab.com
 | `gitlab.com/my-group/my-repo`
-| `refs/heads/main`
 
 | GitLab self-managed
 | `<your-gitlab-hostname>/my-group/my-repo`
-| `refs/heads/main`
 
 | Bitbucket Cloud
 | `bitbucket.org/my-workspace/my-repo`
-| `refs/heads/main`
 
 | Cursor Origin
 | `cursor.com/codebase/my-org/my-repo`
-| `refs/heads/main`
 |===
 --
 
