@@ -38,6 +38,7 @@ Each pipeline also has a _Definition ID_, which is a UUID for the pipeline, whic
 .Project setup page
 image::guides:ROOT:orchestrate-and-trigger/pipeline-definition-id.png[Project setup page]
 
+ifndef::server[]
 == Set up pipelines
 
 NOTE: **Using CircleCI Server?** The Pipeline and Trigger pages under Project Settings and pipeline and trigger add/edit functionality is **not** available. CircleCI Server pipelines are set up when a project is set up and cannot be edited. CircleCI Server requires CircleCI configuration files to be stored in the same repository as your code at `.circleci/config.yml`.
@@ -153,6 +154,12 @@ endif::server[]
 Once you have set up a pipeline you need to set up a trigger to connect it to. Setting up a trigger is covered in the xref:set-up-triggers.adoc[Set Up Triggers] page.
 --
 ====
+endif::server[]
+ifdef::server[]
+== Set up pipelines
+
+Pipelines are set up when a project is set up and cannot be edited. The Pipeline and Trigger pages under Project Settings are not available. CircleCI configuration files must be stored in the same repository as your code, at `.circleci/config.yml`.
+endif::server[]
 
 == Pipeline states
 
