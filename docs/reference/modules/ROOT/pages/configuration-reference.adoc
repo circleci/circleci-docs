@@ -1894,7 +1894,7 @@ The following steps and options are *not* supported for `teardown`:
 
 * `restore_cache`: Use as an ordinary step instead.
 * `attach_workspace`: Use as an ordinary step instead.
-* A step inside `teardown` cannot run in the background. 
+* A step inside `teardown` cannot run in the background.
 * A step inside `teardown` cannot use `max_auto_reruns` or `auto_rerun_delay`.
 * A step inside `teardown` cannot nest another `teardown` key. Config validation rejects this.
 
@@ -2745,8 +2745,6 @@ NOTE: The lifetime of artifacts, workspaces, and caches can be customized on the
 === *`add_ssh_keys`*
 
 Special step that adds SSH keys from a project's settings to a container. Also configures SSH to use these keys. For more information on SSH keys see the xref:guides:integration:add-ssh-key.adoc[Add Additional SSH Keys] page.
-
-CAUTION: *Using server?* CircleCI Server supports only MD5 fingerprints. You can see the MD5 fingerprint in CircleCI under menu:Project Settings[SSH keys > Additional SSH keys]. An upcoming server release is planned to include SHA256 support.
 
 [.table-scroll]
 --

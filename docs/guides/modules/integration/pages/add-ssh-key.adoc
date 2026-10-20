@@ -55,7 +55,6 @@ endif::server[]
 Before you add an additional SSH key, make sure you have the following:
 
 * A project set up in CircleCI.
-* Access to the project's settings in the CircleCI web app.
 * Access to the service the job connects to, so you can add the public key. For a deployment, that is the server's `~/.ssh/authorized_keys` file. For a repository, it is the repository or account settings on your VCS provider.
 * `ssh-keygen` installed on your local machine.
 
