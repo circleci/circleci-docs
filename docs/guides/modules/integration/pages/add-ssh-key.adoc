@@ -37,27 +37,45 @@ If you want to check out code from additional repositories in GitHub, you can ad
 For all other cases, follow the steps on this page to add an additional SSH key. An additional SSH key can also be limited to one repository or one host.
 endif::server[]
 
+[#prerequisites]
+== Prerequisites
+
+Before you add an additional SSH key, make sure you have the following:
+
+* A project set up in CircleCI.
+* Access to the project's settings in the CircleCI web app.
+* Access to the service the job connects to, so you can add the public key. For a deployment, that is the server's `~/.ssh/authorized_keys` file. For a repository, it is the repository or account settings on your VCS provider.
+* `ssh-keygen` installed on your local machine.
+
 [#steps-to-add-additional-ssh-keys]
-== Add an additional SSH key to your project
+== 1. Add the key to your project
 
 Add the private key to CircleCI, and add the matching public key to the service the job connects to.
 
-. Create an SSH key pair. CircleCI cannot decrypt SSH keys, so the key must have an empty passphrase. The following command creates an ed25519 key pair with no passphrase.
-+
+=== 1.1 Create an SSH key pair
+
+CircleCI cannot decrypt SSH keys, so the key must have an empty passphrase. The following command creates an ed25519 key pair with no passphrase.
+
 [source,console]
 ----
 $ ssh-keygen -t ed25519 -C "<your-email>" -f ~/.ssh/<key-name> -N ""
 ----
-+
+
 Replace `<your-email>` and `<key-name>` with your own values, and keep the double quotes.
-. Add the public key (`~/.ssh/<key-name>.pub`) to the service the job connects to. The location depends on the service.
-** For a server you deploy to, append the public key to `~/.ssh/authorized_keys` for the user the job connects as.
-** For a repository, add the public key as a deploy key, or to a machine user account, on your VCS provider. For help generating and adding keys, see the following documentation:
-*** link:https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent[GitHub]
+
+=== 1.2 Add the public key to the service
+
+Add the public key (`~/.ssh/<key-name>.pub`) to the service the job connects to. The location depends on the service.
+
+* For a server you deploy to, append the public key to `~/.ssh/authorized_keys` for the user the job connects as.
+* For a repository, add the public key as a deploy key, or to a machine user account, on your VCS provider. For help generating and adding keys, see the following documentation:
+** link:https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent[GitHub]
 ifndef::server[]
-*** link:https://support.atlassian.com/bitbucket-cloud/docs/configure-ssh-and-two-step-verification/[Bitbucket]
-*** link:https://docs.gitlab.com/ee/user/ssh.html[GitLab]
+** link:https://support.atlassian.com/bitbucket-cloud/docs/configure-ssh-and-two-step-verification/[Bitbucket]
+** link:https://docs.gitlab.com/ee/user/ssh.html[GitLab]
 endif::server[]
+
+=== 1.3 Add the private key to CircleCI
 
 include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 
@@ -80,7 +98,7 @@ endif::server[]
 Adding a key to your project does not give any job access to it. Next, add the key to each job that needs it. See <<add-ssh-keys-to-a-job>>.
 
 [#add-ssh-keys-to-a-job]
-== Add SSH keys to a job
+== 2. Add the key to a job
 
 After you add a key to your project, add it to each job that needs it. Even though all CircleCI jobs use `ssh-agent` to automatically sign all added SSH keys, you *must* use the `add_ssh_keys` key to actually add keys to a container.
 
