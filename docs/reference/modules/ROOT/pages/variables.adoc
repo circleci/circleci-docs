@@ -102,7 +102,7 @@ NOTE: You cannot use a built-in environment variable to define another environme
 | `CIRCLE_OIDC_TOKEN_V3`
 | GitHub, Bitbucket, GitLab, Cursor Origin
 | String
-| An OpenID Connect token signed by CircleCI which includes details about the current job. The value is empty when the pipeline has no checkout or config source.
+| An OpenID Connect token signed by CircleCI which includes details about the current job. The value is empty when the pipeline has no checkout source.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**NO**#
 

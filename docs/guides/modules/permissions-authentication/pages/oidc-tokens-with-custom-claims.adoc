@@ -7,7 +7,7 @@
 :page-description: Create CircleCI OIDC tokens with the environment CLI and customize the aud claim to connect your jobs to different cloud services without long-lived secrets.
 :experimental:
 
-Use OpenID Connect (OIDC) tokens to connect your pipelines to compatible cloud services without the need to manage long-lived secrets in CircleCI. Create CircleCI OIDC tokens, using the CircleCI environment CLI, and customize the `aud` claim to meet the unique needs of different cloud services.
+Use OpenID Connect (OIDC) tokens to connect your jobs to compatible cloud services without the need to manage long-lived secrets in CircleCI. Create CircleCI OIDC tokens, using the CircleCI environment CLI, and customize the `aud` claim to meet the unique needs of different cloud services.
 
 For more information on OIDC tokens, see the xref:openid-connect-tokens.adoc[OpenID Connect Tokens] overview.
 
@@ -41,7 +41,7 @@ CAUTION: **OIDC tokens** created using this method can be printed with no maskin
 [#select-a-token-version]
 === Select a token version
 
-By default, the command returns a V2 token and falls back to V1 if it cannot create one. To request a specific version, pass one of the following flags. You can pass only one.
+By default, the command returns a V2 token and falls back to V1 if it cannot create one. CircleCI recommends V3 for new setups on Cloud. To request a specific version, pass one of the following flags. You can pass only one.
 
 [.table-scroll]
 --
@@ -57,7 +57,7 @@ By default, the command returns a V2 token and falls back to V1 if it cannot cre
 | Returns a V2 token.
 
 | `--v3`
-| Returns a V3 token.
+| Returns a V3 token. Not available on Server.
 |===
 --
 
