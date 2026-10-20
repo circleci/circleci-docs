@@ -44,7 +44,7 @@ CircleCI provides three OpenID Connect ID tokens in environment variables. They 
 | `$CIRCLE_OIDC_TOKEN_V3`
 | Organization, project, and user, plus the checkout source and reference, and the config source and reference. Uses `:` as the separator instead of `/`.
 | Recommended for new setups. Your trust policy can check where the pipeline configuration comes from as well as the code it checks out.
-| Cloud and Server v5.0+
+| Cloud only. Will be supported on Server from v5.0.
 |===
 --
 
@@ -684,6 +684,18 @@ CircleCI's OIDC tokens also contain some https://openid.net/specs/openid-connect
 | V2, V3
 | The URL of the repository that holds the pipeline configuration, without the `https://` scheme. Use with `config-ref` to check where your configuration comes from. Absent when the pipeline has no config source.
 
+| `oidc.circleci.com/checkout-ref`
+| The reference to the change that triggered the pipeline, for example `refs/heads/main`. Available in `$CIRCLE_OIDC_TOKEN_V2` and `$CIRCLE_OIDC_TOKEN_V3`. Has the same value as `oidc.circleci.com/vcs-ref`, which `$CIRCLE_OIDC_TOKEN_V3` does not include.
+
+| `oidc.circleci.com/checkout-source`
+| The URL of the repository that triggered the pipeline, without the `https://` scheme, for example `github.com/organization-123/repo-1`. Available in `$CIRCLE_OIDC_TOKEN_V2` and `$CIRCLE_OIDC_TOKEN_V3`. Has the same value as `oidc.circleci.com/vcs-origin`, which `$CIRCLE_OIDC_TOKEN_V3` does not include.
+
+| `oidc.circleci.com/config-ref`
+| The reference of the pipeline configuration, for example `refs/heads/main`. Available in `$CIRCLE_OIDC_TOKEN_V2` and `$CIRCLE_OIDC_TOKEN_V3`. The claim is absent when the pipeline has no config reference.
+
+| `oidc.circleci.com/config-source`
+| The URL of the repository that holds the pipeline configuration, without the `https://` scheme. Available in `$CIRCLE_OIDC_TOKEN_V2` and `$CIRCLE_OIDC_TOKEN_V3`. Use this claim with `config-ref` to check where your configuration comes from. The claim is absent when the pipeline has no config source.
+
 | `oidc.circleci.com/context-ids`
 | All
 | An array of UUIDs that identify the contexts used in the job.
@@ -782,7 +794,7 @@ The `oidc.circleci.com/vcs-origin` and `oidc.circleci.com/vcs-ref` claims are in
 
 Use `$CIRCLE_OIDC_TOKEN_V3` for new setups. For an existing trust policy, use the token that matches the `sub` format and claims in the policy until you migrate it.
 
-CircleCI sets all three variables in a job on Cloud. On Server, `$CIRCLE_OIDC_TOKEN_V3` is available from v5.0. CircleCI does not create a V3 token when the pipeline has no checkout or config source.
+CircleCI sets all three variables in a job on Cloud. `$CIRCLE_OIDC_TOKEN_V3` is not yet available on Server. CircleCI does not create a V3 token when the pipeline has no checkout or config source.
 
 [.table-scroll]
 --

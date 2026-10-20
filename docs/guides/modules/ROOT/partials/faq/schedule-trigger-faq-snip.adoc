@@ -6,12 +6,23 @@ Yes, visit the xref:guides:orchestrate:migrate-scheduled-workflows-to-schedule-t
 [#find-schedules-that-i-have-created]
 === How do I find the schedules that I have created?
 
-As schedule triggers are stored directly in CircleCI, there is a UUID associated with each schedule. You can view schedules that you have created on the **Triggers** page of the project settings. You can also list all the schedules under a single project:
+As schedule triggers are stored directly in CircleCI, there is a UUID associated with each schedule. You can view schedules that you have created in your project settings. For GitHub App, GitHub App Server, and Cursor Origin pipelines, go to menu:Project Settings[Project Setup]. For GitHub OAuth and Bitbucket Cloud pipelines, go to menu:Project Settings[Triggers].
 
-```shell
-curl --location --request GET "https://circleci.com/api/v2/project/<project-slug>/schedule" \
---header "circle-token: <PERSONAL_API_KEY>"
-```
+You can also list schedules with the API. For GitHub OAuth and Bitbucket Cloud pipelines, list all the schedules under a single project with API v2:
+
+[source,console]
+----
+$ curl --location --request GET "https://circleci.com/api/v2/project/<project-slug>/schedule" \
+  --header "Circle-Token: $CIRCLE_TOKEN"
+----
+
+For GitHub App, GitHub App Server, and Cursor Origin pipelines, list the project's triggers with API v3. Replace `<PROJECT_ID>` with your project ID:
+
+[source,console]
+----
+$ curl -g --url "https://circleci.com/api/v3/triggers?filter[project_id]=<PROJECT_ID>" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN"
+----
 
 Refer to the xref:guides:toolkit:api-developers-guide.adoc#getting-started-with-the-api[Getting Started With the API] section of the API Developer's Guide for more guidance on making requests.
 
@@ -22,7 +33,7 @@ Coordinated Universal Time (UTC) is the time zone in which schedules are interpr
 [#pipelines-scheduled-to-run-specific-time-of-day]
 === Can pipelines be scheduled to run at a specific time of day?
 
-Yes, you can set up xref:guides:orchestrate:schedule-triggers.adoc[Schedule Triggers] through the xref:guides:orchestrate:schedule-triggers.adoc#get-started-with-schedule-triggers[CircleCI Web App], or with xref:guides:orchestrate:schedule-triggers.adoc#use-the-api[CircleCI API v2].
+Yes, you can set up xref:guides:orchestrate:schedule-triggers.adoc[Schedule Triggers] through the xref:guides:orchestrate:schedule-triggers.adoc#get-started-with-schedule-triggers[CircleCI Web App], or with xref:guides:orchestrate:schedule-triggers.adoc#use-the-api[CircleCI API].
 
 If you are currently using xref:guides:orchestrate:workflows.adoc#scheduling-a-workflow[Scheduled Workflows], see the xref:guides:orchestrate:migrate-scheduled-workflows-to-schedule-triggers.adoc[Migration Guide] to update your scheduled workflows to schedule triggers.
 
@@ -38,4 +49,4 @@ However, subsequent runs of the schedule trigger will always be run on the same 
 
 === Why can I not add a schedule trigger to my pipeline?
 
-Only GitHub OAuth, GitHub App and Bitbucket Cloud pipelines support schedule triggers. GitLab pipelines do not support schedule triggers. If you set up a schedule trigger through menu:Project Settings[Triggers] and do not see your pipeline in the "Pipeline to run" menu, check your pipeline type is supported.
+Only GitHub OAuth, GitHub App, GitHub App Server, Cursor Origin, and Bitbucket Cloud pipelines support schedule triggers. GitLab pipelines do not support schedule triggers. If you set up a schedule trigger through menu:Project Settings[Triggers] and do not see your pipeline in the "Pipeline to run" menu, check your pipeline type is supported.

@@ -271,6 +271,10 @@ Example verification process:
 link:https://circleci.com[CircleCI]
 ```
 - Links must have descriptive link text (not "click here", "here", or "this")
+- **Use title case for link text on CircleCI-owned URLs** (including API reference docs at `circleci.com/docs/api/`):
+ - **Good**: `link:https://circleci.com/docs/api/v3#tag/triggers[API v3 Triggers Reference]`
+ - **Bad**: `link:https://circleci.com/docs/api/v3#tag/triggers[Triggers section of the API v3 docs]`
+- **Links to third-party sites may use sentence case** (match the name or title as it appears on that site)
 
 ### Code Samples
 - **Reuse shared snippets** from `docs/guides/modules/ROOT/examples/` when the same config already exists. Include them with `example$` inside a source block. Follow `skills/partials/SKILL.md` to discover, insert, or extract examples.
@@ -291,6 +295,16 @@ $ circleci version
 ----
 ```
 - The dollar sign won't be copied with the copy button
+- **For commands with a multi-line body**, such as a JSON payload or heredoc, use `shell` without a dollar sign. The copy button only copies lines that start with `$ `, so a `console` block would lose the body:
+```adoc
+[source,shell]
+----
+curl --request POST https://example.com/api \
+  --data '{
+    "key": "value"
+  }'
+----
+```
 - When users need to substitute data, use `<my-data>` format
 - Point out what needs replacement, including whether to replace `< >` or `" "`
 - **Show full job or workflow**, not just relevant lines

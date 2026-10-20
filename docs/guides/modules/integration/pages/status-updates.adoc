@@ -1,14 +1,14 @@
 = Status updates overview
 :page-platform: Cloud, Server
-:page-vcs: github, github-enterprise, gitlab, gitlab-self-hosted, bitbucket
+:page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: An overview of commit statuses and GitHub Checks in CircleCI, including how they appear in GitHub, Bitbucket, and GitLab.
+:page-description: See how CircleCI reports pipeline status to your VCS with commit statuses, GitHub Checks, and Cursor Origin checks, and how to set up each.
 :experimental:
 
 ifndef::server[]
-CircleCI reports the status of your pipelines back to your version control system (VCS). This lets you see the progress and results of your CircleCI jobs and workflows without leaving your VCS.
+CircleCI reports the status of your pipelines back to your version control system (VCS). This lets you see the progress and results of your CircleCI jobs and workflows without leaving your VCS. For example, you can spot a failing job on a pull request before you merge.
 endif::server[]
 ifdef::server[]
 CircleCI reports the status of your pipelines back to GitHub. This lets you see the progress and results of your CircleCI jobs and workflows without leaving GitHub.
@@ -17,32 +17,62 @@ endif::server[]
 == Introduction
 
 ifndef::server[]
-CircleCI provides two types of status reporting. This overview guide covers "status updates":
-endif::server[]
+CircleCI reports status updates to your VCS at the job level or the workflow level. What you see depends on your VCS.
 
-ifndef::server[]
-*Status updates*:: CircleCI sends job level status information for every commit. Status updates are available for GitHub, Bitbucket, and GitLab. You can disable status updates in the CircleCI web app by navigating to menu:Project Settings[Advanced Settings] and setting **VCS Status Updates** to `off`.
+[.table-scroll]
+--
+[cols="2,2,3,3",options="header"]
+|===
+| Type | Level | Available for | Setup
+
+| <<commit-status-updates,Commit Status Updates>>
+| Job
+| GitHub, Bitbucket
+| On by default.
+
+| <<github-checks,GitHub Checks>>
+| Workflow
+| GitHub
+| Install the CircleCI Checks GitHub App.
+
+| <<cursor-origin-checks,Cursor Origin Checks>>
+| Workflow
+| Cursor Origin
+| On by default.
+
+| <<gitlab-status-updates,GitLab Status Updates>>
+| Workflow
+| GitLab
+| On by default. You cannot disable them.
+|===
+--
 endif::server[]
 ifdef::server[]
-*Status updates*:: CircleCI sends job level status information for every commit. You can disable status updates in the CircleCI web app by navigating to menu:Project Settings[Advanced Settings] and setting **VCS Status Updates** to `off`.
+CircleCI reports a commit status update for each job, for every commit. You can disable commit status updates in the CircleCI web app by navigating to menu:Project Settings[Advanced Settings] and setting **VCS Status Updates** to `off`.
 endif::server[]
+
+== Commit status updates
+
 ifndef::server[]
-*GitHub Checks*:: GitHub Checks reports workflow-level status and is available for GitHub only. You can enable GitHub Checks in the CircleCI web app by navigating to menu:Organization Settings[VCS Connections] and selecting **Manage GitHub Checks**. GitHub Checks is a GitHub App, and you will notice that from the GitHub UI the App is called **CircleCI Checks**. For information on setting up and using GitHub Checks, see the xref:guides:integration:enable-checks.adoc[Enable GitHub Checks] guide.
+Commit status updates are the default way CircleCI reports pipeline status to GitHub and Bitbucket. CircleCI reports one commit status for each job.
+endif::server[]
+ifdef::server[]
+Commit status updates are the default way CircleCI reports pipeline status to GitHub. CircleCI reports one commit status for each job.
 endif::server[]
 
-== Status update locations
+=== Where commit status updates appear
 
-When a pipeline is triggered in CircleCI, status information is sent back to your VCS. Status updates appear in the following locations:
+When a pipeline is triggered in CircleCI, status information is sent back to your VCS. Commit status updates appear in the following locations:
 
 * In pull requests when viewing an individual commit.
 * Next to individual commits in a pull/merge request conversation view.
 * At the end of a pull/merge request.
 
 ifndef::server[]
-Status updates are the default way CircleCI reports pipeline status to your VCS. They are reported at the job level and are available for GitHub, Bitbucket, and GitLab. The following images show where to find status updates in GitHub. Other VCS providers will have similar locations.
+The following images show where to find commit status updates in GitHub. Bitbucket has similar locations.
 endif::server[]
 ifdef::server[]
-Status updates are the default way CircleCI reports pipeline status to GitHub. They are reported at the job level. The following images show where to find status updates in GitHub.
+The following images show where to find commit status updates in GitHub.
 endif::server[]
 
 [tabs]
@@ -67,10 +97,9 @@ image::guides:ROOT:status-update-commit-pr.png[Status update for a commit in PR 
 --
 ====
 
+=== Commit status update naming
 
-== Status update naming
-
-CircleCI displays status updates differently depending on the job type.
+CircleCI displays commit status updates differently depending on the job type.
 
 Regular jobs display using the following format:
 
@@ -88,31 +117,138 @@ The workflow name prefix for approval and no-op jobs provides additional context
 
 NOTE: **Need to find the workflow for a regular job?** Click through to the CircleCI dashboard. The full workflow context is visible there.
 
-== Disable status updates
+=== Disable commit status updates
 
 ifndef::server[]
-If you use the GitHub Checks feature, you can disable status updates to avoid duplication of statuses.
+If you use GitHub Checks, you can disable commit status updates to avoid duplication of statuses.
 endif::server[]
 
-To disable status updates in the CircleCI web app:
+To disable commit status updates in the CircleCI web app:
 
 include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 . Select **Advanced Settings**.
 . Set **VCS Status Updates** to `off`.
 
-You can re-enable status updates by setting **VCS Status Updates** to `on`.
+You can re-enable commit status updates by setting **VCS Status Updates** to `on`.
 
 ifndef::server[]
-NOTE: The VCS status updates setting affects both GitHub and Bitbucket status updates.
+NOTE: The **VCS Status Updates** setting affects GitHub and Bitbucket Cloud commit status updates. It does not affect GitLab status updates, which you cannot disable, or Cursor Origin checks.
 endif::server[]
 ifdef::server[]
-NOTE: The VCS status updates setting affects GitHub status updates.
+NOTE: The **VCS Status Updates** setting affects GitHub commit status updates.
+endif::server[]
+
+ifndef::server[]
+== GitHub Checks
+
+GitHub Checks reports workflow status in the **Checks** tab of a GitHub pull request. You can rerun workflows from the **Checks** tab, and select **View more details on CircleCI Checks** to open the workflow in the CircleCI web app.
+
+GitHub Checks is a GitHub App. In GitHub, the app is called **CircleCI Checks**.
+
+.The Checks tab on a GitHub pull request showing workflow status
+image::guides:ROOT:checks_tab.png[CircleCI checks on GitHub]
+
+NOTE: GitHub does not provide a granular way to rerun workflows. Selecting **Re-run checks** reruns all checks, regardless of whether you choose "re-run failed checks" or "re-run all checks".
+
+=== Prerequisites
+
+* Your project must use xref:orchestrate:workflows.adoc[Workflows].
+* You must be an admin on your GitHub repository to authorize installation of the CircleCI Checks app.
+
+=== Enable GitHub Checks
+
+. In the CircleCI web app, select **Org** in the sidebar.
+. Select **VCS Connections**.
+. Select **Manage GitHub Checks**.
+. On the CircleCI Checks app settings page in GitHub, select the repositories you want to use Checks with, and select **Save**.
+
+After installation completes, the **Checks** tab on a GitHub pull request shows workflow status.
+
+=== GitHub Checks naming
+
+Each workflow in a pipeline generates a GitHub Check.
+
+* GitHub OAuth integrations name each check after its workflow.
+* GitHub App integrations name each check using the workflow name and the first eight characters of the pipeline definition ID. This prevents naming collisions. You can find the pipeline definition ID in menu:Project Settings[Project Setup] in the CircleCI web app.
+
+If multiple pipelines trigger for the same commit SHA with workflows that share the same name, only one GitHub Check appears for that workflow name. Use unique workflow names across pipelines to get distinct checks.
+
+If you use the xref:orchestrate:skip-build.adoc#skip-jobs[Skip Jobs] feature, CircleCI does not report the status of skipped builds. GitHub Checks are still created in GitHub.
+
+[#github-checks-and-status-updates]
+=== GitHub Checks and commit status updates together
+
+Your project continues to receive commit status updates after you turn on GitHub Checks. With both enabled, a GitHub pull request shows:
+
+* Workflow status in the **Checks** tab.
+* Job status in the **Checks** section of the pull request conversation view.
+
+To show workflow status only, see <<disable-commit-status-updates,Disable Commit Status Updates>>.
+
+=== Disable GitHub Checks for a project
+
+. In the CircleCI web app, select **Org** in the sidebar.
+. Select **VCS Connections**.
+. Select **Manage GitHub Checks**. The **Update CircleCI Checks repository access** page appears.
+. Deselect the repository you want to remove, and select **Save**. If you are removing GitHub Checks from the only repository it is installed on, you must either suspend or uninstall CircleCI Checks.
+. Confirm that commit status updates are on for the project so you see job level status in GitHub pull requests. In the CircleCI web app, go to menu:Project Settings[Advanced Settings] and confirm that **GitHub Status Updates** is set to `on`.
+
+=== Uninstall GitHub Checks for the organization
+
+. In the CircleCI web app, select **Org** in the sidebar.
+. Select **VCS Connections**.
+. Select **Manage GitHub Checks**.
+. Scroll down and select **Uninstall** to uninstall the CircleCI Checks app.
+. Confirm that commit status updates are on for your projects so you see job level status in GitHub pull requests. In the CircleCI web app, go to menu:Project Settings[Advanced Settings] and confirm that **GitHub Status Updates** is set to `on`.
+
+NOTE: GitHub OAuth integrations automatically re-enable job level status when you uninstall GitHub Checks. GitHub App integrations do not disable or re-enable job level status automatically.
+
+[#troubleshoot-github-checks-waiting-for-status-in-github]
+=== Troubleshoot GitHub Checks waiting for status
+
+If the following message appears and the check never completes in the **Checks** tab, a branch protection setting in GitHub may be the cause.
+
+----
+ci/circleci:build — Waiting for status to be reported
+----
+
+The `ci/circleci:build` status key refers to the job status from CircleCI, but with GitHub Checks CircleCI posts status at the workflow level. If you protect a branch and require this status key, GitHub waits for a job status that never completes.
+
+To fix this, deselect the `ci/circleci:build` status key in your branch protection rules.
+
+. In GitHub, go to menu:Settings[Branches].
+. Select **Edit** on the protected branch.
+. Deselect the `ci/circleci:build` status key.
++
+.Deselect GitHub job status keys
+image::guides:ROOT:github_job_status.png[Deselect GitHub job status keys]
+endif::server[]
+
+ifndef::server[]
+== Cursor Origin checks
+
+NOTE: The Cursor Origin integration is in beta.
+
+For Cursor Origin projects, CircleCI reports one check for each workflow rather than a status for each job. Cursor Origin checks are on by default and use Origin's native checks, so you need no separate app.
+
+Each check is named `CircleCI / <workflow_name>`, for example `CircleCI / my-workflow`. Checks appear in the following locations in Cursor Origin:
+
+* On a commit page, under the commit message.
+* On a pull request, in the merge box on the **Activity** tab and in the **Checks** tab.
+
+Select **Details** on a commit, or select the check in the **Checks** tab of a pull request, to see the workflow's jobs and their results. Each job links to the job in the CircleCI web app, and **View on CircleCI** opens the workflow.
+endif::server[]
+
+ifndef::server[]
+== GitLab status updates
+
+For GitLab projects, CircleCI reports status for each workflow. GitLab shows these as statuses rather than checks. GitLab status updates are on by default and you cannot disable them.
 endif::server[]
 
 == Next steps
 
 ifndef::server[]
-* xref:guides:integration:enable-checks.adoc[Enable GitHub Checks]
+* xref:guides:integration:version-control-system-integration-overview.adoc[Version Control Systems, Pipeline Types, and Feature Support]
 endif::server[]
 * xref:guides:orchestrate:workflows.adoc[Workflows]
 * xref:guides:orchestrate:workflows.adoc#holding-a-workflow-for-a-manual-approval[Using Approval Jobs in Workflows]

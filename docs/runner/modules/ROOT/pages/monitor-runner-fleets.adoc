@@ -41,16 +41,18 @@ For every fleet, you can see the following information:
 | Total agents
 | The total number of agents in the fleet.
 
+| Running tasks
+| The number of tasks that agents in the fleet are running.
+
+| Queued tasks
+| The number of tasks that are waiting for an agent.
+
 | Last task claimed
 | The time an agent in the fleet last claimed a task. The value is `never` if no agent has claimed a task.
 |===
 --
 
-When you view a single fleet, you also see the following information:
-
-* The number of running tasks.
-* The number of queued tasks, which are tasks that are waiting for an agent.
-* The agents attached to the fleet, with their names and IDs.
+The `circleci runner fleet get` command and the API also show the agents attached to the fleet, with their names and IDs.
 
 The total agent count includes agents seen in the last 7 days. The active, idle, and disconnected counts leave out agents that have been silent for 10 minutes or more. A fleet can show a total of four agents with all three state counts at zero.
 
@@ -75,13 +77,13 @@ The command has the alias `circleci runner fleet ls`.
 $ circleci runner fleet list --namespace <my-namespace>
 ----
 
-The output is a table with one row for each fleet.
+The output is a table with one row for each fleet, including running and queued task counts. The `--json` output includes the same counts as `running_tasks` and `queued_tasks`.
 
 [source,console]
 ----
-Resource Class      | Active | Idle | Disconnected | Agents | Last Task Claimed
-my-org/linux-runner | 2      | 1    | 1            | 4      | 2026-04-18T12:00:00Z
-my-org/arm-runner   | 0      | 0    | 0            | 0      | never
+Resource Class      | Active | Idle | Disconnected | Agents | Running | Queued | Last Task Claimed
+my-org/linux-runner | 2      | 1    | 1            | 4      | 2       | 5      | 2026-04-18T12:00:00Z
+my-org/arm-runner   | 0      | 0    | 0            | 0      | 0       | 0      | never
 ----
 
 [#get-a-fleet]
@@ -94,7 +96,7 @@ Use `circleci runner fleet get <resource-class>` to view one fleet. Pass the res
 $ circleci runner fleet get <my-namespace>/<my-resource-class>
 ----
 
-Along with the data returned by `list`, this command shows running and queued task counts and the agents attached to the fleet.
+Along with the data returned by `list`, this command shows the agents attached to the fleet.
 
 [source,console]
 ----
@@ -129,11 +131,11 @@ Find the resource classes that have no connected agents.
 $ circleci runner fleet list --json --jq '.[] | select(.active_agents + .idle_agents == 0) | .resource_class'
 ----
 
-Check the number of tasks waiting for an agent in one resource class.
+Find fleets that have tasks waiting for an agent.
 
 [source,console]
 ----
-$ circleci runner fleet get <my-namespace>/<my-resource-class> --json --jq '.queued_tasks'
+$ circleci runner fleet list --namespace <my-namespace> --json --jq '.[] | select(.queued_tasks > 0) | .resource_class'
 ----
 
 Find fleets that have no idle agents.
@@ -148,7 +150,7 @@ $ circleci runner fleet list --namespace <my-namespace> --json --jq '.[] | selec
 
 For the endpoints, parameters, and response schemas, refer to the link:https://circleci.com/docs/api/v3#tag/runner-fleets[Runner Fleets section of the API v3 reference].
 
-Only the single-fleet endpoint, `GET /api/v3/runner/fleets/:id`, returns task counts. The `:id` is the ID of the resource class. To get task counts for every fleet, request each fleet individually.
+List and filter responses from `GET /api/v3/runner/fleets` include `running_tasks`, `queued_tasks`, and the attached agents for each fleet. To get one fleet, use `GET /api/v3/runner/fleets/:id`, where `:id` is the ID of the resource class.
 
 [#next-steps]
 == Next steps
