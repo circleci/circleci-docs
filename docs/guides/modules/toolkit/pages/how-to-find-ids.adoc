@@ -1,7 +1,8 @@
 = How to find IDs
-:page-platform: Cloud
+:page-platform: Cloud, Server
 :page-vcs: all
 :page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: "This page describes how customers can find IDs of various CircleCI elements."
 :experimental:
@@ -36,7 +37,12 @@ image::guides:ROOT:ids-from-env-vars.png[IDs available from built-in environment
 
 The user ID is a unique identifier for a user. Follow these steps to find it in the CircleCI web app:
 
+ifndef::server[]
 . In the CircleCI application, go to your link:https://app.circleci.com/settings/user[User settings, window=_blank].
+endif::server[]
+ifdef::server[]
+. In the CircleCI web app, go to your *User settings*.
+endif::server[]
 . On the menu:Account Integrations[] page, locate the **User ID** label.
 . Note the value or select the btn:[Copy] icon next to your user ID.
 
@@ -145,8 +151,10 @@ From the job URL::
 image::guides:ROOT:workflow-id-from-job-url.png[Get workflow ID from job page URL]
 ====
 
+ifndef::server[]
 == Find a pipeline definition ID
 
 The pipeline definition ID is a unique identifier for a pipeline definition. Follow these steps to find it in the CircleCI web app:
 
 include::guides:ROOT:partial$app-navigation/steps-to-pipeline-definition-id.adoc[]
+endif::server[]
