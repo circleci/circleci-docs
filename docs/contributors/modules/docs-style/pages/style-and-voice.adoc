@@ -19,6 +19,7 @@ Assume technical competence but explain concepts clearly and simply. Some concep
 * When specifying a tool or way of performing an action, use "using" instead of "via". The latter is harder on non-English speakers.
 * Avoid contractions, for example "don't", "you're". They make the content harder for non-native english speakers to read.
 * Do not use time-sentitive language like, "new" or "soon" or "in preview" in main prose. These can get missed when changes are needed. If this language is needed it should be in a banner (admonition) that is clearly there to indicate the time-sensitive nature of the content.
+* Document what the product does now. Do not describe planned or upcoming behavior, for example "will be supported from v5.0". If a feature is not available on a platform, say so plainly and do not say when it might arrive.
 
 [.table-scroll]
 --
