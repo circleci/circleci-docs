@@ -133,7 +133,7 @@ Yes, all prepaid billing customers still receive the benefit of 30,000 credits a
 
 Yes, log in to the CircleCI web app, then navigate to menu:Plan[Share & Transfer].
 
-On non-free plans, you can share your plan with free organizations for which you have admin access using the `Add Shared Organization` option. All orgs you have shared your plan with are listed on the Share & Transfer page. Child organizations will bill all credits and other usage to the parent org.
+On the Scale plan, you can share your plan with free organizations for which you have admin access using the `Add Shared Organization` option. All orgs you have shared your plan with are listed on the Share & Transfer page. Child organizations will bill all credits and other usage to the parent org.
 
 On non-free plans, you can transfer your plan to another free organization for which you have admin access using the `Transfer Plan` option. When you transfer a paid plan to another org, your org will be downgraded to the Free Plan.
 
