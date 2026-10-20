@@ -733,7 +733,14 @@ CircleCI's OIDC tokens also contain some https://openid.net/specs/openid-connect
 [#vcs-origin-and-vcs-ref-values-by-provider]
 === VCS-origin and VCS-ref values by provider
 
-The `oidc.circleci.com/vcs-origin` and `oidc.circleci.com/vcs-ref` claims are included in `$CIRCLE_OIDC_TOKEN` and `$CIRCLE_OIDC_TOKEN_V2` for all trigger types except custom webhooks. The `vcs-origin` value is the repository URL without the `https://` scheme. The `vcs-ref` value is the same format for every provider: `refs/heads/<branch-name>` for branches, or `refs/tags/<tag-name>` for tags. The `oidc.circleci.com/checkout-source` claim uses the same format as `vcs-origin`.
+The `oidc.circleci.com/vcs-origin` and `oidc.circleci.com/vcs-ref` claims are included in `$CIRCLE_OIDC_TOKEN` and `$CIRCLE_OIDC_TOKEN_V2` for all trigger types except custom webhooks.
+
+* `vcs-origin`: The repository URL without the `https://` scheme. The `oidc.circleci.com/checkout-source` claim uses the same format.
+* `vcs-ref`: The Git reference. The format is the same for every provider.
+** `refs/heads/<branch-name>` for branches.
+** `refs/tags/<tag-name>` for tags.
+
+The `vcs-origin` value depends on your VCS provider:
 
 [.table-scroll]
 --
