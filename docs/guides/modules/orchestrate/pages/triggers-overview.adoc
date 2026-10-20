@@ -65,14 +65,15 @@ ifndef::server[]
 NOTE: Triggering a pipeline via the CircleCI v2 API is not currently supported for GitLab projects.
 endif::server[]
 
+ifdef::server[]
+include::ROOT:partial$notes/server-api-examples.adoc[]
+endif::server[]
+
 [tabs]
 ====
 GitHub, Bitbucket, and Cursor Origin::
 +
 --
-ifdef::server[]
-include::ROOT:partial$notes/server-api-examples.adoc[]
-endif::server[]
 
 This method is supported for GitHub (OAuth and App), Bitbucket (Cloud and Data Center), and Cursor Origin orgs.
 

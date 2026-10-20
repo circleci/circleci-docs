@@ -707,6 +707,10 @@ Environment variables declared inside a shell command `run` step, for example `F
 [#creating-environment-variables]
 === Add an environment variable to a context
 
+ifdef::server[]
+include::ROOT:partial$notes/server-api-examples.adoc[]
+endif::server[]
+
 [tabs]
 ====
 CLI::
@@ -731,9 +735,6 @@ circleci context secret set <context-name> --name <env-var-name> --value <env-va
 API::
 +
 --
-ifdef::server[]
-include::ROOT:partial$notes/server-api-examples.adoc[]
-endif::server[]
 
 To create an environment variable using the API, call the https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Add Environment Variable] endpoint with the appropriate request body. For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the new environment variable name. The request body must include a `value` key containing the plain text secret as a string.
 --
@@ -743,6 +744,10 @@ To create an environment variable using the API, call the https://circleci.com/d
 === Remove an environment variable from a context
 
 Removing an environment variable from a context deletes the environment variable from your account.
+
+ifdef::server[]
+include::ROOT:partial$notes/server-api-examples.adoc[]
+endif::server[]
 
 [tabs]
 ====
@@ -775,9 +780,6 @@ circleci context secret delete <context-name> --name <secret-name>
 API::
 +
 --
-ifdef::server[]
-include::ROOT:partial$notes/server-api-examples.adoc[]
-endif::server[]
 
 To delete an environment variable using the API, call the https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Delete environment variable] endpoint.
 
@@ -793,6 +795,10 @@ Rotation refers to the process of updating a secret's value without deleting it 
 Because environment variables can be shared, passed around between employees and teams, and exposed inadvertently, it is good practice to periodically rotate secrets. You can automate this process, for example, running a script when an employee leaves the company, or when a secret may have been compromised.
 
 Context environment variables can be rotated using CircleCI's CLI or API.
+
+ifdef::server[]
+include::ROOT:partial$notes/server-api-examples.adoc[]
+endif::server[]
 
 [tabs]
 ====
@@ -825,9 +831,6 @@ circleci context secret set <context-name> --name <env-var-name> --value <new-va
 API::
 +
 --
-ifdef::server[]
-include::ROOT:partial$notes/server-api-examples.adoc[]
-endif::server[]
 
 To rotate an environment variable from the API, call the link:https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Update environment variable] endpoint with the appropriate request body. For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the environment variable name to update. The request body must include a `value` key containing the plain text secret as a string.
 --

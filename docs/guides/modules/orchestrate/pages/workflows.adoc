@@ -347,6 +347,10 @@ curl --request POST \
 
 To identify the user who approved a job, you can use the CircleCI web app or the API.
 
+ifdef::server[]
+include::ROOT:partial$notes/server-api-examples.adoc[]
+endif::server[]
+
 [tabs]
 ====
 CircleCI web app::
@@ -354,16 +358,11 @@ CircleCI web app::
 --
 * If the user signed up via GitHub, the (non-clickable) avatar of the GitHub user appears next to the approval job. Hovering over that avatar brings up a tooltip with the user's name as specified in their GitHub/Bitbucket account settings.
 
-ifndef::server[]
 * If the user signed up via email, the anonymous avatar appears next to the approval job; hovering over that avatar brings up a tooltip with the user's email address.
-endif::server[]
 --
 API::
 +
 --
-ifdef::server[]
-include::ROOT:partial$notes/server-api-examples.adoc[]
-endif::server[]
 
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
 . You need the workflow ID so you can use the link:https://circleci.com/docs/api/v2/index.html#operation/listWorkflowJobs[get a workflow's jobs] endpoint to get the user ID. You can get the workflow ID using xref:reference:ROOT:variables.adoc[Pipeline Values or Environment Variables], or by receiving xref:integration:outbound-webhooks.adoc[Webhooks] or link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/listWorkflowsByPipelineId[polling the API].
@@ -408,7 +407,6 @@ curl --request GET \
  }
 ----
 
-ifndef::server[]
 ** If the user who approved the job signed up via email, the response from the user information endpoint will have the following format:
 +
 [,json]
@@ -419,7 +417,6 @@ ifndef::server[]
    "id" : "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
  }
 ----
-endif::server[]
 
 TIP: You can find detailed instructions in link:https://support.circleci.com/hc/en-us/articles/360044820493-How-to-Find-hold-Step-Approver-in-a-Workflow[this support article]
 --
@@ -428,6 +425,10 @@ TIP: You can find detailed instructions in link:https://support.circleci.com/hc/
 === Cancel a job
 
 To Cancel a job, follow these steps:
+
+ifdef::server[]
+include::ROOT:partial$notes/server-api-examples.adoc[]
+endif::server[]
 
 [tabs]
 ====
@@ -440,9 +441,6 @@ CircleCI web app::
 API::
 +
 --
-ifdef::server[]
-include::ROOT:partial$notes/server-api-examples.adoc[]
-endif::server[]
 
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
 . You need your job ID (which is the job ID for the job requiring approval) to make the API POST request. Depending on your use case, you might be configuring an approval job in a pipeline, or using an external service to approve a job. You can get the required parameters using xref:reference:ROOT:variables.adoc[Pipeline Values or Environment Variables], or by receiving xref:integration:outbound-webhooks.adoc[Webhooks] or polling the API. To cancel a job, use the link:https://circleci.com/docs/api/v2/index.html#operation/cancelJobByJobID[cancel a job] endpoint, for example:
