@@ -189,35 +189,42 @@ In this scenario, the first key is used regardless of whether it is the correct 
 [#using-specific-ssh-keys-for-a-job]
 === Using specific SSH keys for a job
 
-[NOTE]
-====
-SSH keys are named using MD5 fingerprints with colons removed from the hash.
+If you have added multiple SSH keys for the same hostname to your project, SSH may offer the wrong key. To make a command use a specific key, point the command at that key's file and tell SSH to use only that key.
 
-To retrieve the MD5 fingerprint of an SSH key, run this command locally:
+CircleCI saves each key added with `add_ssh_keys` in `~/.ssh` on the job's executor. The filename is `id_rsa_` followed by the key's MD5 fingerprint with the colons removed. For example, the MD5 fingerprint `a3:f9:82:c5:1d:47:9b:e6:88:32:a1:bc:f4:29:7e:15` is saved as `id_rsa_a3f982c51d479be68832a1bcf4297e15`.
 
-`ssh-keygen -l -E md5 -f ~/.ssh/your_key_name`
-
-The filename follows this format:
-
-`id_rsa_[MD5_fingerprint_without_colons]`
-
-Example:
-
-- SSH key MD5 fingerprint: `a3:f9:82:c5:1d:47:9b:e6:88:32:a1:bc:f4:29:7e:15`.
-
-- SSH key filename: `id_rsa_a3f982c51d479be68832a1bcf4297e15`.
-====
-
-
-If you have added multiple SSH keys for the same hostname to your project and want to use a specific key in your SSH commands, follow these steps:
-
-. Add the SSH key to the job using the `add_ssh_keys` step.
-. Use the `-i` parameter to specify the exact SSH key file path in your SSH commands.
-. Add the `-o "IdentitiesOnly=yes"` option to prevent SSH from using other keys from the SSH agent.
-
-Example:
-
-[source,bash]
+. Find the MD5 fingerprint of the key. Run the following command on your local machine, using the path to the private key you created. The fingerprint follows `MD5:` in the output.
++
+[source,console]
 ----
-ssh -i ~/.ssh/id_rsa_a3f982c51d479be68832a1bcf4297e15 -o "IdentitiesOnly=yes" user@hostname
+$ ssh-keygen -l -E md5 -f ~/.ssh/<key-name>
+----
+. Remove the colons from the fingerprint, and add `id_rsa_` to the start. The result is the filename of the key on the executor.
+. In your configuration file, add the key to the job with the `add_ssh_keys` step. Then, in a later `run` step, add the following to your SSH command:
+** `-i ~/.ssh/<filename>` to specify the key file from the previous step.
+** `-o "IdentitiesOnly=yes"` to stop SSH from trying other keys from the SSH agent.
+
+The following job adds a key and uses it to connect to a host. Replace `<user>@<hostname>` with your own values, and replace the fingerprint and key filename with those of your key.
+
+[source,yaml]
+----
+version: 2.1
+jobs:
+  deploy-job:
+    docker:
+      - image: cimg/base:2026.10
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            # The fingerprint of the key as shown in Project Settings
+            - "a3:f9:82:c5:1d:47:9b:e6:88:32:a1:bc:f4:29:7e:15"
+      - run:
+          name: Connect with a specific key
+          # -i selects the key file, saved as id_rsa_ plus the MD5 fingerprint without colons
+          # IdentitiesOnly=yes stops SSH from trying other keys in the agent
+          command: ssh -i ~/.ssh/id_rsa_a3f982c51d479be68832a1bcf4297e15 -o "IdentitiesOnly=yes" <user>@<hostname> "echo connected"
+workflows:
+  deploy:
+    jobs:
+      - deploy-job
 ----
