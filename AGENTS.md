@@ -349,7 +349,7 @@ some code
 ```
 - **Capitalize first word** of each list item
 - **Use periods** if item is a full sentence or completes the intro stem
-- **Split literal-heavy paragraphs into lists**: a paragraph with three or more inline code spans or literal values is hard to read. Use a bulleted list where it fits, for example one item per format or variant
+- **Split literal-heavy paragraphs into lists**: a paragraph with three or more inline code spans or literal values is hard to read. Use a bulleted or description list where it fits, for example one item per format or variant
 
 ### Tables
 - Wrap tables in scrollable container:
