@@ -13,6 +13,7 @@ orbs:
   aws-cli: circleci/aws-cli@5.4.2
   vale: circleci/vale@1.2.1
   go: circleci/go@3.0.4
+  cloudsmith: https://raw.githubusercontent.com/circleci/backplane-cicd/main/orbs/cloudsmith.yml
 
 executors:
   node_executor:
@@ -60,24 +61,26 @@ jobs:
     executor: node_executor
     steps:
       - checkout
+      - cloudsmith/configure:
+          npm: true
       - restore_cache:
           name: Restore npm cache
           keys:
-            - npm-deps-{{ checksum "package-lock.json" }}
-            - npm-deps-
+            - npm-deps-v2-{{ checksum "package-lock.json" }}
+            - npm-deps-v2-
       - run:
           name: Install Node Dependencies
           command: npm ci
       - save_cache:
           name: Save npm cache
-          key: npm-deps-{{ checksum "package-lock.json" }}
+          key: npm-deps-v2-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
       - restore_cache:
           name: Restore UI bundle cache
           keys:
-            - ui-bundle-v3-{{ checksum "ui/package-lock.json" }}-{{ checksum "ui/gulpfile.js" }}
-            - ui-bundle-v3-{{ checksum "ui/package-lock.json" }}
+            - ui-bundle-v4-{{ checksum "ui/package-lock.json" }}-{{ checksum "ui/gulpfile.js" }}
+            - ui-bundle-v4-{{ checksum "ui/package-lock.json" }}
       - run:
           name: Check if UI rebuild needed
           command: |
@@ -152,7 +155,7 @@ jobs:
             fi
       - save_cache:
           name: Save UI bundle cache
-          key: ui-bundle-v3-{{ checksum "ui/package-lock.json" }}-{{ checksum "ui/gulpfile.js" }}
+          key: ui-bundle-v4-{{ checksum "ui/package-lock.json" }}-{{ checksum "ui/gulpfile.js" }}
           paths:
             - ui-bundle.zip
             - ui/node_modules
