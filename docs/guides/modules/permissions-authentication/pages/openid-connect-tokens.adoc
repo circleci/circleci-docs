@@ -702,7 +702,7 @@ CircleCI's OIDC tokens also contain some https://openid.net/specs/openid-connect
 
 | `oidc.circleci.com/pipeline-id`
 | All
-| A UUID. In `$CIRCLE_OIDC_TOKEN` and `$CIRCLE_OIDC_TOKEN_V2`, it identifies the pipeline that triggered the job. In `$CIRCLE_OIDC_TOKEN_V3`, it identifies the pipeline definition, and the pipeline that triggered the job is in `oidc.circleci.com/run-id`.
+| A UUID. In `$CIRCLE_OIDC_TOKEN` and `$CIRCLE_OIDC_TOKEN_V2`, it identifies the pipeline run that triggered the job. In `$CIRCLE_OIDC_TOKEN_V3`, it identifies the pipeline definition, and the pipeline run that triggered the job is in `oidc.circleci.com/run-id`.
 
 | `oidc.circleci.com/project-id`
 | All
@@ -710,7 +710,7 @@ CircleCI's OIDC tokens also contain some https://openid.net/specs/openid-connect
 
 | `oidc.circleci.com/run-id`
 | V3
-| A UUID that identifies the pipeline that triggered the job. Same value as `oidc.circleci.com/pipeline-id` in the other tokens.
+| A UUID that identifies the pipeline run that triggered the job. Same value as `oidc.circleci.com/pipeline-id` in the other tokens.
 
 | `oidc.circleci.com/ssh-rerun`
 | All
@@ -819,14 +819,14 @@ CircleCI sets all three variables in a job on Cloud. `$CIRCLE_OIDC_TOKEN_V3` is 
 | Yes
 
 | `pipeline-id` identifies
-| Pipeline
-| Pipeline
+| Pipeline run
+| Pipeline run
 | Pipeline definition
 
-| `run-id` claim
-| No
-| No
-| Yes
+| `run-id` identifies
+| Not included
+| Not included
+| Pipeline run
 |===
 --
 
