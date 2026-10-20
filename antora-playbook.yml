@@ -153,4 +153,4 @@ antora:
     # The build fails when more xrefs than this point to pages the Server build
     # drops. Lower it as they get wrapped in ifndef::server[] (the list is in
     # extensions/.temp/guides-server-unlinked.md after a build).
-    maxunlinkedxrefs: 132
+    maxunlinkedxrefs: 101

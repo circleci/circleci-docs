@@ -220,6 +220,8 @@ function unlinkDroppedXrefs (contents, moduleName, componentName, dropped, moved
 // another component has no version, so cloning the page would register it a
 // second time and fail the build as a duplicate. Aliases within the guides
 // component are kept, because other pages reach their targets through them.
+// A `guides:module:page.adoc` alias also has no version, so it loses its
+// component prefix and resolves in the Server version instead.
 function stripCrossComponentAliases (contents, componentName) {
   return Buffer.from(
     contents.toString('utf8').replace(/^:page-aliases:[ \t]*(.*(?: \\\n.*)*)\n/m, (match, value) => {
@@ -232,6 +234,7 @@ function stripCrossComponentAliases (contents, componentName) {
           const parts = alias.split(':').filter((part) => part !== '')
           return parts.length < 3 || parts[0] === componentName
         })
+        .map((alias) => alias.replace(new RegExp(`^${componentName}:(?=[^:]+:)`), ''))
       return kept.length ? `:page-aliases: ${kept.join(', ')}\n` : ''
     })
   )
