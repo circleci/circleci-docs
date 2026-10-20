@@ -623,7 +623,9 @@ This example prevents the workflow `integration_tests` from running unless the `
 }
 ----
 
+ifndef::server[]
 For more examples of using conditional logic in your workflows, see the xref:orchestration-cookbook.adoc[Orchestration Cookbook].
+endif::server[]
 
 ****
 If you want to conditionally run workflows based on trigger event types, consider splitting your workflows into separate YAML files and leveraging GitHub trigger event options.

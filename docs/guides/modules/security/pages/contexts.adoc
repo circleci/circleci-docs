@@ -825,9 +825,11 @@ include::ROOT:partial$shared-sections/secrets-masking.adoc[]
 
 == Troubleshooting
 
+ifndef::server[]
 === Renaming organizations and repositories
 
 If you have existing contexts (or environment variables) and you would like to rename your organization or repository, follow the xref:rename-organizations-and-repositories.adoc[Rename Organizations and Repositories] guide. Following these steps will ensure you do not lose access to contexts or environment variables in the process.
+endif::server[]
 
 [#see-also]
 == See also

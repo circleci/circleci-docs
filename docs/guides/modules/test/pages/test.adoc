@@ -112,7 +112,9 @@ endif::server[]
 
 For a more in-depth look at workflows functionality, visit the xref:orchestrate:workflows.adoc[Workflows] page. You can also refer to the xref:toolkit:sample-config.adoc[Sample configuration] page for more workflow examples.
 
+ifndef::server[]
 If you need to restrict the connections allowed in your test jobs, consider enabling xref:security:ip-ranges.adoc[IP Ranges]. This enables CircleCI jobs to go through a set of well-defined IP address ranges.
+endif::server[]
 
 [#timing-tab]
 === Timing tab

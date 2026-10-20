@@ -355,12 +355,16 @@ Be aware of these boundaries when investigating:
 == See also
 
 * xref:orchestrate:pause-pipelines-during-an-incident.adoc[Pause or Stop Pipelines During an Incident]
+ifndef::server[]
 * xref:security:audit-logs.adoc[Audit Logs]
+endif::server[]
 * xref:toolkit:api-developers-guide.adoc[API Developers Guide]
 * xref:optimize:artifacts.adoc[Storing Build Artifacts]
 * xref:security:security-supply-chain.adoc[Protecting Against Supply Chain Attacks]
 * xref:security:security-recommendations.adoc[Security Recommendations]
+ifndef::server[]
 * xref:security:ip-ranges.adoc[IP Ranges]
+endif::server[]
 * xref:config-policies:config-policy-management-overview.adoc[Policy Management Overview]
 * xref:security:contexts.adoc[Using Contexts]
 * xref:toolkit:managing-api-tokens.adoc[Managing API Tokens]

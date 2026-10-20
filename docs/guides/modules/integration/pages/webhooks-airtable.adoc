@@ -1,7 +1,8 @@
 = CircleCI webhooks with Airtable
-:page-platform: Cloud
+:page-platform: Cloud, Server
 :page-vcs: all
 :page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Set up CircleCI webhooks with Airtable to capture and visualize the output of your pipelines, including an example for tracking deployments.
 :experimental:
