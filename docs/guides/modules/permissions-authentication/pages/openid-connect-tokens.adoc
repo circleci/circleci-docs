@@ -786,6 +786,9 @@ Use `$CIRCLE_OIDC_TOKEN_V3` for new setups. For an existing trust policy, use th
 
 CircleCI sets all three variables in a job on Cloud. `$CIRCLE_OIDC_TOKEN_V3` is not available on Server. CircleCI does not create a V3 token when the pipeline has no checkout or config source.
 
+[#compare-token-versions]
+=== Compare token versions
+
 [.table-scroll]
 --
 [cols="2,2,2,2", options="header"]
@@ -828,6 +831,9 @@ CircleCI sets all three variables in a job on Cloud. `$CIRCLE_OIDC_TOKEN_V3` is 
 --
 
 NOTE: `$CIRCLE_OIDC_TOKEN_V3` is the only token with the config source in the `sub` claim. A trust policy that matches only the checkout source cannot tell which repository or branch holds the pipeline configuration. To check both, use `$CIRCLE_OIDC_TOKEN_V3`, or match the `config-source` and `config-ref` claims in `$CIRCLE_OIDC_TOKEN_V2` where your cloud provider supports claim conditions.
+
+[#migrate-to-the-v3-token]
+=== Migrate to the V3 token
 
 To move a trust policy from `$CIRCLE_OIDC_TOKEN_V2` to `$CIRCLE_OIDC_TOKEN_V3`, follow these steps.
 
