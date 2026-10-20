@@ -35,7 +35,7 @@ ifndef::server[]
 Full lists of available convenience and VM images are available in the link:https://circleci.com/developer/images[CircleCI Developer Hub].
 endif::server[]
 ifdef::server[]
-For a list of convenience images, see the xref:execution-managed:circleci-images.adoc[CircleCI Convenience Images] page. Your system administrator manages the available VM images.
+For a list of convenience images, see the xref:execute:circleci-images.adoc[CircleCI Convenience Images] page. Your system administrator manages the available VM images.
 endif::server[]
 
 See the xref:execute:executor-intro.adoc[Introduction to Execution Environments] document for a comparison of the different executor types, and links to further information for each option.
