@@ -12,7 +12,7 @@ When CircleCI checks out your code, the credentials it uses reach only the repos
 [#why-add-additional-ssh-keys]
 == Why add additional SSH keys to a project?
 
-The credentials CircleCI creates for code checkout are deliberately narrow. They are scoped to a single repository, and depending on your pipeline type they are read-only or are not SSH credentials at all. Any other SSH connection from a job needs a key that you provide.
+The credentials CircleCI creates for code checkout are deliberately narrow. They are scoped to a single repository. Depending on your pipeline type, they are read-only or are not SSH credentials at all. See <<how-checkout-credentials-differ-by-pipeline-type>> for details. Any other SSH connection from a job needs a key that you provide.
 
 Add an additional SSH key when a job needs to do any of the following:
 
@@ -22,22 +22,6 @@ Add an additional SSH key when a job needs to do any of the following:
 * Connect to any other SSH-only service, such as a backup host or an artifact server.
 
 Each key is stored encrypted in your project settings. A job can use a key only when its configuration lists that key's fingerprint, so you control which jobs get access.
-
-[#how-checkout-credentials-differ-by-pipeline-type]
-=== How checkout credentials differ by pipeline type
-
-How much access a job already has depends on how your pipeline checks out code.
-
-ifndef::server[]
-* GitHub App, GitHub App Server (Preview), and Cursor Origin pipelines: CircleCI checks out code over HTTPS. CircleCI adds no SSH key or deploy key, so an additional SSH key is the way to give a job SSH access to other repositories or hosts.
-* GitHub OAuth and Bitbucket Cloud pipelines: CircleCI creates a read-only deploy key for the single repository that triggered the pipeline.
-* GitLab pipelines: CircleCI creates an SSH key to check out the repository that triggered the pipeline.
-endif::server[]
-ifdef::server[]
-* GitHub and GitHub Enterprise Server pipelines: CircleCI creates a read-only deploy key for the single repository that triggered the pipeline.
-endif::server[]
-
-For a full description of each pipeline type, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#how-circleci-checks-out-your-code[How CircleCI Checks Out Your Code] section of the Users, Organizations, and Integrations Guide.
 
 [#choose-a-key-type]
 === Choose between a user key and an additional SSH key
@@ -56,7 +40,7 @@ endif::server[]
 [#steps-to-add-additional-ssh-keys]
 == Add an additional SSH key to your project
 
-Add the private key to CircleCI, and add the matching public key to the service the job connects to. Complete the following steps to add an additional SSH key to your project.
+Add the private key to CircleCI, and add the matching public key to the service the job connects to.
 
 . Create an SSH key pair. CircleCI cannot decrypt SSH keys, so the key must have an empty passphrase. The following command creates an ed25519 key pair with no passphrase.
 +
@@ -90,6 +74,61 @@ endif::server[]
 . Select *Add SSH Key*.
 
 ifndef::server[]
+If you use GitHub Enterprise Server or Cursor Origin, see <<ssh-keys-for-https-checkout-pipelines>> for additional notes.
+
+endif::server[]
+Adding a key to your project does not give any job access to it. Next, add the key to each job that needs it. See <<add-ssh-keys-to-a-job>>.
+
+[#add-ssh-keys-to-a-job]
+== Add SSH keys to a job
+
+After you add a key to your project, add it to each job that needs it. Even though all CircleCI jobs use `ssh-agent` to automatically sign all added SSH keys, you *must* use the `add_ssh_keys` key to actually add keys to a container.
+
+. Copy the key's fingerprint from menu:Project Settings[SSH Keys > Additional SSH Keys]. CircleCI shows the SHA256 fingerprint.
+. In your configuration file, add the `add_ssh_keys` xref:reference:ROOT:configuration-reference.adoc#add-ssh-keys[Special Step] to the appropriate xref:orchestrate:jobs-steps.adoc[Job], and list the fingerprint. The fingerprint can be SHA256 or MD5. Prefix SHA256 fingerprints with `SHA256:`, and include the colons between character pairs for MD5 fingerprints.
++
+[source,yaml]
+----
+jobs:
+  deploy-job:
+    docker:
+      - image: cimg/base:2026.10
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            # An MD5 fingerprint, with colons between character pairs
+            - "SO:ME:FIN:G:ER:PR:IN:T"
+            # A SHA256 fingerprint, prefixed with SHA256:
+            - "SHA256:NPj4IcXxqQEKGXOghi/QbG2sohoNfvZ30JwCcdSSNM0"
+----
+. If the job checks out additional repositories, make sure the public key is added to each of those repositories. Run the `checkout` command *before* `add_ssh_keys`.
+
+All fingerprints in the `fingerprints` list must correspond to keys that have been added through the CircleCI application. Fingerprints in CircleCI environment variables will fail.
+
+For problems connecting after you add a key, and for options such as using a specific key, see <<ssh-key-reference>>.
+
+[#ssh-key-reference]
+== SSH key reference
+
+The following sections cover how checkout credentials work, platform-specific notes, and how to control which key a job uses.
+
+[#how-checkout-credentials-differ-by-pipeline-type]
+=== How checkout credentials differ by pipeline type
+
+How much access a job already has depends on how your pipeline checks out code.
+
+ifndef::server[]
+* GitHub App, GitHub App Server (Preview), and Cursor Origin pipelines: CircleCI checks out code over HTTPS. CircleCI adds no SSH key or deploy key, so an additional SSH key is the way to give a job SSH access to other repositories or hosts.
+* GitHub OAuth and Bitbucket Cloud pipelines: CircleCI creates a read-only deploy key for the single repository that triggered the pipeline.
+* GitLab pipelines: CircleCI creates an SSH key to check out the repository that triggered the pipeline.
+endif::server[]
+ifdef::server[]
+* GitHub and GitHub Enterprise Server pipelines: CircleCI creates a read-only deploy key for the single repository that triggered the pipeline.
+endif::server[]
+
+For a full description of each pipeline type, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#how-circleci-checks-out-your-code[How CircleCI Checks Out Your Code] section of the Users, Organizations, and Integrations Guide.
+
+ifndef::server[]
 [#ssh-keys-for-https-checkout-pipelines]
 === SSH keys for GitHub Enterprise Server and Cursor Origin
 
@@ -101,32 +140,6 @@ GitHub App pipelines for GitHub Enterprise Server and Cursor Origin pipelines ch
 
 For more on these integrations, see the xref:integration:github-enterprise-server-integration.adoc[GitHub Enterprise Server Integration] guide and the xref:integration:version-control-system-integration-overview.adoc[Version Control Systems, Pipeline Types, and Feature Support] page.
 endif::server[]
-
-[#add-ssh-keys-to-a-job]
-== Add SSH keys to a job
-
-Even though all CircleCI jobs use `ssh-agent` to automatically sign all added SSH keys, you *must* use the `add_ssh_keys` key to actually add keys to a container.
-
-To add a set of SSH keys to a container, use the `add_ssh_keys` xref:reference:ROOT:configuration-reference.adoc#add-ssh-keys[Special Step] within the appropriate xref:orchestrate:jobs-steps.adoc[Job] in your configuration file. The fingerprint can be SHA256 or MD5. Prefix SHA256 fingerprints with `SHA256:`, and include the colons between character pairs for MD5 fingerprints. When you add your key to CircleCI in menu:Project Settings[SSH keys > Additional SSH keys] the SHA256 fingerprint will be visible.
-
-For a self-hosted runner, ensure that you have an `ssh-agent` on your system to successfully use the `add_ssh_keys` step. The SSH key is written to `$HOME/.ssh/id_rsa_<fingerprint>`, where `$HOME` is the home directory of the user configured to execute jobs, and `<fingerprint>` is the MD5 fingerprint of the key. A host entry is also appended to `$HOME/.ssh/config`, along with a relevant `IdentityFile` option to use the key.
-
-[source,yaml]
-----
-jobs:
-  deploy-job:
-    docker:
-      - image: cimg/base:2026.10
-    steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "SO:ME:FIN:G:ER:PR:IN:T"
-            - "SHA256:NPj4IcXxqQEKGXOghi/QbG2sohoNfvZ30JwCcdSSNM0"
-----
-
-All fingerprints in the `fingerprints` list must correspond to keys that have been added through the CircleCI application. Fingerprints in CircleCI environment variables will fail.
-
-To check out additional repositories from within your job, make sure the private key is added to the CircleCI project and listed in `add_ssh_keys`. The public key must also be added to each additional repository that you want to check out from within your job. Run the `checkout` command *before* `add_ssh_keys`.
 
 [#add-the-host-to-known-hosts]
 === Add the host to known_hosts
@@ -140,6 +153,11 @@ endif::server[]
 * Your job connects to any other host, such as a deployment target.
 
 To add a host key, run `ssh-keyscan <host> >> ~/.ssh/known_hosts` in your job before the SSH connection. For steps to verify a host key, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#establish-the-authenticity-of-an-ssh-host[Establish the Authenticity of an SSH Host] section of the Users, Organizations, and Integrations Guide.
+
+[#self-hosted-runner-ssh-keys]
+=== Use SSH keys with a self-hosted runner
+
+For a self-hosted runner, ensure that you have an `ssh-agent` on your system to successfully use the `add_ssh_keys` step. The SSH key is written to `$HOME/.ssh/id_rsa_<fingerprint>`, where `$HOME` is the home directory of the user configured to execute jobs, and `<fingerprint>` is the MD5 fingerprint of the key. A host entry is also appended to `$HOME/.ssh/config`, along with a relevant `IdentityFile` option to use the key.
 
 [#adding-multiple-keys-with-blank-hostnames]
 === Adding multiple keys with blank hostnames
