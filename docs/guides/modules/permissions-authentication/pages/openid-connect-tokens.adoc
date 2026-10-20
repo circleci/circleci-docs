@@ -44,7 +44,7 @@ CircleCI provides three OpenID Connect ID tokens in environment variables. They 
 | `$CIRCLE_OIDC_TOKEN_V3`
 | Organization, project, and user, plus the checkout source and reference, and the config source and reference. Uses `:` as the separator instead of `/`.
 | Recommended for new setups. Your trust policy can check where the pipeline configuration comes from as well as the code it checks out.
-| Cloud only. Will be supported on Server from v5.0.
+| Cloud only
 |===
 --
 
@@ -794,7 +794,7 @@ The `oidc.circleci.com/vcs-origin` and `oidc.circleci.com/vcs-ref` claims are in
 
 Use `$CIRCLE_OIDC_TOKEN_V3` for new setups. For an existing trust policy, use the token that matches the `sub` format and claims in the policy until you migrate it.
 
-CircleCI sets all three variables in a job on Cloud. `$CIRCLE_OIDC_TOKEN_V3` is not yet available on Server. CircleCI does not create a V3 token when the pipeline has no checkout or config source.
+CircleCI sets all three variables in a job on Cloud. `$CIRCLE_OIDC_TOKEN_V3` is not available on Server. CircleCI does not create a V3 token when the pipeline has no checkout or config source.
 
 [.table-scroll]
 --
@@ -860,7 +860,7 @@ For more information about building open source projects on CircleCI, see the xr
 
 OIDC is supported from server v4.4+. However, OIDC is **not** supported if your server installation is in an air-gapped environment.
 
-`$CIRCLE_OIDC_TOKEN_V3` and the `--v3` CLI flag will be supported from server v5.0+.
+`$CIRCLE_OIDC_TOKEN_V3` and the `--v3` CLI flag are not available on server.
 
 [#next-steps]
 == Next steps
