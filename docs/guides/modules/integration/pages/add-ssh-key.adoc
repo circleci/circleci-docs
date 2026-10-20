@@ -7,7 +7,7 @@
 :page-description: Add additional SSH keys to your CircleCI project so jobs can deploy to servers, push commits, and check out other private repositories.
 :experimental:
 
-When CircleCI checks out your code, the credentials it uses reach only the repository that triggered the pipeline. If a job needs to deploy to a server, push a commit, or clone another private repository over SSH, it needs a second set of credentials. Add an additional SSH key to your project to give your jobs that access.
+When CircleCI checks out your code, the credentials it uses reach only the repository that triggered the pipeline. If a job needs to deploy to a server, push a commit, or clone another private repository over SSH, the job needs a second set of credentials. Add an additional SSH key to your project to give your jobs that access.
 
 [#why-add-additional-ssh-keys]
 == Why add additional SSH keys to a project?
@@ -29,7 +29,7 @@ Each key is stored encrypted in your project settings. A job can use a key only 
 How much access a job already has depends on how your pipeline checks out code.
 
 ifndef::server[]
-* GitHub App pipelines, including GitHub Enterprise Server (Preview), and Cursor Origin pipelines: CircleCI checks out code over HTTPS. CircleCI adds no SSH key or deploy key, so an additional SSH key is the way to give a job SSH access to other repositories or hosts.
+* GitHub App, GitHub App Server (Preview), and Cursor Origin pipelines: CircleCI checks out code over HTTPS. CircleCI adds no SSH key or deploy key, so an additional SSH key is the way to give a job SSH access to other repositories or hosts.
 * GitHub OAuth and Bitbucket Cloud pipelines: CircleCI creates a read-only deploy key for the single repository that triggered the pipeline.
 * GitLab pipelines: CircleCI creates an SSH key to check out the repository that triggered the pipeline.
 endif::server[]
