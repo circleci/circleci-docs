@@ -47,11 +47,9 @@ GitHub App::
 --
 include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[Insert steps from selecting an organization up to the Project Settings page]
 
-. In the sidebar, click *Triggers*.
-. Edit an existing GitHub App trigger or add a new GitHub App trigger.
+. In the sidebar, click *Project Setup*.
+. Find your pipeline and select the trigger you want to edit, or add a new trigger.
 . In the *Run on* dropdown list, select *PR opened or pushed to, default branch and tag pushes*.
-
-image::guides:ROOT:triggers/run-on-pr-opened-pushed-to.png[Trigger option to build pull requests]
 --
 GitHub OAuth app & Bitbucket Cloud::
 +
@@ -95,8 +93,8 @@ NOTE: The Cursor Origin integration is in beta.
 
 include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[Insert steps from selecting an organization up to the Project Settings page]
 
-. In the sidebar, click *Triggers*.
-. Edit an existing Cursor Origin trigger or add a new Cursor Origin trigger.
+. In the sidebar, click *Project Setup*.
+. Find your pipeline and select the trigger you want to edit, or add a new trigger.
 . In the *Run on* dropdown list, select *PR opened or pushed to, default branch and tag pushes*.
 
 For the full list of trigger event options available for Cursor Origin, see the xref:orchestrate:cursor-origin-trigger-event-options.adoc[Cursor Origin Trigger Event Options] page.
