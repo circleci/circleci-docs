@@ -5,6 +5,7 @@
 ** xref:services:onboarding-assistance.adoc[Onboarding assistance]
 ** xref:services:migration-assistance.adoc[Migration assistance]
 ** xref:services:config-review.adoc[Configuration review]
+** xref:services:config-translation.adoc[Configuration translation]
 ** xref:services:cost-optimization.adoc[Cost optimization]
 ** xref:services:technical-consultation.adoc[Technical consultation]
 ** xref:services:custom-service.adoc[Custom service]

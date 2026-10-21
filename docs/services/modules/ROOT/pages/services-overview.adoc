@@ -17,6 +17,7 @@ The following services are provided by the Field Engineering team:
 * xref:services:migration-assistance.adoc[Migration Assistance]
 * xref:services:onboarding-assistance.adoc[Onboarding Assistance]
 * xref:services:cost-optimization.adoc[Cost Optimization]
+* xref:services:config-translation.adoc[Configuration Translation]
 * xref:services:config-review.adoc[Configuration Review]
 * xref:services:optimization-assistance.adoc[Optimization Assistance]
 * xref:services:general-developer-training.adoc[General Developer Training]
