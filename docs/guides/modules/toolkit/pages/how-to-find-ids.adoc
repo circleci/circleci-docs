@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: "This page describes how customers can find IDs of various CircleCI elements."
+:page-description: Find CircleCI element IDs using the web app, API, or CLI. Covers user, organization, project, pipeline, workflow, and job IDs.
 :experimental:
 
 You may need to find the ID of specific CircleCI elements to perform various actions, including:
@@ -13,7 +13,7 @@ You may need to find the ID of specific CircleCI elements to perform various act
 - Running a command from the local CircleCI CLI.
 - Identifying a CircleCI element in logs or webhook payloads.
 
-NOTE: This guide covers finding IDs in the CircleCI web app, or from environment variables. It is also possible to find IDs via the xref:api-intro.adoc[CircleCI APIs].
+NOTE: The API and CLI methods on this page require a CircleCI personal API token. See xref:toolkit:managing-api-tokens.adoc[Managing API Tokens] for setup instructions. Set your token as an environment variable before using any API or CLI command: `export CIRCLE_TOKEN=<your-api-token>`.
 
 == Get IDs from the built-in environment variables
 
@@ -35,8 +35,13 @@ image::guides:ROOT:ids-from-env-vars.png[IDs available from built-in environment
 
 == Find your user ID
 
-The user ID is a unique identifier for a user. Follow these steps to find it in the CircleCI web app:
+The user ID is a unique identifier for a user.
 
+[tabs]
+====
+Web app::
++
+--
 ifndef::server[]
 . In the CircleCI application, go to your link:https://app.circleci.com/settings/user[User settings, window=_blank].
 endif::server[]
@@ -45,30 +50,268 @@ ifdef::server[]
 endif::server[]
 . On the menu:Account Integrations[] page, locate the **User ID** label.
 . Note the value or select the btn:[Copy] icon next to your user ID.
+--
+API v3::
++
+--
+NOTE: API v3 is not available on CircleCI Server. Use the API v2 tab instead.
+
+To return your user profile, including your user ID:
+
+[source,shell]
+----
+curl -g 'https://circleci.com/api/v3/users?filter[user_id]=me' \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
+----
+
+The response includes your user ID in the `data[0].id` field:
+
+[source,json]
+----
+{
+  "data": [
+    {
+      "id": "<your-user-id>",
+      "attributes": {
+        "login": "your-login",
+        "name": "Your Name"
+      }
+    }
+  ]
+}
+----
+--
+API v2::
++
+--
+To return your user profile, including your user ID:
+
+[source,shell]
+----
+curl 'https://circleci.com/api/v2/me' \
+  --header "Circle-Token: $CIRCLE_TOKEN" | jq .
+----
+
+The response includes your user ID in the `id` field:
+
+[source,json]
+----
+{
+  "id": "<your-user-id>",
+  "login": "your-login",
+  "name": "Your Name"
+}
+----
+--
+CLI::
++
+--
+To return your user ID:
+
+[source,console]
+----
+$ circleci auth me --json --jq '.id'
+----
+--
+====
 
 
 == Find an organization ID
 
 The organization ID is a unique identifier for an organization.
 
-You can access the organization ID through the `CIRCLE_ORGANIZATION_ID` xref:get-ids-from-the-built-in-environment-variables[Built-In Environment Variable]. Alternatively, follow these steps to find it in the CircleCI web app:
+You can access the organization ID through the `CIRCLE_ORGANIZATION_ID` xref:get-ids-from-the-built-in-environment-variables[Built-In Environment Variable], or use one of the following methods to find it.
 
+[tabs]
+====
+Web app::
++
+--
 include::guides:ROOT:partial$app-navigation/steps-to-org-id.adoc[]
+--
+API v3::
++
+--
+NOTE: API v3 is not available on CircleCI Server. Use the API v2 tab instead.
+
+To list all organizations you belong to, each with an `id` field:
+
+[source,shell]
+----
+curl -g 'https://circleci.com/api/v3/orgs' \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
+----
+
+The response returns a list of organizations. The `id` field for each entry is the organization ID:
+
+[source,json]
+----
+{
+  "data": [
+    {
+      "id": "<your-org-id>",
+      "attributes": {
+        "name": "my-org",
+        "slug": "gh/my-org"
+      }
+    }
+  ]
+}
+----
+
+To extract only the IDs:
+
+[source,shell]
+----
+curl -g 'https://circleci.com/api/v3/orgs' \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq '.data[].id'
+----
+--
+API v2::
++
+--
+To list all organizations (collaborations) you have access to, each with an `id` field:
+
+[source,shell]
+----
+curl 'https://circleci.com/api/v2/me/collaborations' \
+  --header "Circle-Token: $CIRCLE_TOKEN" | jq .
+----
+
+The response returns a list of collaborations. The `id` field for each entry is the organization ID:
+
+[source,json]
+----
+[
+  {
+    "id": "<your-org-id>",
+    "name": "my-org",
+    "slug": "gh/my-org",
+    "vcs-type": "github",
+    "avatar_url": "https://avatars.githubusercontent.com/..."
+  }
+]
+----
+--
+CLI::
++
+--
+To list all organizations you belong to:
+
+[source,console]
+----
+$ circleci org list --json
+----
+
+To extract only the IDs, append a `--jq` filter:
+
+[source,console]
+----
+$ circleci org list --json --jq '.[].id'
+----
+--
+====
 
 
 == Find a project ID
 
 The project ID is a unique identifier for a project.
 
-You can access the project ID through the `CIRCLE_PROJECT_ID` xref:get-ids-from-the-built-in-environment-variables[Built-In Environment Variable]. Alternatively, follow these steps to find it in the CircleCI web app:
+You can access the project ID through the `CIRCLE_PROJECT_ID` xref:get-ids-from-the-built-in-environment-variables[Built-In Environment Variable], or use one of the following methods to find it.
 
+[tabs]
+====
+Web app::
++
+--
 include::guides:ROOT:partial$app-navigation/steps-to-project-id.adoc[]
+--
+API v3::
++
+--
+NOTE: API v3 is not available on CircleCI Server. Use the API v2 tab instead.
+
+To list projects in your organization, replace `<your-org-id>` with your organization ID:
+
+[source,shell]
+----
+curl -g 'https://circleci.com/api/v3/projects?filter[org_id]=<your-org-id>' \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
+----
+
+The response returns a list of projects. The `id` field for each entry is the project ID:
+
+[source,json]
+----
+{
+  "data": [
+    {
+      "id": "<your-project-id>",
+      "attributes": {
+        "name": "my-repo",
+        "slug": "gh/my-org/my-repo"
+      }
+    }
+  ]
+}
+----
+
+To look up a single project by its slug:
+
+[source,shell]
+----
+curl -g 'https://circleci.com/api/v3/projects?filter[slug]=gh/my-org/my-repo' \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq '.data[0].id'
+----
+--
+API v2::
++
+--
+To return details for a specific project, replace `<project-slug>` with your project slug (for example, `gh/my-org/my-repo`):
+
+[source,shell]
+----
+curl 'https://circleci.com/api/v2/project/<project-slug>' \
+  --header "Circle-Token: $CIRCLE_TOKEN" | jq .
+----
+
+The response includes the project ID in the `id` field:
+
+[source,json]
+----
+{
+  "id": "<your-project-id>",
+  "slug": "gh/my-org/my-repo",
+  "name": "my-repo",
+  "organization_name": "my-org"
+}
+----
+--
+CLI::
++
+--
+To return the project ID for the current repository:
+
+[source,console]
+----
+$ circleci project get --json --jq '.id'
+----
+
+To look up a specific project by slug:
+
+[source,console]
+----
+$ circleci project list --slug gh/my-org/my-repo --json --jq '.[0].id'
+----
+--
+====
+
 
 == Find a pipeline ID
 
-The pipeline ID is a unique identifier for a pipeline that has been triggered.
+The pipeline ID is a unique identifier for a pipeline run.
 
-You can access the pipeline ID through the `CIRCLE_PIPELINE_ID` xref:get-ids-from-the-built-in-environment-variables[Built-In Environment Variable]. Alternatively, follow these steps to find it in the CircleCI web app:
+You can access the pipeline ID through the `CIRCLE_PIPELINE_ID` xref:get-ids-from-the-built-in-environment-variables[Built-In Environment Variable], or use one of the following methods to find it.
 
 
 [tabs]
@@ -112,15 +355,93 @@ From the job page::
 +
 .Copy pipeline ID from job page
 image::guides:ROOT:pipeline-id-from-job.png[Copy pipeline ID from job page]
+
+Via API v3::
++
+--
+NOTE: API v3 is not available on CircleCI Server. Use the API v2 tab instead. API v3 uses the term *run* for a pipeline run. The run ID corresponds to the `CIRCLE_PIPELINE_ID` environment variable.
+
+To list recent runs for a project, replace `<your-project-id>` with your project ID:
+
+[source,shell]
+----
+curl -g 'https://circleci.com/api/v3/runs?filter[project_id]=<your-project-id>&page[limit]=10' \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq '.data[] | {id: .id, branch: .attributes.branch}'
+----
+
+The `id` field for each run is the pipeline ID:
+
+[source,json]
+----
+{
+  "data": [
+    {
+      "id": "<your-pipeline-id>",
+      "attributes": {
+        "branch": "main",
+        "created_at": "2026-01-15T10:00:00Z"
+      }
+    }
+  ]
+}
+----
+--
+
+Via API v2::
++
+--
+To list recent pipelines for a project, replace `<project-slug>` with your project slug (for example, `gh/my-org/my-repo`):
+
+[source,shell]
+----
+curl 'https://circleci.com/api/v2/project/<project-slug>/pipeline' \
+  --header "Circle-Token: $CIRCLE_TOKEN" | jq '.items[] | {id: .id, branch: .vcs.branch}'
+----
+
+The `id` field for each pipeline is the pipeline ID:
+
+[source,json]
+----
+{
+  "items": [
+    {
+      "id": "<your-pipeline-id>",
+      "vcs": {
+        "branch": "main"
+      },
+      "created_at": "2026-01-15T10:00:00Z"
+    }
+  ]
+}
+----
+--
+
+Via CLI::
++
+--
+To list recent pipeline run IDs for the current project:
+
+[source,console]
+----
+$ circleci run list --json --jq '.[].id'
+----
+
+To filter by branch:
+
+[source,console]
+----
+$ circleci run list --branch main --json --jq '.[].id'
+----
+--
 ====
 
 
 
 == Find a workflow ID
 
-The workflow ID is a unique identifier for a workflow that has been triggered.
+The workflow ID is a unique identifier for a triggered workflow.
 
-You can access the workflow ID through the `CIRCLE_WORKFLOW_ID` xref:get-ids-from-the-built-in-environment-variables[Built-In Environment Variable]. Alternatively, follow these steps to find it in the CircleCI web app:
+You can access the workflow ID through the `CIRCLE_WORKFLOW_ID` xref:get-ids-from-the-built-in-environment-variables[Built-In Environment Variable], or use one of the following methods to find it.
 
 [tabs]
 ====
@@ -149,12 +470,230 @@ From the job URL::
 +
 .Workflow ID in job page URL
 image::guides:ROOT:workflow-id-from-job-url.png[Get workflow ID from job page URL]
+
+Via API v3::
++
+--
+NOTE: API v3 is not available on CircleCI Server. Use the API v2 tab instead.
+
+To list workflows for a run, replace `<your-run-id>` with your pipeline ID (referred to as a run ID in API v3):
+
+[source,shell]
+----
+curl -g 'https://circleci.com/api/v3/workflows?filter[run_id]=<your-run-id>' \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq '.data[] | {id: .id, name: .attributes.name}'
+----
+
+The `id` field for each workflow is the workflow ID:
+
+[source,json]
+----
+{
+  "data": [
+    {
+      "id": "<your-workflow-id>",
+      "attributes": {
+        "name": "build-and-test",
+        "phase": "ended",
+        "outcome": "succeeded"
+      }
+    }
+  ]
+}
+----
+--
+
+Via API v2::
++
+--
+To list workflows for a pipeline, replace `<pipeline-id>` with your pipeline ID:
+
+[source,shell]
+----
+curl 'https://circleci.com/api/v2/pipeline/<pipeline-id>/workflow' \
+  --header "Circle-Token: $CIRCLE_TOKEN" | jq '.items[] | {id: .id, name: .name}'
+----
+
+The `id` field for each workflow is the workflow ID:
+
+[source,json]
+----
+{
+  "items": [
+    {
+      "id": "<your-workflow-id>",
+      "name": "build-and-test",
+      "status": "success",
+      "pipeline_id": "<your-pipeline-id>"
+    }
+  ]
+}
+----
+--
+
+Via CLI::
++
+--
+To list workflow IDs for the latest run on the current branch:
+
+[source,console]
+----
+$ circleci run get --json --jq '.workflows[].id'
+----
+
+To list workflow IDs for a specific run, use the run UUID:
+
+[source,console]
+----
+$ circleci workflow list <run-uuid> --json --jq '.[].id'
+----
+--
 ====
+
+
+== Find a job ID
+
+The job ID is a unique identifier for a job execution.
+
+You can access the job ID through the `CIRCLE_WORKFLOW_JOB_ID` xref:get-ids-from-the-built-in-environment-variables[Built-In Environment Variable], or use one of the following methods to find it.
+
+[tabs]
+====
+Via API v3::
++
+--
+NOTE: API v3 is not available on CircleCI Server. Use the API v2 tab instead.
+
+To list jobs in a workflow, replace `<your-workflow-id>` with your workflow ID:
+
+[source,shell]
+----
+curl -g 'https://circleci.com/api/v3/jobs?filter[workflow_id]=<your-workflow-id>' \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq '.data[] | {id: .id, name: .attributes.name}'
+----
+
+The `id` field for each job is the job ID:
+
+[source,json]
+----
+{
+  "data": [
+    {
+      "id": "<your-job-id>",
+      "attributes": {
+        "name": "build",
+        "phase": "ended",
+        "outcome": "succeeded"
+      }
+    }
+  ]
+}
+----
+--
+
+Via API v2::
++
+--
+To list jobs in a workflow, replace `<workflow-id>` with your workflow ID:
+
+[source,shell]
+----
+curl 'https://circleci.com/api/v2/workflow/<workflow-id>/job' \
+  --header "Circle-Token: $CIRCLE_TOKEN" | jq '.items[] | {id: .id, name: .name}'
+----
+
+The `id` field for each job is the job ID:
+
+[source,json]
+----
+{
+  "items": [
+    {
+      "id": "<your-job-id>",
+      "name": "build",
+      "status": "success",
+      "job_number": 1
+    }
+  ]
+}
+----
+--
+
+Via CLI::
++
+--
+To list job IDs for the latest run on the current branch:
+
+[source,console]
+----
+$ circleci run get --json --jq '.workflows[].jobs[].id'
+----
+
+To list job IDs for a specific workflow, use the workflow UUID:
+
+[source,console]
+----
+$ circleci workflow get <workflow-uuid> --json --jq '.jobs[].id'
+----
+--
+====
+
 
 ifndef::server[]
 == Find a pipeline definition ID
 
-The pipeline definition ID is a unique identifier for a pipeline definition. Follow these steps to find it in the CircleCI web app:
+The pipeline definition ID is a unique identifier for a pipeline definition.
 
+[tabs]
+====
+Web app::
++
+--
 include::guides:ROOT:partial$app-navigation/steps-to-pipeline-definition-id.adoc[]
+--
+API v3::
++
+--
+To list pipeline definitions for a project, replace `<your-project-id>` with your project ID:
+
+[source,shell]
+----
+curl -g 'https://circleci.com/api/v3/pipelines?filter[project_id]=<your-project-id>' \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq '.data[] | {id: .id, name: .attributes.name}'
+----
+
+The `id` field for each pipeline definition is the pipeline definition ID:
+
+[source,json]
+----
+{
+  "data": [
+    {
+      "id": "<your-pipeline-definition-id>",
+      "attributes": {
+        "name": "my-pipeline"
+      }
+    }
+  ]
+}
+----
+--
+CLI::
++
+--
+To list pipeline definitions for the current project:
+
+[source,console]
+----
+$ circleci pipeline list --json --jq '.[].id'
+----
+
+To list pipeline definitions for a specific project:
+
+[source,console]
+----
+$ circleci pipeline list --project gh/my-org/my-repo --json --jq '.[].id'
+----
+--
+====
 endif::server[]
