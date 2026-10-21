@@ -35,7 +35,7 @@ endif::server[]
 
 Your browser remembers the version you choose. If you leave the guides for another part of the docs, such as Reference or Orbs, and then come back, you return to the version you chose last.
 
-Only the guides have a Server version. The Reference, Orbs, and Runner sections have one version, which describes CircleCI Cloud. To install and run CircleCI Server, see the xref:server-admin:overview:circleci-server-overview.adoc[CircleCI Server Overview].
+Only the guides have separate Cloud and Server versions. The Reference, Orbs, and Runner sections have one version that covers both Cloud and Server, with notes where Server is different. To install and run CircleCI Server, see the xref:server-admin:overview:circleci-server-overview.adoc[CircleCI Server Overview].
 
 [#find-out-which-circleci-product-you-use]
 == Find out which CircleCI product you use
