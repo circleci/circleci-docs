@@ -3539,7 +3539,7 @@ Only run the job on the project's `main` branch, or branches starting with `inte
 filters: pipeline.git.branch == "main" or pipeline.git.branch starts-with "integration-test"
 ----
 
-Only run the job on the `main` branch, and disallow use with pipelines xref:guides:toolkit:vs-code-extension-overview.adoc#test-run-your-config-from-vs-code[Triggered With Unversioned Configuration]:
+Only run the job on the `main` branch, and disallow use with pipelines triggered with unversioned configuration:
 
 [source,yml]
 ----

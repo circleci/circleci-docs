@@ -148,16 +148,6 @@ The table below is not a full list of CircleCI features. Only features where the
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 
-| xref:toolkit:vs-code-extension-overview.adoc#test-run-your-config-from-vs-code[Test Run Config From VS Code]
-| Configuration
-| [.circle-red]#**No**#
-| [.circle-red]#**No**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-| [.circle-red]#**No**#
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
 
 | *View your configuration file in the CircleCI web app*
 | Configuration
