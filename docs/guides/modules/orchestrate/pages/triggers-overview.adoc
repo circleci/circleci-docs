@@ -185,9 +185,12 @@ ifndef::server[]
 NOTE: Schedule triggers are not available for GitLab pipelines.
 endif::server[]
 
-Schedule triggers allow you to trigger pipelines periodically based on a schedule. To get this set up for a project you can either use the CircleCI web app or use the API.
 ifndef::server[]
+Schedule triggers allow you to trigger pipelines periodically based on a schedule. To get this set up for a project you can either use the CircleCI web app or use the API.
 For full details of both methods see the xref:schedule-triggers.adoc[Schedule Triggers] docs.
+endif::server[]
+ifdef::server[]
+To run a pipeline on a schedule, use a scheduled workflow. Add a `triggers` key with a `cron` schedule to the workflow in your `.circleci/config.yml` file. See xref:workflows.adoc#scheduling-a-workflow[Scheduling a Workflow].
 endif::server[]
 
 == GitHub webhook settings
