@@ -7,7 +7,7 @@
     {{#each navList}}
       <li
         data-dropdown-option
-        class="ml-2 p-[8px] hover:bg-fog cursor-pointer rounded-lg max-w-fit"
+        class="ml-2 mr-2 p-[8px] hover:bg-fog cursor-pointer rounded-lg max-w-fit"
         role="option"
         data-value="{{./value}}"
         data-label="{{./label}}"
@@ -25,7 +25,7 @@
     {{/each}}
     {{#if footerUrl}}
       <li role="separator" class="mx-2 my-2 border-t border-vapor"></li>
-      <li class="ml-2 p-[8px] hover:bg-fog rounded-lg max-w-fit">
+      <li class="ml-2 mr-2 p-[8px] hover:bg-fog rounded-lg max-w-fit">
         <a href="{{{relativize footerUrl}}}" class="inline-flex items-center gap-1.5">{{footerLabel}}
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
         </a>
