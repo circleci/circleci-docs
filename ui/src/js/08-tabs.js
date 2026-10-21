@@ -3,8 +3,8 @@
 
   var config = (document.currentScript || {}).dataset || {}
   var forEach = Array.prototype.forEach
-  // CircleCI: pages in the guides Server build open synced tab groups on their
-  // "Server" tab (the version name is set by guides-versions-extension.js).
+  // CircleCI: on pages whose navigation has data-tversion="server" (the guides
+  // Server build), synced tab groups open on their "Server" tab.
   var pageNavigation = document.querySelector('[data-page-navigation]')
   var defaultSyncId = pageNavigation && pageNavigation.dataset.tversion === 'server' ? 'Server' : undefined
 
