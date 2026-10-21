@@ -166,18 +166,6 @@ When handling custom webhook requests, we use the "config branch" and "checkout 
 GitHub does not provide documented consistency guarantees for their API responses. There can be a brief delay (typically seconds) between when a commit is pushed and when the API returns the updated reference, especially with larger repositories. As a result, when fetching a branch reference, you may receive a slightly outdated commit rather than the most recent one.
 ****
 
-[#trigger-a-pipeline-from-vs-code-with-unversioned-config]
-== Trigger a pipeline from VS Code with unversioned config
-
-NOTE: The ability to trigger a pipeline from VS Code with an _unversioned_ config is currently in **Open Preview**.
-
-Trigger pipelines from VS Code to iterate on your CircleCI config without committing your trial and error changes to your version control system. Run and validate your full pipeline, or select jobs and workflows to validate individually. View the results of your test runs in the extension pipelines panel or in the CircleCI web app, just the same as any other pipeline.
-
-For full details, see the xref:toolkit:vs-code-extension-overview.adoc#test-run-your-config-from-vs-code[VS Code Extension Overview].
-
-.Screenshot showing the VS Code extension run panel
-image::guides:ROOT:vscode-ext-config-test-run-crop.png[Screenshot showing the run panel]
-
 [#schedule-a-pipeline]
 == Schedule a pipeline
 
