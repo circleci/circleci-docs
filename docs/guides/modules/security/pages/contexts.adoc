@@ -524,11 +524,11 @@ Allow the context only on the project's `main` branch, or branches starting with
 pipeline.git.branch == "main" or pipeline.git.branch starts-with "integration-test"
 ----
 
-Restrict a context to the `main` branch, disallow use in an SSH rerun, and disallow use with pipelines triggered with unversioned configuration:
+Restrict a context to the `main` branch and disallow use in an SSH rerun:
 
 [source]
 ----
-pipeline.git.branch == "main" and not job.ssh.enabled and not (pipeline.config_source starts-with "api")
+pipeline.git.branch == "main" and not job.ssh.enabled
 ----
 
 [#variables]
