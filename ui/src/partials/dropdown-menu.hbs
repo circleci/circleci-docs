@@ -23,4 +23,10 @@
         {{/if}}
       </li>
     {{/each}}
+    {{#if footerUrl}}
+      <li role="separator" class="mx-2 my-2 border-t border-vapor"></li>
+      <li class="ml-2 p-[8px] hover:bg-fog rounded-lg max-w-fit">
+        <a href="{{{relativize footerUrl}}}">{{footerLabel}}</a>
+      </li>
+    {{/if}}
   </ul>

@@ -28,6 +28,13 @@ module.exports = (component, { data: { root } }) => {
     navList.push(item)
   })
 
-  // return the constructed nav list and the selected item
-  return { navList, selected }
+  // The guides switcher links to the page that explains the versions, in the
+  // version being read.
+  const current = root.page.componentVersion.version
+  const aboutUrl = component.name === 'guides'
+    ? `/guides/${current ? current + '/' : ''}about-circleci/about-cloud-and-server-docs/`
+    : undefined
+
+  // return the constructed nav list, the selected item, and the about page
+  return { navList, selected, aboutUrl }
 }
