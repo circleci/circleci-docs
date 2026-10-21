@@ -13,7 +13,7 @@ Using the machine executor gives your application full access to OS resources an
 
 To use the machine executor, use the xref:reference:ROOT:configuration-reference.adoc#machine[`machine` key] in your job configuration and specify an image:
 
-[tabs]
+[tabs%sync,sync-group-id=platform]
 ====
 Cloud::
 +

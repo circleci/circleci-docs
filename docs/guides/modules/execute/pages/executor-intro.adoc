@@ -71,7 +71,7 @@ Find out more about the Docker execution environment on the xref:using-docker.ad
 
 To access the Linux VM execution environment, use the `machine` executor and specify a Linux image. For a full list of `machine` images, see the link:https://circleci.com/developer/images?imageType=machine[CircleCI Developer Hub].
 
-[tabs]
+[tabs%sync,sync-group-id=platform]
 ====
 Cloud::
 +
@@ -134,7 +134,7 @@ To access the Windows execution environment, you can either:
 
 For a full list of `machine` images, see the link:https://circleci.com/developer/images?imageType=machine[CircleCI Developer Hub].
 
-[tabs]
+[tabs%sync,sync-group-id=platform]
 ====
 Cloud with orb::
 +
@@ -268,7 +268,7 @@ Find out more about the GPU execution environment on the xref:using-gpu.adoc[Usi
 
 To access the Arm VM execution environment, use the `machine` executor as detailed below, and specify either the `arm.medium` or the `arm.large` resource class. For a full list of `machine` images, see the link:https://circleci.com/developer/images?imageType=machine[CircleCI Developer Hub].
 
-[tabs]
+[tabs%sync,sync-group-id=platform]
 ====
 Cloud::
 +
@@ -302,9 +302,11 @@ workflows:
       - build-large
 ----
 --
-Server on AWS::
+Server::
 +
 --
+Arm resources on CircleCI Server are only available on installations that use AWS EC2.
+
 [,yml]
 ----
 # .circleci/config.yml

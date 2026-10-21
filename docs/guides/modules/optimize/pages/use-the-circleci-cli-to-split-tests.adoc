@@ -16,7 +16,7 @@ ifdef::server[]
 Test splitting requires the CircleCI environment CLI together with parallelism. The environment CLI commands `circleci tests glob` and `circleci tests split` are used to define your test suite and allocate tests across multiple environments. The environment CLI is automatically injected into your job at run-time, so there is no further setup required to use the `circleci tests` commands.
 endif::server[]
 
-NOTE: The `circleci tests` commands are part of the environment CLI as they require information that only exists within a CircleCI container. `circleci tests` commands are not available in the xref:toolkit:local-cli.adoc[CircleCI CLI].
+NOTE: The `circleci tests` commands are part of the environment CLI as they require information that only exists within a CircleCI container. `circleci tests` commands are not available in the xref:toolkit:local-cli.adoc[CircleCI CLI] that you install locally.
 
 NOTE: xref:runner:ROOT:runner-overview.adoc[Self-Hosted Runners] can invoke `circleci-agent` directly instead of using the CLI to split tests. The xref:runner:ROOT:runner-overview.adoc#circleci-self-hosted-runner-operation[task-agent] already exists on the `$PATH`, which removes an additional dependency when splitting tests.
 

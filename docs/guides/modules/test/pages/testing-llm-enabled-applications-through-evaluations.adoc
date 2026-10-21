@@ -1,8 +1,7 @@
 = Testing LLM-enabled applications through evaluations
-:page-platform: Cloud, Server
+:page-platform: Cloud
 :page-vcs: all
 :page-plan: Free, Performance, Scale
-:page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Test applications powered by large language models (LLMs) with evaluations, and automate evals in your CircleCI pipelines with the CircleCI Evals orb.
 :experimental:

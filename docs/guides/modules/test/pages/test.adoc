@@ -23,6 +23,7 @@ A pipeline might consist of a single workflow, with a single job defined that in
 
 include::ROOT:partial$notes/docker-auth.adoc[]
 
+.Run tests directly in CI
 [,yaml]
 ----
 jobs:
@@ -45,7 +46,7 @@ This example runs your test command directly. On CircleCI Cloud, the recommended
 
 For example, for a project that uses Vitest, the job runs `circleci testsuite run` in place of the test command:
 
-.`.circleci/config.yml`
+.`.circleci/config.yml` using Smarter Testing
 [,yaml]
 ----
 jobs:
@@ -75,13 +76,15 @@ run: npx vitest run --reporter=junit --outputFile="<< outputs.junit >>" --silent
 outputs:
   junit: test-reports/junit.xml
 ----
+
 endif::server[]
 ifdef::server[]
-This example runs your test command directly. To split your tests across parallel execution nodes, see <<choose-your-test-tooling,Choose your test tooling>>.
+
+The previous example runs your test command directly. To split your tests across parallel execution nodes, use test splitting and parallelism. See <<choose-your-test-tooling,Choose your test tooling>>.
 
 For example, for a project that uses Vitest, the following job splits the test files across four parallel execution nodes using timing data from previous runs:
 
-.`.circleci/config.yml`
+.Run tests with test splitting and parallelism
 [,yaml]
 ----
 jobs:
@@ -103,12 +106,7 @@ jobs:
 ----
 endif::server[]
 
-ifndef::server[]
-Depending on your requirements, you might have more complex workflows that orchestrate multiple jobs. For example, you might have several concurrent jobs for building and testing your project in separate Linux, macOS, and Windows execution environments. You might also want to require that a test job is run only if a preceding build job is successful.
-endif::server[]
-ifdef::server[]
 Depending on your requirements, you might have more complex workflows that orchestrate multiple jobs. For example, you might have several concurrent jobs for building and testing your project in separate Linux and Windows execution environments. You might also want to require that a test job is run only if a preceding build job is successful.
-endif::server[]
 
 For a more in-depth look at workflows functionality, visit the xref:orchestrate:workflows.adoc[Workflows] page. You can also refer to the xref:toolkit:sample-config.adoc[Sample configuration] page for more workflow examples.
 
@@ -121,12 +119,7 @@ endif::server[]
 
 The *Timing* tab in the *Job Details* UI shows how long each step of a job took. Use it to identify which steps take the most time, so that you can make targeted improvements to reduce overall runtime.
 
-ifndef::server[]
-When a job runs with xref:use-static-test-splitting.adoc[Parallelism and Test Splitting] enabled, the *Timing* tab shows the timing of each parallel run.
-endif::server[]
-ifdef::server[]
-When a job runs with xref:optimize:parallelism-faster-jobs.adoc[Parallelism and Test Splitting] enabled, the *Timing* tab shows the timing of each parallel run.
-endif::server[]
+When a job runs with parallelism and test splitting, the *Timing* tab shows the timing of each parallel run.
 
 .Timing tab, parallel runs
 image::guides:ROOT:parallel-runs-timing-tests.png[Timing tab, parallel runs]
