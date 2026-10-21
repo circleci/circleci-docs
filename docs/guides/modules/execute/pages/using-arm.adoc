@@ -10,7 +10,7 @@
 
 You can access the Arm VM (virtual machine) execution environment for a job by using the machine executor and specifying a Linux virtual machine image that includes Arm resources. You then specify an Arm resource class.
 
-[tabs]
+[tabs%sync,sync-group-id=platform]
 ====
 Cloud::
 +

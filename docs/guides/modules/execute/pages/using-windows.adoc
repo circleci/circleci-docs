@@ -29,7 +29,7 @@ Configuration options for using the Windows execution environment are shown belo
 
 
 
-[tabs]
+[tabs%sync,sync-group-id=platform]
 ====
 Cloud::
 +
@@ -118,7 +118,7 @@ endif::server[]
 
 include::ROOT:partial$execution-resources/windows-resource-table.adoc[]
 
-[tabs]
+[tabs%sync,sync-group-id=platform]
 ====
 Cloud with orb::
 +
@@ -220,7 +220,7 @@ You can use one of three shells to run job steps on Windows:
 
 You can configure the shell at the job level or at the step level. It is possible to use multiple shells in the same job. Consider the example below, where we use Bash, PowerShell, and CMD by adding a `shell:` argument to our `job` and `step` declarations:
 
-[tabs]
+[tabs%sync,sync-group-id=platform]
 ====
 Cloud::
 +
@@ -277,7 +277,7 @@ jobs:
 
 NOTE: It is possible to install updated or other Windows shell-tooling. For example, you could install the latest version of PowerShell Core with the `dotnet` CLI and use it in a job's successive steps:
 
-[tabs]
+[tabs%sync,sync-group-id=platform]
 ====
 Cloud::
 +
@@ -323,7 +323,7 @@ jobs:
 
 You can run Windows Docker containers on the Windows executor like so:
 
-[tabs]
+[tabs%sync,sync-group-id=platform]
 ====
 Cloud::
 +
