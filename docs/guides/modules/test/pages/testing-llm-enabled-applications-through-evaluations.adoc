@@ -146,6 +146,7 @@ image::guides:ROOT:llmops/eval-job-eval-test-step.png[Evaluation testing: Job St
 .Evaluation testing: Test Failure Details
 image::guides:ROOT:llmops/eval-test-fail-detail.png[Evaluation testing: Test Failure Details]
 
+ifndef::server[]
 == Store credentials for your evaluations
 Store your credentials for LLM providers and LLMOps tools in CircleCI. Storing credentials in this way allows you to access them directly when configuring your pipeline.
 
@@ -159,6 +160,7 @@ To store your LLM provider credentials, follow these steps:
 image::guides:ROOT:llmops/create-context.png[Project Settings > LLMOps: Create Context Modal Window in CircleCI]
 .Project Settings > LLMOps: View contexts in CircleCI
 image::guides:ROOT:llmops/openai-context.png[Project Settings > LLMOps: View contexts in CircleCI]
+endif::server[]
 
 == Next steps
 
