@@ -3539,12 +3539,6 @@ Only run the job on the project's `main` branch, or branches starting with `inte
 filters: pipeline.git.branch == "main" or pipeline.git.branch starts-with "integration-test"
 ----
 
-Only run the job on the `main` branch, and disallow use with pipelines triggered with unversioned configuration:
-
-[source,yml]
-----
-filters: pipeline.git.branch == "main" and not (pipeline.trigger_source starts-with "api")
-----
 
 Use pipeline parameters and the pipeline value `pipeline.git.branch` to run a job only on specific branches **or** when triggered via the API with a pipeline parameter set to true:
 
