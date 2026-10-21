@@ -2,7 +2,7 @@ module github.com/circleci/circleci-docs/scripts/generate-api-markdown
 
 go 1.26.10
 
-require github.com/getkin/kin-openapi v0.149.0
+require github.com/getkin/kin-openapi v0.151.0
 
 require (
 	github.com/go-openapi/jsonpointer v0.22.5 // indirect
