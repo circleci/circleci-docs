@@ -250,31 +250,42 @@ function cloneFile (file, contents) {
 }
 
 // Removes nav lines that link to dropped pages. A parent line left with no
-// children and no link of its own is removed too. A line may name the guides
-// component (`xref:guides:module:page.adoc`); lines into other components are
+// children and no link of its own is removed too, and so is a parent whose
+// guides pages were all dropped, together with any links it still holds into
+// other components. A line may name the guides component
+// (`xref:guides:module:page.adoc`); lines into other components are otherwise
 // kept.
 function pruneNav (source, droppedPages) {
   const lines = source.split('\n')
-  const keep = lines.map((line) => {
+  // For each line: whether it links to a guides page, and whether that page is dropped.
+  const targets = lines.map((line) => {
     const m = line.match(/xref:(?:([\w-]+):)?(?:([\w-]+):)?([^:[\s]+\.adoc)\[/)
-    if (!m) return true
+    if (!m) return null
     const [component, moduleName] = m[2] ? [m[1], m[2]] : [COMPONENT, m[1]]
-    if (component !== COMPONENT) return true
-    return !droppedPages.has(`${moduleName || 'ROOT'}:${m[3]}`)
+    if (component !== COMPONENT) return { guides: false }
+    return { guides: true, dropped: droppedPages.has(`${moduleName || 'ROOT'}:${m[3]}`) }
   })
+  const keep = targets.map((target) => !(target && target.dropped))
   const depth = (line) => (line.match(/^(\*+)\s/) || [, ''])[1].length
   for (let i = lines.length - 1; i >= 0; i--) {
     if (!keep[i]) continue
     const d = depth(lines[i])
     if (!d || /xref:|link:/.test(lines[i])) continue
+    let end = i + 1
+    while (end < lines.length && depth(lines[end]) > d) end++
     let hasChild = false
-    for (let j = i + 1; j < lines.length && depth(lines[j]) > d; j++) {
-      if (keep[j]) {
-        hasChild = true
-        break
+    let keptGuides = false
+    let droppedGuides = false
+    for (let j = i + 1; j < end; j++) {
+      if (keep[j]) hasChild = true
+      if (targets[j] && targets[j].guides) {
+        if (targets[j].dropped) droppedGuides = true
+        else keptGuides = true
       }
     }
-    if (!hasChild) keep[i] = false
+    if (!hasChild || (droppedGuides && !keptGuides)) {
+      for (let j = i; j < end; j++) keep[j] = false
+    }
   }
   return lines.filter((_, i) => keep[i]).join('\n')
 }
