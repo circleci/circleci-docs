@@ -16,6 +16,7 @@ module.exports = (component, { data: { root } }) => {
     const pageVersion = pageVersions[version]
     const item = {
       name: version,
+      value: version,
       label: displayVersion,
       url: pageVersion ? pageVersion.url : url,
       items: [],
