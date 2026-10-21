@@ -13,7 +13,7 @@ A CircleCI pipeline is generally defined by a CircleCI configuration file. You c
 
 Running your GitHub Actions workflow as it is helps when you want to move work onto CircleCI without rewriting your configuration first. It also lets you compare the two platforms using the same workflow. A subset of GitHub Actions features is supported. Before you start, check the <<github-actions-feature-support,GitHub Actions Feature Support>> section to confirm your workflow uses supported features.
 
-TIP: If you would rather convert your workflow into CircleCI syntax, see the xref:migrate:migrating-from-github.adoc[Migrate From GitHub Actions] page and the link:https://circleci.com/developer/tools/configTranslator[CircleCI configuration translator].
+TIP: If you would rather convert your workflow into CircleCI syntax, see the xref:migrate:migrating-from-github.adoc[Migrate From GitHub Actions] page.
 
 == Prerequisites
 

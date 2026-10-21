@@ -37,7 +37,7 @@ If your task does not match this guide, use this table to find the right page in
 | xref:runner:ROOT:runner-overview.adoc[Self-hosted Runner Overview]. Then install xref:runner:ROOT:install-machine-runner-3-on-linux.adoc[Machine Runner 3] on a VM (Server needs v4.4+), or xref:runner:ROOT:container-runner-installation.adoc[Container Runner] on Kubernetes.
 
 | Move from another CI tool
-| xref:migrate:migration-intro.adoc[Introduction to CircleCI Migration], then the matching migrate-from page. Use the link:https://circleci.com/developer/tools/configTranslator[CircleCI configuration translator] for GitHub Actions or GitLab.
+| xref:migrate:migration-intro.adoc[Introduction to CircleCI Migration], then the matching migrate-from page.
 
 | Connect an AI assistant to CircleCI
 | Cloud only. xref:toolkit:circleci-mcp-overview.adoc[CircleCI MCP Overview] first. Then connect the xref:toolkit:connecting-to-the-circleci-mcp-server.adoc[Hosted MCP Server] or the xref:toolkit:connecting-to-the-circleci-cli-mcp.adoc[CLI MCP]. Use the xref:toolkit:connecting-to-a-docs-mcp-server.adoc[Docs MCP] only to search documentation.
