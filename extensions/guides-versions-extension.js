@@ -250,13 +250,17 @@ function cloneFile (file, contents) {
 }
 
 // Removes nav lines that link to dropped pages. A parent line left with no
-// children and no link of its own is removed too.
+// children and no link of its own is removed too. A line may name the guides
+// component (`xref:guides:module:page.adoc`); lines into other components are
+// kept.
 function pruneNav (source, droppedPages) {
   const lines = source.split('\n')
   const keep = lines.map((line) => {
-    const m = line.match(/xref:(?:([\w-]+):)?([^:[\s]+\.adoc)\[/)
+    const m = line.match(/xref:(?:([\w-]+):)?(?:([\w-]+):)?([^:[\s]+\.adoc)\[/)
     if (!m) return true
-    return !droppedPages.has(`${m[1] || 'ROOT'}:${m[2]}`)
+    const [component, moduleName] = m[2] ? [m[1], m[2]] : [COMPONENT, m[1]]
+    if (component !== COMPONENT) return true
+    return !droppedPages.has(`${moduleName || 'ROOT'}:${m[3]}`)
   })
   const depth = (line) => (line.match(/^(\*+)\s/) || [, ''])[1].length
   for (let i = lines.length - 1; i >= 0; i--) {
