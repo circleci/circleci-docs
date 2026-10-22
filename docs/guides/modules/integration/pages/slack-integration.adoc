@@ -20,11 +20,11 @@ This guide explains how to:
 
 The Slack integration is the recommended way to set up workflow notifications in Slack for projects on CircleCI Cloud. It has several advantages over configuring notifications manually:
 
-* Install the Slack app once at the organization level, then turn it on per project.
+* Install the Slack app once at the organization level, then turn it on per project. No app setup is needed for every new project.
 * Notifications work without changes to your CircleCI config file. You do not need to add an orb or extra steps to your pipelines.
 * You do not need to create a Slack app or store OAuth tokens in a context or environment variable.
 * Link projects to channels and manage notification preferences from your project settings in the web app.
-* After you <<link-your-slack-identity,link your Slack identity>>, CircleCI sends workflow notifications to you directly and mentions you in the notifications for workflows you trigger.
+* After you <<link-your-slack-identity,link your Slack identity>>, CircleCI sends workflow notifications to you directly, not only to shared channels, and mentions you in the notifications for workflows you trigger.
 * Approve or cancel on-hold workflows directly from a Slack notification, without opening the CircleCI web app.
 
 == Limitations
@@ -48,7 +48,13 @@ To install the app, you need:
 include::ROOT:partial$tips/check-org-type.adoc[]
 * Approval from a Slack Workspace Admin to install the app in your workspace. If you are not a Slack Workspace Admin, you can request approval during installation.
 
-To link a project to a Slack channel or change its notification events, you need write permissions to the project. If you do not have them, the relevant controls are disabled in the CircleCI web app.
+To link a project to a Slack channel or change its notification events, you need write permissions to the project. With write permissions, you can:
+
+* Link the project to a Slack channel.
+* Update or remove the channel configuration.
+* Enable or disable notifications at the project level.
+
+If you do not have write permissions, the relevant controls are disabled in the CircleCI web app.
 
 [#install-the-slack-app]
 === 1. Install the CircleCI Slack app
@@ -93,7 +99,7 @@ To find a channel ID, open the channel in Slack and select the *Open channel det
 
 To update the channel, select the edit icon icon:edit-solid[Edit icon] next to the channel ID. To remove it, select the delete icon icon:delete[Delete icon].
 
-When you save a channel configuration, CircleCI posts a welcome message from the CircleCI bot to the configured channel. The message includes your project name and confirms the connection is working. If you add the same Slack channel to multiple projects, CircleCI sends one welcome message per project.
+When you save a channel configuration, CircleCI posts a welcome message from the CircleCI bot to the configured channel. The message includes your project name and confirms the connection is working. No manual verification is needed. If you add the same Slack channel to multiple projects, CircleCI sends one welcome message per project.
 
 .CircleCI Slack integration welcome message
 image::guides:ROOT:slack-integration-welcome-message.png[Screenshot of the CircleCI Slack integration welcome message]
@@ -133,7 +139,7 @@ After your organization installs the CircleCI Slack app, you can link your Slack
 [#link-your-slack-identity]
 === Link your Slack identity
 
-Linking your Slack identity connects your CircleCI user account to your identity in a Slack workspace that has the CircleCI Slack app installed. This enables direct message notifications, tagging in notifications, and approving a held workflow directly from Slack. Linking is optional.
+Linking your Slack identity connects your CircleCI user account to your identity in a Slack workspace that has the CircleCI Slack app installed. This enables direct message notifications, actor tagging, and approving a held workflow directly from Slack. Linking is optional.
 
 Each Slack identity link applies to a single Slack workspace. If you belong to multiple organizations that each have their own connected Slack workspace, link your identity separately for each one. A Slack identity can be linked to only one CircleCI user account at a time.
 
