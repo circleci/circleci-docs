@@ -179,8 +179,8 @@ After uploading all required binaries and files, the S3 bucket structure will be
 [source,text]
 ----
 circleci-data/
+├── release.txt
 ├── canary.txt
-├── candidate.txt
 ├── $CIRCLE_AGENT_VERSION/
 │   ├── checksums.txt
 │   └── linux/
