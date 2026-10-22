@@ -63,7 +63,7 @@ endif::env-aws[]
 [#create-a-vpc]
 == 2. Create a VPC
 
-NOTE: **Installing server locally?** You can skip this step, but ensure you follow the resourcing recommendation of using /18 CIDR blocks to ensure you have adequate capacity for both your Kubernetes Cluster and the provisioning of Nomad clients to run your jobs.
+NOTE: **Installing server locally?** You can skip this step. Follow the resourcing recommendation of using /18 CIDR blocks to ensure adequate capacity for both your Kubernetes Cluster and the provisioning of Nomad clients to run your jobs.
 
 If you are installing server in the cloud, either AWS or GCP, you will need to create a new virtual private cloud (VPC).
 
