@@ -1020,9 +1020,6 @@ NOTE: You cannot rerun jobs and workflows that are >= 90 days.
 
 If you have workflows configured on a protected branch and the status check never completes, check the `ci/circleci` status key. `ci/circleci` is related to a deprecated check and must be deselected.
 
-.Uncheck GitHub Status Keys
-image::guides:ROOT:github_branches_status.png[Uncheck GitHub Status Keys]
-
 Go to menu:Settings[Branches] in GitHub and select btn:[Edit] on the protected branch to deselect the settings, for example: `\https://github.com/your-org/project/settings/branches`.
 
 [#see-also]

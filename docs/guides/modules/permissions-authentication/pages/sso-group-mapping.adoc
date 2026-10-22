@@ -31,9 +31,6 @@ First, you will need to configure your Okta settings. Follow the steps below, or
 . Add a group attribute statement with the name 'groups'.
 . Use the filter to limit which groups will sync to CircleCI. Use the regex value `.*` to capture all groups.
 
-.Okta SSO group attribute settings
-image::guides:ROOT:authentication/sso-group-mapping-okta-setup.png[Screenshot of the Okta SSO group attribute settings]
-
 === 2. Configure CircleCI
 
 . In the link:https://app.circleci.com/home/[CircleCI web app], select your organization.

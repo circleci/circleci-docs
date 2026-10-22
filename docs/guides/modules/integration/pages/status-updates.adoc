@@ -145,9 +145,6 @@ GitHub Checks reports workflow status in the **Checks** tab of a GitHub pull req
 
 GitHub Checks is a GitHub App. In GitHub, the app is called **CircleCI Checks**.
 
-.The Checks tab on a GitHub pull request showing workflow status
-image::guides:ROOT:checks_tab.png[CircleCI checks on GitHub]
-
 NOTE: GitHub does not provide a granular way to rerun workflows. Selecting **Re-run checks** reruns all checks, regardless of whether you choose "re-run failed checks" or "re-run all checks".
 
 === Prerequisites
@@ -219,9 +216,6 @@ To fix this, deselect the `ci/circleci:build` status key in your branch protecti
 . In GitHub, go to menu:Settings[Branches].
 . Select **Edit** on the protected branch.
 . Deselect the `ci/circleci:build` status key.
-+
-.Deselect GitHub job status keys
-image::guides:ROOT:github_job_status.png[Deselect GitHub job status keys]
 endif::server[]
 
 ifndef::server[]
