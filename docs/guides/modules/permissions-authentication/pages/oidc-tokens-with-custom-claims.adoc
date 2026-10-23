@@ -38,6 +38,7 @@ Pass this value to a variable and use the variable to call a cloud service for a
 
 CAUTION: **OIDC tokens** created using this method can be printed with no masking. Take care to not log/print the token in your job steps.
 
+ifndef::server[]
 [#select-a-token-version]
 === Select a token version
 
@@ -62,6 +63,7 @@ By default, the command returns a V2 token and falls back to V1 if it cannot cre
 --
 
 If CircleCI cannot create the version you request, the command fails. It does not fall back to another version. See xref:openid-connect-tokens.adoc#choose-a-token-version[Choose a Token Version] for the differences between versions.
+endif::server[]
 
 [#set-the-audience-with-aud]
 === Set the audience with the aud flag
