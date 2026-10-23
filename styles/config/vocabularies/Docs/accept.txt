@@ -450,3 +450,4 @@ Automations
 Create_secret_yourself
 iFrame
 Istio
+Bazelisk
