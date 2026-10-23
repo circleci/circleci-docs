@@ -281,7 +281,7 @@ The table below is not a full list of CircleCI features. Only features where the
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 
-| *Only build on push to pull/merge requests. See more in the xref:oss.adoc#only-build-pull-requests[Open Source Support] guide.*
+| *Only build on push to pull/merge requests. See more in the xref:pull-request-build-settings.adoc#only-build-pull-requests[Pull Request Build Settings] guide.*
 | Triggers
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
@@ -336,7 +336,7 @@ The table below is not a full list of CircleCI features. Only features where the
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 
-| xref:oss.adoc#build-pull-requests-from-forked-repositories[Build Pull Requests From Forked Repositories]
+| xref:pull-request-build-settings.adoc#build-pull-requests-from-forked-repositories[Build Pull Requests From Forked Repositories]
 | Open source support
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
@@ -347,7 +347,7 @@ The table below is not a full list of CircleCI features. Only features where the
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| xref:oss.adoc#pass-secrets-to-builds-from-forked-pull-requests[Pass Secrets to Builds From Forked Pull Requests]
+| xref:pull-request-build-settings.adoc#pass-secrets-to-builds-from-forked-pull-requests[Pass Secrets to Builds From Forked Pull Requests]
 |Open source support
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
