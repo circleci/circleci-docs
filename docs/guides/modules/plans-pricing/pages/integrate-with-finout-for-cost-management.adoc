@@ -77,9 +77,6 @@ Connect your CircleCI organization to Finout using your personal API token and o
 
 . Select **Next**.
 
-.Finout CircleCI integration settings
-image::guides:ROOT:finout-integration.png[screenshot showing the Finout CircleCI integration settings]
-
 == 4. Configure credit pricing
 
 Configure your CircleCI credit pricing to ensure accurate cost calculations. Finout calculates costs based on your usage data and the configured price per credit. Configure ongoing and historical pricing, as follows:
@@ -97,8 +94,6 @@ Configure your CircleCI credit pricing to ensure accurate cost calculations. Fin
 * Enter the **Effective Until** date (leave blank if this is your current pricing).
 * Repeat for each historical pricing period (up to 13 months is recommended for comprehensive historical analysis).
 . Select **Next**.
-
-image::guides:ROOT:finout-credit-pricing.png[screenshot showing the Finout credit pricing configuration]
 
 Finout begins importing your CircleCI usage data. You will receive an email notification when the data sync is complete. The initial import can include up to 13 months of historical data based on your configured pricing periods.
 

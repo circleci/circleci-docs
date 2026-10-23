@@ -1,4 +1,4 @@
-CircleCI server {serverversion48} is installed as a Helm chart. The installation process is broken down into four phases with a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may include multiple steps. This installation guide assumes you have already read the xref:server-admin:overview:circleci-server-overview.adoc#[CircleCI server v4.8 overview].
+CircleCI Server {serverversion48} is installed as a Helm chart. The installation process is broken down into four phases with a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may include multiple steps. This installation guide assumes you have already read the xref:server-admin:overview:circleci-server-overview.adoc#[CircleCI Server Overview].
 
 NOTE: In the following sections, replace any sections indicated by `< >` with your details.
 
@@ -56,8 +56,8 @@ endif::env-aws[]
 
 | link:https://docs.docker.com/engine/install/[Docker]
 | {dockerversion}
-| Running containerized workloads on nomad clients
-| At this time docker v29 is not supported
+| Running containerized workloads on Nomad clients
+| At this time Docker v29 is not supported
 
 |===
 --
@@ -65,7 +65,7 @@ endif::env-aws[]
 [#create-a-vpc]
 == 2. Create a VPC
 
-NOTE: **Installing server locally?** you can skip this step, but you should ensure you follow the resourcing recommendation of using /18 CIDR blocks to ensure you have adequate capacity for both your Kubernetes Cluster and the provisioning of Nomad clients to run your jobs.
+NOTE: **Installing server locally?** You can skip this step. Follow the resourcing recommendation of using /18 CIDR blocks to ensure adequate capacity for both your Kubernetes Cluster and the provisioning of Nomad clients to run your jobs.
 
 If you are installing server in the cloud, either AWS or GCP, you will need to create a new virtual private cloud (VPC).
 
@@ -84,23 +84,23 @@ While there are no strict requirements for VPC (Virtual Private Cloud) setup or 
 
 * **VPC Selection**
 +
-We recommend you create a new VPC specifically for CircleCI server and its components, rather than using an existing VPC.
+We recommend you create a new VPC specifically for CircleCI Server and its components, rather than using an existing VPC.
 
 *  **Subnet Provisioning**
 +
-For high availability, and to avoid potential outages, you should provision subnets using /18 CIDR blocks across multiple Availability Zones.
+For high availability, and to avoid potential outages, provision subnets using /18 CIDR blocks across multiple Availability Zones.
 
 
 [#create-a-kubernetes-cluster]
 == 2. Create a Kubernetes cluster
-CircleCI server installs into an existing Kubernetes cluster. If you have not already created a cluster, you should do so next. Instructions for creating a cluster are provided below, or if you are installing locally, first consider the sizing, version, and permissions requirements.
+CircleCI Server installs into an existing Kubernetes cluster. If you have not already created a cluster, create one now. Instructions for creating a cluster are provided below, or if you are installing locally, first consider the sizing, version, and permissions requirements.
 
 [#cluster-requirements]
 === Cluster requirements
 
 [#compute-resources]
 ==== Compute resources
-The application uses a large number of resources. Depending on your usage, your Kubernetes cluster should meet the following requirements:
+The application uses a large number of resources. Depending on your usage, your Kubernetes cluster must meet the following requirements:
 
 [.table-scroll]
 --
@@ -210,7 +210,7 @@ gcloud container clusters create circleci-server \
   --subnetwork <SUBNETWORK>
 ----
 +
-NOTE: Your kube-context should get updated with the new cluster credentials automatically.
+NOTE: Your kube-context is updated with the new cluster credentials automatically.
 +
 If you need to update your kube-context manually, you can by running the following:
 +
@@ -269,9 +269,9 @@ endif::env-aws[]
 [#create-a-new-github-oauth-app]
 == 3. Create a new GitHub OAuth app
 
-CAUTION: If GitHub Enterprise and CircleCI server are not on the same domain, then images and icons from GHE will fail to load in the CircleCI web app.
+CAUTION: If GitHub Enterprise and CircleCI Server are not on the same domain, then images and icons from GHE will fail to load in the CircleCI web app.
 
-Registering and setting up a new GitHub OAuth app for CircleCI server allows for the following:
+Registering and setting up a new GitHub OAuth app for CircleCI Server allows for the following:
 
 * Authorization control to your server installation using GitHub OAuth .
 * Updates to GitHub projects/repos using build status information.
@@ -279,25 +279,19 @@ Registering and setting up a new GitHub OAuth app for CircleCI server allows for
 The following steps apply for both GitHub.com and GitHub Enterprise.
 
 . In your browser, navigate to menu:Your-GitHub-instance[User Settings>Developer Settings>OAuth Apps] and select **New OAuth App**.
-+
-.New GitHub OAuth App
-image::guides:ROOT:github-oauth-new.png[Screenshot showing setting up a new OAuth app]
 
 . Complete the following fields, based on your planned installation:
 ** *Homepage URL*: The URL of your planned CircleCI installation.
 ** *Authorization callback URL*: The authorization callback URL is the URL of your planned CircleCI installation followed by `/auth/github`
 
-. Once completed, you will be shown the *Client ID*. Select *Generate a new Client Secret* to generate a Client Secret for your new OAuth App. You will need these values when you configure CircleCI server.
-+
-.Client ID and Secret
-image::guides:ROOT:github-clientid.png[Screenshot showing GitHub Client ID]
+. Once completed, you will be shown the *Client ID*. Select *Generate a new Client Secret* to generate a Client Secret for your new OAuth App. You will need these values when you configure CircleCI Server.
 
 [#github-enterprise]
 === GitHub Enterprise
 
 If using GitHub Enterprise, you also need a personal access token and the domain name of your GitHub Enterprise instance.
 
-Create the `defaultToken` by navigating to **User Settings > Developer Settings > Personal access tokens**. The default token requires no scopes. You will need this value when you configure CircleCI server.
+Create the `defaultToken` by navigating to **User Settings > Developer Settings > Personal access tokens**. The default token requires no scopes. You will need this value when you configure CircleCI Server.
 
 [#static-ip-address]
 == 4. Static IP addresses
@@ -341,7 +335,7 @@ endif::env-gcp[]
 
 [#frontend-tls-certificates]
 == 5. Frontend TLS certificates
-By default, CircleCI server creates self-signed certificates to get you started. In production, you should supply a certificate from a trusted certificate authority. The link:https://letsencrypt.org/[Let's Encrypt] certificate authority, for example, can issue a free certificate using their link:https://certbot.eff.org/[Certbot] tool. The sections below cover using Google Cloud DNS and AWS Route 53.
+By default, CircleCI Server creates self-signed certificates to get you started. In production, supply a certificate from a trusted certificate authority. The link:https://letsencrypt.org/[Let's Encrypt] certificate authority, for example, can issue a free certificate using their link:https://certbot.eff.org/[Certbot] tool. The sections below cover using Google Cloud DNS and AWS Route 53.
 
 CAUTION: It is important that your certificate contains both your domain and the `app.*` subdomain as subjects. For example, if you host your installation at `server.example.com`, your certificate must cover `app.server.example.com` and `server.example.com`.
 
@@ -442,7 +436,7 @@ ifndef::env-gcp[]
 
 [#aws-certmanager]
 === AWS Certificate Manager
-Instead of provisioning your own TLS certificates, if you are setting up CircleCI server in an AWS environment, you can have AWS provision TLS certificates using Certificate Manager.
+Instead of provisioning your own TLS certificates, if you are setting up CircleCI Server in an AWS environment, you can have AWS provision TLS certificates using Certificate Manager.
 
 [source,console]
 ----
@@ -459,9 +453,9 @@ endif::env-gcp[]
 
 [#upstream-tls]
 === Upstream TLS termination
-You may have a requirement to terminate TLS for CircleCI server outside the application. This termination option is an alternate method to using ACM or supplying the certificate chain during Helm deployment. An example would be a proxy running in front of the CircleCI installation providing TLS termination for your domain name. In this case the CircleCI application acts as the backend for your load balancer or proxy.
+You may have a requirement to terminate TLS for CircleCI Server outside the application. This termination option is an alternate method to using ACM or supplying the certificate chain during Helm deployment. An example would be a proxy running in front of the CircleCI installation providing TLS termination for your domain name. In this case the CircleCI application acts as the backend for your load balancer or proxy.
 
-CircleCI server listens on the following port numbers, which need to be configured depending how you are routing the traffic:
+CircleCI Server listens on the following port numbers, which need to be configured depending how you are routing the traffic:
 
 * Frontend / API Gateway [TCP 80, 443]
 * Nomad server [TCP 4647]
@@ -494,7 +488,7 @@ $ docker run circleci/server-keysets:latest generate encryption -a stdout
 
 [#object-storage-and-permissions]
 == 7. Object storage and permissions
-CircleCI server v4.8 hosts build artifacts, test results, and other state object storage. The following storage options are supported:
+CircleCI Server v4.8 hosts build artifacts, test results, and other state object storage. The following storage options are supported:
 
 * link:https://aws.amazon.com/s3/[AWS S3]
 
@@ -504,9 +498,9 @@ CircleCI server v4.8 hosts build artifacts, test results, and other state object
 
 While any S3 compatible object storage may work, we test and support AWS S3 and MinIO. Follow the instructions below to create a bucket and access method for AWS S3 or GCS.
 
-If you are installing locally rather than in AWS or GCP, follow the MinIO instructions in the xref:server-admin:air-gapped-installation:phase-2-configure-object-storage.adoc#[Air-gapped installation docs].
+If you are installing locally rather than in AWS or GCP, follow the MinIO instructions in the xref:server-admin:air-gapped-installation:phase-2-configure-object-storage.adoc#[Air-gapped Object Storage].
 
-NOTE: If you are installing behind a proxy, object storage should be behind this proxy also. Otherwise, proxy details will need to be supplied at the job level within every project `.circleci/config.yml` to allow artifacts, test results, cache save and restore, and workspaces to work. For more information see the xref:server-admin:installation:installing-server-behind-a-proxy.adoc#[Installing server behind a proxy] guide.
+NOTE: If you are installing behind a proxy, object storage must be behind this proxy also. Otherwise, proxy details will need to be supplied at the job level within every project `.circleci/config.yml` to allow artifacts, test results, cache save and restore, and workspaces to work. For more information see the xref:server-admin:installation:installing-server-behind-a-proxy.adoc#[Installing Server Behind a Proxy] guide.
 
 // Do not include in GCP page.
 ifndef::env-gcp[]
@@ -752,7 +746,7 @@ IAM access keys::
 
 NOTE: If you wish to store artifacts which are larger than 5GB, you will need to disable presigned mode which requires an AWS role. Disabling presigned mode will enable the use of muli-part uploads to S3 which can support larger files and potentially faster transfers. We recommend you follow the instructions for creating an IRSA role in this case.
 
-. Create an IAM user for CircleCI server.
+. Create an IAM user for CircleCI Server.
 +
 [source,console]
 ----
@@ -870,7 +864,7 @@ NOTE: You will need this when you configure your server installation later.
 $ aws iam create-access-key --user-name circleci-server
 ----
 +
-The result should look like this:
+The result looks like this:
 +
 [source, json]
 ----

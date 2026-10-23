@@ -110,43 +110,25 @@ The Slack orb is an application that executes as part of your job on CircleCI. B
 ==== i. Create a Slack app
 
 . Visit https://api.slack.com/apps[*Your Apps* on the Slack API website] and select the green *Create an App* button.
-+
-.Guides:Root:Slack Orb Create App
-image::guides:ROOT:slack-orb-create-app.png[Create a Slack app]
-+
+
 . Choose *From scratch*.
-+
-.Guides:Root:Slack Orb From Scratch
-image::guides:ROOT:slack-orb-from-scratch.png[Choose From scratch]
-+
+
 . Give your app a name, for example, `CircleCI`, and select the Slack workspace in which you want to use it. You cannot change this workspace afterwards.
-+
-.Guides:Root:Slack Orb Name App
-image::guides:ROOT:slack-orb-name-app.png[Name your Slack app]
-+
+
 . Select the green **Create App** button.
 
 [#set-your-app-permissions]
 ==== ii. Set your app permissions
 
 . On the Basic Information page, locate the **Permissions** tile under _Add features and functionality_.
-+
-.Guides:Root:Slack Orb Permissions
-image::guides:ROOT:slack-orb-permissions.png[Slack app Permissions]
-+
+
 . On the _OAuth & Permissions_ page, scroll down to **Scopes**. Create the permissions for your Slack app here.
-+
-.Guides:Root:Slack Orb Add Scope
-image::guides:ROOT:slack-orb-add-scope.png[Add an OAuth Scope]
-+
+
 . Under **Bot Token Scopes**, select **Add an OAuth Scope**.
 . The Slack orb needs permission to post chat messages and upload files, so create the following scopes:
 * chat:write
 * chat:write.public
 * files:write
-+
-.Guides:Root:Slack Orb Bot Token Scopes
-image::guides:ROOT:slack-orb-bot-token-scopes.png[Add Bot Token Scopes]
 
 TIP: To receive Slack notifications in a private channel, you need to add your Slack app to that channel. Open the channel, select the photos of the channel members in the top right-hand corner, then select the *Integrations* tab. From here, you can add an app.
 
@@ -154,20 +136,10 @@ TIP: To receive Slack notifications in a private channel, you need to add your S
 ==== iii. Install your app
 
 . Once you have created your scopes, scroll up to the top of the page and select the **Install to Workspace** button.
-+
-.Guides:Root:Slack Orb Install Workspace
-image::guides:ROOT:slack-orb-install-workspace.png[Install to Workspace]
-+
-. You will then be asked to grant permission for the app to access your Slack workspace.
-+
-.Guides:Root:Slack Orb Allow
-image::guides:ROOT:slack-orb-allow.png[Allow access]
-+
-. Select the disclosure triangle to double-check the permissions, then select the green **Allow** button.
+
+. You will then be asked to grant permission for the app to access your Slack workspace. Select the disclosure triangle to double-check the permissions, then select the green **Allow** button.
+
 . You see a *Bot User OAuth Token*. Copy this token to your clipboard, ready to add it to CircleCI. Make sure you keep this private.
-+
-.Guides:Root:Slack Orb Copy Token
-image::guides:ROOT:slack-orb-copy-token.png[Copy OAuth Token]
 
 [#creating-a-context]
 === b. Create a context
@@ -201,9 +173,6 @@ image::guides:ROOT:slack-orb-environment-variable.png[Add Environment Variable]
 * The value is the ID of the default Slack channel for posting your notifications. You can override this setting in your individual jobs.
 +
 TIP: To get the ID for your Slack channel, right-click the channel in Slack and choose **Copy Link**. The ID will be visible at the end of the URL and will be in this format: C034R26AM36.
-+
-.Guides:Root:Slack Orb Copy Link
-image::guides:ROOT:slack-orb-copy-link.png[Copy Slack channel link]
 
 . Include the `slack-secrets` context in your `notify` job as follows:
 +
@@ -231,9 +200,6 @@ image::guides:ROOT:slack-orb-success.png[Success]
 . Select your job to see what just happened. You see the message body that was sent to Slack.
 
 . Now open your Slack workspace. In the default channel you specified earlier, you see the alert triggered by your CircleCI pipeline.
-+
-.Guides:Root:Slack Orb Text Notification
-image::guides:ROOT:slack-orb-text-notification.png[Slack text notification]
 
 Although this is a basic alert, you have achieved a lot already:
 
@@ -276,9 +242,6 @@ jobs:
 Whereas in Step 1 you used an all-purpose alert, now you have included different steps according to whether the job has passed or failed. The Slack orb triggers the appropriate step.
 
 Commit your updated `config.yml` file (and push it, if you are working remotely). Once the pipeline is complete, you see a more sophisticated alert in your Slack channel.
-
-.Guides:Root:Slack Orb Deployment Successful
-image::guides:ROOT:slack-orb-deployment-successful.png[Deployment Successful alert]
 
 [#including-additional-parameters]
 === a. Including additional parameters
