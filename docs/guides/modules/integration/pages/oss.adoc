@@ -1,17 +1,20 @@
 = Build open source projects
-:page-platform: Cloud
+:page-platform: Cloud, Server
 :page-vcs: github, github-enterprise, gitlab, bitbucket, cursor-origin
 :page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Follow best practices for building open source projects on CircleCI, including credits, security, and features and settings for public projects.
 :experimental:
 
 This document provides tips and best practices for building your open source project on CircleCI.
 
+ifndef::server[]
 == Credits for open source projects
 
 See the xref:plans-pricing:credits.adoc#open-source-credit-usage[Using Credits] page for up-to-date information on free credits available for open source projects.
 
+endif::server[]
 [#security]
 == Security
 
@@ -36,10 +39,16 @@ For more information, see the xref:security:set-environment-variable.adoc#set-an
 [#only-build-pull-requests]
 === Only build pull requests
 
+ifndef::server[]
 Open source projects have significantly more commits than private projects, so building every commit from every branch might be excessive and costly (both in terms of time and credits usage).
+endif::server[]
+ifdef::server[]
+Open source projects have significantly more commits than private projects, so building every commit from every branch might be excessive and costly in terms of time.
+endif::server[]
 
 You can modify this behaviour by restricting builds to branches that have pull requests.
 
+ifndef::server[]
 [tabs]
 ====
 GitHub App::
@@ -54,19 +63,7 @@ include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[Insert steps
 GitHub OAuth app & Bitbucket Cloud::
 +
 --
-include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[Insert steps from selecting an organization up to the Project Settings page]
-. In the sidebar, click *Advanced*.
-. Enable the *Only build pull requests* option.
-
-image::guides:ROOT:triggers/advanced-only-build-prs.png[Enable the Only build pull requests option]
-
-The ability to override the *Only build pull requests* setting is also supported. Specifically, CircleCI will run validation on all commits from additional, non-default branches that are specified via regular expression (for example, `release.\*`).
-
-Override the *Only build pull requests* setting by utilizing the API and following the steps outlined in this link:https://support.circleci.com/hc/en-us/articles/15222074173723-How-to-allowlist-additional-branches-for-Only-Build-Pull-Requests[support article].
-
-Enabling *Only build pull requests* may result in duplicate builds. You can find troubleshooting steps in this link:https://support.circleci.com/hc/en-us/articles/115013353748-Troubleshooting-duplicate-builds-triggered-upon-every-commit-push[support article].
-
-NOTE: CircleCI will always build all commits from your project's _default branch and tags_ regardless of any setting.
+include::ROOT:partial$github-oauth/only-build-prs.adoc[]
 --
 GitLab::
 +
@@ -100,12 +97,18 @@ include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[Insert steps
 For the full list of trigger event options available for Cursor Origin, see the xref:orchestrate:cursor-origin-trigger-event-options.adoc[Cursor Origin Trigger Event Options] page.
 --
 ====
+endif::server[]
+ifdef::server[]
+include::ROOT:partial$github-oauth/only-build-prs.adoc[]
+endif::server[]
 
 
 [#build-pull-requests-from-forked-repositories]
 === Build pull requests from forked repositories
 
+ifndef::server[]
 include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App, or Cursor Origin]
+endif::server[]
 
 Many open source projects accept PRs from forked repositories. Building these PRs is an effective way to catch bugs before manually reviewing changes.
 
@@ -116,7 +119,9 @@ Sometimes a user submits a pull request to your repository from a fork, but no p
 [#pass-secrets-to-builds-from-forked-pull-requests]
 === Pass secrets to builds from forked pull requests
 
+ifndef::server[]
 include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App, or Cursor Origin]
+endif::server[]
 
 Running an unrestricted build in a parent repository can be dangerous. Projects often contain sensitive information, and this information is freely available to anyone who can push code that triggers a build.
 
