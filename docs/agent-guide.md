@@ -21,7 +21,7 @@ Before starting onboarding or project setup, install CLI v1, then enable the CLI
 
 There is no self-serve signup. Accounts and orgs are provisioned by the Server administrator — direct the human to them, or to the [CircleCI Server overview](https://circleci.com/docs/server-admin/latest/overview/circleci-server-overview/).
 
-CLI v1 does not work against a Server host. Install CLI v0 instead — it installs as a separate `circleci-v0` binary, so it can coexist with a CLI v1 `circleci` install. See [Install CLI v0 for CircleCI Server](https://circleci.com/docs/guides/toolkit/circleci-cli/#install-cli-v0-for-circleci-server) for install methods and `circleci-v0 setup`.
+CLI v1 does not work against a Server host. Install CLI v0 instead — it installs as a separate `circleci-v0` binary, so it can coexist with a CLI v1 `circleci` install. See [Install CLI v0 for CircleCI Server](https://circleci.com/docs/guides/server/toolkit/circleci-cli/#install-cli-v0-for-circleci-server) for install methods and `circleci-v0 setup`.
 
 ## Follow current defaults
 

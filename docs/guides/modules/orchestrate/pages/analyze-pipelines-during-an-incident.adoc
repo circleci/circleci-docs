@@ -34,7 +34,12 @@ The examples on this page use `curl` and `jq`.
 [TIP]
 ====
 Set and export `$CIRCLE_TOKEN` with a xref:toolkit:managing-api-tokens.adoc[Personal API Token] to keep it out of your shell history.
-Set and export `$CIRCLE_HOST` with your CircleCI hostname (`https://circleci.com` for Cloud, or your Server domain name).
+ifndef::server[]
+Set and export `$CIRCLE_HOST` with your CircleCI hostname (`https://circleci.com`).
+endif::server[]
+ifdef::server[]
+Set and export `$CIRCLE_HOST` with your Server domain name.
+endif::server[]
 ====
 
 [#identify-what-ran]
@@ -286,6 +291,7 @@ Jobs may store files as artifacts. Use xref:optimize:artifacts.adoc[Storing Buil
 
 Audit logs record **control-plane events**: changes to projects, contexts, orbs, webhooks, and settings. They help answer questions like "who changed what" and "which contexts a job accessed."
 
+ifndef::server[]
 === What audit logs capture
 
 * `context.secrets.accessed`: a job used secrets from a context.
@@ -303,8 +309,10 @@ See xref:security:audit-logs.adoc[Audit Logs] for the full event list and instru
 **Cloud:** Request audit logs from **Org Settings > Security > Audit Logs** in the web app. Available for the past 12 months.
 
 **Cloud Scale:** Stream audit logs to your own storage (S3) for bulk analysis. See xref:security:audit-logs.adoc#stream-audit-logs[Stream Audit Logs].
-
-**Server:** The Cloud audit log page and Cloud streaming flow do not apply. Review your xref:server-admin:operator:troubleshooting-and-support.adoc#generate-support-bundle[Support Bundle], platform logs, and your deployment's required object storage backend used for build output, artifacts, and audit/event logs.
+endif::server[]
+ifdef::server[]
+For audit logs, see the Audit logs section of xref:server-admin:operator:circleci-server-security-features.adoc#audit-logs[CircleCI Server Security Features]. Also review your xref:server-admin:operator:troubleshooting-and-support.adoc#generate-support-bundle[Support Bundle], platform logs, and your deployment's required object storage backend used for build output, artifacts, and audit/event logs.
+endif::server[]
 
 [#assess-credential-exposure]
 == Assess credential exposure
@@ -348,7 +356,9 @@ Be aware of these boundaries when investigating:
 
 * **Audit logs are control-plane only.** They record who changed settings and which contexts a job accessed, not what happened at runtime inside a job.
 * **Step output is stdout/stderr only.** If malicious code ran without printing, it does not appear in step output. This also means you may not capture on-disk log filenames, paths, or other execution details that never reached the console stream.
-* **Server installations keep some evidence outside CircleCI's API.** If you run CircleCI Server, also check your support bundle, platform logs, and any object storage you configured for build output or artifacts.
+ifdef::server[]
+* **Server installations keep some evidence outside CircleCI's API.** Also check your support bundle, platform logs, and any object storage you configured for build output or artifacts.
+endif::server[]
 * **Environment variable values are masked.** You cannot diff against known-good plaintext. You can only identify what was *reachable* and rotate accordingly.
 
 [#see-also]

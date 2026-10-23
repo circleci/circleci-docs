@@ -1,0 +1,29 @@
+When you set up a new project with a GitHub OAuth pipeline, CircleCI creates a deployment key on the VCS provider for your project. A deploy key is an SSH key-pair, one public, one private. The VCS provider stores the public key, and CircleCI stores the private key. The deployment key gives CircleCI access to a single repository. To prevent CircleCI from pushing to your repository, this deployment key is read-only.
+
+For code in GitHub, to set up a CircleCI project, you might find you need to enable the creation of deploy keys in your GitHub organization. To do so follow these steps:
+
+. Log in to link:https://github.com[GitHub.com].
+. Navigate to your organization.
+. Select Settings at the top of the organization page.
+. In the left sidebar, select "Deploy Keys" in the Security section.
+. Enable the option for allow repositories in this organization to create deploy keys.
+. Select btn:[Save].
+
+If you want to push to the repository from your builds, you will need a deployment key with write access. See the below section for GitHub-specific instructions to create a deployment key.
+
+If your deploy keys or user keys appear to have been removed, it may be due to one of the following reasons:
+
+* GitHub will remove inactive keys if they are unused for over a year.
+* If CircleCI creates keys through a user's OAuth integration with GitHub, and the user revokes or removes the integration, GitHub will also remove the associated keys.
+* In GitHub, if an organization owner restricts or disables deploy keys across all repositories, GitHub may disable or remove existing deploy keys.
+* If your CircleCI project has no followers, CircleCI will consider it disabled and remove the associated keys.
+* When you delete a CircleCI project, CircleCI will remove its associated keys.
+
+When CircleCI builds your project, the private key is installed into the `.ssh` directory and SSH is subsequently configured to communicate with your version control provider. Therefore, the private key is used for:
+
+- Checking out the main project.
+- Checking out any GitHub-hosted submodules.
+- Checking out any GitHub-hosted private dependencies.
+- Automatic git merging/tagging/etc.
+
+Private keys are also used to enable your project to check out additional private repositories.
