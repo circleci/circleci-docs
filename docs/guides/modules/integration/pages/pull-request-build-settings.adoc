@@ -7,7 +7,7 @@
 :page-description: Choose which pull requests CircleCI builds: build only pull requests, build pull requests from forks, and pass secrets to builds from forks.
 :experimental:
 
-These settings control which pull requests CircleCI builds, and what builds from forked repositories can access.
+The settings described on this page control which pull requests CircleCI builds, and what builds from forked repositories can access.
 ifndef::server[]
 For tips on building open source projects, see the xref:oss.adoc[Build Open Source Projects] page.
 endif::server[]
@@ -132,4 +132,4 @@ repository-id of the originator of the fork PR to identify the cache.
 * Enabling the <<pass-secrets-to-builds-from-forked-pull-requests,passing of secrets to build from forked pull requests>>
 will enable cache sharing between the original repo and all forked builds.
 
-Currently there is no pre-population of caches because this optimization has not made it to the top of the priority list yet.
+When you do not pass secrets to builds from forked pull requests, the first build from each fork starts with an empty cache. CircleCI does not copy caches from the original repository into a fork's cache.
