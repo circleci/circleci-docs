@@ -25,10 +25,14 @@ Follow the advice in xref:security-recommendations.adoc[Secure Secrets Handling]
 
 Use xref:security:contexts.adoc#restrict-a-context[Restricted Contexts] with teams to share environment variables with a select security group.
 
-ifndef::server[]
 If your project is **open source and public**, make note of whether or not you want to share environment variables.
 
-On CircleCI, you can change a project's settings to control whether your environment variables can pass on to _forked versions of your repo_. This setting is **not enabled** by default. You can read more about these settings in the xref:integration:pull-request-build-settings.adoc#pass-secrets-to-builds-from-forked-pull-requests[Pull Request Build Settings] page and about open source security in our xref:integration:oss.adoc#security[Open Source Projects Document].
+On CircleCI, you can change a project's settings to control whether your environment variables can pass on to _forked versions of your repo_. This setting is **not enabled** by default.
+ifndef::server[]
+You can read more about these settings in the xref:integration:pull-request-build-settings.adoc#pass-secrets-to-builds-from-forked-pull-requests[Pull Request Build Settings] page and about open source security in our xref:integration:oss.adoc#security[Open Source Projects Document].
+endif::server[]
+ifdef::server[]
+You can read more about these settings in the xref:integration:pull-request-build-settings.adoc#pass-secrets-to-builds-from-forked-pull-requests[Pull Request Build Settings] page.
 endif::server[]
 
 [#secure-your-vcs]
