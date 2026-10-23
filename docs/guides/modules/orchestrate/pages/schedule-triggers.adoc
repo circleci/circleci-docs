@@ -31,6 +31,8 @@ Pipeline parameters are typed pipeline variables in the form of a string, intege
 
 Schedule triggers are set to run by an "actor", either the CircleCI scheduling system, or a specific user (for example, yourself). The scheduling actor is important to consider if making use of restricted contexts in workflows. If the user (actor) running the workflow does not have access to the context, the workflow will fail with the `Unauthorized` status. Using the Scheduling system to be the actor will not count towards your organization's active user quota.
 
+NOTE: Schedule times are interpreted in Coordinated Universal Time (UTC).
+
 You can find a basic how-to guide on the xref:set-a-nightly-schedule-trigger.adoc[Set a Nightly Schedule Trigger] page, and more advanced examples on the xref:schedule-triggers-with-multiple-workflows.adoc[Schedule Pipelines With Multiple Workflows] pages.
 
 NOTE: Schedule triggers are the new name for what was previously known as "scheduled pipelines".
@@ -167,14 +169,56 @@ For additional information, refer to the **Schedule** section under the link:htt
 
 Also see the xref:toolkit:api-developers-guide.adoc#getting-started-with-the-api[Getting Started With the API] section of the API Developer's Guide for more guidance on making requests.
 
+[#view-your-schedule-triggers]
+== View your schedule triggers
+
+To view your schedule triggers in the web app:
+
+* For GitHub App, GitHub App Server, and Cursor Origin pipelines, go to menu:Project Settings[Project Setup].
+* For GitHub OAuth and Bitbucket Cloud pipelines, go to menu:Project Settings[Triggers].
+
+You can also list your schedule triggers using the API. For GitHub App, GitHub App Server, and Cursor Origin pipelines, use API v3. Replace `<PROJECT_ID>` with your project ID:
+
+[source,console]
+----
+$ curl -g --url "https://circleci.com/api/v3/triggers?filter[project_id]=<PROJECT_ID>" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN"
+----
+
+For GitHub OAuth and Bitbucket Cloud pipelines, use API v2. Replace `<project-slug>` with your project slug:
+
+[source,console]
+----
+$ curl --location --request GET "https://circleci.com/api/v2/project/<project-slug>/schedule" \
+  --header "Circle-Token: $CIRCLE_TOKEN"
+----
+
 == Migrate scheduled workflows to schedule triggers
 
 If you have existing scheduled workflows you need to migrate to schedule triggers, use the xref:migrate-scheduled-workflows-to-schedule-triggers.adoc[Schedule Triggers Migration] guide.
 
-[#scheduled-pipelines-faqs]
-== FAQs
+[#troubleshooting]
+== Troubleshooting
 
-include::ROOT:partial$faq/schedule-trigger-faq-snip.adoc[]
+[#schedule-trigger-runs-late]
+=== Schedule trigger runs later than expected
+
+A schedule trigger does not always start a run at the exact scheduled time. CircleCI applies a random delay of up to 10 minutes to the scheduled time (this delay can be up to one hour for schedule triggers created before September 29, 2025). After the first run, the delay is constant for all subsequent runs.
+
+For example, with a schedule for 08:00 UTC, the trigger may start the first run at 08:07 UTC. Subsequent runs also start at 08:07 UTC.
+
+[#cannot-add-schedule-trigger]
+=== Cannot add a schedule trigger to a pipeline
+
+Schedule triggers support the following pipeline types:
+
+* GitHub OAuth
+* GitHub App
+* GitHub App Server
+* Cursor Origin
+* Bitbucket Cloud
+
+GitLab pipelines do not support schedule triggers.
 
 [#next-steps]
 == Next steps
