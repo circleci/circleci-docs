@@ -95,7 +95,7 @@ _Used to trigger pipelines on push events from GitHub_
 * The *event source* repository is always the same repository that gives the project its name.
 * The *event name* field only has two options:
 ** “All pushes to the repository”.
-** “Pushes to open pull requests, default branch, and tags” (equivalent to turning the xref:oss.adoc#only-build-pull-requests[Project Level Flag] “only build pull request” on).
+** “Pushes to open pull requests, default branch, and tags” (equivalent to turning the xref:pull-request-build-settings.adoc#only-build-pull-requests[Project Level Flag] “only build pull request” on).
 
 *Schedules* +
 _Used to trigger pipelines on a schedule (nightly builds for example)_
