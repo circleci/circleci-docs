@@ -109,6 +109,7 @@ For test atoms:
 For JUnit output:
 
 * Use the template variable `<< outputs.junit >>` so Smarter Testing can locate your test results.
+* If your test runner writes one report per test file, for example Cypress, use the template variable `<< outputs.junit-directory >>` instead. See <<junit-directory,`junit-directory`>>.
 
 [.table-scroll]
 --
@@ -264,6 +265,14 @@ Different template variables are available for coverage output, depending on the
 
 Your `analysis` command must use the output variable for the coverage format it produces.
 
+If your coverage tooling writes coverage reports to a directory instead of a single file, use the directory variant of the output variable. Smarter Testing reads and merges every report with the matching file extension in the directory:
+
+* *LCOV* `<< outputs.lcov-directory >>`: reads `*.info` files.
+* *Go coverage format* `<< outputs.go-coverage-directory >>`: reads `*.out` files.
+* *CircleCI coverage format* `<< outputs.circleci-coverage-directory >>`: reads `*.json` files.
+
+Smarter Testing creates a new, empty directory for each analysis run. You can pass the directory to your coverage tooling, for example `--coverage-directory="<< outputs.lcov-directory >>"`, or append a file name, for example `-coverprofile="<< outputs.go-coverage-directory >>/cover.out"`.
+
 [.table-scroll]
 --
 [cols="1,1,1,2", options="header"]
@@ -293,7 +302,9 @@ analysis: go tool gotestsum -- -coverprofile="<< outputs.go-coverage >>" -cover 
 
 A map of output fields that can be set to write command variables to known file paths.
 
-When no output field is set and the variable is used in a command, a temporary file is created.
+When no output field is set and the variable is used in a command, a temporary file is created. For a directory output, a temporary directory is created.
+
+The `junit`, `go-coverage`, `lcov`, and `circleci-coverage` outputs each have a `-directory` variant, for test runners that write any number of reports to a directory, for example `junit-directory`. A test suite cannot set both an output and its `-directory` variant.
 
 '''
 
@@ -338,6 +349,58 @@ jobs:
 name: ci tests
 outputs:
   junit: test-reports/junit.xml
+----
+
+'''
+
+[#junit-directory]
+=== *`junit-directory`*
+
+The `junit-directory` output is the path to a directory of JUnit XML test results, used in the `run` command with the `<< outputs.junit-directory >>` template variable. Use `junit-directory` instead of `junit` when your test runner writes a separate report for each test file.
+
+Each time the `run` command runs, `<< outputs.junit-directory >>` is replaced with a new numbered directory inside the `junit-directory` path, for example `test-reports/junit/1`. Smarter Testing creates the directory and reads every `*.xml` file in it. Results for skipped test atoms are written to the `skipped` directory inside the `junit-directory` path.
+
+Smarter Testing does not empty the `junit-directory` path before a run. When you run tests locally more than once, remove the directory between runs so that reports from a previous run are not read.
+
+Set the `store_test_results` path to the `junit-directory` path.
+
+[.table-scroll]
+--
+[cols="1,1,1,2", options="header"]
+|===
+| Key | Required | Type | Description
+
+| `junit-directory`
+| N
+| String
+| Directory path to write JUnit XML test result reports.
+|===
+--
+
+*Example:*
+
+[%linenums,yaml]
+----
+# .circleci/config.yml
+version: 2.1
+jobs:
+  test:
+    executor: node-with-service
+    steps:
+      - setup
+      - run: circleci testsuite run "ci tests"
+      - store_test_results:
+          path: test-reports/junit
+----
+
+[%linenums,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+run: cypress run --reporter junit --reporter-options "mochaFile=<< outputs.junit-directory >>/junit-[hash].xml" --spec "$(echo << test.atoms >> | tr ' ' ',')"
+outputs:
+  junit-directory: test-reports/junit
 ----
 
 '''
