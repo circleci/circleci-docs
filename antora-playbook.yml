@@ -142,9 +142,7 @@ antora:
     # the Antora Atlas extension (https://gitlab.com/antora/antora-atlas-extension)
     # so its links to pages it doesn't contain resolve to the live site. Atlas
     # was alpha software when this note was written, so check its status first.
-    # Server build is off while the Server conversion is unfinished (DOC-281).
-    # Set to true to build it and show the version switcher again.
-    enabled: false
+    enabled: true
     serverversion: '4.10'
     # Earliest Server version the docs cover. Pages available from it get no
     # "Server version" sidebar line.
@@ -153,4 +151,4 @@ antora:
     # The build fails when more xrefs than this point to pages the Server build
     # drops. Lower it as they get wrapped in ifndef::server[] (the list is in
     # extensions/.temp/guides-server-unlinked.md after a build).
-    maxunlinkedxrefs: 101
+    maxunlinkedxrefs: 15

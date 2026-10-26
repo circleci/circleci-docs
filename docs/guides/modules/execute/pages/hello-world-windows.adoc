@@ -13,15 +13,25 @@ ifndef::server[]
 If this is your first time setting up CircleCI, we recommend checking out the xref:getting-started:getting-started.adoc[Getting Started Guide].
 endif::server[]
 
+ifndef::server[]
 A Windows Server 2022 image is available to CircleCI Cloud customers, read more on link:https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198[Discuss].
+endif::server[]
+ifdef::server[]
+NOTE: Windows execution environments are available on CircleCI Server only if your system administrator has set them up. Contact your system administrator to check that Windows is available.
+endif::server[]
 
 [#prerequisites]
 == Prerequisites
 
 To follow along with this document you will need:
 
+ifndef::server[]
 * An link:https://circleci.com/signup/[account] on CircleCI.
 * Either the Free, Performance, or Scale link:https://circleci.com/pricing/usage/[Plan].
+endif::server[]
+ifdef::server[]
+* An account on your CircleCI Server installation.
+endif::server[]
 
 [#example-application]
 == Example application
@@ -35,8 +45,14 @@ You can view the link:https://github.com/CircleCI-Public/circleci-demo-windows/b
 version: 2.1
 ----
 
+ifndef::server[]
 Above, we start by declaring that we will use version `2.1` of CircleCI, giving us access to link:https://circleci.com/orbs/[orbs] and xref:orchestrate:pipelines.adoc[Pipelines].
+endif::server[]
+ifdef::server[]
+Above, we start by declaring that we will use version `2.1` of CircleCI.
+endif::server[]
 
+ifndef::server[]
 [,yaml]
 ----
 orbs:
@@ -44,6 +60,7 @@ orbs:
 ----
 
 Next, we declare orbs that we will be using in our build. We will only use the link:https://circleci.com/developer/orbs/orb/circleci/windows[Windows orb] to help us get started. This example uses the `4.1.1` version of the orb, but you may consider using a more recent version.
+endif::server[]
 
 [,yaml]
 ----
@@ -55,6 +72,7 @@ workflows:
 
 We define a `hello-world` workflow, in which we run a single job named `build`.
 
+ifndef::server[]
 [,yaml]
 ----
 jobs:
@@ -64,6 +82,18 @@ jobs:
 ----
 
 Under the `jobs` key, we define the `build` job, and set the executor via the orb we are using.
+endif::server[]
+ifdef::server[]
+[,yaml]
+----
+jobs:
+  build:
+    machine:
+      image: windows-default
+----
+
+Under the `jobs` key, we define the `build` job, and set the executor to the `windows-default` machine image.
+endif::server[]
 
 [,yaml]
 ----

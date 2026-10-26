@@ -18,6 +18,8 @@ The link:https://cli.circleci.com/[CircleCI command line interface (CLI)] brings
 endif::server[]
 ifdef::server[]
 The CircleCI command line interface (CLI) brings CircleCI's tooling to your terminal.
+
+NOTE: CLI v1 is not supported for CircleCI Server. Install CLI v0 instead. See <<install-cli-v0-for-circleci-server,Install CLI v0 for CircleCI Server>>.
 endif::server[]
 
 ifndef::server[]

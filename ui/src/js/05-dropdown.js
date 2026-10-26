@@ -28,5 +28,15 @@
     })
   })
 
+  // Remember the guides version picked in the version switcher, so
+  // head-version-redirect.hbs can bring the reader back to it.
+  document.querySelectorAll('[data-version-switcher] [data-dropdown-option]').forEach((option) => {
+    option.addEventListener('click', () => {
+      try {
+        localStorage.setItem('docs-guides-version', option.dataset.value === 'server' ? 'server' : 'cloud')
+      } catch (e) {}
+    })
+  })
+
   console.log('Dropdown initialized')
 })()
