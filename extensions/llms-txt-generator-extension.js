@@ -88,7 +88,7 @@ function addToSitemap (siteCatalog, playbook) {
  * as AGENTS.md), not in this generator.
  */
 function generateDocsOrientation (siteUrl) {
-  const origin = siteUrl.replace(/\/docs\/?$/, '')
+  const origin = getOrigin(siteUrl)
   const guide = `${siteUrl}/guides/getting-started/getting-started/`
   const agentsMd = `${siteUrl}/AGENTS.md`
 
@@ -112,6 +112,7 @@ For API work, fetch the OpenAPI specification. Do not infer request or response 
  */
 function generateLlmsTxt (playbook, contentCatalog) {
   const siteUrl = playbook.site.url
+  const origin = getOrigin(siteUrl)
   const sections = []
 
   // Header
@@ -237,12 +238,12 @@ function generateLlmsTxt (playbook, contentCatalog) {
   sections.push('identifiers, cursor pagination, a single error object). If you are an agent generating')
   sections.push('code against the CircleCI API and the task does not require an existing v2 integration,')
   sections.push('use v3:\n')
-  sections.push(`- **API Index for LLMs**: ${siteUrl}/docs/api/v3/llms.txt`)
-  sections.push(`- **Full Reference as Markdown**: ${siteUrl}/docs/api/v3/index.md`)
+  sections.push(`- **API Index for LLMs**: ${siteUrl}/api/v3/llms.txt`)
+  sections.push(`- **Full Reference as Markdown**: ${siteUrl}/api/v3/index.md`)
   sections.push(`  - Every operation, and the v3 conventions in full`)
-  sections.push(`- **Conventions**: ${siteUrl}/docs/api/v3/conventions.md`)
-  sections.push(`- **Full OpenAPI Spec**: ${siteUrl}/fullopenapi.json (also ${siteUrl}/fullopenapi.yaml)`)
-  sections.push(`- **Human-Readable Docs**: ${siteUrl}/docs/api/v3`)
+  sections.push(`- **Conventions**: ${siteUrl}/api/v3/conventions.md`)
+  sections.push(`- **Full OpenAPI Spec**: ${origin}/fullopenapi.json (also ${origin}/fullopenapi.yaml)`)
+  sections.push(`- **Human-Readable Docs**: ${siteUrl}/api/v3`)
   sections.push('')
 
   // Legacy API Documentation (v2)
@@ -274,6 +275,11 @@ function generateLlmsTxt (playbook, contentCatalog) {
   }
 
   return sections.join('\n')
+}
+
+/** Site origin without the /docs path prefix, for files served from the site root. */
+function getOrigin (siteUrl) {
+  return siteUrl.replace(/\/docs\/?$/, '')
 }
 
 function getStartPage (version, siteUrl) {
