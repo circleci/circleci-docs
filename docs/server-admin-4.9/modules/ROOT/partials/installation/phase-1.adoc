@@ -277,6 +277,7 @@ The following steps apply for both GitHub.com and GitHub Enterprise.
 . Complete the following fields, based on your planned installation:
 ** *Homepage URL*: The URL of your planned CircleCI installation.
 ** *Authorization callback URL*: The authorization callback URL is the URL of your planned CircleCI installation followed by `/auth/github`
+** Make sure that *Allow wildcard matching* is selected.
 
 . Once completed, you will be shown the *Client ID*. Select *Generate a new Client Secret* to generate a Client Secret for your new OAuth App. You will need these values when you configure CircleCI Server.
 
