@@ -92,7 +92,7 @@ If you do not see these options select the CircleCI logo in the top bar to get b
 image:guides:ROOT:getting-started-guide-exp/setup-pipeline.png[float=right]
 [%hardbreaks]
 *Set up a pipeline*
-Follow the in-app instructions to set up your pipeline including connecting your code, preparing a config file and reviewing triggers.
+Follow the in-app instructions to set up your pipeline including connecting your code, reviewing triggers and preparing a config file.
 
 For a more detailed look at this process see the xref:create-project.adoc[Create a Project] guide.
 {empty} +
@@ -104,7 +104,7 @@ image:guides:ROOT:getting-started-guide-exp/commit-and-run.png[float=right]
 *Commit and run*
 Once you have gone through the pipeline setup process in the app, you have everything you need to commit your config and build. If you already have a config in your repo, you do not need to commit a new one.
 
-Review your project details and select *Commit config and run*.
+Review your project details and make a commit to kick off your pipeline run to complete project setup.
 {empty} +
 {empty} +
 
