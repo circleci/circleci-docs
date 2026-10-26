@@ -240,6 +240,11 @@ function stripCrossComponentAliases (contents, componentName) {
   )
 }
 
+// The repository path of a content file, for reports.
+function sourcePathOf (file) {
+  return path.posix.join((file.src.origin && file.src.origin.startPath) || '', file.src.path || file.path)
+}
+
 function cloneFile (file, contents) {
   return new file.constructor({
     path: file.path,
@@ -443,6 +448,38 @@ module.exports.register = function register ({ config }) {
         },
       ],
     })
+  })
+
+  // A link on a Server page to a section that the Server build hides goes to
+  // the top of the target page instead, so it never lands on a missing anchor.
+  this.once('documentsConverted', ({ contentCatalog }) => {
+    const pages = contentCatalog.getPages(
+      (page) => page.out && page.src.component === componentName && page.src.version === VERSION
+    )
+    const ids = new Map(
+      pages.map((page) => [page.pub.url, new Set([...page.contents.toString().matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]))])
+    )
+    const fixed = []
+    for (const page of pages) {
+      const html = page.contents.toString()
+      const out = html.replace(/(<a\s[^>]*?href=")([^"#]*)#([^"]+)"/g, (match, before, target, fragment) => {
+        if (/^[a-z][a-z0-9+.-]*:/i.test(target)) return match
+        let url = target ? path.posix.resolve(page.pub.url, target) : page.pub.url
+        if (!url.endsWith('/') && !path.posix.extname(url)) url += '/'
+        const known = ids.get(url)
+        if (!known || known.has(decodeURIComponent(fragment))) return match
+        fixed.push({ file: sourcePathOf(page), target: `${url}#${fragment}` })
+        return `${before}${target || '#'}"`
+      })
+      if (out !== html) page.contents = Buffer.from(out)
+    }
+    if (!fixed.length) return
+    const lines = ['', '# Links to sections hidden in the Server build', '',
+      `${fixed.length} links on Server pages point to a section that the Server build hides. They now go to the top of the page.`, '']
+    for (const { file, target } of fixed) lines.push(`- ${file} links to \`${target}\``)
+    fs.mkdirSync(reportDir, { recursive: true })
+    fs.appendFileSync(path.join(reportDir, `${REPORT_NAME}.md`), lines.join('\n') + '\n')
+    logger.info(`${componentName} server: ${fixed.length} links to hidden sections now go to the top of the page`)
   })
 
   // Server pages have the Cloud page as their canonical URL, so listing them
