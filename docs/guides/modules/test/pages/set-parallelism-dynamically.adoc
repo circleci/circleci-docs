@@ -15,8 +15,6 @@ You can set parallelism dynamically in two ways:
 
 include::ROOT:partial$notes/smarter-testing-credit-charge.adoc[]
 
-NOTE: Dynamic parallelism is experimental. The `experimental.dynamic-parallelism` configuration will be replaced in a future release. You will be required to update your configuration when the syntax changes.
-
 [#prerequisites]
 == Prerequisites
 
