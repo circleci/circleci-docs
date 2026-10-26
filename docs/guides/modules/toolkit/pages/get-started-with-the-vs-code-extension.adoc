@@ -26,7 +26,7 @@ endif::server[]
 * A xref:getting-started:create-project.adoc[Project] you follow that is building on CircleCI.
 ifdef::server[]
 
-* Your self-hosted server URL.
+* Your self-hosted CircleCI Server URL.
 endif::server[]
 
 [#install-the-extension]
