@@ -936,6 +936,7 @@ stateDiagram-v2
 ----
 endif::server[]
 
+ifdef::server[]
 .CircleCI Server workflow states
 [mermaid]
 ----
@@ -971,6 +972,7 @@ stateDiagram-v2
     not_run --> [*]
 
 ----
+endif::server[]
 
 Workflows may have one of the following states:
 

@@ -36,14 +36,18 @@ Server::
 version: 2.1
 jobs:
   my-job:
-    machine: true
+    machine:
+      image: default
     resource_class: large
 ----
 --
 ====
 
-You can view the list of available images in the xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[Configuration Reference], or on the link:https://circleci.com/developer/images?imageType=machine[Developer Hub]. If you are working on an installation of CircleCI Server, the syntax is slightly different. Your system administrator manages the available Linux images.
+ifndef::server[]
+You can view the list of available images in the xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[Configuration Reference], or on the link:https://circleci.com/developer/images?imageType=machine[Developer Hub].
+endif::server[]
 ifdef::server[]
+Your system administrator manages the available Linux images.
 
 TIP: On CircleCI Server, `machine: true` also works as shorthand for `machine` with `image: default`.
 endif::server[]

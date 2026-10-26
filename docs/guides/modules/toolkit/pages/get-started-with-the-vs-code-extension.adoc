@@ -24,8 +24,10 @@ ifdef::server[]
 endif::server[]
 
 * A xref:getting-started:create-project.adoc[Project] you follow that is building on CircleCI.
+ifdef::server[]
 
-* CircleCI Server users: your self-hosted server URL.
+* Your self-hosted CircleCI Server URL.
+endif::server[]
 
 [#install-the-extension]
 == 1. Install the extension
@@ -45,10 +47,8 @@ ifndef::server[]
 . You will be prompted to enter a xref:managing-api-tokens.adoc#overview[Personal API Token]. You may create one in your CircleCI link:https://app.circleci.com/settings/user/tokens[**User Settings > Personal API Tokens**].
 endif::server[]
 ifdef::server[]
-. You will be prompted to enter a xref:managing-api-tokens.adoc#overview[Personal API Token]. You may create one in your CircleCI menu:User Settings[Personal API Tokens].
+. You will be prompted to enter a xref:managing-api-tokens.adoc#overview[Personal API Token]. You may create one in your CircleCI menu:User Settings[Personal API Tokens]. Check **I'm a CircleCI Server customer**, then enter your self-hosted server URL.
 endif::server[]
-+
-**CircleCI Server**: Make sure to check **I'm a CircleCI Server customer**, then enter your self-hosted server URL.
 +
 .Log in to CircleCI from VS Code
 image::guides:ROOT:vs_code_extension_login.png[Log in to CircleCI from VS Code]

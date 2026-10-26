@@ -10,11 +10,6 @@
 
 ifndef::server[]
 The link:https://cli.circleci.com/[CircleCI command line interface (CLI)] brings CircleCI's tooling to your terminal.
-
-[NOTE]
-====
-*Using CircleCI Server?* CLI v1 is not supported for CircleCI Server. Install CLI v0 instead. See <<install-cli-v0-for-circleci-server,Install CLI v0 for CircleCI Server>>.
-====
 endif::server[]
 ifdef::server[]
 The CircleCI command line interface (CLI) brings CircleCI's tooling to your terminal.
@@ -231,14 +226,10 @@ ifndef::server[]
 The Chunk CLI:: A developer tool that brings AI-powered code review and remote validation to your local workflow. The `chunk` CLI works with AI coding agents such as Claude Code, Cursor, and VS Code Copilot.
 endif::server[]
 
+ifdef::server[]
 == Install CLI v0 for CircleCI Server
 
-ifndef::server[]
-CLI v1 works with CircleCI Cloud only. If you use CircleCI Server, install CLI v0 instead using one of the following methods.
-endif::server[]
-ifdef::server[]
 Install CLI v0 using one of the following methods.
-endif::server[]
 
 === What you can do with CLI v0
 
@@ -372,6 +363,7 @@ CLI v0 does not have a hosted reference site. Add `--help` to any `circleci-v0` 
 circleci-v0 --help
 circleci-v0 config --help
 ----
+endif::server[]
 
 == Next steps
 

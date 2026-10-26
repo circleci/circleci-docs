@@ -23,6 +23,11 @@ Once you have paused or stopped pipelines, use xref:orchestrate:analyze-pipeline
 
 First use the **Block all new work** option at the **organization** or **project** level.
 
+ifdef::server[]
+NOTE: **Block all new work** is available in Server 4.10 and later.
+
+endif::server[]
+
 [tabs]
 ====
 Organization::
@@ -163,8 +168,6 @@ The table in this section presents some common scenarios you may encounter durin
 --
 
 After you have paused or stopped work in CircleCI, see xref:orchestrate:analyze-pipelines-during-an-incident.adoc[Analyze Pipelines and Job Steps During an Incident] to investigate what ran and what the incident exposed.
-
-NOTE: For server customers, **Block all new work** is available in Server 4.10+. See xref:orchestrate:skip-build.adoc#block-all-new-work[Block All New Work] for details.
 
 == Block all new work vs Stop Building feature comparison
 
