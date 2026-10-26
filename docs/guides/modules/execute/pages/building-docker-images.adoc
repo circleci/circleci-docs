@@ -152,9 +152,9 @@ NOTE: **Arm gen2 is currently in beta.** Performance and pricing are tentative a
 - Full list of resource classes: xref:reference:ROOT:configuration-reference.adoc#resourceclass[Configuration Reference].
 - Full specifications and pricing: link:https://circleci.com/pricing/price-list/[CircleCI Pricing]
 endif::server[]
-
-=== CircleCI Server
-For CircleCI Server installations, contact the systems administrator for specifications.
+ifdef::server[]
+Contact your system administrator for the remote Docker specifications for your installation.
+endif::server[]
 
 [#run-docker-commands-using-the-docker-executor]
 == Run Docker commands using the Docker executor
@@ -241,8 +241,9 @@ To use Docker 26, use the following tag:
 
 To use the current deprecated version, Docker 20, use `20.10.24`.
 endif::server[]
-
-NOTE: The `version` key is not supported on CircleCI Server. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
+ifdef::server[]
+The `version` key for `setup_remote_docker` is not supported on CircleCI Server. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
+endif::server[]
 
 [#run-docker-commands-using-the-machine-executor]
 == Run Docker commands using the machine executor

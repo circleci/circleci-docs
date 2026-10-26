@@ -166,7 +166,9 @@ endif::server[]
 == Limitations
 
 * CircleCI supports only 64-bit `arm64` architectures.
-* In CircleCI Server, Arm resources are only available when using the EC2 provider for VM service or machine provisioner. No Arm instances are available in GCP.
+ifdef::server[]
+* Arm resources are only available when using the EC2 provider for VM service or machine provisioner. No Arm instances are available in GCP.
+endif::server[]
 ifndef::server[]
 * If you run into issues with orbs, or if there is software you require that is not available in the image, link:https://circleci.canny.io/cloud-feature-requests[submit a feature request].
 endif::server[]

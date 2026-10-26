@@ -135,7 +135,7 @@ stateDiagram-v2
     not_run --> [*]
 ----
 endif::server[]
-
+ifdef::server[]
 .CircleCI Server job status transitions
 [mermaid]
 ----
@@ -166,6 +166,7 @@ stateDiagram-v2
     canceled --> [*]
     unauthorized --> [*]
 ----
+endif::server[]
 
 [.table-scroll]
 --

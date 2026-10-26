@@ -127,6 +127,7 @@ This scenario is also referred to as _config splitting_.
 
 For an example of config splitting, see the xref:using-dynamic-configuration.adoc#pack-generate-validate[Dynamic Configuration] how-to guide.
 
+ifdef::server[]
 == Using dynamic configuration on CircleCI Server
 
 TIP: For more information on managing orbs in a server installation see the xref:server-admin:operator:managing-orbs.adoc[Managing Orbs] page.
@@ -164,6 +165,7 @@ workflows:
           base-revision: main
           circleci_domain: support-server-4.eks-dev.sphereci.com
 ----
+endif::server[]
 
 [#dynamic-config-faqs]
 == FAQs
