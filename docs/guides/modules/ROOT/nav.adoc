@@ -1,5 +1,6 @@
 * About CircleCI
 ** xref:about-circleci:about-circleci.adoc[CircleCI overview]
+** xref:about-circleci:about-cloud-and-server-docs.adoc[About Cloud and Server docs]
 ** xref:about-circleci:benefits-of-circleci.adoc[Benefits of CircleCI]
 ** xref:about-circleci:introduction-to-the-circleci-web-app.adoc[Intro to the CircleCI web app]
 ** xref:about-circleci:open-source.adoc[Open source acknowledgements]
