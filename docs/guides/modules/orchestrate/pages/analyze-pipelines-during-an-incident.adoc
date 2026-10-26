@@ -286,6 +286,7 @@ Jobs may store files as artifacts. Use xref:optimize:artifacts.adoc[Storing Buil
 
 Audit logs record **control-plane events**: changes to projects, contexts, orbs, webhooks, and settings. They help answer questions like "who changed what" and "which contexts a job accessed."
 
+ifndef::server[]
 === What audit logs capture
 
 * `context.secrets.accessed`: a job used secrets from a context.
@@ -303,6 +304,7 @@ See xref:security:audit-logs.adoc[Audit Logs] for the full event list and instru
 **Cloud:** Request audit logs from **Org Settings > Security > Audit Logs** in the web app. Available for the past 12 months.
 
 **Cloud Scale:** Stream audit logs to your own storage (S3) for bulk analysis. See xref:security:audit-logs.adoc#stream-audit-logs[Stream Audit Logs].
+endif::server[]
 
 **Server:** The Cloud audit log page and Cloud streaming flow do not apply. Review your xref:server-admin:operator:troubleshooting-and-support.adoc#generate-support-bundle[Support Bundle], platform logs, and your deployment's required object storage backend used for build output, artifacts, and audit/event logs.
 

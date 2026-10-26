@@ -108,7 +108,12 @@ Each method is described in the following sections:
 
 You can manually release a serial group from the CircleCI web app to allow queuing jobs to start. To release a serial group is to allow the next job in the queue to start. The job you release from the queue will continue to run. To release a serial group, follow these steps:
 
+ifndef::server[]
 . In the link:https://app.circleci.com/home[CircleCI web app], select your org.
+endif::server[]
+ifdef::server[]
+. In the CircleCI web app, select your org.
+endif::server[]
 . Select *Pipelines* in the sidebar and locate your pipeline with a serial group in action.
 . Select the workflow name to view the workflow graph.
 . Select the serial group start block (with the key icon). A modal appears with information on the consequences of releasing the group. If you are happy to release the group, select btn:[Release serial group].
@@ -116,6 +121,7 @@ You can manually release a serial group from the CircleCI web app to allow queui
 .Screenshot showing the serial group release modal
 image::guides:ROOT:serial-groups/serial-group-release-modal.png[Serial group release modal]
 
+ifndef::server[]
 ****
 *New Pipelines View (Beta)*
 
@@ -143,12 +149,18 @@ If you are not sure which job currently holds the serial group lock, you can fin
 image::guides:ROOT:serial-groups/serial-group-view-job.png[View job button in the new pipelines UI side panel]
 . From that job's side panel, select btn:[Release serial group].
 ****
+endif::server[]
 
 ==== Cancel a workflow with a serial group job
 
 You can cancel an entire workflow that contains serial group jobs. Canceling a workflow will cancel all of its jobs, and the next job in the serial group in the org will start:
 
+ifndef::server[]
 . In the link:https://app.circleci.com/home[CircleCI web app], select your org.
+endif::server[]
+ifdef::server[]
+. In the CircleCI web app, select your org.
+endif::server[]
 . Select *Pipelines* in the sidebar and locate your pipeline with a serial group in action.
 . Select the "Cancel Workflow" button to the right of the pipeline (icon:cancel[Cancel icon]).
 . Confirm the cancellation when prompted.

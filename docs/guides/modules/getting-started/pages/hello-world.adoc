@@ -298,7 +298,6 @@ workflows:
 
 TIP: If you get a `No Config Found` error, it may be that you used `.yaml` file extension. Be sure to use `.yml` file extension to resolve this error.
 
-
 [#next-steps]
 ## Next steps
 
