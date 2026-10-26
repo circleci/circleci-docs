@@ -4,6 +4,9 @@ version: 2.1
 # Schedule this workflow via CircleCI Project Settings → Project Setup → Schedule +
 # Recommended: Weekly schedule (e.g., every Monday at 9:00 AM UTC)
 
+orbs:
+  cloudsmith: https://raw.githubusercontent.com/circleci/backplane-cicd/main/orbs/cloudsmith.yml
+
 executors:
   node_executor:
     docker:
@@ -15,15 +18,17 @@ jobs:
     executor: node_executor
     steps:
       - checkout
+      - cloudsmith/configure:
+          npm: true
       - restore_cache:
           keys:
-            - agent-docs-npm-{{ checksum "package-lock.json" }}
-            - agent-docs-npm-
+            - agent-docs-npm-v2-{{ checksum "package-lock.json" }}
+            - agent-docs-npm-v2-
       - run:
           name: Install Dependencies
           command: npm install -D afdocs vitest
       - save_cache:
-          key: agent-docs-npm-{{ checksum "package-lock.json" }}
+          key: agent-docs-npm-v2-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
       - run:
