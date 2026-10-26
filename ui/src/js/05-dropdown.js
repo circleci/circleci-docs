@@ -4,6 +4,7 @@
     const button = dropdown.querySelector('[data-dropdown-button]')
     const menu = dropdown.querySelector('[data-dropdown-menu]')
     const selected = dropdown.querySelector('[data-dropdown-selected]')
+    const followLink = dropdown.hasAttribute('data-dropdown-follow-link')
 
     button.addEventListener('click', () => {
       const isExpanded = button.getAttribute('aria-expanded') === 'true'
@@ -21,6 +22,10 @@
     menu.addEventListener('click', (event) => {
       const option = event.target.closest('[data-dropdown-option]')
       if (option) {
+        // On menus that ask for it, follow the option's link when the click lands
+        // outside it, so the label never shows a choice that the page does not reflect.
+        const link = followLink && option.querySelector('a')
+        if (link && !event.target.closest('a')) link.click()
         selected.textContent = option.dataset.label
         button.setAttribute('aria-expanded', 'false')
         menu.classList.add('hidden')
@@ -34,7 +39,9 @@
     option.addEventListener('click', () => {
       try {
         localStorage.setItem('docs-guides-version', option.dataset.value === 'server' ? 'server' : 'cloud')
-      } catch (e) {}
+      } catch {
+        // Storage can be blocked, so the choice is simply not remembered.
+      }
     })
   })
 
