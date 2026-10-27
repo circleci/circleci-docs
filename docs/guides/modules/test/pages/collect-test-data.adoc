@@ -41,7 +41,7 @@ The `path` key is an absolute or relative path to your `working_directory`. It c
 CAUTION: Make sure that your `path` value is not a hidden folder. For example, `.my_hidden_directory` would be an invalid format.
 
 ifndef::server[]
-If you use Smarter Testing, the `path` must match the directory of `outputs.junit` in your `.circleci/test-suites.yml` file. See xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing].
+If you use Smarter Testing, the `path` must match the directory of `outputs.junit`, or the `outputs.junit-directory` path, in your `.circleci/test-suites.yml` file. See xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing].
 endif::server[]
 
 To look at the raw XML files, for example when debugging your test uploads, you can also store test results as artifacts with the `store_artifacts` step. See the xref:optimize:artifacts.adoc[Storing Build Artifacts] page.
