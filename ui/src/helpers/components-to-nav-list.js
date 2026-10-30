@@ -20,6 +20,7 @@ module.exports = ({ data: { root } }) => {
     'runner',
     'server-admin',
     'orbs',
+    'functions',
     'services',
   ]
   // Linked from the page footer instead of the component nav

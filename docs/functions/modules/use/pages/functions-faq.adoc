@@ -1,0 +1,60 @@
+= Functions FAQ
+:page-badge: Beta
+:page-platform: Cloud
+:page-audience: developer
+:page-description: This page answers the most frequently asked questions about CircleCI functions.
+:experimental:
+
+[#function-faqs]
+== FAQs
+
+[#difference-between-functions-and-orbs]
+=== What is the difference between functions and orbs?
+
+Orbs package reusable configuration. Functions are programs that run as steps inside your jobs. For a side-by-side comparison, refer to the xref:use:functions-concepts.adoc#functions-and-orbs[Functions and Orbs] section.
+
+[#use-functions-and-orbs-together]
+=== Can I use functions and orbs in the same configuration?
+
+Yes. Declare orbs under `orbs` and functions under `functions` in the same configuration file. Give each function an alias that does not clash with an orb name.
+
+[#which-version-to-use]
+=== Which version of a function do I use?
+
+Use the latest version unless you need a specific one. To see every published version, run `circleci function get <name>`. To declare a function at its latest version, run `circleci function add <name>`.
+
+[#why-exact-versions]
+=== Why do I need to pin an exact version?
+
+An exact version means every run uses the same function, until you choose to update it. Partial versions such as `v0` and labels such as `latest` fail validation. To move to a newer release, run `circleci function update <alias>`.
+
+[#validation-fails-after-update]
+=== Why does my configuration fail validation after I change a function version?
+
+CircleCI checks each function step against the version you pin. If the new version renamed or removed a flag or command that your step uses, validation fails and the error lists the valid flags or commands. Update the step to match, then run `circleci config validate` to check it.
+
+[#see-function-flags]
+=== How do I see the flags a function accepts?
+
+Read the function's README, linked from the xref:use:functions-catalog.adoc[Functions Catalog], or run `circleci function get <name>`.
+
+[#cache-steps]
+=== Do I need to add cache steps when I use a function?
+
+No. Functions that support caching manage their own caches. Refer to xref:use:functions-concepts.adoc#how-functions-run[How Functions Run].
+
+[#which-executors]
+=== Which executors can I use functions on?
+
+Functions run inside your job, on the executor the job uses. Supported operating systems and architectures differ by function, and each function's README lists them under *Platform support*.
+
+[#circleci-server]
+=== Can I use functions on CircleCI Server?
+
+No. Functions are available on CircleCI Cloud only.
+
+[#see-also]
+== See also
+
+* Refer to xref:use:functions-intro.adoc[Functions Overview] for a starting point on using functions.
+* Refer to xref:use:functions-concepts.adoc[Functions Concepts] for high-level information about CircleCI functions.
