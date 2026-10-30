@@ -20,6 +20,7 @@ module.exports = ({ data: { root } }) => {
     'runner',
     'server-admin',
     'orbs',
+    'functions',
     'services',
     'contributors',
   ]

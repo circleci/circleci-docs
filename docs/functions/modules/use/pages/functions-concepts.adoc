@@ -1,0 +1,179 @@
+= Functions concepts
+:page-badge: Beta
+:page-platform: Cloud
+:page-audience: developer
+:page-description: Conceptual overview of CircleCI functions, including commands, flags, aliases, versions, and validation.
+:experimental:
+
+CircleCI functions are versioned, tested programs that run as steps inside your jobs. You declare a function once in your configuration and call its commands as steps in any job.
+
+[#function-elements]
+== Function elements
+
+[#commands]
+=== Commands
+
+Commands are the tasks a function performs. Every function has at least one command. Most functions have a _default command_, which runs when a step uses the function's alias on its own. Additional commands run when a step uses `<alias>/<command>`.
+
+As an example, the `setup-python` function has a default command that installs Python, and an `install-packages` command that installs your project's dependencies:
+
+[,yaml]
+----
+version: 2.1
+
+functions:
+  python: github.com/circleci-functions/setup-python@v0.5.0
+
+jobs:
+  test:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      # using the setup-python default command
+      - python:
+          with:
+            python-version: "3.12"
+      # using the setup-python "install-packages" command
+      - python/install-packages:
+          with:
+            package-manager: poetry
+      - run: poetry run pytest
+
+  #... workflows, other jobs etc.
+----
+
+[#flags]
+=== Flags
+
+Flags change what a command does. Pass flags under `with:` in the step, without the leading `--`. For example, the `--version-file` flag is written as `version-file:`. Each flag has a type and, in most cases, a default value, so a step that uses only default values needs no `with:` at all.
+
+[,yaml]
+----
+version: 2.1
+
+functions:
+  go: github.com/circleci-functions/setup-go@v0.7.0
+
+jobs:
+  test:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - go:
+          with:
+            version-file: go.mod
+            golangci-lint-cache: true
+      - run: go test ./...
+
+workflows:
+  main:
+    jobs:
+      - test
+----
+
+To see a function's commands and flags, read its README in the xref:use:functions-catalog.adoc[Functions Catalog] or run `circleci function get <name>`.
+
+[#aliases]
+== Aliases
+
+The key you give a function under `functions` is its _alias_. Steps call the function by its alias, so every job can call the same function by one short name:
+
+[,yaml]
+----
+functions:
+  go: github.com/circleci-functions/setup-go@v0.7.0
+  aws: github.com/circleci-functions/setup-aws@v0.4.0
+----
+
+You choose the alias. When you add a function with `circleci function add`, the alias defaults to the function's name, and `--as` sets a different one. If the default alias clashes with an orb or command in your configuration, the CLI appends `-fn` to the alias.
+
+[#versioning]
+== Versioning
+
+Functions use semantic versioning. Each release has a version led by `v`, in `vMAJOR.MINOR.PATCH` format, for example `v0.7.0`.
+
+You pin each function to an exact version. Partial versions such as `v0` and labels such as `latest` are not accepted, so your jobs use the same function version until you change the pin.
+
+[#update-a-function-version]
+=== Update a function version
+
+To see the published versions of a function, run:
+
+[source,console]
+----
+$ circleci function get <name>
+----
+
+To move a declared function to its latest release, run `circleci function update` with its alias. To pin a specific version, add `--version`:
+
+[source,console]
+----
+$ circleci function update go
+$ circleci function update go --version v0.7.0
+----
+
+To list the functions your configuration declares and the versions they are pinned to, run `circleci function list --pinned`.
+
+[#configuration-validation]
+== Configuration validation
+
+When your configuration compiles, CircleCI checks every function step against the version you pinned. Compilation fails if:
+
+* The version is not a valid version string.
+* The function or version is not published.
+* A step uses a command the function does not have.
+* A step uses a flag the command does not accept.
+
+The error names the job and step, and lists the valid commands or flags. Run the same checks locally before you push:
+
+[source,console]
+----
+$ circleci config validate
+----
+
+[#how-functions-run]
+== How functions run
+
+When a job reaches a function step, CircleCI runs the function version you pinned inside the job. Functions that install tools put them on `PATH`, so later steps run them by name in any shell, with nothing to source or export.
+
+Functions that support caching manage their own caches. They restore the cache when their step runs and save it to the job cache when the job ends. Your job needs no `restore_cache` or `save_cache` steps for what the function caches.
+
+Each function's README lists the operating systems and architectures the function supports.
+
+[#functions-and-orbs]
+== Functions and orbs
+
+Orbs and functions both help you reuse work across pipelines, and you can use both in the same configuration:
+
+[.table-scroll]
+--
+[cols="1,2,2", options="header"]
+|===
+| | Orbs | Functions
+
+| What they provide
+| Packages of reusable configuration: jobs, commands, and executors.
+| Tested programs that run as steps inside your jobs.
+
+| How you add them
+| The `orbs` key.
+| The `functions` key.
+
+| What they are best for
+| Sharing whole jobs and workflows, and configuration logic across projects.
+| Setting up tools, dependencies, caches, and credentials inside a job.
+
+| Versions
+| Pinned to a full or partial semantic version.
+| Pinned to an exact semantic version.
+|===
+--
+
+[#see-also]
+== See also
+
+* Refer to xref:use:functions-intro.adoc[Functions Overview] for a starting point on using functions.
+* Refer to xref:use:functions-catalog.adoc[Functions Catalog] for the full list of functions, with a link to each function's README.
+* Refer to xref:use:functions-faq.adoc[Functions FAQ] for answers to common questions about using functions.
