@@ -17,7 +17,7 @@ orbs:
 executors:
   node_executor:
     docker:
-      - image: cimg/node:24.21.0
+      - image: cimg/node:24.22.2
     resource_class: medium+.gen2
     working_directory: ~/project
 
@@ -48,7 +48,7 @@ commands:
 jobs:
   check-metadata:
     docker:
-      - image: cimg/node:24.21.0
+      - image: cimg/node:24.22.2
     resource_class: small
     steps:
       - checkout
