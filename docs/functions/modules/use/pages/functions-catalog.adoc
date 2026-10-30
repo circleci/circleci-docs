@@ -1,0 +1,29 @@
+= Functions catalog
+:page-badge: Beta
+:page-platform: Cloud
+:page-audience: developer
+:page-description: The functions CircleCI publishes, with a link to each function's README on GitHub.
+:experimental:
+
+CircleCI publishes the following functions:
+
+* link:https://github.com/circleci-functions/setup-aws#readme[`setup-aws`]: Install the AWS CLI and configure AWS credentials.
+* link:https://github.com/circleci-functions/setup-browser-tools#readme[`setup-browser-tools`]: Install browsers and browser drivers.
+* link:https://github.com/circleci-functions/setup-docker#readme[`setup-docker`]: Install the Docker CLI, Buildx, and Compose.
+* link:https://github.com/circleci-functions/setup-dotnet#readme[`setup-dotnet`]: Install the .NET SDK and runtimes.
+* link:https://github.com/circleci-functions/setup-github-cli#readme[`setup-github-cli`]: Install the GitHub CLI.
+* link:https://github.com/circleci-functions/setup-go#readme[`setup-go`]: Install Go.
+* link:https://github.com/circleci-functions/setup-java#readme[`setup-java`]: Install a Java Development Kit.
+* link:https://github.com/circleci-functions/setup-node#readme[`setup-node`]: Install Node.js and your project's packages.
+* link:https://github.com/circleci-functions/setup-python#readme[`setup-python`]: Install Python and your project's packages.
+* link:https://github.com/circleci-functions/setup-ruby#readme[`setup-ruby`]: Install Ruby and your project's gems.
+
+NOTE: A function's README is the source of truth for its flags, usage, and versions.
+
+To browse functions from your terminal, refer to xref:use:functions-intro.adoc#functions-in-the-circleci-cli[Functions in the CircleCI CLI].
+
+[#see-also]
+== See also
+
+* Refer to xref:use:functions-intro.adoc[Functions Overview] for a starting point on using functions.
+* Refer to xref:use:functions-concepts.adoc[Functions Concepts] for high-level information about CircleCI functions.

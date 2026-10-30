@@ -1,0 +1,190 @@
+= Functions overview
+:page-badge: Beta
+:page-platform: Cloud
+:page-audience: developer
+:page-description: Starting point for using CircleCI functions to set up tools, dependencies, and credentials in your jobs.
+:experimental:
+
+Functions are versioned, tested programs that set up the tools your jobs need. Use functions to:
+
+* Install languages, command-line tools, and browsers in any job.
+* Install and cache your project's dependencies.
+* Configure credentials for cloud providers and registries.
+* Pin the tools your pipeline depends on to known versions.
+* Catch version and flag mistakes when your configuration compiles.
+
+CircleCI writes, tests, and publishes the functions in the xref:use:functions-catalog.adoc[Functions Catalog]. For how commands, flags, and versions work, refer to xref:use:functions-concepts.adoc[Functions Concepts].
+
+[#use-a-function]
+== Use a function
+
+A function is identified by its _name_ and a _version_. The name is the full path of the function, for example `github.com/circleci-functions/setup-node`. The name is followed by an `@` symbol and the exact version to use, for example `github.com/circleci-functions/setup-node@v0.4.0`.
+
+Declare a function under the `functions` key in your configuration file:
+
+[tabs]
+====
+Node::
++
+--
+[,yaml]
+----
+version: 2.1
+
+functions:
+  node: github.com/circleci-functions/setup-node@v0.4.0
+----
+--
+Generic::
++
+--
+[,yaml]
+----
+version: 2.1
+
+functions:
+  <alias>: github.com/circleci-functions/<function-name>@vX.Y.Z
+----
+--
+====
+
+The key under `functions` is the _alias_, and your steps call the function by it. A step named `<alias>` runs the function's default command, and `<alias>/<command>` runs another command. For details, refer to xref:use:functions-concepts.adoc#function-elements[Function Elements].
+
+The following job installs Node.js, then runs the `setup-node` function's `install-packages` command:
+
+.Using the `install-packages` command in a job
+[,yaml]
+----
+version: 2.1
+
+functions:
+  node: github.com/circleci-functions/setup-node@v0.4.0
+
+jobs:
+  test:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - node: # install Node.js
+          with:
+            node-version: "22"
+      - node/install-packages # install and cache the project's dependencies
+      - run: npm test
+
+workflows:
+  main:
+    jobs:
+      - test
+----
+
+To add a function to your configuration from your terminal, run `circleci function add`. The CLI looks up the latest version and writes the `functions` entry for you:
+
+[source,console]
+----
+$ circleci function add setup-node --as node
+----
+
+[#benefits-of-using-functions]
+== Benefits of using functions
+
+Functions replace the install scripts, `PATH` changes, and cache steps that a job otherwise needs to set up its tools. The following example shows a job that tests a Node.js application using the `setup-node` function. The second tab shows the configuration required without the function.
+
+Functions work in any job and on any image the function supports, so you do not need an image that ships the tool you need.
+
+[tabs]
+====
+With the function::
++
+--
+[,yaml]
+----
+version: 2.1
+
+functions:
+  node: github.com/circleci-functions/setup-node@v0.4.0
+
+jobs:
+  test:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - node:
+          with:
+            node-version-file: .nvmrc
+      - node/install-packages
+      - run: npm test
+
+workflows:
+  test_my_app:
+    jobs:
+      - test
+----
+--
+Without the function::
++
+--
+[,yaml]
+----
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: cimg/node:<node-version>
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - node-deps-v1-{{ .Branch }}-{{checksum "package-lock.json"}}
+      - run:
+          name: install packages
+          command: npm ci
+      - save_cache:
+          key: node-deps-v1-{{ .Branch }}-{{checksum "package-lock.json"}}
+          paths:
+            - ~/.npm
+      - run:
+          name: Run Tests
+          command: npm run test
+
+workflows:
+  test_my_app:
+    jobs:
+      - test
+----
+--
+====
+
+[#functions-in-the-circleci-cli]
+== Functions in the CircleCI CLI
+
+The xref:guides:toolkit:circleci-cli.adoc[CircleCI CLI] includes a `function` command for finding and managing the functions in your configuration:
+
+[.table-scroll]
+--
+[cols="1,2", options="header"]
+|===
+| Command | Description
+
+| `circleci function list`
+| List the published functions and their latest versions. Add `--pinned` to list the functions your configuration declares.
+
+| `circleci function get <name>`
+| Show a function's published versions and flags.
+
+| `circleci function add <name>`
+| Declare a function in your configuration at its latest version.
+
+| `circleci function update <alias>`
+| Move a declared function to its latest version, or to the version you pass with `--version`.
+|===
+--
+
+[#see-also]
+== See also
+
+* Refer to xref:use:functions-concepts.adoc[Functions Concepts] for high-level information about CircleCI functions.
+* Refer to xref:use:functions-catalog.adoc[Functions Catalog] for the full list of functions, with a link to each function's README.
+* Refer to xref:use:functions-faq.adoc[Functions FAQ] for answers to common questions about using functions.
