@@ -377,6 +377,7 @@ Telegraf
 [Tt]emplatizable
 Terraform
 TestFairy
+TestMu
 \btime windows\b
 [Tt]imebox
 [Tt]imeboxing
