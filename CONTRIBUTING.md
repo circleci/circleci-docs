@@ -18,7 +18,7 @@ Every page on the docs site has a **Make a contribution** link at the bottom. It
 
 Each successful `build` job on your pull request publishes the built site as artifacts. Select the `ci/circleci: build` check on your pull request, open the **Artifacts** tab, and select `index.html` to browse the site for your latest commit.
 
-![The Artifacts tab of the build job in CircleCI, with index.html listed](docs/contributors/modules/docs-style/images/preview-build-artifacts.png)
+![The Artifacts tab of the build job in CircleCI, with index.html listed](.github/images/preview-build-artifacts.png)
 
 ## Style checks
 
