@@ -554,7 +554,7 @@ image::guides:ROOT:name-of-image.png[Alternative text describing the image]
 - Include title above image using `.Title` syntax
 
 ### Diagrams
-Add diagrams with a `[mermaid]` block. Follow the `circleci-mermaid-diagrams` skill for on-brand diagrams.
+Add diagrams with a `[mermaid]` block.
 
 ```adoc
 [mermaid]
