@@ -14,12 +14,22 @@ xref:guides:integration:github-integration.adoc#user-keys-and-deploy-keys[User K
 +
 See the link:https://docs.antora.org/antora/latest/page/resource-id-coordinates/[Resource ID coordinates] page in the Antora docs for more information.
 
+* Use title case for cross reference link text. Vale enforces this.
+** **Good:** `xref:guides:orchestrate:schedule-triggers.adoc[Schedule Triggers]`
+** **Bad:** `xref:guides:orchestrate:schedule-triggers.adoc[schedule triggers]`
+
 * Cross references should explicitly name the document or section to which they are linking.
-** **Good:** Refer to the xref:guides:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Setting an environment variable in a project] section of the Environment Variables document.
+** **Good:** Refer to the xref:guides:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Setting an Environment Variable in a Project] section of the Environment Variables document.
 ** **Bad:** For more information on adding project-level environment variables head xref:guides:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[here].
+
+* Heading IDs are the lowercase, kebab-case form of the heading text, so `== Install CircleCI agent skills` becomes `#install-circleci-agent-skills`. Do not use the AsciiDoc default underscore IDs, such as `#_install_circleci_agent_skills`. Add an explicit `[#custom-id]` only when the hash must differ from the generated one.
 
 [#links]
 == Links
+
+* Link text must describe the destination. Do not use "click here", "here", or "this".
+
+* Use title case for link text on CircleCI-owned URLs, including the API reference. Link text for third-party sites matches the name or title on that site.
 
 * Links to third party sites should be in the following form in AsciiDoc content:
 +

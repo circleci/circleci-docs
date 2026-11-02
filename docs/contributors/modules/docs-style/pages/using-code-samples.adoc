@@ -32,6 +32,8 @@ $ circleci version
 +
 NOTE: Using the copy to clipboard icon will *not* copy the dollar sign if the language is set to `console`.
 
+* When a command has a multi-line body, such as a JSON payload or heredoc, use the `shell` language and no dollar sign. The copy button only copies lines that start with `$ `, so a `console` block would lose the body.
+
 * When adding a snippet of a CircleCI config, show the full job or workflow, not just the relevant lines.
 
 * Where possible add a title to the code snippet, and call out relevant points within the snippet using comments:

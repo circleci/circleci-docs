@@ -125,16 +125,28 @@ docs/
                 └── icons/
                     ├── cancel.svg
                     ├── cancel-dark.svg
-                    ├── check.svg
-                    ├── check-dark.svg
+                    ├── chunk.svg
+                    ├── chunk-dark.svg
+                    ├── delete.svg
+                    ├── delete-dark.svg
                     ├── edit-solid.svg
                     ├── edit-solid-dark.svg
+                    ├── github-app.svg
+                    ├── github-app-dark.svg
+                    ├── github-oauth.svg
+                    ├── github-oauth-dark.svg
                     ├── more.svg
                     ├── more-dark.svg
                     ├── passed.svg
                     ├── passed-dark.svg
+                    ├── promote.svg
+                    ├── promote-dark.svg
+                    ├── rebuild.svg
+                    ├── rebuild-dark.svg
                     ├── settings.svg
-                    └── settings-dark.svg
+                    ├── settings-dark.svg
+                    ├── warning.svg
+                    └── warning-dark.svg
 ----
 
 NOTE: If you use the older `image:` macro syntax (for example, pass:[`image:guides:ROOT:icons/example.svg[alt text, role="no-border"`]), it will not automatically switch themes. Use the pass:[icon:name[Icon alt text]] macro instead for theme-aware icons.
