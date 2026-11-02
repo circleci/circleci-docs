@@ -11,8 +11,14 @@ Every page on the docs site has a **Make a contribution** link at the bottom. It
 1. Fork the repository at https://github.com/circleci/circleci-docs. CircleCI employees can clone it instead.
 2. Create a branch for your change.
 3. Edit the `.adoc` files under `docs/`. Read the [style guide](https://circleci.com/docs/contributors/docs-style/) first, and start new pages from a template in `docs/contributors/modules/templates/pages/`.
-4. Preview your change locally. See [DEVELOPMENT.md](DEVELOPMENT.md) for setup. You can also preview the build artifacts from the `ci/circleci: build` job on your pull request.
+4. Preview your change locally. See [DEVELOPMENT.md](DEVELOPMENT.md) for setup.
 5. Open a pull request and complete the template.
+
+## Preview your pull request
+
+Each successful `build` job on your pull request publishes the built site as artifacts. Select the `ci/circleci: build` check on your pull request, open the **Artifacts** tab, and select `index.html` to browse the site for your latest commit.
+
+![The Artifacts tab of the build job in CircleCI, with index.html listed](docs/contributors/modules/docs-style/images/preview-build-artifacts.png)
 
 ## Style checks
 
