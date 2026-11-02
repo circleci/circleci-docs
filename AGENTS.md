@@ -69,6 +69,21 @@ All pages require standard attributes (`:page-platform:`, `:page-audience:`, `:p
 - **Good**: `$CIRCLE_OIDC_TOKEN_V3` is not available on server.
 - **Bad**: `$CIRCLE_OIDC_TOKEN_V3` will be supported from server v5.0+.
 
+### Word Choices
+- Do not describe a process as "easy", "easily", or "simply". You cannot know what is easy for the reader
+- Avoid "please"
+- Use "using" instead of "via", which is harder for non-native English speakers
+- Do not use time-sensitive language such as "new", "soon", or "in preview" in main prose. It goes stale. If it is needed, put it in an admonition that makes the time-sensitive nature clear
+- Use inclusive terms:
+
+| Avoid | Use instead |
+|---|---|
+| Blacklist / Whitelist | Blocklist / Safelist |
+| Master / Slave | Leader / Follower, or Primary / Replica, depending on context |
+| Insane / Sane / Crazy | Unreasonable / Reasonable |
+| Killer | Very successful |
+| Guys | Folks, people, humans, teammates |
+
 ### CircleCI-Specific Terminology
 - The CircleCI web interface is the "web app"
 - Use "CI/CD" to describe what we do
@@ -100,6 +115,13 @@ All pages require standard attributes (`:page-platform:`, `:page-audience:`, `:p
   - Log in to your account …
   - Read the setup guide …
   - Set up your account …
+
+- **Use "open source"**, not "opensource" or "open-source"
+
+## Abbreviations and Symbols
+- **Do not use "e.g." or "i.e."**. Use "for example" and "that is"
+- **Do not use "&"** in place of "and"
+- **Use the Oxford comma**: "a pencil, eraser, and notebook"
 
 ## Punctuation
 
@@ -177,6 +199,24 @@ Click the icon:settings[Settings icon] to access project settings.
 - Each icon has a light version (`name.svg`) and dark version (`name-dark.svg`)
 - Use this macro instead of the older `image:` syntax for theme-aware icons
 
+**Creating a new icon:** add two SVG files to `docs/guides/modules/ROOT/images/icons/`:
+- `name.svg`: the light theme version, with a dark icon color (typically `#161616`)
+- `name-dark.svg`: the dark theme version, with a light icon color (typically `#D7DBE3`)
+
+### Page Badges
+Add a badge next to a page title and its sidebar navigation entry using page attributes:
+
+```adoc
+= Page Title
+:page-badge: Preview
+```
+
+- `:page-badge:`: one of `Beta`, `Preview`, or `Deprecated`. Never `New`, because it goes stale (see Page Attributes)
+- `:page-badge-classes:`: Tailwind classes for styling (optional)
+- `:page-badge-bg:` and `:page-badge-border:`: hex colors (optional, override the classes)
+- A closed preview page has the `Preview` badge and is **not** listed in the navigation. An open preview page has the `Preview` badge and **is** listed
+- See xref:contributors:docs-style:title-badges.adoc[Page Title Badges] for complete documentation
+
 ### Subsection Badges
 Add status badges to section headings (h2-h6) to indicate feature maturity or platform availability.
 
@@ -218,7 +258,8 @@ Configure Slack notifications for your project...
 
 ### Headings
 - Write headings in **logical sequence** that tells a story
-- **Do not skip heading levels** (e.g., h2 to h4)
+- **Do not skip heading levels** (for example, h2 to h4)
+- Antora creates the `h1` from the page title, so use only `h2` and below in the body
 - Include at least an intro paragraph before subheadings
 - **Start headings with verbs** where possible:
   - **Good**: "Grooming cats"
@@ -263,7 +304,7 @@ Common mistakes:
 
 The xref format is: `xref:component:module:filename.adoc[Link Text]`
 - **component**: Usually `guides`, `reference`, `orbs`, etc.
-- **module**: The module directory name (e.g., `orchestrate`, `deploy`, `toolkit`)
+- **module**: The module directory name (for example, `orchestrate`, `deploy`, `toolkit`)
 - **filename.adoc**: The actual file name
 
 Example verification process:
@@ -511,6 +552,17 @@ image::guides:ROOT:name-of-image.png[Alternative text describing the image]
 ```
 - Images without alt text are accessibility violations
 - Include title above image using `.Title` syntax
+
+### Diagrams
+Add diagrams with a `[mermaid]` block.
+
+```adoc
+[mermaid]
+....
+sequenceDiagram
+    Alice->>Bob: Hello Bob
+....
+```
 
 ### Admonitions (Notes, Tips, Warnings)
 Use these for visual separation:
@@ -907,10 +959,10 @@ The `check-metadata` CI job validates every page against the schema. Run the sam
   - Comma-separated, capitalized: `Cloud`, `Server`, or `Cloud, Server`
   - Do not put a version number here — use `:page-server-min-version:` instead
 
-- `:page-server-min-version:` - Only when `server` is in `:page-platform:`. The minimum Server version the feature is available from, e.g. `"4.7"`.
+- `:page-server-min-version:` - Only when `server` is in `:page-platform:`. The minimum Server version the feature is available from, for example `"4.7"`.
   - **Always quote the value.** An unquoted `4.10` is parsed as the number `4.1`, silently dropping the trailing zero.
 
-- `:page-server-deprecated-in:` - Optional. Same format and quoting rule as above, for a feature deprecated or removed in Server, e.g. `"5.0"`.
+- `:page-server-deprecated-in:` - Optional. Same format and quoting rule as above, for a feature deprecated or removed in Server, for example `"5.0"`.
 
 - `:page-audience:` - Who the page is for.
   - `admin` - Server operators/administrators (installation, cluster management, upgrades)
@@ -922,11 +974,11 @@ The `check-metadata` CI job validates every page against the schema. Run the sam
 
 - `:page-badge:` - Optional. One of `Beta`, `Preview`, `Deprecated`. Never `New` — it's date-relative and goes stale as soon as someone forgets to remove it.
 
-- `:page-plan:` - Optional. Which CircleCI cloud plan(s) the page's functionality is available on: one to three of `Free`, `Performance`, `Scale`, comma-separated, in that order, e.g. `Performance, Scale`.
+- `:page-plan:` - Optional. Which CircleCI cloud plan(s) the page's functionality is available on: one to three of `Free`, `Performance`, `Scale`, comma-separated, in that order, for example `Performance, Scale`.
   - Title case, unlike the other enum attributes — it matches the product's own plan names.
   - No `all` shorthand — a page available on every plan lists all three: `Free, Performance, Scale`.
   - Not used on Server-only pages (`:page-platform: server` with no `cloud`); Server is a separate plan covered by `page-platform`, not by `page-plan`.
-  - A page gets a plan if the feature is available on it at all, even at a lower limit (e.g. capped flaky test detection). If only a section of the page is gated, the page still lists all three plans and the gated section carries its own inline note.
+  - A page gets a plan if the feature is available on it at all, even at a lower limit (for example capped flaky test detection). If only a section of the page is gated, the page still lists all three plans and the gated section carries its own inline note.
   - On `guides` and `reference` pages, `page-plan` and `page-vcs` drive a generated availability sidebar (Cloud plans / Version control) — don't write one by hand as a `****` sidebar or NOTE. It's built at build time from these attributes; see `extensions/page-availability-extension.js`.
 
 - `:page-description:` - Used for SEO meta descriptions and page previews

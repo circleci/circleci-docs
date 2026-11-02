@@ -56,7 +56,15 @@ function collectPages(contentCatalog, siteUrl) {
     'server-4.9',
   ];
 
+  // Contributor guidance is for people writing docs, not for readers searching them.
+  const excludedComponents = ['contributors'];
+
   contentCatalog.getComponents().forEach(({ name: comp, versions }) => {
+    if (excludedComponents.includes(comp)) {
+      console.log(`Skipping Algolia indexing for the ${comp} component`);
+      return;
+    }
+
     versions.forEach(({ version }) => {
       // The guides Server build (guides-versions-extension.js) repeats the
       // Cloud guides with small differences, so it stays out of search. Server

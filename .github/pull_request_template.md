@@ -5,7 +5,7 @@ What did you change?
 Why did you make these changes? What problem does this solve?
 
 # Content checks
-Please follow our style when contributing to CircleCI docs. View our [style guide](https://circleci.com/docs/style/style-guide-overview) or check out our [CONTRIBUTING.md](../CONTRIBUTING.md) for more information.
+Please follow our style when contributing to CircleCI docs. View our [style guide](https://circleci.com/docs/contributors/docs-style/) or check out our [CONTRIBUTING.md](../CONTRIBUTING.md) for more information.
 
 **Preview your changes:**
 - [ ] View the Vale linter results, select the `ci/circleci: lint` job at the bottom of your PR. You will be redirected to the `vale/lint` job output in CircleCI.
