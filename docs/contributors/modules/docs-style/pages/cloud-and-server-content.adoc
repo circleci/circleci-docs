@@ -134,7 +134,7 @@ Server steps.
 ====
 ----
 
-The Server build then shows only the Cloud and Server tabs.
+The Server build omits the macOS tab.
 
 [#check-your-work]
 == Check your work
