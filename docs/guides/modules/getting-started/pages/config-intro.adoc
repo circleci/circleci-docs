@@ -346,3 +346,4 @@ The CircleCI VS Code extension is available to download on the link:https://mark
 * xref:reference:ROOT:configuration-reference.adoc[Configuring CircleCI]
 * xref:execute:executor-intro.adoc[Executors and Images]
 * xref:orchestrate:workflows.adoc[Using Workflows to Orchestrate Jobs]
+* xref:functions:ROOT:functions-intro.adoc[Functions Overview]

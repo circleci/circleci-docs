@@ -507,6 +507,13 @@ For added security when using the Docker executor and running Docker commands, u
 
 For more information, see the xref:guides:execute:executor-intro.adoc[Execution Environments Overview] page.
 
+[#functions]
+== Functions
+
+Functions are versioned, tested programs that run as steps inside your jobs to set up the tools your jobs need, such as languages, dependencies, and credentials. Declare functions under the `functions` key in your configuration. You can use functions and <<orbs,orbs>> in the same configuration.
+
+See xref:functions:ROOT:functions-intro.adoc[Functions Overview] for how to use functions, and xref:functions:ROOT:functions-concepts.adoc[Functions Concepts] for how commands, flags, and versions work.
+
 [#images]
 == Images
 

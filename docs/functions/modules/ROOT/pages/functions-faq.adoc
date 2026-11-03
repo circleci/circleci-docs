@@ -11,7 +11,7 @@
 [#difference-between-functions-and-orbs]
 === What is the difference between functions and orbs?
 
-Orbs package reusable configuration. Functions are programs that run as steps inside your jobs. For a side-by-side comparison, refer to the xref:use:functions-concepts.adoc#functions-and-orbs[Functions and Orbs] section.
+Orbs package reusable configuration. Functions are programs that run as steps inside your jobs. For a side-by-side comparison, refer to the xref:functions-concepts.adoc#functions-and-orbs[Functions and Orbs] section.
 
 [#use-functions-and-orbs-together]
 === Can I use functions and orbs in the same configuration?
@@ -36,12 +36,12 @@ CircleCI checks each function step against the version you pin. If the new versi
 [#see-function-flags]
 === How do I see the flags a function accepts?
 
-Read the function's README, linked from the xref:use:functions-catalog.adoc[Functions Catalog], or run `circleci function get <name>`.
+Read the function's README, linked from the xref:functions-catalog.adoc[Functions Catalog], or run `circleci function get <name>`.
 
 [#cache-steps]
 === Do I need to add cache steps when I use a function?
 
-No. Functions that support caching manage their own caches. Refer to xref:use:functions-concepts.adoc#how-functions-run[How Functions Run].
+No. Functions that support caching manage their own caches. Refer to xref:functions-concepts.adoc#how-functions-run[How Functions Run].
 
 [#which-executors]
 === Which executors can I use functions on?
@@ -56,5 +56,5 @@ No. Functions are available on CircleCI Cloud only.
 [#see-also]
 == See also
 
-* Refer to xref:use:functions-intro.adoc[Functions Overview] for a starting point on using functions.
-* Refer to xref:use:functions-concepts.adoc[Functions Concepts] for high-level information about CircleCI functions.
+* Refer to xref:functions-intro.adoc[Functions Overview] for a starting point on using functions.
+* Refer to xref:functions-concepts.adoc[Functions Concepts] for high-level information about CircleCI functions.

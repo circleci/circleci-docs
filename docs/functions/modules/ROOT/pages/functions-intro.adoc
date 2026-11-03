@@ -13,7 +13,7 @@ Functions are versioned, tested programs that set up the tools your jobs need. U
 * Pin the tools your pipeline depends on to known versions.
 * Catch version and flag mistakes when your configuration compiles.
 
-CircleCI writes, tests, and publishes the functions in the xref:use:functions-catalog.adoc[Functions Catalog]. For how commands, flags, and versions work, refer to xref:use:functions-concepts.adoc[Functions Concepts].
+CircleCI writes, tests, and publishes the functions in the xref:functions-catalog.adoc[Functions Catalog]. For how commands, flags, and versions work, refer to xref:functions-concepts.adoc[Functions Concepts].
 
 [#use-a-function]
 == Use a function
@@ -48,7 +48,7 @@ functions:
 --
 ====
 
-The key under `functions` is the _alias_, and your steps call the function by it. A step named `<alias>` runs the function's default command, and `<alias>/<command>` runs another command. For details, refer to xref:use:functions-concepts.adoc#function-elements[Function Elements].
+The key under `functions` is the _alias_, and your steps call the function by it. A step named `<alias>` runs the function's default command, and `<alias>/<command>` runs another command. For details, refer to xref:functions-concepts.adoc#function-elements[Function Elements].
 
 The following job installs Node.js, then runs the `setup-node` function's `install-packages` command:
 
@@ -185,6 +185,6 @@ The xref:guides:toolkit:circleci-cli.adoc[CircleCI CLI] includes a `function` co
 [#see-also]
 == See also
 
-* Refer to xref:use:functions-concepts.adoc[Functions Concepts] for high-level information about CircleCI functions.
-* Refer to xref:use:functions-catalog.adoc[Functions Catalog] for the full list of functions, with a link to each function's README.
-* Refer to xref:use:functions-faq.adoc[Functions FAQ] for answers to common questions about using functions.
+* Refer to xref:functions-concepts.adoc[Functions Concepts] for high-level information about CircleCI functions.
+* Refer to xref:functions-catalog.adoc[Functions Catalog] for the full list of functions, with a link to each function's README.
+* Refer to xref:functions-faq.adoc[Functions FAQ] for answers to common questions about using functions.
