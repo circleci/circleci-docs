@@ -448,30 +448,18 @@ You can access the workflow ID through the `CIRCLE_WORKFLOW_ID` xref:get-ids-fro
 [tabs]
 ====
 
-From the workflow URL::
+From the workflow page::
 +
 . In the link:https://app.circleci.com[CircleCI web app, window=_blank], select your org from the org cards on your user homepage.
 . Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
 . Select the menu:Pipelines[] next to your project.
 . Select the workflow run you want to find the ID for.
-. Check the URL of the page. The workflow ID is the last alphanumeric string of the URL, after the `/workflows/` string.
+. On the workflow page, select the ellipsis icon:more[Ellipsis menu icon] at the top-right of the page (next to the btn:[Rerun] button).
+. In the contextual menu, select btn:[Copy Workflow ID].
 
 +
-.Workflow ID in workflow page URL
-image::guides:ROOT:workflow-id-from-workflow-url.png[Get workflow ID from workflow page URL]
-
-From the job URL::
-+
-. In the link:https://app.circleci.com[CircleCI web app, window=_blank], select your org from the org cards on your user homepage.
-. Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
-. Select the menu:Pipelines[] next to your project.
-. Select the workflow run you want to find the ID for.
-. Select any job from that workflow run.
-. Check the URL of the page. The workflow ID is the alphanumeric string of the URL located between the `/workflows/` and the `/jobs/` strings.
-
-+
-.Workflow ID in job page URL
-image::guides:ROOT:workflow-id-from-job-url.png[Get workflow ID from job page URL]
+.Copy workflow ID from workflow page
+image::guides:ROOT:workflow-id-from-workflow-page.png[Copy workflow ID from the workflow page ellipsis menu]
 
 ifndef::server[]
 Via API v3::
@@ -561,6 +549,21 @@ You can access the job ID through the `CIRCLE_WORKFLOW_JOB_ID` xref:get-ids-from
 
 [tabs]
 ====
+From the job page::
++
+--
+. In the link:https://app.circleci.com[CircleCI web app, window=_blank], select your org from the org cards on your user homepage.
+. Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
+. Select the menu:Pipelines[] next to your project.
+. Select the workflow run that contains the job.
+. Select the job you want to find the ID for.
+. On the job page, select the ellipsis icon:more[Ellipsis menu icon] at the top-right of the page (next to the btn:[Rerun] button).
+. In the contextual menu, select btn:[Copy Job ID].
+
++
+.Copy job ID from job page
+image::guides:ROOT:job-id-from-job-page.png[Copy job ID from the job page ellipsis menu]
+--
 ifndef::server[]
 Via API v3::
 +
