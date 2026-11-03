@@ -15,6 +15,7 @@ version: 2.1
 
 orbs:
   go: circleci/go@3.0.4
+  cloudsmith: https://raw.githubusercontent.com/circleci/backplane-cicd/main/orbs/cloudsmith.yml
 
 executors:
   node_executor:
@@ -28,6 +29,8 @@ jobs:
     executor: node_executor
     steps:
       - checkout
+      - cloudsmith/configure:
+          npm: true
       - run:
           name: Install Node dependencies
           command: npm ci
