@@ -1,0 +1,242 @@
+= Optimize Bazel builds on CircleCI
+:page-platform: Cloud
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-audience: developer
+:page-description: Learn two strategies for persisting Bazel's build cache across CircleCI jobs to avoid cold builds and reduce CI run times.
+:page-content-type: tutorial
+:experimental:
+
+Bazel's action caching model identifies each build step by a content hash of its inputs and skips any step whose output it has already computed. This means most incremental builds on a developer workstation are fast. On CI, where each job starts with an empty workspace, that local cache is absent, so builds run cold on every commit.
+
+This tutorial shows you two ways to carry Bazel's build cache across CircleCI jobs:
+
+* *Disk cache*: save Bazel's local disk cache between jobs using `save_cache` and `restore_cache`.
+* *Build tool cache*: use the `with_tool_cache` step to back Bazel's remote cache protocol with a CircleCI-managed backend. No cache key design required.
+
+You can follow along using the link:https://github.com/circleci-public/circleci-demo-bazel[CircleCI Bazel demo project], or apply the patterns to your own Bazel project.
+
+[#introduction]
+== Introduction
+
+Follow this tutorial to:
+
+. Learn why Bazel's cache is absent on CI by default and how to restore it.
+. Configure a Bazel disk cache that persists across pipeline runs.
+. Replace the disk cache with `with_tool_cache`, a simpler approach that uses Bazel's native remote cache protocol.
+. Confirm that cache hits appear in your job output.
+
+[#prerequisites]
+== Prerequisites
+
+* A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
+* A Bazel project. Use the link:https://github.com/circleci-public/circleci-demo-bazel[CircleCI Bazel demo project] or your own repository.
+* Bazel or link:https://github.com/bazelbuild/bazelisk[Bazelisk] installed in your Docker image. The demo project uses `cimg/base:current`, which includes Bazelisk.
+
+[#1-explore-the-demo-project]
+== 1. Explore the demo project
+
+The link:https://github.com/circleci-public/circleci-demo-bazel[CircleCI Bazel demo project] is a small multi-target Bazel workspace. It includes several build targets so you can observe Bazel's incremental build behavior.
+
+Clone the project (or fork it to trigger your own pipeline runs):
+
+[source,console]
+----
+$ git clone https://github.com/circleci-public/circleci-demo-bazel.git
+$ cd circleci-demo-bazel
+----
+
+Run a build locally to warm your local disk cache:
+
+[source,console]
+----
+$ bazel build //...
+----
+
+Run the same command a second time. Bazel reports `(cached)` next to each target whose output was already stored. On CI, a new job starts with an empty workspace. That local cache does not carry over, so every build starts cold by default.
+
+The two strategies in this tutorial restore that cache across jobs so that unchanged targets are not rebuilt on every commit.
+
+[#2-configure-a-disk-cache]
+== 2. Configure a Bazel disk cache
+
+Bazel's link:https://bazel.build/remote/caching#disk-cache[disk cache] stores build outputs as content-addressed files in a local directory. Entries use content hashes as keys, so partial cache restores are safe: Bazel reuses only the entries that match the current build and rebuilds anything that has changed.
+
+[#2a-enable-disk-cache-in-bazelrc]
+=== a. Enable the disk cache in .bazelrc
+
+Add the following line to your project's `.bazelrc` file:
+
+[source,shell]
+----
+build --disk_cache=~/.cache/bazel-disk-cache
+----
+
+This tells every `bazel build` and `bazel test` invocation to read from and write to `~/.cache/bazel-disk-cache`. The home directory path works without changes across different executor types.
+
+[#2b-add-cache-steps-to-config]
+=== b. Add cache steps to your CircleCI config
+
+Use `restore_cache` to load a previously saved cache before the build, and `save_cache` to persist the updated cache after it completes. The cache key combines the branch name and a checksum of your `WORKSPACE` file, so CircleCI invalidates the cache when your external Bazel dependencies change.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - bazel-disk-cache-v1-{{ .Branch }}-{{ checksum "WORKSPACE" }}
+            - bazel-disk-cache-v1-{{ .Branch }}-
+            - bazel-disk-cache-v1-
+      - run:
+          name: Build
+          command: bazel build //...
+      - run:
+          name: Test
+          command: bazel test //...
+      - save_cache:
+          key: bazel-disk-cache-v1-{{ .Branch }}-{{ checksum "WORKSPACE" }}
+          paths:
+            - ~/.cache/bazel-disk-cache
+
+workflows:
+  build-and-test:
+    jobs:
+      - build
+----
+
+The three fallback keys under `restore_cache` let CircleCI use a cache from a parent branch when no exact match exists, so feature branches do not always start cold.
+
+NOTE: Caches are immutable per key on CircleCI. The first run to produce a given key captures the cache directory, and later runs with the same key restore that snapshot. If you upgrade Bazel or make a large dependency change, increment the version prefix (`v1` to `v2`) to force a fresh cache.
+
+[#3-migrate-to-build-tool-cache]
+[badge="Beta"]
+== 3. Migrate to build tool cache
+
+The disk cache approach has one practical limitation: because CircleCI caches are immutable per key, the first build to populate a key captures the entire cache directory. Later builds with new targets restore the old snapshot before adding those targets, then save a new copy of the whole directory under a new key. As the cache grows, successive copies become large and nearly identical to one another, which uses storage inefficiently.
+
+CircleCI's `with_tool_cache` step uses Bazel's link:https://bazel.build/remote/caching[remote cache protocol] instead. It stores and fetches individual build outputs on demand, so a small change adds one new entry rather than a new copy of the whole cache.
+
+[#3a-switch-to-build-tool-cache]
+=== a. Switch to the build tool cache step
+
+Remove the `restore_cache` and `save_cache` steps and the `--disk_cache` line from `.bazelrc`. Then wrap your build steps with `with_tool_cache`:
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - checkout
+      - with_tool_cache:
+          tool: bazel
+          steps:
+            - run:
+                name: Build
+                command: bazel build //...
+            - run:
+                name: Test
+                command: bazel test //...
+
+workflows:
+  build-and-test:
+    jobs:
+      - build
+----
+
+`with_tool_cache` handles all cache infrastructure automatically:
+
+. Starts a local cache server that speaks Bazel's remote cache protocol (gRPC).
+. Configures Bazel to point at that server as its remote cache.
+. Runs your wrapped steps.
+. Stops the cache server when your steps finish, regardless of whether they passed or failed.
+
+The step requires no cache key design, path configuration, or Bazel flags.
+
+NOTE: Put `checkout` before `with_tool_cache`, not inside it. The checkout step does not use the build cache and runs outside the wrapper.
+
+[#3b-keep-dependency-caching-separate]
+=== b. Keep dependency caching separate
+
+`with_tool_cache` manages Bazel's build output cache, not its external dependency cache. If your project fetches external repositories (rules or third-party packages), add a separate `save_cache`/`restore_cache` pair for the Bazel repository cache directory:
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - bazel-repo-cache-v1-{{ checksum "WORKSPACE" }}
+            - bazel-repo-cache-v1-
+      - with_tool_cache:
+          tool: bazel
+          steps:
+            - run:
+                name: Build
+                command: bazel build //...
+            - run:
+                name: Test
+                command: bazel test //...
+      - save_cache:
+          key: bazel-repo-cache-v1-{{ checksum "WORKSPACE" }}
+          paths:
+            - ~/.cache/bazel/external
+
+workflows:
+  build-and-test:
+    jobs:
+      - build
+----
+
+The repository cache (`~/.cache/bazel/external`) holds downloaded external dependencies such as Go modules, Maven artifacts, and rule sets. This directory changes infrequently, so a bulk snapshot works well for it. The build output cache, managed by `with_tool_cache`, changes often and is a good fit for granular, on-demand caching.
+
+[#4-verify-cache-hits]
+== 4. Verify cache hits
+
+After your first cached run completes, trigger another pipeline run and keep your build targets unchanged. In the job output, look for Bazel's cache hit summary at the end of the build:
+
+----
+INFO: Build completed successfully, 12 total actions, 11 action cache hits.
+----
+
+A high ratio of cache hits to total actions confirms that caching is working. On a warm run with no source changes, nearly every action is a cache hit.
+
+If you see zero cache hits on a second run, check the following:
+
+* For disk cache, confirm that the key used in `restore_cache` matches the key used in `save_cache`. When the WORKSPACE checksum changes, CircleCI falls back to a prefix key and fewer targets come from cache.
+* Check your `.bazelrc` for flags that disable caching, such as `--noremote_cache` or `--nouse_action_cache`.
+* Confirm your build targets are deterministic. Targets that embed timestamps or random values produce different content hashes on each run and never produce cache hits.
+
+[#conclusion]
+== Conclusion
+
+In this tutorial, you configured two strategies for persisting Bazel's build cache across CircleCI jobs:
+
+* *Disk cache* with `save_cache` and `restore_cache` provides a straightforward starting point. It works well for smaller projects and requires adding only cache steps to an existing config.
+* *Build tool cache* with `with_tool_cache` uses Bazel's remote cache protocol for more efficient, granular caching. It requires no cache key design and accumulates new entries continuously instead of saving and restoring large directory snapshots.
+
+Both strategies avoid cold builds for unchanged targets and reduce pipeline run time.
+
+[#next-steps]
+== Next steps
+
+* xref:optimize:build-tool-cache.adoc[Build Tool Cache] — full reference for `with_tool_cache` options and supported tools
+* xref:optimize:caching.adoc[Caching Dependencies] — cache external package dependencies alongside your Bazel build outputs
+* xref:optimize:optimizations.adoc[Optimizations Reference] — an overview of all CircleCI optimization features
+* link:https://bazel.build/remote/caching[Remote Caching — Bazel documentation]
