@@ -13,7 +13,7 @@ include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supp
 
 Use CircleCI test Insights to analyze your test performance within the most recent executions and identify opportunities for test optimization. To access test insights, select the *Tests* tab on the *Workflow Insights* page.
 
-NOTE: Test Insights are not available for all branches. If the *Tests* tab displays the message "Test Insights are not available for All Branches", select an individual branch from the branch dropdown menu.
+TIP: If the *Tests* tab displays the message "Test Insights are not available for All Branches", select an individual branch from the branch dropdown menu.
 
 The next sections go over what test insights are available.
 
