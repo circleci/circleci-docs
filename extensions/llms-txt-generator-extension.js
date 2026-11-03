@@ -151,7 +151,7 @@ function generateLlmsTxt (playbook, contentCatalog) {
 
   const components = contentCatalog.getComponents()
 
-  const componentOrder = ['root', 'guides', 'reference', 'runner', 'orbs', 'server-admin']
+  const componentOrder = ['root', 'guides', 'reference', 'runner', 'orbs', 'functions', 'server-admin']
   const excludedComponents = ['services', 'contributors']
   const sortedComponents = [...components]
     .filter(c => !excludedComponents.includes(c.name))
@@ -227,6 +227,7 @@ function generateLlmsTxt (playbook, contentCatalog) {
   sections.push(`- Reference: ${siteUrl}/reference/<topic>/`)
   sections.push(`- Runner: ${siteUrl}/runner/<topic>/`)
   sections.push(`- Orbs: ${siteUrl}/orbs/<topic>/`)
+  sections.push(`- Functions: ${siteUrl}/functions/<topic>/`)
   sections.push(`- Server Admin: ${siteUrl}/server-admin-<version>/<topic>/`)
   sections.push(`- API: ${siteUrl}/api/<version>/`)
   sections.push('')

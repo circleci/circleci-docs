@@ -289,4 +289,5 @@ The orbs page also includes your org's allow list URLs for URL orbs.
 
 * Refer to xref:use:orb-concepts.adoc[Orbs Concepts] for high-level information about CircleCI orbs.
 * Refer to xref:author:orb-author.adoc[Introduction to Authoring Orbs] for guidance on creating your own orbs.
+* Refer to xref:functions:ROOT:functions-intro.adoc[Functions Overview] for programs that set up tools, dependencies, and credentials inside your jobs. You can use functions and orbs in the same configuration.
 * Refer to xref:orbs-faq.adoc[Orbs FAQ] for information on known issues and questions that have been addressed when using CircleCI orbs.

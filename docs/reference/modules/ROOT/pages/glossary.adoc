@@ -178,6 +178,10 @@ The mechanisms for controlling whether a <<job>>, <<workflow>>, or <<step>> runs
 
 A test that passes and fails inconsistently without changes to the code under test. CircleCI identifies a test as flaky when it both fails and passes on the same commit within a set time window. See the xref:guides:test:fix-flaky-tests.adoc[Identify and Fix Flaky Tests] page. To retry flaky tests automatically, see <<auto-rerun-failed-tests>>.
 
+== Function
+
+A versioned, tested program that runs as a step inside a <<job>> to set up tools, dependencies, or credentials. Declare functions under the `functions` key in your configuration and call them by alias in your steps. See the xref:functions:ROOT:functions-intro.adoc[Functions Overview] page.
+
 == Image
 
 A packaged system that includes the instructions for creating a running <<container>>. The <<primary-container>> is defined by the first image listed in your <<configuration,configuration file>>. Visit the https://circleci.com/developer/images[CircleCI Developer Hub] to browse available convenience and machine images. See also <<convenience-image>>, <<machine-image>>, and <<custom-image>>.
