@@ -42,12 +42,7 @@ The user ID is a unique identifier for a user.
 Web app::
 +
 --
-ifndef::server[]
-. In the CircleCI application, go to your link:https://app.circleci.com/settings/user[User settings, window=_blank].
-endif::server[]
-ifdef::server[]
-. In the CircleCI web app, go to your *User settings*.
-endif::server[]
+include::guides:ROOT:partial$app-navigation/steps-to-user-settings.adoc[]
 . On the menu:Account Integrations[] page, locate the **User ID** label.
 . Note the value or select the btn:[Copy] icon next to your user ID.
 
@@ -322,9 +317,7 @@ You can access the pipeline run ID through the `CIRCLE_PIPELINE_ID` xref:get-ids
 
 From the pipelines dashboard::
 +
-. In the link:https://app.circleci.com[CircleCI web app, window=_blank], select your org from the org cards on your user homepage.
-. Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
-. Select the menu:Pipelines[] next to your project.
+include::guides:ROOT:partial$app-navigation/steps-to-project-pipelines.adoc[]
 . Select the ellipsis icon:more[Ellipsis menu icon] next to any workflow run of the pipeline.
 . In the contextual menu, select btn:[Copy Pipeline ID].
 
@@ -334,9 +327,7 @@ image::guides:ROOT:pipelines-page-ids.png[Copy pipeline ID from pipelines dashbo
 
 From the workflow page::
 +
-. In the link:https://app.circleci.com[CircleCI web app, window=_blank], select your org from the org cards on your user homepage.
-. Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
-. Select the menu:Pipelines[] next to your project.
+include::guides:ROOT:partial$app-navigation/steps-to-project-pipelines.adoc[]
 . Select any workflow run of the pipeline you want to find the ID for.
 . On the workflow page, open the btn:[Project] menu.
 . In the contextual menu, select btn:[Copy Pipeline ID].
@@ -347,9 +338,7 @@ image::guides:ROOT:workflow-page-ids.png[Copy pipeline ID from the workflow page
 
 From the job page::
 +
-. In the link:https://app.circleci.com[CircleCI web app, window=_blank], select your org from the org cards on your user homepage.
-. Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
-. Select the menu:Pipelines[] next to your project.
+include::guides:ROOT:partial$app-navigation/steps-to-project-pipelines.adoc[]
 . Select any workflow run from the pipeline you want to find the ID for.
 . Select any job from that workflow run.
 . On the job page, select the ellipsis icon:more[Ellipsis menu icon] at the top-right of the page.
@@ -360,7 +349,7 @@ From the job page::
 image::guides:ROOT:job-page-id.png[Copy pipeline ID from the job page menu]
 
 ifndef::server[]
-Via API v3::
+API v3::
 +
 --
 API v3 uses the term *run* for a pipeline run. The run ID corresponds to the `CIRCLE_PIPELINE_ID` environment variable.
@@ -392,7 +381,7 @@ The `id` field for each run is the pipeline run ID:
 --
 endif::server[]
 
-Via API v2::
+API v2::
 +
 --
 To list recent pipelines for a project, replace `<project-slug>` with your project slug (for example, `gh/my-org/my-repo`):
@@ -421,7 +410,7 @@ The `id` field for each pipeline is the pipeline run ID:
 ----
 --
 
-Via CLI::
+CLI::
 +
 --
 To list recent pipeline run IDs for the current project:
@@ -453,9 +442,7 @@ You can access the workflow ID through the `CIRCLE_WORKFLOW_ID` xref:get-ids-fro
 
 From the pipelines dashboard::
 +
-. In the link:https://app.circleci.com[CircleCI web app, window=_blank], select your org from the org cards on your user homepage.
-. Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
-. Select the menu:Pipelines[] next to your project.
+include::guides:ROOT:partial$app-navigation/steps-to-project-pipelines.adoc[]
 . Select the ellipsis icon:more[Ellipsis menu icon] next to any workflow run of the pipeline.
 . In the contextual menu, select btn:[Copy Workflow ID].
 
@@ -465,9 +452,7 @@ image::guides:ROOT:pipelines-page-ids.png[Copy workflow ID from pipelines dashbo
 
 From the workflow page::
 +
-. In the link:https://app.circleci.com[CircleCI web app, window=_blank], select your org from the org cards on your user homepage.
-. Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
-. Select the menu:Pipelines[] next to your project.
+include::guides:ROOT:partial$app-navigation/steps-to-project-pipelines.adoc[]
 . Select the workflow run you want to find the ID for.
 . On the workflow page, open the btn:[Project] menu.
 . In the contextual menu, select btn:[Copy Workflow ID].
@@ -477,7 +462,7 @@ From the workflow page::
 image::guides:ROOT:workflow-page-ids.png[Copy workflow ID from the workflow page Project menu]
 
 ifndef::server[]
-Via API v3::
+API v3::
 +
 --
 To list workflows for a run, replace `<your-run-id>` with your pipeline run ID (referred to as a run ID in API v3):
@@ -508,7 +493,7 @@ The `id` field for each workflow is the workflow ID:
 --
 endif::server[]
 
-Via API v2::
+API v2::
 +
 --
 To list workflows for a pipeline, replace `<pipeline-run-id>` with your pipeline run ID:
@@ -536,7 +521,7 @@ The `id` field for each workflow is the workflow ID:
 ----
 --
 
-Via CLI::
+CLI::
 +
 --
 To list workflow IDs for the latest run on the current branch:
@@ -567,9 +552,7 @@ You can access the job ID through the `CIRCLE_WORKFLOW_JOB_ID` xref:get-ids-from
 From the job page::
 +
 --
-. In the link:https://app.circleci.com[CircleCI web app, window=_blank], select your org from the org cards on your user homepage.
-. Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
-. Select the menu:Pipelines[] next to your project.
+include::guides:ROOT:partial$app-navigation/steps-to-project-pipelines.adoc[]
 . Select the workflow run that contains the job.
 . Select the job you want to find the ID for.
 . On the job page, select the ellipsis icon:more[Ellipsis menu icon] at the top-right of the page (next to the btn:[Rerun] button).
@@ -579,7 +562,7 @@ From the job page::
 image::guides:ROOT:job-page-id.png[Copy job ID from the job page menu]
 --
 ifndef::server[]
-Via API v3::
+API v3::
 +
 --
 To list jobs in a workflow, replace `<your-workflow-id>` with your workflow ID:
@@ -610,7 +593,7 @@ The `id` field for each job is the job ID:
 --
 endif::server[]
 
-Via API v2::
+API v2::
 +
 --
 To list jobs in a workflow, replace `<workflow-id>` with your workflow ID:
@@ -638,7 +621,7 @@ The `id` field for each job is the job ID:
 ----
 --
 
-Via CLI::
+CLI::
 +
 --
 To list job IDs for the latest run on the current branch:
