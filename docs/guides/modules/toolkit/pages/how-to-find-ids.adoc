@@ -15,6 +15,10 @@ You may need to find the ID of specific CircleCI elements to perform various act
 
 NOTE: The API and CLI methods on this page require a CircleCI personal API token. See xref:toolkit:managing-api-tokens.adoc[Managing API Tokens] for setup instructions. Set your token as an environment variable before using any API or CLI command: `export CIRCLE_TOKEN=<your-api-token>`.
 
+ifdef::server[]
+include::guides:ROOT:partial$notes/server-api-examples.adoc[]
+endif::server[]
+
 == Get IDs from the built-in environment variables
 
 xref:reference:ROOT:variables.adoc#built-in-environment-variables[Built-In Environment Variables], scoped at the job level, include the following IDs:
