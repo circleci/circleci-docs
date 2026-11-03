@@ -51,11 +51,10 @@ endif::server[]
 . On the menu:Account Integrations[] page, locate the **User ID** label.
 . Note the value or select the btn:[Copy] icon next to your user ID.
 --
+ifndef::server[]
 API v3::
 +
 --
-NOTE: API v3 is not available on CircleCI Server. Use the API v2 tab instead.
-
 To return your user profile, including your user ID:
 
 [source,shell]
@@ -81,6 +80,7 @@ The response includes your user ID in the `data[0].id` field:
 }
 ----
 --
+endif::server[]
 API v2::
 +
 --
@@ -129,11 +129,10 @@ Web app::
 --
 include::guides:ROOT:partial$app-navigation/steps-to-org-id.adoc[]
 --
+ifndef::server[]
 API v3::
 +
 --
-NOTE: API v3 is not available on CircleCI Server. Use the API v2 tab instead.
-
 To list all organizations you belong to, each with an `id` field:
 
 [source,shell]
@@ -167,6 +166,7 @@ curl -g 'https://circleci.com/api/v3/orgs' \
   --header "Authorization: Bearer $CIRCLE_TOKEN" | jq '.data[].id'
 ----
 --
+endif::server[]
 API v2::
 +
 --
@@ -226,11 +226,10 @@ Web app::
 --
 include::guides:ROOT:partial$app-navigation/steps-to-project-id.adoc[]
 --
+ifndef::server[]
 API v3::
 +
 --
-NOTE: API v3 is not available on CircleCI Server. Use the API v2 tab instead.
-
 To list projects in your organization, replace `<your-org-id>` with your organization ID:
 
 [source,shell]
@@ -264,6 +263,7 @@ curl -g 'https://circleci.com/api/v3/projects?filter[slug]=gh/my-org/my-repo' \
   --header "Authorization: Bearer $CIRCLE_TOKEN" | jq '.data[0].id'
 ----
 --
+endif::server[]
 API v2::
 +
 --
@@ -356,10 +356,11 @@ From the job page::
 .Copy pipeline ID from job page
 image::guides:ROOT:pipeline-id-from-job.png[Copy pipeline ID from job page]
 
+ifndef::server[]
 Via API v3::
 +
 --
-NOTE: API v3 is not available on CircleCI Server. Use the API v2 tab instead. API v3 uses the term *run* for a pipeline run. The run ID corresponds to the `CIRCLE_PIPELINE_ID` environment variable.
+API v3 uses the term *run* for a pipeline run. The run ID corresponds to the `CIRCLE_PIPELINE_ID` environment variable.
 
 To list recent runs for a project, replace `<your-project-id>` with your project ID:
 
@@ -386,6 +387,7 @@ The `id` field for each run is the pipeline run ID:
 }
 ----
 --
+endif::server[]
 
 Via API v2::
 +
@@ -471,11 +473,10 @@ From the job URL::
 .Workflow ID in job page URL
 image::guides:ROOT:workflow-id-from-job-url.png[Get workflow ID from job page URL]
 
+ifndef::server[]
 Via API v3::
 +
 --
-NOTE: API v3 is not available on CircleCI Server. Use the API v2 tab instead.
-
 To list workflows for a run, replace `<your-run-id>` with your pipeline run ID (referred to as a run ID in API v3):
 
 [source,shell]
@@ -502,6 +503,7 @@ The `id` field for each workflow is the workflow ID:
 }
 ----
 --
+endif::server[]
 
 Via API v2::
 +
@@ -559,11 +561,10 @@ You can access the job ID through the `CIRCLE_WORKFLOW_JOB_ID` xref:get-ids-from
 
 [tabs]
 ====
+ifndef::server[]
 Via API v3::
 +
 --
-NOTE: API v3 is not available on CircleCI Server. Use the API v2 tab instead.
-
 To list jobs in a workflow, replace `<your-workflow-id>` with your workflow ID:
 
 [source,shell]
@@ -590,6 +591,7 @@ The `id` field for each job is the job ID:
 }
 ----
 --
+endif::server[]
 
 Via API v2::
 +
