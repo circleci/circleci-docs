@@ -633,7 +633,7 @@ endif::server[]
 - Use `ifndef::server[]` for Cloud-only content and `ifdef::server[]` for Server-only content. Never test for a `cloud` attribute, because partials are shared with the `reference` component.
 - **Cloud output must not change** when you add conditionals to an existing page. Keep the original Cloud text byte-for-byte inside `ifndef::server[]`. Put wanted Cloud wording changes in a separate commit or pull request.
 - Whole-page availability comes from metadata (`:page-platform:`, `:page-server-min-version:`, `:page-server-deprecated-in:`), not conditionals. Never wrap page attributes, such as `:page-description:`, in conditionals.
-- Do not put conditionals inside `[tabs]` blocks. Move the tab body into a partial and include it in the tab and in an `ifdef::server[]` block.
+- In a `[tabs]` block, a conditional may wrap a complete tab, from its `Label::` line to the end of its body. Do not put a conditional inside a tab body or around part of a tab. When only part of a tab differs, move the tab body into a partial and include it in the tab and in an `ifdef::server[]` block.
 - Do not put a directive mid-sentence. Write two complete sentences.
 - Keep one explicit kebab-case heading ID for both builds. Do not wrap the `[#id]` line.
 - Close every directive. Unbalanced conditionals fail Vale (`AsciiDoc.ValidConditions`).
