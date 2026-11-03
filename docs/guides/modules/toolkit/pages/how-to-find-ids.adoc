@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Find CircleCI element IDs using the web app, API, or CLI. Covers user, organization, project, pipeline, workflow, and job IDs.
+:page-description: Find CircleCI element IDs using the web app, API, or CLI. Covers user, organization, project, pipeline run, workflow, and job IDs.
 :experimental:
 
 You may need to find the ID of specific CircleCI elements to perform various actions, including:
@@ -21,7 +21,7 @@ xref:reference:ROOT:variables.adoc#built-in-environment-variables[Built-In Envir
 
 - `CIRCLE_ORGANIZATION_ID`: The organization ID.
 - `CIRCLE_PROJECT_ID`: The project ID.
-- `CIRCLE_PIPELINE_ID`: The pipeline ID.
+- `CIRCLE_PIPELINE_ID`: The pipeline run ID.
 - `CIRCLE_WORKFLOW_ID`: The workflow ID.
 - `CIRCLE_WORKFLOW_JOB_ID`: The job ID.
 
@@ -307,11 +307,11 @@ $ circleci project list --slug gh/my-org/my-repo --json --jq '.[0].id'
 ====
 
 
-== Find a pipeline ID
+== Find a pipeline run ID
 
-The pipeline ID is a unique identifier for a pipeline run.
+The pipeline run ID is a unique identifier for a pipeline run.
 
-You can access the pipeline ID through the `CIRCLE_PIPELINE_ID` xref:get-ids-from-the-built-in-environment-variables[Built-In Environment Variable], or use one of the following methods to find it.
+You can access the pipeline run ID through the `CIRCLE_PIPELINE_ID` xref:get-ids-from-the-built-in-environment-variables[Built-In Environment Variable], or use one of the following methods to find it.
 
 
 [tabs]
@@ -369,14 +369,14 @@ curl -g 'https://circleci.com/api/v3/runs?filter[project_id]=<your-project-id>&p
   --header "Authorization: Bearer $CIRCLE_TOKEN" | jq '.data[] | {id: .id, branch: .attributes.branch}'
 ----
 
-The `id` field for each run is the pipeline ID:
+The `id` field for each run is the pipeline run ID:
 
 [source,json]
 ----
 {
   "data": [
     {
-      "id": "<your-pipeline-id>",
+      "id": "<your-pipeline-run-id>",
       "attributes": {
         "branch": "main",
         "created_at": "2026-01-15T10:00:00Z"
@@ -398,14 +398,14 @@ curl 'https://circleci.com/api/v2/project/<project-slug>/pipeline' \
   --header "Circle-Token: $CIRCLE_TOKEN" | jq '.items[] | {id: .id, branch: .vcs.branch}'
 ----
 
-The `id` field for each pipeline is the pipeline ID:
+The `id` field for each pipeline is the pipeline run ID:
 
 [source,json]
 ----
 {
   "items": [
     {
-      "id": "<your-pipeline-id>",
+      "id": "<your-pipeline-run-id>",
       "vcs": {
         "branch": "main"
       },
@@ -476,7 +476,7 @@ Via API v3::
 --
 NOTE: API v3 is not available on CircleCI Server. Use the API v2 tab instead.
 
-To list workflows for a run, replace `<your-run-id>` with your pipeline ID (referred to as a run ID in API v3):
+To list workflows for a run, replace `<your-run-id>` with your pipeline run ID (referred to as a run ID in API v3):
 
 [source,shell]
 ----
@@ -506,11 +506,11 @@ The `id` field for each workflow is the workflow ID:
 Via API v2::
 +
 --
-To list workflows for a pipeline, replace `<pipeline-id>` with your pipeline ID:
+To list workflows for a pipeline, replace `<pipeline-run-id>` with your pipeline run ID:
 
 [source,shell]
 ----
-curl 'https://circleci.com/api/v2/pipeline/<pipeline-id>/workflow' \
+curl 'https://circleci.com/api/v2/pipeline/<pipeline-run-id>/workflow' \
   --header "Circle-Token: $CIRCLE_TOKEN" | jq '.items[] | {id: .id, name: .name}'
 ----
 
@@ -524,7 +524,7 @@ The `id` field for each workflow is the workflow ID:
       "id": "<your-workflow-id>",
       "name": "build-and-test",
       "status": "success",
-      "pipeline_id": "<your-pipeline-id>"
+      "pipeline_id": "<your-pipeline-run-id>"
     }
   ]
 }
