@@ -87,7 +87,7 @@ a| * `POST /api/v1.1/project/:vcs-type/:username/:repo/`
 * `POST /api/v1.1/project/:vcs-type/:username/:repo/build`
 ifndef::server[]
 a|
-* API v3: link:https://circleci.com/docs/api/v3#tag/Runs/operation/createRun[`POST /api/v3/runs`]
+* API v3: link:https://circleci.com/docs/api/v3#tag/runs/POST/api/v3/runs[`POST /api/v3/runs`]
 * API v2: link:https://circleci.com/docs/api/v2/#tag/Pipeline/operation/triggerPipelineRun[`POST /api/v2/project/:provider/:organization/:project/pipeline/run`]
 endif::server[]
 ifdef::server[]
@@ -98,7 +98,7 @@ endif::server[]
 | `POST /api/v1.1/project/:vcs-type/:username/:repo/:build_num/retry`
 ifndef::server[]
 a|
-* API v3: link:https://circleci.com/docs/api/v3#tag/Workflows/operation/rerunWorkflow[`POST /api/v3/workflows/:id/rerun`]
+* API v3: link:https://circleci.com/docs/api/v3#tag/workflows/POST/api/v3/workflows/%7Bid%7D/rerun[`POST /api/v3/workflows/:id/rerun`]
 * API v2: link:https://circleci.com/docs/api/v2/#tag/Workflow/operation/rerunWorkflow[`POST /api/v2/workflow/:workflow-id/rerun`]
 endif::server[]
 ifdef::server[]
@@ -109,7 +109,7 @@ endif::server[]
 | `POST /api/v1.1/project/:vcs-type/:username/:repo/:build_num/ssh`
 ifndef::server[]
 a|
-* API v3: link:https://circleci.com/docs/api/v3#tag/Workflows/operation/rerunWorkflow[`POST /api/v3/workflows/:id/rerun`] with `"is_ssh_enabled": true`
+* API v3: link:https://circleci.com/docs/api/v3#tag/workflows/POST/api/v3/workflows/%7Bid%7D/rerun[`POST /api/v3/workflows/:id/rerun`] with `"is_ssh_enabled": true`
 * API v2: link:https://circleci.com/docs/api/v2/#tag/Workflow/operation/rerunWorkflow[`POST /api/v2/workflow/:workflow-id/rerun`] with `"enable_ssh": true`
 endif::server[]
 ifdef::server[]
