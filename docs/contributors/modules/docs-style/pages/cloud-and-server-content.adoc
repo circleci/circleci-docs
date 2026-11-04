@@ -82,17 +82,18 @@ Conditionals work around a paragraph, list item, table row, section, or single l
 [#web-app-links]
 === Links to the web app
 
-Server has no fixed hostname. Link to `app.circleci.com` on Cloud, and name the web app without a link on Server:
+Server has no fixed hostname. Use the `cloudlink` macro. It links to the web app on Cloud and renders plain text on Server.
 
 [source,adoc]
 ----
-\ifndef::server[]
-Log in to the link:https://app.circleci.com/[CircleCI web app].
-\endif::server[]
-\ifdef::server[]
-Log in to the CircleCI web app.
-\endif::server[]
+Log in to the cloudlink:webapp[].
+Go to cloudlink:user-settings[] and create a token.
+Open cloudlink:path[Plan Usage,path=settings/plan/usage].
 ----
+
+Link text defaults to the destination name (for example, `CircleCI web app` or `User Settings`). Add custom text in the brackets to override it. To add a destination, add an entry to `DESTINATIONS` in `extensions/cloud-link-extension.js`.
+
+Use `ifndef::server[]` instead when the whole sentence or block is Cloud only.
 
 [#api-examples]
 === API hostnames
