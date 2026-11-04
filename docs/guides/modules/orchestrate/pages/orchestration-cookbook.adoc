@@ -71,9 +71,7 @@ workflows:
 
 === Notes
 
-* The `pipeline.event.name` and `pipeline.event.action` variables are only available for GitHub App pipelines. If you have a GitHub OAuth integration you can install the GitHub App into your GitHub org and then create GitHub App pipelines. Installing the GitHub App is a quick one-time action, as described in the xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth Organization] page.
-+
-include::ROOT:partial$tips/check-github-type-org.adoc[]
+* The `pipeline.event.name` and `pipeline.event.action` variables are available for GitHub App, GitHub OAuth, Bitbucket Cloud, and Cursor Origin pipelines. These variables are not available for GitLab pipelines. Available action values vary by VCS provider. See xref:guides:orchestrate:pipeline-variables.adoc[Pipeline Values and Parameters] for a full list of available values and supported integrations.
 
 == Run a workflow only for specific branches
 
