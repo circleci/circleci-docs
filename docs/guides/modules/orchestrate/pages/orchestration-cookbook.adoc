@@ -71,7 +71,7 @@ workflows:
 
 === Notes
 
-* The `pipeline.event.name` and `pipeline.event.action` variables are available for GitHub App, GitHub OAuth, Bitbucket Cloud, and Cursor Origin pipelines. These variables are not available for GitLab pipelines. Available action values vary by VCS provider. See xref:guides:orchestrate:pipeline-variables.adoc[Pipeline Values and Parameters] for a full list of available values and supported integrations.
+* The `pipeline.event.name` and `pipeline.event.action` values are not available for GitLab pipelines. Available action values vary by VCS provider. See xref:guides:orchestrate:pipeline-variables.adoc[Pipeline Values and Parameters] for a full list of available values and supported integrations.
 
 == Run a workflow only for specific branches
 
