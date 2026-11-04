@@ -1997,6 +1997,23 @@ h6 {
           </a>
         </div>
         <h1 id='circleci-v1-api-overview'>CircleCI V1 API Overview</h1>
+<aside class="v2-banner">
+<strong>Deprecation notice:</strong> Ten v1 and v1.1 endpoints used to trigger and rerun builds will be removed on <strong>1 February 2027</strong>. After that date, requests to these endpoints return HTTP 410 Gone. This change affects both CircleCI Cloud and CircleCI Server. <br/><br/>
+<strong>Affected endpoints:</strong>
+<ul>
+<li><code>POST /api/v1/project/:username/:repo/</code></li>
+<li><code>POST /api/v1/project/:username/:repo/:build_num/retry</code></li>
+<li><code>POST /api/v1/project/:username/:repo/:build_num/ssh</code></li>
+<li><code>POST /api/v1/project/:username/:repo/build</code></li>
+<li><code>POST /api/v1/project/:username/:repo/tree/:branch</code></li>
+<li><code>POST /api/v1.1/project/:vcs-type/:username/:repo/</code></li>
+<li><code>POST /api/v1.1/project/:vcs-type/:username/:repo/:build_num/retry</code></li>
+<li><code>POST /api/v1.1/project/:vcs-type/:username/:repo/:build_num/ssh</code></li>
+<li><code>POST /api/v1.1/project/:vcs-type/:username/:repo/build</code></li>
+<li><code>POST /api/v1.1/project/:vcs-type/:username/:repo/tree/:branch</code></li>
+</ul>
+<strong>What to use instead:</strong> To trigger a pipeline run, use <a href="https://circleci.com/docs/api/v2/#tag/Pipeline/operation/triggerPipelineRun"><code>POST /api/v2/project/:provider/:organization/:project/pipeline/run</code></a> (API v2) or <a href="https://circleci.com/docs/api/v3#tag/Runs/operation/createRun"><code>POST /api/v3/runs</code></a> (API v3, Cloud only). To rerun a workflow, use <a href="https://circleci.com/docs/api/v2/#tag/Workflow/operation/rerunWorkflow"><code>POST /api/v2/workflow/:workflow-id/rerun</code></a> (API v2) or <a href="https://circleci.com/docs/api/v3#tag/Workflows/operation/rerunWorkflow"><code>POST /api/v3/workflows/:id/rerun</code></a> (API v3, Cloud only). See the <a href="https://circleci.com/docs/api-v1-migration-guide/">API v1 migration guide</a> for step-by-step instructions.
+</aside>
 <p>The CircleCI API is a full-featured RESTful API that allows you to access all information and trigger all actions in CircleCI. RESTful APIs enable you to call individual API endpoints to perform the following actions:</p>
 
 <ul>
@@ -2107,8 +2124,8 @@ For Basic Authentication, the colon ":" as shown in the example tells curl that 
 <td>Follow a new project on CircleCI.</td>
 </tr>
 <tr>
-<td>/project/:vcs-type/:org_name/:project/:build_num/retry</td>
-<td>Retries the job, returns a summary of the new job run.</td>
+<td>/project/:vcs-type/:org_name/:project/:build_num/retry <strong>(deprecated, removed 1 Feb 2027)</strong></td>
+<td>Retries the job, returns a summary of the new job run. <strong>Deprecated.</strong> Use <a href="https://circleci.com/docs/api/v2/#tag/Workflow/operation/rerunWorkflow">POST /api/v2/workflow/:workflow-id/rerun</a> instead.</td>
 </tr>
 <tr>
 <td>/project/:vcs-type/:username/:project/:build_num/cancel</td>
@@ -2119,8 +2136,20 @@ For Basic Authentication, the colon ":" as shown in the example tells curl that 
 <td>Adds a user to the job&#39;s SSH permissions.</td>
 </tr>
 <tr>
-<td>/project/:vcs-type/:username/:project/tree/:branch</td>
-<td>Triggers a new job, returns a summary of the job run. Optional <a href="https://circleci.com/docs/inject-environment-variables-with-api/#api-v1">build parameters</a> can be set.</td>
+<td>/project/:vcs-type/:username/:project/:build_num/ssh <strong>(deprecated, removed 1 Feb 2027)</strong></td>
+<td>Retries the job with SSH enabled. <strong>Deprecated.</strong> Use the <code>enable_ssh</code> option in the <a href="https://circleci.com/docs/api/v2/#tag/Workflow/operation/rerunWorkflow">POST /api/v2/workflow/:workflow-id/rerun</a> request body instead.</td>
+</tr>
+<tr>
+<td>/project/:vcs-type/:username/:project/ <strong>(deprecated, removed 1 Feb 2027)</strong></td>
+<td>Triggers a new job, returns a summary of the job run. <strong>Deprecated.</strong> Use <a href="https://circleci.com/docs/api/v2/#tag/Pipeline/operation/triggerPipelineRun">POST /api/v2/project/:provider/:organization/:project/pipeline/run</a> instead.</td>
+</tr>
+<tr>
+<td>/project/:vcs-type/:username/:project/tree/:branch <strong>(deprecated, removed 1 Feb 2027)</strong></td>
+<td>Triggers a new job on a specific branch. <strong>Deprecated.</strong> Use <a href="https://circleci.com/docs/api/v2/#tag/Pipeline/operation/triggerPipelineRun">POST /api/v2/project/:provider/:organization/:project/pipeline/run</a> instead.</td>
+</tr>
+<tr>
+<td>/project/:vcs-type/:username/:project/build <strong>(deprecated, removed 1 Feb 2027)</strong></td>
+<td>Triggers a pipeline by project. <strong>Deprecated.</strong> Use <a href="https://circleci.com/docs/api/v2/#tag/Pipeline/operation/triggerPipelineRun">POST /api/v2/project/:provider/:organization/:project/pipeline/run</a> instead.</td>
 </tr>
 <tr>
 <td>/project/:vcs-type/:username/:project/ssh-key</td>
