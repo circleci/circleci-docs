@@ -69,7 +69,14 @@ CLI v0::
 --
 CLI v1 is not supported on CircleCI Server. Install CLI v0 as described in xref:toolkit:circleci-cli.adoc#install-cli-v0-for-circleci-server[Install the CLI for CircleCI Server].
 
-. Create a context. Replace `<org-id>`; see xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID]:
+. Find your organization ID. Copy the ID of your organization from the output:
++
+[source,console]
+----
+$ circleci info org
+----
+
+. Create a context. Replace `<org-id>`:
 +
 [source,console]
 ----
@@ -103,7 +110,13 @@ API v3::
 +
 --
 . Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
-. Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. List your organizations and copy the `id` of the one that owns your contexts:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v3/orgs" \
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
+----
 . Create a context with the link:https://circleci.com/docs/api/v3/contexts.md[Create a Context] endpoint. Replace `<org-id>` and `<context-name>`:
 +
 [,shell]
@@ -152,7 +165,13 @@ API v2::
 include::ROOT:partial$notes/server-api-examples.adoc[]
 
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
-. Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. List your organizations and copy the `id` of the one that owns your contexts:
++
+[,shell]
+----
+curl "https://circleci.com/api/v2/me/collaborations" \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" | jq .
+----
 . Create a context with the link:https://circleci.com/docs/api/v2/#operation/createContext[Create a New Context] endpoint. Replace `<org-id>` and `<context-name>`:
 +
 [,shell]
@@ -311,7 +330,7 @@ In this example, the jobs `test` and `deploy` are restricted. The `deploy` job o
 [#security-group-restrictions]
 == Security group restrictions
 
-NOTE: Restricting the use of contexts using security groups is available for `github` type organizations only. For more information on organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organizations[Users, Organizations, and Integrations Guide].
+NOTE: Restricting the use of contexts using security groups is available for `github` type organizations only, and you must be an organization administrator. For more information on organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organizations[Users, Organizations, and Integrations Guide].
 
 ifndef::server[]
 A context security setting is available for `github` type organizations to require all newly-created contexts in the organization to be group-restricted. Contexts can still be created, but an administrator must assign at least one security group before the context will be available for use in workflows. This setting can be found in menu:Org[Security].
@@ -319,8 +338,6 @@ endif::server[]
 
 [#restrict-a-context-to-a-security-group-or-groups]
 === Restrict a context to a security group or groups
-
-CAUTION: To use security group context restrictions you must be an organization administrator, and your code must be integrated with CircleCI via the GitHub OAuth app.
 
 [tabs]
 ====
@@ -335,15 +352,22 @@ CLI v1::
 $ circleci context create <context-name> --org <org-slug>
 ----
 
+. Find your organization ID:
++
+[source,console]
+----
+$ circleci org list --json --jq '.[].id'
+----
+
 . List your security groups. Replace `<org-id>`:
 +
 [,shell]
 ----
 curl -g "https://circleci.com/api/v3/groups?filter[org_id]=<org-id>" \
-  --header "Authorization: Bearer ${CIRCLE_TOKEN}"
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
 ----
 +
-Copy the `id` of the group for your GitHub team. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID] for the organization ID. To authenticate, follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
+Copy the `id` of the group for your GitHub team. To authenticate, follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
 
 . Add a security group restriction to the context, where `<group-id>` is the ID of the security group (GitHub team) you want to restrict access to:
 +
@@ -377,13 +401,19 @@ API v3::
 +
 --
 . Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
-. Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. List your organizations and copy the `id` of the one that owns your contexts:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v3/orgs" \
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
+----
 . List your contexts and copy the context ID. Replace `<org-id>`:
 +
 [,shell]
 ----
 curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=<org-id>" \
-  --header "Authorization: Bearer ${CIRCLE_TOKEN}"
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
 ----
 
 . List your security groups and copy the ID of the group (GitHub team) you want to restrict the context to. Replace `<org-id>`:
@@ -391,7 +421,7 @@ curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=<org-id>" \
 [,shell]
 ----
 curl -g "https://circleci.com/api/v3/groups?filter[org_id]=<org-id>" \
-  --header "Authorization: Bearer ${CIRCLE_TOKEN}"
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
 ----
 
 . Create a group restriction with the link:https://circleci.com/docs/api/v3/context-restrictions.md[Create a Context Restriction] endpoint. Replace `<context-id>` and `<group-id>`:
@@ -425,13 +455,19 @@ API v2::
 include::ROOT:partial$notes/server-api-examples.adoc[]
 
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
-. Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. List your organizations and copy the `id` of the one that owns your contexts:
++
+[,shell]
+----
+curl "https://circleci.com/api/v2/me/collaborations" \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" | jq .
+----
 . List your contexts and copy the context ID. Replace `<org-id>`:
 +
 [,shell]
 ----
 curl -g "https://circleci.com/api/v2/context?owner-id=<org-id>" \
-  --header "Circle-Token: ${CIRCLE_TOKEN}"
+  --header "Circle-Token: ${CIRCLE_TOKEN}" | jq .
 ----
 
 . List your security groups and copy the ID of the group (GitHub team) you want to restrict the context to. Replace `<org-id>`:
@@ -440,7 +476,7 @@ curl -g "https://circleci.com/api/v2/context?owner-id=<org-id>" \
 ----
 curl --request GET \
   --url https://circleci.com/api/v2/organizations/<org-id>/groups \
-  --header "Circle-Token: ${CIRCLE_TOKEN}"
+  --header "Circle-Token: ${CIRCLE_TOKEN}" | jq .
 ----
 
 . Create a group restriction with the link:https://circleci.com/docs/api/v2/#operation/createContextRestriction[Create Context Restriction] endpoint. Replace `<context-id>` and `<group-id>`:
@@ -509,14 +545,12 @@ ifndef::server[]
 CLI v1::
 +
 --
-. Find the ID of the project you want to restrict access to by listing your projects:
+. Find the ID of the project you want to restrict access to. Replace `<project-slug>`, for example `gh/my-org/my-repo`:
 +
 [source,console]
 ----
-$ circleci project list
+$ circleci project list --slug <project-slug> --json --jq '.[0].id'
 ----
-+
-Copy the ID of the project from the output.
 
 . Add a project restriction to the context using the project ID:
 +
@@ -551,13 +585,26 @@ API v3::
 +
 --
 . Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
-. Copy your organization ID and project ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID] and xref:toolkit:how-to-find-ids.adoc#find-a-project-id[Find a Project ID].
+. List your organizations and copy the `id` of the one that owns your contexts:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v3/orgs" \
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
+----
+. List your projects and copy the `id` of the project you want to restrict access to. Replace `<org-id>`:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v3/projects?filter[org_id]=<org-id>" \
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
+----
 . List your contexts and copy the context ID. Replace `<org-id>`:
 +
 [,shell]
 ----
 curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=<org-id>" \
-  --header "Authorization: Bearer ${CIRCLE_TOKEN}"
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
 ----
 +
 Add `&filter[name]=<context-name>` to narrow the results by name.
@@ -593,13 +640,19 @@ API v2::
 include::ROOT:partial$notes/server-api-examples.adoc[]
 
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
-. Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. List your organizations and copy the `id` of the one that owns your contexts:
++
+[,shell]
+----
+curl "https://circleci.com/api/v2/me/collaborations" \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" | jq .
+----
 . List your contexts and copy the context ID. Replace `<org-id>`:
 +
 [,shell]
 ----
 curl -g "https://circleci.com/api/v2/context?owner-id=<org-id>" \
-  --header "Circle-Token: ${CIRCLE_TOKEN}"
+  --header "Circle-Token: ${CIRCLE_TOKEN}" | jq .
 ----
 
 . Get the project ID for the project you want to restrict access to. Replace `<project-slug>`:
@@ -608,7 +661,7 @@ curl -g "https://circleci.com/api/v2/context?owner-id=<org-id>" \
 ----
 curl --request GET \
   --url https://circleci.com/api/v2/project/<project-slug> \
-  --header "Circle-Token: ${CIRCLE_TOKEN}"
+  --header "Circle-Token: ${CIRCLE_TOKEN}" | jq .
 ----
 
 . Create a project restriction with the link:https://circleci.com/docs/api/v2/#operation/createContextRestriction[Create Context Restriction] endpoint. Replace `<context-id>` and `<project-id>`:
@@ -668,13 +721,19 @@ API v3::
 +
 --
 . Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
-. Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. List your organizations and copy the `id` of the one that owns your contexts:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v3/orgs" \
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
+----
 . List your contexts and copy the context ID. Replace `<org-id>`:
 +
 [,shell]
 ----
 curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=<org-id>" \
-  --header "Authorization: Bearer ${CIRCLE_TOKEN}"
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
 ----
 
 . List the restrictions for that context and copy the restriction ID. Replace `<context-id>`:
@@ -682,7 +741,7 @@ curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=<org-id>" \
 [,shell]
 ----
 curl -g "https://circleci.com/api/v3/context-restrictions?filter[context_id]=<context-id>" \
-  --header "Authorization: Bearer ${CIRCLE_TOKEN}"
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
 ----
 
 . Delete the restriction with the link:https://circleci.com/docs/api/v3/context-restrictions.md[Delete a Context Restriction] endpoint. Replace `<restriction-id>` and `<context-id>`:
@@ -702,13 +761,19 @@ API v2::
 include::ROOT:partial$notes/server-api-examples.adoc[]
 
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
-. Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. List your organizations and copy the `id` of the one that owns your contexts:
++
+[,shell]
+----
+curl "https://circleci.com/api/v2/me/collaborations" \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" | jq .
+----
 . List your contexts and copy the context ID. Replace `<org-id>`:
 +
 [,shell]
 ----
 curl -g "https://circleci.com/api/v2/context?owner-id=<org-id>" \
-  --header "Circle-Token: ${CIRCLE_TOKEN}"
+  --header "Circle-Token: ${CIRCLE_TOKEN}" | jq .
 ----
 
 . List the restrictions for that context and copy the restriction ID. Replace `<context-id>`:
@@ -717,7 +782,7 @@ curl -g "https://circleci.com/api/v2/context?owner-id=<org-id>" \
 ----
 curl --request GET \
   --url https://circleci.com/api/v2/context/<context-id>/restrictions \
-  --header "Circle-Token: ${CIRCLE_TOKEN}"
+  --header "Circle-Token: ${CIRCLE_TOKEN}" | jq .
 ----
 
 . Delete the restriction with the link:https://circleci.com/docs/api/v2/#operation/deleteContextRestriction[Delete Context Restriction] endpoint. Replace `<context-id>` and `<restriction-id>`:
@@ -798,13 +863,19 @@ API v3::
 +
 --
 . Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
-. Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. List your organizations and copy the `id` of the one that owns your contexts:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v3/orgs" \
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
+----
 . List your contexts and copy the context ID. Replace `<org-id>`:
 +
 [,shell]
 ----
 curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=<org-id>" \
-  --header "Authorization: Bearer ${CIRCLE_TOKEN}"
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
 ----
 
 . Create an expression restriction with the link:https://circleci.com/docs/api/v3/context-restrictions.md[Create a Context Restriction] endpoint. Replace `<context-id>` and `<expression>`:
@@ -838,13 +909,19 @@ API v2::
 include::ROOT:partial$notes/server-api-examples.adoc[]
 
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
-. Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. List your organizations and copy the `id` of the one that owns your contexts:
++
+[,shell]
+----
+curl "https://circleci.com/api/v2/me/collaborations" \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" | jq .
+----
 . List your contexts and copy the context ID. Replace `<org-id>`:
 +
 [,shell]
 ----
 curl -g "https://circleci.com/api/v2/context?owner-id=<org-id>" \
-  --header "Circle-Token: ${CIRCLE_TOKEN}"
+  --header "Circle-Token: ${CIRCLE_TOKEN}" | jq .
 ----
 
 . Create an expression restriction with the link:https://circleci.com/docs/api/v2/#operation/createContextRestriction[Create Context Restriction] endpoint. Replace `<context-id>` and `<expression>`:
@@ -1044,7 +1121,14 @@ CLI v0::
 --
 CLI v1 is not supported on CircleCI Server. Install CLI v0 as described in xref:toolkit:circleci-cli.adoc#install-cli-v0-for-circleci-server[Install the CLI for CircleCI Server].
 
-To find the name of the context, list your contexts. Replace `<org-id>`; see xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID]:
+To find your organization ID, copy the ID of your organization from the output:
+
+[source,console]
+----
+$ circleci info org
+----
+
+To find the name of the context, list your contexts. Replace `<org-id>`:
 
 [source,console]
 ----
@@ -1071,13 +1155,19 @@ API v3::
 +
 --
 . Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
-. Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. List your organizations and copy the `id` of the one that owns your contexts:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v3/orgs" \
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
+----
 . List your contexts and copy the context ID. Replace `<org-id>`:
 +
 [,shell]
 ----
 curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=<org-id>" \
-  --header "Authorization: Bearer ${CIRCLE_TOKEN}"
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
 ----
 
 . Delete the context with the link:https://circleci.com/docs/api/v3/contexts.md[Delete a Context] endpoint. Replace `<context-id>`:
@@ -1097,13 +1187,19 @@ API v2::
 include::ROOT:partial$notes/server-api-examples.adoc[]
 
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
-. Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. List your organizations and copy the `id` of the one that owns your contexts:
++
+[,shell]
+----
+curl "https://circleci.com/api/v2/me/collaborations" \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" | jq .
+----
 . List your contexts and copy the context ID. Replace `<org-id>`:
 +
 [,shell]
 ----
 curl -g "https://circleci.com/api/v2/context?owner-id=<org-id>" \
-  --header "Circle-Token: ${CIRCLE_TOKEN}"
+  --header "Circle-Token: ${CIRCLE_TOKEN}" | jq .
 ----
 
 . Delete the context with the link:https://circleci.com/docs/api/v2/#operation/deleteContext[Delete a Context] endpoint. Replace `<context-id>`:
@@ -1166,7 +1262,14 @@ CLI v0::
 --
 CLI v1 is not supported on CircleCI Server. Install CLI v0 as described in xref:toolkit:circleci-cli.adoc#install-cli-v0-for-circleci-server[Install the CLI for CircleCI Server].
 
-. If you have not already done so, find the right context name. Replace `<org-id>`; see xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID]:
+. Find your organization ID. Copy the ID of your organization from the output:
++
+[source,console]
+----
+$ circleci info org
+----
+
+. If you have not already done so, find the right context name. Replace `<org-id>`:
 +
 [source,console]
 ----
@@ -1186,13 +1289,19 @@ API v3::
 +
 --
 . Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
-. Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. List your organizations and copy the `id` of the one that owns your contexts:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v3/orgs" \
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
+----
 . List your contexts and copy the context ID. Replace `<org-id>`:
 +
 [,shell]
 ----
 curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=<org-id>" \
-  --header "Authorization: Bearer ${CIRCLE_TOKEN}"
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
 ----
 
 . Add an environment variable with the link:https://circleci.com/docs/api/v3/contexts.md[Set a Context Environment Variable] endpoint. Replace `<context-id>`, `<env-var-name>`, and `<env-var-value>`:
@@ -1217,13 +1326,19 @@ API v2::
 include::ROOT:partial$notes/server-api-examples.adoc[]
 
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
-. Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. List your organizations and copy the `id` of the one that owns your contexts:
++
+[,shell]
+----
+curl "https://circleci.com/api/v2/me/collaborations" \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" | jq .
+----
 . List your contexts and copy the context ID. Replace `<org-id>`:
 +
 [,shell]
 ----
 curl -g "https://circleci.com/api/v2/context?owner-id=<org-id>" \
-  --header "Circle-Token: ${CIRCLE_TOKEN}"
+  --header "Circle-Token: ${CIRCLE_TOKEN}" | jq .
 ----
 
 . Add an environment variable with the link:https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Add or Update an Environment Variable] endpoint. Replace `<context-id>`, `<env-var-name>`, and `<env-var-value>`:
@@ -1283,7 +1398,14 @@ CLI v0::
 --
 CLI v1 is not supported on CircleCI Server. Install CLI v0 as described in xref:toolkit:circleci-cli.adoc#install-cli-v0-for-circleci-server[Install the CLI for CircleCI Server].
 
-. If you have not already done so, find the context name that contains the environment variable you wish to delete. Replace `<org-id>`; see xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID]:
+. Find your organization ID. Copy the ID of your organization from the output:
++
+[source,console]
+----
+$ circleci info org
+----
+
+. If you have not already done so, find the context name that contains the environment variable you wish to delete. Replace `<org-id>`:
 +
 [source,console]
 ----
@@ -1310,13 +1432,19 @@ API v3::
 +
 --
 . Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
-. Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. List your organizations and copy the `id` of the one that owns your contexts:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v3/orgs" \
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
+----
 . List your contexts and copy the context ID. Replace `<org-id>`:
 +
 [,shell]
 ----
 curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=<org-id>" \
-  --header "Authorization: Bearer ${CIRCLE_TOKEN}"
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
 ----
 
 . Delete the environment variable with the link:https://circleci.com/docs/api/v3/contexts.md[Delete a Context Environment Variable] endpoint. Replace `<context-id>` and `<env-var-name>`:
@@ -1336,13 +1464,19 @@ API v2::
 include::ROOT:partial$notes/server-api-examples.adoc[]
 
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
-. Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. List your organizations and copy the `id` of the one that owns your contexts:
++
+[,shell]
+----
+curl "https://circleci.com/api/v2/me/collaborations" \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" | jq .
+----
 . List your contexts and copy the context ID. Replace `<org-id>`:
 +
 [,shell]
 ----
 curl -g "https://circleci.com/api/v2/context?owner-id=<org-id>" \
-  --header "Circle-Token: ${CIRCLE_TOKEN}"
+  --header "Circle-Token: ${CIRCLE_TOKEN}" | jq .
 ----
 
 . Delete the environment variable with the link:https://circleci.com/docs/api/v2/#operation/deleteEnvironmentVariableFromContext[Remove an Environment Variable] endpoint. Replace `<context-id>` and `<env-var-name>`:
@@ -1402,7 +1536,14 @@ CLI v0::
 --
 CLI v1 is not supported on CircleCI Server. Install CLI v0 as described in xref:toolkit:circleci-cli.adoc#install-cli-v0-for-circleci-server[Install the CLI for CircleCI Server].
 
-. Find the context name that contains the variable you would like to rotate. Replace `<org-id>`; see xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID]:
+. Find your organization ID. Copy the ID of your organization from the output:
++
+[source,console]
+----
+$ circleci info org
+----
+
+. Find the context name that contains the variable you would like to rotate. Replace `<org-id>`:
 +
 [source,console]
 ----
@@ -1431,13 +1572,19 @@ API v3::
 The link:https://circleci.com/docs/api/v3/contexts.md[Set a Context Environment Variable] endpoint creates or updates a variable. Use it to rotate a secret without changing the variable name.
 
 . Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
-. Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. List your organizations and copy the `id` of the one that owns your contexts:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v3/orgs" \
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
+----
 . List your contexts and copy the context ID. Replace `<org-id>`:
 +
 [,shell]
 ----
 curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=<org-id>" \
-  --header "Authorization: Bearer ${CIRCLE_TOKEN}"
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
 ----
 
 . Set the new value. Replace `<context-id>`, `<env-var-name>`, and `<new-value>`:
@@ -1464,13 +1611,19 @@ include::ROOT:partial$notes/server-api-examples.adoc[]
 The link:https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Add or Update an Environment Variable] endpoint creates or updates a variable. Use it to rotate a secret without changing the variable name.
 
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
-. Copy your organization ID from the CircleCI web app. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. List your organizations and copy the `id` of the one that owns your contexts:
++
+[,shell]
+----
+curl "https://circleci.com/api/v2/me/collaborations" \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" | jq .
+----
 . List your contexts and copy the context ID. Replace `<org-id>`:
 +
 [,shell]
 ----
 curl -g "https://circleci.com/api/v2/context?owner-id=<org-id>" \
-  --header "Circle-Token: ${CIRCLE_TOKEN}"
+  --header "Circle-Token: ${CIRCLE_TOKEN}" | jq .
 ----
 
 . Set the new value. Replace `<context-id>`, `<env-var-name>`, and `<new-value>`:
