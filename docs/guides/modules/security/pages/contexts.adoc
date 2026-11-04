@@ -12,7 +12,12 @@ Contexts provide a mechanism for securing and sharing environment variables acro
 [#overview]
 == Introduction
 
-Manage contexts using the xref:toolkit:circleci-cli.adoc[CircleCI CLI], the API (link:https://circleci.com/docs/api/v3/contexts.md[API v3] on Cloud, or the link:https://circleci.com/docs/api/v2/#tag/Context[API v2] on Server), or on the *Organization Settings* page of the cloudlink:webapp[CircleCI web app]. You must be an organization member to view, create, or edit contexts.
+ifndef::server[]
+Manage contexts using the xref:toolkit:circleci-cli.adoc[CircleCI CLI], the link:https://circleci.com/docs/api/v3/contexts.md[API], or on the *Organization Settings* page of the cloudlink:webapp[CircleCI web app]. You must be an organization member to view, create, or edit contexts.
+endif::server[]
+ifdef::server[]
+Manage contexts using the xref:toolkit:circleci-cli.adoc[CircleCI CLI], the link:https://circleci.com/docs/api/v2/#tag/Context[API], or on the *Organization Settings* page of the cloudlink:webapp[CircleCI web app]. You must be an organization member to view, create, or edit contexts.
+endif::server[]
 
 Create a context and add your environment variables. You can use the `context` key in the workflows section of a project's configuration file to give any job(s) access to the environment variables associated with the context. See the xref:reference:ROOT:configuration-reference.adoc#context[Configuration Reference] page for more information.
 
@@ -330,7 +335,7 @@ CLI v1::
 $ circleci context create <context-name> --org <org-slug>
 ----
 
-. Find the ID of the security group you want to restrict access to. Replace `<org-id>`, and copy the `id` of the group whose `name` matches your GitHub team:
+. List your security groups. Replace `<org-id>`:
 +
 [,shell]
 ----
@@ -338,7 +343,7 @@ curl -g "https://circleci.com/api/v3/groups?filter[org_id]=<org-id>" \
   --header "Authorization: Bearer ${CIRCLE_TOKEN}"
 ----
 +
-See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID] for the organization ID. To authenticate, follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
+Copy the `id` of the group for your GitHub team. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID] for the organization ID. To authenticate, follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
 
 . Add a security group restriction to the context, where `<group-id>` is the ID of the security group (GitHub team) you want to restrict access to:
 +
@@ -746,7 +751,12 @@ and not job.ssh.enabled
 and not (pipeline.config_source starts-with "api")
 ----
 
+ifndef::server[]
 You can set up expression restrictions using the link:https://circleci.com/docs/api/v3/context-restrictions.md[Context Restrictions] API, or using the Context page (menu:Org[Contexts>Expression Restrictions]) in the CircleCI web app.
+endif::server[]
+ifdef::server[]
+You can set up expression restrictions using the link:https://circleci.com/docs/api/v2/#operation/createContextRestriction[Create Context Restriction] endpoint, or using the Context page (menu:Org[Contexts>Expression Restrictions]) in the CircleCI web app.
+endif::server[]
 
 Rules are expressed in a small language that supports equality checks, numeric comparisons, and boolean `and`, `or`, and `not` operators.
 
@@ -1034,7 +1044,14 @@ CLI v0::
 --
 CLI v1 is not supported on CircleCI Server. Install CLI v0 as described in xref:toolkit:circleci-cli.adoc#install-cli-v0-for-circleci-server[Install the CLI for CircleCI Server].
 
-Run the following command, replacing `<org-id>` and `<context-name>`. You can use `circleci context list --org-id <org-id>` to find the name of the context. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID] for the organization ID.
+To find the name of the context, list your contexts. Replace `<org-id>`; see xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID]:
+
+[source,console]
+----
+$ circleci context list --org-id <org-id>
+----
+
+Delete the context. Replace `<context-name>`:
 
 [source,console]
 ----
