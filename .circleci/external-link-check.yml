@@ -32,7 +32,7 @@ jobs:
           name: Install Node dependencies
           command: npm ci
       - go/install:
-          version: "1.25.0"
+          version: "1.26.10"
       - run:
           name: Build the documentation site
           command: NODE_OPTIONS="--max-old-space-size=4096" npm run build:docs

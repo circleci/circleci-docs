@@ -1,8 +1,7 @@
 = Automate LLM evaluation testing with the CircleCI Evals orb
-:page-platform: Cloud, Server
+:page-platform: Cloud
 :page-vcs: all
 :page-plan: Free, Performance, Scale
-:page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Use the CircleCI Evals orb to automate LLM evaluations in your pipeline, define test cases and review evaluation results in the CircleCI web app.
 :experimental:

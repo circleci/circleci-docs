@@ -1,0 +1,23 @@
+ifndef::server[]
+For `github`  organizations projects are created automatically from your VCS repositories. Select "Projects" in the link:https://app.circleci.com/home[CircleCI web app] to view your repositories. From here you have the option to:
+endif::server[]
+ifdef::server[]
+Projects are created automatically from your GitHub repositories. Select "Projects" in the CircleCI web app to view your repositories. From here you have the option to:
+endif::server[]
+
+* Set up new repositories as CircleCI projects. Commit a CircleCI `config.yml` file to the repository to define your pipeline. This creates a GitHub OAuth pipeline for you, which you can view in menu:Project Settings[Project Setup].
+* Follow/unfollow projects, to subscribe/unsubscribe from notifications for builds.
+
+ifndef::server[]
+If you install the CircleCI GitHub App into your organization you can create new GitHub App pipelines and triggers alongside existing OAuth pipelines. GitHub App pipelines and triggers are not bound to the project repository. For example:
+
+* You could set up a trigger for your pipeline that runs when someone pushes to the repository itself. It could also trigger when there is a push to the default branch of a library your project depends on.
+* You could create a new pipeline within the project that uses a configuration file from a centrally managed repository but is triggered on events in the project repository.
+endif::server[]
+
+When you set up a project to build with CircleCI, the following settings are added to the repository using the permissions you gave CircleCI when you signed up:
+
+- A deploy key that is used to check out your project from GitHub.
+- A webhook that is used to notify CircleCI when you push to GitHub.
+
+CircleCI builds push events by default. Builds are triggered for all pushes to the repository and push is the most common case of triggering a build.

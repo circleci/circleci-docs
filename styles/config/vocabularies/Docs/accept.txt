@@ -450,8 +450,22 @@ Automations
 Create_secret_yourself
 iFrame
 Istio
-
 [Rr]sync
 [Gg]itignored
 [Ww]orktrees?
 [Ii]mplementer('s)?
+Temurin
+SDKs
+musl
+JDKs?
+Corretto
+Azul
+CRuby
+CPython
+xUnit
+MSTest
+glibc
+cmd
+setup-(aws|browser-tools|docker|dotnet|github-cli|go|java|node|python|ruby)
+NuGet
+Chrome for Testing

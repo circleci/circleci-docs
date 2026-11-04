@@ -113,29 +113,7 @@ docs/guides/modules/ROOT/images/icons/
 
 === Available icons
 
-You can find available icons by looking here:
-
-[,shell]
-----
-docs/
-└── guides/
-    └── modules/
-        └── ROOT/
-            └── images/
-                └── icons/
-                    ├── cancel.svg
-                    ├── cancel-dark.svg
-                    ├── check.svg
-                    ├── check-dark.svg
-                    ├── edit-solid.svg
-                    ├── edit-solid-dark.svg
-                    ├── more.svg
-                    ├── more-dark.svg
-                    ├── passed.svg
-                    ├── passed-dark.svg
-                    ├── settings.svg
-                    └── settings-dark.svg
-----
+The available icons are the SVG files in `docs/guides/modules/ROOT/images/icons/`.
 
 NOTE: If you use the older `image:` macro syntax (for example, pass:[`image:guides:ROOT:icons/example.svg[alt text, role="no-border"`]), it will not automatically switch themes. Use the pass:[icon:name[Icon alt text]] macro instead for theme-aware icons.
 

@@ -1,0 +1,54 @@
+= About Cloud and Server docs
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Choose the Cloud or Server version of the CircleCI guides, find out which CircleCI product you use, and send feedback on the Server version.
+:experimental:
+
+The CircleCI guides come in two versions, one for CircleCI Cloud and one for CircleCI Server. Choose the version that matches the CircleCI product you use, so that you see only the features and steps that apply to you.
+
+[#about-the-versions]
+== About the versions
+
+CircleCI Cloud is the service that CircleCI hosts for you. CircleCI Server is a version of CircleCI that your organization installs and runs on its own infrastructure. Some features are available on Cloud only, and some steps are different on Server.
+
+* The Cloud version covers every CircleCI feature. It is the default version.
+* The Server version covers CircleCI Server. It leaves out pages and sections about features that Server does not support, and it adds Server steps and notes.
+
+Some features need a later Server version. When a page describes one of these features, its sidebar shows the earliest Server version that supports it, for example "Server version: 4.9 and later". If you use an earlier Server version, check this line before you follow the page.
+
+If a page does not match your installation, see <<give-feedback-on-the-server-version>>.
+
+[#choose-a-version]
+== Choose a version
+
+Use the version switcher at the top of the left navigation to choose Cloud or Server. The switcher opens the same page in the other version. If the page is not part of the other version, the switcher opens that version's start page.
+
+ifndef::server[]
+NOTE: You are viewing the Cloud version of this page. Try the switcher now to see the Server version.
+endif::server[]
+ifdef::server[]
+NOTE: You are viewing the Server version of this page. Try the switcher now to see the Cloud version.
+endif::server[]
+
+Your browser remembers the version you choose. If you leave the guides for another part of the docs, such as Reference or Orbs, and then come back, you return to the version you chose last.
+
+Only the guides have separate Cloud and Server versions. The Reference, Orbs, and Runner sections have one version that covers both Cloud and Server, with notes where Server is different. To install and run CircleCI Server, see the xref:server-admin:overview:circleci-server-overview.adoc[CircleCI Server Overview].
+
+[#find-out-which-circleci-product-you-use]
+== Find out which CircleCI product you use
+
+Check the address you use to sign in to the CircleCI web app:
+
+* If you sign in at `https://app.circleci.com`, you use CircleCI Cloud. Choose the Cloud version.
+* If you sign in at an address that your organization runs, for example `https://circleci.example.com`, you use CircleCI Server. Choose the Server version. To find out which Server version you use, ask your CircleCI Server administrator.
+
+[#give-feedback-on-the-server-version]
+== Give feedback on the Server version
+
+Tell us what works and what does not work in the Server version of the guides. For example, a step that is different on your installation, or a feature that is missing or that Server does not support. Use either of these options:
+
+* Select *Yes* or *No* under *Was this page helpful?* at the bottom of any page.
+* link:https://github.com/circleci/circleci-docs/issues/new?title=Server%20guides%3A%20[Open an issue on GitHub]. Include a link to the page and what you expected to see.

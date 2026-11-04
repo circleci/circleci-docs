@@ -269,18 +269,12 @@ CAUTION: If GitHub Enterprise and CircleCI Server are not on the same domain, th
 Registering a new GitHub OAuth app for CircleCI Server gives you authorization control over your server installation. It also lets CircleCI update GitHub projects and repositories with build status information. The following steps apply for both GitHub.com and GitHub Enterprise.
 
 . In your browser, navigate to menu:Your-GitHub-instance[User Settings>Developer Settings>OAuth Apps] and select **New OAuth App**.
-+
-.New GitHub OAuth App
-image::guides:ROOT:github-oauth-new.png[Screenshot showing setting up a new OAuth app]
 
 . Complete the following fields, based on your planned installation:
 ** *Homepage URL*: The URL of your planned CircleCI installation.
 ** *Authorization callback URL*: The authorization callback URL is the URL of your planned CircleCI installation followed by `/auth/github`
 
 . Once completed, you will be shown the *Client ID*. Select *Generate a new Client Secret* to generate a Client Secret for your new OAuth App. You will need these values when you configure CircleCI Server.
-+
-.Client ID and Secret
-image::guides:ROOT:github-clientid.png[Screenshot showing GitHub Client ID]
 
 [#github-enterprise]
 === GitHub Enterprise

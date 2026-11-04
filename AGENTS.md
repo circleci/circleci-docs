@@ -62,10 +62,41 @@ All pages require standard attributes (`:page-platform:`, `:page-audience:`, `:p
 - Assume technical competence but explain concepts clearly and simply
 - Complex concepts should be accessible to non-technical readers
 
+### Current Product Behavior Only
+- Docs state what the product does now. Do not document planned, upcoming, or aspirational behavior
+- Do not write "will be supported from", "coming soon", or a future version number for a feature that is not yet available
+- If a feature is unavailable on a platform, say so plainly and leave out when it might arrive
+- **Good**: `$CIRCLE_OIDC_TOKEN_V3` is not available on server.
+- **Bad**: `$CIRCLE_OIDC_TOKEN_V3` will be supported from server v5.0+.
+
+### Word Choices
+- Do not describe a process as "easy", "easily", or "simply". You cannot know what is easy for the reader
+- Avoid "please"
+- Use "using" instead of "via", which is harder for non-native English speakers
+- Do not use time-sensitive language such as "new", "soon", or "in preview" in main prose. It goes stale. If it is needed, put it in an admonition that makes the time-sensitive nature clear
+- Use inclusive terms:
+
+| Avoid | Use instead |
+|---|---|
+| Blacklist / Whitelist | Blocklist / Safelist |
+| Master / Slave | Leader / Follower, or Primary / Replica, depending on context |
+| Insane / Sane / Crazy | Unreasonable / Reasonable |
+| Killer | Very successful |
+| Guys | Folks, people, humans, teammates |
+
 ### CircleCI-Specific Terminology
 - The CircleCI web interface is the "web app"
 - Use "CI/CD" to describe what we do
-- Pipelines are **triggered**, not "run"
+- A pipeline is the definition of what code to run and which config to use. It does not run and is not triggered
+- A **trigger** starts a **run** (the web app labels it "Pipeline run"). Write "trigger a pipeline run" or "a run is triggered", not "trigger a pipeline" or "run a pipeline"
+- **Workflows** and **jobs** run. Runs and pipelines do not
+- **Good**: Push a commit to trigger a pipeline run.
+- **Good**: Push a commit to trigger a run.
+- **Good**: The workflow starts once the pipeline run is triggered.
+- **Good**: The workflow starts once the run is triggered.
+- **Bad**: Push a commit to trigger your pipeline.
+- **Bad**: Run the pipeline to build your project.
+- **Bad**: The pipeline runs when you push a commit.
 - Feature names are rarely capitalized (exceptions: Insights)
 
 ## Numbers
@@ -84,6 +115,13 @@ All pages require standard attributes (`:page-platform:`, `:page-audience:`, `:p
   - Log in to your account …
   - Read the setup guide …
   - Set up your account …
+
+- **Use "open source"**, not "opensource" or "open-source"
+
+## Abbreviations and Symbols
+- **Do not use "e.g." or "i.e."**. Use "for example" and "that is"
+- **Do not use "&"** in place of "and"
+- **Use the Oxford comma**: "a pencil, eraser, and notebook"
 
 ## Punctuation
 
@@ -161,6 +199,24 @@ Click the icon:settings[Settings icon] to access project settings.
 - Each icon has a light version (`name.svg`) and dark version (`name-dark.svg`)
 - Use this macro instead of the older `image:` syntax for theme-aware icons
 
+**Creating a new icon:** add two SVG files to `docs/guides/modules/ROOT/images/icons/`:
+- `name.svg`: the light theme version, with a dark icon color (typically `#161616`)
+- `name-dark.svg`: the dark theme version, with a light icon color (typically `#D7DBE3`)
+
+### Page Badges
+Add a badge next to a page title and its sidebar navigation entry using page attributes:
+
+```adoc
+= Page Title
+:page-badge: Preview
+```
+
+- `:page-badge:`: one of `Beta`, `Preview`, or `Deprecated`. Never `New`, because it goes stale (see Page Attributes)
+- `:page-badge-classes:`: Tailwind classes for styling (optional)
+- `:page-badge-bg:` and `:page-badge-border:`: hex colors (optional, override the classes)
+- A closed preview page has the `Preview` badge and is **not** listed in the navigation. An open preview page has the `Preview` badge and **is** listed
+- See xref:contributors:docs-style:title-badges.adoc[Page Title Badges] for complete documentation
+
 ### Subsection Badges
 Add status badges to section headings (h2-h6) to indicate feature maturity or platform availability.
 
@@ -202,7 +258,8 @@ Configure Slack notifications for your project...
 
 ### Headings
 - Write headings in **logical sequence** that tells a story
-- **Do not skip heading levels** (e.g., h2 to h4)
+- **Do not skip heading levels** (for example, h2 to h4)
+- Antora creates the `h1` from the page title, so use only `h2` and below in the body
 - Include at least an intro paragraph before subheadings
 - **Start headings with verbs** where possible:
   - **Good**: "Grooming cats"
@@ -247,7 +304,7 @@ Common mistakes:
 
 The xref format is: `xref:component:module:filename.adoc[Link Text]`
 - **component**: Usually `guides`, `reference`, `orbs`, etc.
-- **module**: The module directory name (e.g., `orchestrate`, `deploy`, `toolkit`)
+- **module**: The module directory name (for example, `orchestrate`, `deploy`, `toolkit`)
 - **filename.adoc**: The actual file name
 
 Example verification process:
@@ -262,6 +319,10 @@ Example verification process:
 link:https://circleci.com[CircleCI]
 ```
 - Links must have descriptive link text (not "click here", "here", or "this")
+- **Use title case for link text on CircleCI-owned URLs** (including API reference docs at `circleci.com/docs/api/`):
+ - **Good**: `link:https://circleci.com/docs/api/v3#tag/triggers[API v3 Triggers Reference]`
+ - **Bad**: `link:https://circleci.com/docs/api/v3#tag/triggers[Triggers section of the API v3 docs]`
+- **Links to third-party sites may use sentence case** (match the name or title as it appears on that site)
 
 ### Code Samples
 - **Reuse shared snippets** from `docs/guides/modules/ROOT/examples/` when the same config already exists. Include them with `example$` inside a source block. Follow `skills/partials/SKILL.md` to discover, insert, or extract examples.
@@ -282,6 +343,16 @@ $ circleci version
 ----
 ```
 - The dollar sign won't be copied with the copy button
+- **For commands with a multi-line body**, such as a JSON payload or heredoc, use `shell` without a dollar sign. The copy button only copies lines that start with `$ `, so a `console` block would lose the body:
+```adoc
+[source,shell]
+----
+curl --request POST https://example.com/api \
+  --data '{
+    "key": "value"
+  }'
+----
+```
 - When users need to substitute data, use `<my-data>` format
 - Point out what needs replacement, including whether to replace `< >` or `" "`
 - **Show full job or workflow**, not just relevant lines
@@ -319,6 +390,7 @@ some code
 ```
 - **Capitalize first word** of each list item
 - **Use periods** if item is a full sentence or completes the intro stem
+- **Split literal-heavy paragraphs into lists**: a paragraph with three or more inline code spans or literal values is hard to read. Use a bulleted or description list where it fits, for example one item per format or variant
 
 ### Tables
 - Wrap tables in scrollable container:
@@ -481,6 +553,17 @@ image::guides:ROOT:name-of-image.png[Alternative text describing the image]
 - Images without alt text are accessibility violations
 - Include title above image using `.Title` syntax
 
+### Diagrams
+Add diagrams with a `[mermaid]` block.
+
+```adoc
+[mermaid]
+....
+sequenceDiagram
+    Alice->>Bob: Hello Bob
+....
+```
+
 ### Admonitions (Notes, Tips, Warnings)
 Use these for visual separation:
 - `NOTE:` - Supplementary information to highlight
@@ -550,7 +633,7 @@ endif::server[]
 - Use `ifndef::server[]` for Cloud-only content and `ifdef::server[]` for Server-only content. Never test for a `cloud` attribute, because partials are shared with the `reference` component.
 - **Cloud output must not change** when you add conditionals to an existing page. Keep the original Cloud text byte-for-byte inside `ifndef::server[]`. Put wanted Cloud wording changes in a separate commit or pull request.
 - Whole-page availability comes from metadata (`:page-platform:`, `:page-server-min-version:`, `:page-server-deprecated-in:`), not conditionals. Never wrap page attributes, such as `:page-description:`, in conditionals.
-- Do not put conditionals inside `[tabs]` blocks. Move the tab body into a partial and include it in the tab and in an `ifdef::server[]` block.
+- In a `[tabs]` block, a conditional may wrap a complete tab, from its `Label::` line to the end of its body. Do not put a conditional inside a tab body or around part of a tab. When only part of a tab differs, move the tab body into a partial and include it in the tab and in an `ifdef::server[]` block.
 - Do not put a directive mid-sentence. Write two complete sentences.
 - Keep one explicit kebab-case heading ID for both builds. Do not wrap the `[#id]` line.
 - Close every directive. Unbalanced conditionals fail Vale (`AsciiDoc.ValidConditions`).
@@ -581,6 +664,8 @@ endif::server[]
 17. Using AsciiDoc underscore heading IDs (`<<_install_circleci_agent_skills>>`) instead of the site kebab-case ID (`<<install-circleci-agent-skills>>`)
 18. Unnecessary semicolons (prefer a period or a comma)
 19. En dashes, or dashes used to separate an item and its description
+20. Documenting planned or future behavior, such as "will be supported from v5.0"
+21. Paragraphs dense with inline code or literal values that should be a bulleted list
 
 ## AsciiDoc Validation Rules
 - Close all attribute blocks properly
@@ -874,10 +959,10 @@ The `check-metadata` CI job validates every page against the schema. Run the sam
   - Comma-separated, capitalized: `Cloud`, `Server`, or `Cloud, Server`
   - Do not put a version number here — use `:page-server-min-version:` instead
 
-- `:page-server-min-version:` - Only when `server` is in `:page-platform:`. The minimum Server version the feature is available from, e.g. `"4.7"`.
+- `:page-server-min-version:` - Only when `server` is in `:page-platform:`. The minimum Server version the feature is available from, for example `"4.7"`.
   - **Always quote the value.** An unquoted `4.10` is parsed as the number `4.1`, silently dropping the trailing zero.
 
-- `:page-server-deprecated-in:` - Optional. Same format and quoting rule as above, for a feature deprecated or removed in Server, e.g. `"5.0"`.
+- `:page-server-deprecated-in:` - Optional. Same format and quoting rule as above, for a feature deprecated or removed in Server, for example `"5.0"`.
 
 - `:page-audience:` - Who the page is for.
   - `admin` - Server operators/administrators (installation, cluster management, upgrades)
@@ -889,11 +974,11 @@ The `check-metadata` CI job validates every page against the schema. Run the sam
 
 - `:page-badge:` - Optional. One of `Beta`, `Preview`, `Deprecated`. Never `New` — it's date-relative and goes stale as soon as someone forgets to remove it.
 
-- `:page-plan:` - Optional. Which CircleCI cloud plan(s) the page's functionality is available on: one to three of `Free`, `Performance`, `Scale`, comma-separated, in that order, e.g. `Performance, Scale`.
+- `:page-plan:` - Optional. Which CircleCI cloud plan(s) the page's functionality is available on: one to three of `Free`, `Performance`, `Scale`, comma-separated, in that order, for example `Performance, Scale`.
   - Title case, unlike the other enum attributes — it matches the product's own plan names.
   - No `all` shorthand — a page available on every plan lists all three: `Free, Performance, Scale`.
   - Not used on Server-only pages (`:page-platform: server` with no `cloud`); Server is a separate plan covered by `page-platform`, not by `page-plan`.
-  - A page gets a plan if the feature is available on it at all, even at a lower limit (e.g. capped flaky test detection). If only a section of the page is gated, the page still lists all three plans and the gated section carries its own inline note.
+  - A page gets a plan if the feature is available on it at all, even at a lower limit (for example capped flaky test detection). If only a section of the page is gated, the page still lists all three plans and the gated section carries its own inline note.
   - On `guides` and `reference` pages, `page-plan` and `page-vcs` drive a generated availability sidebar (Cloud plans / Version control) — don't write one by hand as a `****` sidebar or NOTE. It's built at build time from these attributes; see `extensions/page-availability-extension.js`.
 
 - `:page-description:` - Used for SEO meta descriptions and page previews

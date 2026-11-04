@@ -82,6 +82,7 @@ In addition to everything in the Performance plan, the Scale plan includes:
 * *Budget controls*: Set and monitor spending budgets for your organization. Refer to the xref:manage-budgets.adoc[Manage Budgets] page for details.
 * *Site-to-site connectivity* (preview): Connect CircleCI to your private network over a dedicated link. Refer to the xref:security:site-to-site-connectivity.adoc[Site-to-Site Connectivity] page for details.
 * *Premium support*: Expanded SLAs, an account team, training and onboarding options, and available support package add-ons.
+* *Plan sharing*: Share your plan with child organizations so they can build under your account.
 
 For current network and storage allowances, refer to the link:https://circleci.com/pricing/[Pricing] page.
 

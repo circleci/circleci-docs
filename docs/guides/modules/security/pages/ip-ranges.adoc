@@ -88,23 +88,35 @@ workflows:
 [#list-of-ip-address-ranges]
 == List of IP address ranges associated with the IP ranges feature
 
-_Last updated_: 2022-04-06
+_Last updated_: 2026-10-28
 
 Jobs that have been opted into the IP ranges feature will have one of the following IP address ranges associated with them:
 
+* 3.224.115.101
 * 3.228.39.90
+* 13.216.76.60
 * 18.213.67.41
+* 32.199.15.111
 * 34.194.94.201
 * 34.194.144.202
 * 34.197.6.234
+* 34.203.182.179
+* 34.231.217.224
+* 34.233.141.181
 * 35.169.17.173
 * 35.174.253.146
+* 44.214.209.165
 * 52.3.128.216
 * 52.4.195.249
 * 52.5.58.121
 * 52.21.153.129
 * 52.72.72.233
+* 52.203.234.139
+* 54.80.154.85
 * 54.92.235.88
+* 54.92.251.216
+* 54.146.98.112
+* 54.160.141.245
 * 54.161.182.76
 * 54.164.161.41
 * 54.166.105.113
@@ -113,6 +125,10 @@ Jobs that have been opted into the IP ranges feature will have one of the follow
 * 54.205.138.102
 * 54.208.72.234
 * 54.209.115.53
+* 98.87.113.183
+* 100.59.104.64
+* 107.20.96.174
+* 184.193.63.221
 
 NOTE: Jobs can use any of the address ranges above. It is also important to note that the address ranges are shared by all CircleCI customers who have opted into using the feature.
 

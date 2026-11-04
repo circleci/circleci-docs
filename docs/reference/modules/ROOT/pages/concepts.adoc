@@ -50,6 +50,148 @@ image::guides:ROOT:config-elements.png[configuration elements]
 
 CircleCI configurations use YAML. See the xref:guides:getting-started:introduction-to-yaml-configurations.adoc[Introduction to YAML Configurations] page for basic guidance. For a full overview of what is possible in a configuration file, see the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference] page.
 
+[#compilation-and-runtime]
+== Compilation and runtime
+
+CircleCI processes your configuration at _compilation time_ and runs your workflows and jobs at _runtime_.
+
+[#compilation-time]
+=== Compilation time
+
+Compilation time (also called _config processing time_) is when CircleCI processes and validates your `.circleci/config.yml` file. This happens before any jobs run, when a pipeline run is triggered. During compilation time, CircleCI performs the following actions:
+
+* Validates YAML syntax.
+* Validates CircleCI configuration structure.
+* Resolves and expands orbs into their full configuration.
+* Evaluates pipeline parameters and values.
+* Processes dynamic configuration logic.
+* Plans workflow orchestration and job dependencies.
+* Resolves configuration references (anchors, aliases).
+
+At compilation time, certain values are locked in and cannot change during job execution. For example, when you use pipeline parameters or values, they are evaluated once at compilation time and remain constant throughout the run.
+
+[source,yaml]
+----
+version: 2.1
+
+parameters:
+  image-tag:
+    type: string
+    default: "latest"
+
+jobs:
+  build:
+    docker:
+      - image: cimg/node:<< pipeline.parameters.image-tag >>
+    steps:
+      - checkout
+      - run:
+          name: Show image tag
+          command: echo "Using image tag << pipeline.parameters.image-tag >>"
+
+workflows:
+  my-workflow:
+    jobs:
+      - build
+----
+
+In this example, the `image-tag` parameter is evaluated when the pipeline run is triggered. The same value is used throughout the run.
+
+[#runtime]
+=== Runtime
+
+Runtime is when your jobs actually execute in their designated execution environments. At runtime, the steps in your jobs run commands, execute tests, build applications, and perform deployments. During runtime, CircleCI performs the following actions:
+
+* Spins up execution environments (containers or virtual machines).
+* Evaluates environment variables.
+* Runs job steps in sequence.
+* Executes commands and scripts, and stores artifacts, caches, and workspaces.
+
+Unlike compilation-time values, environment variables are evaluated at runtime. This means each job can have different environment variable values, and they can be set dynamically based on the execution environment.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/node:current
+    steps:
+      - checkout
+      - run:
+          name: Show runtime information
+          command: |
+            echo "Current branch: $CIRCLE_BRANCH"
+            echo "Build number: $CIRCLE_BUILD_NUM"
+            echo "Job started at: $(date)"
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Run tests
+          command: npm test
+
+workflows:
+  my-workflow:
+    jobs:
+      - build
+----
+
+In this example, the environment variables like `CIRCLE_BRANCH` and `CIRCLE_BUILD_NUM` are evaluated when the job runs. The commands `npm install` and `npm test` execute at runtime in the job's execution environment.
+
+[#when-it-matters]
+=== When the distinction matters
+
+Understanding compilation time versus runtime is important in several scenarios:
+
+* *Pipeline parameters*: These are set at compilation time and cannot change during job execution. If you need dynamic values during job execution, use environment variables instead.
+* *Orb usage*: Orbs are expanded at compilation time. The resulting configuration is what runs at runtime.
+* *Dynamic configuration*: The setup workflow runs at runtime but generates a configuration that is compiled before continuation workflows run.
+* *Conditionals*: The `when` clause in workflows and the `when` step are evaluated at compilation time, based on pipeline parameters and pipeline values. The `when` attribute on a `run` step, such as `when: on_fail`, is evaluated at runtime, based on the state of the job.
+* *Error messages*: Compilation errors appear before any jobs run. Runtime errors occur during job execution and are specific to that job.
+
+[source,yaml]
+----
+version: 2.1
+
+parameters:
+  run-integration-tests:
+    type: boolean
+    default: false
+
+jobs:
+  unit-tests:
+    docker:
+      - image: cimg/node:current
+    steps:
+      - checkout
+      - run: npm test
+
+  integration-tests:
+    docker:
+      - image: cimg/node:current
+    steps:
+      - checkout
+      - run: npm run test:integration
+      - run:
+          name: Print logs on failure
+          command: cat test-output.log
+          when: on_fail
+
+workflows:
+  test-workflow:
+    jobs:
+      - unit-tests
+
+  integration-workflow:
+    when: << pipeline.parameters.run-integration-tests >>
+    jobs:
+      - integration-tests
+----
+
+In this example, the workflow-level `when` clause is evaluated at compilation time and determines whether `integration-workflow` is included in the pipeline at all. The `when: on_fail` attribute is evaluated at runtime and determines whether the log step runs, based on whether an earlier step in the job failed.
+
 [#contexts]
 == Contexts
 
@@ -361,16 +503,23 @@ workflows:
 
 The first image listed in the `.circleci/config.yml` file defines the primary container. CircleCI executes commands in the primary container. The Docker executor spins up a container with a Docker image. The machine executor spins up a complete Ubuntu virtual machine image. You can add further images to spin up secondary/service containers.
 
-For added security when using the Docker executor and running Docker commands, use the `setup_remote_docker` key to spin up another Docker container in which to run these commands. For more information see the xref:guides:execution-managed:building-docker-images.adoc[Running Docker Commands] page.
+For added security when using the Docker executor and running Docker commands, use the `setup_remote_docker` key to spin up another Docker container in which to run these commands. For more information see the xref:guides:execute:building-docker-images.adoc[Running Docker Commands] page.
 
-For more information, see the xref:guides:execution-managed:executor-intro.adoc[Execution Environments Overview] page.
+For more information, see the xref:guides:execute:executor-intro.adoc[Execution Environments Overview] page.
+
+[#functions]
+== Functions
+
+Functions are versioned, tested programs that run as steps inside your jobs to set up the tools your jobs need, such as languages, dependencies, and credentials. Declare functions under the `functions` key in your configuration. You can use functions and <<orbs,orbs>> in the same configuration.
+
+See xref:functions:ROOT:functions-intro.adoc[Functions Overview] for how to use functions, and xref:functions:ROOT:functions-concepts.adoc[Functions Concepts] for how commands, flags, and versions work.
 
 [#images]
 == Images
 
 An image is a packaged system that includes instructions for creating a running container. The first image listed in a `.circleci/config.yml` file defines the primary container. CircleCI executes commands for jobs in the primary container, using the Docker or machine executor.
 
-The *Docker executor* spins up a container with a Docker image. CircleCI maintains xref:guides:execution-managed:circleci-images.adoc[Convenience Images] for popular languages on Docker Hub.
+The *Docker executor* spins up a container with a Docker image. CircleCI maintains xref:guides:execute:circleci-images.adoc[Convenience Images] for popular languages on Docker Hub.
 
 include::guides:ROOT:partial$notes/docker-auth.adoc[]
 
@@ -418,12 +567,12 @@ workflows:
       - build3
 ----
 
-See the xref:guides:execution-managed:circleci-images.adoc[CircleCI Images] page for more information.
+See the xref:guides:execute:circleci-images.adoc[CircleCI Images] page for more information.
 
 [#jobs]
 == Jobs
 
-Jobs are the building blocks of your configuration. Jobs are collections of <<steps,steps>>, which run commands/scripts as required. Each job must declare an executor that is either `docker`, `machine`, `windows`, or `macos`. For `docker` you must xref:guides:execution-managed:executor-intro.adoc#docker[Specify an Image] to use for the primary container. For `macos` you must specify an xref:guides:execution-managed:executor-intro.adoc#macos[Xcode Version]. For `windows` you must use the xref:guides:execution-managed:executor-intro.adoc#windows[Windows Orb].
+Jobs are the building blocks of your configuration. Jobs are collections of <<steps,steps>>, which run commands/scripts as required. Each job must declare an executor that is either `docker`, `machine`, `windows`, or `macos`. For `docker` you must xref:guides:execute:executor-intro.adoc#docker[Specify an Image] to use for the primary container. For `macos` you must specify an xref:guides:execute:executor-intro.adoc#macos[Xcode Version]. For `windows` you must use the xref:guides:execute:executor-intro.adoc#windows[Windows Orb].
 
 .Illustration of a CircleCI job
 image::guides:ROOT:job.png[Illustration of a CircleCI job]
@@ -562,18 +711,18 @@ jobs:
 
 Examples for all execution environments are available on the following pages:
 
-* xref:guides:execution-managed:using-docker.adoc[Using the Docker Execution Environment]
-* xref:guides:execution-managed:using-linuxvm.adoc[Using the LinuxVM Execution Environment]
-* xref:guides:execution-managed:using-macos.adoc[Using the macOS Execution Environment]
-* xref:guides:execution-managed:using-windows.adoc[Using the Windows Execution Environment]
-* xref:guides:execution-managed:using-gpu.adoc[Using the GPU Execution Environment]
-* xref:guides:execution-managed:using-arm.adoc[Using the Arm VM Execution Environment]
+* xref:guides:execute:using-docker.adoc[Using the Docker Execution Environment]
+* xref:guides:execute:using-linuxvm.adoc[Using the LinuxVM Execution Environment]
+* xref:guides:execute:using-macos.adoc[Using the macOS Execution Environment]
+* xref:guides:execute:using-windows.adoc[Using the Windows Execution Environment]
+* xref:guides:execute:using-gpu.adoc[Using the GPU Execution Environment]
+* xref:guides:execute:using-arm.adoc[Using the Arm VM Execution Environment]
 
 Pricing and plans information for the various resource classes can be found on the link:https://circleci.com/product/features/resource-classes/[Resource classes] product page.
 
 The `resource_class` key is also used to configure a xref:runner:ROOT:runner-concepts.adoc#namespaces-and-resource-classes[Self-Hosted Runner Instance].
 
-For full details on both uses of resource classes, see the xref:guides:execution-managed:resource-class-overview.adoc[Resource Class Overview] page.
+For full details on both uses of resource classes, see the xref:guides:execute:resource-class-overview.adoc[Resource Class Overview] page.
 
 [#runs]
 == Runs

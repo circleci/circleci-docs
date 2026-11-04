@@ -3,7 +3,7 @@
 :page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-audience: developer
-:page-description: Rename organizations and repositories connected to CircleCI. The steps depend on whether you use the GitHub App, GitLab, GitHub OAuth app or Bitbucket Cloud.
+:page-description: Rename organizations and repositories connected to CircleCI, with steps for GitHub App, GitLab, Cursor Origin, GitHub OAuth app, and Bitbucket Cloud.
 :experimental:
 
 This page details everything you need to know about renaming organizations and repositories connected to CircleCI. Renaming works differently depending on how your account is connected:
@@ -21,6 +21,12 @@ This page details everything you need to know about renaming organizations and r
 | Changing the name of a repository does not affect the name of the project in CircleCI. The project name remains the same.
 
 | GitLab
+| [.circle-green]#Yes#
+| [.circle-green]#Yes#
+| [.circle-red]#No#
+| Changing the name of a repository does not affect the name of the project in CircleCI. The project name remains the same.
+
+| Cursor Origin
 | [.circle-green]#Yes#
 | [.circle-green]#Yes#
 | [.circle-red]#No#
@@ -44,9 +50,9 @@ This page details everything you need to know about renaming organizations and r
 TIP: For a guide to organizations and integration types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
 
 [#github-app-or-gitlab]
-== GitHub App, GitLab
+== GitHub App, GitLab, Cursor Origin
 
-For CircleCI organizations integrated through the GitHub App or GitLab, no changes are required when organizations or repositories are renamed in the connected VCS (version control system). CircleCI organizations and projects are _standalone_ entities, not directly tied to code repository or org names.
+For CircleCI organizations integrated through the GitHub App, GitLab, or Cursor Origin, no changes are required when organizations or repositories are renamed in the connected VCS (version control system). CircleCI organizations and projects are _standalone_ entities, not directly tied to code repository or org names.
 
 You can rename your organization from the CircleCI web app:
 
@@ -62,7 +68,7 @@ If you need to rename a GitHub (OAuth app) or Bitbucket Cloud organization or re
 [#rename-organizations-and-repositories]
 === Steps to rename organizations and repositories
 
-NOTE: It is **not** possible to rename projects that use CircleCI's GitHub App or GitLab integrations. The following instructions are for orgs and projects that use CircleCI's GitHub OAuth App or Bitbucket Cloud integrations.
+NOTE: It is **not** possible to rename projects that use CircleCI's GitHub App, GitLab, or Cursor Origin integrations. The following instructions are for orgs and projects that use CircleCI's GitHub OAuth App or Bitbucket Cloud integrations.
 
 . Rename organization or repository in your VCS.
 . Go to the CircleCI web app using the new org/repo name, for example: `app.circleci.com/pipelines/<VCS>/<new-org-name>/<project-name>`.

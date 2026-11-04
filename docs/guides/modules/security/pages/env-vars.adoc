@@ -14,7 +14,9 @@ Use environment variables to set up various configuration options, and keep your
 
 See the xref:set-environment-variable.adoc[Set an Environment Variable] page for guidance on the different ways to set an environment variable.
 
+ifndef::server[]
 If you have existing environment variables (or contexts) and you would like to rename your organization or repository, follow the xref:rename-organizations-and-repositories.adoc[Rename Organizations and Repositories] guide. The recommended steps ensure you do not lose access to environment variables or contexts in the process.
+endif::server[]
 
 [#built-in-environment-variables]
 == Built-in environment variables
@@ -135,7 +137,7 @@ In the example below, `$ORGNAME` and `$REPONAME` will not be interpolated.
 working_directory: /go/src/github.com/$ORGNAME/$REPONAME
 ----
 
-NOTE: An exception to this interpolation rule is using project environment variables to pull xref:execution-managed:private-images.adoc[Private Images].
+NOTE: An exception to this interpolation rule is using project environment variables to pull xref:execute:private-images.adoc[Private Images].
 
 You can reuse pieces of configuration across your `.circleci/config.yml` file. By using the `parameters` declaration, you can pass values into reusable `commands`, `jobs`, and `executors`:
 

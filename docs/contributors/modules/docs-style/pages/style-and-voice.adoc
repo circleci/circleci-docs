@@ -12,6 +12,12 @@ Use an active voice, talk directly to the reader using simple, direct, clear and
 == Write for anyone and everyone
 Assume technical competence but explain concepts clearly and simply. Some concepts we write about are complex, and outside a non-technical reader's experience, but the flow of CircleCI docs should be accessible to anyone.
 
+== Keep sentences readable
+* Avoid wordy phrases such as "in order to", "at this time", and "due to the fact that".
+* Avoid more than three commas in a sentence.
+* Avoid sentences over 25 words.
+* Avoid gender-biased language.
+
 == Word choices
 * Do not make assumptions about the complexity of a process. Avoid descriptions like "easy", "easily" or "simply".
 * Avoid using "please".
@@ -19,6 +25,7 @@ Assume technical competence but explain concepts clearly and simply. Some concep
 * When specifying a tool or way of performing an action, use "using" instead of "via". The latter is harder on non-English speakers.
 * Avoid contractions, for example "don't", "you're". They make the content harder for non-native english speakers to read.
 * Do not use time-sentitive language like, "new" or "soon" or "in preview" in main prose. These can get missed when changes are needed. If this language is needed it should be in a banner (admonition) that is clearly there to indicate the time-sensitive nature of the content.
+* Document what the product does now. Do not describe planned or upcoming behavior, for example "will be supported from v5.0". If a feature is not available on a platform, say so plainly and do not say when it might arrive.
 
 [.table-scroll]
 --
@@ -45,9 +52,12 @@ Assume technical competence but explain concepts clearly and simply. Some concep
 --
 
 == Talking about CircleCI
-* The CircleCI is referred to as the "web app".
+* The CircleCI web interface is the "web app".
 * Use CI/CD to describe what we do. The "D" is ambiguous so link to this guide rather than defining it: https://circleci.com/continuous-integration/#what-is-continuous-integration.
-* Pipelines are _triggered_ **not** _run_.
+* A pipeline is the definition of what code to run and which config to use. A _trigger_ starts a _run_ of that pipeline. Write "trigger a pipeline run", "trigger a run", or "a run is triggered".
+* Workflows and jobs _run_. Pipelines and runs do not.
+** **Good:** Push a commit to trigger a pipeline run. The workflow starts once the run is triggered.
+** **Bad:** Run the pipeline to build your project. The pipeline runs when you push a commit.
 * Feature names are rarely capitalized. We will keep a list of exceptions here:
 ** Insights
 
@@ -76,6 +86,19 @@ Recommended: When you have limited time, focus on the changes that will have the
 Recommended: Review the page one more time, checking for the following: present tense and active voice; typos, punctuation, and grammar; and whether you can shorten anything.
 +
 Notice that in the final example, the second item in the list is itself a list.
+
+=== Colons
+
+Avoid colons in the middle of a sentence to introduce an explanation or continuation. Prefer a new sentence.
+
+* Use a colon to introduce a list, a code block, or a table.
+* Use a colon to separate an item and its description, not a dash.
++
+Recommended: Resource class: The compute size assigned to a job.
++
+Not recommended: This saves round trips: you retrieve all failure context at once.
++
+Recommended: This saves round trips. You retrieve all failure context at once.
 
 === Dashes
 

@@ -1,0 +1,18 @@
+{{#with (components-to-nav-list)}}
+<ul data-mobile-component-list class="flex flex-col text-terminal-black">
+  {{#each navList}}
+    <li>
+      {{!-- Components drill into their sections (06-navigation.js); the href is the
+            fallback when the tree can't be loaded. Home has no tree, so it is a plain link. --}}
+      {{#if (eq ./name 'ROOT')}}
+        <a href="{{{relativize ./url}}}" class="mobile-nav-row"><span>{{{./label}}}</span></a>
+      {{else}}
+        <a href="{{{relativize ./url}}}" class="mobile-nav-row" data-nav-component="{{./name}}" data-nav-component-title="{{./label}}">
+          <span>{{{./label}}}</span>
+          {{> icon-arrow-right}}
+        </a>
+      {{/if}}
+    </li>
+  {{/each}}
+</ul>
+{{/with}}

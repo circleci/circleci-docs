@@ -310,7 +310,6 @@ Or through npm scripts defined in `package.json`.
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `FORCE_NPM_INSTALL` | Force reinstallation of UI dependencies | `false` |
-| `LIVERELOAD` | Enable live reload for preview | `true` |
 | `ALGOLIA_APP_ID` | Algolia search app ID | - |
 | `ALGOLIA_API_KEY` | Algolia search API key | - |
 | `ALGOLIA_INDEX_NAME` | Algolia search index name | - |
@@ -361,5 +360,5 @@ The build process includes these optimizations:
 
 - **CSS minification**: Reduces stylesheet size
 - **JavaScript bundling**: Combines and minifies scripts
-- **Image optimization**: Compresses images
+- **UI image optimization**: SVGs in `ui/src/img/` are committed pre-optimized. The build does not compress images, and docs screenshots are copied as they are
 - **HTML compression**: Reduces HTML size

@@ -220,6 +220,8 @@ function unlinkDroppedXrefs (contents, moduleName, componentName, dropped, moved
 // another component has no version, so cloning the page would register it a
 // second time and fail the build as a duplicate. Aliases within the guides
 // component are kept, because other pages reach their targets through them.
+// A `guides:module:page.adoc` alias also has no version, so it loses its
+// component prefix and resolves in the Server version instead.
 function stripCrossComponentAliases (contents, componentName) {
   return Buffer.from(
     contents.toString('utf8').replace(/^:page-aliases:[ \t]*(.*(?: \\\n.*)*)\n/m, (match, value) => {
@@ -232,9 +234,15 @@ function stripCrossComponentAliases (contents, componentName) {
           const parts = alias.split(':').filter((part) => part !== '')
           return parts.length < 3 || parts[0] === componentName
         })
+        .map((alias) => alias.replace(new RegExp(`^${componentName}:(?=[^:]+:)`), ''))
       return kept.length ? `:page-aliases: ${kept.join(', ')}\n` : ''
     })
   )
+}
+
+// The repository path of a content file, for reports.
+function sourcePathOf (file) {
+  return path.posix.join((file.src.origin && file.src.origin.startPath) || '', file.src.path || file.path)
 }
 
 function cloneFile (file, contents) {
@@ -247,27 +255,42 @@ function cloneFile (file, contents) {
 }
 
 // Removes nav lines that link to dropped pages. A parent line left with no
-// children and no link of its own is removed too.
+// children and no link of its own is removed too, and so is a parent whose
+// guides pages were all dropped, together with any links it still holds into
+// other components. A line may name the guides component
+// (`xref:guides:module:page.adoc`); lines into other components are otherwise
+// kept.
 function pruneNav (source, droppedPages) {
   const lines = source.split('\n')
-  const keep = lines.map((line) => {
-    const m = line.match(/xref:(?:([\w-]+):)?([^:[\s]+\.adoc)\[/)
-    if (!m) return true
-    return !droppedPages.has(`${m[1] || 'ROOT'}:${m[2]}`)
+  // For each line: whether it links to a guides page, and whether that page is dropped.
+  const targets = lines.map((line) => {
+    const m = line.match(/xref:(?:([\w-]+):)?(?:([\w-]+):)?([^:[\s]+\.adoc)\[/)
+    if (!m) return null
+    const [component, moduleName] = m[2] ? [m[1], m[2]] : [COMPONENT, m[1]]
+    if (component !== COMPONENT) return { guides: false }
+    return { guides: true, dropped: droppedPages.has(`${moduleName || 'ROOT'}:${m[3]}`) }
   })
+  const keep = targets.map((target) => !(target && target.dropped))
   const depth = (line) => (line.match(/^(\*+)\s/) || [, ''])[1].length
   for (let i = lines.length - 1; i >= 0; i--) {
     if (!keep[i]) continue
     const d = depth(lines[i])
     if (!d || /xref:|link:/.test(lines[i])) continue
+    let end = i + 1
+    while (end < lines.length && depth(lines[end]) > d) end++
     let hasChild = false
-    for (let j = i + 1; j < lines.length && depth(lines[j]) > d; j++) {
-      if (keep[j]) {
-        hasChild = true
-        break
+    let keptGuides = false
+    let droppedGuides = false
+    for (let j = i + 1; j < end; j++) {
+      if (keep[j]) hasChild = true
+      if (targets[j] && targets[j].guides) {
+        if (targets[j].dropped) droppedGuides = true
+        else keptGuides = true
       }
     }
-    if (!hasChild) keep[i] = false
+    if (!hasChild || (droppedGuides && !keptGuides)) {
+      for (let j = i; j < end; j++) keep[j] = false
+    }
   }
   return lines.filter((_, i) => keep[i]).join('\n')
 }
@@ -425,6 +448,38 @@ module.exports.register = function register ({ config }) {
         },
       ],
     })
+  })
+
+  // A link on a Server page to a section that the Server build hides goes to
+  // the top of the target page instead, so it never lands on a missing anchor.
+  this.once('documentsConverted', ({ contentCatalog }) => {
+    const pages = contentCatalog.getPages(
+      (page) => page.out && page.src.component === componentName && page.src.version === VERSION
+    )
+    const ids = new Map(
+      pages.map((page) => [page.pub.url, new Set([...page.contents.toString().matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]))])
+    )
+    const fixed = []
+    for (const page of pages) {
+      const html = page.contents.toString()
+      const out = html.replace(/(<a\s[^>]*?href=")([^"#]*)#([^"]+)"/g, (match, before, target, fragment) => {
+        if (/^[a-z][a-z0-9+.-]*:/i.test(target)) return match
+        let url = target ? path.posix.resolve(page.pub.url, target) : page.pub.url
+        if (!url.endsWith('/') && !path.posix.extname(url)) url += '/'
+        const known = ids.get(url)
+        if (!known || known.has(decodeURIComponent(fragment))) return match
+        fixed.push({ file: sourcePathOf(page), target: `${url}#${fragment}` })
+        return `${before}${target || '#'}"`
+      })
+      if (out !== html) page.contents = Buffer.from(out)
+    }
+    if (!fixed.length) return
+    const lines = ['', '# Links to sections hidden in the Server build', '',
+      `${fixed.length} links on Server pages point to a section that the Server build hides. They now go to the top of the page.`, '']
+    for (const { file, target } of fixed) lines.push(`- ${file} links to \`${target}\``)
+    fs.mkdirSync(reportDir, { recursive: true })
+    fs.appendFileSync(path.join(reportDir, `${REPORT_NAME}.md`), lines.join('\n') + '\n')
+    logger.info(`${componentName} server: ${fixed.length} links to hidden sections now go to the top of the page`)
   })
 
   // Server pages have the Cloud page as their canonical URL, so listing them

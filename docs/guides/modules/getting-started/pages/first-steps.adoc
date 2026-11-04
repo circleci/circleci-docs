@@ -40,7 +40,7 @@ TIP: If you want to collaborate on an existing org you can create an account and
 . Set up MFA by following the instructions in the web app.
 . Choose one of the following options:
 ** Use the <<join-an-existing-org,Find Your Team>> option to connect your account to a shared org.
-** Head straight to <<sign-up-and-create-an-org>> to create a new organization.
+** Head straight to <<sign-up-and-create-an-org>> and create a new organization.
 
 [#bitbucket-cloud]
 === Sign up to build Bitbucket Cloud projects
@@ -123,6 +123,8 @@ Set up integrations from menu:Org[VCS Connections]. For steps, see the xref:inte
 * If you sign up or sign in with a **GitHub** social login, CircleCI creates a matching organization for you automatically.
 * If you sign up or sign in with **Bitbucket Cloud**, CircleCI creates a matching organization for you automatically. Every team member joining your org authenticates with Bitbucket _during_ signup, not later.
 
+NOTE: GitLab does not offer a social login option. To build GitLab projects, sign up with email and password, then connect GitLab from menu:Org[VCS Connections].
+
 You cannot use these sign-in methods interchangeably for the same account. For example, using a social login after you already have an email and password account creates a new, separate account connected to your VCS provider.
 
 For the full picture of organization types and VCS integrations and how they affect project creation, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
@@ -130,7 +132,7 @@ For the full picture of organization types and VCS integrations and how they aff
 [#terms]
 == Terms
 
-By signing up, you are agreeing to our link:https://circleci.com/terms-of-service/[SaaS Agreement] and link:https://circleci.com/privacy/[Privacy Policy]. We ask for read/write access to make your experience seamless on CircleCI. If you are a GitHub user and are not ready to share access to your private projects, you can choose public repositories instead. Protected by reCAPTCHA, Google link:https://policies.google.com/privacy?hl=en[Privacy Policy] and link:https://policies.google.com/terms?hl=en[Terms of Service] apply.
+By signing up, you are agreeing to our link:https://circleci.com/terms-of-service/[SaaS Agreement] and link:https://circleci.com/privacy/[Privacy Policy]. We ask for read/write access to make your experience seamless on CircleCI. If you are a GitHub user and are not ready to share access to your private projects, you can choose public repositories instead. On the login page, select the dropdown arrow next to **Log in with GitHub**, then select **Public repos only**. Protected by reCAPTCHA, Google link:https://policies.google.com/privacy?hl=en[Privacy Policy] and link:https://policies.google.com/terms?hl=en[Terms of Service] apply.
 
 [#next-steps]
 == Next steps

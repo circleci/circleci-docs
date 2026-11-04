@@ -84,6 +84,11 @@
   font-size: 32px;
 }
 
+/* Page title: 32px from the breadcrumbs at every width, matching the 32px below it */
+.doc h1.page {
+  margin-top: calc(32 / var(--rem-base) * 1rem); /* 32px */
+}
+
 .doc h2 {
   font-size: 24px;
 }
@@ -109,12 +114,8 @@
     font-size: 24px;
   }
 
-  /* On mobile, the breadcrumbs→title gap and section-heading top margin are 32px
+  /* On mobile, section headings get a 32px top margin
      (desktop/tablet uses 24px — see the ≥768 rule below). */
-  .doc h1.page {
-    margin-top: calc(32 / var(--rem-base) * 1rem); /* 32px */
-  }
-
   .doc h2 {
     font-size: 20px;
     margin-top: calc(32 / var(--rem-base) * 1rem); /* 32px */
@@ -132,10 +133,9 @@
   }
 }
 
-/* Special case: Page title gets extra top margin on larger screens */
+/* Page title gets extra bottom margin on larger screens */
 @media screen and (min-width: 768px) {
   .doc h1.page {
-    margin-top: calc(24 / var(--rem-base) * 1rem); /* 24px */
     margin-bottom: calc(32 / var(--rem-base) * 1rem); /* 32px */
   }
 

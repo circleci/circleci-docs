@@ -700,9 +700,11 @@ The table below shows the permissions associated with each CircleCI project role
 [#permissions-scope]
 == Permissions scope
 
-Your CircleCI roles and associated permissions are **not** derived from the permissions set in your VCS (version control system). Your CircleCI role permissions do **not** allow you to bypass permissions in the VCS.
+CircleCI roles apply to `circleci` type organizations. In these organizations, your CircleCI roles and associated permissions are **not** derived from the permissions set in your VCS (version control system). Your CircleCI role permissions do **not** allow you to bypass permissions in the VCS.
 
 For example, you may be an _Organization Administrator_ within CircleCI, which gives you access to view and modify organization and project settings _within your CircleCI organization_. However, you will not be able to edit a project’s `.circleci/config.yml` hosted in your VCS without your user also having the write permissions _within that VCS's repository project_. Your CircleCI user’s VCS permissions are determined by its associated VCS identity.
+
+`github` and `bitbucket` type organizations do not use CircleCI roles. In these organizations, the VCS provider determines user permissions. Installing the CircleCI GitHub App in a `github` type organization does not change the organization type. For details, see the xref:users-organizations-and-integrations-guide.adoc#organization-user-permissions[Organization User Permissions] section of the Users, Organizations, and Integrations Guide page.
 
 [#role-hierarchy]
 == Role hierarchy across groups and individuals

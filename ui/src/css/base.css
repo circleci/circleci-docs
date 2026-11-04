@@ -410,3 +410,76 @@ html[data-theme="dark"] table.datatable tbody tr:nth-child(odd):hover {
   white-space: nowrap;
   border-width: 0;
 }
+
+/* Mobile nav drawer (below lg): one view at a time, drilled down rather than
+   using accordions. data-nav-view is top (all components), component (its
+   sections) or section (its pages); 06-navigation.js switches it and builds the
+   component and section views into [data-mobile-nav] from the desktop tree. */
+@media (width < 75rem) { /* matches --breakpoint-lg in site.css, so lg:hidden and these rules agree */
+  [data-page-navigation][data-nav-view="top"] [data-nav-panel="component"],
+  [data-page-navigation]:not([data-nav-view="top"]) [data-nav-panel="top"] {
+    display: none;
+  }
+
+  /* on tablet widths the drawer is full screen; cap the lists so each arrow
+     stays close enough to its title to scan */
+  [data-page-navigation] [data-nav-panels] {
+    max-width: 28rem;
+  }
+
+  /* only hide the tree once the drill-down views exist */
+  [data-page-navigation][data-mobile-nav-ready] [data-left-side-nav] > ul {
+    display: none;
+  }
+
+  /* the Server version switcher belongs to the component view */
+  [data-page-navigation][data-nav-view="section"] [data-left-side-nav] [data-dropdown] {
+    display: none;
+  }
+}
+
+.mobile-nav-row {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.5rem 0.25rem;
+  text-align: left;
+  line-height: 1.25rem;
+  letter-spacing: 0.1px;
+}
+
+.mobile-nav-row[aria-current="page"] {
+  color: var(--color-link-on-light);
+  font-weight: 500;
+}
+
+.mobile-nav-row[data-active] {
+  font-weight: 600;
+}
+
+/* subsection groups in the section view */
+.mobile-nav-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+[data-mobile-nav] > * + .mobile-nav-group {
+  margin-top: 2.5rem;
+}
+
+.mobile-nav-heading {
+  padding: 0 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--toc-font-color);
+}
+
+/* a component's tree is loading after a tap in the top view */
+.mobile-nav-row[aria-busy="true"] {
+  cursor: progress;
+  opacity: 0.6;
+}

@@ -43,7 +43,7 @@ If you are interested in reading more on this topic, visit the xref:reference:RO
 
 Orbs are packages of xref:guides:getting-started:introduction-to-yaml-configurations.adoc[CircleCI YAML Configuration].
 
-CircleCI orbs package xref:reference:ROOT:reusing-config.adoc[Reusable Configuration Elements] like xref:reference:ROOT:reusing-config.adoc#authoring-reusable-commands[Commands]. These commands run within an xref:guides:execution-managed:executor-intro.adoc[Executor]—either one the user specifies in a custom job, or one the orb author defines in a xref:orbs:use:orb-concepts.adoc#jobs[Reusable Job]. This execution environment may influence your language decisions.
+CircleCI orbs package xref:reference:ROOT:reusing-config.adoc[Reusable Configuration Elements] like xref:reference:ROOT:reusing-config.adoc#authoring-reusable-commands[Commands]. These commands run within an xref:guides:execute:executor-intro.adoc[Executor]—either one the user specifies in a custom job, or one the orb author defines in a xref:orbs:use:orb-concepts.adoc#jobs[Reusable Job]. This execution environment may influence your language decisions.
 
 [#what-programming-languages-command-logic]
 === What programming languages can I write my Command logic in?

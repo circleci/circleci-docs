@@ -1,0 +1,4 @@
+* xref:functions-intro.adoc[Introduction to using functions]
+* xref:functions-concepts.adoc[Functions concepts]
+* xref:functions-faq.adoc[FAQ]
+* xref:functions-catalog.adoc[Functions catalog]

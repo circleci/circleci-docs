@@ -63,7 +63,7 @@ endif::env-aws[]
 [#create-a-vpc]
 == 2. Create a VPC
 
-NOTE: **Installing server locally?** You can skip this step, but ensure you follow the resourcing recommendation of using /18 CIDR blocks to ensure you have adequate capacity for both your Kubernetes Cluster and the provisioning of Nomad clients to run your jobs.
+NOTE: **Installing server locally?** You can skip this step. Follow the resourcing recommendation of using /18 CIDR blocks to ensure adequate capacity for both your Kubernetes Cluster and the provisioning of Nomad clients to run your jobs.
 
 If you are installing server in the cloud, either AWS or GCP, you will need to create a new virtual private cloud (VPC).
 
@@ -273,18 +273,12 @@ Registering and setting up a new GitHub OAuth app for CircleCI Server allows for
 The following steps apply for both GitHub.com and GitHub Enterprise.
 
 . In your browser, navigate to menu:Your-GitHub-instance[User Settings>Developer Settings>OAuth Apps] and select **New OAuth App**.
-+
-.New GitHub OAuth App
-image::guides:ROOT:github-oauth-new.png[Screenshot showing setting up a new OAuth app]
 
 . Complete the following fields, based on your planned installation:
 ** *Homepage URL*: The URL of your planned CircleCI installation.
 ** *Authorization callback URL*: The authorization callback URL is the URL of your planned CircleCI installation followed by `/auth/github`
 
 . Once completed, you will be shown the *Client ID*. Select *Generate a new Client Secret* to generate a Client Secret for your new OAuth App. You will need these values when you configure CircleCI Server.
-+
-.Client ID and Secret
-image::guides:ROOT:github-clientid.png[Screenshot showing GitHub Client ID]
 
 [#github-enterprise]
 === GitHub Enterprise

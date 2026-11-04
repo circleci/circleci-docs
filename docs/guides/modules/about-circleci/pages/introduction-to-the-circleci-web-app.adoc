@@ -78,7 +78,7 @@ image::guides:ROOT:user_settings.png[User settings]
 | See the list of organizations you are a part of. If you have administrative privileges, you may also view the plan each organization is on.
 
 | Job SSH keys
-| Set up an SSH key to access your job containers. For more information on this feature see the xref:execution-managed:ssh-access-jobs.adoc[Debug With SSH] page.
+| Set up an SSH key to access your job containers. For more information on this feature see the xref:execute:ssh-access-jobs.adoc[Debug With SSH] page.
 
 | Beta Program
 | Opt in to CircleCI's beta program. Beta features you opt in to will be listed on this page.

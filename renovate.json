@@ -3,6 +3,7 @@
   "extends": [
     "config:recommended"
   ],
+  "labels": ["dependencies"],
   "timezone": "Europe/London",
   "postUpdateOptions": [
     "gomodTidy",

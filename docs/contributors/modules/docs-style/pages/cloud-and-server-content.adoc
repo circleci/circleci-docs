@@ -71,7 +71,7 @@ Conditionals work around a paragraph, list item, table row, section, or single l
 [#where-not-to-use-them]
 == Where not to use conditionals
 
-* *Inside `[tabs]` blocks.* Conditionals inside tabs break the tab markup. Move the tab body into a partial, then include it in the tab and in an `ifdef::server[]` block.
+* *Inside a tab or around part of a tab.* A conditional can wrap a complete tab, from its `Label::` line to the end of its body, but not part of one. When only part of a tab differs, move the tab body into a partial, then include it in the tab and in an `ifdef::server[]` block.
 * *In the middle of a sentence.* Write two complete sentences instead.
 * *In page attributes and heading IDs.* Headings keep one explicit ID for both builds, for example `[#create-a-context]`. Use kebab-case IDs.
 * *In shared partials that other components include.* The `reference` component includes some partials, so a conditional there must keep the Cloud output unchanged.
@@ -82,17 +82,18 @@ Conditionals work around a paragraph, list item, table row, section, or single l
 [#web-app-links]
 === Links to the web app
 
-Server has no fixed hostname. Link to `app.circleci.com` on Cloud, and name the web app without a link on Server:
+Server has no fixed hostname. Use the `cloudlink` macro. It links to the web app on Cloud and renders plain text on Server.
 
 [source,adoc]
 ----
-\ifndef::server[]
-Log in to the link:https://app.circleci.com/[CircleCI web app].
-\endif::server[]
-\ifdef::server[]
-Log in to the CircleCI web app.
-\endif::server[]
+Log in to the cloudlink:webapp[].
+Go to cloudlink:user-settings[] and create a token.
+Open cloudlink:path[Plan Usage,path=settings/plan/usage].
 ----
+
+Link text defaults to the destination name (for example, `CircleCI web app` or `User Settings`). Add custom text in the brackets to override it. To add a destination, add an entry to `DESTINATIONS` in `extensions/cloud-link-extension.js`.
+
+Use `ifndef::server[]` instead when the whole sentence or block is Cloud only.
 
 [#api-examples]
 === API hostnames
@@ -108,6 +109,33 @@ If a page has `:page-platform: Cloud`, the Server build drops it. Wrap any xref 
 === Features Server does not have
 
 The pipeline type table in the xref:guides:integration:version-control-system-integration-overview.adoc[version control systems overview] is the source of truth for what Server supports, using the *GitHub OAuth on Server* column. Hide anything that table marks as unsupported. Do not rely on memory.
+
+[#hide-a-tab]
+=== Hide a tab on Server
+
+To hide a tab that Server lacks, wrap the whole tab, from its `Label::` line to the end of its body:
+
+[source,asciidoc]
+----
+[tabs]
+====
+Cloud::
++
+Cloud steps.
+
+\ifndef::server[]
+macOS::
++
+macOS steps.
+\endif::[]
+
+Server::
++
+Server steps.
+====
+----
+
+The Server build omits the macOS tab.
 
 [#check-your-work]
 == Check your work

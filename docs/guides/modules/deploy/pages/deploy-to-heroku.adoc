@@ -69,7 +69,7 @@ include::ROOT:partial$tips/env-var-or-context.adoc[]
 [#create-deploy-job]
 === 3. Create deploy job
 
-In your `.circleci/config.yml`, create a `deploy` job and add an xref:execution-managed:executor-intro.adoc[Executor Type].
+In your `.circleci/config.yml`, create a `deploy` job and add an xref:execute:executor-intro.adoc[Executor Type].
 
 [#add-steps-deploy-job]
 === 4. Add steps to your deploy job

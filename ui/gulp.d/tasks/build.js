@@ -5,7 +5,6 @@ const browserify = require('browserify')
 const concat = require('gulp-concat')
 const cssnano = require('cssnano')
 const fs = require('fs-extra')
-const imagemin = require('gulp-imagemin')
 const merge = require('merge-stream')
 const ospath = require('path')
 const path = ospath.posix
@@ -14,15 +13,19 @@ const postcssCalc = require('postcss-calc')
 const postcssImport = require('postcss-import')
 const postcssUrl = require('postcss-url')
 const postcssVar = require('postcss-custom-properties')
-const { Transform } = require('stream')
+const { PassThrough, Transform } = require('stream')
 const tailwindPlugin = require('@tailwindcss/postcss')
 const map = (transform) => new Transform({ objectMode: true, transform })
 const through = () => map((file, enc, next) => next(null, file))
 const uglify = require('gulp-uglify')
-const vfs = require('vinyl-fs')
+const vinylFs = require('vinyl-fs')
+
+// vinyl-fs 4 returns streamx streams, which end any destination they pipe to, so merge-stream would close
+// early. Piping through a Node stream restores the end: false behavior that merge-stream relies on.
+const vfs = { ...vinylFs, src: (...args) => vinylFs.src(...args).pipe(new PassThrough({ objectMode: true })) }
 
 module.exports = (src, dest, preview) => () => {
-  const opts = { base: src, cwd: src }
+  const opts = { base: src, cwd: src, encoding: false }
   const sourcemaps = preview || process.env.SOURCEMAPS === 'true'
   const postcssPlugins = [
     postcssImport,
@@ -84,24 +87,7 @@ module.exports = (src, dest, preview) => () => {
       .src(['css/site.css', 'css/vendor/*.css'], { ...opts, sourcemaps })
       .pipe(postcss((file) => ({ plugins: postcssPlugins, options: { file } }))),
     vfs.src('font/*.{ttf,woff*(2)}', opts),
-    vfs.src('img/**/*.{gif,ico,jpg,png,svg}', opts).pipe(
-      preview
-        ? through()
-        : imagemin(
-          [
-            imagemin.gifsicle(),
-            imagemin.jpegtran(),
-            imagemin.optipng(),
-            imagemin.svgo({
-              plugins: [
-                { cleanupIDs: { preservePrefixes: ['icon-', 'view-'] } },
-                { removeViewBox: false },
-                { removeDesc: false },
-              ],
-            }),
-          ].reduce((accum, it) => (it ? accum.concat(it) : accum), [])
-        )
-    ),
+    vfs.src('img/**/*.{gif,ico,jpg,png,svg}', opts),
     vfs.src('helpers/*.js', opts),
     vfs.src('layouts/*.hbs', opts),
     vfs.src('partials/*.hbs', opts),

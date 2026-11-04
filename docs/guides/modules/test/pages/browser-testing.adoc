@@ -21,7 +21,7 @@ Every time you commit and push code, CircleCI automatically runs your tests agai
 [#prerequisites]
 == Prerequisites
 
-Refer to the xref:execution-managed:circleci-images.adoc[Pre-Built CircleCI Convenience Images] and add `-browsers:` to the image name. This will give you a variant that includes Java 8, geckodriver, Firefox, and Chrome. Add  `-browsers-legacy` to the image name for a variant which includes PhantomJS.
+Refer to the xref:execute:circleci-images.adoc[Pre-Built CircleCI Convenience Images] and add `-browsers:` to the image name. This will give you a variant that includes Java 8, geckodriver, Firefox, and Chrome. Add  `-browsers-legacy` to the image name for a variant which includes PhantomJS.
 
 [#selenium]
 == Selenium
@@ -197,7 +197,7 @@ VNC allows you to view and interact with the browser that is running your tests.
 
 . Install a VNC viewer. If you are using macOS, consider link:https://sourceforge.net/projects/chicken/[Chicken of the VNC].
 link:https://www.realvnc.com/download/viewer/[RealVNC] is also available on most platforms.
-. Open a Terminal window, xref:execution-managed:ssh-access-jobs.adoc[Start an SSH Run] to a CircleCI container and forward the remote port 5901 to the local port 5902.
+. Open a Terminal window, xref:execute:ssh-access-jobs.adoc[Start an SSH Run] to a CircleCI container and forward the remote port 5901 to the local port 5902.
 +
 [,shell]
 ----
@@ -266,7 +266,7 @@ jobs:
           background: true
 ----
 
-. Now when you xref:execution-managed:ssh-access-jobs.adoc[Start an SSH Build], you'll be able to connect to the VNC server while your default test steps run. You can either use a VNC viewer that is capable of SSH tunneling, or set up a tunnel on your own:
+. Now when you xref:execute:ssh-access-jobs.adoc[Start an SSH Build], you'll be able to connect to the VNC server while your default test steps run. You can either use a VNC viewer that is capable of SSH tunneling, or set up a tunnel on your own:
 +
 [,shell]
 ----
@@ -279,7 +279,7 @@ ssh -p PORT ubuntu@IP_ADDRESS -L 5900:localhost:5900
 CircleCI also supports X11 forwarding over SSH. X11 forwarding is similar to VNC &mdash; you can interact with the browser running on CircleCI from your local machine.
 
 . Install an X Window System on your computer. If you are using macOS, consider link:https://xquartz.macosforge.org/landing/[XQuartz].
-. With X set up on your system, xref:execution-managed:ssh-access-jobs.adoc[Start an SSH Build] to a CircleCI VM, using the `-X` flag to set up forwarding:
+. With X set up on your system, xref:execute:ssh-access-jobs.adoc[Start an SSH Build] to a CircleCI VM, using the `-X` flag to set up forwarding:
 +
 [,shell]
 ----

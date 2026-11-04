@@ -7,7 +7,7 @@
 :page-description: Restrict code signing management to organization admins so only admins can manage certificates, signing bundles, and provisioning profiles.
 :experimental:
 
-By default, organization admins and contributors can manage the certificates, signing bundles, and provisioning profiles used for xref:guides:execution-managed:ios-codesigning.adoc[iOS and macOS Code Signing]. An organization admin can turn on a setting that restricts these actions to organization admins only. This page describes what the setting controls and how to turn it on.
+By default, organization admins and contributors can manage the certificates, signing bundles, and provisioning profiles used for xref:guides:execute:ios-codesigning.adoc[iOS and macOS Code Signing]. An organization admin can turn on a setting that restricts these actions to organization admins only. This page describes what the setting controls and how to turn it on.
 
 [#understand-what-the-setting-controls]
 == Understand what the setting controls
@@ -62,4 +62,4 @@ NOTE: CircleCI records changes to organization settings in your audit logs as th
 
 CircleCI enforces the setting on the server, so it applies to the web app, CLI, and API requests. When the setting is on, a request from a non-admin user to change code signing assets returns an HTTP 403 response. Requests that list certificates and signing bundles are not affected.
 
-For the API requests used to manage code signing, see xref:guides:execution-managed:ios-codesigning.adoc#code-signing-api[Code Signing API].
+For the API requests used to manage code signing, see xref:guides:execute:ios-codesigning.adoc#code-signing-api[Code Signing API].

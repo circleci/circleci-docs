@@ -303,7 +303,7 @@ workflows:
       - build
 ```
 
-CAUTION: **Do not** use an existing job that uses xref:guides:execution-managed:building-docker-images.adoc[Building Docker Images] (see xref:container-runner.adoc#building-container-images[Building Container Images] for more information).
+CAUTION: **Do not** use an existing job that uses xref:guides:execute:building-docker-images.adoc[Building Docker Images] (see xref:container-runner.adoc#building-container-images[Building Container Images] for more information).
 
 [#troubleshooting]
 == Troubleshooting

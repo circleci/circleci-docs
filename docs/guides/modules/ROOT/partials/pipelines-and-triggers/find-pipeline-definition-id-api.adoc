@@ -1,0 +1,33 @@
+. Have your CircleCI personal API token ready, or create a new token by following the steps on the xref:toolkit:managing-api-tokens.adoc[Managing API Tokens] page. Set it as an environment variable:
++
+[source,console]
+----
+$ export CIRCLE_TOKEN=<YOUR_API_TOKEN>
+----
+. List your organizations:
++
+[source,console]
+----
+$ curl -g https://circleci.com/api/v3/orgs \
+  --header "Authorization: Bearer $CIRCLE_TOKEN"
+----
++
+Locate your organization in the response and copy its `id` value.
+. Find your project ID. Replace `<ORG_ID>` with your organization ID:
++
+[source,console]
+----
+$ curl -g "https://circleci.com/api/v3/projects?filter[org_id]=<ORG_ID>" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN"
+----
++
+Locate your project in the response and copy its `id` value.
+. Get your pipeline definition ID. Replace `<PROJECT_ID>` with your project ID:
++
+[source,console]
+----
+$ curl -g "https://circleci.com/api/v3/pipelines?filter[project_id]=<PROJECT_ID>" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN"
+----
++
+Locate your pipeline in the response and copy its `id` value.

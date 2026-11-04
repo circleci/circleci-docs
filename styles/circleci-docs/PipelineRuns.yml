@@ -1,0 +1,12 @@
+extends: existence
+message: "'%s': a pipeline is a definition and does not run or get triggered. Trigger a run (or pipeline run). Workflows and jobs run."
+level: suggestion
+ignorecase: true
+# Exceptions: API v2 operation names and CircleCI server docs still say
+# "trigger a pipeline". Server docs are switched off in .vale.ini.
+# Vale uses RE2 (no lookahead), so a pipeline noun phrase such as "pipeline run"
+# is excluded by requiring the match to end at punctuation or a preposition.
+# Vale concatenates raw items into one regex, so the second starts with |.
+raw:
+  - '\b(trigger(s|ed|ing)?|run(s|ning)?|ran)\s+(a\s+|an\s+|the\s+|your\s+|this\s+|new\s+|each\s+|every\s+)*pipelines?(\s+(with|from|when|on|in|for|to|using|manually|by|through|via|every|overnight|at|and|or|that)\b|[.,;:)!?]|\s*$)'
+  - '|\bpipelines?\s+(is|are|was|were|gets?|will|can|then)\s+(be\s+)?(run|runs|running|triggered|trigger|triggers)\b'

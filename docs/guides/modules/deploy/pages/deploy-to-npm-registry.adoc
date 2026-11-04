@@ -87,9 +87,6 @@ Gather context IDs for each context you want to restrict publishing to.
 . Select the *Settings* tab.
 
 . Under *Trusted Publishing*, select *CircleCI*.
-+
-.Selecting CircleCI as the trusted publisher on npmjs.com
-image::guides:ROOT:npm-trusted-publishing/npm-settings.png[npm package Settings tab showing the Trusted Publisher section with CircleCI selected as the provider]
 
 . Fill in the fields with the values you collected in the previous step:
 +
@@ -98,9 +95,6 @@ image::guides:ROOT:npm-trusted-publishing/npm-settings.png[npm package Settings 
 ** Pipeline Definition ID
 ** VCS origin
 ** Context IDs (optional)
-+
-.Trusted publisher form with the CircleCI identifiers filled in
-image::guides:ROOT:npm-trusted-publishing/npm-trusted-form.png[npm Trusted Publisher form for the CircleCI provider with Organization ID, Project ID, Pipeline Definition ID, Context IDs, and VCS origin populated]
 
 . Choose which actions this trusted publisher can perform (`npm publish`, `npm stage publish`, or both) and save.
 

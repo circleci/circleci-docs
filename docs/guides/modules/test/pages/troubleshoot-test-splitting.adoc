@@ -117,7 +117,7 @@ workflows:
 ### Video: troubleshooting globbing
 
 
-NOTE: To follow along with the commands in the video below you will need to be xref:execution-managed:ssh-access-jobs.adoc[`SSH-ed into a job`].
+NOTE: To follow along with the commands in the video below you will need to be xref:execute:ssh-access-jobs.adoc[`SSH-ed into a job`].
 
 ++++
 <div class="video-wrapper">

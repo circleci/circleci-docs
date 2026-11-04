@@ -9,6 +9,8 @@
 
 Cross-repo triggers allow you to run a pipeline to build code from one repository when an event occurs in another repository. In this guide, you will learn how to set up a cross-repo trigger.
 
+NOTE: Cross-repo triggers also work with Cursor Origin. Cursor Origin is in beta. This guide shows the GitHub App setup.
+
 == Introduction
 For this how-to guide we have chosen the following scenario:
 

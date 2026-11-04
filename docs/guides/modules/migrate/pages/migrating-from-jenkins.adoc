@@ -26,7 +26,7 @@ CircleCI is a different product from Jenkins, with different concepts on how to 
             echo "Copy-paste from 'Execute Shell' in Jenkins"
 ----
 
-Some programs and utilities are xref:execution-managed:circleci-images.adoc#pre-installed-tools[Pre-installed on CircleCI Images], but anything else required by your build must be installed with a `run` step. Your project's dependencies may be xref:optimize:caching.adoc[Cached] for the next build using the `save_cache` and `restore_cache` steps, so that they only need to be fully downloaded and installed once.
+Some programs and utilities are xref:execute:circleci-images.adoc#pre-installed-tools[Pre-installed on CircleCI Images], but anything else required by your build must be installed with a `run` step. Your project's dependencies may be xref:optimize:caching.adoc[Cached] for the next build using the `save_cache` and `restore_cache` steps, so that they only need to be fully downloaded and installed once.
 
 *Manual configuration:* If you used plugins or options other than Execute Shell in Jenkins to run your build steps, you may need to manually port your build from Jenkins. Use the xref:reference:ROOT:configuration-reference.adoc[Configuring CircleCI] document as a guide to the complete set of CircleCI configuration keys.
 
@@ -42,7 +42,7 @@ Almost all configuration for CircleCI builds are stored in a file called `.circl
 
 It is often the responsibility of an ops person or team to manage Jenkins servers. These people generally get involved with various CI/CD maintenance tasks like installing dependencies and troubleshooting issues.
 
-It is never necessary to access a CircleCI environment to install dependencies. Every build starts in a fresh environment where custom dependencies must be installed automatically, ensuring that the entire build process is truly automated. Troubleshooting in the execution environment can be done securely by any developer using CircleCI's xref:execution-managed:ssh-access-jobs.adoc[SSH] feature.
+It is never necessary to access a CircleCI environment to install dependencies. Every build starts in a fresh environment where custom dependencies must be installed automatically, ensuring that the entire build process is truly automated. Troubleshooting in the execution environment can be done securely by any developer using CircleCI's xref:execute:ssh-access-jobs.adoc[SSH] feature.
 
 If you install CircleCI on your own hardware, the divide between the host OS and containerized execution environments is useful for security and ops. See <<your-builds-in-containers,Your builds in containers>> below for more details. Ops team members can work on the host OS without affecting builds. They never need to give developers access. Developers can use CircleCI's SSH feature to debug builds at the container level without affecting ops.
 
@@ -70,7 +70,7 @@ Talking about containerization in build systems can be complicated. Arbitrary bu
 
 If you use a tool like Docker in your workflow, you will likely also want to run it on CI/CD. Jenkins does not provide any built-in support for this, and it is up to you to make sure it is installed and available within your execution environment.
 
-Docker has long been one of the tools that is pre-installed on CircleCI, so you can access Docker in your builds by adding `docker` as an executor in your `.circleci/config.yml` file. See the xref:execution-managed:executor-intro.adoc[Introduction to Execution Environments] page for more info.
+Docker has long been one of the tools that is pre-installed on CircleCI, so you can access Docker in your builds by adding `docker` as an executor in your `.circleci/config.yml` file. See the xref:execute:executor-intro.adoc[Introduction to Execution Environments] page for more info.
 
 [#your-builds-in-containers]
 === Your builds in containers

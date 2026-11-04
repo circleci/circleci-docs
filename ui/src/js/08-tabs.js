@@ -3,6 +3,10 @@
 
   var config = (document.currentScript || {}).dataset || {}
   var forEach = Array.prototype.forEach
+  // CircleCI: on pages whose navigation has data-tversion="server" (the guides
+  // Server build), synced tab groups open on their "Server" tab.
+  var pageNavigation = document.querySelector('[data-page-navigation]')
+  var defaultSyncId = pageNavigation && pageNavigation.dataset.tversion === 'server' ? 'Server' : undefined
 
   init(document.querySelectorAll('.tabs'))
 
@@ -46,7 +50,7 @@
         if (syncGroupId === undefined) tabs.dataset.syncGroupId = syncGroupId = Object.keys(syncIds).sort().join('|')
         var preferredSyncId = 'syncStorageKey' in config &&
           window[(config.syncStorageScope || 'local') + 'Storage'].getItem(config.syncStorageKey + '-' + syncGroupId)
-        var tab = preferredSyncId && syncIds[preferredSyncId]
+        var tab = (preferredSyncId && syncIds[preferredSyncId]) || (defaultSyncId && syncIds[defaultSyncId])
         tab && Object.assign(start, { tab: tab, panel: document.getElementById(tab.getAttribute('aria-controls')) })
         toggleSelected(start.tab, true) || toggleHidden(start.panel, false)
       }

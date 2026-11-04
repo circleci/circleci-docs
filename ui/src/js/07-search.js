@@ -37,7 +37,7 @@
       mobileSearchContainer: document.querySelector('[data-page-navigation] [data-search-results-container]'),
       mobileAskAiButton: document.querySelector('[data-page-navigation] [data-ask-ai-button]'),
       navigation: document.querySelector('[data-page-navigation]'),
-      leftSideNav: document.querySelector('[data-left-side-nav-container]'),
+      navPanels: document.querySelector('[data-page-navigation] [data-nav-panels]'),
       goToAppMobileButton: document.querySelector('[data-go-to-app-mobile]'),
       searchResultPathsContainer: null,
       mobileSearchResultPathsContainer: null,
@@ -454,9 +454,9 @@
     // ===== MOBILE-SPECIFIC FUNCTIONS =====
 
     function showMobileSearchResults () {
-      if (!elements.mobileSearchContainer || !elements.leftSideNav) return
+      if (!elements.mobileSearchContainer || !elements.navPanels) return
 
-      elements.leftSideNav.classList.add('hidden')
+      elements.navPanels.classList.add('hidden')
       if (elements.goToAppMobileButton) elements.goToAppMobileButton.classList.add('hidden')
       elements.mobileSearchContainer.classList.remove('hidden')
 
@@ -467,15 +467,15 @@
         elements.mobileClearButton.classList.add('flex')
       }
 
-      if (elements.navigation.classList.contains('-translate-x-full')) {
-        elements.navigation.classList.remove('-translate-x-full')
+      if (elements.navigation.classList.contains('translate-x-full')) {
+        elements.navigation.classList.remove('translate-x-full')
       }
     }
 
     function hideMobileSearchResults () {
-      if (!elements.mobileSearchContainer || !elements.leftSideNav) return
+      if (!elements.mobileSearchContainer || !elements.navPanels) return
 
-      elements.leftSideNav.classList.remove('hidden')
+      elements.navPanels.classList.remove('hidden')
       if (elements.goToAppMobileButton) elements.goToAppMobileButton.classList.remove('hidden')
       elements.mobileSearchContainer.classList.add('hidden')
 

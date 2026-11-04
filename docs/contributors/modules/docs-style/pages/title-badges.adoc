@@ -74,7 +74,6 @@ This displays a "Preview" badge both on the page title and in the navigation sid
 * Common badge types work best:
 ** `Preview`: Features in preview.
 ** `Beta`: Beta features.
-** `New`: Recently added content.
 ** `Deprecated`: Deprecated functionality.
 
 Longer badge text may wrap or truncate on narrow viewports.

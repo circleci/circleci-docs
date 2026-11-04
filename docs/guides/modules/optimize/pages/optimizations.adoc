@@ -38,8 +38,8 @@ To persist data from a job and make it available to downstream jobs via the xref
 
 Choosing the right Docker image for your project can have a huge impact on build time. For example, a basic language image requires downloading dependencies and tools on every pipeline run. An image with those dependencies pre-installed saves that time on every build run. When configuring your projects and specifying images, consider the following options:
 
-* CircleCI provides a range of xref:execution-managed:circleci-images.adoc[Convenience Images], typically based on official Docker images, but with a range of useful language tools pre-installed.
-* You can create xref:execution-managed:custom-images.adoc[Custom Images], maximizing specificity for your projects. To help with this, we provide xref:execution-managed:custom-images.adoc#creating-a-custom-image-manually[Guidance for Building Images Manually].
+* CircleCI provides a range of xref:execute:circleci-images.adoc[Convenience Images], typically based on official Docker images, but with a range of useful language tools pre-installed.
+* You can create xref:execute:custom-images.adoc[Custom Images], maximizing specificity for your projects. To help with this, we provide xref:execute:custom-images.adoc#creating-a-custom-image-manually[Guidance for Building Images Manually].
 
 [#docker-layer-caching]
 === Docker layer caching
@@ -201,7 +201,7 @@ ifdef::server[]
 NOTE: On CircleCI Server, use `image: default` for the Linux VM, `image: windows-default` for Windows, and `image: arm-default` for Arm.
 
 endif::server[]
-* Read more about resource classes on the xref:execution-managed:resource-class-overview.adoc[Resource Class Overview] page.
+* Read more about resource classes on the xref:execute:resource-class-overview.adoc[Resource Class Overview] page.
 
 [#configuration]
 == Optimize your configuration files

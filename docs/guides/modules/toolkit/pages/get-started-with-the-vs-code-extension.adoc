@@ -24,8 +24,10 @@ ifdef::server[]
 endif::server[]
 
 * A xref:getting-started:create-project.adoc[Project] you follow that is building on CircleCI.
+ifdef::server[]
 
-* CircleCI Server users: your self-hosted server URL.
+* Your self-hosted CircleCI Server URL.
+endif::server[]
 
 [#install-the-extension]
 == 1. Install the extension
@@ -45,10 +47,8 @@ ifndef::server[]
 . You will be prompted to enter a xref:managing-api-tokens.adoc#overview[Personal API Token]. You may create one in your CircleCI link:https://app.circleci.com/settings/user/tokens[**User Settings > Personal API Tokens**].
 endif::server[]
 ifdef::server[]
-. You will be prompted to enter a xref:managing-api-tokens.adoc#overview[Personal API Token]. You may create one in your CircleCI menu:User Settings[Personal API Tokens].
+. You will be prompted to enter a xref:managing-api-tokens.adoc#overview[Personal API Token]. You may create one in your CircleCI menu:User Settings[Personal API Tokens]. Check **I'm a CircleCI Server customer**, then enter your self-hosted server URL.
 endif::server[]
-+
-**CircleCI Server**: Make sure to check **I'm a CircleCI Server customer**, then enter your self-hosted server URL.
 +
 .Log in to CircleCI from VS Code
 image::guides:ROOT:vs_code_extension_login.png[Log in to CircleCI from VS Code]
@@ -91,7 +91,7 @@ You can configure specific workflow status changes you want to be notified for i
 [#configure-ssh-keys]
 == 6. Configure SSH keys
 
-The extension allows you to xref:execution-managed:ssh-access-jobs.adoc[Rerun Jobs With SSH] directly from within VS Code, either in the terminal or in a link:https://code.visualstudio.com/docs/remote/ssh[remote VS Code window].
+The extension allows you to xref:execute:ssh-access-jobs.adoc[Rerun Jobs With SSH] directly from within VS Code, either in the terminal or in a link:https://code.visualstudio.com/docs/remote/ssh[remote VS Code window].
 
 The SSH functionality uses the same key that you use for your VCS. The easiest way to configure SSH keys for the extension is to try re-running a job with SSH, by clicking on the action icon next to the job.
 
