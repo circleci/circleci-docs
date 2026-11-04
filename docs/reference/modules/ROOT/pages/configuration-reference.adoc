@@ -2996,6 +2996,8 @@ workflows:
 
 The `max_auto_reruns` key is used to configure the maximum number of automatic reruns for a workflow.
 
+NOTE: `max_auto_reruns` (underscore, plural) in `.circleci/config.yml` retries failed steps or workflows. It is different from the `max-auto-rerun` option (hyphen, singular) in `.circleci/test-suites.yml`, which retries individual test atoms as part of xref:testsuite-configuration-reference.adoc#max-auto-rerun[Smarter Testing Auto Rerun Failed Tests].
+
 [,yml]
 ----
 version: 2.1

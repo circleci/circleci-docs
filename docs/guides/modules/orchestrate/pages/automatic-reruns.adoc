@@ -29,6 +29,8 @@ Benefits of automatic reruns include:
 * Cost-effective retry strategy that only reruns failed jobs.
 * Configurable retry limits to prevent infinite loops.
 
+NOTE: This page covers `max_auto_reruns` in `.circleci/config.yml`, which retries failed steps and workflows. If you are using Smarter Testing and want to retry individual test atoms, see xref:guides:test:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests], which uses the separate `max-auto-rerun` option in `.circleci/test-suites.yml`.
+
 == Quickstart
 
 This section provides config examples to help you set up automatic reruns. The content following this quickstart section details how the feature works, along with some troubleshooting guidance and frequently asked questions.
