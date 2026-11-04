@@ -9,6 +9,9 @@ endif::server[]
 . Select btn:[Create New Token] button.
 . In the *Token name* field, type a memorable name for the token.
 . Set an expiry date for the token. You must choose a date no more than one year in the future.
+ifndef::server[]
+. Select a scope for the token: *Read*, *Write*, or *Admin*. Choose the narrowest scope that meets your needs. For details, see the xref:managing-api-tokens.adoc#personal-api-token-scopes[Personal API Token Scopes] section.
+endif::server[]
 . Select btn:[Add API Token] button.
 . After the token appears, copy and paste it to another location. You will not be able to view the token again.
 
