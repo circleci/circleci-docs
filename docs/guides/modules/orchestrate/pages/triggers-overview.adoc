@@ -102,8 +102,6 @@ curl -X POST https://circleci.com/api/v3/runs \
 endif::server[]
 
 ifdef::server[]
-include::ROOT:partial$notes/server-api-examples.adoc[]
-
 . If you have not already, get set up to use API v2 by following the steps in the  xref:toolkit:api-developers-guide.adoc#authentication-and-authorization[API Developers Guide].
 
 . To trigger a pipeline from the command line using `curl`, copy and paste this sample request and replace the details in `< >` with your details, VCS can be `gh` or `bb`:
