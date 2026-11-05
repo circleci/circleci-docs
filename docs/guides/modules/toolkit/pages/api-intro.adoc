@@ -54,7 +54,7 @@ a| * Existing integrations that have not yet migrated to v3.
 | Basic pipeline, job, and project endpoints.
 a| * Maintaining existing integrations that you have not yet updated.
 * Specific legacy use cases not covered by v2 or v3.
-* Note: ten trigger and rerun endpoints are removed on 1 February 2027. See the xref:api-v1-migration-guide.adoc[Migrate From API V1 to V2 or V3].
+* Note: ten trigger and rerun endpoints are removed on 1 February 2027. See the xref:api-v1-migration-guide.adoc[Migrate From API v1 and v1.1 to API v2 or v3].
 
 | xref:reference:ROOT:runner-api.adoc[Runner API]
 | Specialized (separate API)
@@ -72,7 +72,7 @@ a| * Managing self-hosted runner resource classes and tasks.
 |===
 --
 
-WARNING: Ten v1 and v1.1 endpoints used to trigger and rerun builds are scheduled for removal on 1 February 2027. This affects both CircleCI Cloud and CircleCI Server. See xref:api-v1-migration-guide.adoc[Migrate From API V1 to V2 or V3] for step-by-step instructions.
+WARNING: Ten API v1 and API v1.1 endpoints used to trigger and rerun builds are scheduled for removal on 1 February 2027. This affects both CircleCI Cloud and CircleCI Server. See xref:api-v1-migration-guide.adoc[Migrate From API v1 and v1.1 to API v2 or v3] for step-by-step instructions.
 
 ifndef::server[]
 To get started, see the xref:api-v3-developers-guide.adoc[API V3 Developers Guide], the xref:api-developers-guide.adoc[API V2 Developers Guide], or the xref:reference:ROOT:runner-api.adoc[Runner API Reference].
