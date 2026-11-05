@@ -38,7 +38,7 @@ ifdef::server[]
 NOTE: Organization members can create contexts, but only organization administrators can restrict them using security groups.
 endif::server[]
 
-[tabs]
+[tabs%sync,sync-group-id=method]
 ====
 ifndef::server[]
 CLI v1::
@@ -103,7 +103,7 @@ Web app::
 include::ROOT:partial$app-navigation/steps-to-org-settings.adoc[]
 
 . Select btn:[Create Context], add a unique name for your context and select btn:[Create Context] in the modal to finalize. The new context will appear in a list with security set to `All members` to show that anyone in your organization can access this context at runtime.
-. You can now select any context created in your list to add environment variables. Once you have a context selected, select btn:[Add Environment Variable] to enter the variable name and value. Select btn:[Add Environment Variable] in the modal to finalize.
+. You can now select any context created in your list to add environment variables. Once you have a context selected, select btn:[Add] in the *Environment variables* section to enter the variable name and value. Select btn:[Add environment variable] in the dialog to finalize.
 
 include::ROOT:partial$shared-sections/use-a-context-in-a-job.adoc[]
 --
@@ -329,7 +329,7 @@ endif::server[]
 [#restrict-a-context-to-a-security-group-or-groups]
 === Restrict a context to a security group or groups
 
-[tabs]
+[tabs%sync,sync-group-id=method]
 ====
 ifndef::server[]
 CLI v1::
@@ -376,7 +376,7 @@ Web app::
 . Select *Create Context* to use a new context, or select the name of an existing context. If you use an existing context, remove the `All members` security group before adding a new one.
 . Select *Add Security Group* button to view the dialog box.
 . Make your choices in the dialog box and then select the *Add Security Group* or *Add Project Restriction* button to finalize. Contexts will now be restricted to the selections you have made.
-. Select *Add Environment Variables* to add environment variables to the context. Fill out your desired name and value in the dialog box, then select *Add Environment Variables* again to finalize. Use of the environment variables for this context is now limited to members of the security groups.
+. In the *Environment variables* section, select btn:[Add] to add environment variables to the context. Fill out your desired name and value in the dialog, then select btn:[Add environment variable] to finalize. Use of the environment variables for this context is now limited to members of the security groups.
 . Navigate back to menu:Org[Contexts] in the CircleCI app. The security groups appear in the Security column for the context.
 --
 ifndef::server[]
@@ -392,6 +392,8 @@ API v3::
 curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=<org-id>" \
   --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
 ----
++
+TIP: Add `&filter[name]=<context-name>` to the URL to narrow the results. The filter matches any part of the name and ignores case.
 
 . Next, find your security group ID. List your security groups, replacing `<org-id>`, and copy the `id` of the group (GitHub team) you want to restrict the context to:
 +
@@ -510,7 +512,7 @@ To invoke a workflow that uses a restricted context, the workflow must be part o
 
 You must be an *organization admin* to restrict a context through the method detailed below.
 
-[tabs]
+[tabs%sync,sync-group-id=method]
 ====
 ifndef::server[]
 CLI v1::
@@ -544,7 +546,7 @@ Web app::
 . Select *Add Project Restriction* to view the dialog box.
 . Select the project name to add to the context, and select *Add*. Use of the context is now limited to the specified project. Currently, multiple projects must be added individually.
 . You can now see a list of the defined project restrictions on the context page.
-. If you have environment variables, they appear on the page. If there are none, you can select *Add Environment Variables* to add them to the context. Then select *Add* to finish. Use of the environment variables for this context is now limited to the specified projects.
+. If you have environment variables, they appear on the page. If there are none, you can select btn:[Add] in the *Environment variables* section to add them to the context. Then select btn:[Add environment variable] to finish. Use of the environment variables for this context is now limited to the specified projects.
 --
 ifndef::server[]
 API v3::
@@ -560,7 +562,7 @@ curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=<org-id>" \
   --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
 ----
 +
-Add `&filter[name]=<context-name>` to narrow the results by name.
+TIP: Add `&filter[name]=<context-name>` to the URL to narrow the results. The filter matches any part of the name and ignores case.
 
 . Create a project restriction with the link:https://circleci.com/docs/api/v3/context-restrictions.md[Create a Context Restriction] endpoint. Replace `<context-id>` and `<project-id>`:
 +
@@ -626,7 +628,7 @@ Only workflows under the specified projects may now use the context and its envi
 
 You must be an *organization admin* to remove projects from contexts through the method detailed below.
 
-[tabs]
+[tabs%sync,sync-group-id=method]
 ====
 ifndef::server[]
 CLI v1::
@@ -669,6 +671,8 @@ API v3::
 curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=<org-id>" \
   --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
 ----
++
+TIP: Add `&filter[name]=<context-name>` to the URL to narrow the results. The filter matches any part of the name and ignores case.
 
 . Next, find the restriction ID. List the restrictions for the context, replacing `<context-id>`, and copy the `id` of the restriction you want to remove:
 +
@@ -760,7 +764,7 @@ NOTE: You must be an organization administrator to set an expression restriction
 
 Follow these steps to set an expression restriction on a context:
 
-[tabs]
+[tabs%sync,sync-group-id=method]
 ====
 ifndef::server[]
 CLI v1::
@@ -768,7 +772,7 @@ CLI v1::
 --
 . Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
 
-. Add an expression restriction to the context. Replace `<org-id>` and `<expression>`, a pipeline value expression such as `pipeline.git.branch == "main"`:
+. Add an expression restriction to the context. Replace `<org-id>` with your organization ID and `<expression>` with a pipeline value expression such as `pipeline.git.branch == "main"`:
 +
 [source,console]
 ----
@@ -779,14 +783,10 @@ endif::server[]
 Web app::
 +
 --
-// Vale merges consecutive AsciiDoc ordered list items into one sentence, because
-// the `. ` marker reads as a period, so SentenceLength miscounts these short steps.
-pass:[<!-- vale circleci-docs.SentenceLength = NO -->]
 . In the cloudlink:webapp[CircleCI web app], go to menu:Organization Settings[Contexts].
 . Select the context you want to add an expression restriction to.
 . Select btn:[Add Expression Restriction].
 . Enter your expression in the text box and select btn:[Add Expression Restriction] again to confirm.
-pass:[<!-- vale circleci-docs.SentenceLength = YES -->]
 --
 ifndef::server[]
 API v3::
@@ -801,6 +801,8 @@ API v3::
 curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=<org-id>" \
   --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
 ----
++
+TIP: Add `&filter[name]=<context-name>` to the URL to narrow the results. The filter matches any part of the name and ignores case.
 
 . Create an expression restriction with the link:https://circleci.com/docs/api/v3/context-restrictions.md[Create a Context Restriction] endpoint. Replace `<context-id>` and `<expression>`:
 +
@@ -1019,7 +1021,7 @@ To delete a context, follow the steps below:
 
 NOTE: If the context is restricted with a group other than `All members`, you must be a member of that security group to complete this task.
 
-[tabs]
+[tabs%sync,sync-group-id=method]
 ====
 ifndef::server[]
 CLI v1::
@@ -1090,6 +1092,8 @@ API v3::
 curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=<org-id>" \
   --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
 ----
++
+TIP: Add `&filter[name]=<context-name>` to the URL to narrow the results. The filter matches any part of the name and ignores case.
 
 . Delete the context with the link:https://circleci.com/docs/api/v3/contexts.md[Delete a Context] endpoint. Replace `<context-id>`:
 +
@@ -1148,7 +1152,7 @@ Environment variables declared inside a shell command `run` step, for example `F
 [#creating-environment-variables]
 === Add an environment variable to a context
 
-[tabs]
+[tabs%sync,sync-group-id=method]
 ====
 ifndef::server[]
 CLI v1::
@@ -1199,6 +1203,14 @@ $ circleci context store-secret --org-id <org-id> <context-name> <env-var-name>
 ----
 --
 endif::server[]
+Web app::
++
+--
+. Navigate to menu:Org[Contexts] in the cloudlink:webapp[CircleCI web app].
+. Select the name of the context you want to add an environment variable to.
+. In the *Environment variables* section, select btn:[Add].
+. Enter the variable name and value, then select btn:[Add environment variable] in the dialog.
+--
 ifndef::server[]
 API v3::
 +
@@ -1212,6 +1224,8 @@ API v3::
 curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=<org-id>" \
   --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
 ----
++
+TIP: Add `&filter[name]=<context-name>` to the URL to narrow the results. The filter matches any part of the name and ignores case.
 
 . Add an environment variable with the link:https://circleci.com/docs/api/v3/contexts.md[Set a Context Environment Variable] endpoint. Replace `<context-id>`, `<env-var-name>`, and `<env-var-value>`:
 +
@@ -1265,7 +1279,7 @@ endif::server[]
 
 Removing an environment variable from a context deletes the environment variable from your account.
 
-[tabs]
+[tabs%sync,sync-group-id=method]
 ====
 ifndef::server[]
 CLI v1::
@@ -1330,6 +1344,14 @@ $ circleci context remove-secret --org-id <org-id> <context-name> <env-var-name>
 ----
 --
 endif::server[]
+Web app::
++
+--
+. Navigate to menu:Org[Contexts] in the cloudlink:webapp[CircleCI web app].
+. Select the name of the context that contains the environment variable.
+. In the *Environment variables* section, select the checkbox next to the variable you want to remove.
+. Select btn:[Delete].
+--
 ifndef::server[]
 API v3::
 +
@@ -1343,6 +1365,8 @@ API v3::
 curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=<org-id>" \
   --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
 ----
++
+TIP: Add `&filter[name]=<context-name>` to the URL to narrow the results. The filter matches any part of the name and ignores case.
 
 . Delete the environment variable with the link:https://circleci.com/docs/api/v3/contexts.md[Delete a Context Environment Variable] endpoint. Replace `<context-id>` and `<env-var-name>`:
 +
@@ -1383,15 +1407,15 @@ endif::server[]
 ====
 
 [#rotating-environment-variables]
-=== Rotate environment variables with the CLI or API
+=== Rotate environment variables
 
 Rotation refers to the process of updating a secret's value without deleting it or changing its name.
 
 Because environment variables can be shared, passed around between employees and teams, and exposed inadvertently, it is good practice to periodically rotate secrets. You can automate this process, for example, running a script when an employee leaves the company, or when a secret may have been compromised.
 
-Context environment variables can be rotated using CircleCI's CLI or API.
+You can rotate context environment variables in the CircleCI web app, with the CLI, or with the API.
 
-[tabs]
+[tabs%sync,sync-group-id=method]
 ====
 ifndef::server[]
 CLI v1::
@@ -1456,6 +1480,14 @@ $ circleci context store-secret --org-id <org-id> <context-name> <env-var-name>
 ----
 --
 endif::server[]
+Web app::
++
+--
+. Navigate to menu:Org[Contexts] in the cloudlink:webapp[CircleCI web app].
+. Select the name of the context that contains the environment variable.
+. In the *Environment variables* section, select the pencil icon next to the value of the variable you want to rotate.
+. Enter the new value in the *New value* field, then select btn:[Update].
+--
 ifndef::server[]
 API v3::
 +
@@ -1471,6 +1503,8 @@ The link:https://circleci.com/docs/api/v3/contexts.md[Set a Context Environment 
 curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=<org-id>" \
   --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
 ----
++
+TIP: Add `&filter[name]=<context-name>` to the URL to narrow the results. The filter matches any part of the name and ignores case.
 
 . Set the new value. Replace `<context-id>`, `<env-var-name>`, and `<new-value>`:
 +
