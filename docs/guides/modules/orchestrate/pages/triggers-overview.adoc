@@ -62,11 +62,11 @@ NOTE: If your GitHub user account connection to CircleCI is not yet authorized, 
 == Trigger a pipeline using the API
 
 ifndef::server[]
-NOTE: Triggering a pipeline using the API is not currently supported for GitLab projects.
+NOTE: Triggering a pipeline run using the API is not currently supported for GitLab projects.
 
 This method is supported for GitHub, Bitbucket, and Cursor Origin pipelines.
 
-Trigger a pipeline run using the link:https://circleci.com/docs/api/v3#tag/runs/POST/api/v3/runs[API v3 Runs endpoint].
+Trigger a pipeline run using the link:https://circleci.com/docs/api/v3#tag/runs/POST/api/v3/runs[API v3 Runs Endpoint].
 
 . Get your pipeline definition ID. See the xref:toolkit:how-to-find-ids.adoc[How to Find IDs] guide for instructions.
 
@@ -104,7 +104,7 @@ endif::server[]
 ifdef::server[]
 . If you have not already, get set up to use API v2 by following the steps in the  xref:toolkit:api-developers-guide.adoc#authentication-and-authorization[API Developers Guide].
 
-. To trigger a pipeline from the command line using `curl`, copy and paste this sample request and replace the details in `< >` with your details:
+. To trigger a pipeline run from the command line using `curl`, copy and paste this sample request and replace the details in `< >` with your details:
 +
 NOTE: Replace `<your-circleci-hostname>` with your CircleCI Server hostname.
 +
