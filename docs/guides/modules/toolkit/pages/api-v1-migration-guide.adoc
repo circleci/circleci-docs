@@ -1,0 +1,490 @@
+= Migrate from API v1 and v1.1 to API v2 or v3
+:page-platform: Cloud, Server
+:page-server-min-version: "4.7"
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-audience: developer
+:page-description: Migrate from deprecated CircleCI API v1 and API v1.1 trigger and rerun endpoints to API v2 or API v3 before the 1 February 2027 removal date.
+:experimental:
+
+CircleCI removes ten API v1 and API v1.1 endpoints used to trigger and rerun builds on 1 February 2027. See <<deprecated-endpoints>>. After that date, requests to these endpoints return HTTP 410 Gone. This guide walks you through finding those calls in your code, choosing the equivalent API v2 or API v3 endpoints, and updating your calls to use them.
+
+WARNING: Deprecated endpoints now return `Deprecation` and `Sunset` response headers. On 1 February 2027 they return HTTP 410 Gone. Update your integrations before that date.
+
+ifndef::server[]
+CircleCI recommends starting with API v3. API v2 remains supported if API v3 does not cover your needs.
+endif::server[]
+ifdef::server[]
+NOTE: API v3 is not available on CircleCI Server. Use the API v2 endpoints described in this guide.
+endif::server[]
+
+[#deprecated-endpoints]
+== Deprecated endpoints
+
+CircleCI removes the following ten endpoints on 1 February 2027. This change applies to both CircleCI Cloud and CircleCI Server.
+
+API v1 endpoints:
+
+* `POST /api/v1/project/<username>/<repo>/`
+* `POST /api/v1/project/<username>/<repo>/<build-num>/retry`
+* `POST /api/v1/project/<username>/<repo>/<build-num>/ssh`
+* `POST /api/v1/project/<username>/<repo>/build`
+* `POST /api/v1/project/<username>/<repo>/tree/<branch>`
+
+API v1.1 endpoints:
+
+* `POST /api/v1.1/project/<vcs-type>/<username>/<repo>/`
+* `POST /api/v1.1/project/<vcs-type>/<username>/<repo>/<build-num>/retry`
+* `POST /api/v1.1/project/<vcs-type>/<username>/<repo>/<build-num>/ssh`
+* `POST /api/v1.1/project/<vcs-type>/<username>/<repo>/build`
+* `POST /api/v1.1/project/<vcs-type>/<username>/<repo>/tree/<branch>`
+
+[#prerequisites]
+== Prerequisites
+
+* A CircleCI personal API token. See the xref:managing-api-tokens.adoc[Managing API Tokens] guide.
+ifndef::server[]
+* For API v3: your organization ID and project ID. See xref:how-to-find-ids.adoc[How to Find IDs] for steps to find them.
+endif::server[]
+* For API v2: your project slug in the form `<provider>/<organization>/<project>`, for example `gh/my-org/my-repo`.
+
+[#find-your-v1-api-calls]
+== 1. Find your API v1 and v1.1 calls
+
+Search your CI scripts, automation tooling, and third-party integrations for calls to the deprecated endpoints.
+
+Search for the following patterns:
+
+[source,console]
+----
+$ grep -r "api/v1" .
+$ grep -r "api/v1.1" .
+----
+
+Look in:
+
+* Shell scripts and `Makefile` build files.
+* CI configuration files such as `.circleci/config.yml` and `.github/workflows/`.
+* Internal tooling, deployment scripts, and scheduled jobs.
+* Third-party integrations and webhook consumers that call back into CircleCI.
+
+For each match, check whether the HTTP method is `POST` and whether the path matches one of the deprecated endpoints listed in <<deprecated-endpoints>>.
+
+[#map-to-the-replacement-endpoint]
+== 2. Map to the replacement endpoint
+
+Use the following table to find the replacement for each deprecated endpoint.
+
+[.table-scroll]
+--
+[cols="1,2,2", options="header"]
+|===
+| Use case | Deprecated API v1 and v1.1 endpoint | Replacement endpoint
+
+| Trigger a pipeline run
+a| * `POST /api/v1.1/project/<vcs-type>/<username>/<repo>/`
+* `POST /api/v1.1/project/<vcs-type>/<username>/<repo>/tree/<branch>`
+* `POST /api/v1.1/project/<vcs-type>/<username>/<repo>/build`
+ifndef::server[]
+a|
+* link:https://circleci.com/docs/api/v3#tag/runs/POST/api/v3/runs[API v3]: `POST /api/v3/runs`
+* link:https://circleci.com/docs/api/v2/#tag/Pipeline/operation/triggerPipelineRun[API v2]: `POST /api/v2/project/<provider>/<organization>/<project>/pipeline/run`
+endif::server[]
+ifdef::server[]
+a|
+* link:https://circleci.com/docs/api/v2/#tag/Pipeline/operation/triggerPipelineRun[API v2]: `POST /api/v2/project/<provider>/<organization>/<project>/pipeline/run`
+endif::server[]
+
+| Rerun a workflow
+| `POST /api/v1.1/project/<vcs-type>/<username>/<repo>/<build-num>/retry`
+ifndef::server[]
+a|
+* link:https://circleci.com/docs/api/v3#tag/workflows/POST/api/v3/workflows/%7Bid%7D/rerun[API v3]: `POST /api/v3/workflows/<workflow-id>/rerun`
+* link:https://circleci.com/docs/api/v2/#tag/Workflow/operation/rerunWorkflow[API v2]: `POST /api/v2/workflow/<workflow-id>/rerun`
+endif::server[]
+ifdef::server[]
+a|
+* link:https://circleci.com/docs/api/v2/#tag/Workflow/operation/rerunWorkflow[API v2]: `POST /api/v2/workflow/<workflow-id>/rerun`
+endif::server[]
+
+| Rerun a workflow with SSH enabled
+| `POST /api/v1.1/project/<vcs-type>/<username>/<repo>/<build-num>/ssh`
+ifndef::server[]
+a|
+* link:https://circleci.com/docs/api/v3#tag/workflows/POST/api/v3/workflows/%7Bid%7D/rerun[API v3]: `POST /api/v3/workflows/<workflow-id>/rerun` with `"is_ssh_enabled": true`
+* link:https://circleci.com/docs/api/v2/#tag/Workflow/operation/rerunWorkflow[API v2]: `POST /api/v2/workflow/<workflow-id>/rerun` with `"enable_ssh": true` and a `"jobs"` array
+endif::server[]
+ifdef::server[]
+a|
+* link:https://circleci.com/docs/api/v2/#tag/Workflow/operation/rerunWorkflow[API v2]: `POST /api/v2/workflow/<workflow-id>/rerun` with `"enable_ssh": true` and a `"jobs"` array
+endif::server[]
+
+|===
+--
+
+The API v1 endpoints map to the same replacements as their API v1.1 equivalents.
+
+[#update-your-calls]
+== 3. Update your calls
+
+Replace each deprecated call with its replacement endpoint from the previous step. The examples in this section show the request for each replacement. Start with <<project-addressing>> to find the values to use in the request.
+
+ifdef::server[]
+include::ROOT:partial$notes/server-api-examples.adoc[]
+endif::server[]
+
+[#project-addressing]
+=== Project addressing
+
+The project values you use in API v1.1 carry over to API v2 with new names. `<vcs-type>/<username>/<repo>` becomes `<provider>/<organization>/<project>`:
+
+* `<vcs-type>` becomes `<provider>`.
+* `<username>` becomes `<organization>`.
+* `<repo>` becomes `<project>`.
+
+For example, `github/my-org/my-repo` is also valid in API v2, and you can use the short form `gh/my-org/my-repo`. API v1 has no VCS type in the path, so add the provider when you move to API v2.
+
+API v2 accepts both the long and short form of the provider name:
+
+[.table-scroll]
+--
+[cols="1,1,1", options="header"]
+|===
+| Provider | API v1.1 `<vcs-type>` value | API v2 `<provider>` value
+
+| GitHub
+| `github`
+| `github` or `gh`
+
+| Bitbucket
+| `bitbucket`
+| `bitbucket` or `bb`
+
+| GitLab
+| Not supported
+| `circleci`
+
+|===
+--
+
+ifndef::server[]
+The change to API v3 is bigger. API v3 identifies resources by UUID instead of by name, so you need your organization ID and project ID instead of a project slug. See xref:how-to-find-ids.adoc[How to Find IDs] for steps to find them, or use the API v3 `GET /api/v3/projects` endpoint.
+endif::server[]
+
+[#trigger-a-pipeline-run]
+=== Trigger a pipeline run
+
+ifndef::server[]
+==== Using API v3
+
+[source,shell]
+----
+curl --request POST https://circleci.com/api/v3/runs \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "project_id": "<project-id>",
+    "branch": "main"
+  }'
+----
+
+See xref:how-to-find-ids.adoc[How to Find IDs] for steps to find your project ID, or use `GET /api/v3/projects`.
+
+To trigger on a tag, include `tag` in the request body instead of `branch`. To pass pipeline parameters, include a `parameters` object.
+
+endif::server[]
+
+==== Using API v2
+
+[source,shell]
+----
+curl --request POST \
+  "https://circleci.com/api/v2/project/<provider>/<organization>/<project>/pipeline/run" \
+  --header "Circle-Token: $CIRCLE_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "branch": "main"
+  }'
+----
+
+To pass pipeline parameters, include a `parameters` object:
+
+[source,shell]
+----
+curl --request POST \
+  "https://circleci.com/api/v2/project/<provider>/<organization>/<project>/pipeline/run" \
+  --header "Circle-Token: $CIRCLE_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "branch": "main",
+    "parameters": {
+      "<parameter-name>": "<parameter-value>"
+    }
+  }'
+----
+
+[#rerun-a-workflow]
+=== Rerun a workflow
+
+Rerunning in API v2 and API v3 is workflow-based. You choose which workflow to rerun, and optionally which jobs within it.
+
+Before calling the rerun endpoint, retrieve the workflow ID from the pipeline run response or by calling:
+
+[source,shell]
+----
+curl "https://circleci.com/api/v2/pipeline/<pipeline-id>/workflow" \
+  --header "Circle-Token: $CIRCLE_TOKEN"
+----
+
+ifndef::server[]
+==== Using API v3
+
+[source,shell]
+----
+curl --request POST \
+  "https://circleci.com/api/v3/workflows/<workflow-id>/rerun" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{}'
+----
+
+To rerun only failed jobs, set `is_from_failed` to `true`:
+
+[source,shell]
+----
+curl --request POST \
+  "https://circleci.com/api/v3/workflows/<workflow-id>/rerun" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{"is_from_failed": true}'
+----
+
+To rerun with SSH enabled, set `is_ssh_enabled` to `true`:
+
+[source,shell]
+----
+curl --request POST \
+  "https://circleci.com/api/v3/workflows/<workflow-id>/rerun" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{"is_ssh_enabled": true}'
+----
+
+endif::server[]
+
+==== Using API v2
+
+[source,shell]
+----
+curl --request POST \
+  "https://circleci.com/api/v2/workflow/<workflow-id>/rerun" \
+  --header "Circle-Token: $CIRCLE_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{}'
+----
+
+To rerun only failed jobs, set `from_failed` to `true`:
+
+[source,shell]
+----
+curl --request POST \
+  "https://circleci.com/api/v2/workflow/<workflow-id>/rerun" \
+  --header "Circle-Token: $CIRCLE_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{"from_failed": true}'
+----
+
+To rerun with SSH enabled, set `enable_ssh` to `true` and list the jobs to rerun in `jobs`. You cannot combine `enable_ssh` with `from_failed`:
+
+[source,shell]
+----
+curl --request POST \
+  "https://circleci.com/api/v2/workflow/<workflow-id>/rerun" \
+  --header "Circle-Token: $CIRCLE_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{"enable_ssh": true, "jobs": ["<job-id>"]}'
+----
+
+[#response-differences]
+=== Response differences
+
+API v2 and API v3 responses differ from the build-centric format of API v1 and API v1.1.
+
+API v1 and API v1.1 triggered a job and returned a build summary with fields like `build_num`, `build_url`, and `status`.
+
+API v2 triggers a pipeline run and returns a pipeline object:
+
+[source,json]
+----
+{
+  "id": "5034460f-c7c4-4c43-9457-de07e2029e7b",
+  "state": "created",
+  "number": 1,
+  "created_at": "2020-01-01T15:32:36.605Z"
+}
+----
+
+Use the returned pipeline `id` to fetch workflow and job details:
+
+[source,shell]
+----
+curl "https://circleci.com/api/v2/pipeline/<pipeline-id>/workflow" \
+  --header "Circle-Token: $CIRCLE_TOKEN"
+----
+
+ifndef::server[]
+API v3 triggers a run and returns a run object. The run ID is in `data.id`:
+
+[source,json]
+----
+{
+  "data": {
+    "id": "c6e2e2cd-d0ee-4253-be29-d076f9555602",
+    "attributes": {
+      "created_at": "2020-01-01T15:32:36.605Z"
+    },
+    "references": {
+      "pipeline": {
+        "id": "5034460f-c7c4-4c43-9457-de07e2029e7b"
+      }
+    }
+  }
+}
+----
+
+Use `GET /api/v3/runs/<run-id>` to retrieve run status.
+endif::server[]
+
+Key differences to update in your code:
+
+* Replace `build_num` references with the pipeline `id` or the run `id`.
+* Replace `build_url` references with links constructed from the pipeline or workflow ID.
+* Replace `status` polling on the trigger response with calls to the pipeline or workflow status endpoints.
+
+The following examples show each change.
+
+[#replace-build-num]
+==== Replace build numbers
+
+Save the ID from the trigger response instead of the build number. The examples use https://jqlang.github.io/jq/[jq] to read the response.
+
+ifndef::server[]
+For API v3, the run ID is `data.id`:
+
+[source,shell]
+----
+RUN_ID=$(curl --silent --request POST https://circleci.com/api/v3/runs \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{"project_id": "<project-id>", "branch": "main"}' \
+  | jq --raw-output '.data.id')
+----
+
+For API v2, the pipeline ID is `id`:
+endif::server[]
+ifdef::server[]
+The pipeline ID is `id`:
+endif::server[]
+
+[source,shell]
+----
+PIPELINE_ID=$(curl --silent --request POST \
+  "https://circleci.com/api/v2/project/<provider>/<organization>/<project>/pipeline/run" \
+  --header "Circle-Token: $CIRCLE_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{"branch": "main"}' \
+  | jq --raw-output '.id')
+----
+
+[#replace-build-url]
+==== Replace build URLs
+
+API v1 and API v1.1 returned a `build_url` in the trigger response. API v2 and API v3 do not return a URL.
+
+ifndef::server[]
+Construct the link to the workflow in the CircleCI web app instead:
+
+[source,text]
+----
+https://app.circleci.com/pipelines/<provider>/<organization>/<project>/<pipeline-number>/workflows/<workflow-id>
+----
+
+For example:
+
+[source,text]
+----
+https://app.circleci.com/pipelines/github/my-org/my-repo/130/workflows/fda08377-fe7e-46b1-8992-3a7aaecac9c3
+----
+
+Take `<pipeline-number>` from the `number` field of the API v2 trigger response. To get `<workflow-id>`, list the workflows in the pipeline:
+endif::server[]
+ifdef::server[]
+To find the workflow in the CircleCI web app, use the `number` field of the trigger response and the workflow ID. To get the workflow ID, list the workflows in the pipeline:
+endif::server[]
+
+[source,shell]
+----
+curl --silent "https://circleci.com/api/v2/pipeline/$PIPELINE_ID/workflow" \
+  --header "Circle-Token: $CIRCLE_TOKEN" \
+  | jq --raw-output '.items[] | "\(.name): \(.id)"'
+----
+
+ifndef::server[]
+For API v3, get the pipeline number from `GET /api/v3/runs/<run-id>`, where it is in `data.attributes.number`. Get the workflow IDs from `GET /api/v3/workflows?filter[run_id]=<run-id>`.
+endif::server[]
+
+[#replace-status-polling]
+==== Replace status polling
+
+Poll the workflow instead of the trigger response. In API v2, `GET /api/v2/workflow/<workflow-id>` returns a `status` field:
+
+[source,shell]
+----
+curl --silent "https://circleci.com/api/v2/workflow/<workflow-id>" \
+  --header "Circle-Token: $CIRCLE_TOKEN" \
+  | jq --raw-output '.status'
+----
+
+The `status` value is one of:
+
+* `success`
+* `running`
+* `not_run`
+* `failed`
+* `error`
+* `failing`
+* `on_hold`
+* `canceled`
+* `unauthorized`
+
+Keep polling while the status is `running` or `failing`.
+
+ifndef::server[]
+In API v3, poll the run. `GET /api/v3/runs/<run-id>` returns the state of the run in two fields:
+
+[source,shell]
+----
+curl --silent "https://circleci.com/api/v3/runs/<run-id>" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
+  | jq '.data.attributes | {phase, current_outcome}'
+----
+
+* `phase` is `queued`, `started`, or `ended`. Keep polling until it is `ended`.
+* `current_outcome` is the result so far. It can change after the run ends if you rerun a workflow. The possible values are:
+** `succeeded`
+** `failed`
+** `canceled`
+** `errored`
+** `not_run`
+** `unauthorized`
+endif::server[]
+
+[#next-steps]
+== Next steps
+
+ifndef::server[]
+* Review the xref:api-v3-developers-guide.adoc[API v3 Developers Guide] for a full walkthrough of API v3.
+endif::server[]
+* Review the xref:api-developers-guide.adoc[API v2 Developers Guide] for details on API v2 endpoints.
+* See the link:https://circleci.com/docs/api/v2/[API v2 Reference] and link:https://circleci.com/docs/api/v3/[API v3 Reference] for complete endpoint documentation.
+* See xref:managing-api-tokens.adoc[Managing API Tokens] for instructions on creating personal API tokens.
