@@ -129,6 +129,10 @@ The API v1 endpoints map to the same replacements as their API v1.1 equivalents.
 
 Replace each deprecated call with its replacement endpoint from the previous step. The examples in this section show the request for each replacement. Start with <<project-addressing>> to find the values to use in the request.
 
+ifdef::server[]
+include::ROOT:partial$notes/server-api-examples.adoc[]
+endif::server[]
+
 [#project-addressing]
 === Project addressing
 
@@ -173,9 +177,9 @@ endif::server[]
 ifndef::server[]
 ==== Using API v3
 
-[source,console]
+[source,shell]
 ----
-$ curl --request POST https://circleci.com/api/v3/runs \
+curl --request POST https://circleci.com/api/v3/runs \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
   --data '{
@@ -192,9 +196,9 @@ endif::server[]
 
 ==== Using API v2
 
-[source,console]
+[source,shell]
 ----
-$ curl --request POST \
+curl --request POST \
   "https://circleci.com/api/v2/project/<provider>/<organization>/<project>/pipeline/run" \
   --header "Circle-Token: $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
@@ -205,9 +209,9 @@ $ curl --request POST \
 
 To pass pipeline parameters, include a `parameters` object:
 
-[source,console]
+[source,shell]
 ----
-$ curl --request POST \
+curl --request POST \
   "https://circleci.com/api/v2/project/<provider>/<organization>/<project>/pipeline/run" \
   --header "Circle-Token: $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
@@ -226,18 +230,18 @@ Rerunning in API v2 and API v3 is workflow-based. You choose which workflow to r
 
 Before calling the rerun endpoint, retrieve the workflow ID from the pipeline run response or by calling:
 
-[source,console]
+[source,shell]
 ----
-$ curl "https://circleci.com/api/v2/pipeline/<pipeline-id>/workflow" \
+curl "https://circleci.com/api/v2/pipeline/<pipeline-id>/workflow" \
   --header "Circle-Token: $CIRCLE_TOKEN"
 ----
 
 ifndef::server[]
 ==== Using API v3
 
-[source,console]
+[source,shell]
 ----
-$ curl --request POST \
+curl --request POST \
   "https://circleci.com/api/v3/workflows/<workflow-id>/rerun" \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
@@ -246,9 +250,9 @@ $ curl --request POST \
 
 To rerun only failed jobs, set `is_from_failed` to `true`:
 
-[source,console]
+[source,shell]
 ----
-$ curl --request POST \
+curl --request POST \
   "https://circleci.com/api/v3/workflows/<workflow-id>/rerun" \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
@@ -257,9 +261,9 @@ $ curl --request POST \
 
 To rerun with SSH enabled, set `is_ssh_enabled` to `true`:
 
-[source,console]
+[source,shell]
 ----
-$ curl --request POST \
+curl --request POST \
   "https://circleci.com/api/v3/workflows/<workflow-id>/rerun" \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
@@ -270,9 +274,9 @@ endif::server[]
 
 ==== Using API v2
 
-[source,console]
+[source,shell]
 ----
-$ curl --request POST \
+curl --request POST \
   "https://circleci.com/api/v2/workflow/<workflow-id>/rerun" \
   --header "Circle-Token: $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
@@ -281,9 +285,9 @@ $ curl --request POST \
 
 To rerun only failed jobs, set `from_failed` to `true`:
 
-[source,console]
+[source,shell]
 ----
-$ curl --request POST \
+curl --request POST \
   "https://circleci.com/api/v2/workflow/<workflow-id>/rerun" \
   --header "Circle-Token: $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
@@ -292,9 +296,9 @@ $ curl --request POST \
 
 To rerun with SSH enabled, set `enable_ssh` to `true` and list the jobs to rerun in `jobs`. You cannot combine `enable_ssh` with `from_failed`:
 
-[source,console]
+[source,shell]
 ----
-$ curl --request POST \
+curl --request POST \
   "https://circleci.com/api/v2/workflow/<workflow-id>/rerun" \
   --header "Circle-Token: $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
@@ -322,9 +326,9 @@ API v2 triggers a pipeline run and returns a pipeline object:
 
 Use the returned pipeline `id` to fetch workflow and job details:
 
-[source,console]
+[source,shell]
 ----
-$ curl "https://circleci.com/api/v2/pipeline/<pipeline-id>/workflow" \
+curl "https://circleci.com/api/v2/pipeline/<pipeline-id>/workflow" \
   --header "Circle-Token: $CIRCLE_TOKEN"
 ----
 
@@ -367,9 +371,9 @@ Save the ID from the trigger response instead of the build number. The examples 
 ifndef::server[]
 For API v3, the run ID is `data.id`:
 
-[source,console]
+[source,shell]
 ----
-$ RUN_ID=$(curl --silent --request POST https://circleci.com/api/v3/runs \
+RUN_ID=$(curl --silent --request POST https://circleci.com/api/v3/runs \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
   --data '{"project_id": "<project-id>", "branch": "main"}' \
@@ -382,9 +386,9 @@ ifdef::server[]
 The pipeline ID is `id`:
 endif::server[]
 
-[source,console]
+[source,shell]
 ----
-$ PIPELINE_ID=$(curl --silent --request POST \
+PIPELINE_ID=$(curl --silent --request POST \
   "https://circleci.com/api/v2/project/<provider>/<organization>/<project>/pipeline/run" \
   --header "Circle-Token: $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
@@ -395,7 +399,10 @@ $ PIPELINE_ID=$(curl --silent --request POST \
 [#replace-build-url]
 ==== Replace build URLs
 
-API v1 and API v1.1 returned a `build_url` in the trigger response. API v2 and API v3 do not return a URL. Construct the link to the workflow in the CircleCI web app instead:
+API v1 and API v1.1 returned a `build_url` in the trigger response. API v2 and API v3 do not return a URL.
+
+ifndef::server[]
+Construct the link to the workflow in the CircleCI web app instead:
 
 [source,text]
 ----
@@ -410,10 +417,14 @@ https://app.circleci.com/pipelines/github/my-org/my-repo/130/workflows/fda08377-
 ----
 
 Take `<pipeline-number>` from the `number` field of the API v2 trigger response. To get `<workflow-id>`, list the workflows in the pipeline:
+endif::server[]
+ifdef::server[]
+To find the workflow in the CircleCI web app, use the `number` field of the trigger response and the workflow ID. To get the workflow ID, list the workflows in the pipeline:
+endif::server[]
 
-[source,console]
+[source,shell]
 ----
-$ curl --silent "https://circleci.com/api/v2/pipeline/$PIPELINE_ID/workflow" \
+curl --silent "https://circleci.com/api/v2/pipeline/$PIPELINE_ID/workflow" \
   --header "Circle-Token: $CIRCLE_TOKEN" \
   | jq --raw-output '.items[] | "\(.name): \(.id)"'
 ----
@@ -427,9 +438,9 @@ endif::server[]
 
 Poll the workflow instead of the trigger response. In API v2, `GET /api/v2/workflow/<workflow-id>` returns a `status` field:
 
-[source,console]
+[source,shell]
 ----
-$ curl --silent "https://circleci.com/api/v2/workflow/<workflow-id>" \
+curl --silent "https://circleci.com/api/v2/workflow/<workflow-id>" \
   --header "Circle-Token: $CIRCLE_TOKEN" \
   | jq --raw-output '.status'
 ----
@@ -451,9 +462,9 @@ Keep polling while the status is `running` or `failing`.
 ifndef::server[]
 In API v3, poll the run. `GET /api/v3/runs/<run-id>` returns the state of the run in two fields:
 
-[source,console]
+[source,shell]
 ----
-$ curl --silent "https://circleci.com/api/v3/runs/<run-id>" \
+curl --silent "https://circleci.com/api/v3/runs/<run-id>" \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   | jq '.data.attributes | {phase, current_outcome}'
 ----
