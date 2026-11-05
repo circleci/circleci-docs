@@ -13,10 +13,10 @@ Contexts provide a mechanism for securing and sharing environment variables acro
 == Introduction
 
 ifndef::server[]
-Manage contexts using the xref:toolkit:circleci-cli.adoc[CircleCI CLI], link:https://circleci.com/docs/api/v2/#tag/Context[API], or on the *Organization Settings* page of the https://app.circleci.com[CircleCI web app]. You must be an organization member to view, create, or edit contexts.
+Manage contexts using the xref:toolkit:circleci-cli.adoc[CircleCI CLI], the link:https://circleci.com/docs/api/v3/contexts.md[API], or on the *Organization Settings* page of the cloudlink:webapp[CircleCI web app]. You must be an organization member to view, create, or edit contexts.
 endif::server[]
 ifdef::server[]
-Manage contexts using the xref:toolkit:circleci-cli.adoc[CircleCI CLI], link:https://circleci.com/docs/api/v2/#tag/Context[API], or on the *Organization Settings* page of the CircleCI web app. You must be an organization member to view, create, or edit contexts.
+Manage contexts using the xref:toolkit:circleci-cli.adoc[CircleCI CLI], the link:https://circleci.com/docs/api/v2/#tag/Context[API], or on the *Organization Settings* page of the cloudlink:webapp[CircleCI web app]. You must be an organization member to view, create, or edit contexts.
 endif::server[]
 
 Create a context and add your environment variables. You can use the `context` key in the workflows section of a project's configuration file to give any job(s) access to the environment variables associated with the context. See the xref:reference:ROOT:configuration-reference.adoc#context[Configuration Reference] page for more information.
@@ -38,84 +38,164 @@ ifdef::server[]
 NOTE: Organization members can create contexts, but only organization administrators can restrict them using security groups.
 endif::server[]
 
-[tabs]
+[tabs%sync,sync-group-id=method]
 ====
-CLI::
+ifndef::server[]
+CLI v1::
 +
 --
-. Create a context:
+. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+
+. Create a context. Replace `<org-id>`:
 +
-[,shell]
+[source,console]
 ----
-circleci context create <context-name> --org <org-slug>
+$ circleci context create <context-name> --org <org-id>
 ----
 +
 The new context appears with security set to `All members`, meaning anyone in your organization can access it at runtime.
 
 . Add an environment variable to the context:
 +
-[,shell]
+[source,console]
 ----
-circleci context secret set <context-name> --name <env-var-name> --value <env-var-value>
+$ circleci context secret set <context-name> --name <env-var-name> --value <env-var-value> --org <org-id>
 ----
 
-. To allow a job to access the environment variables stored in a context, add a `context` key to that job's entry in the xref:reference:ROOT:configuration-reference.adoc#workflows[`workflows`] section of the `.circleci/config.yml` file. For example, the following gives the `run-tests` job access to variables in the `org-global` and `my-context` contexts:
-+
-[,yaml]
-----
-version: 2.1
-
-workflows:
-  my-workflow:
-    jobs:
-      - run-tests:
-          context:
-            - org-global
-            - my-context
-
-jobs:
-  run-tests:
-    docker:
-      - image: cimg/base:2020.01
-    steps:
-      - checkout
-      - run:
-          name: "echo environment variables from org-global context"
-          command: echo $MY_ENV_VAR
-----
+include::ROOT:partial$shared-sections/use-a-context-in-a-job.adoc[]
 --
+endif::server[]
+ifdef::server[]
+CLI v0::
++
+--
+CLI v1 is not supported on CircleCI Server. Install CLI v0 as described in xref:toolkit:circleci-cli.adoc#install-cli-v0-for-circleci-server[Install the CLI for CircleCI Server].
+
+. Find your organization ID. Copy the ID of your organization from the output:
++
+[source,console]
+----
+$ circleci info org
+----
+
+. Create a context. Replace `<org-id>`:
++
+[source,console]
+----
+$ circleci context create --org-id <org-id> <context-name>
+----
++
+The new context appears with security set to `All members`, meaning anyone in your organization can access it at runtime.
+
+. Add an environment variable to the context. The CLI prompts you for the value:
++
+[source,console]
+----
+$ circleci context store-secret --org-id <org-id> <context-name> <env-var-name>
+----
+
+include::ROOT:partial$shared-sections/use-a-context-in-a-job.adoc[]
+--
+endif::server[]
 Web app::
 +
 --
 include::ROOT:partial$app-navigation/steps-to-org-settings.adoc[]
 
 . Select btn:[Create Context], add a unique name for your context and select btn:[Create Context] in the modal to finalize. The new context will appear in a list with security set to `All members` to show that anyone in your organization can access this context at runtime.
-. You can now select any context created in your list to add environment variables. Once you have a context selected, select btn:[Add Environment Variable] to enter the variable name and value. Select btn:[Add Environment Variable] in the modal to finalize.
-. To allow a job to access the environment variables stored in a context, add a context key to that job's entry in the xref:reference:ROOT:configuration-reference.adoc#workflows[`workflows`] section of the `.circleci/config.yml` file. For example, in the following example, the `run-tests` job has access to the environment variables set in the `org-global` and `my-context` contexts.
-+
-[,yaml]
-----
-version: 2.1
+. You can now select any context created in your list to add environment variables. Once you have a context selected, select btn:[Add] in the *Environment variables* section to enter the variable name and value. Select btn:[Add environment variable] in the dialog to finalize.
 
-workflows:
-  my-workflow:
-    jobs:
-      - run-tests:
-          context:
-            - org-global
-            - my-context
-
-jobs:
-  run-tests:
-    docker:
-      - image: cimg/base:2020.01
-    steps:
-      - checkout
-      - run:
-          name: "echo environment variables from org-global context"
-          command: echo $MY_ENV_VAR
-----
+include::ROOT:partial$shared-sections/use-a-context-in-a-job.adoc[]
 --
+ifndef::server[]
+API v3::
++
+--
+. Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
+. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Create a context with the link:https://circleci.com/docs/api/v3/contexts.md[Create a Context] endpoint. Replace `<org-id>` and `<context-name>`:
++
+[,shell]
+----
+curl --request POST \
+  --url https://circleci.com/api/v3/contexts \
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "data": {
+      "attributes": {
+        "name": "<context-name>"
+      },
+      "references": {
+        "org": {
+          "id": "<org-id>"
+        }
+      }
+    }
+  }'
+----
++
+Copy the context `id` from the response.
+
+. Add an environment variable with the link:https://circleci.com/docs/api/v3/contexts.md[Set a Context Environment Variable] endpoint. Replace `<context-id>`, `<env-var-name>`, and `<env-var-value>`:
++
+[,shell]
+----
+curl --request POST \
+  --url https://circleci.com/api/v3/contexts/<context-id>/env-vars/set \
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "name": "<env-var-name>",
+    "value": "<env-var-value>"
+  }'
+----
+
+include::ROOT:partial$shared-sections/use-a-context-in-a-job.adoc[]
+--
+endif::server[]
+ifdef::server[]
+API v2::
++
+--
+include::ROOT:partial$notes/server-api-examples.adoc[]
+
+. Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
+. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Create a context with the link:https://circleci.com/docs/api/v2/#operation/createContext[Create a New Context] endpoint. Replace `<org-id>` and `<context-name>`:
++
+[,shell]
+----
+curl --request POST \
+  --url https://circleci.com/api/v2/context \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "name": "<context-name>",
+    "owner": {
+      "id": "<org-id>"
+    }
+  }'
+----
++
+Copy the context `id` from the response.
+
+. Add an environment variable with the link:https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Add or Update an Environment Variable] endpoint. Replace `<context-id>`, `<env-var-name>`, and `<env-var-value>`:
++
+[,shell]
+----
+curl --request PUT \
+  --url https://circleci.com/api/v2/context/<context-id>/environment-variable/<env-var-name> \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "value": "<env-var-value>"
+  }'
+----
+
+include::ROOT:partial$shared-sections/use-a-context-in-a-job.adoc[]
+--
+endif::server[]
 ====
 
 CAUTION: If you move your repository to a new organization, you must also have the context with that unique name set in the new organization.
@@ -240,7 +320,7 @@ In this example, the jobs `test` and `deploy` are restricted. The `deploy` job o
 [#security-group-restrictions]
 == Security group restrictions
 
-NOTE: Restricting the use of contexts using security groups is available for `github` type organizations only. For more information on organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organizations[Users, Organizations, and Integrations Guide].
+NOTE: Restricting the use of contexts using security groups is available for `github` type organizations only, and you must be an organization administrator. For more information on organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organizations[Users, Organizations, and Integrations Guide].
 
 ifndef::server[]
 A context security setting is available for `github` type organizations to require all newly-created contexts in the organization to be group-restricted. Contexts can still be created, but an administrator must assign at least one security group before the context will be available for use in workflows. This setting can be found in menu:Org[Security].
@@ -249,36 +329,46 @@ endif::server[]
 [#restrict-a-context-to-a-security-group-or-groups]
 === Restrict a context to a security group or groups
 
-CAUTION: To use security group context restrictions you must be an organization administrator, and your code must be integrated with CircleCI via the GitHub OAuth app.
-
-[tabs]
+[tabs%sync,sync-group-id=method]
 ====
-CLI::
+ifndef::server[]
+CLI v1::
 +
 --
-. Create a new context or use an existing one. To create a new context:
+. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+
+. Create a new context or use an existing one. To create a new context, replace `<org-id>`:
 +
-[,shell]
+[source,console]
 ----
-circleci context create <context-name> --org <org-slug>
+$ circleci context create <context-name> --org <org-id>
 ----
 
-. Add a security group restriction to the context, where `<github-team-name>` is the name of the GitHub team you want to restrict access to:
+. Next, find your security group ID. This step uses the API. Set up your API authentication by following the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide]. Then list your security groups, replacing `<org-id>`, and copy the `id` of the group (GitHub team) you want to restrict the context to:
 +
 [,shell]
 ----
-circleci context restriction create <context-name> --type group --value <github-team-name> --org <org-slug>
+curl -g "https://circleci.com/api/v3/groups?filter[org_id]=<org-id>" \
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
+----
+
+. Add a security group restriction to the context. Replace `<group-id>`:
++
+[source,console]
+----
+$ circleci context restriction create <context-name> --type group --value <group-id> --org <org-id>
 ----
 +
 Only members of the specified GitHub team can now use the context in their workflows.
 
 . Optionally, add environment variables to the context:
 +
-[,shell]
+[source,console]
 ----
-circleci context secret set <context-name> --name <env-var-name> --value <env-var-value>
+$ circleci context secret set <context-name> --name <env-var-name> --value <env-var-value> --org <org-id>
 ----
 --
+endif::server[]
 Web app::
 +
 --
@@ -286,9 +376,97 @@ Web app::
 . Select *Create Context* to use a new context, or select the name of an existing context. If you use an existing context, remove the `All members` security group before adding a new one.
 . Select *Add Security Group* button to view the dialog box.
 . Make your choices in the dialog box and then select the *Add Security Group* or *Add Project Restriction* button to finalize. Contexts will now be restricted to the selections you have made.
-. Select *Add Environment Variables* to add environment variables to the context. Fill out your desired name and value in the dialog box, then select *Add Environment Variables* again to finalize. Use of the environment variables for this context is now limited to members of the security groups.
+. In the *Environment variables* section, select btn:[Add] to add environment variables to the context. Fill out your desired name and value in the dialog, then select btn:[Add environment variable] to finalize. Use of the environment variables for this context is now limited to members of the security groups.
 . Navigate back to menu:Org[Contexts] in the CircleCI app. The security groups appear in the Security column for the context.
 --
+ifndef::server[]
+API v3::
++
+--
+. Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
+. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=<org-id>" \
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
+----
++
+TIP: Add `&filter[name]=<context-name>` to the URL to narrow the results. The filter matches any part of the name and ignores case.
+
+. Next, find your security group ID. List your security groups, replacing `<org-id>`, and copy the `id` of the group (GitHub team) you want to restrict the context to:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v3/groups?filter[org_id]=<org-id>" \
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
+----
+
+. Create a group restriction with the link:https://circleci.com/docs/api/v3/context-restrictions.md[Create a Context Restriction] endpoint. Replace `<context-id>` and `<group-id>`:
++
+[,shell]
+----
+curl --request POST \
+  --url https://circleci.com/api/v3/context-restrictions \
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "data": {
+      "attributes": {
+        "restriction_type": "group",
+        "match_pattern": "<group-id>"
+      },
+      "references": {
+        "context": {
+          "id": "<context-id>"
+        }
+      }
+    }
+  }'
+----
+--
+endif::server[]
+ifdef::server[]
+API v2::
++
+--
+include::ROOT:partial$notes/server-api-examples.adoc[]
+
+. Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
+. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v2/context?owner-id=<org-id>" \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" | jq .
+----
+
+. Next, find your security group ID. List your security groups, replacing `<org-id>`, and copy the `id` of the group (GitHub team) you want to restrict the context to:
++
+[,shell]
+----
+curl --request GET \
+  --url https://circleci.com/api/v2/organizations/<org-id>/groups \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" | jq .
+----
+
+. Create a group restriction with the link:https://circleci.com/docs/api/v2/#operation/createContextRestriction[Create Context Restriction] endpoint. Replace `<context-id>` and `<group-id>`:
++
+[,shell]
+----
+curl --request POST \
+  --url https://circleci.com/api/v2/context/<context-id>/restrictions \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "restriction_type": "group",
+    "restriction_value": "<group-id>"
+  }'
+----
+--
+endif::server[]
 ====
 
 Only members of the selected groups may now use the context in their workflows or add or remove environment variables for the context.
@@ -296,12 +474,7 @@ Only members of the selected groups may now use the context in their workflows o
 [#make-changes-to-context-restrictions]
 === Make changes to security group context restrictions
 
-ifndef::server[]
-Changes to security group restrictions for contexts might not take effect immediately due to caching. To make sure settings are applied immediately, it is best practice for the organization administrator to refresh permissions once the change has been made. The *Refresh Permissions* button can be found on the https://app.circleci.com/settings/user[Account Integrations] page.
-endif::server[]
-ifdef::server[]
-Changes to security group restrictions for contexts might not take effect immediately due to caching. To make sure settings are applied immediately, it is best practice for the organization administrator to refresh permissions once the change has been made. The *Refresh Permissions* button can be found at menu:User Settings[Account Integrations].
-endif::server[]
+Changes to security group restrictions for contexts might not take effect immediately due to caching. To make sure settings are applied immediately, it is best practice for the organization administrator to refresh permissions once the change has been made. The *Refresh Permissions* button can be found on the cloudlink:user-settings[Account Integrations] page.
 
 ifndef::server[]
 Administrators of CircleCI Server installations can find the *Refresh Permissions* button at `<circleci-hostname>/account`.
@@ -337,49 +510,115 @@ To invoke a workflow that uses a restricted context, the workflow must be part o
 [#restrict-a-context-to-a-project]
 === Restrict a context to a project
 
-You must be an *organization admin* to restrict a context though the method detailed below.
+You must be an *organization admin* to restrict a context through the method detailed below.
 
-[tabs]
+[tabs%sync,sync-group-id=method]
 ====
-CLI::
+ifndef::server[]
+CLI v1::
 +
 --
-. Find the ID of the project you want to restrict access to by listing your projects:
-+
-[,shell]
-----
-circleci project list
-----
-+
-Copy the ID of the project from the output.
+. Get your organization ID and the ID of the project you want to restrict access to. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID] and xref:toolkit:how-to-find-ids.adoc#find-a-project-id[Find a Project ID].
 
-. Add a project restriction to the context using the project ID:
+. Add a project restriction to the context. Replace `<org-id>` and `<project-id>`:
 +
-[,shell]
+[source,console]
 ----
-circleci context restriction create <context-name> --type project --value <project-id> --org <org-slug>
+$ circleci context restriction create <context-name> --type project --value <project-id> --org <org-id>
 ----
 +
 To add restrictions for multiple projects, run the command once for each project ID.
 
 . To verify the restrictions, list the context details:
 +
-[,shell]
+[source,console]
 ----
-circleci context get <context-name>
+$ circleci context get <context-name> --org <org-id>
 ----
 --
+endif::server[]
 Web app::
 +
 --
-. Navigate to the menu:Org[Contexts] page of your organization in the https://app.circleci.com/[CircleCI web app]. The list of contexts will be visible.
+. Navigate to the menu:Org[Contexts] page of your organization in the cloudlink:webapp[CircleCI web app]. The list of contexts will be visible.
 
 . Select the name of an existing context, or select *Create Context* if you want to use a new context.
 . Select *Add Project Restriction* to view the dialog box.
 . Select the project name to add to the context, and select *Add*. Use of the context is now limited to the specified project. Currently, multiple projects must be added individually.
 . You can now see a list of the defined project restrictions on the context page.
-. If you have environment variables, they appear on the page. If there are none, you can select *Add Environment Variables* to add them to the context. Then select *Add* to finish. Use of the environment variables for this context is now limited to the specified projects.
+. If you have environment variables, they appear on the page. If there are none, you can select btn:[Add] in the *Environment variables* section to add them to the context. Then select btn:[Add environment variable] to finish. Use of the environment variables for this context is now limited to the specified projects.
 --
+ifndef::server[]
+API v3::
++
+--
+. Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
+. Get your organization ID and the ID of the project you want to restrict access to. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID] and xref:toolkit:how-to-find-ids.adoc#find-a-project-id[Find a Project ID].
+. Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=<org-id>" \
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
+----
++
+TIP: Add `&filter[name]=<context-name>` to the URL to narrow the results. The filter matches any part of the name and ignores case.
+
+. Create a project restriction with the link:https://circleci.com/docs/api/v3/context-restrictions.md[Create a Context Restriction] endpoint. Replace `<context-id>` and `<project-id>`:
++
+[,shell]
+----
+curl --request POST \
+  --url https://circleci.com/api/v3/context-restrictions \
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "data": {
+      "attributes": {
+        "restriction_type": "project",
+        "match_pattern": "<project-id>"
+      },
+      "references": {
+        "context": {
+          "id": "<context-id>"
+        }
+      }
+    }
+  }'
+----
+--
+endif::server[]
+ifdef::server[]
+API v2::
++
+--
+include::ROOT:partial$notes/server-api-examples.adoc[]
+
+. Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
+. Get your organization ID and the ID of the project you want to restrict access to. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID] and xref:toolkit:how-to-find-ids.adoc#find-a-project-id[Find a Project ID].
+. Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v2/context?owner-id=<org-id>" \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" | jq .
+----
+
+. Create a project restriction with the link:https://circleci.com/docs/api/v2/#operation/createContextRestriction[Create Context Restriction] endpoint. Replace `<context-id>` and `<project-id>`:
++
+[,shell]
+----
+curl --request POST \
+  --url https://circleci.com/api/v2/context/<context-id>/restrictions \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "restriction_type": "project",
+    "restriction_value": "<project-id>"
+  }'
+----
+--
+endif::server[]
 ====
 
 Only workflows under the specified projects may now use the context and its environment variables.
@@ -387,34 +626,107 @@ Only workflows under the specified projects may now use the context and its envi
 [#remove-project-restrictions-from-contexts]
 === Remove project restrictions from contexts
 
-You must be an *organization admin* to remove projects from contexts though the method detailed below.
+You must be an *organization admin* to remove projects from contexts through the method detailed below.
 
-[tabs]
+[tabs%sync,sync-group-id=method]
 ====
-CLI::
+ifndef::server[]
+CLI v1::
 +
 --
-. Get the context details to find the restriction ID you want to remove:
+. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+
+. Next, find the restriction ID. Get the context details, replacing `<org-id>`, and copy the ID of the restriction you want to remove:
 +
-[,shell]
+[source,console]
 ----
-circleci context get <context-name>
+$ circleci context get <context-name> --org <org-id>
 ----
 
 . Delete the restriction using the restriction ID from the output:
 +
-[,shell]
+[source,console]
 ----
-circleci context restriction delete <context-name> --restriction-id <restriction-id>
+$ circleci context restriction delete <context-name> --restriction-id <restriction-id> --org <org-id>
 ----
 --
+endif::server[]
 Web app::
 +
 --
-. Navigate to menu:Org[Contexts] page in the https://app.circleci.com/[CircleCI web app]. The list of contexts will be visible.
+. Navigate to menu:Org[Contexts] page in the cloudlink:webapp[CircleCI web app]. The list of contexts will be visible.
 . Select the name of the existing context for which you would like to modify restrictions.
 . Select *X* next to the project restriction you would like to remove. The project restriction will be removed for the context. If there are no longer any project restrictions for the context, the context and its environment variables are now effectively unrestricted.
 --
+ifndef::server[]
+API v3::
++
+--
+. Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
+. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=<org-id>" \
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
+----
++
+TIP: Add `&filter[name]=<context-name>` to the URL to narrow the results. The filter matches any part of the name and ignores case.
+
+. Next, find the restriction ID. List the restrictions for the context, replacing `<context-id>`, and copy the `id` of the restriction you want to remove:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v3/context-restrictions?filter[context_id]=<context-id>" \
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
+----
+
+. Delete the restriction with the link:https://circleci.com/docs/api/v3/context-restrictions.md[Delete a Context Restriction] endpoint. Replace `<restriction-id>` and `<context-id>`:
++
+[,shell]
+----
+curl -g --request DELETE \
+  --url "https://circleci.com/api/v3/context-restrictions/<restriction-id>?filter[context_id]=<context-id>" \
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}"
+----
+--
+endif::server[]
+ifdef::server[]
+API v2::
++
+--
+include::ROOT:partial$notes/server-api-examples.adoc[]
+
+. Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
+. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v2/context?owner-id=<org-id>" \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" | jq .
+----
+
+. Next, find the restriction ID. List the restrictions for the context, replacing `<context-id>`, and copy the `id` of the restriction you want to remove:
++
+[,shell]
+----
+curl --request GET \
+  --url https://circleci.com/api/v2/context/<context-id>/restrictions \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" | jq .
+----
+
+. Delete the restriction with the link:https://circleci.com/docs/api/v2/#operation/deleteContextRestriction[Delete Context Restriction] endpoint. Replace `<context-id>` and `<restriction-id>`:
++
+[,shell]
+----
+curl --request DELETE \
+  --url https://circleci.com/api/v2/context/<context-id>/restrictions/<restriction-id> \
+  --header "Circle-Token: ${CIRCLE_TOKEN}"
+----
+--
+endif::server[]
 ====
 
 [#expression-restrictions]
@@ -436,7 +748,12 @@ and not job.ssh.enabled
 and not (pipeline.config_source starts-with "api")
 ----
 
-You can set up expression restrictions using the context restriction API, or via the Context page (menu:Org[Contexts>Expression Restrictions]) in the CircleCI web app.
+ifndef::server[]
+You can set up expression restrictions using the link:https://circleci.com/docs/api/v3/context-restrictions.md[Context Restrictions] API, or using the Context page (menu:Org[Contexts>Expression Restrictions]) in the CircleCI web app.
+endif::server[]
+ifdef::server[]
+You can set up expression restrictions using the link:https://circleci.com/docs/api/v2/#operation/createContextRestriction[Create Context Restriction] endpoint, or using the Context page (menu:Org[Contexts>Expression Restrictions]) in the CircleCI web app.
+endif::server[]
 
 Rules are expressed in a small language that supports equality checks, numeric comparisons, and boolean `and`, `or`, and `not` operators.
 
@@ -447,64 +764,101 @@ NOTE: You must be an organization administrator to set an expression restriction
 
 Follow these steps to set an expression restriction on a context:
 
-[tabs]
+[tabs%sync,sync-group-id=method]
 ====
-CLI::
+ifndef::server[]
+CLI v1::
 +
 --
-Add an expression restriction to a context, where `<expression>` is a pipeline value expression such as `pipeline.git.branch == "main"`:
+. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
 
-[,shell]
+. Add an expression restriction to the context. Replace `<org-id>` with your organization ID and `<expression>` with a pipeline value expression such as `pipeline.git.branch == "main"`:
++
+[source,console]
 ----
-circleci context restriction create <context-name> --type expression --value "<expression>" --org <org-slug>
+$ circleci context restriction create <context-name> --type expression --value "<expression>" --org <org-id>
 ----
 --
+endif::server[]
 Web app::
 +
 --
-// Vale merges consecutive AsciiDoc ordered list items into one sentence, because
-// the `. ` marker reads as a period, so SentenceLength miscounts these short steps.
-pass:[<!-- vale circleci-docs.SentenceLength = NO -->]
-. In the https://app.circleci.com/[CircleCI web app], go to menu:Organization Settings[Contexts].
+. In the cloudlink:webapp[CircleCI web app], go to menu:Organization Settings[Contexts].
 . Select the context you want to add an expression restriction to.
 . Select btn:[Add Expression Restriction].
 . Enter your expression in the text box and select btn:[Add Expression Restriction] again to confirm.
-pass:[<!-- vale circleci-docs.SentenceLength = YES -->]
 --
-API::
+ifndef::server[]
+API v3::
++
+--
+. Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
+. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=<org-id>" \
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
+----
++
+TIP: Add `&filter[name]=<context-name>` to the URL to narrow the results. The filter matches any part of the name and ignores case.
+
+. Create an expression restriction with the link:https://circleci.com/docs/api/v3/context-restrictions.md[Create a Context Restriction] endpoint. Replace `<context-id>` and `<expression>`:
++
+[,shell]
+----
+curl --request POST \
+  --url https://circleci.com/api/v3/context-restrictions \
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "data": {
+      "attributes": {
+        "restriction_type": "expression",
+        "match_pattern": "<expression>"
+      },
+      "references": {
+        "context": {
+          "id": "<context-id>"
+        }
+      }
+    }
+  }'
+----
+--
+endif::server[]
+ifdef::server[]
+API v2::
 +
 --
 include::ROOT:partial$notes/server-api-examples.adoc[]
 
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
-ifndef::server[]
-. You are going to need your organization ID. In the link:https://app.circleci.com/[CircleCI web app] select **Org** in the sidebar and copy your "Organization ID" somewhere safe.
-endif::server[]
-ifdef::server[]
-. You are going to need your organization ID. In the CircleCI web app select **Org** in the sidebar and copy your "Organization ID" somewhere safe.
-endif::server[]
-. To get the ID for your context, list your contexts, as follows, substituting your organization ID:
+. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
 +
 [,shell]
 ----
-curl --request GET \
-  --url 'https://circleci.com/api/v2/context?owner-id=<your-org-ID>&page-token=NEXT_PAGE_TOKEN' \
-  --header "Circle-Token: ${CIRCLE_TOKEN}" \
-  --header "Accept: application/json" \
-  --header "Content-Type: application/json" | jq
+curl -g "https://circleci.com/api/v2/context?owner-id=<org-id>" \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" | jq .
 ----
-. Copy the ID for your context from the previous API response.
-. Create your context expression restriction, as follows, substituting your context ID and expression restriction:
+
+. Create an expression restriction with the link:https://circleci.com/docs/api/v2/#operation/createContextRestriction[Create Context Restriction] endpoint. Replace `<context-id>` and `<expression>`:
 +
 [,shell]
 ----
 curl --request POST \
-  --url https://circleci.com/api/v2/context/<your-context-ID>/restrictions \
+  --url https://circleci.com/api/v2/context/<context-id>/restrictions \
   --header "Circle-Token: ${CIRCLE_TOKEN}" \
-  --header 'content-type: application/json' \
-  --data '{"restriction_type":"expression","restriction_value":"<your-expression-restriction>"}'
+  --header "Content-Type: application/json" \
+  --data '{
+    "restriction_type": "expression",
+    "restriction_value": "<expression>"
+  }'
 ----
 --
+endif::server[]
 ====
 
 [#examples]
@@ -667,18 +1021,57 @@ To delete a context, follow the steps below:
 
 NOTE: If the context is restricted with a group other than `All members`, you must be a member of that security group to complete this task.
 
-[tabs]
+[tabs%sync,sync-group-id=method]
 ====
-CLI::
+ifndef::server[]
+CLI v1::
 +
 --
-Run the following command, replacing `<context-name>` with the name or ID of the context you want to delete. You can use `circleci context list` to find the name or ID of the context:
+. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
 
-[,shell]
+. Find the name of the context you want to delete. Replace `<org-id>`:
++
+[source,console]
 ----
-circleci context delete <context-name>
+$ circleci context list --org <org-id>
+----
+
+. Delete the context. Replace `<context-name>` with the name or ID of the context:
++
+[source,console]
+----
+$ circleci context delete <context-name> --org <org-id>
 ----
 --
+endif::server[]
+ifdef::server[]
+CLI v0::
++
+--
+CLI v1 is not supported on CircleCI Server. Install CLI v0 as described in xref:toolkit:circleci-cli.adoc#install-cli-v0-for-circleci-server[Install the CLI for CircleCI Server].
+
+To find your organization ID, copy the ID of your organization from the output:
+
+[source,console]
+----
+$ circleci info org
+----
+
+To find the name of the context, list your contexts. Replace `<org-id>`:
+
+[source,console]
+----
+$ circleci context list --org-id <org-id>
+----
+
+Delete the context. Replace `<context-name>`:
+
+[source,console]
+----
+$ circleci context delete --org-id <org-id> <context-name>
+----
+--
+endif::server[]
 Web app::
 +
 --
@@ -686,6 +1079,58 @@ Web app::
 . Select the *X* icon for the context you want to delete. A confirmation dialog appears.
 . Type "DELETE" in the field and then select *Delete Context*. The context and all associated environment variables will be deleted.
 --
+ifndef::server[]
+API v3::
++
+--
+. Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
+. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=<org-id>" \
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
+----
++
+TIP: Add `&filter[name]=<context-name>` to the URL to narrow the results. The filter matches any part of the name and ignores case.
+
+. Delete the context with the link:https://circleci.com/docs/api/v3/contexts.md[Delete a Context] endpoint. Replace `<context-id>`:
++
+[,shell]
+----
+curl --request DELETE \
+  --url https://circleci.com/api/v3/contexts/<context-id> \
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}"
+----
+--
+endif::server[]
+ifdef::server[]
+API v2::
++
+--
+include::ROOT:partial$notes/server-api-examples.adoc[]
+
+. Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
+. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v2/context?owner-id=<org-id>" \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" | jq .
+----
+
+. Delete the context with the link:https://circleci.com/docs/api/v2/#operation/deleteContext[Delete a Context] endpoint. Replace `<context-id>`:
++
+[,shell]
+----
+curl --request DELETE \
+  --url https://circleci.com/api/v2/context/<context-id> \
+  --header "Circle-Token: ${CIRCLE_TOKEN}"
+----
+--
+endif::server[]
 ====
 
 If a _deleted_ context is used in a job, the job will fail and show an error.
@@ -707,37 +1152,126 @@ Environment variables declared inside a shell command `run` step, for example `F
 [#creating-environment-variables]
 === Add an environment variable to a context
 
-ifdef::server[]
-include::ROOT:partial$notes/server-api-examples.adoc[]
-endif::server[]
-
-[tabs]
+[tabs%sync,sync-group-id=method]
 ====
-CLI::
+ifndef::server[]
+CLI v1::
 +
 --
-To add an environment variable to a context using the CLI, follow these steps:
+. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
 
-. If you have not already done so, find the right context name that will contain the new environment variable:
+. If you have not already done so, find the right context name that will contain the new environment variable. Replace `<org-id>`:
 +
-[,shell]
+[source,console]
 ----
-circleci context list
+$ circleci context list --org <org-id>
 ----
 
 . Store a new environment variable under that context:
 +
-[,shell]
+[source,console]
 ----
-circleci context secret set <context-name> --name <env-var-name> --value <env-var-value>
+$ circleci context secret set <context-name> --name <env-var-name> --value <env-var-value> --org <org-id>
 ----
 --
-API::
+endif::server[]
+ifdef::server[]
+CLI v0::
 +
 --
+CLI v1 is not supported on CircleCI Server. Install CLI v0 as described in xref:toolkit:circleci-cli.adoc#install-cli-v0-for-circleci-server[Install the CLI for CircleCI Server].
 
-To create an environment variable using the API, call the https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Add Environment Variable] endpoint with the appropriate request body. For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the new environment variable name. The request body must include a `value` key containing the plain text secret as a string.
+. Find your organization ID. Copy the ID of your organization from the output:
++
+[source,console]
+----
+$ circleci info org
+----
+
+. If you have not already done so, find the right context name. Replace `<org-id>`:
++
+[source,console]
+----
+$ circleci context list --org-id <org-id>
+----
+
+. Store a new environment variable under that context. The CLI prompts you for the value:
++
+[source,console]
+----
+$ circleci context store-secret --org-id <org-id> <context-name> <env-var-name>
+----
 --
+endif::server[]
+Web app::
++
+--
+. Navigate to menu:Org[Contexts] in the cloudlink:webapp[CircleCI web app].
+. Select the name of the context you want to add an environment variable to.
+. In the *Environment variables* section, select btn:[Add].
+. Enter the variable name and value, then select btn:[Add environment variable] in the dialog.
+--
+ifndef::server[]
+API v3::
++
+--
+. Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
+. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=<org-id>" \
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
+----
++
+TIP: Add `&filter[name]=<context-name>` to the URL to narrow the results. The filter matches any part of the name and ignores case.
+
+. Add an environment variable with the link:https://circleci.com/docs/api/v3/contexts.md[Set a Context Environment Variable] endpoint. Replace `<context-id>`, `<env-var-name>`, and `<env-var-value>`:
++
+[,shell]
+----
+curl --request POST \
+  --url https://circleci.com/api/v3/contexts/<context-id>/env-vars/set \
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "name": "<env-var-name>",
+    "value": "<env-var-value>"
+  }'
+----
+--
+endif::server[]
+ifdef::server[]
+API v2::
++
+--
+include::ROOT:partial$notes/server-api-examples.adoc[]
+
+. Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
+. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v2/context?owner-id=<org-id>" \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" | jq .
+----
+
+. Add an environment variable with the link:https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Add or Update an Environment Variable] endpoint. Replace `<context-id>`, `<env-var-name>`, and `<env-var-value>`:
++
+[,shell]
+----
+curl --request PUT \
+  --url https://circleci.com/api/v2/context/<context-id>/environment-variable/<env-var-name> \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "value": "<env-var-value>"
+  }'
+----
+--
+endif::server[]
 ====
 
 [#deleting-environment-variables]
@@ -745,95 +1279,280 @@ To create an environment variable using the API, call the https://circleci.com/d
 
 Removing an environment variable from a context deletes the environment variable from your account.
 
-ifdef::server[]
-include::ROOT:partial$notes/server-api-examples.adoc[]
-endif::server[]
-
-[tabs]
+[tabs%sync,sync-group-id=method]
 ====
-CLI::
+ifndef::server[]
+CLI v1::
 +
 --
-To remove an environment variable from a context using the CLI, follow these steps:
+. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
 
-. If you have not already done so, find the context name that contains the environment variable you wish to delete:
+. If you have not already done so, find the context name that contains the environment variable you wish to delete. Replace `<org-id>`:
 +
-[,shell]
+[source,console]
 ----
-circleci context list
+$ circleci context list --org <org-id>
 ----
 
 . Confirm the environment variable exists within that context:
 +
-[,shell]
+[source,console]
 ----
-circleci context get <context-name>
+$ circleci context get <context-name> --org <org-id>
 ----
 
 . Delete the environment variable:
 +
-[,shell]
+[source,console]
 ----
-circleci context secret delete <context-name> --name <secret-name>
+$ circleci context secret delete <context-name> --name <env-var-name> --org <org-id>
 ----
 --
-API::
+endif::server[]
+ifdef::server[]
+CLI v0::
 +
 --
+CLI v1 is not supported on CircleCI Server. Install CLI v0 as described in xref:toolkit:circleci-cli.adoc#install-cli-v0-for-circleci-server[Install the CLI for CircleCI Server].
 
-To delete an environment variable using the API, call the https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Delete environment variable] endpoint.
+. Find your organization ID. Copy the ID of your organization from the output:
++
+[source,console]
+----
+$ circleci info org
+----
 
-For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the environment variable name to update.
+. If you have not already done so, find the context name that contains the environment variable you wish to delete. Replace `<org-id>`:
++
+[source,console]
+----
+$ circleci context list --org-id <org-id>
+----
+
+. Confirm the environment variable exists within that context:
++
+[source,console]
+----
+$ circleci context show --org-id <org-id> <context-name>
+----
+
+. Delete the environment variable:
++
+[source,console]
+----
+$ circleci context remove-secret --org-id <org-id> <context-name> <env-var-name>
+----
 --
+endif::server[]
+Web app::
++
+--
+. Navigate to menu:Org[Contexts] in the cloudlink:webapp[CircleCI web app].
+. Select the name of the context that contains the environment variable.
+. In the *Environment variables* section, select the checkbox next to the variable you want to remove.
+. Select btn:[Delete].
+--
+ifndef::server[]
+API v3::
++
+--
+. Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
+. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=<org-id>" \
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
+----
++
+TIP: Add `&filter[name]=<context-name>` to the URL to narrow the results. The filter matches any part of the name and ignores case.
+
+. Delete the environment variable with the link:https://circleci.com/docs/api/v3/contexts.md[Delete a Context Environment Variable] endpoint. Replace `<context-id>` and `<env-var-name>`:
++
+[,shell]
+----
+curl -g --request DELETE \
+  --url "https://circleci.com/api/v3/contexts/<context-id>/env-vars?filter[name]=<env-var-name>" \
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}"
+----
+--
+endif::server[]
+ifdef::server[]
+API v2::
++
+--
+include::ROOT:partial$notes/server-api-examples.adoc[]
+
+. Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
+. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v2/context?owner-id=<org-id>" \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" | jq .
+----
+
+. Delete the environment variable with the link:https://circleci.com/docs/api/v2/#operation/deleteEnvironmentVariableFromContext[Remove an Environment Variable] endpoint. Replace `<context-id>` and `<env-var-name>`:
++
+[,shell]
+----
+curl --request DELETE \
+  --url https://circleci.com/api/v2/context/<context-id>/environment-variable/<env-var-name> \
+  --header "Circle-Token: ${CIRCLE_TOKEN}"
+----
+--
+endif::server[]
 ====
 
 [#rotating-environment-variables]
-=== Rotate environment variables with the CLI or API
+=== Rotate environment variables
 
 Rotation refers to the process of updating a secret's value without deleting it or changing its name.
 
 Because environment variables can be shared, passed around between employees and teams, and exposed inadvertently, it is good practice to periodically rotate secrets. You can automate this process, for example, running a script when an employee leaves the company, or when a secret may have been compromised.
 
-Context environment variables can be rotated using CircleCI's CLI or API.
+You can rotate context environment variables in the CircleCI web app, with the CLI, or with the API.
 
-ifdef::server[]
-include::ROOT:partial$notes/server-api-examples.adoc[]
-endif::server[]
-
-[tabs]
+[tabs%sync,sync-group-id=method]
 ====
-CLI::
+ifndef::server[]
+CLI v1::
 +
 --
-To rotate an environment variable using the CLI, follow these steps:
+. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
 
-. Find the context name that contains the variable you would like to rotate:
+. Find the context name that contains the variable you would like to rotate. Replace `<org-id>`:
 +
-[,shell]
+[source,console]
 ----
-circleci context list --org <org-slug>
+$ circleci context list --org <org-id>
 ----
 
 . Find the environment variable to rotate within that context:
 +
-[,shell]
+[source,console]
 ----
-circleci context get <context-name>
+$ circleci context get <context-name> --org <org-id>
 ----
 
-. Update the existing environment variable, replacing `<env-var-name>` with the name of the environment variable you chose in Step 2:
+. Update the existing environment variable. Replace `<env-var-name>` with the name of the variable from the previous step:
++
+[source,console]
+----
+$ circleci context secret set <context-name> --name <env-var-name> --value <new-value> --org <org-id>
+----
+--
+endif::server[]
+ifdef::server[]
+CLI v0::
++
+--
+CLI v1 is not supported on CircleCI Server. Install CLI v0 as described in xref:toolkit:circleci-cli.adoc#install-cli-v0-for-circleci-server[Install the CLI for CircleCI Server].
+
+. Find your organization ID. Copy the ID of your organization from the output:
++
+[source,console]
+----
+$ circleci info org
+----
+
+. Find the context name that contains the variable you would like to rotate. Replace `<org-id>`:
++
+[source,console]
+----
+$ circleci context list --org-id <org-id>
+----
+
+. Find the environment variable to rotate within that context:
++
+[source,console]
+----
+$ circleci context show --org-id <org-id> <context-name>
+----
+
+. Update the existing environment variable. The CLI prompts you for the new value:
++
+[source,console]
+----
+$ circleci context store-secret --org-id <org-id> <context-name> <env-var-name>
+----
+--
+endif::server[]
+Web app::
++
+--
+. Navigate to menu:Org[Contexts] in the cloudlink:webapp[CircleCI web app].
+. Select the name of the context that contains the environment variable.
+. In the *Environment variables* section, select the pencil icon next to the value of the variable you want to rotate.
+. Enter the new value in the *New value* field, then select btn:[Update].
+--
+ifndef::server[]
+API v3::
++
+--
+The link:https://circleci.com/docs/api/v3/contexts.md[Set a Context Environment Variable] endpoint creates or updates a variable. Use it to rotate a secret without changing the variable name.
+
+. Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
+. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
 +
 [,shell]
 ----
-circleci context secret set <context-name> --name <env-var-name> --value <new-value>
+curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=<org-id>" \
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" | jq .
+----
++
+TIP: Add `&filter[name]=<context-name>` to the URL to narrow the results. The filter matches any part of the name and ignores case.
+
+. Set the new value. Replace `<context-id>`, `<env-var-name>`, and `<new-value>`:
++
+[,shell]
+----
+curl --request POST \
+  --url https://circleci.com/api/v3/contexts/<context-id>/env-vars/set \
+  --header "Authorization: Bearer ${CIRCLE_TOKEN}" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "name": "<env-var-name>",
+    "value": "<new-value>"
+  }'
 ----
 --
-API::
+endif::server[]
+ifdef::server[]
+API v2::
 +
 --
+include::ROOT:partial$notes/server-api-examples.adoc[]
 
-To rotate an environment variable from the API, call the link:https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Update environment variable] endpoint with the appropriate request body. For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the environment variable name to update. The request body must include a `value` key containing the plain text secret as a string.
+The link:https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Add or Update an Environment Variable] endpoint creates or updates a variable. Use it to rotate a secret without changing the variable name.
+
+. Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
+. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
++
+[,shell]
+----
+curl -g "https://circleci.com/api/v2/context?owner-id=<org-id>" \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" | jq .
+----
+
+. Set the new value. Replace `<context-id>`, `<env-var-name>`, and `<new-value>`:
++
+[,shell]
+----
+curl --request PUT \
+  --url https://circleci.com/api/v2/context/<context-id>/environment-variable/<env-var-name> \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "value": "<new-value>"
+  }'
+----
 --
+endif::server[]
 ====
 
 include::ROOT:partial$shared-sections/secrets-masking.adoc[]
