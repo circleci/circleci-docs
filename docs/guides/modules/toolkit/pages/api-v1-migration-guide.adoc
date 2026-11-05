@@ -7,7 +7,7 @@
 :page-description: Migrate from deprecated CircleCI API v1 and API v1.1 trigger and rerun endpoints to API v2 or API v3 before the 1 February 2027 removal date.
 :experimental:
 
-CircleCI will remove ten API v1 and API v1.1 endpoints used to trigger and rerun builds on 1 February 2027. See <<deprecated-endpoints>>. After that date, requests to these endpoints return HTTP 410 Gone. This guide walks you through finding those calls in your code, updating your project addressing, and switching to the equivalent API v2 or API v3 endpoints.
+CircleCI removes ten API v1 and API v1.1 endpoints used to trigger and rerun builds on 1 February 2027. See <<deprecated-endpoints>>. After that date, requests to these endpoints return HTTP 410 Gone. This guide walks you through finding those calls in your code, choosing the equivalent API v2 or API v3 endpoints, and updating your calls to use them.
 
 WARNING: Deprecated endpoints now return `Deprecation` and `Sunset` response headers. On 1 February 2027 they return HTTP 410 Gone. Update your integrations before that date.
 
@@ -124,19 +124,23 @@ endif::server[]
 
 The API v1 endpoints map to the same replacements as their API v1.1 equivalents.
 
-[#update-project-addressing]
-== 3. Update project addressing
+[#update-your-calls]
+== 3. Update your calls
 
-API v1 and API v1.1 use different project addressing from API v2 and API v3.
+Replace each deprecated call with its replacement endpoint from the previous step. The examples in this section show the request for each replacement. Start with <<project-addressing>> to find the values to use in the request.
 
-* API v1 uses `<username>/<repo>`.
-* API v1.1 uses `<vcs-type>/<username>/<repo>`, for example `github/my-org/my-repo`.
-* API v2 uses `<provider>/<organization>/<project>`. You can use either the long or short form of the VCS provider name.
-ifndef::server[]
-* API v3 uses UUIDs for all resources. See xref:how-to-find-ids.adoc[How to Find IDs] for steps to find your organization ID and project ID, or use the API v3 `GET /api/v3/projects` endpoint.
-endif::server[]
+[#project-addressing]
+=== Project addressing
 
-The following table shows the provider values for each API version.
+The project values you use in API v1.1 carry over to API v2 with new names. `<vcs-type>/<username>/<repo>` becomes `<provider>/<organization>/<project>`:
+
+* `<vcs-type>` becomes `<provider>`.
+* `<username>` becomes `<organization>`.
+* `<repo>` becomes `<project>`.
+
+For example, `github/my-org/my-repo` is also valid in API v2, and you can use the short form `gh/my-org/my-repo`. API v1 has no VCS type in the path, so add the provider when you move to API v2.
+
+API v2 accepts both the long and short form of the provider name:
 
 [.table-scroll]
 --
@@ -159,10 +163,9 @@ The following table shows the provider values for each API version.
 |===
 --
 
-[#replacement-examples]
-== Replacement examples
-
-Once you know the replacement endpoint and your project addressing, update your calls. The following examples show how to trigger a pipeline run and rerun a workflow.
+ifndef::server[]
+The change to API v3 is bigger. API v3 identifies resources by UUID instead of by name, so you need your organization ID and project ID instead of a project slug. See xref:how-to-find-ids.adoc[How to Find IDs] for steps to find them, or use the API v3 `GET /api/v3/projects` endpoint.
+endif::server[]
 
 [#trigger-a-pipeline-run]
 === Trigger a pipeline run
@@ -299,7 +302,7 @@ $ curl --request POST \
 ----
 
 [#response-differences]
-== Response differences
+=== Response differences
 
 API v2 and API v3 responses differ from the build-centric format of API v1 and API v1.1.
 
@@ -326,24 +329,144 @@ $ curl "https://circleci.com/api/v2/pipeline/<pipeline-id>/workflow" \
 ----
 
 ifndef::server[]
-API v3 triggers a run and returns a run object with a `run_id`:
+API v3 triggers a run and returns a run object. The run ID is in `data.id`:
 
 [source,json]
 ----
 {
-  "run_id": "c6e2e2cd-d0ee-4253-be29-d076f9555602",
-  "created_at": "2020-01-01T15:32:36.605Z"
+  "data": {
+    "id": "c6e2e2cd-d0ee-4253-be29-d076f9555602",
+    "attributes": {
+      "created_at": "2020-01-01T15:32:36.605Z"
+    },
+    "references": {
+      "pipeline": {
+        "id": "5034460f-c7c4-4c43-9457-de07e2029e7b"
+      }
+    }
+  }
 }
 ----
 
-Use `GET /api/v3/runs/<run-id>` to retrieve run status and workflow details.
+Use `GET /api/v3/runs/<run-id>` to retrieve run status.
 endif::server[]
 
 Key differences to update in your code:
 
-* Replace `build_num` references with the pipeline `id` or the run `run_id`.
+* Replace `build_num` references with the pipeline `id` or the run `id`.
 * Replace `build_url` references with links constructed from the pipeline or workflow ID.
 * Replace `status` polling on the trigger response with calls to the pipeline or workflow status endpoints.
+
+The following examples show each change.
+
+[#replace-build-num]
+==== Replace build numbers
+
+Save the ID from the trigger response instead of the build number. The examples use https://jqlang.github.io/jq/[jq] to read the response.
+
+ifndef::server[]
+For API v3, the run ID is `data.id`:
+
+[source,console]
+----
+$ RUN_ID=$(curl --silent --request POST https://circleci.com/api/v3/runs \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{"project_id": "<project-id>", "branch": "main"}' \
+  | jq --raw-output '.data.id')
+----
+
+For API v2, the pipeline ID is `id`:
+endif::server[]
+ifdef::server[]
+The pipeline ID is `id`:
+endif::server[]
+
+[source,console]
+----
+$ PIPELINE_ID=$(curl --silent --request POST \
+  "https://circleci.com/api/v2/project/<provider>/<organization>/<project>/pipeline/run" \
+  --header "Circle-Token: $CIRCLE_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{"branch": "main"}' \
+  | jq --raw-output '.id')
+----
+
+[#replace-build-url]
+==== Replace build URLs
+
+API v1 and API v1.1 returned a `build_url` in the trigger response. API v2 and API v3 do not return a URL. Construct the link to the workflow in the CircleCI web app instead:
+
+[source,text]
+----
+https://app.circleci.com/pipelines/<provider>/<organization>/<project>/<pipeline-number>/workflows/<workflow-id>
+----
+
+For example:
+
+[source,text]
+----
+https://app.circleci.com/pipelines/github/my-org/my-repo/130/workflows/fda08377-fe7e-46b1-8992-3a7aaecac9c3
+----
+
+Take `<pipeline-number>` from the `number` field of the API v2 trigger response. To get `<workflow-id>`, list the workflows in the pipeline:
+
+[source,console]
+----
+$ curl --silent "https://circleci.com/api/v2/pipeline/$PIPELINE_ID/workflow" \
+  --header "Circle-Token: $CIRCLE_TOKEN" \
+  | jq --raw-output '.items[] | "\(.name): \(.id)"'
+----
+
+ifndef::server[]
+For API v3, get the pipeline number from `GET /api/v3/runs/<run-id>`, where it is in `data.attributes.number`. Get the workflow IDs from `GET /api/v3/workflows?filter[run_id]=<run-id>`.
+endif::server[]
+
+[#replace-status-polling]
+==== Replace status polling
+
+Poll the workflow instead of the trigger response. In API v2, `GET /api/v2/workflow/<workflow-id>` returns a `status` field:
+
+[source,console]
+----
+$ curl --silent "https://circleci.com/api/v2/workflow/<workflow-id>" \
+  --header "Circle-Token: $CIRCLE_TOKEN" \
+  | jq --raw-output '.status'
+----
+
+The `status` value is one of:
+
+* `success`
+* `running`
+* `not_run`
+* `failed`
+* `error`
+* `failing`
+* `on_hold`
+* `canceled`
+* `unauthorized`
+
+Keep polling while the status is `running` or `failing`.
+
+ifndef::server[]
+In API v3, poll the run. `GET /api/v3/runs/<run-id>` returns the state of the run in two fields:
+
+[source,console]
+----
+$ curl --silent "https://circleci.com/api/v3/runs/<run-id>" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
+  | jq '.data.attributes | {phase, current_outcome}'
+----
+
+* `phase` is `queued`, `started`, or `ended`. Keep polling until it is `ended`.
+* `current_outcome` is the result so far. It can change after the run ends if you rerun a workflow. The possible values are:
+** `succeeded`
+** `failed`
+** `canceled`
+** `errored`
+** `not_run`
+** `unauthorized`
+endif::server[]
 
 [#next-steps]
 == Next steps
