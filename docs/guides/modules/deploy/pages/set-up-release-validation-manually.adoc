@@ -59,7 +59,7 @@ A failing check still marks the release as failed, records the events that cause
 * A CircleCI project with a workflow configured to deploy your code.
 * Deploy markers configured in that workflow. See the xref:configure-deploy-markers.adoc#set-up-deploy-markers-manually[Set Up Deploy Markers Manually] section.
 * A monitoring tool that can send outbound webhooks. Datadog, Prometheus, and Alertmanager are supported directly, and you can connect any other tool as a custom provider.
-* Organization administrator permissions, to create a webhook secret.
+include::ROOT:partial$prerequisites/organization-admin.adoc[]
 
 == 1. Add a release job to your configuration
 
