@@ -19,7 +19,7 @@ For detailed information about user types, how to register, and why registration
 
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
 * You must be on the link:https://circleci.com/pricing/[Performance or Scale Plan].
-* You must be an org admin.
+include::ROOT:partial$prerequisites/organization-admin.adoc[]
 
 [#steps]
 == Steps
