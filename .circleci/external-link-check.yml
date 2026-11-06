@@ -14,7 +14,7 @@ version: 2.1
 #   this pipeline only runs on the schedule.
 
 orbs:
-  go: circleci/go@3.0.4
+  go: circleci/go@4.0.3
 
 executors:
   node_executor:
