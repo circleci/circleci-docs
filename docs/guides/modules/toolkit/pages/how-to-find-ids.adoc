@@ -18,11 +18,11 @@ NOTE: The API and CLI methods on this page require a CircleCI personal API token
 endif::server[]
 
 ifdef::server[]
-NOTE: The API methods on this page require a CircleCI personal API token. See xref:toolkit:managing-api-tokens.adoc[Managing API Tokens] for setup instructions. Set your token as an environment variable before using any API command: `export CIRCLE_TOKEN=<your-api-token>`.
+NOTE: The API and CLI methods on this page require a CircleCI personal API token. See xref:toolkit:managing-api-tokens.adoc[Managing API Tokens] for setup instructions. For API commands, set your token as an environment variable: `export CIRCLE_TOKEN=<your-api-token>`. For CLI v0, you enter the token when you run `circleci-v0 setup`.
 
 include::guides:ROOT:partial$notes/server-api-examples.adoc[]
 
-CLI v1 is not supported on CircleCI Server. The CLI examples on this page use CLI v0, which installs as the `circleci-v0` binary. To install and set up CLI v0 with your Server host and API token, see xref:toolkit:circleci-cli.adoc#install-cli-v0-for-circleci-server[Install the CLI for CircleCI Server].
+CLI v1 is not supported on CircleCI Server. The CLI examples on this page use CLI v0, which installs as the `circleci-v0` binary. To install and set up CLI v0 with your Server host, see xref:toolkit:circleci-cli.adoc#install-cli-v0-for-circleci-server[Install the CLI for CircleCI Server].
 endif::server[]
 
 == Get IDs from the built-in environment variables
