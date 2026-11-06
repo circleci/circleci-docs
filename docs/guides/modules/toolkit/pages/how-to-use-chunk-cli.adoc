@@ -3,7 +3,7 @@
 :page-vcs: all
 :page-plan: Free, Performance, Scale
 :page-audience: developer
-:page-description: How to use the `chunk` CLI to initialize projects, generate AI review prompts, manage Chunk sidecars, run validations, and install AI agent skills.
+:page-description: How to use the `chunk` CLI to validate changes in Chunk sidecars, monitor runs, find test gaps, run Chunk factory, generate review prompts, and trigger tasks.
 :experimental:
 
 This page describes how to use the main features of the `chunk` CLI. The recommended workflow uses Chunk sidecars to validate your changes in a real CircleCI Cloud environment, catching failures that only reproduce outside your local machine. For installation, authentication, and first-time setup, see xref:install-and-configure-the-chunk-cli.adoc[Install and Configure the Chunk CLI].
@@ -19,6 +19,7 @@ This page describes how to use the main features of the `chunk` CLI. The recomme
 * **`.chunk/` directory**: holds `config.json` (your validation commands) and `context/review-prompt.md` (your team's review standards). Commit both so everyone on your team gets the same setup.
 * **Chunk sidecars**: ephemeral Linux environments on CircleCI where you run checks remotely, catching failures that only reproduce outside your machine.
 * **Skills**: instructions installed into your AI coding agent that add commands like `/chunk-review` and `/chunk-sidecar`, triggered by slash commands or natural language.
+* **Watch daemon**: a background process that tracks your sidecars, runs background validation, and hosts long-running sessions such as Chunk factory runs. The `chunk` CLI starts it when needed. Use `chunk watch` to see what it is doing.
 
 [#typical-workflow]
 == Typical workflow
@@ -26,9 +27,11 @@ This page describes how to use the main features of the `chunk` CLI. The recomme
 Once set up, your day-to-day workflow looks like this:
 
 . Make your changes.
-. Ask your agent to review: type `/chunk-review`, or say "review my changes" or "review PR #123".
-. Ask your agent to validate remotely: type `/chunk-sidecar`, or say "validate on the sidecar".
+. Ask your agent to review. Type `/chunk-review`, or say "review my changes" or "review PR #123".
+. Ask your agent to validate remotely. Type `/chunk-sidecar`, or say "validate on the sidecar".
 . Push when checks pass.
+
+When several agent sessions are open in the same repository, each session automatically uses its own sidecar. Two sessions never sync into the same remote workspace. To pin the session identity for an agent other than Claude Code, set the `CHUNK_SESSION_ID` environment variable.
 
 [#run-validation-in-a-sidecar]
 [badge="Preview"]
@@ -38,16 +41,16 @@ CAUTION: Chunk sidecars are available in preview on all CircleCI plans. The prod
 
 Chunk sidecars validate changes in a CircleCI Cloud environment instead of locally. This ensures your code runs against the same environment your CI pipeline uses, catching failures that do not reproduce on your machine.
 
-The easiest way to get started is to ask your AI agent — type `/chunk-sidecar` or say "validate on the sidecar". The skill handles auth checks, sidecar creation, file sync, and validation automatically. If you prefer to run the steps yourself, continue below.
+The easiest way to get started is to ask your AI agent. Type `/chunk-sidecar` or say "validate on the sidecar". The skill handles auth checks, sidecar creation, file sync, and validation automatically. If you prefer to run the steps yourself, continue below.
 
-TIP: Use `chunk watch` (or `chunk watch --all` for all projects) for a live dashboard of Chunk sidecar status and activity while validation runs.
+TIP: Use `chunk watch` for a live dashboard of Chunk sidecar status and activity while validation runs. See <<monitor-sidecars-with-chunk-watch>>.
 
 You can set up Chunk sidecar validation in two ways: the `chunk sidecar setup` command handles everything in one step, or you can run each step manually for more control.
 
 [#fast-path-setup]
 === Fast path: set up with one command
 
-The `chunk sidecar setup` command detects your tech stack, syncs your files, runs setup commands in a sidecar, and creates a snapshot — all in one step:
+The `chunk sidecar setup` command detects your tech stack, syncs your files, runs install commands in a sidecar, and creates a snapshot, all in one step:
 
 [source,console]
 ----
@@ -62,6 +65,8 @@ After the first run, the CLI saves the detected environment to `.chunk/config.js
 ----
 $ chunk sidecar setup --force
 ----
+
+The command marks the install and gate commands it finds as remote in your config. To run the setup without syncing your files first, pass `--skip-sync`. To detect your tech stack without creating a sidecar, run `chunk sidecar env`. Add `--no-save` to print the result without writing it to `.chunk/config.json`.
 
 [#manual-sidecar-setup]
 === Manual setup: step by step
@@ -95,7 +100,18 @@ Create a new Chunk sidecar environment:
 $ chunk sidecar create --name <name>
 ----
 
-Replace `<name>` with a descriptive name for your sidecar. The `--name` flag is optional — a name is auto-generated if you omit it. The command auto-detects your tech stack, generates a Dockerfile, and provisions a cloud environment. When ready, it prints the Chunk sidecar ID. Copy this ID for use in the validation step.
+Replace `<name>` with a descriptive name for your sidecar. The `--name` flag is optional. The CLI generates a name if you omit it. The command provisions a cloud environment and prints the Chunk sidecar ID when ready. Copy this ID for use in the validation step.
+
+The CLI needs your CircleCI organization ID to create a sidecar. It resolves the ID in this order:
+
+. The `--org-id` flag.
+. The `CIRCLECI_ORG_ID` environment variable.
+. The `orgID` value in `.chunk/config.json`, which `chunk init` saves for you.
+. An interactive organization picker, when you run the command in a terminal.
+
+To list your organizations and their IDs, run `chunk org list`. In non-interactive sessions such as CI or agent runs, set `orgID` in `.chunk/config.json` or pass `--org-id`. If your account has no organization, `chunk org create <name>` creates a standalone one.
+
+When you do not pass `--image` and your config has no `validation.sidecarImage`, the CLI picks the org snapshot that best matches your repository name and detected tech stack. It prints the snapshot it chose and why. If no snapshot matches, the CLI uses the default image, which has none of your dependencies installed. To pin the environment, record a snapshot ID with `chunk config set validation.sidecarImage <snapshot-id>`.
 
 To launch a sidecar from an existing snapshot, pass the snapshot ID with `--image`:
 
@@ -112,6 +128,8 @@ Sync your current working directory to the Chunk sidecar:
 ----
 $ chunk sidecar sync
 ----
+
+The sync mirrors your working tree to the sidecar with rsync, skips files matched by `.gitignore`, and includes uncommitted changes. You do not need to push your branch to GitHub. To sync through a git checkout instead, push your branch and pass `--checkout`.
 
 ==== Set the active Chunk sidecar
 
@@ -135,8 +153,10 @@ Validate commands in the active Chunk sidecar:
 
 [source,console]
 ----
-$ chunk validate --remote
+$ chunk validate
 ----
+
+Commands run in the sidecar by default. See <<run-validation>> for how to run specific commands or keep a command local.
 
 To target a specific Chunk sidecar by ID instead of using the active one:
 
@@ -154,7 +174,14 @@ If validation fails and you need to investigate, SSH into the Chunk sidecar:
 $ chunk sidecar ssh
 ----
 
-This opens an interactive shell in the remote environment.
+This opens an interactive shell in the remote environment. To run a single command instead of opening a shell, pass it after `--`, for example `chunk sidecar ssh -- ls`.
+
+If sync or SSH fails with `permission denied (publickey)`, re-register the SSH key that the CLI manages at `~/.ssh/chunk_ai`:
+
+[source,console]
+----
+$ chunk sidecar add-ssh-key --public-key-file ~/.ssh/chunk_ai.pub
+----
 
 ==== (Optional) Snapshot the Chunk sidecar for reuse
 
@@ -165,7 +192,7 @@ After configuring a Chunk sidecar successfully, capture its state as a snapshot 
 $ chunk sidecar snapshot create --name <snapshot-name>
 ----
 
-The command captures the configured state of the active Chunk sidecar and prints the snapshot ID. Use this ID with `chunk sidecar create --image <snapshot-id>` to boot new sidecars from the snapshot.
+The command captures the configured state of the active Chunk sidecar and prints the snapshot ID. Use this ID with `chunk sidecar create --image <snapshot-id>` to boot new sidecars from the snapshot. To record the snapshot as the default for your project, run `chunk config set validation.sidecarImage <snapshot-id>`.
 
 CAUTION: `chunk sidecar snapshot create` deletes the source Chunk sidecar after capturing the snapshot to avoid leaving the build instance running. If the deleted sidecar was the active one, the CLI clears local active-sidecar state. Launch a new Chunk sidecar from the snapshot with `chunk sidecar create --name <name> --image <snapshot-id>` to resume work.
 
@@ -196,8 +223,11 @@ For more details on managing Chunk sidecars, see the <<manage-sidecars>> section
 |Clear the active Chunk sidecar (without deleting)
 |`chunk sidecar forget`
 
-|List all Chunk sidecars
+|List your Chunk sidecars
 |`chunk sidecar list`
+
+|List all Chunk sidecars in the organization (requires organization admin)
+|`chunk sidecar list --all`
 
 |Sync local files to the active Chunk sidecar
 |`chunk sidecar sync`
@@ -206,7 +236,16 @@ For more details on managing Chunk sidecars, see the <<manage-sidecars>> section
 |`chunk sidecar ssh`
 
 |Execute a command in the active Chunk sidecar
-|`chunk sidecar exec <command>`
+|`chunk sidecar exec --command <command>`
+
+|Print the output of a command that ran on a Chunk sidecar
+|`chunk sidecar logs <command-id>`
+
+|Detect your tech stack and save the environment to config
+|`chunk sidecar env`
+
+|Detect the environment, sync, and run install steps
+|`chunk sidecar setup`
 
 |Create a snapshot
 |`chunk sidecar snapshot create --name <snapshot-name>`
@@ -214,32 +253,49 @@ For more details on managing Chunk sidecars, see the <<manage-sidecars>> section
 |List snapshots
 |`chunk sidecar snapshot list`
 
+|Get a snapshot by ID
+|`chunk sidecar snapshot get <snapshot-id>`
+
 |Delete the active Chunk sidecar
 |`chunk sidecar delete`
 
 |Delete a specific Chunk sidecar
 |`chunk sidecar delete --sidecar-id <id>`
+
+|Delete all of your Chunk sidecars older than one hour
+|`chunk prune`
 |===
 --
+
+`chunk prune` asks for confirmation before it deletes anything. Pass `--before <duration>` to change the age cutoff (for example, `--before 24h`), or `--force` to skip the prompt.
+
+The CLI also removes abandoned sidecars automatically. When you run `chunk validate`, it deletes local state for sidecars that no longer exist, and deletes sidecars that are still running but have not been used for five days.
 
 CAUTION: `chunk sidecar snapshot create` deletes the source Chunk sidecar after capturing to avoid leaving the build instance running. If the deleted Chunk sidecar was the active one, the CLI clears local active-sidecar state. Launch a new Chunk sidecar from the snapshot with `chunk sidecar create --name <name> --image <snapshot-id>` to resume work.
 
 [#run-validation]
-== Validate your changes locally
+== Validate your changes
 
 The `chunk validate` command runs the commands configured in your project's `.chunk/config.json`. Use it to verify your changes pass all quality checks before pushing.
-
-[NOTE]
-====
-For CI parity, use `chunk validate --remote` to validate in a Chunk sidecar instead of locally. See <<run-validation-in-a-sidecar>>.
-====
 
 [source,console]
 ----
 $ chunk validate
 ----
 
-`chunk validate` caches results by file content hash. Unchanged files skip re-execution on subsequent runs.
+Commands run in a Chunk sidecar by default. To run a command in your local working tree instead, set `"local": true` on it in `.chunk/config.json`. Use this for formatters, whose edits must land in your local files. The older `"remote": true` setting still works, but it matches the default. A command cannot set both `local` and `remote`.
+
+To see where each command runs, use `chunk validate --list`. To override placement for a whole run, pass `--local` to run everything locally or `--remote` to run everything in a sidecar.
+
+When a run includes several commands, the CLI runs them in this order:
+
+. Local commands with `"role": "autofix"`.
+. The batch of remote commands, after syncing your working tree.
+. The remaining local commands.
+
+Independent remote commands run on separate sidecars, up to three at a time by default. Pass `--parallel <n>` to change the limit. The CLI keeps the extra sidecars it creates for later runs.
+
+`chunk validate` caches results by file content hash when it runs from a hook. Unchanged files skip re-execution on subsequent runs. Manual runs and inline `--cmd` commands never use the cache.
 
 To run a specific named command:
 
@@ -264,6 +320,8 @@ Add `--save` to write the inline command to `.chunk/config.json` for future runs
 $ chunk validate --cmd "go test ./..." --save
 ----
 
+To mark existing commands as remote, run `chunk validate --mark-remote`. Pass a command name to mark only that command. Without a name, the CLI marks every command except those with `"role": "autofix"` and lists the ones it skipped.
+
 The following flags are available:
 
 [.table-scroll]
@@ -273,7 +331,7 @@ The following flags are available:
 |Flag |Description
 
 |`--list`
-|List all configured commands and their status.
+|List all configured commands, whether each runs locally or remotely, and its status.
 
 |`--dry-run`
 |Show the commands that would run, without executing them.
@@ -285,10 +343,28 @@ The following flags are available:
 |Save the `--cmd` value to `.chunk/config.json`.
 
 |`--remote`
-|Run on the active Chunk sidecar. Creates a new Chunk sidecar if none exists.
+|Run all selected commands on a Chunk sidecar, overriding local placement. Creates a Chunk sidecar if none exists.
+
+|`--local`
+|Run all selected commands locally instead of on a Chunk sidecar.
+
+|`--mark-remote`
+|Mark the named command, or every eligible command, as remote in `.chunk/config.json`, then exit.
+
+|`--parallel <n>`
+|Maximum number of sidecars to use for remote commands. The default of `0` selects automatically, up to three.
 
 |`--sidecar-id <id>`
 |Run commands in a specific Chunk sidecar. Get a sidecar ID from `chunk sidecar list`.
+
+|`--org-id <id>`
+|Organization ID to use when the CLI creates a new Chunk sidecar.
+
+|`--workdir <path>`
+|Working directory on the Chunk sidecar.
+
+|`--project <path>`
+|Override the project directory.
 
 |`-e <KEY=VALUE>`
 |Set an environment variable in the remote sidecar session. Repeatable.
@@ -296,8 +372,312 @@ The following flags are available:
 |`--env-file <path>`
 |Load environment variables from a file. Defaults to `.env.local`.
 
+|`--async`
+|Run in the background through the watch daemon. Read the results later with `chunk validate results`.
+
 |`--json`
 |Output results as JSON. Only applies with `--list`.
+|===
+--
+
+Remote runs load `.env.local` from your working directory automatically and forward its variables to the sidecar session. Variables you pass with `-e` take precedence over those in the file.
+
+[#validate-in-the-background]
+=== Validate in the background
+
+The `--async` flag hands a validation run to the watch daemon and returns immediately. The daemon runs the checks while you keep working.
+
+[source,console]
+----
+$ chunk validate --async
+----
+
+Read the results of finished background runs with `chunk validate results`. The CLI reports each result once and then forgets it. If your working tree changed while a run was in flight, the CLI discards the verdict and says so. A result for code that is no longer on disk would be misleading.
+
+Background validation also applies to the Stop hook. When the watch daemon is running, it can release the hook and run the checks afterward, then report the results to your agent on its next turn. By default, the daemon does this only for changes under 500 lines, or for changes confined to documentation and text files. It always waits for larger changes, and for any project whose last run failed. A `chunk validate` command you type in a terminal always waits for the result.
+
+You can tune this behavior with the following keys in `.chunk/config.json`:
+
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+|Key |Description
+
+|`asyncValidate`
+|Whether hook runs may be validated in the background. Set to `auto` (default), `always`, or `never`.
+
+|`asyncValidateMaxLines`
+|The largest change, in lines, that the daemon still validates in the background under `auto`. The default is 500.
+
+|`asyncValidateWorktree`
+|Run background checks in a checked-out snapshot so that edits cannot make the result stale. Defaults to `false`. A snapshot does not include gitignored files.
+
+|`asyncValidateInert`
+|File extensions (such as `.sql`) or file names that the daemon also treats as documentation. Adds to the built-in list.
+
+|`asyncValidateBlocking`
+|File extensions or file names that always make the hook wait.
+|===
+--
+
+Set these keys with `chunk config set`, or ask your agent to use the `chunk-validate-config` skill.
+
+[#validate-code-variants]
+=== Validate code variants
+
+The `chunk validate variants` command runs your validation commands against a set of code variants on a temporary pool of sidecars. The `chunk-testing-gaps` skill uses it for mutation testing. The CLI deletes the pool when the run finishes.
+
+[source,console]
+----
+$ chunk validate variants <variants-file>
+----
+
+Replace `<variants-file>` with the path to a file that describes your variants. The following flags are available:
+
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+|Flag |Description
+
+|`--name <command>`
+|Name of the validate command to run. Defaults to all remote commands.
+
+|`--parallel <n>`
+|Maximum pool capacity. The default is five.
+
+|`--timeout <seconds>`
+|Per-command timeout, used when the command sets none. The default is 300. Use `0` for no limit.
+
+|`--image <id>`
+|Snapshot image ID. Defaults to `validation.sidecarImage` from your config.
+
+|`--org-id <id>`
+|Organization ID.
+
+|`--workdir <path>`
+|Remote working directory.
+|===
+--
+
+The CLI never reports an environmental failure as a caught variant. A variant counts as killed only when the command ran and exited with a non-zero status on its own terms. A command that fails to start, or that exceeds its timeout, is recorded as an error. If every variant is killed, the CLI warns you, because that result is more often a single broken command than fully covered code.
+
+[#monitor-sidecars-with-chunk-watch]
+== Monitor sidecars with chunk watch
+
+The `chunk watch` command opens a live dashboard of your sidecars and their activity. Run it in a terminal while a sync or validation is in progress.
+
+[source,console]
+----
+$ chunk watch
+----
+
+By default, the dashboard shows every project that `chunk` has seen. Pass `--focus` to watch only the current directory, or pass a path to add another project. The dashboard refreshes every five seconds and requires an interactive terminal.
+
+The left pane lists your sidecars, grouped by project, with what each one is doing. The right pane shows the activity log for the selected sidecar, including sync, validate, exec, and setup events. For each sidecar, the dashboard also shows CPU, memory, and disk usage, sampled every two seconds while the dashboard is open.
+
+You do not need to have the dashboard open while a run happens. Every remote `chunk validate` run records its results to disk, so you can see earlier runs the next time you open `chunk watch`.
+
+Use the following keys to navigate:
+
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+|Key |Action
+
+|`↑` / `↓` or `j` / `k`
+|Select a sidecar.
+
+|`Enter`
+|Open the output of the selected command. Commands marked `▤` have output the daemon still holds. Commands that are still running tail live.
+
+|`Esc`
+|Close the output view.
+
+|`q`
+|Quit the dashboard.
+|===
+--
+
+The daemon keeps up to 256 KiB of output for each of the 20 most recent commands per project, and only in memory. Restarting the daemon clears these buffers.
+
+To read the same output without a terminal, such as from a script or an agent, use `chunk sidecar logs`. Command IDs appear in the dashboard.
+
+[source,console]
+----
+$ chunk sidecar logs <command-id>
+----
+
+Pass `-f` to keep printing until the command exits. The command writes output to stdout so you can pipe it. It reports a non-zero remote exit status on stderr as `exit status <n>`.
+
+[#find-test-coverage-gaps]
+== Find test coverage gaps
+
+The `chunk mutate` command finds gaps in your test coverage with mutation testing. It changes your production code, then checks whether your test suite detects each change. A change that the suite fails to detect points to behavior without an effective assertion.
+
+`chunk mutate` supports Go projects. It does not change your local working tree. It creates a small patch for each mutation and applies it on a sidecar.
+
+To list the candidate mutations without running them:
+
+[source,console]
+----
+$ chunk mutate [path]
+----
+
+The optional `path` can name a file, a directory, or a recursive pattern such as `./internal/...`. To run the mutations against your test suite, pass `--parallel`:
+
+[source,console]
+----
+$ chunk mutate --parallel 10
+----
+
+With `--parallel`, the command creates or reuses a pool of sidecars and runs the unmodified test suite first. The suite must pass before any mutation runs. The test command defaults to the command named `test` in `.chunk/config.json`.
+
+Each mutation gets one of the following results:
+
+* `KILLED`: The test command failed, so the suite detected the mutation.
+* `SURVIVED`: The test command passed despite the mutation.
+* `ERROR`: Setup, patching, remote execution, or cleanup failed.
+
+The following flags are available:
+
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+|Flag |Description
+
+|`--parallel <n>`
+|Number of sidecars in the pool. Without this flag, the command lists mutations and exits.
+
+|`--max <n>`
+|Limit the number of mutations. The default of `0` means no limit.
+
+|`--output <table\|json>`
+|Format of the mutation list.
+
+|`--test-cmd <command>`
+|Test command to run. Overrides the `test` command in your config.
+
+|`--test-timeout <duration>`
+|Maximum time for each mutation's test run. The default is three minutes.
+
+|`--org-id <id>`
+|CircleCI organization ID.
+
+|`--destroy-pool`
+|Delete the pool's sidecars after the run. Otherwise the CLI keeps them for reuse.
+|===
+--
+
+You can also ask your agent to find testing gaps. The `chunk-testing-gaps` skill runs a four-stage process that adds production cross-referencing and risk assessment.
+
+[#run-chunk-factory]
+[badge="Preview"]
+== Run Chunk factory
+
+CAUTION: Chunk factory is in preview and under active development. The command is hidden from `chunk --help` while it is being finalized, and its behavior and flags may change.
+
+The `chunk factory` command sends a prompt to an implementer agent on a sidecar, then checks the agent's work in a loop. Each round, the command reviews the work with your review prompts, runs your validation commands, and feeds any failures back to the implementer. The loop ends when every check passes or when the attempts run out.
+
+[#before-you-run-chunk-factory]
+=== Before you start
+
+Chunk factory needs something to check the implementer's work against. Set up at least one of the following:
+
+* Review prompts. Add one `.md` or `.txt` file per review to the `.chunk/reviews` directory. Each prompt runs as an independent review on its own sidecar.
+* Validation commands. Run `chunk init` to detect them, or see <<run-validation>>.
+
+If you have neither, the command stops and tells you what to add.
+
+[#start-a-chunk-factory-run]
+=== Start a run
+
+From your project directory, pass the prompt as a single quoted argument:
+
+[source,console]
+----
+$ chunk factory "add a --verbose flag to the export command"
+----
+
+The command registers your project with the watch daemon, starts the daemon if needed, and follows the run in your terminal. It prints the sidecars being prepared and each round's review findings, including the end of the output from any failed validation command. You can also follow the run in `chunk watch`. To stop the run, use `Ctrl-C`. The command waits for the implementer's work so far to be committed.
+
+NOTE: Chunk factory runs on your local watch daemon, so it does not work when `CHUNK_WATCHD_REMOTE_ADDR` is set.
+
+[#chunk-factory-worktree]
+=== Review the result
+
+Chunk factory never touches your checkout. It works in a separate git worktree on a new branch named `chunk/factory/<run-id>`. The worktree starts from your files as they are, including uncommitted changes. The CLI commits your uncommitted work as the starting point, so it does not appear as part of the change under review.
+
+The CLI syncs the implementer's work into the worktree after each round and commits it when the run ends. The CLI keeps the worktree so you can inspect the work or continue in it. When the run ends, the command prints the following:
+
+* The work committed on the `chunk/factory/<run-id>` branch.
+* The worktree path, and a command to keep the work. If your branch started at your `HEAD`, the command is `git merge chunk/factory/<run-id>`. If you had uncommitted changes, the command applies the run's changes on top of them with `git diff --binary`.
+* How long the run took and what the implementer cost.
+
+The command exits with a non-zero status unless every check passed.
+
+[#chunk-factory-logs]
+=== Keep a run log
+
+Pass `--log` to keep a plain-text log of the run's full context. The log includes every prompt sent to the implementer, what the implementer did and said, each review's findings in full, and the output of failed validation commands. Use it to judge the run and refine your prompts.
+
+[source,console]
+----
+$ chunk factory "<prompt>" --log
+----
+
+By default, the log is saved to `~/.chunk/factory/run-<start-time>.log`. Pass `--log=<path>` to choose another file. Pass `--verbose` to add the review prompts, the output of commands that passed, and a per-round check that every reviewer has the implementer's change. `--verbose` also shows the log in your terminal as the run writes it, and implies `--log`.
+
+[#chunk-factory-flags]
+=== Chunk factory flags
+
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+|Flag |Description
+
+|`--attempts <n>`
+|Maximum number of review and validation rounds. The default is three.
+
+|`--reviews <dir>`
+|Directory of review prompts. Must be inside the project. Defaults to `.chunk/reviews`.
+
+|`--reviewers <n>`
+|Number of reviewer sidecars. The default of `0` uses one per review prompt.
+
+|`--no-validate`
+|Skip the project's validation commands.
+
+|`--keep-sidecars`
+|Leave the sidecars running when the run ends.
+
+|`--model <model>`
+|Claude model for the implementer. Defaults to the default of Claude Code.
+
+|`--implement-timeout <duration>`
+|Maximum time for each implementer turn. The default is 30 minutes.
+
+|`--review-timeout <duration>`
+|Maximum time for each review. The default is 15 minutes.
+
+|`--org-id <id>`
+|Organization ID. Defaults to the organization in your project config.
+
+|`--image <snapshot-id>`
+|Snapshot image ID. Defaults to `validation.sidecarImage` from your config.
+
+|`--log[=<path>]`
+|Keep a log of the run's full context.
+
+|`--verbose`
+|Log more detail and show the log in the terminal. Implies `--log`.
+
+|`--json`
+|Output as JSON.
 |===
 --
 
@@ -365,12 +745,35 @@ The following flags are available:
 [#configure-hooks]
 == Validation hooks
 
-`chunk init` automatically adds two hooks to `.claude/settings.json`:
+`chunk init` automatically adds two hooks to `.claude/settings.json`. If you use Codex, it adds the same hooks to `.codex/hooks.json`.
 
 * **PreToolUse hook**: runs before every `git commit` and blocks it if validation fails, preventing broken code from entering the repository.
-* **Stop hook**: runs when your Claude Code session ends. If your working tree has changes, it validates them automatically.
+* **Stop hook**: runs when your agent session ends. If your working tree has changes, it validates them automatically. The hook retries up to three times by default before it lets the session end. Set `stopHookMaxAttempts` in `.chunk/config.json` to change this.
+
+`chunk init` also installs a git pre-commit hook that runs `chunk validate` locally before every commit. To skip it, pass `--skip-git-hook`.
+
+A successful Stop hook run is cached. If the hook fires again with nothing changed, it prints `skipped` instead of re-running your commands. The CLI never caches failures.
 
 To reinstall hooks without re-running full initialization, run `chunk init --skip-validate`.
+
+[#disable-hooks]
+=== Turn hooks off and on
+
+To pause validation hooks in a project without removing them, run `chunk hook disable`. Run `chunk hook enable` to turn them back on, and `chunk hook status` to check the current state. You can also disable Stop hook validation for a single session by setting the `CHUNK_HOOKS_DISABLED` environment variable.
+
+[#check-for-merge-conflicts]
+=== Check for merge conflicts
+
+The `chunk conflicts` command reports whether your branch still merges cleanly into its merge target, usually the default branch on `origin`. The watch daemon computes the answer in the background, so the command returns immediately and never touches your working tree.
+
+[source,console]
+----
+$ chunk conflicts
+----
+
+The command is advisory and always exits with status `0`. It compares committed history only, so uncommitted changes are not considered. If there is no answer, for example because the daemon is not running or your `HEAD` is detached, the command says why instead of reporting that there are no conflicts.
+
+Pass `--json` to print the raw report, or `--hook` to emit Claude Code hook output so the notice reaches your agent.
 
 [#generate-a-review-prompt]
 == Generate a team review prompt
