@@ -13,10 +13,16 @@ You may need to find the ID of specific CircleCI elements to perform various act
 - Running a command from the local CircleCI CLI.
 - Identifying a CircleCI element in logs or webhook payloads.
 
+ifndef::server[]
 NOTE: The API and CLI methods on this page require a CircleCI personal API token. See xref:toolkit:managing-api-tokens.adoc[Managing API Tokens] for setup instructions. Set your token as an environment variable before using any API or CLI command: `export CIRCLE_TOKEN=<your-api-token>`.
+endif::server[]
 
 ifdef::server[]
+NOTE: The API and CLI methods on this page require a CircleCI personal API token. See xref:toolkit:managing-api-tokens.adoc[Managing API Tokens] for setup instructions. For API commands, set your token as an environment variable: `export CIRCLE_TOKEN=<your-api-token>`. For CLI v0, you enter the token when you run `circleci-v0 setup`.
+
 include::guides:ROOT:partial$notes/server-api-examples.adoc[]
+
+CLI v1 is not supported on CircleCI Server. The CLI examples on this page use CLI v0, which installs as the `circleci-v0` binary. To install and set up CLI v0 with your Server host, see xref:toolkit:circleci-cli.adoc#install-cli-v0-for-circleci-server[Install the CLI for CircleCI Server].
 endif::server[]
 
 == Get IDs from the built-in environment variables
@@ -105,6 +111,7 @@ The response includes your user ID in the `id` field:
 }
 ----
 --
+ifndef::server[]
 CLI::
 +
 --
@@ -115,6 +122,14 @@ To return your user ID:
 $ circleci auth me --json --jq '.id'
 ----
 --
+endif::server[]
+ifdef::server[]
+CLI v0::
++
+--
+CLI v0 has no command that returns your user ID. Use the web app or API v2 method instead.
+--
+endif::server[]
 ====
 
 
@@ -195,6 +210,7 @@ The response returns a list of collaborations. The `id` field for each entry is 
 ]
 ----
 --
+ifndef::server[]
 CLI::
 +
 --
@@ -212,6 +228,37 @@ To extract only the IDs, append a `--jq` filter:
 $ circleci org list --json --jq '.[].id'
 ----
 --
+endif::server[]
+ifdef::server[]
+CLI v0::
++
+--
+To list all organizations you belong to:
+
+[source,console]
+----
+$ circleci-v0 info org
+----
+
+The output is a table. The `ID` column holds the organization ID:
+
+[source,text]
+----
++---------------+--------+
+|      ID       |  NAME  |
++---------------+--------+
+| <your-org-id> | my-org |
++---------------+--------+
+----
+
+To extract only the IDs, add the `--json` flag and pipe the output to `jq`:
+
+[source,console]
+----
+$ circleci-v0 info org --json | jq '.[].id'
+----
+--
+endif::server[]
 ====
 
 
@@ -289,6 +336,7 @@ The response includes the project ID in the `id` field:
 }
 ----
 --
+ifndef::server[]
 CLI::
 +
 --
@@ -306,6 +354,14 @@ To look up a specific project by slug:
 $ circleci project list --slug gh/my-org/my-repo --json --jq '.[0].id'
 ----
 --
+endif::server[]
+ifdef::server[]
+CLI v0::
++
+--
+CLI v0 has no command that returns a project ID. Use the web app or API v2 method instead.
+--
+endif::server[]
 ====
 
 
@@ -414,6 +470,7 @@ The `id` field for each pipeline is the pipeline run ID:
 ----
 --
 
+ifndef::server[]
 CLI::
 +
 --
@@ -431,6 +488,14 @@ To filter by branch:
 $ circleci run list --branch main --json --jq '.[].id'
 ----
 --
+endif::server[]
+ifdef::server[]
+CLI v0::
++
+--
+CLI v0 has no command that returns a pipeline run ID. Use one of the web app methods or the API v2 method instead.
+--
+endif::server[]
 ====
 
 
@@ -525,6 +590,7 @@ The `id` field for each workflow is the workflow ID:
 ----
 --
 
+ifndef::server[]
 CLI::
 +
 --
@@ -542,6 +608,14 @@ To list workflow IDs for a specific run, use the run UUID:
 $ circleci workflow list <run-uuid> --json --jq '.[].id'
 ----
 --
+endif::server[]
+ifdef::server[]
+CLI v0::
++
+--
+CLI v0 has no command that returns a workflow ID. Use one of the web app methods or the API v2 method instead.
+--
+endif::server[]
 ====
 
 
@@ -625,6 +699,7 @@ The `id` field for each job is the job ID:
 ----
 --
 
+ifndef::server[]
 CLI::
 +
 --
@@ -642,6 +717,14 @@ To list job IDs for a specific workflow, use the workflow UUID:
 $ circleci workflow get <workflow-uuid> --json --jq '.jobs[].id'
 ----
 --
+endif::server[]
+ifdef::server[]
+CLI v0::
++
+--
+CLI v0 has no command that returns a job ID. Use the web app or API v2 method instead.
+--
+endif::server[]
 ====
 
 

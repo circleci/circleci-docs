@@ -71,18 +71,13 @@ CLI v0::
 --
 CLI v1 is not supported on CircleCI Server. Install CLI v0 as described in xref:toolkit:circleci-cli.adoc#install-cli-v0-for-circleci-server[Install the CLI for CircleCI Server].
 
-. Find your organization ID. Copy the ID of your organization from the output:
-+
-[source,console]
-----
-$ circleci info org
-----
+. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
 
 . Create a context. Replace `<org-id>`:
 +
 [source,console]
 ----
-$ circleci context create --org-id <org-id> <context-name>
+$ circleci-v0 context create --org-id <org-id> <context-name>
 ----
 +
 The new context appears with security set to `All members`, meaning anyone in your organization can access it at runtime.
@@ -91,7 +86,7 @@ The new context appears with security set to `All members`, meaning anyone in yo
 +
 [source,console]
 ----
-$ circleci context store-secret --org-id <org-id> <context-name> <env-var-name>
+$ circleci-v0 context store-secret --org-id <org-id> <context-name> <env-var-name>
 ----
 
 include::ROOT:partial$shared-sections/use-a-context-in-a-job.adoc[]
@@ -254,6 +249,8 @@ NOTE: Bitbucket repositories do *not* provide an API that allows CircleCI contex
 endif::server[]
 ifdef::server[]
 NOTE: Only `github` type organizations support security group restrictions.
+
+CLI v0 has no commands for context restrictions. On CircleCI Server, add and remove security group, project, and expression restrictions with the web app or API v2.
 endif::server[]
 
 CircleCI enables you to restrict contexts at run time in the following ways:
@@ -1050,26 +1047,23 @@ CLI v0::
 --
 CLI v1 is not supported on CircleCI Server. Install CLI v0 as described in xref:toolkit:circleci-cli.adoc#install-cli-v0-for-circleci-server[Install the CLI for CircleCI Server].
 
-To find your organization ID, copy the ID of your organization from the output:
+. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
 
+. Next, find your context name. List your contexts, replacing `<org-id>`, and copy the name of the context:
++
 [source,console]
 ----
-$ circleci info org
+$ circleci-v0 context list --org-id <org-id>
 ----
 
-To find the name of the context, list your contexts. Replace `<org-id>`:
-
+. Delete the context. Replace `<context-name>`. The CLI asks you to confirm the deletion:
++
 [source,console]
 ----
-$ circleci context list --org-id <org-id>
+$ circleci-v0 context delete --org-id <org-id> <context-name>
 ----
-
-Delete the context. Replace `<context-name>`:
-
-[source,console]
-----
-$ circleci context delete --org-id <org-id> <context-name>
-----
++
+To skip the confirmation prompt, add the `--force` flag.
 --
 endif::server[]
 Web app::
@@ -1181,25 +1175,20 @@ CLI v0::
 --
 CLI v1 is not supported on CircleCI Server. Install CLI v0 as described in xref:toolkit:circleci-cli.adoc#install-cli-v0-for-circleci-server[Install the CLI for CircleCI Server].
 
-. Find your organization ID. Copy the ID of your organization from the output:
-+
-[source,console]
-----
-$ circleci info org
-----
+. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
 
-. If you have not already done so, find the right context name. Replace `<org-id>`:
+. Next, find your context name. List your contexts, replacing `<org-id>`, and copy the name of the context you want to add the environment variable to:
 +
 [source,console]
 ----
-$ circleci context list --org-id <org-id>
+$ circleci-v0 context list --org-id <org-id>
 ----
 
 . Store a new environment variable under that context. The CLI prompts you for the value:
 +
 [source,console]
 ----
-$ circleci context store-secret --org-id <org-id> <context-name> <env-var-name>
+$ circleci-v0 context store-secret --org-id <org-id> <context-name> <env-var-name>
 ----
 --
 endif::server[]
@@ -1315,32 +1304,27 @@ CLI v0::
 --
 CLI v1 is not supported on CircleCI Server. Install CLI v0 as described in xref:toolkit:circleci-cli.adoc#install-cli-v0-for-circleci-server[Install the CLI for CircleCI Server].
 
-. Find your organization ID. Copy the ID of your organization from the output:
-+
-[source,console]
-----
-$ circleci info org
-----
+. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
 
-. If you have not already done so, find the context name that contains the environment variable you wish to delete. Replace `<org-id>`:
+. Next, find your context name. List your contexts, replacing `<org-id>`, and copy the name of the context that contains the environment variable you wish to delete:
 +
 [source,console]
 ----
-$ circleci context list --org-id <org-id>
+$ circleci-v0 context list --org-id <org-id>
 ----
 
 . Confirm the environment variable exists within that context:
 +
 [source,console]
 ----
-$ circleci context show --org-id <org-id> <context-name>
+$ circleci-v0 context show --org-id <org-id> <context-name>
 ----
 
 . Delete the environment variable:
 +
 [source,console]
 ----
-$ circleci context remove-secret --org-id <org-id> <context-name> <env-var-name>
+$ circleci-v0 context remove-secret --org-id <org-id> <context-name> <env-var-name>
 ----
 --
 endif::server[]
@@ -1451,32 +1435,27 @@ CLI v0::
 --
 CLI v1 is not supported on CircleCI Server. Install CLI v0 as described in xref:toolkit:circleci-cli.adoc#install-cli-v0-for-circleci-server[Install the CLI for CircleCI Server].
 
-. Find your organization ID. Copy the ID of your organization from the output:
-+
-[source,console]
-----
-$ circleci info org
-----
+. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
 
-. Find the context name that contains the variable you would like to rotate. Replace `<org-id>`:
+. Next, find your context name. List your contexts, replacing `<org-id>`, and copy the name of the context that contains the variable you would like to rotate:
 +
 [source,console]
 ----
-$ circleci context list --org-id <org-id>
+$ circleci-v0 context list --org-id <org-id>
 ----
 
 . Find the environment variable to rotate within that context:
 +
 [source,console]
 ----
-$ circleci context show --org-id <org-id> <context-name>
+$ circleci-v0 context show --org-id <org-id> <context-name>
 ----
 
 . Update the existing environment variable. The CLI prompts you for the new value:
 +
 [source,console]
 ----
-$ circleci context store-secret --org-id <org-id> <context-name> <env-var-name>
+$ circleci-v0 context store-secret --org-id <org-id> <context-name> <env-var-name>
 ----
 --
 endif::server[]
