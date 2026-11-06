@@ -862,12 +862,7 @@ The steps detailed in this section show how to manually rerun only a workflow's 
 
 To rerun only a workflow's failed jobs, follow these steps:
 
-ifndef::server[]
-. In the link:https://app.circleci.com/home/[CircleCI web app] select your organization.
-endif::server[]
-ifdef::server[]
-. In the CircleCI web app, select your organization.
-endif::server[]
+. In the cloudlink:webapp[CircleCI web app], select your organization.
 . Select **Pipelines** in the sidebar.
 . Use the filters to find your project and pipeline.
 . Find the row in the pipeline view for the workflow you would like to rerun from failed and select the *Rerun from failed* icon. This option is also available in the workflow view using the rerun dropdown menu, which you can access by clicking on the workflow name or badge.
@@ -1038,12 +1033,7 @@ If you have a working configuration with a single job named `build` and you then
 [#workflow-and-subsequent-jobs-do-not-trigger]
 === Workflow and subsequent jobs do not trigger
 
-ifndef::server[]
-If you do not see your workflows running, check for configuration errors that may be preventing the workflow from starting. Navigate to your link:https://app.circleci.com/pipelines/[project's pipelines] and find your workflow name to locate the failure.
-endif::server[]
-ifdef::server[]
-If you do not see your workflows running, check for configuration errors that may be preventing the workflow from starting. Navigate to your project's pipelines in the CircleCI web app and find your workflow name to locate the failure.
-endif::server[]
+If you do not see your workflows running, check for configuration errors that may be preventing the workflow from starting. Navigate to your project's pipelines in the cloudlink:webapp[CircleCI web app] and find your workflow name to locate the failure.
 
 [#rerunning-workflows-fails]
 === Rerunning workflows fails

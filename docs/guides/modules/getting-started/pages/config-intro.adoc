@@ -83,12 +83,7 @@ As mentioned in the note above the sample code, you may optionally supply your D
 
 . Commit your `config.yml` file (and push, if you are working remotely).
 
-ifndef::server[]
-. A new pipeline is triggered in CircleCI. You can see the output in the link:https://app.circleci.com/[CircleCI dashboard]. A green tick denotes a successful pipeline. A red exclamation mark alerts you to a failure. Click on the job for more details. You can see your step - The First Step - along with the output of the commands.
-endif::server[]
-ifdef::server[]
-. A new pipeline is triggered in CircleCI. You can see the output in the CircleCI web app. A green tick denotes a successful pipeline. A red exclamation mark alerts you to a failure. Click on the job for more details. You can see your step - The First Step - along with the output of the commands.
-endif::server[]
+. A new pipeline is triggered in CircleCI. You can see the output in the cloudlink:webapp[CircleCI web app]. A green tick denotes a successful pipeline. A red exclamation mark alerts you to a failure. Click on the job for more details. You can see your step - The First Step - along with the output of the commands.
 
 NOTE: Although the `config.yml` syntax itself is straightforward, the indentation is more complicated. Incorrect indentation is the most common error. If you are experiencing problems with this example, check your indentation carefully, or copy and paste the sample code.
 

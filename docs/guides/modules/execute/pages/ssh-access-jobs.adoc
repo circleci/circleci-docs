@@ -24,12 +24,7 @@ NOTE: Regular CircleCI pipelines execute each step in a non-interactive shell. S
 
 NOTE: **Using self-hosted runners?** To use SSH reruns with CircleCI runners you will first need to enable the SSH rerun feature. Refer to the xref:runner:ROOT:machine-runner-3-configuration-reference.adoc#runner-ssh-advertise-addr[Machine Runner 3], xref:runner:ROOT:container-runner-installation.adoc#enable-rerun-job-with-ssh[Container Runner], or xref:runner:ROOT:machine-runner-orchestrator.adoc#enable-rerun-job-with-ssh[Machine Runner Orchestrator] pages for steps.
 
-ifndef::server[]
-. If you have not already done so, add an SSH key to your link:https://app.circleci.com/settings/user/job-ssh-keys[User Settings].
-endif::server[]
-ifdef::server[]
-. If you have not already done so, add an SSH key to your *User Settings*.
-endif::server[]
+. If you have not already done so, add an SSH key to your cloudlink:job-ssh-keys[User Settings].
 +
 This key connects to the container or virtual machine (VM) that is running your job.
 +
@@ -50,12 +45,7 @@ image::guides:ROOT:rerun-job-with-ssh.png[Screenshot showing rerun job with SSH 
 
 . To see the connection details, expand the *Enable SSH* section in the job output where you will see the SSH command needed to connect. The details are displayed again in the *Wait for SSH* section at the end of the job.
 +
-ifndef::server[]
-NOTE: After clicking btn:[Rerun Job With SSH], if your job does not populate the Enable SSH step, you have not added an SSH key to your link:https://app.circleci.com/settings/user/job-ssh-keys[User Settings].
-endif::server[]
-ifdef::server[]
-NOTE: After clicking btn:[Rerun Job With SSH], if your job does not populate the Enable SSH step, you have not added an SSH key to your *User Settings*.
-endif::server[]
+NOTE: After clicking btn:[Rerun Job With SSH], if your job does not populate the Enable SSH step, you have not added an SSH key to your cloudlink:job-ssh-keys[User Settings].
 +
 .Screenshot showing SSH connection details in the Enable SSH section
 image::guides:ROOT:rerun-job-connect.png[Screenshot showing SSH connection details in the Enable SSH section]
