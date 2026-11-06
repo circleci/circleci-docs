@@ -850,12 +850,7 @@ When disconnecting a VCS connection using the method described here, any existin
 
 Follow these steps to disconnect your CircleCI account from GitHub.
 
-ifndef::server[]
-. From the link:https://app.circleci.com/[CircleCI web app], navigate to your **User Settings** by clicking on your user icon in the top bar.
-endif::server[]
-ifdef::server[]
-. From the CircleCI web app, navigate to your **User Settings** by clicking on your user icon in the top bar.
-endif::server[]
+. From the cloudlink:webapp[CircleCI web app], navigate to your **User Settings** by clicking on your user icon in the top bar.
 . Select **Account Integrations**.
 . You will see a list of connections along with the GitHub or Bitbucket organizations they are associated with. Select btn:[Disconnect] next to the GitHub/Bitbucket connection you wish to disconnect.
 

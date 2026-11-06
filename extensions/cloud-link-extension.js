@@ -22,13 +22,15 @@ const DESTINATIONS = {
   projects: { path: '/projects', text: 'Projects' },
 }
 
-function render (document, name, text, pathAttr) {
+function render (document, name, text, pathAttr, window) {
   const dest = name === 'path' ? { path: `/${String(pathAttr || '').replace(/^\//, '')}`, text: '' } : DESTINATIONS[name]
   if (!dest) throw new Error(`cloudlink: unknown destination "${name}". Known: ${Object.keys(DESTINATIONS).join(', ')}, path`)
   const label = text || dest.text
   if (!label) throw new Error(`cloudlink:${name}[] needs link text`)
   if (isGuidesServerBuild(document.getAttribute('page-component-name'), document.getAttribute('page-component-version'))) return label
-  return `link:${BASE_URL}${dest.path}[${label.replace(/\]/g, '\\]')}]`
+  const escaped = label.replace(/\]/g, '\\]')
+  if (window) return `link:${BASE_URL}${dest.path}["${escaped.replace(/"/g, '\\"')}",window=${window}]`
+  return `link:${BASE_URL}${dest.path}[${escaped}]`
 }
 
 module.exports.register = function register (registry) {
@@ -36,7 +38,7 @@ module.exports.register = function register (registry) {
     const self = this
     self.process((parent, target, attrs) => {
       const text = attrs.$positional && attrs.$positional[0]
-      return self.createInlinePass(parent, render(parent.getDocument(), target, text, attrs.path))
+      return self.createInlinePass(parent, render(parent.getDocument(), target, text, attrs.path, attrs.window))
     })
   })
 }

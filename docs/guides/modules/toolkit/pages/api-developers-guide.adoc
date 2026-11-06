@@ -57,14 +57,8 @@ CircleCI encourages security best practices when using cURL with the API. Visit 
 
 To add an API token, perform the steps listed below.
 
-ifndef::server[]
-. Log in to the https://app.circleci.com[CircleCI web application].
-. xref:toolkit:managing-api-tokens.adoc#creating-a-personal-api-token[Create a Personal API Token] by visiting the link:https://app.circleci.com/settings/user/tokens[Personal API Tokens] page, and follow the steps to add an API token.
-endif::server[]
-ifdef::server[]
-. Log in to the CircleCI web application.
-. xref:toolkit:managing-api-tokens.adoc#creating-a-personal-api-token[Create a Personal API Token] by visiting the Personal API Tokens page, and follow the steps to add an API token.
-endif::server[]
+. Log in to the cloudlink:webapp[CircleCI web application].
+. xref:toolkit:managing-api-tokens.adoc#creating-a-personal-api-token[Create a Personal API Token] by visiting the cloudlink:personal-api-tokens[Personal API Tokens] page, and follow the steps to add an API token.
 . To test your token, call the API using the command below. You will need to set your API token as an environment variable before making a cURL call.
 +
 [,shell]
@@ -275,12 +269,7 @@ endif::server[]
 === Steps
 
 . In your VCS, create a repository (or use an existing one if you prefer). The repository for this how-to guide will be called `hello-world`. Create a README for your repository so that it is not empty.
-ifndef::server[]
-. Set up your new project on the link:https://app.circleci.com/[CircleCI web app]. Refer to the xref:getting-started:create-project.adoc[Create a Project] guide for steps.
-endif::server[]
-ifdef::server[]
-. Set up your new project in the CircleCI web app. Refer to the xref:getting-started:create-project.adoc[Create a Project] guide for steps.
-endif::server[]
+. Set up your new project in the cloudlink:webapp[CircleCI web app]. Refer to the xref:getting-started:create-project.adoc[Create a Project] guide for steps.
 +
 After completing the steps for setting up your project, you will have a valid `config.yml` file in a `.circleci` folder at the root of your repository. Something like the following:
 +
