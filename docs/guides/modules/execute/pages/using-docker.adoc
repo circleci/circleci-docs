@@ -252,7 +252,7 @@ endif::server[]
 * If you experience increases in your run times due to installing additional tools during execution, consider creating and using a custom-built image that comes with those tools pre-installed. See the xref:custom-images.adoc[Using Custom-Built Docker Images] page for more information.
 
 ifndef::server[]
-* When you use xref:private-images.adoc#aws-ecr[AWS ECR] images, pull times are shortest when the image is in the same region as your job's compute. If you can host your image in only one region, `us-east-1` is a reasonable default. If you replicate your image across regions, set `prefer_same_region` to `true` so that CircleCI attempts to pull the nearest copy. See xref:private-images.adoc#prefer-same-region[Using Docker authenticated pulls].
+* When you use xref:private-images.adoc#aws-ecr[AWS ECR] images, pull times are shortest when the image is in the same region as your job's compute. If you can host your image in only one region, `us-east-1` is a reasonable default. If you replicate your image across regions, set `prefer_same_region` to `true` so that CircleCI attempts to pull the nearest copy. See xref:private-images.adoc#prefer-same-region[Using Docker Authenticated Pulls].
 endif::server[]
 
 * If your pipelines fail despite little to no changes in your project, you may need to investigate upstream issues with the Docker images you use.
