@@ -1,0 +1,209 @@
+= Run incremental Bazel builds
+:page-badge: Beta
+:page-platform: Cloud
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-audience: developer
+:page-content-type: tutorial
+:page-description: Build and test only the Bazel targets affected by a change, and reuse unchanged build outputs across jobs with a CircleCI-managed remote cache.
+:experimental:
+
+On a large Bazel project, running `bazel test //...` on every commit wastes time. Most changes touch a small part of the codebase, but every target is rebuilt and retested anyway. Filtering by changed file paths is not a fix, because it misses downstream targets that depend on the code you changed.
+
+This tutorial shows you how to run only what a change affects:
+
+* Find the affected targets by comparing Bazel's dependency graph between `main` and your branch.
+* Generate a pipeline that builds those targets and runs only their tests, in parallel.
+* Reuse build outputs from earlier jobs with the xref:build-tool-cache.adoc[Build Tool Cache], so unchanged targets are not rebuilt.
+
+[#introduction]
+== Introduction
+
+Bazel models your codebase as a dependency graph. Every target declares its inputs, so Bazel knows which targets a change can affect. This tutorial uses a tool called link:https://github.com/Tinder/bazel-diff[`bazel-diff`] to read that graph.
+
+The pipeline in this tutorial uses two CircleCI features:
+
+* xref:orchestrate:dynamic-config.adoc[Dynamic Configuration]: a setup workflow works out the affected targets, then generates the configuration for the rest of the pipeline.
+* xref:build-tool-cache.adoc[Build Tool Cache]: the `with_tool_cache` step backs Bazel's remote cache, so the build job stores outputs that the test jobs reuse.
+
+You can follow along using the link:https://github.com/circleci-public/circleci-demo-bazel[CircleCI Bazel demo project], or apply the same pattern to your own Bazel project.
+
+[#prerequisites]
+== Prerequisites
+
+* A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
+* link:https://github.com/bazelbuild/bazelisk[Bazelisk] installed locally. On macOS, run `brew install bazelisk`. Bazelisk provides the `bazel` command.
+* The xref:guides:toolkit:circleci-cli.adoc[CircleCI CLI] installed and authenticated.
+
+[#1-explore-the-demo-project]
+== 1. Explore the demo project
+
+The demo project is a small Bazel workspace with four targets and a deliberate dependency graph:
+
+[source,text]
+----
+lib/math/       py_library + py_test   (no upstream deps)
+lib/strings/    py_library + py_test   (no upstream deps)
+app/hello/      py_binary              (depends on lib/math and lib/strings)
+app/goodbye/    py_binary              (depends on lib/strings only)
+----
+
+A change to `lib/math` affects `app/hello` but not `app/goodbye`. That difference is what the rest of this tutorial demonstrates.
+
+. Fork the demo project, then clone your fork:
++
+[source,console]
+----
+$ git clone https://github.com/<your-username>/circleci-demo-bazel.git
+$ cd circleci-demo-bazel
+----
+
+. Build and test everything locally to confirm that Bazel works:
++
+[source,console]
+----
+$ bazel build //...
+$ bazel test //...
+----
+
+[#2-set-up-the-project-on-circleci]
+== 2. Set up the project on CircleCI
+
+Follow your fork of the demo project in CircleCI. For steps, see the xref:getting-started:create-project.adoc[Create a Project] page.
+
+[#3-understand-the-pipeline]
+== 3. Understand the pipeline
+
+The demo project's `.circleci/config.yml` is a setup workflow. It generates the pipeline instead of building anything. Each time you push, the setup workflow:
+
+. Installs Bazel and `bazel-diff`.
+. Computes the targets that your change affects.
+. Generates a configuration file for that specific commit.
+. Passes the generated configuration to CircleCI to run as the next stage of the pipeline.
+
+The result differs by branch:
+
+* On `main`, the setup workflow saves a snapshot of the dependency graph to the cache, then generates a single job that builds and tests `//...`.
+* On any other branch, the setup workflow restores the latest `main` snapshot, compares it with the dependency graph of your branch, and generates the following jobs:
++
+** One build job.
+** One test job for each affected test target. These jobs run in parallel after the build job completes.
+
+Both the build job and the test jobs use `with_tool_cache`. The build job stores its outputs in the cache. Because the test jobs read from the same cache, they do not recompile the targets that the build job already built.
+
+For more on how the pieces work, see xref:orchestrate:dynamic-config.adoc[Dynamic Configuration] and xref:build-tool-cache.adoc[Build Tool Cache].
+
+[#4-run-a-pipeline-on-main]
+== 4. Trigger a run on main
+
+The setup workflow compares each branch with a snapshot of the dependency graph from `main`, so a successful run on `main` must exist first.
+
+. Trigger a run on `main` by pushing a commit, or by selecting **Rerun** on an existing run.
+. Wait for both stages of the pipeline to pass: the `setup` workflow, then the generated `build-and-test` job.
+
+To check the status from your terminal, run:
+
+[source,console]
+----
+$ circleci run list --project gh/<your-username>/circleci-demo-bazel --branch main --limit 1
+----
+
+[#5-change-only-lib-math]
+== 5. Change only lib/math
+
+. Create a branch:
++
+[source,console]
+----
+$ git checkout -b demo/math-only
+----
+
+. Edit `lib/math/math.py`. Add a function or change a constant.
+
+. Commit and push the change:
++
+[source,console]
+----
+$ git add lib/math/math.py
+$ git commit -m "demo: change lib/math only"
+$ git push -u origin demo/math-only
+----
+
+[#6-inspect-the-affected-targets]
+== 6. Inspect the affected targets
+
+. Find the run for your branch:
++
+[source,console]
+----
+$ circleci run list --project gh/<your-username>/circleci-demo-bazel --branch demo/math-only --limit 1
+----
+
+. Watch the run. The `setup` workflow completes first, then the generated `ci` workflow starts:
++
+[source,console]
+----
+$ circleci run watch <run-id>
+----
+
+. Open the `setup` job and read the output of the `Compute affected targets` step. The affected targets are:
++
+[source,text]
+----
+//app/hello:hello
+//lib/math:math
+//lib/math:math.py
+//lib/math:math_test
+----
+
+`//app/goodbye` and `//lib/strings` are absent, because neither depends on `lib/math`.
+
+. Open the generated `ci` workflow. It contains a `build-affected` job and a `test-lib-math-math-test` job. The test job requires the build job:
++
+[source,yaml]
+----
+workflows:
+  ci:
+    jobs:
+      - build-affected
+      - test-lib-math-math-test:
+          requires: [build-affected]
+----
+
+[#7-change-only-lib-strings]
+== 7. Change only lib/strings
+
+Now check the reverse case. Both apps depend on `lib/strings`, so a change there affects more targets.
+
+. Create a branch from `main`:
++
+[source,console]
+----
+$ git checkout main
+$ git checkout -b demo/strings-only
+----
+
+. Edit `lib/strings/strings.py`.
+
+. Commit and push the change:
++
+[source,console]
+----
+$ git add lib/strings/strings.py
+$ git commit -m "demo: change lib/strings only"
+$ git push -u origin demo/strings-only
+----
+
+When the run completes, `app/hello` and `app/goodbye` both appear in the affected targets. `lib/math` and `lib/math:math_test` are absent.
+
+[#conclusion]
+== Conclusion
+
+In this tutorial you ran a Bazel pipeline that builds and tests only the targets a change affects. You compared two branches that touched different libraries, and saw that the pipeline included different targets for each.
+
+[#next-steps]
+== Next steps
+
+* xref:build-tool-cache.adoc[Build Tool Cache]: options and supported tools for `with_tool_cache`.
+* xref:orchestrate:dynamic-config.adoc[Dynamic Configuration]: how setup workflows generate configuration.
+* xref:optimizations.adoc[Optimizations Overview]: other ways to speed up your pipelines.
