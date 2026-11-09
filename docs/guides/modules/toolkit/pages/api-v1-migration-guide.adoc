@@ -48,7 +48,7 @@ All other API v1 and API v1.1 endpoints, including every `GET` endpoint, are not
 
 * A CircleCI personal API token. API v2 does not support project API tokens. See the xref:managing-api-tokens.adoc[Managing API Tokens] guide.
 ifndef::server[]
-* For API v3: your organization ID and project ID. See xref:how-to-find-ids.adoc[How to Find IDs] for steps to find them.
+* For API v3: your project ID. You use it to list the project's pipeline definitions. See xref:how-to-find-ids.adoc[How to Find IDs] for steps to find it.
 endif::server[]
 * For API v2: your project slug in the form `<provider>/<organization>/<project>`, for example `gh/my-org/my-repo`. See <<project-addressing>>.
 
@@ -134,7 +134,7 @@ endif::server[]
 [#project-addressing]
 === Find your project address
 
-API v1.1 identifies a project by `<vcs-type>/<username>/<repo>`. API v2 identifies it by a project slug, `<provider>/<organization>/<project>`:
+API v1.1 identifies a project by `<vcs-type>/<username>/<repo>`. API v2 identifies it by a project slug, `<provider>/<organization>/<project>`, which you put in the URL of each request:
 
 * `<vcs-type>` becomes `<provider>`.
 * `<username>` becomes `<organization>`.
@@ -172,7 +172,7 @@ endif::server[]
 Projects in some organizations have an opaque project slug, for example `circleci/<organization-id>/<project-id>`. Use the slug that *Project Settings > Overview* shows. API v1 and API v1.1 cannot address these projects.
 
 ifndef::server[]
-API v3 identifies resources by UUID instead of by name, so you need your organization ID and project ID instead of a project slug. See xref:how-to-find-ids.adoc[How to Find IDs] for steps to find them, or use the API v3 `GET /api/v3/projects` endpoint.
+API v3 identifies resources by UUID instead of by name, so you need your project ID instead of a project slug. See xref:how-to-find-ids.adoc[How to Find IDs] for steps to find them, or use the API v3 `GET /api/v3/projects` endpoint.
 endif::server[]
 
 [#authentication]
@@ -210,7 +210,7 @@ Three API v1.1 endpoints become one API v2 endpoint and one API v3 endpoint. The
 ifndef::server[]
 ==== Using API v3
 
-. Find your pipeline definition ID. In the web app, go to *Project Settings > Pipelines*. You can also list the definitions for a project with the API:
+. Find your pipeline definition ID. A pipeline definition tells CircleCI which repository and config file to use for a pipeline. A project can have more than one, so the trigger request names the one to run. In the web app, go to *Project Settings > Pipelines*. You can also list the definitions for a project with the API:
 +
 [source,shell]
 ----
@@ -236,7 +236,7 @@ curl --request POST https://circleci.com/api/v3/runs \
     }
   }'
 ----
-. Save the run ID from `data.id` in the response:
+. The response contains the run ID in `data.id`. You need it to find the run's workflows and to check its status:
 +
 [source,json]
 ----
@@ -260,7 +260,7 @@ endif::server[]
 ifndef::server[]
 ==== Using API v2
 
-. Find your pipeline definition ID. In the web app, go to *Project Settings > Pipelines*. You can also list the definitions for a project with the API:
+. Find your pipeline definition ID. A pipeline definition tells CircleCI which repository and config file to use for a pipeline. A project can have more than one, so the trigger request names the one to run. In the web app, go to *Project Settings > Pipelines*. You can also list the definitions for a project with the API:
 +
 [source,shell]
 ----
@@ -268,7 +268,7 @@ curl "https://circleci.com/api/v2/project/<provider>/<organization>/<project>" \
   --header "Circle-Token: $CIRCLE_TOKEN"
 ----
 +
-Take the project `id` from the response, then list its pipeline definitions:
+Take the project `id` from the response. The pipeline definitions endpoint needs it in place of the slug:
 +
 [source,shell]
 ----
@@ -289,7 +289,7 @@ curl --request POST \
     "checkout": { "branch": "main" }
   }'
 ----
-. Save the pipeline `id` and `number` from the response:
+. The response contains the pipeline `id` and `number`. You need the `id` to find the pipeline's workflows, and the `number` to build a link to the pipeline in the web app:
 +
 [source,json]
 ----
@@ -315,7 +315,7 @@ curl --request POST \
   --header "Content-Type: application/json" \
   --data '{"branch": "main"}'
 ----
-. Save the pipeline `id` and `number` from the response:
+. The response contains the pipeline `id` and `number`. You need the `id` to find the pipeline's workflows, and the `number` to build a link to the pipeline in the web app:
 +
 [source,json]
 ----
@@ -460,7 +460,7 @@ The response contains the ID of the new workflow in `data.id`.
 
 To rerun with SSH enabled:
 
-. Get the job IDs in the workflow:
+. Get the job IDs in the workflow. The SSH rerun request must name the jobs to rerun:
 +
 [source,shell]
 ----
@@ -508,7 +508,7 @@ The response contains the ID of the new workflow in `workflow_id`.
 
 To rerun with SSH enabled:
 
-. Get the job IDs in the workflow:
+. Get the job IDs in the workflow. The SSH rerun request must name the jobs to rerun:
 +
 [source,shell]
 ----
@@ -534,7 +534,7 @@ API v1 and API v1.1 triggered a job and returned a build summary with fields suc
 [#replace-build-num]
 === Replace build numbers
 
-Save the ID from the trigger response instead of the build number. The examples use https://jqlang.github.io/jq/[jq] to read the response.
+API v1.1 callers used the build number to find a job again. Save the ID from the trigger response instead, and use it to look up the workflows and their status. The examples use https://jqlang.github.io/jq/[jq] to read the response.
 
 ifndef::server[]
 For API v3, the run ID is `data.id`:
