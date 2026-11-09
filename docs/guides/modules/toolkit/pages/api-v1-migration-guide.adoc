@@ -151,6 +151,16 @@ endif::server[]
 [#project-addressing]
 === Find your project address
 
+ifndef::server[]
+API v3 identifies a project by its project ID, a UUID, instead of by name. See xref:how-to-find-ids.adoc[How to Find IDs] for steps to find it. If you already know the project slug, look the project up with the API and take the `id` from the response:
+
+[source,shell]
+----
+curl -g "https://circleci.com/api/v3/projects?filter[slug]=<project-slug>" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN"
+----
+
+endif::server[]
 API v2 identifies a project by a project slug, which you put in the URL of each request. Check the slug for each project in the web app:
 
 . Open the project in the CircleCI web app.
@@ -188,10 +198,6 @@ endif::server[]
 
 |===
 --
-
-ifndef::server[]
-API v3 identifies resources by UUID instead of by name, so you need your project ID instead of a project slug. See xref:how-to-find-ids.adoc[How to Find IDs] for steps to find them, or use the API v3 `GET /api/v3/projects` endpoint.
-endif::server[]
 
 [#authentication]
 === Update authentication
