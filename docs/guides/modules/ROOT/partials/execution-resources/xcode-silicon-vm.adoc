@@ -10,6 +10,15 @@
 | Release Notes
 | Other Notes
 
+| `27.3`
+| Xcode 27.3 (27C5020n)
+| 26.6.2
+a| `m4pro.medium` +
+   `m4pro.large`
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v19887/manifest.txt[Installed software]
+| link:https://[Release Notes]
+| -
+
 | `27.2`
 | Xcode 27.2 (27B5028f)
 | 26.6.2
