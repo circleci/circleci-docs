@@ -16,7 +16,7 @@
 a| `m4pro.medium` +
    `m4pro.large`
 | link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v19887/manifest.txt[Installed software]
-| link:https://[Release Notes]
+| link:https://circleci.com/changelog/xcode-27-3-beta-1-available/[Release Notes]
 | -
 
 | `27.2`
