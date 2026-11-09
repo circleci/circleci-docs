@@ -391,7 +391,7 @@ Rerunning in API v2 and API v3 is workflow-based. You choose which workflow to r
 [#get-the-workflow-id]
 ==== Get the workflow ID
 
-If you saved the response when you triggered the pipeline run, use that:
+Use the ID that the trigger response returned:
 
 ifndef::server[]
 * API v3: List the workflows for the run, using the run ID from the trigger response:
@@ -419,17 +419,7 @@ curl "https://circleci.com/api/v2/pipeline/<pipeline-id>/workflow" \
 ----
 endif::server[]
 
-If you only have a build number, which is all the API v1 and API v1.1 retry endpoints needed, look up the job. The response includes the workflow ID in `latest_workflow.id`:
-
-// TODO(DOC-327): Confirm with the API team that GET /project/{project-slug}/job/{job-number} is meant to stay public.
-// TODO(DOC-327): It works, and api-developers-guide.adoc documents it, but it is missing from the API v2 OpenAPI spec. Link to the API reference once it is restored.
-[source,shell]
-----
-curl "https://circleci.com/api/v2/project/<provider>/<organization>/<project>/job/<job-number>" \
-  --header "Circle-Token: $CIRCLE_TOKEN"
-----
-
-See the xref:api-developers-guide.adoc#get-job-details[Get Job Details] section of the API v2 Developers Guide for the full response.
+API v1 and API v1.1 identified a build by its build number. API v2 and API v3 identify it by an ID, so save the ID when you trigger. See <<replace-build-num>>.
 
 ifndef::server[]
 ==== Using API v3
