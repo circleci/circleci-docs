@@ -2,7 +2,7 @@
 ====
 This feature **is supported** for orgs that use OAuth authentication.
 
-Check your Organization slug at menu:Organization settings[Overview]. OAuth authenticated orgs are structured as follows:
+Check your Organization slug at menu:Org[Overview]. OAuth authenticated orgs are structured as follows:
 
 * `github/<your-org-name>` or `gh/<your-org-name>`
 * `bitbucket/<your-org-name>` or `bb/<your-org-name>`
