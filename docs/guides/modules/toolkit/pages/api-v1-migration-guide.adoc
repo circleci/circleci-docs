@@ -7,7 +7,13 @@
 :page-description: Migrate from deprecated CircleCI API v1 and API v1.1 trigger and rerun endpoints to API v2 or API v3 before the 1 February 2027 removal date.
 :experimental:
 
-CircleCI removes ten API v1 and API v1.1 endpoints used to trigger and rerun builds on 1 February 2027. See <<deprecated-endpoints>>. After that date, requests to these endpoints return HTTP 410 Gone. This guide walks you through finding those calls in your code and replacing each one with an API v2 or API v3 call.
+CircleCI removes ten API v1 and API v1.1 endpoints used to trigger and rerun builds on 1 February 2027. See <<deprecated-endpoints>>. After that date, requests to these endpoints return HTTP 410 Gone.
+ifndef::server[]
+This guide walks you through finding those calls in your code and replacing each one with an API v2 or API v3 call.
+endif::server[]
+ifdef::server[]
+This guide walks you through finding those calls in your code and replacing each one with an API v2 call.
+endif::server[]
 
 WARNING: Until the removal date, the deprecated endpoints return `Deprecation` and `Sunset` response headers. Update your integrations before 1 February 2027.
 
@@ -41,12 +47,23 @@ API v1.1 endpoints:
 * `POST /api/v1.1/project/<vcs-type>/<username>/<repo>/build`
 * `POST /api/v1.1/project/<vcs-type>/<username>/<repo>/tree/<branch>`
 
-All other API v1 and API v1.1 endpoints, including every `GET` endpoint, are not affected. API v2 and API v3 endpoints are not affected.
+All other API v1 and API v1.1 endpoints, including every `GET` endpoint, are not affected.
+ifndef::server[]
+API v2 and API v3 endpoints are not affected.
+endif::server[]
+ifdef::server[]
+API v2 endpoints are not affected.
+endif::server[]
 
 [#prerequisites]
 == Prerequisites
 
+ifndef::server[]
+* A CircleCI personal API token. API v2 and API v3 do not support project API tokens. See the xref:managing-api-tokens.adoc[Managing API Tokens] guide.
+endif::server[]
+ifdef::server[]
 * A CircleCI personal API token. API v2 does not support project API tokens. See the xref:managing-api-tokens.adoc[Managing API Tokens] guide.
+endif::server[]
 ifndef::server[]
 * For API v3: your project ID. You use it to list the project's pipeline definitions. See xref:how-to-find-ids.adoc[How to Find IDs] for steps to find it.
 endif::server[]
@@ -134,16 +151,19 @@ endif::server[]
 [#project-addressing]
 === Find your project address
 
-API v1.1 identifies a project by `<vcs-type>/<username>/<repo>`. API v2 identifies it by a project slug, `<provider>/<organization>/<project>`, which you put in the URL of each request:
+API v2 identifies a project by a project slug, which you put in the URL of each request. Check the slug for each project in the web app:
+
+. Open the project in the CircleCI web app.
+. Go to *Project Settings > Overview*. This page shows the project slug.
+. Use that slug as `<provider>/<organization>/<project>` in your API v2 requests.
+
+A slug looks like `gh/my-org/my-repo`. Projects in some organizations have an opaque slug, for example `circleci/<organization-id>/<project-id>`. Use it as the web app shows it.
+
+API v1 has no VCS type in the path, so the web app is how you find the provider for each project. If you are working from an API v1.1 call, the values map as follows:
 
 * `<vcs-type>` becomes `<provider>`.
 * `<username>` becomes `<organization>`.
 * `<repo>` becomes `<project>`.
-
-API v1 has no VCS type in the path, so work out the provider for each project before you move to API v2. To find the provider and the full slug:
-
-. Open the project in the CircleCI web app.
-. Go to *Project Settings > Overview*. This page shows the project slug.
 
 ifndef::server[]
 The web app URL uses the long provider form. For example, `https://app.circleci.com/pipelines/github/my-org/my-repo` uses `github`. API v2 accepts both the long and short form, so `github/my-org/my-repo` and `gh/my-org/my-repo` are the same project.
@@ -169,8 +189,6 @@ endif::server[]
 |===
 --
 
-Projects in some organizations have an opaque project slug, for example `circleci/<organization-id>/<project-id>`. Use the slug that *Project Settings > Overview* shows. API v1 and API v1.1 cannot address these projects.
-
 ifndef::server[]
 API v3 identifies resources by UUID instead of by name, so you need your project ID instead of a project slug. See xref:how-to-find-ids.adoc[How to Find IDs] for steps to find them, or use the API v3 `GET /api/v3/projects` endpoint.
 endif::server[]
@@ -178,7 +196,12 @@ endif::server[]
 [#authentication]
 === Update authentication
 
+ifndef::server[]
 API v2 and API v3 accept the personal API token in an HTTP header:
+endif::server[]
+ifdef::server[]
+API v2 accepts the personal API token in an HTTP header:
+endif::server[]
 
 [.table-scroll]
 --
@@ -190,7 +213,7 @@ API v2 and API v3 accept the personal API token in an HTTP header:
 | The `Circle-Token` header, the `Authorization: Bearer` header, HTTP basic authentication, or the `circle-token` query parameter.
 
 | API v2
-| The `Circle-Token` header or the `Authorization: Bearer` header. HTTP basic authentication is also accepted. CircleCI has deprecated the `circle-token` query parameter.
+| The `Circle-Token` header or the `Authorization: Bearer` header. HTTP basic authentication is also accepted.
 
 ifndef::server[]
 | API v3
@@ -205,7 +228,7 @@ If your API v1 or API v1.1 calls pass the token as a query parameter, move it to
 [#trigger-a-pipeline-run]
 === Trigger a pipeline run
 
-Three API v1.1 endpoints become one API v2 endpoint and one API v3 endpoint. The branch moves from the URL path (`/tree/<branch>`) into the request body.
+The three API v1.1 trigger endpoints all map to a single trigger request. The branch moves from the URL path (`/tree/<branch>`) into the request body.
 
 ifndef::server[]
 ==== Using API v3
@@ -289,7 +312,7 @@ curl --request POST \
     "checkout": { "branch": "main" }
   }'
 ----
-. The response contains the pipeline `id` and `number`. You need the `id` to find the pipeline's workflows, and the `number` to build a link to the pipeline in the web app:
+. The response contains the pipeline `id` and `number`. You need the `id` to find the pipeline's workflows. API v1.1 returned a `build_url` and API v2 does not, so you use the `number` to build the link to the pipeline yourself. See <<replace-build-url>>:
 +
 [source,json]
 ----
@@ -315,7 +338,7 @@ curl --request POST \
   --header "Content-Type: application/json" \
   --data '{"branch": "main"}'
 ----
-. The response contains the pipeline `id` and `number`. You need the `id` to find the pipeline's workflows, and the `number` to build a link to the pipeline in the web app:
+. The response contains the pipeline `id` and `number`. You need the `id` to find the pipeline's workflows. API v1.1 returned a `build_url` and API v2 does not, so you use the `number` to build the link to the pipeline yourself. See <<replace-build-url>>:
 +
 [source,json]
 ----
@@ -339,7 +362,7 @@ The API v1.1 request body fields map as follows:
 * `branch`: Becomes `config.branch` and `checkout.branch`.
 * `tag`: Becomes `config.tag` and `checkout.tag`.
 * `revision`: No replacement. API v2 and API v3 take a branch or a tag, not a commit.
-* `build_parameters`: Environment variables set through `build_parameters` have no direct replacement. Declare a pipeline parameter in your config for each value, then pass the values in `parameters`.
+* `build_parameters`: Environment variables set through `build_parameters` have no direct replacement. For each value, declare a pipeline parameter in your config, then pass the values in `parameters`. See xref:orchestrate:pipeline-variables.adoc#pipeline-parameters-in-configuration[Pipeline Values and Parameters].
 
 A pipeline parameter that your config does not declare is not rejected when you trigger. The request returns a success response, and the pipeline then fails with the error `Unexpected argument(s): <parameter-name>`.
 
@@ -363,7 +386,7 @@ The API v1.1 request body fields map as follows:
 * `branch`: Stays `branch`. The branch moves from the URL path (`/tree/<branch>`) into the request body.
 * `tag`: Stays `tag`. Use either `branch` or `tag`, not both.
 * `revision`: No replacement. API v2 takes a branch or a tag, not a commit.
-* `build_parameters`: Environment variables set through `build_parameters` have no direct replacement. Declare a pipeline parameter in your config for each value, then pass the values in `parameters`.
+* `build_parameters`: Environment variables set through `build_parameters` have no direct replacement. For each value, declare a pipeline parameter in your config, then pass the values in `parameters`. See xref:orchestrate:pipeline-variables.adoc#pipeline-parameters-in-configuration[Pipeline Values and Parameters].
 
 A pipeline parameter that your config does not declare is not rejected when you trigger. The request returns a success response, and the pipeline then fails with the error `Unexpected argument(s): <parameter-name>`.
 
@@ -386,7 +409,13 @@ endif::server[]
 [#rerun-a-workflow]
 === Rerun a workflow
 
-Rerunning in API v2 and API v3 is workflow-based. You choose which workflow to rerun, and optionally which jobs within it. Every rerun needs a workflow ID, so get that first.
+ifndef::server[]
+Rerunning in API v2 and API v3 is workflow-based. You choose which workflow to rerun, and optionally which jobs within it.
+endif::server[]
+ifdef::server[]
+Rerunning in API v2 is workflow-based. You choose which workflow to rerun, and optionally which jobs within it.
+endif::server[]
+Every rerun needs a workflow ID, so get that first.
 
 [#get-the-workflow-id]
 ==== Get the workflow ID
@@ -419,7 +448,13 @@ curl "https://circleci.com/api/v2/pipeline/<pipeline-id>/workflow" \
 ----
 endif::server[]
 
-API v1 and API v1.1 identified a build by its build number. API v2 and API v3 identify it by an ID, so save the ID when you trigger. See <<replace-build-num>>.
+API v1 and API v1.1 identified a build by its build number.
+ifndef::server[]
+API v2 and API v3 identify it by an ID, so save the ID when you trigger. See <<replace-build-num>>.
+endif::server[]
+ifdef::server[]
+API v2 identifies it by an ID, so save the ID when you trigger. See <<replace-build-num>>.
+endif::server[]
 
 ifndef::server[]
 ==== Using API v3
@@ -519,7 +554,14 @@ curl --request POST \
 [#update-how-you-track-results]
 == 3. Update how you track results
 
-API v1 and API v1.1 triggered a job and returned a build summary with fields such as `build_num`, `build_url`, and `status`. API v2 and API v3 return a pipeline or run object instead. The following sections show how to replace each field.
+API v1 and API v1.1 triggered a job and returned a build summary with fields such as `build_num`, `build_url`, and `status`.
+ifndef::server[]
+API v2 and API v3 return a pipeline or run object instead.
+endif::server[]
+ifdef::server[]
+API v2 returns a pipeline object instead.
+endif::server[]
+The following sections show how to replace each field.
 
 [#replace-build-num]
 === Replace build numbers
@@ -570,7 +612,13 @@ endif::server[]
 [#replace-build-url]
 === Replace build URLs
 
-API v1 and API v1.1 returned a `build_url` in the trigger response. API v2 and API v3 do not return a URL.
+API v1 and API v1.1 returned a `build_url` in the trigger response.
+ifndef::server[]
+API v2 and API v3 do not return a URL.
+endif::server[]
+ifdef::server[]
+API v2 does not return a URL.
+endif::server[]
 
 ifndef::server[]
 Construct the link to the workflow in the CircleCI web app instead. Use the long provider form, such as `github`, in this URL:
