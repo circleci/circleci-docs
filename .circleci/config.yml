@@ -12,7 +12,7 @@ parameters:
 orbs:
   aws-cli: circleci/aws-cli@5.4.2
   vale: circleci/vale@1.2.1
-  go: circleci/go@3.0.4
+  go: circleci/go@4.0.3
 
 executors:
   node_executor:
