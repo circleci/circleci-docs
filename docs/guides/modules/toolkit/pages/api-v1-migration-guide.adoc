@@ -329,23 +329,24 @@ Before you change a rerun call, be aware of the following:
 === Get the workflow ID
 
 API v1 and API v1.1 identified a build by its build number.
-API v2 and API v3 identify it by an ID, so use the ID that the trigger response returned in step 2.
+API v2 and API v3 identify it by an ID, so use the ID that the trigger response returned in step 2. List the workflows with the call that matches the API version you triggered with:
 
-. If you triggered with API v3, list the workflows for the run, using the run ID from the trigger response:
+* If you triggered with API v3, list the workflows for the run, using the run ID from the trigger response:
 +
 [source,shell]
 ----
 curl -g "https://circleci.com/api/v3/workflows?filter[run_id]=<run-id>" \
   --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
-. If you triggered with API v2, list the workflows for the pipeline, using the pipeline ID from the trigger response:
+* If you triggered with API v2, list the workflows for the pipeline, using the pipeline ID from the trigger response:
 +
 [source,shell]
 ----
 curl "https://circleci.com/api/v2/pipeline/<pipeline-id>/workflow" \
   --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
-. Copy the `id` of the workflow you want to rerun.
+
+Then copy the `id` of the workflow you want to rerun.
 
 === Replace rerun calls using API v3
 
@@ -479,8 +480,8 @@ Update each part of your code that reads one of them.
 If your code reads `build_num` from the trigger response, read the ID instead. Use it to look up the workflows and their status. The examples use https://jqlang.github.io/jq/[jq] to read the response.
 
 ifndef::server[]
-. For API v3, read the run ID from `data.id` in the response from step 2. The response has no equivalent of `build_num`. To get the pipeline number, which the web app uses in its URLs, see <<replace-build-url>>.
-. For API v2, the pipeline ID is `id`:
+* For API v3, read the run ID from `data.id` in the response from step 2. The response has no equivalent of `build_num`. To get the pipeline number, which the web app uses in its URLs, see <<replace-build-url>>.
+* For API v2, the pipeline ID is `id`:
 +
 [source,shell]
 ----
