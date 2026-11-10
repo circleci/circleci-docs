@@ -126,7 +126,7 @@ ifndef::server[]
 
 A pipeline definition tells CircleCI which repository and config file to use for a pipeline. A project can have more than one, so a trigger request names the one to run. You need this ID only if you trigger pipeline runs.
 
-To find it, see xref:how-to-find-ids.adoc#find-a-pipeline-definition-id[Find a Pipeline Definition ID]. To list the definitions with the API, you need the project ID from <<project-addressing>>.
+To find it, see xref:how-to-find-ids.adoc#find-a-pipeline-definition-id[Find a Pipeline Definition ID].
 endif::server[]
 
 [#find-your-v1-api-calls]
