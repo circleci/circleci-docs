@@ -1,0 +1,23 @@
+[#job-resource-usage]
+=== Job resource usage
+
+pass:[<!-- vale off -->]
+
+[cols="1",options="header"]
+|===
+| Identifier
+
+| `execution`
+| `job.id`
+| `job.name`
+| `job.number`
+| `resource.class`
+| `resource.cpu`
+| `resource.executor`
+| `resource.image`
+| `resource.name`
+| `resource.ram`
+| `resource.remote_docker`
+| `workflow.id`
+| `workflow.name`
+|===

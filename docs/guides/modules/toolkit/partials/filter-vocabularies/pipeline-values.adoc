@@ -1,0 +1,64 @@
+pass:[<!-- vale off -->]
+
+[cols="1",options="header"]
+|===
+| Identifier
+
+| `pipeline.config.file_path`
+| `pipeline.config.ref`
+| `pipeline.config.repository.name`
+| `pipeline.config.repository.url`
+| `pipeline.config.sha`
+| `pipeline.config_source`
+| `pipeline.definition.id`
+| `pipeline.deploy.component_name`
+| `pipeline.deploy.current_version`
+| `pipeline.deploy.environment_name`
+| `pipeline.deploy.namespace`
+| `pipeline.deploy.reason`
+| `pipeline.deploy.target_version`
+| `pipeline.event.action`
+| `pipeline.event.circleci_actor_id`
+| `pipeline.event.name`
+| `pipeline.event.provider_actor_id`
+| `pipeline.event.provider_login`
+| `pipeline.git.base_revision`
+| `pipeline.git.branch`
+| `pipeline.git.branch.is_default`
+| `pipeline.git.commit.author_avatar_url`
+| `pipeline.git.commit.author_email`
+| `pipeline.git.commit.author_login`
+| `pipeline.git.commit.author_name`
+| `pipeline.git.commit.body`
+| `pipeline.git.commit.subject`
+| `pipeline.git.commit.url`
+| `pipeline.git.repo_id`
+| `pipeline.git.repo_name`
+| `pipeline.git.repo_owner`
+| `pipeline.git.repo_url`
+| `pipeline.git.revision`
+| `pipeline.git.tag`
+| `pipeline.id`
+| `pipeline.integration_source`
+| `pipeline.name`
+| `pipeline.number`
+| `pipeline.project.git_url`
+| `pipeline.project.slug`
+| `pipeline.project.type`
+| `pipeline.project.url`
+| `pipeline.schedule.id`
+| `pipeline.schedule.name`
+| `pipeline.trigger.id`
+| `pipeline.trigger.name`
+| `pipeline.trigger.received_at`
+| `pipeline.trigger.type`
+| `pipeline.trigger_source`
+| `pipeline.vcs.event_type`
+| `pipeline.vcs.origin_repository_id`
+| `pipeline.vcs.origin_repository_url`
+| `pipeline.vcs.repository_url`
+| `pipeline.vcs.revision`
+| `pipeline.vcs.target_repository_id`
+| `pipeline.vcs.target_repository_url`
+| `pipeline.vcs.type`
+|===

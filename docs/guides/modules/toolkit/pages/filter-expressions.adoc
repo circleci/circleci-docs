@@ -1,0 +1,98 @@
+= Filter expressions
+:page-platform: Cloud
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-audience: developer
+:page-content-type: reference
+:page-description: Write filter expressions for CircleCI API v3 operations, and look up the identifiers each operation accepts in its vocabularies.
+:experimental:
+
+Some API v3 operations accept an expression to select or group the data they return. This page describes the expression language and lists the identifiers that you can use in an expression.
+
+== About filter expressions
+
+A filter expression is a small formula that CircleCI evaluates against your data. The language is described on this page. For example, a filter expression can select only the records from the `main` branch.
+
+The link:https://circleci.com/docs/api/v3[API v3 Reference] shows which request field on each operation carries an expression. The names that an expression can use depend on the operation. Each operation supports one or more vocabularies of identifiers. Refer to <<vocabulary-identifiers>> for the full list.
+
+[#write-an-expression]
+== Write an expression
+
+An expression combines identifiers, literal values, and operators. The following expression matches records from the `main` branch that did not come from an API-triggered run:
+
+[source]
+----
+pipeline.git.branch == "main" and not (pipeline.config_source starts-with "api")
+----
+
+Tabs and new lines count as whitespace, so you can use them to break a long expression across lines.
+
+[#operators]
+=== Operators
+
+include::ROOT:partial$using-expressions/operators.adoc[]
+
+The `contains` operator is also supported. It evaluates `true` when the right operand is a substring of the left operand. It is an error to use a non-string type as an operand.
+
+[#precedence]
+=== Precedence
+
+Operators bind in the following order, from loosest to tightest:
+
+. `or`
+. `and`
+. `==`, `!=`, `starts-with`, `contains`, `matches`
+. `>=`, `>`, `<=`, `<`
+. `not`
+
+Operators at the same level group from left to right. Use parentheses to group sub-expressions and override the order.
+
+[#literals]
+=== Literals
+
+Expressions support the following literal values:
+
+* Strings: Text in double quotes, such as `"main"`. Use `+\"+` for a quote and `+\\+` for a backslash inside a string.
+* Numbers: Whole numbers from 0 to 9223372036854775807, such as `42`.
+* Booleans: `true` and `false`.
+
+[#differences-from-context-restrictions]
+=== Differences from context restrictions
+
+The language is the same one that xref:security:contexts.adoc#expression-restrictions[Expression Restrictions] use for contexts. A filter expression differs in the following ways:
+
+* The identifiers in an expression are values from the operations' vocabularies. The Pipeline values vocabulary lists the subset of xref:orchestrate:pipeline-variables.adoc#pipeline-values[Pipeline Values] that are available for filtering.
+* An expression that does not parse, or that names an identifier outside the operation's vocabularies, returns a `400` response.
+* A literal must match the data type of the identifier. Comparing a number with a string identifier returns a `400` response.
+
+[#vocabulary-identifiers]
+== Vocabulary identifiers
+
+Identifiers are grouped into vocabularies. Each section below lists the identifiers in one vocabulary.
+
+include::toolkit:partial$filter-vocabularies/job-resource-usage.adoc[]
+
+include::toolkit:partial$filter-vocabularies/run-search.adoc[]
+
+include::toolkit:partial$filter-vocabularies/project-charges.adoc[]
+
+include::toolkit:partial$filter-vocabularies/test-job-result.adoc[]
+
+include::toolkit:partial$filter-vocabularies/test-job-run.adoc[]
+
+include::toolkit:partial$filter-vocabularies/test-result.adoc[]
+
+include::toolkit:partial$filter-vocabularies/test-suite-run.adoc[]
+
+[#pipeline-values]
+== Pipeline values
+
+For descriptions of most of these identifiers, refer to xref:orchestrate:pipeline-variables.adoc#pipeline-values[Pipeline Values].
+
+include::toolkit:partial$filter-vocabularies/pipeline-values.adoc[]
+
+[#reference]
+== Reference
+
+* Refer to xref:api-v3-developers-guide.adoc[API V3 Developer's Guide] for the conventions that every endpoint shares.
+* Refer to link:https://circleci.com/docs/api/v3/[API v3 Reference] for the request and response of each operation.

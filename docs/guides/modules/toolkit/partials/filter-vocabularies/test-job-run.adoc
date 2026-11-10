@@ -1,0 +1,18 @@
+[#test-job-run]
+=== Test job run
+
+pass:[<!-- vale off -->]
+
+[cols="1",options="header"]
+|===
+| Identifier
+
+| `job.duration_ms`
+| `job.id`
+| `job.name`
+| `job.number`
+| `job.outcome`
+| `job.tests_duration_ms`
+| `workflow.id`
+| `workflow.name`
+|===

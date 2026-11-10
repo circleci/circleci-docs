@@ -1,0 +1,22 @@
+[#test-suite-run]
+=== Test suite run
+
+pass:[<!-- vale off -->]
+
+[cols="1",options="header"]
+|===
+| Identifier
+
+| `job.id`
+| `job.name`
+| `job.number`
+| `job.outcome`
+| `test_suite.duration_ms`
+| `test_suite.name`
+| `test_suite.selection`
+| `test_suite.tests_analyzed`
+| `test_suite.tests_discovered`
+| `test_suite.tests_run`
+| `workflow.id`
+| `workflow.name`
+|===

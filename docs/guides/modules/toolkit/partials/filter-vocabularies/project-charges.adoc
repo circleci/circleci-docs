@@ -1,0 +1,24 @@
+[#project-charges]
+=== Project charges
+
+pass:[<!-- vale off -->]
+
+[cols="1",options="header"]
+|===
+| Identifier
+
+| `actor.external_slug`
+| `actor.id`
+| `charge.type`
+| `job.id`
+| `job.name`
+| `job.number`
+| `resource.class`
+| `resource.cpu`
+| `resource.executor`
+| `resource.fleet`
+| `resource.ram`
+| `resource.region`
+| `workflow.id`
+| `workflow.name`
+|===

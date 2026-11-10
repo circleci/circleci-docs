@@ -14,6 +14,7 @@
 ** link:https://circleci.com/docs/api/v1[API v1 reference]
 ** xref:guides:toolkit:api-v3-developers-guide.adoc[API v3 developers guide]
 ** xref:guides:toolkit:api-developers-guide.adoc[API v2 developers guide]
+** xref:guides:toolkit:filter-expressions.adoc[Filter expressions]
 ** xref:runner-api.adoc[Runner API reference]
 
 * General

@@ -274,6 +274,8 @@ Most list operations require a scope filter and return 400 without it. Common fi
 
 Always check the operation's required parameters before making a request.
 
+Some operations also accept a filter expression in a request field. Refer to xref:filter-expressions.adoc[Filter Expressions] for the expression language and the identifiers each operation accepts.
+
 [#http-methods]
 === HTTP methods
 
@@ -606,4 +608,5 @@ CAUTION: The `201` response includes the raw token value once. Save it immediate
 * Refer to xref:api-intro.adoc[API Overview] for high-level information about all CircleCI API versions.
 * Refer to link:https://circleci.com/docs/api/v3/[API v3 Reference] for detailed endpoint documentation.
 * Refer to xref:managing-api-tokens.adoc[Managing API Tokens] for information on creating and managing tokens.
+* Refer to xref:filter-expressions.adoc[Filter Expressions] for the expression language and the identifiers each operation accepts.
 * Refer to xref:how-to-find-ids.adoc[How to Find IDs] for help locating resource identifiers.

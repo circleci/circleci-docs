@@ -1,0 +1,14 @@
+[#run-search]
+=== Run search
+
+pass:[<!-- vale off -->]
+
+[cols="1",options="header"]
+|===
+| Identifier
+
+| `actor.id`
+| `pipeline.current_outcome`
+| `pipeline.phase`
+| `pipeline.status`
+|===

@@ -1,0 +1,25 @@
+[#test-result]
+=== Test result
+
+pass:[<!-- vale off -->]
+
+[cols="1",options="header"]
+|===
+| Identifier
+
+| `execution`
+| `job.id`
+| `job.name`
+| `job.number`
+| `job.outcome`
+| `test.atom`
+| `test.classname`
+| `test.duration_ms`
+| `test.file`
+| `test.message`
+| `test.name`
+| `test.rerun_attempt`
+| `test.result`
+| `workflow.id`
+| `workflow.name`
+|===
