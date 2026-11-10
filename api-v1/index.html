@@ -2122,7 +2122,7 @@ For Basic Authentication, the colon ":" as shown in the example tells curl that 
 </tr>
 <tr>
 <td>/project/:vcs-type/:org_name/:project/:build_num/retry <strong>(deprecated, removed 1 Feb 2027)</strong></td>
-<td>Retries the job, returns a summary of the new job run. <strong>Deprecated.</strong> Use <a href="https://circleci.com/docs/api/v2/#tag/Workflow/operation/rerunWorkflow">POST /api/v2/workflow/:workflow-id/rerun</a> instead.</td>
+<td>Retries the job, returns a summary of the new job run. Use <a href="https://circleci.com/docs/api/v2/#tag/Workflow/operation/rerunWorkflow">POST /api/v2/workflow/:workflow-id/rerun</a> instead.</td>
 </tr>
 <tr>
 <td>/project/:vcs-type/:username/:project/:build_num/cancel</td>
@@ -2134,19 +2134,19 @@ For Basic Authentication, the colon ":" as shown in the example tells curl that 
 </tr>
 <tr>
 <td>/project/:vcs-type/:username/:project/:build_num/ssh <strong>(deprecated, removed 1 Feb 2027)</strong></td>
-<td>Retries the job with SSH enabled. <strong>Deprecated.</strong> Use the <code>enable_ssh</code> option in the <a href="https://circleci.com/docs/api/v2/#tag/Workflow/operation/rerunWorkflow">POST /api/v2/workflow/:workflow-id/rerun</a> request body instead.</td>
+<td>Retries the job with SSH enabled. Use the <code>enable_ssh</code> option in the <a href="https://circleci.com/docs/api/v2/#tag/Workflow/operation/rerunWorkflow">POST /api/v2/workflow/:workflow-id/rerun</a> request body instead.</td>
 </tr>
 <tr>
 <td>/project/:vcs-type/:username/:project/ <strong>(deprecated, removed 1 Feb 2027)</strong></td>
-<td>Triggers a new job, returns a summary of the job run. <strong>Deprecated.</strong> Use <a href="https://circleci.com/docs/api/v2/#tag/Pipeline/operation/triggerPipelineRun">POST /api/v2/project/:provider/:organization/:project/pipeline/run</a> on Cloud or <a href="https://circleci.com/docs/api/v2/#tag/Pipeline/operation/triggerPipeline">POST /api/v2/project/:provider/:organization/:project/pipeline</a> on Server instead.</td>
+<td>Triggers a new job, returns a summary of the job run. Use <a href="https://circleci.com/docs/api/v2/#tag/Pipeline/operation/triggerPipelineRun">POST /api/v2/project/:provider/:organization/:project/pipeline/run</a> on Cloud or <a href="https://circleci.com/docs/api/v2/#tag/Pipeline/operation/triggerPipeline">POST /api/v2/project/:provider/:organization/:project/pipeline</a> on Server instead.</td>
 </tr>
 <tr>
 <td>/project/:vcs-type/:username/:project/tree/:branch <strong>(deprecated, removed 1 Feb 2027)</strong></td>
-<td>Triggers a new job on a specific branch. <strong>Deprecated.</strong> Use <a href="https://circleci.com/docs/api/v2/#tag/Pipeline/operation/triggerPipelineRun">POST /api/v2/project/:provider/:organization/:project/pipeline/run</a> on Cloud or <a href="https://circleci.com/docs/api/v2/#tag/Pipeline/operation/triggerPipeline">POST /api/v2/project/:provider/:organization/:project/pipeline</a> on Server instead.</td>
+<td>Triggers a new job on a specific branch. Use <a href="https://circleci.com/docs/api/v2/#tag/Pipeline/operation/triggerPipelineRun">POST /api/v2/project/:provider/:organization/:project/pipeline/run</a> on Cloud or <a href="https://circleci.com/docs/api/v2/#tag/Pipeline/operation/triggerPipeline">POST /api/v2/project/:provider/:organization/:project/pipeline</a> on Server instead.</td>
 </tr>
 <tr>
 <td>/project/:vcs-type/:username/:project/build <strong>(deprecated, removed 1 Feb 2027)</strong></td>
-<td>Triggers a pipeline by project. <strong>Deprecated.</strong> Use <a href="https://circleci.com/docs/api/v2/#tag/Pipeline/operation/triggerPipelineRun">POST /api/v2/project/:provider/:organization/:project/pipeline/run</a> on Cloud or <a href="https://circleci.com/docs/api/v2/#tag/Pipeline/operation/triggerPipeline">POST /api/v2/project/:provider/:organization/:project/pipeline</a> on Server instead.</td>
+<td>Triggers a pipeline by project. Use <a href="https://circleci.com/docs/api/v2/#tag/Pipeline/operation/triggerPipelineRun">POST /api/v2/project/:provider/:organization/:project/pipeline/run</a> on Cloud or <a href="https://circleci.com/docs/api/v2/#tag/Pipeline/operation/triggerPipeline">POST /api/v2/project/:provider/:organization/:project/pipeline</a> on Server instead.</td>
 </tr>
 <tr>
 <td>/project/:vcs-type/:username/:project/ssh-key</td>

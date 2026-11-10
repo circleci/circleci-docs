@@ -29,10 +29,10 @@ endif::server[]
 == Deprecated endpoints and their replacements
 
 ifndef::server[]
-CircleCI removes the following nine endpoints on 1 February 2027. This change applies to both CircleCI Cloud and CircleCI Server. Each entry lists the deprecated endpoints and the endpoints to migrate to.
+This change applies to both CircleCI Cloud and CircleCI Server. Each entry lists the deprecated endpoints and the endpoints to migrate to.
 endif::server[]
 ifdef::server[]
-CircleCI removes the following endpoints on 1 February 2027. The API v1 and API v1.1 `retry` and `ssh` endpoints do not exist on CircleCI Server, so only the trigger endpoints are affected. The entry lists the deprecated endpoints and the endpoint to migrate to.
+The API v1 and API v1.1 `retry` and `ssh` endpoints do not exist on CircleCI Server, so only the trigger endpoints are affected. The entry lists the deprecated endpoints and the endpoint to migrate to.
 endif::server[]
 
 All other API v1 and API v1.1 endpoints, including every `GET` endpoint, are not affected.
@@ -518,7 +518,7 @@ endif::server[]
 [#replace-build-url]
 === Replace build URLs
 
-If your code reads `build_url` from the trigger response, build the link yourself. API v1 and API v1.1 returned a `build_url` in the trigger response.
+If your code reads `build_url` from the trigger response, build the link yourself.
 ifndef::server[]
 API v2 and API v3 do not return a URL.
 endif::server[]
