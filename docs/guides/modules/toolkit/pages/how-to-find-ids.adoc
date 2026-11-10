@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Find CircleCI element IDs using the web app, API, or CLI. Covers user, organization, project, pipeline run, workflow, and job IDs.
+:page-description: Find CircleCI element IDs and slugs using the web app, API, or CLI. Covers user, organization, project, pipeline run, workflow, and job IDs.
 :experimental:
 
 You may need to find the ID of specific CircleCI elements to perform various actions, including:
@@ -215,6 +215,58 @@ $ circleci org list --json --jq '.[].id'
 ====
 
 
+== Find an organization slug
+
+The organization slug identifies an organization in API v2 requests and CLI commands. It takes the form `<provider>/<organization>`, for example `gh/my-org`.
+ifndef::server[]
+An organization that uses the GitHub App has a slug in the form `circleci/<organization-id>`.
+endif::server[]
+
+Use one of the following methods to find it.
+
+[tabs]
+====
+Web app::
++
+--
+include::guides:ROOT:partial$app-navigation/steps-to-org-settings.adoc[]
+. The *Overview* page lists the organization slug.
+--
+API v2::
++
+--
+To list all organizations (collaborations) you have access to, each with a `slug` field:
+
+[source,shell]
+----
+curl 'https://circleci.com/api/v2/me/collaborations' \
+  --header "Circle-Token: $CIRCLE_TOKEN" | jq .
+----
+
+The `slug` field for each entry is the organization slug:
+
+[source,json]
+----
+[
+  {
+    "id": "<your-org-id>",
+    "name": "my-org",
+    "slug": "gh/my-org",
+    "vcs_type": "github"
+  }
+]
+----
+
+If you know the organization ID, you can look up one organization. The response contains the `slug`:
+
+[source,shell]
+----
+curl 'https://circleci.com/api/v2/organization/<your-org-id>' \
+  --header "Circle-Token: $CIRCLE_TOKEN" | jq .
+----
+--
+====
+
 == Find a project ID
 
 The project ID is a unique identifier for a project.
@@ -308,6 +360,40 @@ $ circleci project list --slug gh/my-org/my-repo --json --jq '.[0].id'
 --
 ====
 
+
+== Find a project slug
+
+The project slug identifies a project in API v2 requests and CLI commands. It takes the form `<provider>/<organization>/<project>`, for example `gh/my-org/my-repo`.
+ifndef::server[]
+A project in an organization that uses the GitHub App has a slug in the form `circleci/<organization-id>/<project-id>`.
+endif::server[]
+
+Use one of the following methods to find it.
+
+[tabs]
+====
+Web app::
++
+--
+include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
+. The *Overview* page lists the project slug.
+--
+API v2::
++
+--
+If you have a pipeline ID, the pipeline response contains the project slug in `project_slug`:
+
+[source,shell]
+----
+curl 'https://circleci.com/api/v2/pipeline/<your-pipeline-id>' \
+  --header "Circle-Token: $CIRCLE_TOKEN" | jq '.project_slug'
+----
+
+To find a pipeline ID, see <<find-a-pipeline-run-id>>.
+--
+====
+
+// TODO(DOC-327): Confirm with the API team whether GET /api/v2/project/<project-id> is meant to work. It returns the project, including the slug, when you put the project ID where the slug goes, on Cloud and Server 4.10, but the API v2 spec only documents the slug.
 
 == Find a pipeline run ID
 

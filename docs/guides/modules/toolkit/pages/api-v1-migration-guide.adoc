@@ -110,10 +110,10 @@ In every call you change, send your personal API token in the `Authorization: Be
 === Get your project address
 
 ifndef::server[]
-API v3 identifies a project by its project ID. API v2 identifies a project by its project slug, which you put in the URL of each request. See xref:how-to-find-ids.adoc#find-a-project-id[How to Find IDs] for how to find them.
+API v3 identifies a project by its project ID. API v2 identifies a project by its project slug, which you put in the URL of each request. To find them, see xref:how-to-find-ids.adoc#find-a-project-id[Find a Project ID] and xref:how-to-find-ids.adoc#find-a-project-slug[Find a Project Slug].
 endif::server[]
 ifdef::server[]
-API v2 identifies a project by its project slug, which you put in the URL of each request. See xref:how-to-find-ids.adoc#find-a-project-id[How to Find IDs] for how to find it.
+API v2 identifies a project by its project slug, which you put in the URL of each request. To find it, see xref:how-to-find-ids.adoc#find-a-project-slug[Find a Project Slug].
 endif::server[]
 
 ifndef::server[]
