@@ -8,7 +8,13 @@
 :page-description: Migrate from deprecated CircleCI API v1 and API v1.1 trigger and rerun endpoints to API v2 or API v3 before the 1 February 2027 removal date.
 :experimental:
 
-CircleCI removes nine API v1 and API v1.1 endpoints that trigger and rerun builds on 1 February 2027. See <<deprecated-endpoints>> for the list. Until then, the deprecated endpoints return `Deprecation` and `Sunset` response headers. After that date, requests to these endpoints return HTTP 410 Gone. This guide shows you how to find those calls in your code and replace each one.
+ifndef::server[]
+CircleCI removes nine API v1 and API v1.1 endpoints that trigger and rerun builds on 1 February 2027.
+endif::server[]
+ifdef::server[]
+CircleCI removes the API v1 and API v1.1 endpoints that trigger builds on 1 February 2027.
+endif::server[]
+See <<deprecated-endpoints>> for the list. Until then, the deprecated endpoints return `Deprecation` and `Sunset` response headers. After that date, requests to these endpoints return HTTP 410 Gone. This guide shows you how to find those calls in your code and replace each one.
 
 ifndef::server[]
 Use API v3 to replace these calls. API v2 remains supported if API v3 does not cover your needs.
@@ -22,7 +28,12 @@ endif::server[]
 [#deprecated-endpoints]
 == Deprecated endpoints and their replacements
 
+ifndef::server[]
 CircleCI removes the following nine endpoints on 1 February 2027. This change applies to both CircleCI Cloud and CircleCI Server. Each entry lists the old endpoints and the endpoints that replace them.
+endif::server[]
+ifdef::server[]
+CircleCI removes the following endpoints on 1 February 2027. The API v1 and API v1.1 `retry` and `ssh` endpoints do not exist on CircleCI Server, so only the trigger endpoints are affected. The entry lists the old endpoints and the endpoint that replaces them.
+endif::server[]
 
 All other API v1 and API v1.1 endpoints, including every `GET` endpoint, are not affected.
 ifndef::server[]
@@ -50,30 +61,22 @@ ifdef::server[]
 * New: link:https://circleci.com/docs/api/v2/#tag/Pipeline/operation/triggerPipeline[API v2]: `POST /api/v2/project/<provider>/<organization>/<project>/pipeline`
 endif::server[]
 
+ifndef::server[]
 *Rerun a workflow*::
 +
 * Old, API v1.1: `POST /api/v1.1/project/<vcs-type>/<username>/<repo>/<build-num>/retry`
 * Old, API v1: `POST /api/v1/project/<username>/<repo>/<build-num>/retry`
-ifndef::server[]
 * New:
 ** link:https://circleci.com/docs/api/v3#tag/workflows/POST/api/v3/workflows/%7Bid%7D/rerun[API v3]: `POST /api/v3/workflows/<workflow-id>/rerun`
 ** link:https://circleci.com/docs/api/v2/#tag/Workflow/operation/rerunWorkflow[API v2]: `POST /api/v2/workflow/<workflow-id>/rerun`
-endif::server[]
-ifdef::server[]
-* New: link:https://circleci.com/docs/api/v2/#tag/Workflow/operation/rerunWorkflow[API v2]: `POST /api/v2/workflow/<workflow-id>/rerun`
-endif::server[]
 
 *Rerun a workflow with SSH enabled*::
 +
 * Old, API v1.1: `POST /api/v1.1/project/<vcs-type>/<username>/<repo>/<build-num>/ssh`
 * Old, API v1: `POST /api/v1/project/<username>/<repo>/<build-num>/ssh`
-ifndef::server[]
 * New:
 ** link:https://circleci.com/docs/api/v3#tag/workflows/POST/api/v3/workflows/%7Bid%7D/rerun[API v3]: `POST /api/v3/workflows/<workflow-id>/rerun` with `"is_ssh_enabled": true` and a `"jobs"` array.
 ** link:https://circleci.com/docs/api/v2/#tag/Workflow/operation/rerunWorkflow[API v2]: `POST /api/v2/workflow/<workflow-id>/rerun` with `"enable_ssh": true` and a `"jobs"` array.
-endif::server[]
-ifdef::server[]
-* New: link:https://circleci.com/docs/api/v2/#tag/Workflow/operation/rerunWorkflow[API v2]: `POST /api/v2/workflow/<workflow-id>/rerun` with `"enable_ssh": true` and a `"jobs"` array.
 endif::server[]
 
 ifdef::server[]
@@ -145,8 +148,10 @@ $ grep -rE "api/v1(\.1)?/project" .
 . Make a list of the calls you find, grouped by what they do. The steps that follow depend on the group:
 +
 * Calls that trigger a build, such as `/`, `/build`, and `/tree/<branch>`: do step 2.
+ifndef::server[]
 * Calls that rerun a build with `/retry`: do step 3.
 * Calls that rerun a build with SSH using `/ssh`: do step 4.
+endif::server[]
 
 [#replace-trigger-calls]
 == 2. Replace your trigger calls
@@ -294,7 +299,7 @@ curl --request POST \
   }
 }
 ----
-. Send the request. The response contains the pipeline `id` and `number`. Save both. You need the `id` to find the pipeline's workflows in step 3. API v1.1 returned a `build_url` and API v2 does not, so you use the `number` to build the link to the pipeline yourself in step 5:
+. Send the request. The response contains the pipeline `id` and `number`. Save both. API v1.1 returned a `build_url` and API v2 does not, so you use the `number` to build the link to the pipeline yourself in step 3:
 +
 [source,json]
 ----
@@ -307,6 +312,7 @@ curl --request POST \
 ----
 endif::server[]
 
+ifndef::server[]
 [#replace-rerun-calls]
 == 3. Replace your rerun calls
 
@@ -321,14 +327,8 @@ Before you change a rerun call, be aware of the following:
 === Get the workflow ID
 
 API v1 and API v1.1 identified a build by its build number.
-ifndef::server[]
 API v2 and API v3 identify it by an ID, so use the ID that the trigger response returned in step 2.
-endif::server[]
-ifdef::server[]
-API v2 identifies it by an ID, so use the ID that the trigger response returned in step 2.
-endif::server[]
 
-ifndef::server[]
 . If you triggered with API v3, list the workflows for the run, using the run ID from the trigger response:
 +
 [source,shell]
@@ -344,19 +344,7 @@ curl "https://circleci.com/api/v2/pipeline/<pipeline-id>/workflow" \
   --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
 . Copy the `id` of the workflow you want to rerun.
-endif::server[]
-ifdef::server[]
-. List the workflows for the pipeline, using the pipeline ID from the trigger response:
-+
-[source,shell]
-----
-curl "https://circleci.com/api/v2/pipeline/<pipeline-id>/workflow" \
-  --header "Authorization: Bearer $CIRCLE_TOKEN"
-----
-. Copy the `id` of the workflow you want to rerun.
-endif::server[]
 
-ifndef::server[]
 === Replace rerun calls using API v3
 
 . Replace the URL of the call with `https://circleci.com/api/v3/workflows/<workflow-id>/rerun`. The method stays `POST`.
@@ -408,34 +396,6 @@ curl --request POST \
   --data '{"from_failed": true}'
 ----
 . Send the request. The response contains the ID of the new workflow in `workflow_id`. Save it if you track the result.
-endif::server[]
-ifdef::server[]
-=== Replace rerun calls using API v2
-
-. Replace the URL of the call with `https://circleci.com/api/v2/workflow/<workflow-id>/rerun`. The method stays `POST`.
-. Send your personal API token in the `Authorization: Bearer` header. Remove any `circle-token` query parameter or basic authentication from the call.
-. To rerun all jobs in the workflow, send an empty request body:
-+
-[source,shell]
-----
-curl --request POST \
-  "https://circleci.com/api/v2/workflow/<workflow-id>/rerun" \
-  --header "Authorization: Bearer $CIRCLE_TOKEN" \
-  --header "Content-Type: application/json" \
-  --data '{}'
-----
-. To rerun only failed jobs, send `from_failed` set to `true`:
-+
-[source,shell]
-----
-curl --request POST \
-  "https://circleci.com/api/v2/workflow/<workflow-id>/rerun" \
-  --header "Authorization: Bearer $CIRCLE_TOKEN" \
-  --header "Content-Type: application/json" \
-  --data '{"from_failed": true}'
-----
-. Send the request. The response contains the ID of the new workflow in `workflow_id`. Save it if you track the result.
-endif::server[]
 
 [#replace-ssh-rerun-calls]
 == 4. Replace your rerun-with-SSH calls
@@ -445,14 +405,8 @@ Do this step if you call `POST .../<build-num>/ssh`. Otherwise, go to step 5.
 Before you change an SSH rerun call, be aware of the following:
 
 * An SSH rerun must name the jobs to rerun, so you need job IDs as well as the workflow ID.
-ifndef::server[]
 * You cannot combine `enable_ssh` (API v2) or `is_ssh_enabled` (API v3) with the from-failed option. A request that sends both returns an error.
-endif::server[]
-ifdef::server[]
-* You cannot combine `enable_ssh` with `from_failed`. A request that sends both returns an error.
-endif::server[]
 
-ifndef::server[]
 === Replace SSH rerun calls using API v3
 
 . Get the workflow ID. See <<get-the-workflow-id>>.
@@ -497,32 +451,14 @@ curl --request POST \
 ----
 . Send the request. The response contains the ID of the new workflow in `workflow_id`.
 endif::server[]
-ifdef::server[]
-=== Replace SSH rerun calls using API v2
-
-. Get the workflow ID. See <<get-the-workflow-id>>.
-. List the jobs in the workflow and copy the `id` of each job to rerun:
-+
-[source,shell]
-----
-curl "https://circleci.com/api/v2/workflow/<workflow-id>/job" \
-  --header "Authorization: Bearer $CIRCLE_TOKEN"
-----
-. Replace the URL of the call with `https://circleci.com/api/v2/workflow/<workflow-id>/rerun`, send your personal API token in the `Authorization: Bearer` header, and send `enable_ssh` set to `true` with the job IDs in `jobs`:
-+
-[source,shell]
-----
-curl --request POST \
-  "https://circleci.com/api/v2/workflow/<workflow-id>/rerun" \
-  --header "Authorization: Bearer $CIRCLE_TOKEN" \
-  --header "Content-Type: application/json" \
-  --data '{"enable_ssh": true, "jobs": ["<job-id>"]}'
-----
-. Send the request. The response contains the ID of the new workflow in `workflow_id`.
-endif::server[]
 
 [#update-how-you-track-results]
+ifndef::server[]
 == 5. Update how you handle responses
+endif::server[]
+ifdef::server[]
+== 3. Update how you handle responses
+endif::server[]
 
 Do this step if any of your code reads the response of a deprecated call.
 
