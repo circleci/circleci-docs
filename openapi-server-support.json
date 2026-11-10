@@ -1,0 +1,54 @@
+{
+  "label": "**CircleCI Server:**",
+  "tags": {
+    "Deploy": "These endpoints are not available on CircleCI Server.",
+    "OTel": "These endpoints are not available on CircleCI Server.",
+    "Pipeline Definition": "These endpoints are not available on CircleCI Server.",
+    "Rollback": "These endpoints are not available on CircleCI Server.",
+    "Trigger": "These endpoints are not available on CircleCI Server.",
+    "Usage": "These endpoints are not available on CircleCI Server."
+  },
+  "operations": {
+    "listComponents": "This endpoint is not available on CircleCI Server.",
+    "getComponent": "This endpoint is not available on CircleCI Server.",
+    "listComponentVersions": "This endpoint is not available on CircleCI Server.",
+    "listEnvironments": "This endpoint is not available on CircleCI Server.",
+    "getEnvironment": "This endpoint is not available on CircleCI Server.",
+
+    "listOtelExporters": "This endpoint is not available on CircleCI Server.",
+    "createOtelExporter": "This endpoint is not available on CircleCI Server.",
+    "deleteOtelExporter": "This endpoint is not available on CircleCI Server.",
+
+    "listPipelineDefinitions": "This endpoint is not available on CircleCI Server.",
+    "getPipelineDefinition": "This endpoint is not available on CircleCI Server.",
+    "createPipelineDefinition": "This endpoint is not available on CircleCI Server.",
+    "updatePipelineDefinition": "This endpoint is not available on CircleCI Server.",
+    "deletePipelineDefinition": "This endpoint is not available on CircleCI Server.",
+
+    "listPipelineDefinitionTriggers": "This endpoint is not available on CircleCI Server.",
+    "createTrigger": "This endpoint is not available on CircleCI Server.",
+    "getTrigger": "This endpoint is not available on CircleCI Server.",
+    "updateTrigger": "This endpoint is not available on CircleCI Server.",
+    "deleteTrigger": "This endpoint is not available on CircleCI Server.",
+
+    "rollbackProject": "This endpoint is not available on CircleCI Server.",
+
+    "createSchedule": "This endpoint is not available on CircleCI Server.",
+    "listSchedulesForProject": "This endpoint is not available on CircleCI Server.",
+    "getScheduleById": "This endpoint is not available on CircleCI Server.",
+    "updateSchedule": "This endpoint is not available on CircleCI Server.",
+    "deleteScheduleById": "This endpoint is not available on CircleCI Server.",
+
+    "createUsageExport": "This endpoint is not available on CircleCI Server. On Server 4.8 and later, requests return a 500 error.",
+    "getUsageExport": "This endpoint is not available on CircleCI Server. On Server 4.8 and later, requests return a 500 error.",
+
+    "createOrganizationGroup": "This endpoint is not available on CircleCI Server.",
+    "getGroup": "This endpoint is not available on CircleCI Server.",
+    "deleteGroup": "This endpoint is not available on CircleCI Server.",
+    "getOrganizationGroups": "Use this endpoint to get the ID of a security group (a GitHub Enterprise team) for a context restriction. Pass the returned `id` as `restriction_value`, with `restriction_type` set to `group`, to [Create context restriction](#operation/createContextRestriction).",
+
+    "getJob": "This endpoint is not available on CircleCI Server. To get job details on Server, use `GET /project/{project-slug}/job/{job-number}`.",
+
+    "triggerPipelineRun": "This endpoint is not available on CircleCI Server. To trigger a pipeline on Server, use [Trigger a new pipeline](#operation/triggerPipeline)."
+  }
+}

@@ -150,6 +150,7 @@ function generateApiMarkdown(callback) {
  * 2. Bundle and resolve all $ref pointers (using Redocly)
  * 3. Generate code samples with httpsnippet (for cURL, Node.js, Python, Go, Ruby)
  * 4. Apply JSON patches - CURRENTLY DISABLED for simplicity
+ * 4.2. Add CircleCI Server support notes from openapi-server-support.json
  * 4.5. Generate markdown chunks for LLMs/agents
  * 5. Lint for quality assurance
  * 6. Generate final HTML with Redocly
@@ -217,6 +218,10 @@ function buildApiV2(callback) {
           // Copy patched file to final location
           fs.copyFileSync('build/temp-api-v2/openapi-patched.json', 'build/temp-api-v2/openapi-final.json')
 
+          // STEP 4.2: Add CircleCI Server support notes
+          // Adds notes from openapi-server-support.json to the start of operation and tag descriptions
+          applyServerSupportNotes(() => {
+
           // STEP 4.5: Generate markdown chunks for LLMs/agents
           // Creates per-operation markdown files and llms.txt index
           generateApiMarkdown(() => {
@@ -272,9 +277,36 @@ function buildApiV2(callback) {
               })
             })
           })
+          })
         })
       })
     })
+  })
+}
+
+/**
+ * Add CircleCI Server Support Notes
+ *
+ * PURPOSE: Show which v2 endpoints are not available on CircleCI Server
+ *
+ * DATA FILE: openapi-server-support.json (in project root)
+ * - Maps operationIds and tag names to a short note
+ * - Notes go at the start of the existing description, which a JSON merge
+ *   patch cannot do
+ *
+ * FALLBACK: If the script fails, the build continues without the notes
+ */
+function applyServerSupportNotes(callback) {
+  console.log('🖥️  Adding CircleCI Server support notes...')
+  exec('node scripts/apply-server-support-notes.js build/temp-api-v2/openapi-final.json openapi-server-support.json', (err, stdout, stderr) => {
+    if (err) {
+      console.error('❌ Failed to add Server support notes:', err)
+      console.log('ℹ️  Continuing without Server support notes...')
+    } else {
+      if (stdout) console.log(stdout.trim())
+      if (stderr) console.warn(stderr.trim())
+    }
+    callback()
   })
 }
 
@@ -350,6 +382,7 @@ function applyJsonPatches(callback) {
  * CUSTOMIZATION:
  * - Add code samples: Re-enable snippet-enricher-cli in step 2
  * - Modify v2 spec: Edit openapi-patch.json
+ * - Mark v2 endpoints unavailable on Server: Edit openapi-server-support.json
  * - Add API versions: Create buildApiV3() function and update main build
  * - Change output paths: Modify directory constants at top of functions
  */
