@@ -290,22 +290,22 @@ endif::server[]
 * Environment variables set through `build_parameters` have no direct replacement. For each value, declare a pipeline parameter in your config, then pass the values in `parameters`. See xref:orchestrate:pipeline-variables.adoc#pipeline-parameters-in-configuration[Pipeline Values and Parameters].
 * A pipeline parameter that your config does not declare is not rejected when you trigger. The request returns a success response, and the pipeline then fails with the error `Unexpected argument(s): <parameter-name>`.
 ifndef::server[]
-* API v3 does not trigger the implicit pipeline definition of a GitHub OAuth project, and returns `404 Not Found`. If your project uses GitHub OAuth, trigger it with API v2.
+* API v3 needs your project ID in the URL, as the `filter[project_id]` query parameter. API v3 cannot find the pipeline definition of a GitHub OAuth project without it, and returns `404 Not Found`. A project ID that does not own the pipeline definition also returns `404 Not Found`.
 endif::server[]
 
 // TODO(DOC-327): Confirm with engineering how to replace the CIRCLE_JOB build parameter, which ran a single job by name.
 // TODO(DOC-327): Add the replacement once confirmed. Do not document a workaround until then.
-// TODO(DOC-327): Confirm with engineering that POST /api/v3/runs does not support GitHub OAuth projects. One test returned 404 for the implicit pipeline definition.
+// TODO(DOC-327): Confirm with the API team that filter[project_id] is required on POST /api/v3/runs for GitHub OAuth projects. The operation description mentions it, but the API v3 spec does not list it as a parameter.
 
 ifndef::server[]
 === Replace trigger calls using API v3
 
-. Replace the URL of the call with `https://circleci.com/api/v3/runs`. The method stays `POST`.
+. Replace the URL of the call with `https://circleci.com/api/v3/runs?filter[project_id]=<project-id>`. The method stays `POST`.
 . Replace the request body. Send your pipeline definition ID in `references.pipeline.id`, and send the branch in `config.branch` and `checkout.branch`. To trigger a tag, send `config.tag` and `checkout.tag` instead:
 +
 [source,shell]
 ----
-curl --request POST https://circleci.com/api/v3/runs \
+curl --globoff --request POST "https://circleci.com/api/v3/runs?filter[project_id]=<project-id>" \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
   --data '{
@@ -666,7 +666,7 @@ ifndef::server[]
 +
 [source,shell]
 ----
-RUN_ID=$(curl --silent --request POST https://circleci.com/api/v3/runs \
+RUN_ID=$(curl --silent --globoff --request POST "https://circleci.com/api/v3/runs?filter[project_id]=<project-id>" \
   --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
   --data '{"data": {"attributes": {"config": {"branch": "main"}, "checkout": {"branch": "main"}}, "references": {"pipeline": {"id": "<pipeline-definition-id>"}}}}' \
