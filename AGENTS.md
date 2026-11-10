@@ -964,7 +964,7 @@ The `check-metadata` CI job validates every page against the schema. Run the sam
 
 - `:page-server-deprecated-in:` - Optional. Same format and quoting rule as above, for a feature deprecated or removed in Server, for example `"5.0"`.
 
-- `:page-audience:` - Who the page is for.
+- `:page-audience:` - Who the page is for. One or more values, comma-separated, for example `developer, admin`.
   - `admin` - Server operators/administrators (installation, cluster management, upgrades)
   - `developer` - everyone else; this is the default for Cloud-only and general content
 

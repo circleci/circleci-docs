@@ -15,7 +15,7 @@ Every page starts with attributes that set its metadata. Start new pages from a 
 ----
 
 * `:page-platform:` is the platform that supports the feature: `Cloud`, `Server`, or `Cloud, Server`.
-* `:page-audience:` is `admin` for Server operators, and `developer` for everyone else.
+* `:page-audience:` is `admin` for Server operators, and `developer` for everyone else. Use both, comma-separated, when a page serves both audiences, for example `developer, admin`.
 * `:page-description:` is a clear summary of the page, between 70 and 160 characters. It must be unique across the site.
 * `:experimental:` enables the experimental AsciiDoc macros.
 
