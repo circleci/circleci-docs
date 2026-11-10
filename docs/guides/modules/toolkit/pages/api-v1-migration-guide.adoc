@@ -28,12 +28,7 @@ The API v1 and API v1.1 `retry` and `ssh` endpoints do not exist on CircleCI Ser
 endif::server[]
 
 All other API v1 and API v1.1 endpoints, including every `GET` endpoint, are not affected.
-ifndef::server[]
 API v2 and API v3 endpoints are not affected.
-endif::server[]
-ifdef::server[]
-API v2 endpoints are not affected.
-endif::server[]
 
 *Trigger a pipeline run*::
 +
