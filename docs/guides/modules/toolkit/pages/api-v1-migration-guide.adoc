@@ -1,4 +1,4 @@
-= Migrate from API v1 and v1.1 to API v2 or v3
+= Migrate from API v1/v1.1 to API v3 or v2
 :page-platform: Cloud, Server
 :page-server-min-version: "4.7"
 :page-vcs: all
@@ -8,13 +8,7 @@
 :page-description: Migrate from deprecated CircleCI API v1 and API v1.1 trigger and rerun endpoints to API v2 or API v3 before the 1 February 2027 removal date.
 :experimental:
 
-ifndef::server[]
-CircleCI removes nine API v1 and API v1.1 endpoints that trigger and rerun builds on 1 February 2027.
-endif::server[]
-ifdef::server[]
-CircleCI removes the API v1 and API v1.1 endpoints that trigger builds on 1 February 2027.
-endif::server[]
-See <<deprecated-endpoints>> for the list. Until then, the deprecated endpoints return `Deprecation` and `Sunset` response headers. After that date, requests to these endpoints return HTTP 410 Gone. This guide shows you how to find those calls in your code and replace each one.
+On 1 February 2027, CircleCI removes nine API v1 and API v1.1 endpoints. These endpoints trigger and rerun builds. See <<deprecated-endpoints>> for the list. Until then, the deprecated endpoints return `Deprecation` and `Sunset` response headers. After that date, requests to these endpoints return HTTP 410 Gone. This guide shows you how to find those calls in your code and replace each one.
 
 ifndef::server[]
 Use API v3 to replace these calls. API v2 remains supported if API v3 does not cover your needs.
@@ -28,11 +22,9 @@ endif::server[]
 [#deprecated-endpoints]
 == Deprecated endpoints and their replacements
 
-ifndef::server[]
 This change applies to both CircleCI Cloud and CircleCI Server. Each entry lists the deprecated endpoints and the endpoints to migrate to.
-endif::server[]
 ifdef::server[]
-The API v1 and API v1.1 `retry` and `ssh` endpoints do not exist on CircleCI Server, so only the trigger endpoints are affected. The entry lists the deprecated endpoints and the endpoint to migrate to.
+The API v1 and API v1.1 `retry` and `ssh` endpoints do not exist on CircleCI Server, so you have only trigger calls to migrate.
 endif::server[]
 
 All other API v1 and API v1.1 endpoints, including every `GET` endpoint, are not affected.
