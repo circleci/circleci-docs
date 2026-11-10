@@ -29,10 +29,10 @@ endif::server[]
 == Deprecated endpoints and their replacements
 
 ifndef::server[]
-CircleCI removes the following nine endpoints on 1 February 2027. This change applies to both CircleCI Cloud and CircleCI Server. Each entry lists the old endpoints and the endpoints that replace them.
+CircleCI removes the following nine endpoints on 1 February 2027. This change applies to both CircleCI Cloud and CircleCI Server. Each entry lists the deprecated endpoints and the endpoints to migrate to.
 endif::server[]
 ifdef::server[]
-CircleCI removes the following endpoints on 1 February 2027. The API v1 and API v1.1 `retry` and `ssh` endpoints do not exist on CircleCI Server, so only the trigger endpoints are affected. The entry lists the old endpoints and the endpoint that replaces them.
+CircleCI removes the following endpoints on 1 February 2027. The API v1 and API v1.1 `retry` and `ssh` endpoints do not exist on CircleCI Server, so only the trigger endpoints are affected. The entry lists the deprecated endpoints and the endpoint to migrate to.
 endif::server[]
 
 All other API v1 and API v1.1 endpoints, including every `GET` endpoint, are not affected.
@@ -45,36 +45,38 @@ endif::server[]
 
 *Trigger a pipeline run*::
 +
-* Old, API v1.1:
-** `POST /api/v1.1/project/<vcs-type>/<username>/<repo>/`
-** `POST /api/v1.1/project/<vcs-type>/<username>/<repo>/tree/<branch>`
-** `POST /api/v1.1/project/<vcs-type>/<username>/<repo>/build`
-* Old, API v1:
-** `POST /api/v1/project/<username>/<repo>/`
-** `POST /api/v1/project/<username>/<repo>/tree/<branch>`
+* Deprecated:
+** link:https://circleci.com/docs/api/v1/#trigger-a-new-job[API v1.1]: `POST /api/v1.1/project/<vcs-type>/<username>/<repo>/`
+** link:https://circleci.com/docs/api/v1/#trigger-a-new-job-with-a-branch[API v1.1]: `POST /api/v1.1/project/<vcs-type>/<username>/<repo>/tree/<branch>`
+** link:https://circleci.com/docs/api/v1/#trigger-a-new-job[API v1.1]: `POST /api/v1.1/project/<vcs-type>/<username>/<repo>/build`
+** link:https://circleci.com/docs/api/v1/#trigger-a-new-job[API v1]: `POST /api/v1/project/<username>/<repo>/`
+** link:https://circleci.com/docs/api/v1/#trigger-a-new-job-with-a-branch[API v1]: `POST /api/v1/project/<username>/<repo>/tree/<branch>`
 ifndef::server[]
-* New:
+* Migrate to:
 ** link:https://circleci.com/docs/api/v3#tag/runs/POST/api/v3/runs[API v3]: `POST /api/v3/runs`
 ** link:https://circleci.com/docs/api/v2/#tag/Pipeline/operation/triggerPipelineRun[API v2]: `POST /api/v2/project/<provider>/<organization>/<project>/pipeline/run`
 endif::server[]
 ifdef::server[]
-* New: link:https://circleci.com/docs/api/v2/#tag/Pipeline/operation/triggerPipeline[API v2]: `POST /api/v2/project/<provider>/<organization>/<project>/pipeline`
+* Migrate to:
+** link:https://circleci.com/docs/api/v2/#tag/Pipeline/operation/triggerPipeline[API v2]: `POST /api/v2/project/<provider>/<organization>/<project>/pipeline`
 endif::server[]
 
 ifndef::server[]
 *Rerun a workflow*::
 +
-* Old, API v1.1: `POST /api/v1.1/project/<vcs-type>/<username>/<repo>/<build-num>/retry`
-* Old, API v1: `POST /api/v1/project/<username>/<repo>/<build-num>/retry`
-* New:
+* Deprecated:
+** link:https://circleci.com/docs/api/v1/#retry-a-job[API v1.1]: `POST /api/v1.1/project/<vcs-type>/<username>/<repo>/<build-num>/retry`
+** link:https://circleci.com/docs/api/v1/#retry-a-job[API v1]: `POST /api/v1/project/<username>/<repo>/<build-num>/retry`
+* Migrate to:
 ** link:https://circleci.com/docs/api/v3#tag/workflows/POST/api/v3/workflows/%7Bid%7D/rerun[API v3]: `POST /api/v3/workflows/<workflow-id>/rerun`
 ** link:https://circleci.com/docs/api/v2/#tag/Workflow/operation/rerunWorkflow[API v2]: `POST /api/v2/workflow/<workflow-id>/rerun`
 
 *Rerun a workflow with SSH enabled*::
 +
-* Old, API v1.1: `POST /api/v1.1/project/<vcs-type>/<username>/<repo>/<build-num>/ssh`
-* Old, API v1: `POST /api/v1/project/<username>/<repo>/<build-num>/ssh`
-* New:
+* Deprecated:
+** link:https://circleci.com/docs/api/v1/#retry-a-job[API v1.1]: `POST /api/v1.1/project/<vcs-type>/<username>/<repo>/<build-num>/ssh`
+** link:https://circleci.com/docs/api/v1/#retry-a-job[API v1]: `POST /api/v1/project/<username>/<repo>/<build-num>/ssh`
+* Migrate to:
 ** link:https://circleci.com/docs/api/v3#tag/workflows/POST/api/v3/workflows/%7Bid%7D/rerun[API v3]: `POST /api/v3/workflows/<workflow-id>/rerun` with `"is_ssh_enabled": true` and a `"jobs"` array.
 ** link:https://circleci.com/docs/api/v2/#tag/Workflow/operation/rerunWorkflow[API v2]: `POST /api/v2/workflow/<workflow-id>/rerun` with `"enable_ssh": true` and a `"jobs"` array.
 endif::server[]
