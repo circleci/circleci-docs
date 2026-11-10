@@ -1996,13 +1996,12 @@ h6 {
         </div>
         <h1 id='circleci-v1-api-overview'>CircleCI V1 API Overview</h1>
 <aside class="v2-banner">
-<strong>Deprecation notice:</strong> Ten v1 and v1.1 endpoints used to trigger and rerun builds will be removed on <strong>1 February 2027</strong>. After that date, requests to these endpoints return HTTP 410 Gone. This change affects both CircleCI Cloud and CircleCI Server. <br/><br/>
+<strong>Deprecation notice:</strong> Nine v1 and v1.1 endpoints used to trigger and rerun builds will be removed on <strong>1 February 2027</strong>. After that date, requests to these endpoints return HTTP 410 Gone. This change affects both CircleCI Cloud and CircleCI Server. <br/><br/>
 <strong>Affected endpoints:</strong>
 <ul>
 <li><code>POST /api/v1/project/:username/:repo/</code></li>
 <li><code>POST /api/v1/project/:username/:repo/:build_num/retry</code></li>
 <li><code>POST /api/v1/project/:username/:repo/:build_num/ssh</code></li>
-<li><code>POST /api/v1/project/:username/:repo/build</code></li>
 <li><code>POST /api/v1/project/:username/:repo/tree/:branch</code></li>
 <li><code>POST /api/v1.1/project/:vcs-type/:username/:repo/</code></li>
 <li><code>POST /api/v1.1/project/:vcs-type/:username/:repo/:build_num/retry</code></li>
@@ -2855,7 +2854,7 @@ https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:branch
 <p><strong>Note</strong> Triggering a new job with a branch is not currently supported with configurations that specify <code>version: 2.1</code>.</p>
 <h2 id='trigger-a-new-pipeline-by-project'>Trigger a new Pipeline by Project</h2>
 <aside class="warning">
-<strong>Deprecated:</strong> This endpoint (<code>POST /api/v1.1/project/:vcs-type/:username/:project/build</code> and its v1 equivalent) will be removed on 1 February 2027. Migrate to the API v2 <a href="https://circleci.com/docs/api/v2/#tag/Pipeline/operation/triggerPipelineRun">trigger a pipeline run</a> endpoint on Cloud, or the <a href="https://circleci.com/docs/api/v2/#tag/Pipeline/operation/triggerPipeline">trigger a pipeline</a> endpoint on Server.
+<strong>Deprecated:</strong> This endpoint (<code>POST /api/v1.1/project/:vcs-type/:username/:project/build</code>) will be removed on 1 February 2027. Migrate to the API v2 <a href="https://circleci.com/docs/api/v2/#tag/Pipeline/operation/triggerPipelineRun">trigger a pipeline run</a> endpoint on Cloud, or the <a href="https://circleci.com/docs/api/v2/#tag/Pipeline/operation/triggerPipeline">trigger a pipeline</a> endpoint on Server.
 </aside>
 <div class="highlight"><pre class="highlight sh tab-shell"><code>curl <span class="nt">-X</span> POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/build <span class="nt">-H</span> <span class="s2">"Circle-Token: &lt;circle-token&gt;"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">

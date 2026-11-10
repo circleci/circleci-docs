@@ -459,8 +459,6 @@ To find a pipeline ID, see <<find-a-pipeline-run-id>>.
 --
 ====
 
-// TODO(DOC-327): Confirm with the API team whether GET /api/v2/project/<project-id> is meant to work. It returns the project, including the slug, when you put the project ID where the slug goes, on Cloud and Server 4.10, but the API v2 spec only documents the slug.
-
 == Find a pipeline run ID
 
 The pipeline run ID is a unique identifier for a pipeline run.

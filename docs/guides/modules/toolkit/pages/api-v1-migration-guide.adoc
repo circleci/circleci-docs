@@ -8,7 +8,7 @@
 :page-description: Migrate from deprecated CircleCI API v1 and API v1.1 trigger and rerun endpoints to API v2 or API v3 before the 1 February 2027 removal date.
 :experimental:
 
-CircleCI removes ten API v1 and API v1.1 endpoints that trigger and rerun builds on 1 February 2027. See <<deprecated-endpoints>> for the list. Until then, the deprecated endpoints return `Deprecation` and `Sunset` response headers. After that date, requests to these endpoints return HTTP 410 Gone. This guide shows you how to find those calls in your code and replace each one.
+CircleCI removes nine API v1 and API v1.1 endpoints that trigger and rerun builds on 1 February 2027. See <<deprecated-endpoints>> for the list. Until then, the deprecated endpoints return `Deprecation` and `Sunset` response headers. After that date, requests to these endpoints return HTTP 410 Gone. This guide shows you how to find those calls in your code and replace each one.
 
 ifndef::server[]
 Use API v3 to replace these calls. API v2 remains supported if API v3 does not cover your needs.
@@ -22,7 +22,7 @@ endif::server[]
 [#deprecated-endpoints]
 == Deprecated endpoints and their replacements
 
-CircleCI removes the following ten endpoints on 1 February 2027. This change applies to both CircleCI Cloud and CircleCI Server. Each entry lists the old endpoints and the endpoints that replace them.
+CircleCI removes the following nine endpoints on 1 February 2027. This change applies to both CircleCI Cloud and CircleCI Server. Each entry lists the old endpoints and the endpoints that replace them.
 
 All other API v1 and API v1.1 endpoints, including every `GET` endpoint, are not affected.
 ifndef::server[]
@@ -41,7 +41,6 @@ endif::server[]
 * Old, API v1:
 ** `POST /api/v1/project/<username>/<repo>/`
 ** `POST /api/v1/project/<username>/<repo>/tree/<branch>`
-** `POST /api/v1/project/<username>/<repo>/build`
 ifndef::server[]
 * New:
 ** link:https://circleci.com/docs/api/v3#tag/runs/POST/api/v3/runs[API v3]: `POST /api/v3/runs`
@@ -170,10 +169,6 @@ endif::server[]
 ifndef::server[]
 * If your project uses GitHub OAuth or Bitbucket OAuth, add your project ID to the URL as the `filter[project_id]` query parameter. API v3 derives the pipeline definition of an OAuth project from the project, so it can find the definition only with the project ID. Without it, the request returns `404 Not Found`. A project that uses the GitHub App does not need the parameter. A project ID that does not own the pipeline definition also returns `404 Not Found`. To check your integration type, look at your organization slug in menu:Organization settings[Overview]. It starts with `gh/` or `github/` for GitHub OAuth. It starts with `bb/` or `bitbucket/` for Bitbucket OAuth. It starts with `circleci/` for the GitHub App.
 endif::server[]
-
-// TODO(DOC-327): Confirm with the PM that expression-based job filters and conditional logic are the intended replacement for the job parameter, which ran a single job by name.
-// TODO(DOC-327): Tested on Cloud: POST /api/v1.1/project/<vcs-type>/<username>/<repo> with the documented job parameter ran only that job, in an implicit workflow named after the job. build_parameters {"CIRCLE_JOB": "<job-name>"} on POST .../tree/<branch> did the same, but the v1.1 reference does not document it. POST .../build rejects build_parameters with a 400. The API v2 and v3 trigger requests have no equivalent field.
-// TODO(DOC-327): Confirm with the API team that filter[project_id] is needed on POST /api/v3/runs only for implicit OAuth pipeline definitions. The spec says so for GET /api/v3/pipelines/{id}, and the POST /api/v3/runs description mentions it, but the spec does not list it as a parameter on POST /api/v3/runs. Tested: GitHub OAuth and Bitbucket OAuth projects need it, a GitHub App project works with or without it. GitLab is not tested.
 
 ifndef::server[]
 === Replace trigger calls using API v3

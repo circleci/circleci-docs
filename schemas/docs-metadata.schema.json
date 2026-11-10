@@ -46,7 +46,7 @@
     "page-audience": {
       "type": "string",
       "pattern": "^(admin|developer)(,\\s*(admin|developer))*$",
-      "description": "Who the page is for, comma-separated: 'admin' (Server operators), 'developer' (everyone else, the default), or both for pages that serve both audiences, for example 'developer, admin'. Replaces the old 'Server Admin' marker baked into page-platform."
+      "description": "Who the page is for, comma-separated: 'admin' (Server operators), 'developer' (everyone else, the default), or both for pages that serve both audiences, for example 'developer, admin'."
     },
     "page-plan": {
       "type": "string",
