@@ -62,78 +62,55 @@ NOTE: If your GitHub user account connection to CircleCI is not yet authorized, 
 == Trigger a pipeline using the API
 
 ifndef::server[]
-NOTE: Triggering a pipeline via the CircleCI v2 API is not currently supported for GitLab projects.
-endif::server[]
+NOTE: Triggering a pipeline run using the API is not currently supported for GitLab projects.
 
-ifdef::server[]
-include::ROOT:partial$notes/server-api-examples.adoc[]
-endif::server[]
+This method is supported for GitHub, Bitbucket, and Cursor Origin pipelines.
 
-[tabs]
-====
-GitHub, Bitbucket, and Cursor Origin::
-+
---
+Trigger a pipeline run using the link:https://circleci.com/docs/api/v3#tag/runs/POST/api/v3/runs[API v3 Runs Endpoint].
 
-This method is supported for GitHub (OAuth and App), Bitbucket (Cloud and Data Center), and Cursor Origin orgs.
+. Get your pipeline definition ID. See the xref:toolkit:how-to-find-ids.adoc[How to Find IDs] guide for instructions.
 
-TIP: **GitHub OAuth and Bitbucket Cloud pipelines** can also be triggered using the link:https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[Trigger a New Pipeline] endpoint, which is described in the **CircleCI Server** tab. However, the method outlined in this section is recommended.
-
-Trigger a pipeline for a project using the link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/triggerPipelineRun[v2 API endpoint] `\https://circleci.com/api/v2/project/<project-slug>/pipeline/run`.
-
-. If you have not already, get set up to use API v2 by following the steps in the  xref:toolkit:api-developers-guide#authentication-and-authorization[API Developers Guide].
-
-. In the link:https://app.circleci.com/home/[CircleCI web app] select your organization. Over the next few steps you will collect the data you need to trigger your pipeline.
-
-. Find your project slug:
-.. Select **Projects** in the CircleCI web app sidebar.
-.. Find your project.
-.. Select the ellipsis menu icon:more[Ellipsis menu icon] and choose **Project Settings**.
-.. Copy your project slug. Save this somewhere, you will need it later.
-
-. Find your definition ID:
-.. You are in project settings if you are following these steps in sequence. If not see previous steps to get there. Select *Project Setup* in the sidebar, or **Pipelines** if you are using Bitbucket Cloud.
-.. Copy the definition ID for the correct pipeline. Save this somewhere, you will need it in the next step.
-+
-.Screenshot showing the pipeline definition ID copy button
-image::guides:ROOT:orchestrate-and-trigger/pipeline-definition-id.png[screenshot showing location of pipeline definition ID copy button]
-
-. To trigger a pipeline from the command line using `curl`, copy and paste this sample request and replace the details in `< >` with your details. The key `parameters` is optional:
+. To trigger a pipeline run from the command line using `curl`, copy and paste this sample request and replace the details in `< >` with your details. The key `parameters` is optional:
 +
 [source,shell]
 ----
-curl -X POST https://circleci.com/api/v2/project/<project-slug>/pipeline/run \
-  --header "Circle-Token: $CIRCLE_TOKEN" \
-  --header "content-type: application/json" \
+curl -X POST https://circleci.com/api/v3/runs \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
+  --header "Content-Type: application/json" \
   --data '{
-  "definition_id": "<pipeline-definition-id>",
-  "config": {"branch": "<your-branch-name>"},
-  "checkout": {"branch": "<your-branch-name>"},
-  "parameters": {"<param-name>": "<param-value>"}
+    "data": {
+      "attributes": {
+        "config": {"branch": "<your-branch-name>"},
+        "checkout": {"branch": "<your-branch-name>"},
+        "parameters": {"<param-name>": "<param-value>"}
+      },
+      "references": {
+        "pipeline": {"id": "<pipeline-definition-id>"}
+      }
+    }
   }'
 ----
 
-. To run a pipeline based on a **tag** instead of a **branch**, replace the `config` and/or `checkout` fields with:
+. To trigger a run based on a **tag** instead of a **branch**, replace the `config` and/or `checkout` fields with:
 +
 [source,shell]
 ----
-  "config": {"tag": "<your-tag-name>"},
-  "checkout": {"tag": "<your-tag-name>"}
+        "config": {"tag": "<your-tag-name>"},
+        "checkout": {"tag": "<your-tag-name>"}
 ----
 . Head back to the CircleCI web app and see your pipeline running on the dashboard.
---
-CircleCI Server::
-+
---
+endif::server[]
+
+ifdef::server[]
 . If you have not already, get set up to use API v2 by following the steps in the  xref:toolkit:api-developers-guide.adoc#authentication-and-authorization[API Developers Guide].
 
-. To trigger a pipeline from the command line using `curl`, copy and paste this sample request and replace the details in `< >` with your details, VCS can be `gh` or `bb`:
+. To trigger a pipeline run from the command line using `curl`, copy and paste this sample request and replace the details in `< >` with your details:
 +
-NOTE: If you are using CircleCI Cloud, `<your-circleci-hostname>` is `circleci.com`.
+NOTE: Replace `<your-circleci-hostname>` with your CircleCI Server hostname.
 +
 [source,shell]
 ----
-curl -X POST https://<your-circleci-hostname>/api/v2/project/<VCS>/<your-vcs-org-or-username>/<your-repo-name>/pipeline \
+curl -X POST https://<your-circleci-hostname>/api/v2/project/gh/<your-vcs-org-or-username>/<your-repo-name>/pipeline \
   --header "Circle-Token: $CIRCLE_TOKEN" \
   --header "content-type: application/json" \
   --data '{"branch":"<your-branch-name>"}'
@@ -142,8 +119,7 @@ curl -X POST https://<your-circleci-hostname>/api/v2/project/<VCS>/<your-vcs-org
 . Head back to the CircleCI web app and see your pipeline running on the dashboard.
 
 TIP: You can also specify pipeline parameters when triggering a pipeline using the API. For full details, see the https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[API v2 Docs].
---
-====
+endif::server[]
 
 ifndef::server[]
 [#trigger-a-pipeline-from-a-custom-webhook]

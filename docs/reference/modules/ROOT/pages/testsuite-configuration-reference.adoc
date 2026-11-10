@@ -660,6 +660,8 @@ options:
 
 Set `max-auto-rerun` to use auto rerun failed tests, which has a credit charge above your plan's allowance, to automatically rerun failed test atoms up to a maximum number of attempts. Test atoms will run once initially, then up to a further `max-auto-rerun` times.
 
+NOTE: `max-auto-rerun` (hyphen, singular) in `.circleci/test-suites.yml` retries individual test atoms as part of Smarter Testing. It is different from the `max_auto_reruns` key (underscore, plural) in `.circleci/config.yml`, which retries entire failed steps or workflows. See xref:guides:orchestrate:automatic-reruns.adoc[Automatic Reruns] for step and workflow-level retries.
+
 [.table-scroll]
 --
 [cols="1,1,1,2", options="header"]

@@ -40,7 +40,7 @@ TIP: If you want to collaborate on an existing org you can create an account and
 . Set up MFA by following the instructions in the web app.
 . Choose one of the following options:
 ** Use the <<join-an-existing-org,Find Your Team>> option to connect your account to a shared org.
-** Head straight to <<sign-up-and-create-an-org>> to create a new organization.
+** Head straight to <<sign-up-and-create-an-org>> and create a new organization.
 
 [#bitbucket-cloud]
 === Sign up to build Bitbucket Cloud projects
@@ -122,6 +122,8 @@ Your sign-in method and VCS provider together determine what kind of CircleCI or
 Set up integrations from menu:Org[VCS Connections]. For steps, see the xref:integration:set-up-vcs-connections.adoc[Set Up VCS Connections] page. You can also set up VCS repository integrations when _creating a project_. You authenticate with your VCS provider as part of that setup. For steps see the xref:create-project.adoc[Create a Project] page.
 * If you sign up or sign in with a **GitHub** social login, CircleCI creates a matching organization for you automatically.
 * If you sign up or sign in with **Bitbucket Cloud**, CircleCI creates a matching organization for you automatically. Every team member joining your org authenticates with Bitbucket _during_ signup, not later.
+
+NOTE: GitLab does not offer a social login option. To build GitLab projects, sign up with email and password, then connect GitLab from menu:Org[VCS Connections].
 
 You cannot use these sign-in methods interchangeably for the same account. For example, using a social login after you already have an email and password account creates a new, separate account connected to your VCS provider.
 

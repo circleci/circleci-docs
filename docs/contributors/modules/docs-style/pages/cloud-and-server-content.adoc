@@ -91,7 +91,7 @@ Go to cloudlink:user-settings[] and create a token.
 Open cloudlink:path[Plan Usage,path=settings/plan/usage].
 ----
 
-Link text defaults to the destination name (for example, `CircleCI web app` or `User Settings`). Add custom text in the brackets to override it. To add a destination, add an entry to `DESTINATIONS` in `extensions/cloud-link-extension.js`.
+Link text defaults to the destination name (for example, `CircleCI web app` or `User Settings`). Add custom text in the brackets to override it. To open the link in a new tab, add `window=_blank` (for example, `cloudlink:webapp[CircleCI web app,window=_blank]`). To add a destination, add an entry to `DESTINATIONS` in `extensions/cloud-link-extension.js`.
 
 Use `ifndef::server[]` instead when the whole sentence or block is Cloud only.
 

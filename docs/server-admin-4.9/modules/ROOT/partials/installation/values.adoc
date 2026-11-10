@@ -3,6 +3,16 @@ pass:[<!-- vale off -->]
 |===
 | Key | Type | Default | Description
 
+| api_service.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| api_service.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
+
 | api_service.replicas
 | int
 | `1`
@@ -28,6 +38,21 @@ pass:[<!-- vale off -->]
 | `"1Gi"`
 |
 
+| api_service.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| audit_log_service.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| audit_log_service.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
+
 | audit_log_service.replicas
 | int
 | `1`
@@ -52,6 +77,21 @@ pass:[<!-- vale off -->]
 | string
 | `"700M"`
 |
+
+| audit_log_service.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| authentication_service.auth_api.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| authentication_service.auth_api.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
 
 | authentication_service.auth_api.rate_limit.burst
 | int
@@ -93,6 +133,21 @@ pass:[<!-- vale off -->]
 | `"512Mi"`
 | Memory request for the authentication-service auth api deployment.
 
+| authentication_service.auth_api.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| authentication_service.internal_api.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| authentication_service.internal_api.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
+
 | authentication_service.internal_api.replicas
 | int
 | `1`
@@ -117,6 +172,21 @@ pass:[<!-- vale off -->]
 | string
 | `"512Mi"`
 | Memory request for the authentication-service internal api deployment.
+
+| authentication_service.internal_api.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| authentication_service.login_api.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| authentication_service.login_api.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
 
 | authentication_service.login_api.replicas
 | int
@@ -143,6 +213,21 @@ pass:[<!-- vale off -->]
 | `"512Mi"`
 | Memory request for the authentication-service login api deployment.
 
+| authentication_service.login_api.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| authentication_service.users_bff.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| authentication_service.users_bff.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
+
 | authentication_service.users_bff.replicas
 | int
 | `1`
@@ -167,6 +252,21 @@ pass:[<!-- vale off -->]
 | string
 | `"512Mi"`
 | Memory request for the authentication-service users bff deployment.
+
+| authentication_service.users_bff.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| authentication_service.worker.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| authentication_service.worker.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
 
 | authentication_service.worker.replicas
 | int
@@ -193,6 +293,21 @@ pass:[<!-- vale off -->]
 | `"512Mi"`
 | Memory request for the authentication-service worker deployment.
 
+| authentication_service.worker.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| branch_service.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| branch_service.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
+
 | branch_service.replicas
 | int
 | `1`
@@ -218,6 +333,11 @@ pass:[<!-- vale off -->]
 | `"256Mi"`
 | Memory request for the branch-service deployment.
 
+| branch_service.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
 | builds_service.custom_max_run_time
 | string
 | `"5h"`
@@ -227,6 +347,16 @@ pass:[<!-- vale off -->]
 | string
 | `"3g"`
 | JVM heap size for the builds-service JVM.
+
+| builds_service.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| builds_service.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
 
 | builds_service.replicas
 | int
@@ -253,6 +383,21 @@ pass:[<!-- vale off -->]
 | `"300Mi"`
 | Memory request for the builds-service deployment.
 
+| builds_service.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| ciam_gateway.internal_api.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| ciam_gateway.internal_api.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
+
 | ciam_gateway.internal_api.replicas
 | int
 | `1`
@@ -277,6 +422,21 @@ pass:[<!-- vale off -->]
 | string
 | `"512Mi"`
 | Memory request for the ciam-gateway-service internal api deployment.
+
+| ciam_gateway.internal_api.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| ciam_gateway.outgoing_api.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| ciam_gateway.outgoing_api.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
 
 | ciam_gateway.outgoing_api.replicas
 | int
@@ -303,6 +463,21 @@ pass:[<!-- vale off -->]
 | `"512Mi"`
 | Memory request for the ciam-gateway-service outgoing api deployment.
 
+| ciam_gateway.outgoing_api.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| ciam_gateway.public_api.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| ciam_gateway.public_api.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
+
 | ciam_gateway.public_api.replicas
 | int
 | `1`
@@ -327,6 +502,21 @@ pass:[<!-- vale off -->]
 | string
 | `"512Mi"`
 | Memory request for the ciam-gateway-service public api deployment.
+
+| ciam_gateway.public_api.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| ciam_service.internal_admin_api.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| ciam_service.internal_admin_api.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
 
 | ciam_service.internal_admin_api.replicas
 | int
@@ -353,6 +543,26 @@ pass:[<!-- vale off -->]
 | `"512Mi"`
 | Memory request for the ciam-service internal admin api deployment.
 
+| ciam_service.internal_admin_api.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| contexts_service.javaToolOptions
+| string
+| `""`
+| Extra JVM flags for contexts-service, set as JAVA_TOOL_OPTIONS. Leave empty to omit the env var. Example: "-XX:ConcGCThreads=1 -XX:ParallelGCThreads=1 -Xlog:gc*::time,uptime,level,tags"
+
+| contexts_service.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| contexts_service.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
+
 | contexts_service.replicas
 | int
 | `1`
@@ -377,6 +587,21 @@ pass:[<!-- vale off -->]
 | string
 | `"300Mi"`
 | Memory request for the contexts-service deployment.
+
+| contexts_service.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| cron_service.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| cron_service.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
 
 | cron_service.replicas
 | int
@@ -403,10 +628,25 @@ pass:[<!-- vale off -->]
 | `"250Mi"`
 |
 
+| cron_service.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
 | distributor.agent_base_url
 | string
-| `"https://circleci-binary-releases.s3.amazonaws.com/circleci-agent"`
+| `+"https://circleci-binary-releases.s3.amazonaws.com/circleci-agent"+`
 | location of the task-agent.  When airgapped, the task-agent will need to be hosted within the airgap and this value updated
+
+| distributor_cleaner.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| distributor_cleaner.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
 
 | distributor_cleaner.replicas
 | int
@@ -433,6 +673,21 @@ pass:[<!-- vale off -->]
 | `"512Mi"`
 |
 
+| distributor_cleaner.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| distributor_dispatcher.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| distributor_dispatcher.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
+
 | distributor_dispatcher.replicas
 | int
 | `1`
@@ -457,6 +712,21 @@ pass:[<!-- vale off -->]
 | string
 | `"512Mi"`
 |
+
+| distributor_dispatcher.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| distributor_external.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| distributor_external.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
 
 | distributor_external.replicas
 | int
@@ -483,6 +753,21 @@ pass:[<!-- vale off -->]
 | `"512Mi"`
 | Memory request for the distributor-external deployment.
 
+| distributor_external.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| distributor_internal.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| distributor_internal.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
+
 | distributor_internal.replicas
 | int
 | `1`
@@ -508,9 +793,14 @@ pass:[<!-- vale off -->]
 | `"256Mi"`
 | Memory request for the distributor-internal deployment.
 
+| distributor_internal.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
 | docker_provisioner.agent_base_url
 | string
-| `"https://circleci-binary-releases.s3.amazonaws.com/docker-provisioner"`
+| `+"https://circleci-binary-releases.s3.amazonaws.com/docker-provisioner"+`
 | Location of the docker-provisioner agent. When air-gapped, the docker-provisioner agent will need to be hosted within the air-gap and this value updated
 
 | docker_provisioner.custom_config
@@ -522,6 +812,16 @@ pass:[<!-- vale off -->]
 | bool
 | `true`
 |
+
+| docker_provisioner.external.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| docker_provisioner.external.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
 
 | docker_provisioner.external.replicas
 | int
@@ -543,6 +843,21 @@ pass:[<!-- vale off -->]
 | `"512Mi"`
 | Memory request for the docker-provisioner-externalapi deployment
 
+| docker_provisioner.external.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| docker_provisioner.internal.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| docker_provisioner.internal.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
+
 | docker_provisioner.internal.replicas
 | int
 | `1`
@@ -563,10 +878,25 @@ pass:[<!-- vale off -->]
 | `"512Mi"`
 | Memory request for the docker-provisioner-internalapi deployment
 
+| docker_provisioner.internal.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
 | docker_provisioner.plugin_repository_url
 | string
-| `"https://circleci-binary-releases.s3.amazonaws.com"`
+| `+"https://circleci-binary-releases.s3.amazonaws.com"+`
 | Location of the agent plugin binaries. When air-gapped, the plugin binaries will need to be hosted within the air-gap and this value updated
+
+| docker_provisioner.provisioner.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| docker_provisioner.provisioner.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
 
 | docker_provisioner.provisioner.replicas
 | int
@@ -588,10 +918,25 @@ pass:[<!-- vale off -->]
 | `"512Mi"`
 | Memory request for the docker-provisioner-provisioner deployment
 
+| docker_provisioner.provisioner.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
 | docker_provisioner.reaperContainerRepository
 | string
 | `""`
 | Repository to use to download the reaper container. Must contain the `pause:3.6` image
+
+| domain_service.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| domain_service.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
 
 | domain_service.providersMangerMaxPoolSize
 | int
@@ -623,6 +968,21 @@ pass:[<!-- vale off -->]
 | `"500Mi"`
 | Memory request for the domain-service deployment.
 
+| domain_service.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| execution_gateway.api.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| execution_gateway.api.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
+
 | execution_gateway.api.replicas
 | int
 | `1`
@@ -643,6 +1003,11 @@ pass:[<!-- vale off -->]
 | `"512Mi"`
 | Memory request for the execution-gateway-api deployment
 
+| execution_gateway.api.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
 | execution_gateway.force_legacy_ui
 | string
 | `"false"`
@@ -652,6 +1017,16 @@ pass:[<!-- vale off -->]
 | int
 | `2500`
 | Maximum concurrency you wish to permit per org in your environment
+
+| execution_gateway.public_api.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| execution_gateway.public_api.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
 
 | execution_gateway.public_api.replicas
 | int
@@ -673,10 +1048,25 @@ pass:[<!-- vale off -->]
 | `"1536Mi"`
 | Memory request for the execution-gateway-publicapi deployment
 
+| execution_gateway.public_api.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
 | frontend.jvmHeapSize
 | string
 | `"3g"`
 |
+
+| frontend.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| frontend.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
 
 | frontend.replicas
 | int
@@ -703,6 +1093,11 @@ pass:[<!-- vale off -->]
 | `"1536Mi"`
 | Memory request for the frontend deployment.
 
+| frontend.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
 | github
 | object
 | `{"clientId":"","clientSecret":"","enterprise":false,"fingerprint":null,"hostname":"ghe.example.com","scheme":"https","unsafeDisableWebhookSSLVerification":false}`
@@ -711,12 +1106,18 @@ pass:[<!-- vale off -->]
 | github.clientId
 | string
 | `""`
-| Client ID for OAuth Login via Github (2 Options). **Option 1:** Set the value here and CircleCI will create the secret automatically. + **Option 2:** Leave this blank, and create the secret yourself. CircleCI will assume it exists.  Create on by Navigating to Settings > Developer Settings > OAuth Apps. Your homepage should be set to `{{ .Values.global.scheme }}://{{ .Values.global.domainName }}` and callback should be `{{ .Value.scheme }}://{{ .Values.global.domainName }}/auth/github`.
+| Client ID for OAuth Login via Github (2 Options). +
+*Option 1:* Set the value here and CircleCI will create the secret automatically. +
+*Option 2:* Leave this blank, and create the secret yourself. CircleCI will assume it exists. +
+Create on by Navigating to Settings > Developer Settings > OAuth Apps. Your homepage should be set to `{{ .Values.global.scheme }}://{{ .Values.global.domainName }}` and callback should be `{{ .Value.scheme }}://{{ .Values.global.domainName }}/auth/github`.
 
 | github.clientSecret
 | string
 | `""`
-| Client Secret for OAuth Login via Github (2 Options).  **Option 1:** Set the value here and CircleCI will create the secret automatically.  **Option 2:** Leave this blank, and create the secret yourself. CircleCI will assume it exists.  Retrieved from the same location as specified in github.clientID.
+| Client Secret for OAuth Login via Github (2 Options). +
+*Option 1:* Set the value here and CircleCI will create the secret automatically. +
+*Option 2:* Leave this blank, and create the secret yourself. CircleCI will assume it exists. +
+Retrieved from the same location as specified in github.clientID.
 
 | github.enterprise
 | bool
@@ -766,7 +1167,10 @@ pass:[<!-- vale off -->]
 | global.license
 | string
 | `""`
-| License (2 Options) For your CircleCI Installation  **Option 1:** Set the value global.license and CircleCI will create the secret automatically.  **Option 2:** Leave this blank, and create the secret yourself. CircleCI will assume it exists.  The secret must be named 'license' and have the key 'license' (where the value equals the base64 encoded string of your license). It must be in the same namespace as your installation.
+| License (2 Options) For your CircleCI Installation +
+*Option 1:* Set the value global.license and CircleCI will create the secret automatically. +
+*Option 2:* Leave this blank, and create the secret yourself. CircleCI will assume it exists. +
+The secret must be named 'license' and have the key 'license' (where the value equals the base64 encoded string of your license). It must be in the same namespace as your installation.
 
 | global.nodeAffinity
 | object
@@ -823,6 +1227,16 @@ pass:[<!-- vale off -->]
 | `true`
 | Whether or not to enable the insights-service deployment.
 
+| insights_service.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| insights_service.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
+
 | insights_service.replicas
 | int
 | `1`
@@ -848,10 +1262,18 @@ pass:[<!-- vale off -->]
 | `false`
 | Enable to skip the permissions check on the org page and show all projects
 
+| insights_service.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
 | keyset
 | object
 | `{"encryption":"","signing":""}`
-| Keysets (2 Options) used to encrypt and sign artifacts generated by CircleCI. You need these values to configure server.  **Option 1:** Set the values keyset.signing and keyset.encryption here and CircleCI will create the secret automatically.  **Option 2:** Leave this blank, and create the secret yourself. CircleCI will assume it exists.  The secret must be named 'signing-keys' and have the keys; signing-key, encryption-key.
+| Keysets (2 Options) used to encrypt and sign artifacts generated by CircleCI. You need these values to configure server. +
+*Option 1:* Set the values keyset.signing and keyset.encryption here and CircleCI will create the secret automatically. +
+*Option 2:* Leave this blank, and create the secret yourself. CircleCI will assume it exists. +
+The secret must be named 'signing-keys' and have the keys; signing-key, encryption-key.
 
 | keyset.encryption
 | string
@@ -883,20 +1305,20 @@ pass:[<!-- vale off -->]
 | `"notice"`
 | Debug level for Kong. Available levels: `debug`, `info`, `warn`, `error`, `crit`, `notice`.
 
-| kong.image.repository
-| string
-| `"kong"`
-| The Docker image repository for Kong. Note this repository is not managed by CircleCI.
-
-| kong.image.tag
-| string
-| `"3.4.2"`
-| The Kong image tag. Kong has been tested against this specific version tag; edit this value at your own risk.
-
 | kong.nginx_worker_processes
 | int
 | `10`
 | Determines the number of worker processes spawned by Nginx.
+
+| kong.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| kong.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
 
 | kong.replicas
 | int
@@ -928,6 +1350,21 @@ pass:[<!-- vale off -->]
 | `false`
 | Set to true for public health check page (kong) for load balancers to hit
 
+| kong.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| legacy_notifier.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| legacy_notifier.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
+
 | legacy_notifier.replicas
 | int
 | `1`
@@ -952,6 +1389,21 @@ pass:[<!-- vale off -->]
 | string
 | `"800Mi"`
 |
+
+| legacy_notifier.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| lock_job_provider.consumer.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| lock_job_provider.consumer.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
 
 | lock_job_provider.consumer.replicas
 | int
@@ -978,6 +1430,21 @@ pass:[<!-- vale off -->]
 | `"512Mi"`
 |
 
+| lock_job_provider.consumer.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| lock_job_provider.internalapi.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| lock_job_provider.internalapi.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
+
 | lock_job_provider.internalapi.replicas
 | int
 | `1`
@@ -1003,9 +1470,14 @@ pass:[<!-- vale off -->]
 | `"512Mi"`
 |
 
+| lock_job_provider.internalapi.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
 | machine_provisioner.agent_base_url
 | string
-| `"https://circleci-binary-releases.s3.amazonaws.com/machine-provisioner"`
+| `+"https://circleci-binary-releases.s3.amazonaws.com/machine-provisioner"+`
 | Location of the machine-provisioner agent. When air-gapped, the machine-provisioner agent will need to be hosted within the air-gap and this value updated
 
 | machine_provisioner.agent_download_timeout_seconds
@@ -1043,6 +1515,16 @@ pass:[<!-- vale off -->]
 | `true`
 |
 
+| machine_provisioner.external.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| machine_provisioner.external.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
+
 | machine_provisioner.external.replicas
 | int
 | `1`
@@ -1063,6 +1545,11 @@ pass:[<!-- vale off -->]
 | `"512Mi"`
 | Memory request for the machine-provisioner-externalapi deployment
 
+| machine_provisioner.external.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
 | machine_provisioner.fudgeConstantTerm
 | int
 | `0`
@@ -1077,6 +1564,16 @@ pass:[<!-- vale off -->]
 | string
 | `"production"`
 | Unique tag machine provisioner applies to machines it manages.
+
+| machine_provisioner.internal.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| machine_provisioner.internal.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
 
 | machine_provisioner.internal.replicas
 | int
@@ -1098,6 +1595,21 @@ pass:[<!-- vale off -->]
 | `"512Mi"`
 | Memory request for the machine-provisioner-internalapi deployment
 
+| machine_provisioner.internal.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| machine_provisioner.leader.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| machine_provisioner.leader.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
+
 | machine_provisioner.leader.replicas
 | int
 | `1`
@@ -1118,6 +1630,11 @@ pass:[<!-- vale off -->]
 | `"512Mi"`
 | Memory request for the machine-provisioner-leader deployment
 
+| machine_provisioner.leader.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
 | machine_provisioner.machine_agent_download_timeout_seconds
 | int
 | `10`
@@ -1125,18 +1642,21 @@ pass:[<!-- vale off -->]
 
 | machine_provisioner.plugin_repository_url
 | string
-| `"https://circleci-binary-releases.s3.amazonaws.com"`
+| `+"https://circleci-binary-releases.s3.amazonaws.com"+`
 | Location of the agent plugin binaries. When air-gapped, the plugin binaries will need to be hosted within the air-gap and this value updated
 
 | machine_provisioner.providers
 | object
-| `{"ec2":{"accessKey":"","allowIMDSv1":false,"assignPublicIP":false,"assumedRoleArn":"","enabled":false,"iops":0,"irsaRole":"","linuxAMI":"","region":"us-west-1","secretKey":"","securityGroupId":"sg-123","subnets":["subnet-abc","subnet-def"],"tags":{"key1":"value1","key2":"value2"},"throughput":0,"windowsAMI":""},"gcp":{"assignPublicIP":true,"enabled":false,"linuxImage":"","network":"default","network_tags":["circleci-vm"],"project_id":"my-server-project","region":"us-central1","service_account":{"project_id":"... ...","type":"service_account"},"subnetwork":"my-server-vm-subnet","windowsImage":"","workloadIdentity":"","zones":["us-central1-a","us-central1-b","us-central1-c","us-central1-f"]}}`
+| `+{"ec2":{"accessKey":"","allowIMDSv1":false,"assignPublicIP":false,"assumedRoleArn":"","enabled":false,"iops":0,"irsaRole":"","linuxAMI":"","region":"us-west-1","secretKey":"","securityGroupId":"sg-123","subnets":["subnet-abc","subnet-def"],"tags":{"key1":"value1","key2":"value2"},"throughput":0,"windowsAMI":""},"gcp":{"assignPublicIP":true,"enabled":false,"linuxImage":"","network":"default","network_tags":["circleci-vm"],"project_id":"my-server-project","region":"us-central1","service_account":{"project_id":"... ...","type":"service_account"},"subnetwork":"my-server-vm-subnet","windowsImage":"","workloadIdentity":"","zones":["us-central1-a","us-central1-b","us-central1-c","us-central1-f"]}}+`
 | Provider configuration for Machine Provisioner.
 
 | machine_provisioner.providers.ec2.accessKey
 | string
 | `""`
-| EC2 Authentication Config (3 Options).  **Option 1:** Set accessKey and secretKey here, and CircleCI will create the secret for you.  **Option 2:** Leave accessKey and secretKey blank, and create the secret yourself. CircleCI will assume it exists.  **Option 3:** Leave accessKey and secretKey blank, and set the irsaRole field (IAM roles for service accounts).
+| EC2 Authentication Config (3 Options). +
+*Option 1:* Set accessKey and secretKey here, and CircleCI will create the secret for you. +
+*Option 2:* Leave accessKey and secretKey blank, and create the secret yourself. CircleCI will assume it exists. +
+*Option 3:* Leave accessKey and secretKey blank, and set the irsaRole field (IAM roles for service accounts).
 
 | machine_provisioner.providers.ec2.allowIMDSv1
 | bool
@@ -1156,12 +1676,15 @@ pass:[<!-- vale off -->]
 | machine_provisioner.providers.ec2.iops
 | int
 | `0`
-| EBS volume IOPS value. Backend default is 5000 if not specified.  IOPS can range from 3,000 to 16,000 for gp3 volumes.  Maximum of 500 IOPS per GiB of volume size.
+| EBS volume IOPS value. Backend default is 5000 if not specified. +
+IOPS can range from 3,000 to 16,000 for gp3 volumes. +
+Maximum of 500 IOPS per GiB of volume size.
 
 | machine_provisioner.providers.ec2.throughput
 | int
 | `0`
-| EBS volume throughput in MB/s. Backend default is 500 if not specified.  Throughput can range from 125 to 1,000 MiB/s for gp3 volumes.
+| EBS volume throughput in MB/s. Backend default is 500 if not specified. +
+Throughput can range from 125 to 1,000 MiB/s for gp3 volumes.
 
 | machine_provisioner.providers.gcp.enabled
 | bool
@@ -1170,8 +1693,21 @@ pass:[<!-- vale off -->]
 
 | machine_provisioner.providers.gcp.service_account
 | object
-| `{"project_id":"... ...","type":"service_account"}`
-| GCP Compute Authentication Config (3 Options).  **Option 1:** Set service_account with the service account JSON (raw JSON, not a string), and CircleCI will create the secret for you.  **Option 2:** Leave the service_account field as its default, and create the secret yourself. CircleCI will assume it exists.  **Option 3:** Leave the service_account field as its default, and set the workloadIdentityField with a service account email to use workload identities.
+| `+{"project_id":"... ...","type":"service_account"}+`
+| GCP Compute Authentication Config (3 Options). +
+*Option 1:* Set service_account with the service account JSON (raw JSON, not a string), and CircleCI will create the secret for you. +
+*Option 2:* Leave the service_account field as its default, and create the secret yourself. CircleCI will assume it exists. +
+*Option 3:* Leave the service_account field as its default, and set the workloadIdentityField with a service account email to use workload identities.
+
+| machine_provisioner.provisioner.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| machine_provisioner.provisioner.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
 
 | machine_provisioner.provisioner.replicas
 | int
@@ -1192,6 +1728,11 @@ pass:[<!-- vale off -->]
 | string
 | `"512Mi"`
 | Memory request for the machine-provisioner-provisioner deployment
+
+| machine_provisioner.provisioner.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
 
 | machine_provisioner.terminatePendingLinuxAfter
 | string
@@ -1333,15 +1874,10 @@ pass:[<!-- vale off -->]
 | `false`
 | ⚠️ WARNING: Enabling this will recreate frontend's service which will recreate the load balancer. If you are updating your deployed settings, then you will need to route your frontend domain to the new loadbalancer. You will also need to add `service.beta.kubernetes.io/aws-load-balancer-ssl-cert: <acm-arn>` to the `nginx.annotations` block.
 
-| nginx.image.repository
-| string
-| `"nginxinc/nginx-unprivileged"`
-| The Docker image repository for NGINX. Note this repository is not managed by CircleCI.
-
-| nginx.image.tag
-| string
-| `"1.30.1"`
-| Nginx has been tested against this specific version tag; edit this value at your own risk.
+| nginx.keepalive_connections
+| int
+| `32`
+| Idle connections kept open to Kong, per worker process (so the pod holds up to `worker_processes` x this many). Reusing connections avoids exhausting ephemeral ports under load, which surfaces as nginx 502s. Raise this if Kong traffic is highly concurrent; each idle connection counts against nginx's 1024 per-worker connection budget.
 
 | nginx.loadBalancerIp
 | string
@@ -1352,6 +1888,16 @@ pass:[<!-- vale off -->]
 | list
 | `[]`
 | Load Balancer Source IP CIDRs List of IP CIDRs allowed access to load balancer
+
+| nginx.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| nginx.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
 
 | nginx.private_load_balancers
 | bool
@@ -1383,6 +1929,26 @@ pass:[<!-- vale off -->]
 | `"512Mi"`
 | Memory request for the nginx deployment.
 
+| nginx.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| nginx.worker_processes
+| int
+| `10`
+| Determines the number of worker processes spawned by Nginx. Kept explicit rather than `auto`, which would scale with the node's CPU count instead of this deployment's CPU limit.
+
+| no_op_job_provider.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| no_op_job_provider.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
+
 | no_op_job_provider.replicas
 | int
 | `1`
@@ -1408,10 +1974,18 @@ pass:[<!-- vale off -->]
 | `"512Mi"`
 |
 
+| no_op_job_provider.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
 | nomad.auto_scaler.aws.accessKey
 | string
 | `""`
-| AWS Authentication Config (3 Options).  **Option 1:** Set accessKey and secretKey here, and CircleCI will create the secret for you.  **Option 2:** Leave accessKey and secretKey blank, and create the secret yourself. CircleCI will assume it exists.  **Option 3:** Leave accessKey and secretKey blank, and set the irsaRole field (IAM roles for service accounts).
+| AWS Authentication Config (3 Options). +
+*Option 1:* Set accessKey and secretKey here, and CircleCI will create the secret for you. +
+*Option 2:* Leave accessKey and secretKey blank, and create the secret yourself. CircleCI will assume it exists. +
+*Option 3:* Leave accessKey and secretKey blank, and set the irsaRole field (IAM roles for service accounts).
 
 | nomad.auto_scaler.aws.autoScalingGroup
 | string
@@ -1465,8 +2039,11 @@ pass:[<!-- vale off -->]
 
 | nomad.auto_scaler.gcp.service_account
 | object
-| `{"project_id":"... ...","type":"service_account"}`
-| GCP Authentication Config (3 Options).  **Option 1:** Set service_account with the service account JSON (raw JSON, not a string), and CircleCI will create the secret for you.  **Option 2:** Leave the service_account field as its default, and create the secret yourself. CircleCI will assume it exists.  **Option 3:** Leave the service_account field as its default, and set the workloadIdentity field with a service account email to use workload identities.
+| `+{"project_id":"... ...","type":"service_account"}+`
+| GCP Authentication Config (3 Options). +
+*Option 1:* Set service_account with the service account JSON (raw JSON, not a string), and CircleCI will create the secret for you. +
+*Option 2:* Leave the service_account field as its default, and create the secret yourself. CircleCI will assume it exists. +
+*Option 3:* Leave the service_account field as its default, and set the workloadIdentity field with a service account email to use workload identities.
 
 | nomad.auto_scaler.gcp.workloadIdentity
 | string
@@ -1487,6 +2064,11 @@ pass:[<!-- vale off -->]
 | string
 | `"0.4.6"`
 | Nomad Autoscaler has been tested against this specific version tag; edit this value at your own risk.
+
+| nomad.auto_scaler.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
 
 | nomad.auto_scaler.scaling.cooldown
 | string
@@ -1512,6 +2094,11 @@ pass:[<!-- vale off -->]
 | string
 | `"5m"`
 |
+
+| nomad.auto_scaler.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
 
 | nomad.buildAgentImage
 | string
@@ -1563,6 +2150,16 @@ pass:[<!-- vale off -->]
 | `90`
 |
 
+| nomad.server.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| nomad.server.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
+
 | nomad.server.pdb.enabled
 | bool
 | `true`
@@ -1611,7 +2208,11 @@ pass:[<!-- vale off -->]
 | nomad.server.rpc.mTLS
 | object
 | `{"CACertificate":"","certificate":"","enabled":true,"privateKey":""}`
-| Nomad mTLS (2 Options), strongly suggested for RPC communication  Encrypts traffic and authenticates clients to ensure no unauthenticated clients can join the cluster.  **Option 1:** Provide the CACertificate, certificate, and privateKey values - CircleCI will create the secret for you.  **Option 2:** Leave the value blank (default) and create the secret yourself. If the values are populated, CircleCI will use them.  The secret must be named 'nomad-mtls', be in the same namespace, and have the key:values of: ca.pem: 'base64-encoded-certificate-authority', key.pem: 'base64-encoded-private-key', cert.pem: 'base64-encoded-certificate'.
+| Nomad mTLS (2 Options), strongly suggested for RPC communication +
+Encrypts traffic and authenticates clients to ensure no unauthenticated clients can join the cluster. +
+*Option 1:* Provide the CACertificate, certificate, and privateKey values - CircleCI will create the secret for you. +
+*Option 2:* Leave the value blank (default) and create the secret yourself. If the values are populated, CircleCI will use them. +
+The secret must be named 'nomad-mtls', be in the same namespace, and have the key:values of: ca.pem: 'base64-encoded-certificate-authority', key.pem: 'base64-encoded-private-key', cert.pem: 'base64-encoded-certificate'.
 
 | nomad.server.serverHostname
 | string
@@ -1623,9 +2224,14 @@ pass:[<!-- vale off -->]
 | `false`
 |
 
+| nomad.server.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
 | object_storage
 | object
-| `{"bucketName":"","expireAfter":0,"gcs":{"enabled":false,"service_account":{"project_id":"... ...","type":"service_account"},"workloadIdentity":""},"s3":{"accessKey":"","enabled":false,"endpoint":"https://s3.us-east-1.amazonaws.com","irsaRole":"","partition":"aws","presigned":true,"region":"us-east-1","secretKey":"","storageRole":""}}`
+| `+{"bucketName":"","expireAfter":0,"gcs":{"enabled":false,"service_account":{"project_id":"... ...","type":"service_account"},"workloadIdentity":""},"s3":{"accessKey":"","enabled":false,"endpoint":"https://s3.us-east-1.amazonaws.com","irsaRole":"","partition":"aws","presigned":true,"region":"us-east-1","secretKey":"","storageRole":""}}+`
 | Object storage for build artifacts, audit logs, test results and more. One of object_storage.s3.enabled or object_storage.gcs.enabled must be true for the chart to function.
 
 | object_storage.expireAfter
@@ -1635,22 +2241,28 @@ pass:[<!-- vale off -->]
 
 | object_storage.gcs.service_account
 | object
-| `{"project_id":"... ...","type":"service_account"}`
-| GCP Storage (GCS) Authentication Config (3 Options).  **Option 1:** Set `service_account` with the service account JSON (raw JSON, not a string), and CircleCI will create the secret for you.  **Option 2:** Leave the `service_account` field as its default, and create the secret yourself. CircleCI will assume it exists.  **Option 3:** Leave the `service_account` field as its default, and set the `workloadIdentity` field with a service account email to use workload identities.
+| `+{"project_id":"... ...","type":"service_account"}+`
+| GCP Storage (GCS) Authentication Config (3 Options). +
+*Option 1:* Set `service_account` with the service account JSON (raw JSON, not a string), and CircleCI will create the secret for you. +
+*Option 2:* Leave the `service_account` field as its default, and create the secret yourself. CircleCI will assume it exists. +
+*Option 3:* Leave the `service_account` field as its default, and set the `workloadIdentity` field with a service account email to use workload identities.
 
 | object_storage.s3
 | object
-| `{"accessKey":"","enabled":false,"endpoint":"https://s3.us-east-1.amazonaws.com","irsaRole":"","partition":"aws","presigned":true,"region":"us-east-1","secretKey":"","storageRole":""}`
+| `+{"accessKey":"","enabled":false,"endpoint":"https://s3.us-east-1.amazonaws.com","irsaRole":"","partition":"aws","presigned":true,"region":"us-east-1","secretKey":"","storageRole":""}+`
 | S3 Configuration for Object Storage. Authentication methods: AWS Access/Secret Key, and IRSA Role
 
 | object_storage.s3.accessKey
 | string
 | `""`
-| AWS Authentication Config (3 Options).  **Option 1:** Set accessKey and secretKey here, and CircleCI will create the secret for you.  **Option 2:** Leave accessKey and secretKey blank, and create the secret yourself. CircleCI will assume it exists.  **Option 3:** Leave accessKey and secretKey blank, and set the irsaRole field (IAM roles for service accounts), also set region: "your-aws-region".
+| AWS Authentication Config (3 Options). +
+*Option 1:* Set accessKey and secretKey here, and CircleCI will create the secret for you. +
+*Option 2:* Leave accessKey and secretKey blank, and create the secret yourself. CircleCI will assume it exists. +
+*Option 3:* Leave accessKey and secretKey blank, and set the irsaRole field (IAM roles for service accounts), also set region: "your-aws-region".
 
 | object_storage.s3.endpoint
 | string
-| `"https://s3.us-east-1.amazonaws.com"`
+| `+"https://s3.us-east-1.amazonaws.com"+`
 | API endpoint for S3. If in AWS us-west-2, for example, this would be the regional endpoint https://s3.us-west-2.amazonaws.com. If using S3 compatible storage, specify the API endpoint of your object storage server
 
 | object_storage.s3.presigned
@@ -1678,6 +2290,16 @@ pass:[<!-- vale off -->]
 | `""`
 | The json web key (JWK) or key set (JWKS) used for signing ID tokens. Value should be base64 encoded.
 
+| oidc_service.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| oidc_service.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
+
 | oidc_service.replicas
 | int
 | `1`
@@ -1693,6 +2315,21 @@ pass:[<!-- vale off -->]
 | `"5h"`
 | Maximum time-to-live for newly minted ID tokens.
 
+| oidc_service.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| oidc_tasks_service.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| oidc_tasks_service.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
+
 | oidc_tasks_service.replicas
 | int
 | `1`
@@ -1702,6 +2339,11 @@ pass:[<!-- vale off -->]
 | object
 | `{"limits":{"cpu":"200m","memory":"128Mi"},"requests":{"cpu":"100m","memory":"128Mi"}}`
 | Resource configuration for the oidc-tasks-service deployment.
+
+| oidc_tasks_service.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
 
 | opentelemetry-collector.config.processors.filter/traces_lowSignal.error_mode
 | string
@@ -1823,6 +2465,16 @@ pass:[<!-- vale off -->]
 | `5`
 |
 
+| orb_service.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| orb_service.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
+
 | orb_service.replicas
 | int
 | `1`
@@ -1848,6 +2500,21 @@ pass:[<!-- vale off -->]
 | `"300Mi"`
 |
 
+| orb_service.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| output.internal.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| output.internal.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
+
 | output.internal.replicas
 | string
 | `nil`
@@ -1868,10 +2535,25 @@ pass:[<!-- vale off -->]
 | `"1Gi"`
 | Memory request for the output-internal deployment.
 
+| output.internal.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
 | output.public
 | object
-| `{"replicas":1,"resources":{"limits":{"memory":"512Mi"},"requests":{"cpu":0.5,"memory":"512Mi"}}}`
+| `{"nodeAffinity":{},"nodeSelector":{},"replicas":1,"resources":{"limits":{"memory":"512Mi"},"requests":{"cpu":0.5,"memory":"512Mi"}},"tolerations":[]}`
 | Number of replicas to deploy for the output-public deployment.
+
+| output.public.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| output.public.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
 
 | output.public.resources.limits.memory
 | string
@@ -1888,10 +2570,25 @@ pass:[<!-- vale off -->]
 | `"512Mi"`
 | Memory request for the output-public deployment.
 
+| output.public.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
 | output.receiver
 | object
-| `{"replicas":1,"resources":{"limits":{"memory":"1Gi"},"requests":{"cpu":0.5,"memory":"1Gi"}}}`
+| `{"nodeAffinity":{},"nodeSelector":{},"replicas":1,"resources":{"limits":{"memory":"1Gi"},"requests":{"cpu":0.5,"memory":"1Gi"}},"tolerations":[]}`
 | Number of replicas to deploy for the output-receiver deployment.
+
+| output.receiver.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| output.receiver.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
 
 | output.receiver.resources.limits.memory
 | string
@@ -1907,6 +2604,21 @@ pass:[<!-- vale off -->]
 | string
 | `"1Gi"`
 | Memory request for the output-receiver deployment.
+
+| output.receiver.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| permissions_service.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| permissions_service.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
 
 | permissions_service.replicas
 | int
@@ -1933,6 +2645,21 @@ pass:[<!-- vale off -->]
 | `"300Mi"`
 | Memory request for the permissions-service deployment.
 
+| permissions_service.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| policy_service.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| policy_service.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
+
 | policy_service.replicas
 | int
 | `1`
@@ -1958,6 +2685,21 @@ pass:[<!-- vale off -->]
 | `"128Mi"`
 |
 
+| policy_service.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| policy_service_internal.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| policy_service_internal.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
+
 | policy_service_internal.replicas
 | int
 | `1`
@@ -1982,6 +2724,11 @@ pass:[<!-- vale off -->]
 | string
 | `"128Mi"`
 |
+
+| policy_service_internal.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
 
 | postgresql.auth.existingSecret
 | string
@@ -2121,7 +2868,17 @@ pass:[<!-- vale off -->]
 | proxy.no_proxy
 | list
 | `[]`
-| List of hostnames, IP CIDR blocks exempt from proxying. Loopback and intra-service traffic is never proxied.
+| Extra hostnames and CIDR blocks exempt from proxying. The chart also exempts the in-cluster hostnames it dials, including headless service names.
+
+| public_api_service.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| public_api_service.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
 
 | public_api_service.replicas
 | int
@@ -2147,6 +2904,11 @@ pass:[<!-- vale off -->]
 | string
 | `"512Mi"`
 |
+
+| public_api_service.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
 
 | pusher.key
 | string
@@ -2205,7 +2967,7 @@ pass:[<!-- vale off -->]
 
 | rabbitmq.image.tag
 | string
-| `"3.12.4071-a535ab2"`
+| `"3.12.5977-281b064"`
 |
 
 | rabbitmq.internal
@@ -2325,7 +3087,7 @@ pass:[<!-- vale off -->]
 
 | redis.image.tag
 | string
-| `"6.2.2471-c0995cc"`
+| `"6.2.5979-281b064"`
 |
 
 | redis.master.extraEnvVars[0].name
@@ -2393,6 +3155,16 @@ pass:[<!-- vale off -->]
 | `false`
 |
 
+| runner_admin.cleaner.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| runner_admin.cleaner.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
+
 | runner_admin.cleaner.replicas
 | int
 | `1`
@@ -2417,6 +3189,21 @@ pass:[<!-- vale off -->]
 | string
 | `"512M"`
 | Memory request for the radm-cleaner deployment
+
+| runner_admin.cleaner.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| runner_admin.external.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| runner_admin.external.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
 
 | runner_admin.external.replicas
 | int
@@ -2443,6 +3230,21 @@ pass:[<!-- vale off -->]
 | `"512M"`
 | Memory request for the radm-external deployment
 
+| runner_admin.external.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| runner_admin.internal.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| runner_admin.internal.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
+
 | runner_admin.internal.replicas
 | int
 | `1`
@@ -2467,6 +3269,11 @@ pass:[<!-- vale off -->]
 | string
 | `"512M"`
 | Memory request for the radm-internal deployment
+
+| runner_admin.internal.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
 
 | serveUnsafeArtifacts
 | bool
@@ -2498,6 +3305,16 @@ pass:[<!-- vale off -->]
 | `"1.6-16-distroless"`
 | Soketi has been tested against this specific version tag; edit this value at your own risk.
 
+| soketi.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| soketi.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
+
 | soketi.replicas
 | int
 | `1`
@@ -2522,6 +3339,21 @@ pass:[<!-- vale off -->]
 | string
 | `"32Mi"`
 | Memory request for the soketi deployment.
+
+| soketi.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| step.internal.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| step.internal.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
 
 | step.internal.replicas
 | int
@@ -2548,6 +3380,21 @@ pass:[<!-- vale off -->]
 | `"512Mi"`
 | Memory request for the step-internal deployment
 
+| step.internal.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| step.receiver.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| step.receiver.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
+
 | step.receiver.replicas
 | int
 | `1`
@@ -2572,6 +3419,11 @@ pass:[<!-- vale off -->]
 | string
 | `"512Mi"`
 | Memory request for the step-receiver deployment
+
+| step.receiver.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
 
 | telegraf.args[0]
 | string
@@ -2701,7 +3553,11 @@ pass:[<!-- vale off -->]
 | tink
 | object
 | `{"enabled":false,"keyset":""}`
-| Tink Configuration  Tink is given precedence over vault. If tink.enabled is true, vault will not be deployed. Tink or vault must be set once at install and cannot be changed.  **Option 1:** Leave this blank, and create the secret yourself. CircleCI will assume it exists.  The secret must be named 'tink' and have the key; keyset. **Option 2:** Set the values tink.keyset here and CircleCI will create the secret automatically.  Generate a keyset via: `tinkey create-keyset --key-template XCHACHA20_POLY1305`
+| Tink Configuration +
+Tink is given precedence over vault. If tink.enabled is true, vault will not be deployed. Tink or vault must be set once at install and cannot be changed. +
+*Option 1:* Leave this blank, and create the secret yourself. CircleCI will assume it exists. +
+The secret must be named 'tink' and have the key; keyset. *Option 2:* Set the values tink.keyset here and CircleCI will create the secret automatically. +
+Generate a keyset via: `tinkey create-keyset --key-template XCHACHA20_POLY1305`
 
 | tink.enabled
 | bool
@@ -2735,13 +3591,23 @@ pass:[<!-- vale off -->]
 
 | vault
 | object
-| `{"internal":true,"podAnnotations":{"backup.velero.io/backup-volumes":"data"},"resources":{},"token":"","transitPath":"transit","url":"http://vault:8200"}`
+| `+{"internal":true,"nodeAffinity":{},"nodeSelector":{},"podAnnotations":{"backup.velero.io/backup-volumes":"data"},"resources":{},"token":"","tolerations":[],"transitPath":"transit","url":"http://vault:8200"}+`
 | External Services configuration
 
 | vault.internal
 | bool
 | `true`
 | Disables this charts Internal Vault instance
+
+| vault.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| vault.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
 
 | vault.resources
 | object
@@ -2751,12 +3617,30 @@ pass:[<!-- vale off -->]
 | vault.token
 | string
 | `""`
-| This token is required when `internal: false`.  **Option 1:** Leave this blank, and create the secret yourself. CircleCI will assume it exists.  The secret must be named 'vault' and have the key; token.  **Option 2:** Set the values vault.token here and CircleCI will create the secret automatically.
+| This token is required when `internal: false`. +
+*Option 1:* Leave this blank, and create the secret yourself. CircleCI will assume it exists. +
+The secret must be named 'vault' and have the key; token. +
+*Option 2:* Set the values vault.token here and CircleCI will create the secret automatically.
+
+| vault.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
 
 | vault.transitPath
 | string
 | `"transit"`
 | When `internal: true`, this value is used for the vault transit path.
+
+| web_ui.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| web_ui.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
 
 | web_ui.replicas
 | int
@@ -2773,6 +3657,21 @@ pass:[<!-- vale off -->]
 | `"256Mi"`
 | Memory request configuration for the web-ui deployment
 
+| web_ui.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| web_ui_server_admin.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| web_ui_server_admin.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
+
 | web_ui_server_admin.replicas
 | int
 | `1`
@@ -2788,10 +3687,25 @@ pass:[<!-- vale off -->]
 | `"256Mi"`
 |
 
+| web_ui_server_admin.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
 | webhook_service.isEnabled
 | bool
 | `true`
 |
+
+| webhook_service.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| webhook_service.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
 
 | webhook_service.replicas
 | int
@@ -2818,6 +3732,21 @@ pass:[<!-- vale off -->]
 | `"2G"`
 | Memory request configuration for the webhook-service deployment.
 
+| webhook_service.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| workflows_conductor_event_consumer.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| workflows_conductor_event_consumer.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
+
 | workflows_conductor_event_consumer.replicas
 | int
 | `1`
@@ -2842,6 +3771,21 @@ pass:[<!-- vale off -->]
 | string
 | `"700Mi"`
 |
+
+| workflows_conductor_event_consumer.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
+
+| workflows_conductor_grpc.nodeAffinity
+| object
+| `{}`
+| NodeAffinity override for this deployment. Takes priority over global.nodeAffinity when set (not merged).
+
+| workflows_conductor_grpc.nodeSelector
+| object
+| `{}`
+| NodeSelector override for this deployment. Merged with global.nodeSelector; matching keys here take priority.
 
 | workflows_conductor_grpc.replicas
 | int
@@ -2868,5 +3812,9 @@ pass:[<!-- vale off -->]
 | `"700Mi"`
 |
 
+| workflows_conductor_grpc.tolerations
+| list
+| `[]`
+| Tolerations override for this deployment. Merged with global.tolerations (both apply).
 |===
 pass:[<!-- vale on -->]

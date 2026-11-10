@@ -39,12 +39,7 @@ endif::server[]
 
 To configure webhooks within the CircleCI app:
 
-ifndef::server[]
-. In the link:https://app.circleci.com/[CircleCI web app], select your organization.
-endif::server[]
-ifdef::server[]
-. In the CircleCI web app, select your organization.
-endif::server[]
+. In the cloudlink:webapp[CircleCI web app], select your organization.
 . Select **Projects** in the sidebar.
 . Find your project in the list, select the ellipsis icon:more[Ellipsis menu icon], and select **Project Settings**.
 . In the sidebar select *Webhooks*.

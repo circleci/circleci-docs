@@ -66,8 +66,8 @@ asciidoc:
     serverversion46: 4.6.6
     serverversion47: 4.7.15
     serverversion48: 4.8.12
-    serverversion49: 4.9.6
-    serverversion410: 4.10.1
+    serverversion49: 4.9.8
+    serverversion410: 4.10.3
     terraformversion: 0.15.4
     dockerversion: v28
     kubectlversion: 1.19

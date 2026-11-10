@@ -16,8 +16,8 @@ When you log in to CircleCI you are logging in to your _user account_.
 ifndef::server[]
 You can log in to CircleCI using one of the following methods. These methods cannot be used together. For example, if you have an email/password account and then use a social login, this will create a new account connected to your VCS provider:
 
-* Email and password.
-* Social login (GitHub, Bitbucket).
+* Email and password. Required for GitLab and Cursor Origin projects. After signing up, connect GitLab from menu:Org[VCS Connections].
+* Social login (GitHub, Bitbucket). GitLab does not offer social login.
 
 As a CircleCI _user_ you can create and access _organizations_. You can access zero, one, or many organizations. You can create new organizations and/or join an existing organization.
 endif::server[]
@@ -850,12 +850,7 @@ When disconnecting a VCS connection using the method described here, any existin
 
 Follow these steps to disconnect your CircleCI account from GitHub.
 
-ifndef::server[]
-. From the link:https://app.circleci.com/[CircleCI web app], navigate to your **User Settings** by clicking on your user icon in the top bar.
-endif::server[]
-ifdef::server[]
-. From the CircleCI web app, navigate to your **User Settings** by clicking on your user icon in the top bar.
-endif::server[]
+. From the cloudlink:webapp[CircleCI web app], navigate to your **User Settings** by clicking on your user icon in the top bar.
 . Select **Account Integrations**.
 . You will see a list of connections along with the GitHub or Bitbucket organizations they are associated with. Select btn:[Disconnect] next to the GitHub/Bitbucket connection you wish to disconnect.
 
