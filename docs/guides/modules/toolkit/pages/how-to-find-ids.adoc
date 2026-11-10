@@ -91,7 +91,7 @@ To return your user profile, including your user ID:
 [source,shell]
 ----
 curl 'https://circleci.com/api/v2/me' \
-  --header "Circle-Token: $CIRCLE_TOKEN" | jq .
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
 ----
 
 The response includes your user ID in the `id` field:
@@ -152,8 +152,10 @@ The response returns a list of organizations. The `id` field for each entry is t
     {
       "id": "<your-org-id>",
       "attributes": {
-        "name": "my-org",
-        "slug": "gh/my-org"
+        "avatar": {
+          "url": "https://avatars.githubusercontent.com/..."
+        },
+        "name": "my-org"
       }
     }
   ]
@@ -177,7 +179,7 @@ To list all organizations (collaborations) you have access to, each with an `id`
 [source,shell]
 ----
 curl 'https://circleci.com/api/v2/me/collaborations' \
-  --header "Circle-Token: $CIRCLE_TOKEN" | jq .
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
 ----
 
 The response returns a list of collaborations. The `id` field for each entry is the organization ID:
@@ -189,7 +191,7 @@ The response returns a list of collaborations. The `id` field for each entry is 
     "id": "<your-org-id>",
     "name": "my-org",
     "slug": "gh/my-org",
-    "vcs-type": "github",
+    "vcs_type": "github",
     "avatar_url": "https://avatars.githubusercontent.com/..."
   }
 ]
@@ -240,7 +242,7 @@ To list all organizations (collaborations) you have access to, each with a `slug
 [source,shell]
 ----
 curl 'https://circleci.com/api/v2/me/collaborations' \
-  --header "Circle-Token: $CIRCLE_TOKEN" | jq .
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
 ----
 
 The `slug` field for each entry is the organization slug:
@@ -262,7 +264,7 @@ If you know the organization ID, you can look up one organization. The response 
 [source,shell]
 ----
 curl 'https://circleci.com/api/v2/organization/<your-org-id>' \
-  --header "Circle-Token: $CIRCLE_TOKEN" | jq .
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
 ----
 --
 ====
@@ -302,7 +304,15 @@ The response returns a list of projects. The `id` field for each entry is the pr
       "id": "<your-project-id>",
       "attributes": {
         "name": "my-repo",
-        "slug": "gh/my-org/my-repo"
+        "is_followed": true
+      },
+      "references": {
+        "org": {
+          "id": "<your-org-id>",
+          "attributes": {
+            "name": "my-org"
+          }
+        }
       }
     }
   ]
@@ -326,7 +336,7 @@ To return details for a specific project, replace `<project-slug>` with your pro
 [source,shell]
 ----
 curl 'https://circleci.com/api/v2/project/<project-slug>' \
-  --header "Circle-Token: $CIRCLE_TOKEN" | jq .
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
 ----
 
 The response includes the project ID in the `id` field:
@@ -386,7 +396,7 @@ If you have a pipeline ID, the pipeline response contains the project slug in `p
 [source,shell]
 ----
 curl 'https://circleci.com/api/v2/pipeline/<your-pipeline-id>' \
-  --header "Circle-Token: $CIRCLE_TOKEN" | jq '.project_slug'
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq '.project_slug'
 ----
 
 To find a pipeline ID, see <<find-a-pipeline-run-id>>.
@@ -479,7 +489,7 @@ To list recent pipelines for a project, replace `<project-slug>` with your proje
 [source,shell]
 ----
 curl 'https://circleci.com/api/v2/project/<project-slug>/pipeline' \
-  --header "Circle-Token: $CIRCLE_TOKEN" | jq '.items[] | {id: .id, branch: .vcs.branch}'
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq '.items[] | {id: .id, branch: .vcs.branch}'
 ----
 
 The `id` field for each pipeline is the pipeline run ID:
@@ -591,7 +601,7 @@ To list workflows for a pipeline, replace `<pipeline-run-id>` with your pipeline
 [source,shell]
 ----
 curl 'https://circleci.com/api/v2/pipeline/<pipeline-run-id>/workflow' \
-  --header "Circle-Token: $CIRCLE_TOKEN" | jq '.items[] | {id: .id, name: .name}'
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq '.items[] | {id: .id, name: .name}'
 ----
 
 The `id` field for each workflow is the workflow ID:
@@ -691,7 +701,7 @@ To list jobs in a workflow, replace `<workflow-id>` with your workflow ID:
 [source,shell]
 ----
 curl 'https://circleci.com/api/v2/workflow/<workflow-id>/job' \
-  --header "Circle-Token: $CIRCLE_TOKEN" | jq '.items[] | {id: .id, name: .name}'
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq '.items[] | {id: .id, name: .name}'
 ----
 
 The `id` field for each job is the job ID:
