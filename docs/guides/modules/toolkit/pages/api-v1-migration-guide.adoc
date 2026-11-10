@@ -290,12 +290,13 @@ endif::server[]
 * Environment variables set through `build_parameters` have no direct replacement. For each value, declare a pipeline parameter in your config, then pass the values in `parameters`. See xref:orchestrate:pipeline-variables.adoc#pipeline-parameters-in-configuration[Pipeline Values and Parameters].
 * A pipeline parameter that your config does not declare is not rejected when you trigger. The request returns a success response, and the pipeline then fails with the error `Unexpected argument(s): <parameter-name>`.
 ifndef::server[]
-* API v3 needs your project ID in the URL, as the `filter[project_id]` query parameter. API v3 cannot find the pipeline definition of a GitHub OAuth project without it, and returns `404 Not Found`. A project ID that does not own the pipeline definition also returns `404 Not Found`.
+* Include your project ID in the URL as the `filter[project_id]` query parameter. A GitHub OAuth project has an implicit pipeline definition that API v3 derives from the project, so it can find the definition only with the project ID. Without it, the request returns `404 Not Found`. A project ID that does not own the pipeline definition also returns `404 Not Found`.
 endif::server[]
 
 // TODO(DOC-327): Confirm with engineering how to replace the CIRCLE_JOB build parameter, which ran a single job by name.
 // TODO(DOC-327): Add the replacement once confirmed. Do not document a workaround until then.
-// TODO(DOC-327): Confirm with the API team that filter[project_id] is required on POST /api/v3/runs for GitHub OAuth projects. The operation description mentions it, but the API v3 spec does not list it as a parameter.
+// TODO(DOC-327): Confirm with the API team that filter[project_id] is needed on POST /api/v3/runs only for implicit GitHub OAuth pipeline definitions. The spec says so for GET /api/v3/pipelines/{id}, and the POST /api/v3/runs description mentions it, but the spec does not list it as a parameter on POST /api/v3/runs.
+// TODO(DOC-327): Test a GitHub OAuth project that has an explicit pipeline definition, which should not need the filter.
 
 ifndef::server[]
 === Replace trigger calls using API v3
