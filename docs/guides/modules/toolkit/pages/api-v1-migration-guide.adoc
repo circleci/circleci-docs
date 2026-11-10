@@ -72,28 +72,29 @@ endif::server[]
 === Get your project address
 
 ifndef::server[]
-API v3 identifies a project by its project ID, a UUID. API v2 identifies a project by its project slug, which you put in the URL of each request.
-endif::server[]
-ifdef::server[]
-API v2 identifies a project by its project slug, which you put in the URL of each request.
-endif::server[]
+API v3 identifies a project by its project ID, a UUID. API v2 identifies a project by its project slug, which you put in the URL of each request. The project settings page shows both. You can find them in menu:Project Settings[Overview], or follow these steps:
 
-For each project:
+include::guides:ROOT:partial$app-navigation/steps-to-project-id.adoc[]
 
-. Open the project in the CircleCI web app.
-. Go to *Project Settings > Overview*. This page shows the project slug.
-. Copy the slug. Use it as `<provider>/<organization>/<project>` in your API v2 requests.
-ifndef::server[]
-. For API v3, find the project ID. See xref:how-to-find-ids.adoc[How to Find IDs], or look the project up with the API using the slug and take the `id` from the response:
-+
+The same page shows the project slug. Copy it for API v2, and use it as `<provider>/<organization>/<project>` in your requests.
+
+If you already have the project slug, you can look up the project ID with the API instead. Take the `id` from the response:
+
 [source,shell]
 ----
 curl -g "https://circleci.com/api/v3/projects?filter[slug]=<project-slug>" \
   --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
-endif::server[]
 
 A slug looks like `gh/my-org/my-repo`. Projects in some organizations have an opaque slug, for example `circleci/<organization-id>/<project-id>`. Use it as the web app shows it.
+endif::server[]
+ifdef::server[]
+API v2 identifies a project by its project slug, which you put in the URL of each request. To find the slug for a project, follow these steps:
+
+include::guides:ROOT:partial$tips/find-project-slug.adoc[]
+
+Use the slug as `<provider>/<organization>/<project>` in your API v2 requests. A slug looks like `gh/my-org/my-repo`.
+endif::server[]
 
 API v1 has no VCS type in the path, so the web app is how you find the provider for each project. If you are working from an API v1.1 call, the values map as follows:
 
@@ -131,11 +132,9 @@ ifndef::server[]
 
 A pipeline definition tells CircleCI which repository and config file to use for a pipeline. A project can have more than one, so a trigger request names the one to run. You need this ID only if you trigger pipeline runs.
 
-To find it in the web app:
+You can find it in menu:Project Settings[Project Setup], or follow these steps:
 
-. Open the project in the CircleCI web app.
-. Go to *Project Settings > Pipelines*.
-. Copy the ID of the pipeline definition you want to trigger.
+include::guides:ROOT:partial$app-navigation/steps-to-pipeline-definition-id.adoc[]
 
 To list the definitions with the API instead, use one of the following. You need the project ID from <<project-addressing>>.
 
