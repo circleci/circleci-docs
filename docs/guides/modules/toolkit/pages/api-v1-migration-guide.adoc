@@ -104,78 +104,17 @@ endif::server[]
 [#token-methods]
 === Know where to send your token
 
-API v1 and API v1.1 accepted the token in several ways.
-ifndef::server[]
-API v2 and API v3 take it in a header.
-endif::server[]
-ifdef::server[]
-API v2 takes it in a header.
-endif::server[]
-In each call you change, move the token as follows:
-
-* API v1 and v1.1: the `Circle-Token` header, the `Authorization: Bearer` header, HTTP basic authentication, or the `circle-token` query parameter.
-* API v2: the `Circle-Token` header or the `Authorization: Bearer` header. HTTP basic authentication is also accepted.
-ifndef::server[]
-* API v3: the `Authorization: Bearer` header.
-endif::server[]
+In every call you change, send your personal API token in the `Authorization: Bearer` header. API v2 also accepts the `Circle-Token` header and HTTP basic authentication.
 
 [#project-addressing]
 === Get your project address
 
 ifndef::server[]
-API v3 identifies a project by its project ID, a UUID. API v2 identifies a project by its project slug, which you put in the URL of each request. The project settings page shows both. You can find them in menu:Project Settings[Overview], or follow these steps:
-
-include::guides:ROOT:partial$app-navigation/steps-to-project-id.adoc[]
-
-The same page shows the project slug. Copy it for API v2, and use it as `<provider>/<organization>/<project>` in your requests.
-
-If you already have the project slug, you can look up the project ID with the API instead. Take the `id` from the response:
-
-[source,shell]
-----
-curl -g "https://circleci.com/api/v3/projects?filter[slug]=<project-slug>" \
-  --header "Authorization: Bearer $CIRCLE_TOKEN"
-----
-
-A slug looks like `gh/my-org/my-repo`. Projects in some organizations have an opaque slug, for example `circleci/<organization-id>/<project-id>`. Use it as the web app shows it.
+API v3 identifies a project by its project ID. API v2 identifies a project by its project slug, which you put in the URL of each request. See xref:how-to-find-ids.adoc#find-a-project-id[How to Find IDs] for how to find them.
 endif::server[]
 ifdef::server[]
-API v2 identifies a project by its project slug, which you put in the URL of each request. To find the slug for a project, follow these steps:
-
-include::guides:ROOT:partial$tips/find-project-slug.adoc[]
-
-Use the slug as `<provider>/<organization>/<project>` in your API v2 requests. A slug looks like `gh/my-org/my-repo`.
+API v2 identifies a project by its project slug, which you put in the URL of each request. See xref:how-to-find-ids.adoc#find-a-project-id[How to Find IDs] for how to find it.
 endif::server[]
-
-API v1 has no VCS type in the path, so the web app is how you find the provider for each project. If you are working from an API v1.1 call, the values map as follows:
-
-* `<vcs-type>` becomes `<provider>`.
-* `<username>` becomes `<organization>`.
-* `<repo>` becomes `<project>`.
-
-ifndef::server[]
-The web app URL uses the long provider form. For example, `https://app.circleci.com/pipelines/github/my-org/my-repo` uses `github`. API v2 accepts both the long and short form, so `github/my-org/my-repo` and `gh/my-org/my-repo` are the same project.
-endif::server[]
-ifdef::server[]
-API v2 accepts both the long and short form of the provider name, so `github/my-org/my-repo` and `gh/my-org/my-repo` are the same project.
-endif::server[]
-
-[.table-scroll]
---
-[cols="1,1,1", options="header"]
-|===
-| Provider | API v1.1 `<vcs-type>` value | API v2 `<provider>` value
-
-| GitHub
-| `github`
-| `github` or `gh`
-
-| Bitbucket
-| `bitbucket`
-| `bitbucket` or `bb`
-
-|===
---
 
 ifndef::server[]
 [#pipeline-definition-id]
@@ -201,7 +140,7 @@ curl -g "https://circleci.com/api/v3/pipelines?filter[project_id]=<project-id>" 
 [source,shell]
 ----
 curl "https://circleci.com/api/v2/projects/<project-id>/pipeline-definitions" \
-  --header "Circle-Token: $CIRCLE_TOKEN"
+  --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
 endif::server[]
 
@@ -313,14 +252,14 @@ curl --globoff --request POST "https://circleci.com/api/v3/runs?filter[project_i
 === Replace trigger calls using API v2
 
 . Replace the URL of the call with `https://circleci.com/api/v2/project/<provider>/<organization>/<project>/pipeline/run`, using the project slug from <<project-addressing>>. The method stays `POST`.
-. Send your personal API token in the `Circle-Token` header. Remove any `circle-token` query parameter from the URL.
+. Send your personal API token in the `Authorization: Bearer` header. Remove any `circle-token` query parameter or basic authentication from the call.
 . Replace the request body. Send your pipeline definition ID in `definition_id`, and send the branch in `config.branch` and `checkout.branch`. To trigger a tag, send `config.tag` and `checkout.tag` instead:
 +
 [source,shell]
 ----
 curl --request POST \
   "https://circleci.com/api/v2/project/<provider>/<organization>/<project>/pipeline/run" \
-  --header "Circle-Token: $CIRCLE_TOKEN" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
   --data '{
     "definition_id": "<pipeline-definition-id>",
@@ -357,14 +296,14 @@ ifdef::server[]
 === Replace trigger calls using API v2
 
 . Replace the URL of the call with `https://circleci.com/api/v2/project/<provider>/<organization>/<project>/pipeline`, using the project slug from <<project-addressing>>. The method stays `POST`.
-. Send your personal API token in the `Circle-Token` header. Remove any `circle-token` query parameter from the URL.
+. Send your personal API token in the `Authorization: Bearer` header. Remove any `circle-token` query parameter or basic authentication from the call.
 . Replace the request body. Send the branch in `branch`. To trigger a tag, send `tag` instead:
 +
 [source,shell]
 ----
 curl --request POST \
   "https://circleci.com/api/v2/project/<provider>/<organization>/<project>/pipeline" \
-  --header "Circle-Token: $CIRCLE_TOKEN" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
   --data '{"branch": "main"}'
 ----
@@ -426,7 +365,7 @@ curl -g "https://circleci.com/api/v3/workflows?filter[run_id]=<run-id>" \
 [source,shell]
 ----
 curl "https://circleci.com/api/v2/pipeline/<pipeline-id>/workflow" \
-  --header "Circle-Token: $CIRCLE_TOKEN"
+  --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
 . Copy the `id` of the workflow you want to rerun.
 endif::server[]
@@ -436,7 +375,7 @@ ifdef::server[]
 [source,shell]
 ----
 curl "https://circleci.com/api/v2/pipeline/<pipeline-id>/workflow" \
-  --header "Circle-Token: $CIRCLE_TOKEN"
+  --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
 . Copy the `id` of the workflow you want to rerun.
 endif::server[]
@@ -471,14 +410,14 @@ curl --request POST \
 === Replace rerun calls using API v2
 
 . Replace the URL of the call with `https://circleci.com/api/v2/workflow/<workflow-id>/rerun`. The method stays `POST`.
-. Send your personal API token in the `Circle-Token` header. Remove any `circle-token` query parameter from the URL.
+. Send your personal API token in the `Authorization: Bearer` header. Remove any `circle-token` query parameter or basic authentication from the call.
 . To rerun all jobs in the workflow, send an empty request body:
 +
 [source,shell]
 ----
 curl --request POST \
   "https://circleci.com/api/v2/workflow/<workflow-id>/rerun" \
-  --header "Circle-Token: $CIRCLE_TOKEN" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
   --data '{}'
 ----
@@ -488,7 +427,7 @@ curl --request POST \
 ----
 curl --request POST \
   "https://circleci.com/api/v2/workflow/<workflow-id>/rerun" \
-  --header "Circle-Token: $CIRCLE_TOKEN" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
   --data '{"from_failed": true}'
 ----
@@ -498,14 +437,14 @@ ifdef::server[]
 === Replace rerun calls using API v2
 
 . Replace the URL of the call with `https://circleci.com/api/v2/workflow/<workflow-id>/rerun`. The method stays `POST`.
-. Send your personal API token in the `Circle-Token` header. Remove any `circle-token` query parameter from the URL.
+. Send your personal API token in the `Authorization: Bearer` header. Remove any `circle-token` query parameter or basic authentication from the call.
 . To rerun all jobs in the workflow, send an empty request body:
 +
 [source,shell]
 ----
 curl --request POST \
   "https://circleci.com/api/v2/workflow/<workflow-id>/rerun" \
-  --header "Circle-Token: $CIRCLE_TOKEN" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
   --data '{}'
 ----
@@ -515,7 +454,7 @@ curl --request POST \
 ----
 curl --request POST \
   "https://circleci.com/api/v2/workflow/<workflow-id>/rerun" \
-  --header "Circle-Token: $CIRCLE_TOKEN" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
   --data '{"from_failed": true}'
 ----
@@ -568,15 +507,15 @@ curl --request POST \
 [source,shell]
 ----
 curl "https://circleci.com/api/v2/workflow/<workflow-id>/job" \
-  --header "Circle-Token: $CIRCLE_TOKEN"
+  --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
-. Replace the URL of the call with `https://circleci.com/api/v2/workflow/<workflow-id>/rerun`, send your personal API token in the `Circle-Token` header, and send `enable_ssh` set to `true` with the job IDs in `jobs`:
+. Replace the URL of the call with `https://circleci.com/api/v2/workflow/<workflow-id>/rerun`, send your personal API token in the `Authorization: Bearer` header, and send `enable_ssh` set to `true` with the job IDs in `jobs`:
 +
 [source,shell]
 ----
 curl --request POST \
   "https://circleci.com/api/v2/workflow/<workflow-id>/rerun" \
-  --header "Circle-Token: $CIRCLE_TOKEN" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
   --data '{"enable_ssh": true, "jobs": ["<job-id>"]}'
 ----
@@ -591,15 +530,15 @@ ifdef::server[]
 [source,shell]
 ----
 curl "https://circleci.com/api/v2/workflow/<workflow-id>/job" \
-  --header "Circle-Token: $CIRCLE_TOKEN"
+  --header "Authorization: Bearer $CIRCLE_TOKEN"
 ----
-. Replace the URL of the call with `https://circleci.com/api/v2/workflow/<workflow-id>/rerun`, send your personal API token in the `Circle-Token` header, and send `enable_ssh` set to `true` with the job IDs in `jobs`:
+. Replace the URL of the call with `https://circleci.com/api/v2/workflow/<workflow-id>/rerun`, send your personal API token in the `Authorization: Bearer` header, and send `enable_ssh` set to `true` with the job IDs in `jobs`:
 +
 [source,shell]
 ----
 curl --request POST \
   "https://circleci.com/api/v2/workflow/<workflow-id>/rerun" \
-  --header "Circle-Token: $CIRCLE_TOKEN" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
   --data '{"enable_ssh": true, "jobs": ["<job-id>"]}'
 ----
@@ -642,7 +581,7 @@ RUN_ID=$(curl --silent --globoff --request POST "https://circleci.com/api/v3/run
 ----
 PIPELINE_ID=$(curl --silent --request POST \
   "https://circleci.com/api/v2/project/<provider>/<organization>/<project>/pipeline/run" \
-  --header "Circle-Token: $CIRCLE_TOKEN" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
   --data '{"definition_id": "<pipeline-definition-id>", "config": {"branch": "main"}, "checkout": {"branch": "main"}}' \
   | jq --raw-output '.id')
@@ -655,7 +594,7 @@ The pipeline ID is `id`:
 ----
 PIPELINE_ID=$(curl --silent --request POST \
   "https://circleci.com/api/v2/project/<provider>/<organization>/<project>/pipeline" \
-  --header "Circle-Token: $CIRCLE_TOKEN" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
   --header "Content-Type: application/json" \
   --data '{"branch": "main"}' \
   | jq --raw-output '.id')
@@ -693,7 +632,7 @@ https://app.circleci.com/pipelines/github/my-org/my-repo/130/workflows/fda08377-
 [source,shell]
 ----
 curl --silent "https://circleci.com/api/v2/pipeline/$PIPELINE_ID/workflow" \
-  --header "Circle-Token: $CIRCLE_TOKEN" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
   | jq --raw-output '.items[] | "\(.name): \(.id)"'
 ----
 +
@@ -706,7 +645,7 @@ ifdef::server[]
 [source,shell]
 ----
 curl --silent "https://circleci.com/api/v2/pipeline/$PIPELINE_ID/workflow" \
-  --header "Circle-Token: $CIRCLE_TOKEN" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
   | jq --raw-output '.items[] | "\(.name): \(.id)"'
 ----
 . Use the pipeline number and the workflow ID to find the workflow in the CircleCI web app.
@@ -720,7 +659,7 @@ If your code reads `status` from the trigger response, poll the workflow instead
 [source,shell]
 ----
 curl --silent "https://circleci.com/api/v2/workflow/<workflow-id>" \
-  --header "Circle-Token: $CIRCLE_TOKEN" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
   | jq --raw-output '.status'
 ----
 
