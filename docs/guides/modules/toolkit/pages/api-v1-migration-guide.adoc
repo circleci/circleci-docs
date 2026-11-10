@@ -87,13 +87,13 @@ endif::server[]
 Have the following ready before you start step 1:
 
 ifndef::server[]
-* A CircleCI personal API token. API v2 and API v3 do not support project API tokens, so create a personal API token if you use a project token today. See the xref:managing-api-tokens.adoc[Managing API Tokens] guide.
+* A CircleCI personal API token. API v3 and API v2 do not support project API tokens, so create a personal API token if you use a project token today. See the xref:managing-api-tokens.adoc[Managing API Tokens] guide.
 endif::server[]
 ifdef::server[]
 * A CircleCI personal API token. API v2 does not support project API tokens, so create a personal API token if you use a project token today. See the xref:managing-api-tokens.adoc[Managing API Tokens] guide.
 endif::server[]
 ifndef::server[]
-* The address of each project you call: the project slug for API v2 and the project ID for API v3. See <<project-addressing>>.
+* The address of each project you call: the project ID for API v3 and the project slug for API v2. See <<project-addressing>>.
 * If you trigger pipeline runs, the pipeline definition ID for each project. See <<pipeline-definition-id>>.
 endif::server[]
 ifdef::server[]
@@ -122,26 +122,7 @@ ifndef::server[]
 
 A pipeline definition tells CircleCI which repository and config file to use for a pipeline. A project can have more than one, so a trigger request names the one to run. You need this ID only if you trigger pipeline runs.
 
-You can find it in menu:Project Settings[Project Setup], or follow these steps:
-
-include::guides:ROOT:partial$app-navigation/steps-to-pipeline-definition-id.adoc[]
-
-To list the definitions with the API instead, use one of the following. You need the project ID from <<project-addressing>>.
-
-* API v3:
-+
-[source,shell]
-----
-curl -g "https://circleci.com/api/v3/pipelines?filter[project_id]=<project-id>" \
-  --header "Authorization: Bearer $CIRCLE_TOKEN"
-----
-* API v2:
-+
-[source,shell]
-----
-curl "https://circleci.com/api/v2/projects/<project-id>/pipeline-definitions" \
-  --header "Authorization: Bearer $CIRCLE_TOKEN"
-----
+To find it, see xref:how-to-find-ids.adoc#find-a-pipeline-definition-id[Find a Pipeline Definition ID]. To list the definitions with the API, you need the project ID from <<project-addressing>>.
 endif::server[]
 
 [#find-your-v1-api-calls]
