@@ -486,7 +486,6 @@ All partials are located in `docs/guides/modules/ROOT/partials/`
 
 - **tips/** - Helpful tips and guidance
   - `check-org-type.adoc` - How to check organization type
-  - `find-project-slug.adoc` - How to find project slug
   - `env-var-or-context.adoc` - When to use env vars vs contexts
   - `trigger-pipeline-with-parameters.adoc` - Pipeline parameter triggering
 

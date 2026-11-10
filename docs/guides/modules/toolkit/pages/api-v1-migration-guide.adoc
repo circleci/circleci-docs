@@ -190,6 +190,7 @@ ifndef::server[]
 endif::server[]
 
 // TODO(DOC-327): Confirm with engineering how to replace the CIRCLE_JOB build parameter, which ran a single job by name.
+// TODO(DOC-327): Tested on Cloud: POST /api/v1.1/project/<vcs-type>/<username>/<repo>/tree/<branch> with build_parameters {"CIRCLE_JOB": "<job-name>"} ran only that job, in an implicit workflow named after the job. POST .../build rejects build_parameters with a 400. The API v2 and v3 trigger requests have no equivalent field.
 // TODO(DOC-327): Add the replacement once confirmed. Do not document a workaround until then.
 // TODO(DOC-327): Confirm with the API team that filter[project_id] is needed on POST /api/v3/runs only for implicit GitHub OAuth pipeline definitions. The spec says so for GET /api/v3/pipelines/{id}, and the POST /api/v3/runs description mentions it, but the spec does not list it as a parameter on POST /api/v3/runs.
 // TODO(DOC-327): Test a GitHub OAuth project that has an explicit pipeline definition, which should not need the filter.
