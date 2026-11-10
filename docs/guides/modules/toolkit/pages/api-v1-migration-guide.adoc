@@ -7,23 +7,15 @@
 :page-description: Migrate from deprecated CircleCI API v1 and API v1.1 trigger and rerun endpoints to API v2 or API v3 before the 1 February 2027 removal date.
 :experimental:
 
-CircleCI removes ten API v1 and API v1.1 endpoints used to trigger and rerun builds on 1 February 2027. See <<deprecated-endpoints>>. After that date, requests to these endpoints return HTTP 410 Gone.
-ifndef::server[]
-This guide walks you through finding those calls in your code and replacing each one with an API v2 or API v3 call.
-endif::server[]
-ifdef::server[]
-This guide walks you through finding those calls in your code and replacing each one with an API v2 call.
-endif::server[]
-
-WARNING: Until the removal date, the deprecated endpoints return `Deprecation` and `Sunset` response headers. Update your integrations before 1 February 2027.
+CircleCI removes ten API v1 and API v1.1 endpoints that trigger and rerun builds on 1 February 2027. See <<deprecated-endpoints>> for the list. This guide shows you how to find those calls in your code and replace each one.
 
 ifndef::server[]
-NOTE: API v3 is currently available on CircleCI Cloud only. CircleCI Server customers use API v2. The API v2 steps in this guide apply to both Cloud and Server.
+Use API v3 to replace these calls. API v2 remains supported if API v3 does not cover your needs.
 
-CircleCI recommends starting with API v3 on Cloud. API v2 remains supported if API v3 does not cover your needs.
+API v3 is available on CircleCI Cloud only. CircleCI Server customers use API v2, and the API v2 steps in this guide apply to both Cloud and Server.
 endif::server[]
 ifdef::server[]
-NOTE: API v3 is not available on CircleCI Server. Use the API v2 endpoints described in this guide.
+Use API v2 to replace these calls. API v3 is not available on CircleCI Server.
 endif::server[]
 
 [#deprecated-endpoints]
