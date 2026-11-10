@@ -213,7 +213,7 @@ curl --request POST https://circleci.com/api/v3/runs \
   }
 }
 ----
-. Send the request. The response contains the run ID in `data.id`. Save it, because you need it to find the run's workflows in step 3 and to check its status in step 5:
+. Send the request. The response contains the run ID in `data.id`. Save it, because you need it to find the run's workflows in step 3 and to check its status in step 5. The response does not include a pipeline number or a URL. Step 5 shows how to get them:
 +
 [source,json]
 ----
@@ -479,16 +479,7 @@ Update each part of your code that reads one of them.
 If your code reads `build_num` from the trigger response, read the ID instead. Use it to look up the workflows and their status. The examples use https://jqlang.github.io/jq/[jq] to read the response.
 
 ifndef::server[]
-. For API v3, the run ID is `data.id`:
-+
-[source,shell]
-----
-RUN_ID=$(curl --silent --request POST https://circleci.com/api/v3/runs \
-  --header "Authorization: Bearer $CIRCLE_TOKEN" \
-  --header "Content-Type: application/json" \
-  --data '{"data": {"attributes": {"config": {"branch": "main"}, "checkout": {"branch": "main"}}, "references": {"pipeline": {"id": "<pipeline-definition-id>"}}}}' \
-  | jq --raw-output '.data.id')
-----
+. For API v3, read the run ID from `data.id` in the response from step 2. The response has no equivalent of `build_num`. To get the pipeline number, which the web app uses in its URLs, see <<replace-build-url>>.
 . For API v2, the pipeline ID is `id`:
 +
 [source,shell]
@@ -540,6 +531,7 @@ For example:
 ----
 https://app.circleci.com/pipelines/github/my-org/my-repo/130/workflows/fda08377-fe7e-46b1-8992-3a7aaecac9c3
 ----
+. Take `<organization>` and `<project>` from the names in your old call, which are `<username>` and `<repo>` in the API v1.1 URL.
 . Take `<pipeline-number>` from the `number` field of the API v2 trigger response.
 . Get `<workflow-id>` by listing the workflows in the pipeline:
 +
@@ -550,7 +542,7 @@ curl --silent "https://circleci.com/api/v2/pipeline/$PIPELINE_ID/workflow" \
   | jq --raw-output '.items[] | "\(.name): \(.id)"'
 ----
 +
-For API v3, get the pipeline number from `GET /api/v3/runs/<run-id>`, where it is in `data.attributes.number`. Get the workflow IDs from `GET /api/v3/workflows?filter[run_id]=<run-id>`.
+For API v3, get the pipeline number from `GET /api/v3/runs/<run-id>`, where it is in `data.attributes.number`. A new run is not readable at the moment you create it. If the request returns 404 with `Run not found`, wait and send it again. Get the workflow IDs from `GET /api/v3/workflows?filter[run_id]=<run-id>`.
 endif::server[]
 ifdef::server[]
 . Take the pipeline `number` from the trigger response.
@@ -603,13 +595,51 @@ curl --silent "https://circleci.com/api/v3/runs/<run-id>" \
 ----
 
 * `phase` is `queued`, `started`, or `ended`. Keep polling until it is `ended`.
-* `current_outcome` is the result so far. It can change after the run ends if you rerun a workflow. The possible values are:
+* `current_outcome` is `null` until the run has a result. After that, it is the result so far, and it can change after the run ends if you rerun a workflow. The possible values are:
 ** `succeeded`
 ** `failed`
 ** `canceled`
 ** `errored`
 ** `not_run`
 ** `unauthorized`
+endif::server[]
+
+ifndef::server[]
+[#v3-worked-example]
+=== Get the build number, URL, and status with API v3
+
+The following script triggers a run and prints the equivalent of the `build_num`, `build_url`, and `status` fields that API v1.1 returned. It combines the calls from the previous sections. If your project uses GitHub OAuth or Bitbucket OAuth, keep the `filter[project_id]` parameter. Otherwise, remove it. Replace each value in angle brackets.
+
+[source,shell]
+----
+#!/bin/bash
+AUTH="Authorization: Bearer $CIRCLE_TOKEN"
+BASE=https://circleci.com/api/v3
+
+# Trigger the run and save its ID.
+RUN_ID=$(curl --silent --globoff --request POST \
+  "$BASE/runs?filter[project_id]=<project-id>" \
+  --header "$AUTH" \
+  --header "Content-Type: application/json" \
+  --data '{"data": {"attributes": {"config": {"branch": "main"}, "checkout": {"branch": "main"}}, "references": {"pipeline": {"id": "<pipeline-definition-id>"}}}}' \
+  | jq --raw-output '.data.id')
+
+# A new run is not readable at the moment you create it, so retry until it is.
+for attempt in 1 2 3 4 5; do
+  RUN=$(curl --silent "$BASE/runs/$RUN_ID" --header "$AUTH")
+  NUMBER=$(echo "$RUN" | jq --raw-output '.data.attributes.number // empty')
+  [ -n "$NUMBER" ] && break
+  sleep 2
+done
+
+# Get the workflow ID to build the URL.
+WORKFLOW_ID=$(curl --silent --globoff "$BASE/workflows?filter[run_id]=$RUN_ID" \
+  --header "$AUTH" | jq --raw-output '.data[0].id')
+
+echo "build_num: $NUMBER"
+echo "build_url: https://app.circleci.com/pipelines/<provider>/<organization>/<project>/$NUMBER/workflows/$WORKFLOW_ID"
+echo "status: $(echo "$RUN" | jq --compact-output '.data.attributes | {phase, current_outcome}')"
+----
 endif::server[]
 
 [#next-steps]
