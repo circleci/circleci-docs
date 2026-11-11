@@ -26,6 +26,8 @@ pass:[<!-- vale off -->]
 
 * Use ordered lists for steps in a process. All other lists should be unordered.
 
+* In a migration guide, give each use case a "Deprecated:" bullet and a "Migrate to:" bullet. Put sub-bullets under each, one per endpoint, command, or version, written the same way. Link every item to its reference, the deprecated ones as well as the new ones.
+
 * Capitalize the first word of each item in a list.
 
 * If the text in the bullet is a full sentence or completes the intro stem use a period at the end.

@@ -133,6 +133,7 @@ Not recommended: Appendix A—Configuration reference
 * We use the oxford comma. For example: “Please bring me a pencil, eraser, and notebook.” The comma after “eraser” is the oxford comma.
 
 == Numbers
+* Vale does not check numbers, so a clean lint run does not mean the numbers are right. Check them by hand, including counts in headings, descriptions, and other pages that repeat the number.
 * Write out numbers one through nine, 10 and above use numerals. Some exceptions:
 ** Addresses: 6 Maple St.
 ** Ages, even for inanimate objects: Beth, a 12-year-old turtle; the 2-year-old testing framework

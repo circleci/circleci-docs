@@ -100,6 +100,7 @@ All pages require standard attributes (`:page-platform:`, `:page-audience:`, `:p
 - Feature names are rarely capitalized (exceptions: Insights)
 
 ## Numbers
+- Vale does not check this rule, so a clean lint run does not mean the numbers are right. Check them by hand, including counts in headings, descriptions, and other pages that repeat the number
 - **Write out** numbers one through nine
 - **Use numerals** for 10 and above
 - **Exceptions**:
@@ -388,6 +389,7 @@ some code
 ----
 . Step three
 ```
+- **Migration guides**: when a page maps old endpoints, commands, or settings to new ones, give each use case a "Deprecated:" bullet and a "Migrate to:" bullet. Put sub-bullets under each, one per endpoint, command, or version, written the same way. Link every item to its reference, the deprecated ones as well as the new ones
 - **Capitalize first word** of each list item
 - **Use periods** if item is a full sentence or completes the intro stem
 - **Split literal-heavy paragraphs into lists**: a paragraph with three or more inline code spans or literal values is hard to read. Use a bulleted or description list where it fits, for example one item per format or variant
@@ -686,6 +688,8 @@ The CircleCI docs use automated linting to enforce style rules and catch common 
 4. Never commit documentation with linting errors
 
 This is not optional - Vale errors will cause CI failures and block PRs.
+
+**Test how-to and API guides by following them.** Vale checks style, not whether the instructions work. For a how-to guide that changes code or API calls, have someone (or a fresh agent that has not seen the change) follow the built page literally, with no outside knowledge, and record every guess, gap, and wrong step. Fix those before merging.
 
 ### Agent Environment Context
 
