@@ -9,6 +9,16 @@ Use an active voice, talk directly to the reader using simple, direct, clear and
 * **Good**: Click **Go** and your project will complete.
 * **Bad**: When you click the **Go** button your project should complete.
 
+== Write about dated changes
+Put the date first, then the actor and the action, in the present tense. A date at the end of a sentence can read as the time the action in the sentence happens. The present tense stays correct whenever the reader sees the page, and the `FutureTense` Vale rule flags "will". An announced removal or deprecation is a current fact, not aspirational behavior.
+
+* **Good**: On 1 February 2027, CircleCI removes nine endpoints. These endpoints trigger and rerun builds.
+* **Bad**: CircleCI removes nine endpoints that trigger and rerun builds on 1 February 2027.
+
+== Keep working notes out of pages
+* Do not leave `TODO`, `FIXME`, or reviewer notes in a page, including AsciiDoc `//` comments. Put open questions in the pull request description checklist.
+* Do not describe history in a page, a schema description, or a comment. Avoid "previously", "no longer", and "now supports". State the current behavior or rule.
+
 == Write for anyone and everyone
 Assume technical competence but explain concepts clearly and simply. Some concepts we write about are complex, and outside a non-technical reader's experience, but the flow of CircleCI docs should be accessible to anyone.
 

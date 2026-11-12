@@ -26,6 +26,8 @@ pass:[<!-- vale off -->]
 
 * Use ordered lists for steps in a process. All other lists should be unordered.
 
+* Use bullets for alternatives. If the reader picks one option, such as API v3 or API v2, or rerunning all jobs or only failed jobs, do not number the options. Ask whether the reader does every item in order. If not, it is not a numbered list.
+
 * Capitalize the first word of each item in a list.
 
 * If the text in the bullet is a full sentence or completes the intro stem use a period at the end.

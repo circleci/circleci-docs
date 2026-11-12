@@ -17,6 +17,7 @@ The guides component serves two audiences from one set of source files: CircleCI
 Most content is the same on Cloud and Server. Conditional content costs reviewers time and drifts out of date, so use as little as you can.
 
 * If the text is correct for both platforms, leave it alone. Server readers can read Cloud-leaning examples and comparison tables. You do not need to hide that Cloud exists.
+* Facts about scope are the same on both platforms. When a change affects both, such as a deprecation, state it the same way in the opening, even when some of it does not apply to Server. Do not use conditionals to make a change look smaller or larger on one platform. Use conditionals only where the steps differ.
 * If a feature, setting, or page does not exist on Server, hide it from the Server build with `ifndef::server[]`.
 * If Server works differently, write a Server variant with `ifdef::server[]` next to the Cloud text.
 * If only a version number differs, state the version in the text, for example "from Server 4.9". Do not branch on version.

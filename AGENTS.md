@@ -42,6 +42,16 @@ All pages require standard attributes (`:page-platform:`, `:page-audience:`, `:p
 - **Good**: Click **Go** and your project will complete.
 - **Bad**: When you click the **Go** button your project should complete.
 
+### Dated and Scheduled Changes
+- Put the date first, then the actor and the action, in the present tense. A date at the end of a sentence can read as the time the action in the sentence happens.
+- Use the present tense for a dated, announced change. It stays correct whenever the reader sees it, and the `FutureTense` Vale rule flags "will". An announced removal or deprecation is a current fact, not aspirational behavior.
+- **Good**: On 1 February 2027, CircleCI removes nine endpoints. These endpoints trigger and rerun builds.
+- **Bad**: CircleCI removes nine endpoints that trigger and rerun builds on 1 February 2027.
+
+### No Working Notes in Pages
+- Do not leave `TODO`, `FIXME`, or reviewer notes in a page, including AsciiDoc `//` comments. Put open questions in the pull request description checklist.
+- Do not describe history in a page, a schema description, or a comment. Avoid "previously", "no longer", and "now supports". State the current behavior or rule.
+
 ### Accessibility
 - Write for a general audience
 - Assume technical competence but explain concepts clearly and simply
@@ -267,7 +277,7 @@ jobs:
 . Step two
 . Step three
 ```
-- **Use unordered lists** for everything else
+- **Use unordered lists** for everything else, including alternatives. If the reader picks one option, such as API v3 or API v2, or rerunning all jobs or only failed jobs, use bullets. Ask whether the reader does every item in order. If not, it is not a numbered list.
 - Use `+` to include blocks within steps:
 ```adoc
 . Step one
@@ -402,6 +412,7 @@ The `guides` component builds twice from one set of source files: a Cloud build 
 **Decide first.** Most content is the same on both platforms, so use as few conditionals as possible.
 
 - If the text is correct for both platforms, leave it alone. Do not hide Cloud examples or comparison tables from Server readers.
+- Facts about scope are the same on both platforms. When a change affects both, such as a deprecation, state it the same way in the opening, even when some of it does not apply to Server. Do not use conditionals to make a change look smaller or larger on one platform. Use conditionals only where the steps differ.
 - If a feature does not exist on Server, wrap it in `ifndef::server[]`.
 - If Server works differently, keep the Cloud text unchanged and add a Server variant in `ifdef::server[]`.
 - If only the version differs, state the version in the text ("from Server 4.9"). Do not branch on version, and do not use `ifeval`.
@@ -444,7 +455,10 @@ Vale (rules in `styles/`) catches most wording and punctuation problems. Watch f
 6. Semicolons, en dashes, or dashes that separate an item from its description
 7. Documenting planned or future behavior, such as "will be supported from v5.0"
 8. Paragraphs dense with inline code or literal values that should be a bulleted list
-9. **Committing without running Vale and fixing errors**
+9. A date at the end of a sentence about a change, so it reads as when the action happens
+10. A numbered list for alternatives the reader chooses between
+11. `TODO` notes, or descriptions of history such as "previously" or "now supports", left in a page or schema
+12. **Committing without running Vale and fixing errors**
 
 ## AsciiDoc Validation Rules
 - Close all attribute blocks properly
