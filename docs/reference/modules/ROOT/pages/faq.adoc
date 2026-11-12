@@ -28,7 +28,7 @@ This page answers frequently asked questions about the following CircleCI topics
 |
 
 | <<orbs>>
-| <<dynamic-configuration>>
+|
 
 | <<author-orbs>>
 | <<billing>>
@@ -82,11 +82,6 @@ include::guides:ROOT:partial$faq/pipelines-faq-snip.adoc[]
 == Workflows
 
 include::guides:ROOT:partial$faq/workflows-faq-snip.adoc[]
-
-[#dynamic-configuration]
-== Dynamic configuration
-
-include::guides:ROOT:partial$faq/dynamic-configuration-faq-snip.adoc[]
 
 [#billing]
 == Billing

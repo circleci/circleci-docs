@@ -61,6 +61,7 @@ Some constraints on continuing pipelines from a `setup: true` configuration are 
 ** Use logic conditions to ensure only one workflow is run for each pipeline.
 - A pipeline can only be continued once. A pipeline cannot be continued with another setup configuration. Workflow reruns will fail as part of this restriction. Rather than rerun a setup workflow you can trigger a new pipeline.
 - A pipeline can only be continued within six hours of its creation.
+- If you use a custom executor for the continuation step, it must have `curl` and `jq` installed.
 - You can declare a pipeline parameter with the same name and type in both the setup and continuation configuration files. If the default values differ, each configuration uses its own default.
 - You can set the value of a pipeline parameter declared in the continuation configuration to a value other than the default. To do so, specify the parameter's name and value when calling the `continue` job or command from the link:https://circleci.com/developer/orbs/orb/circleci/continuation[continuation orb] using the `parameters` parameter.
 - The `continue` job/command will fail with the error {"message":"Conflicting pipeline parameters."} when all three of these conditions occur:
@@ -166,11 +167,6 @@ workflows:
           circleci_domain: support-server-4.eks-dev.sphereci.com
 ----
 endif::server[]
-
-[#dynamic-config-faqs]
-== FAQs
-
-include::ROOT:partial$faq/dynamic-configuration-faq-snip.adoc[]
 
 [#what-to-read-next]
 == Next steps
