@@ -83,7 +83,6 @@ Check each technical claim, command, flag, field, and default the change adds or
 - **Search the org's code**: `gh search code '<identifier>' --owner circleci`. Private repositories only appear if the user has access. If nothing is found, say what you searched and list the claim.
 - **Server availability**: the `circleci/server` repository pins each service version in `images.yaml` at every release tag. Read it with `gh api "repos/circleci/server/contents/images.yaml?ref=<tag>" --jq .content | base64 -d`, then check whether that service version contains the code. Run the same check on `main` first as a positive control, so a zero result means "absent" and not "lookup failed".
 - **APIs**: check endpoints and fields against the API reference before calling them wrong.
-- **Shell**: do not name a shell variable `path` in zsh. It is tied to `PATH` and silently breaks every later command.
 - **Keep private code private.** The PR and the report may be read outside the team. State the fact ("not in 4.9.8"), not code, file paths, or repository names.
 
 List under **Needs engineering review** only what you could not confirm, and say what you checked. If the code shows the docs are right, say so in the report.
