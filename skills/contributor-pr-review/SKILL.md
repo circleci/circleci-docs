@@ -76,9 +76,17 @@ Report these instead of redoing them.
   - Server wording names the web app without a link, and examples that use `circleci.com` say to substitute the Server hostname.
   - When unsure whether Server supports something, put it under **Needs engineering review**. Do not guess.
 
-### 6. Separate what you can and cannot verify
+### 6. Verify product claims, and list only what you could not confirm
 
-You can verify structure, links, versions, and consistency. You cannot verify product behavior. List every technical claim, command, flag, field, and default that the change adds or alters under **Needs engineering review**, so the docs team can route it. Check endpoints and fields against the API reference before calling them wrong.
+Check each technical claim, command, flag, field, and default the change adds or alters against the product before you hand it to engineering.
+
+- **Search the org's code**: `gh search code '<identifier>' --owner circleci`. Private repositories only appear if the user has access. If nothing is found, say what you searched and list the claim.
+- **Server availability**: the `circleci/server` repository pins each service version in `images.yaml` at every release tag. Read it with `gh api "repos/circleci/server/contents/images.yaml?ref=<tag>" --jq .content | base64 -d`, then check whether that service version contains the code. Run the same check on `main` first as a positive control, so a zero result means "absent" and not "lookup failed".
+- **APIs**: check endpoints and fields against the API reference before calling them wrong.
+- **Shell**: do not name a shell variable `path` in zsh. It is tied to `PATH` and silently breaks every later command.
+- **Keep private code private.** The PR and the report may be read outside the team. State the fact ("not in 4.9.8"), not code, file paths, or repository names.
+
+List under **Needs engineering review** only what you could not confirm, and say what you checked. If the code shows the docs are right, say so in the report.
 
 ## Report
 
@@ -100,7 +108,7 @@ Save to the repository root as `pr-review-<number>.md`, then tell the user the f
 [Same format. Optional for the contributor.]
 
 ## Needs engineering review
-[Technical claims the docs team cannot verify]
+[Only claims you could not confirm, and what you checked]
 
 ## Where this review and the bot disagree
 [Only when they differ. Quote both sides and the evidence. Leave the decision to the reviewer.]
