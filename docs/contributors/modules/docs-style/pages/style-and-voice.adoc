@@ -58,7 +58,7 @@ Assume technical competence but explain concepts clearly and simply. Some concep
 * Workflows and jobs _run_. Pipelines and runs do not.
 ** **Good:** Push a commit to trigger a pipeline run. The workflow starts once the run is triggered.
 ** **Bad:** Run the pipeline to build your project. The pipeline runs when you push a commit.
-* A CircleCI configuration file can have any name. Do not state that it must be `.circleci/config.yml`. Write "CircleCI configuration file, commonly stored as `.circleci/config.yml`".
+* A CircleCI configuration file can have any name. Do not state that it must be `.circleci/config.yml` or assume the reader's file has that name. Write "your CircleCI configuration file, commonly stored as `.circleci/config.yml`".
 * Feature names are rarely capitalized. We will keep a list of exceptions here:
 ** Insights
 

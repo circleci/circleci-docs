@@ -83,7 +83,7 @@ All pages require standard attributes (`:page-platform:`, `:page-audience:`, `:p
 - **Bad**: Run the pipeline to build your project.
 - **Bad**: The pipeline runs when you push a commit.
 - Feature names are rarely capitalized (exceptions: Insights)
-- A CircleCI configuration file can have any name. Do not state that it must be `.circleci/config.yml`. Write "CircleCI configuration file, commonly stored as `.circleci/config.yml`". Vale warns on this (`ConfigFileName`)
+- A CircleCI configuration file can have any name. Do not state that it must be `.circleci/config.yml` or assume the reader's file has that name. Write "your CircleCI configuration file, commonly stored as `.circleci/config.yml`". Vale warns on this (`ConfigFileName`)
 
 ## Numbers
 - **Write out** numbers one through nine
@@ -174,7 +174,6 @@ Put `[badge="Beta"]` on the line above a heading (h2-h6) to badge it. Common bad
 - Antora creates the `h1` from the page title, so use only `h2` and below in the body
 - Include at least an intro paragraph before subheadings
 - Headings are in **sentence case**. Only xref link text is title case, so an xref to a heading does not match the heading's capitalization
-- How-to pages have a `== Prerequisites` section before the first step
 - **Start headings with verbs** where possible:
   - **Good**: "Grooming cats"
   - **Bad**: "Cats"
@@ -420,7 +419,7 @@ endif::server[]
 
 **Rules:**
 
-- Use `ifndef::server[]` for Cloud-only content and `ifdef::server[]` for Server-only content. Never test for a `cloud` attribute, because partials are shared with the `reference` component. Vale (`ServerConditionals`) fails the build on a `cloud` test, on `ifeval`, and on a page attribute wrapped in a conditional.
+- Use `ifndef::server[]` for Cloud-only content and `ifdef::server[]` for Server-only content. Never test for a `cloud` attribute, because partials are shared with the `reference` component. Vale (`ServerConditionals`) enforces some of these rules.
 - **Cloud output must not change** when you add conditionals to an existing page. Keep the original Cloud text byte-for-byte inside `ifndef::server[]`. Put wanted Cloud wording changes in a separate commit or pull request.
 - Whole-page availability comes from metadata (`:page-platform:`, `:page-server-min-version:`, `:page-server-deprecated-in:`), not conditionals. Never wrap page attributes, such as `:page-description:`, in conditionals.
 - In a `[tabs]` block, a conditional may wrap a complete tab, from its `Label::` line to the end of its body. Do not put a conditional inside a tab body or around part of a tab. When only part of a tab differs, move the tab body into a partial and include it in the tab and in an `ifdef::server[]` block.
@@ -435,7 +434,7 @@ endif::server[]
 
 ## Common Mistakes to Avoid
 
-Vale already catches passive voice, wordiness, hedging, missing Oxford commas, gender-biased language, missing alt text, vague link text, inline code in headings, and long sentences or too many commas. Watch for the ones it cannot:
+Vale (rules in `styles/`) catches most wording and punctuation problems. Watch for the ones it cannot:
 
 1. Contractions
 2. Periods at the end of sentences that end in a URL or code
@@ -498,7 +497,7 @@ Before committing documentation changes:
 3. ✅ Preview locally to check formatting and links
 4. ✅ Verify all xrefs point to existing files, and that heading hashes use kebab-case of the heading (not `_underscore_ids`)
 5. ✅ Confirm the page is added to `nav.adoc` if new
-6. ✅ If you add or change code samples that pin an orb or `cimg` image version, run `node scripts/check-code-versions.js <files>` and update versions that are behind, unless the example needs the older one
+6. ✅ If you add or change code samples that pin an orb or `cimg` version, or name a resource class, machine image, or Xcode version, run `node scripts/check-code-versions.js <files>` and fix what it reports, unless the example needs it
 
 ## Documentation Architecture
 

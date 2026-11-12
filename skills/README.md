@@ -7,7 +7,7 @@ This directory contains custom skills for working with CircleCI documentation. S
 ### content-review
 Reviews CircleCI documentation pages for quality, clarity, and adherence to style guidelines. Generates a comprehensive narrative report with prioritized recommendations.
 
-**What it checks (10 dimensions):**
+**What it checks:**
 - Tone and audience appropriateness
 - Purpose ("why" and "how", and the opening value statement)
 - Heading clarity and structure
@@ -23,8 +23,6 @@ Reviews CircleCI documentation pages for quality, clarity, and adherence to styl
 
 ### contributor-pr-review
 Reviews a contributor's pull request that adds a new page or updates existing content. Checks CI results, the PR as a whole, new-page requirements (template, nav, xrefs, images) and changed sections of updated pages, and lists technical claims that need engineering review. Uses the content-review dimensions and `AGENTS.md` rules instead of repeating them.
-
-Reads the factory bot's findings and the CI results instead of repeating them. It flags a stale bot review by comparing the commit the bot reviewed with the PR head, and looks for facts the change leaves wrong in files it does not touch. Pinned orb and `cimg` versions on added lines are checked by `scripts/check-code-versions.js --diff`, and Vale rules (`ServerConditionals`, `ConfigFileName`) cover Cloud and Server directive mistakes and the configuration file name.
 
 **Output:** Saves a markdown report to the repository root as `pr-review-[number].md`. It never posts to GitHub.
 
@@ -83,7 +81,7 @@ Once installed, Claude Code will automatically trigger skills when relevant, or 
 ```
 
 The skill will:
-1. Analyze the page across 10 quality dimensions
+1. Analyze the page across its quality dimensions
 2. Check 3-5 related pages for consistency
 3. Flag hand-written content that should use, or become, a shared partial or example (see the partials skill below)
 4. Generate a prioritized report
