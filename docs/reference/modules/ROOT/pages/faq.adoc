@@ -32,9 +32,6 @@ This page answers frequently asked questions about the following CircleCI topics
 
 | <<author-orbs>>
 | <<billing>>
-
-| <<cancel-performance-plan>>
-|
 |===
 --
 
@@ -94,8 +91,3 @@ include::guides:ROOT:partial$faq/dynamic-configuration-faq-snip.adoc[]
 Visit our link:https://circleci.com/pricing/[Pricing page] to find details about CircleCI's plans.
 
 include::guides:ROOT:partial$faq/billing-faq-snip.adoc[]
-
-[#cancel-performance-plan]
-== Cancel Performance Plan
-
-include::guides:ROOT:partial$faq/cancel-subscription-faq-snip.adoc[]

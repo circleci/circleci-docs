@@ -62,7 +62,29 @@ In addition to everything in the Free plan, the Performance plan includes:
 
 For current network and storage allowances, refer to the link:https://circleci.com/pricing/[Pricing] page.
 
-NOTE: For details on canceling a Performance plan, refer to the xref:reference:ROOT:faq.adoc#cancel-performance-plan[Cancel Performance Plan FAQ].
+[#cancel-performance-plan]
+=== Cancel a Performance plan
+
+You must be an org admin in your CircleCI organization to cancel your Performance plan subscription. Your role depends on your VCS:
+
+* GitHub: your account has the "Owner" role in your GitHub organization.
+* Bitbucket Cloud: your account has "Admin" permissions in your Bitbucket repository.
+* GitLab: the CircleCI web app shows your account as "Org Admin" under menu:Org[People].
+
+To cancel your subscription:
+
+. In the link:https://app.circleci.com/[CircleCI web app], select **Plan** on the left sidebar and then open the **Billing** tab.
+. At the bottom of the page, select "Looking to cancel your plan?".
+. Select **Cancel**. Follow the prompts to complete the cancellation.
+
+After you cancel:
+
+* You keep access to the Performance plan settings in the CircleCI web app and can use credits until the end of your current billing cycle.
+* When the cycle ends, your org moves to the <<free-plan,Free plan>>, where you can use up to 30,000 credits per month.
+* You forfeit credits that you do not use by the end of the billing cycle, and they are not eligible for refunds.
+* You lose access to billing statements after the end of the current billing cycle, so download them before then.
+
+To reactivate the Performance plan after you cancel, upgrade from the **Plan > Overview** page in the CircleCI web app.
 
 [#scale-plan]
 == Scale plan
