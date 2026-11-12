@@ -18,7 +18,7 @@ const EXCLUDED = /^docs\/contributors\//
 
 const SUPPORTED_SCHEMA_KEYS = new Set(['$schema', '$id', 'title', 'description', 'type', 'required', 'additionalProperties', 'properties'])
 const SUPPORTED_PROPERTY_KEYS = new Set(['type', 'description', 'pattern', 'enum', 'minLength', 'maxLength'])
-const LIST_FIELDS = ['page-content-type', 'page-platform', 'page-vcs', 'page-plan']
+const LIST_FIELDS = ['page-audience', 'page-content-type', 'page-platform', 'page-vcs', 'page-plan']
 const PLAN_ORDER = ['Free', 'Performance', 'Scale']
 
 function loadSchema () {

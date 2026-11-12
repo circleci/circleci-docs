@@ -45,8 +45,8 @@
     },
     "page-audience": {
       "type": "string",
-      "enum": ["admin", "developer"],
-      "description": "Replaces the old 'Server Admin' marker baked into page-platform. 'admin' where that marker was present, 'developer' as the default everywhere else."
+      "pattern": "^(admin|developer)(,\\s*(admin|developer))*$",
+      "description": "Who the page is for, comma-separated: 'admin' (Server operators), 'developer' (everyone else, the default), or both for pages that serve both audiences, for example 'developer, admin'."
     },
     "page-plan": {
       "type": "string",
