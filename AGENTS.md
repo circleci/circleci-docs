@@ -20,25 +20,10 @@ The human-facing "find the right starting point" table lives as a section in `do
 
 ## Git worktrees
 
-What to do depends on which environment you are running in (see [Agent Environment Context](#agent-environment-context)):
+- **Local agents** (Claude Code CLI, Cursor Desktop): work in the main `circleci-docs` checkout. **Ask before creating a git worktree**, and create one only when asked. Worktrees accumulate quickly and are awkward to unwind mid-task.
+- **Cloud agents** (started via `@cursor` in Linear or GitHub): always create a worktree, since there is no one to ask. Use `../circleci-docs-worktrees/<issue-id>-<short-description>`, for example `git worktree add ../circleci-docs-worktrees/LIN-123-fix-nav -b LIN-123-fix-nav`. With no issue ID, use a short description only.
 
-- **Local agents** (Claude Code CLI, Cursor Desktop): work in the main `circleci-docs` checkout by default. **Ask before creating a git worktree**, and create one only when the person you are working with asks for it. Worktrees are useful for genuinely parallel work on the same files, but they accumulate quickly and are awkward to unwind mid-task, so they are not the default.
-
-- **Cloud agents** (started via `@cursor` in Linear or GitHub): always create a worktree, since there is no one to ask.
-
-When you create a worktree, use this location and naming:
-
-```
-../circleci-docs-worktrees/<issue-id>-<short-description>
-```
-
-For example:
-
-```
-git worktree add ../circleci-docs-worktrees/LIN-123-fix-nav -b LIN-123-fix-nav
-```
-
-If there is no issue ID, use a short description only.
+See [Agent Environment Context](#agent-environment-context) for the two environments.
 
 ## Creating New Documentation Pages
 
@@ -108,6 +93,7 @@ All pages require standard attributes (`:page-platform:`, `:page-audience:`, `:p
 - **Bad**: Run the pipeline to build your project.
 - **Bad**: The pipeline runs when you push a commit.
 - Feature names are rarely capitalized (exceptions: Insights)
+- A CircleCI configuration file can have any name. Do not state that it must be `.circleci/config.yml` or assume the reader's file has that name. Write "your CircleCI configuration file, commonly stored as `.circleci/config.yml`". Vale warns on this (`ConfigFileName`)
 
 ## Numbers
 - **Write out** numbers one through nine
@@ -176,101 +162,28 @@ All pages require standard attributes (`:page-platform:`, `:page-audience:`, `:p
   - _Parallelism_
 
 ### Icons
-CircleCI docs use a custom icon macro for UI icons that automatically switches between light and dark theme versions.
+Use the icon macro for UI icons. It switches between light and dark versions:
 
-**Syntax:**
-```adoc
-icon:icon-name[Alt text description]
-```
-
-**Available icons** (located in `docs/guides/modules/ROOT/images/icons/`):
-- `icon:more[Ellipsis menu icon]` - Three-dot menu (ellipsis)
-- `icon:edit-solid[Edit icon]` - Edit button
-- `icon:delete[Trash bin icon]` - Delete/trash button
-- `icon:settings[Settings icon]` - Settings button
-- `icon:cancel[Cancel icon]` - Cancel button
-- `icon:passed[Passed icon]` - Success/passed indicator
-- `icon:warning[Warning icon]` - Warning indicator
-- `icon:rebuild[Rebuild icon]` - Rebuild button
-- `icon:promote[Promote icon]` - Promote button
-- `icon:chunk[Chunk icon]` - Chunk feature icon
-- `icon:github-app[GitHub App icon]` - GitHub App integration
-- `icon:github-oauth[GitHub OAuth icon]` - GitHub OAuth integration
-
-**Usage examples:**
 ```adoc
 Select the icon:more[Ellipsis menu icon] to open the menu.
-Click the icon:settings[Settings icon] to access project settings.
 ```
 
-**Important notes:**
-- Always include descriptive alt text for accessibility
-- The macro automatically handles light/dark theme switching
-- Each icon has a light version (`name.svg`) and dark version (`name-dark.svg`)
-- Use this macro instead of the older `image:` syntax for theme-aware icons
-
-**Creating a new icon:** add two SVG files to `docs/guides/modules/ROOT/images/icons/`:
-- `name.svg`: the light theme version, with a dark icon color (typically `#161616`)
-- `name-dark.svg`: the dark theme version, with a light icon color (typically `#D7DBE3`)
+- Always include alt text, and use this macro instead of `image:` for theme-aware icons
+- Icons live in `docs/guides/modules/ROOT/images/icons/`. List the directory for the available names
+- To add one, add `name.svg` (light theme, dark icon color, typically `#161616`) and `name-dark.svg` (dark theme, light icon color, typically `#D7DBE3`)
 
 ### Page Badges
-Add a badge next to a page title and its sidebar navigation entry using page attributes:
-
-```adoc
-= Page Title
-:page-badge: Preview
-```
-
-- `:page-badge:`: one of `Beta`, `Preview`, or `Deprecated`. Never `New`, because it goes stale (see Page Attributes)
-- `:page-badge-classes:`: Tailwind classes for styling (optional)
-- `:page-badge-bg:` and `:page-badge-border:`: hex colors (optional, override the classes)
-- A closed preview page has the `Preview` badge and is **not** listed in the navigation. An open preview page has the `Preview` badge and **is** listed
-- See xref:contributors:docs-style:title-badges.adoc[Page Title Badges] for complete documentation
+Set `:page-badge:` to `Beta`, `Preview`, or `Deprecated` to show a badge next to the page title and its navigation entry. Never use `New`, because it goes stale. A closed preview page has the `Preview` badge and is **not** listed in the navigation. An open preview page has the `Preview` badge and **is** listed. For optional styling attributes, see xref:contributors:docs-style:title-badges.adoc[Page Title Badges].
 
 ### Subsection Badges
-Add status badges to section headings (h2-h6) to indicate feature maturity or platform availability.
-
-**Syntax:**
-```adoc
-[badge="Badge Text"]
-== Section Heading
-```
-
-**Common badge types:**
-- `Preview` - Features in preview
-- `Beta` - Beta features
-- `Deprecated` - Deprecated functionality
-- `Cloud only` - Cloud-specific features
-- `Server v4+` - Server version-specific features
-
-**Examples:**
-```adoc
-[badge="Preview"]
-== Slack notifications
-
-Configure Slack notifications for your project...
-```
-
-**Custom styling:**
-```adoc
-[badge="Beta",badge-classes="text-white bg-blue-500 border border-blue-600"]
-=== AI-powered optimization
-
-[badge="Deprecated",badge-bg="#ff0000",badge-border="#cc0000"]
-==== Legacy approach
-```
-
-**Important notes:**
-- Use subsection badges consistently across related pages
-- Badges appear next to the heading, not in cross-reference link text
-- Badge attributes: `badge` (text), `badge-classes` (Tailwind classes), `badge-bg` (hex color), `badge-border` (hex color)
-- See xref:contributors:docs-style:title-badges.adoc#subsection-badges[Subsection Badges] for complete documentation
+Put `[badge="Beta"]` on the line above a heading (h2-h6) to badge it. Common badges: `Preview`, `Beta`, `Deprecated`, `Cloud only`, `Server v4+`. Badges do not appear in xref link text. For styling attributes, see xref:contributors:docs-style:title-badges.adoc#subsection-badges[Subsection Badges].
 
 ### Headings
 - Write headings in **logical sequence** that tells a story
 - **Do not skip heading levels** (for example, h2 to h4)
 - Antora creates the `h1` from the page title, so use only `h2` and below in the body
 - Include at least an intro paragraph before subheadings
+- Headings are in **sentence case**. Only xref link text is title case, so an xref to a heading does not match the heading's capitalization
 - **Start headings with verbs** where possible:
   - **Good**: "Grooming cats"
   - **Bad**: "Cats"
@@ -297,31 +210,9 @@ See the Codex and Copilot tabs in <<install-circleci-agent-skills>>.
 ```
 - For cross-page section links: `xref:guides:toolkit:circleci-agent-skills.adoc#install-circleci-agent-skills[Install CircleCI Agent Skills]`
 
-Before adding any xref to a document, you must verify the target file exists and the path is correct:
+Before adding any xref, verify the target file exists and the path is correct (`find docs -name "filename.adoc"`). Do not guess file names, module names, or locations.
 
-```bash
-# Search for the file
-find docs -name "filename.adoc"
-
-# Or use glob pattern
-glob pattern: **/filename.adoc
-```
-
-Common mistakes:
-- Making up file names that don't exist
-- Using incorrect module names in the path
-- Guessing at file locations without checking
-
-The xref format is: `xref:component:module:filename.adoc[Link Text]`
-- **component**: Usually `guides`, `reference`, `orbs`, etc.
-- **module**: The module directory name (for example, `orchestrate`, `deploy`, `toolkit`)
-- **filename.adoc**: The actual file name
-
-Example verification process:
-1. Search: `glob pattern: **/deploy-markers.adoc` → finds `docs/guides/modules/deploy/pages/configure-deploy-markers.adoc`
-2. Read target page title: "Configure deploy markers"
-3. Build xref: Component=`guides`, Module=`deploy`, File=`configure-deploy-markers.adoc`
-4. Result: `xref:guides:deploy:configure-deploy-markers.adoc[Configure Deploy Markers]` (title case)
+The format is `xref:component:module:filename.adoc[Link Text]`. The component is usually `guides`, `reference`, or `orbs`. The module is the directory under `modules/`. For example, `docs/guides/modules/deploy/pages/configure-deploy-markers.adoc` becomes `xref:guides:deploy:configure-deploy-markers.adoc[Configure Deploy Markers]`.
 
 ### External Links
 - Use this format:
@@ -424,121 +315,12 @@ some code
 
 ### Reusable Partials
 
-When discovering, inserting, or creating partials or shared code examples, follow the partials skill at `skills/partials/SKILL.md`. That skill covers both `partials/` (AsciiDoc prose) and `examples/` (shared config snippets). It is the workflow for browsing categories, searching, suggesting from page context, proposing extractions, and writing the correct `include::` syntax. Other docs-authoring skills should reference it instead of copying reusable content.
+Follow `skills/partials/SKILL.md` to discover, insert, or create partials (`docs/guides/modules/ROOT/partials/`, shared AsciiDoc prose) and shared examples. Scan the directory instead of relying on a list. Do not paste a partial's content into a page, and do not copy reusable content by hand in other skills.
 
-CircleCI docs use reusable partials to maintain consistency and reduce duplication. Partials are AsciiDoc snippets that can be included in multiple pages.
-
-**When to use partials:**
-- Repeated instructions that appear across multiple pages (navigation steps, setup procedures)
-- Standard notes, tips, or warnings used in multiple locations
-- Content that needs to stay synchronized across pages (resource tables, FAQ entries)
-- Common troubleshooting steps
-
-**When NOT to use partials:**
-- Content that appears only once
-- Page-specific information that would not be reused
-- Content that needs different context on each page
-
-**Include syntax:**
-```adoc
-include::ROOT:partial$category/filename.adoc[]
-```
-
-**Include with custom text or comment:**
-```adoc
-include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab or GitHub App]
-```
-
-**Partial categories and locations:**
-
-All partials are located in `docs/guides/modules/ROOT/partials/`
-
-- **app-navigation/** - Navigation instructions
-  - `steps-to-project-settings.adoc` - Steps to access project settings
-
-- **create-project/** - Project creation steps
-  - `steps-up-to-pipeline.adoc` - Steps from Create Project to pipeline setup
-
-- **execution-resources/** - Resource specifications
-  - `docker-resource-table.adoc` - Docker executor resource table
-  - `machine-resource-table.adoc` - Machine executor resource table
-  - `macos-resource-table.adoc` - macOS executor resource table
-  - `windows-resource-table.adoc` - Windows executor resource table
-  - And others for ARM, GPU, and resource class views
-
-- **faq/** - Frequently asked questions snippets
-  - `general-faq-snip.adoc` - General FAQ entries
-  - `orb-faq-snip.adoc` - Orb-related FAQs
-  - `workflows-faq-snip.adoc` - Workflow FAQs
-  - `billing-faq-snip.adoc` - Billing FAQs
-  - And others for specific topics
-
-- **notes/** - Reusable notes and warnings
-  - `docker-auth.adoc` - Docker authentication note
-  - `standalone-unsupported.adoc` - Feature support note (accepts custom text)
-  - `find-organization-id.adoc` - How to find organization ID
-  - `server-api-examples.adoc` - Server API examples note
-
-- **orbs/** - Orb-related content
-  - `orb-types.adoc` - Orb type definitions
-  - `orb-type-comparison.adoc` - Orb type comparison table
-
-- **pipelines-and-triggers/** - Pipeline setup content
-  - `set-up-schedule-trigger.adoc` - Schedule trigger setup steps
-  - `custom-webhook-setup.adoc` - Webhook configuration steps
-  - `pipeline-values.adoc` - Pipeline values reference
-
-- **runner/** - Self-hosted runner setup
-  - `install-with-web-app-steps.adoc` - Runner installation via web app
-  - `install-with-cli-steps.adoc` - Runner installation via CLI
-  - `container-runner-prereq.adoc` - Container runner prerequisites
-  - `terms.adoc` - Runner terminology
-
-- **tips/** - Helpful tips and guidance
-  - `check-org-type.adoc` - How to check organization type
-  - `find-project-slug.adoc` - How to find project slug
-  - `env-var-or-context.adoc` - When to use env vars vs contexts
-  - `trigger-pipeline-with-parameters.adoc` - Pipeline parameter triggering
-
-- **troubleshoot/** - Troubleshooting snippets
-  - `orb-troubleshoot-snip.adoc` - Orb troubleshooting
-  - `pipelines-troubleshoot-snip.adoc` - Pipeline troubleshooting
-  - `self-hosted-runner-troubleshoot-snip.adoc` - Runner troubleshooting
-
-- **using-expressions/** - Configuration expressions
-  - `operators.adoc` - Expression operators
-  - `env-vars-in-conditional-caveat.adoc` - Environment variable caveats
-
-**Example usage:**
-
-```adoc
-== Setting up your project
-
-include::ROOT:partial$tips/check-org-type.adoc[]
-
-Follow these steps:
-
-include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Steps to create project]
-
-include::ROOT:partial$notes/docker-auth.adoc[]
-```
-
-**Creating new partials:**
-
-When creating a new partial:
-1. Determine if the content will be used in 2+ places
-2. Choose the appropriate category directory
-3. Use a descriptive filename ending in `.adoc`
-4. For FAQ/troubleshooting snippets, use `-snip.adoc` suffix
-5. Consider if the partial should accept custom text parameters
-6. Test the partial in all intended locations
-
-**Best practices:**
-- Keep partials focused on a single concept or set of related steps
-- Write partials to work in multiple contexts without requiring modifications
-- Document partials that accept custom text parameters
-- Update all pages when modifying a partial (partials affect multiple pages)
-- Use meaningful filenames that describe the content
+- Use a partial for content that appears on two or more pages and must stay in sync: navigation steps, standard notes, FAQ entries, resource tables, troubleshooting. Do not use one for page-specific content.
+- Include syntax: `include::ROOT:partial$category/filename.adoc[]`. Custom text goes in the brackets, for example `include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab]`.
+- Give a new partial a descriptive filename in the right category directory. End FAQ and troubleshooting snippets with `-snip.adoc`.
+- A change to a partial changes every page that includes it.
 
 ### Reusable Examples
 
@@ -575,12 +357,19 @@ sequenceDiagram
 ```
 
 ### Admonitions (Notes, Tips, Warnings)
-Use these for visual separation:
-- `NOTE:` - Supplementary information to highlight
-- `TIP:` - Guidance on how to carry out a step
-- `IMPORTANT:` - Rarely used; consider other options first
-- `CAUTION:` - Reader needs to be careful
-- `WARNING:` - Dangers or consequences exist
+Use admonitions sparingly. If every paragraph is important, nothing is. Keep each one short, and if a note runs long, make it its own section. Choose the type from the situation:
+
+| Situation | Use |
+|---|---|
+| An optional shortcut or efficiency hint for a step | `TIP:` |
+| An important point that does not fit neatly into the flow | `NOTE:` |
+| A feature is in beta or subject to change | `NOTE:` (and set `:page-badge:`) |
+| Key details that cause extra work if missed | `IMPORTANT:` |
+| A setting or action might have unintended consequences | `CAUTION:` |
+| A security concern the reader must be aware of | `CAUTION:` |
+| An action that cannot be undone, such as data loss or a security breach | `WARNING:` |
+| A procedure to follow to avoid future issues | Main text, not an admonition |
+| A known limitation that affects what the reader can expect | A limitations section, not an admonition |
 
 Simple syntax:
 ```adoc
@@ -641,7 +430,7 @@ endif::server[]
 
 **Rules:**
 
-- Use `ifndef::server[]` for Cloud-only content and `ifdef::server[]` for Server-only content. Never test for a `cloud` attribute, because partials are shared with the `reference` component.
+- Use `ifndef::server[]` for Cloud-only content and `ifdef::server[]` for Server-only content. Never test for a `cloud` attribute, because partials are shared with the `reference` component. Vale (`ServerConditionals`) enforces some of these rules.
 - **Cloud output must not change** when you add conditionals to an existing page. Keep the original Cloud text byte-for-byte inside `ifndef::server[]`. Put wanted Cloud wording changes in a separate commit or pull request.
 - Whole-page availability comes from metadata (`:page-platform:`, `:page-server-min-version:`, `:page-server-deprecated-in:`), not conditionals. Never wrap page attributes, such as `:page-description:`, in conditionals.
 - In a `[tabs]` block, a conditional may wrap a complete tab, from its `Label::` line to the end of its body. Do not put a conditional inside a tab body or around part of a tab. When only part of a tab differs, move the tab body into a partial and include it in the tab and in an `ifdef::server[]` block.
@@ -656,30 +445,20 @@ endif::server[]
 
 ## Common Mistakes to Avoid
 
-1. Passive voice constructions
-2. Wordy phrases like "in order to", "at this time", "due to the fact that"
-3. Hedging words like "should", "might", "perhaps" when being definitive
-4. Contractions
-5. Missing Oxford commas
-6. Periods at end of sentences with URLs/code
-7. Gender-biased language
-8. Missing alt text on images
-9. Links without descriptive text
-10. Inline code in headings
-11. More than 3 commas in a sentence
-12. Sentences over 25 words (affects readability)
-13. Missing page attributes (`:page-platform:`, `:page-audience:`, `:page-description:`, `:experimental:`)
-14. Not using appropriate page templates for new content
-15. Using xrefs without verifying the target file exists and path is correct
-16. **Committing without running Vale and fixing linting errors**
-17. Using AsciiDoc underscore heading IDs (`<<_install_circleci_agent_skills>>`) instead of the site kebab-case ID (`<<install-circleci-agent-skills>>`)
-18. Unnecessary semicolons (prefer a period or a comma)
-19. En dashes, or dashes used to separate an item and its description
-20. Documenting planned or future behavior, such as "will be supported from v5.0"
-21. Paragraphs dense with inline code or literal values that should be a bulleted list
-22. A date at the end of a sentence about a change, so it reads as when the action happens
-23. A numbered list for alternatives the reader chooses between
-24. `TODO` notes, or descriptions of history such as "previously" or "now supports", left in a page or schema
+Vale (rules in `styles/`) catches most wording and punctuation problems. Watch for the ones it cannot:
+
+1. Contractions
+2. Periods at the end of sentences that end in a URL or code
+3. Missing page attributes (`:page-platform:`, `:page-audience:`, `:page-description:`, `:experimental:`), or not starting a new page from a template
+4. Xrefs to files that do not exist
+5. Underscore heading IDs (`<<_install_circleci_agent_skills>>`) instead of the site kebab-case ID (`<<install-circleci-agent-skills>>`)
+6. Semicolons, en dashes, or dashes that separate an item from its description
+7. Documenting planned or future behavior, such as "will be supported from v5.0"
+8. Paragraphs dense with inline code or literal values that should be a bulleted list
+9. A date at the end of a sentence about a change, so it reads as when the action happens
+10. A numbered list for alternatives the reader chooses between
+11. `TODO` notes, or descriptions of history such as "previously" or "now supports", left in a page or schema
+12. **Committing without running Vale and fixing errors**
 
 ## AsciiDoc Validation Rules
 - Close all attribute blocks properly
@@ -690,173 +469,49 @@ endif::server[]
 
 ## Linting and Validation
 
-The CircleCI docs use automated linting to enforce style rules and catch common errors. Understanding these tools helps you write docs that pass validation on the first try.
-
-**REQUIRED FOR AI AGENTS**: When creating or editing documentation pages, you MUST:
-
-1. **Run Vale locally before committing** (recommended for both cloud and local agents)
-2. Fix all error-level violations (not just warnings)
-3. Verify the page passes Vale validation
-4. Never commit documentation with linting errors
-
-This is not optional - Vale errors will cause CI failures and block PRs.
+Vale (rules in `styles/`, configuration in `.vale.ini`) and the build enforce most mechanical rules, so this guide does not restate them. **Run Vale locally before committing and fix all error-level violations.** Vale errors fail the `lint` CI job and block the PR. Do not request review until they are resolved.
 
 ### Agent Environment Context
 
-AI agents run in two types of environments:
-
-- **Cloud Agents** (started via `@cursor` in Linear/GitHub): Run in isolated cloud VMs without access to your local tools, credentials, or CircleCI CLI. Must install Vale locally (see below).
-
-- **Local Agents** (started via Cursor Desktop or Claude Code CLI): Run on your local machine with access to CircleCI CLI, MCP servers, and local credentials. Can use CircleCI CLI for checking runs, but running Vale locally is still recommended.
-
-**Best Practice**: Regardless of environment, install and run Vale locally before pushing changes. This catches errors immediately without waiting for CI.
+- **Cloud agents** (started via `@cursor` in Linear or GitHub) run in isolated VMs without your local tools, credentials, or the CircleCI CLI. Install Vale yourself.
+- **Local agents** (Cursor Desktop or Claude Code CLI) have the CircleCI CLI, MCP servers, and local credentials. Still run Vale locally.
 
 ### Installing Vale
 
-**Match the version CI uses.** The `lint` job runs the `jdkato/vale:latest` Docker image, so CI tracks the newest Vale release. Install the latest version locally rather than pinning an old one.
-
-macOS:
+CI runs the `jdkato/vale:latest` image, so install the latest Vale. On macOS, `brew install vale` (or `brew upgrade vale`). On Linux, including cloud agents:
 
 ```bash
-brew install vale        # or: brew upgrade vale
-vale --version
-```
-
-Linux, including cloud agents:
-
-```bash
-# Install the latest Vale release, matching CI
 VALE_VERSION=$(curl -sL https://api.github.com/repos/vale-cli/vale/releases/latest | grep -o '"tag_name": *"v[^"]*' | cut -d'v' -f2)
 curl -sL "https://github.com/vale-cli/vale/releases/download/v${VALE_VERSION}/vale_${VALE_VERSION}_Linux_64-bit.tar.gz" -o /tmp/vale.tar.gz
-tar -xzf /tmp/vale.tar.gz -C /tmp
-sudo mv /tmp/vale /usr/local/bin/
-vale --version
-
-# Install asciidoctor (required for Vale to parse AsciiDoc files)
-sudo apt-get update && sudo apt-get install -y asciidoctor
+tar -xzf /tmp/vale.tar.gz -C /tmp && sudo mv /tmp/vale /usr/local/bin/
+sudo apt-get update && sudo apt-get install -y asciidoctor   # Vale needs it to parse AsciiDoc
 ```
 
-### Syncing Vale packages
+Then run `vale sync` once, and again whenever `.vale.ini` changes. Without it the packaged rules do not load and local results differ from CI.
 
-`.vale.ini` declares an external package under `Packages`. Run `vale sync` once after installing, and again whenever `.vale.ini` changes:
+### Running Vale
 
 ```bash
-vale sync
+vale docs/guides/modules/toolkit/pages/your-file.adoc          # a file or a directory
+git diff --cached --name-only | grep '\.adoc$' | xargs vale   # staged files
 ```
 
-CI runs this before every lint. If you skip it, the packaged rules never load locally and your run reports fewer problems than CI does.
-
-### If your results do not match CI
-
-A local run that disagrees with the `lint` job is almost always a version or package mismatch, not a flaky rule. Symptoms include rules firing locally but not in CI, or the reverse, on the same commit.
-
-Check in this order:
-
-1. `vale --version` against the version CI printed in the `lint` job output.
-2. `vale sync`, in case the packaged rules are missing or stale.
-
-Treat CI as authoritative. Before concluding that a rule is wrong or that an alert is a false positive, reproduce it on the same version CI ran.
-
-### Vale Linter
-
-Vale is a syntax-aware linter that enforces style rules defined in the `styles/` directory. It checks for grammar, style violations, and CircleCI-specific conventions.
-
-**Running Vale locally:**
-
-If you have Vale installed:
-
-```bash
-# Check a specific file
-vale docs/guides/modules/toolkit/pages/your-file.adoc
-
-# Check all files in a directory
-vale docs/guides/modules/toolkit/pages/
-
-# Check staged files before commit
-git diff --cached --name-only | grep '.adoc$' | xargs vale
-```
-
-If Vale is not installed, use the CircleCI CLI method below instead.
-
-**Vale configuration location:**
-- Main config: `.vale.ini`
-- Style rules: `styles/` directory
-- Custom CircleCI rules: `styles/CircleCI/`
-
-**Running Vale locally with CircleCI CLI:**
-
-Local agents with CircleCI CLI access can check Vale errors from recent pipeline runs as an alternative:
-
-```bash
-# Get the latest run for your current branch
-circleci run get
-
-# Watch a running pipeline in real-time
-circleci run watch
-
-# Get job output from the vale/lint job
-# First, get the run to find the job UUID, then:
-circleci job output get <job-uuid>
-
-# Or find the lint job and get its output in one command:
-circleci run get --json --jq '.workflows[].jobs[] | select(.name | contains("lint")) | .id' | xargs -I {} circleci job output get {}
-```
-
-**Note**: This requires CircleCI CLI authentication and is only available in local agent environments. Vale local validation is still preferred as it catches errors before pushing to CI.
-
-For more CircleCI CLI commands, see the link:https://cli.circleci.com/reference/[CircleCI CLI Reference].
-
-**Checking Vale results in CI:**
-
-If you prefer to check CI results after pushing:
-
-1. Go to your PR on GitHub
-2. Scroll to the bottom and find the `ci/circleci: lint` check
-3. Click "Details" to view the Vale output in CircleCI
-4. Fix any errors shown and push updates
-
-Do not request review until all Vale errors are resolved.
-
-**Automated Vale error fixing:**
-
-When asked to fix Vale errors, use the vale-linter skill located at `skills/vale-linter/SKILL.md`. This skill automates the workflow of:
-- Running Vale to identify error-level issues (not warnings or suggestions)
-- Applying fixes while preserving AsciiDoc formatting
-- Creating individual pull requests per file for easier review
-
-To use: "Fix vale errors in [file or directory]" or "Run vale on [file] and create a PR"
+CI is authoritative. If a local run disagrees with the `lint` job, compare `vale --version` with the `lint` output and run `vale sync` before concluding a rule is wrong. Local agents with the CircleCI CLI can read the CI result with `circleci run get`, then `circleci job output get <job-uuid>`. On GitHub, open the `ci/circleci: lint` check. To fix many errors at once, use `skills/vale-linter/SKILL.md`.
 
 ### AsciiDoc Validation
 
-In addition to Vale, the build process validates AsciiDoc syntax:
-- Broken xrefs (links to non-existent pages)
-- Unlisted pages (pages not in `nav.adoc`)
-- Invalid attribute syntax
-- Malformed code blocks or tables
-
-**Running validation locally:**
-
-```bash
-# Preview with local dev server (shows validation warnings)
-npm run start:dev
-
-# Full build (catches all errors)
-npm run build:docs
-```
+The build also catches broken xrefs, unlisted pages (not in `nav.adoc`), invalid attributes, and malformed code blocks or tables. `npm run start:dev` shows warnings and `npm run build:docs` catches all errors.
 
 ### Pre-commit Checklist
 
 Before committing documentation changes:
 
-1. ✅ **REQUIRED**: Run Vale locally and fix all error-level violations (recommended for all agents). Confirm `vale --version` matches CI and that you have run `vale sync`, or your results will not match the `lint` job
-2. ✅ Preview locally to check formatting and links
-3. ✅ Verify all xrefs point to existing files, and that heading hashes use kebab-case of the heading (not `_underscore_ids`)
-4. ✅ Check `:page-description:` is 70-160 characters
-5. ✅ Ensure link text uses title case
-6. ✅ Confirm page is added to `nav.adoc` if new
-7. ✅ **REQUIRED**: Run `npm run check:metadata` and fix any page attribute errors (see Page Attributes section)
-
-**Alternative for local agents**: If CircleCI CLI is available and authenticated, you can also check Vale errors from CI runs using `circleci run get` and `circleci job output get`, but running Vale locally is still the recommended approach.
+1. ✅ **REQUIRED**: Run Vale locally and fix all error-level violations. Confirm `vale --version` matches CI and that you have run `vale sync`, or your results will not match the `lint` job
+2. ✅ **REQUIRED**: Run `npm run check:metadata` and fix any page attribute errors. It also enforces the `:page-description:` length
+3. ✅ Preview locally to check formatting and links
+4. ✅ Verify all xrefs point to existing files, and that heading hashes use kebab-case of the heading (not `_underscore_ids`)
+5. ✅ Confirm the page is added to `nav.adoc` if new
+6. ✅ If you add or change code samples that pin an orb or `cimg` version, or name a resource class, machine image, or Xcode version, run `node scripts/check-code-versions.js <files>` and fix what it reports, unless the example needs it
 
 ## Documentation Architecture
 

@@ -28,14 +28,22 @@ The following _admonitions_ are available. Admonitions create a visual separatio
 * Caution
 * Warning
 
+Use admonitions sparingly. If every paragraph is important, nothing is. Keep each one short, and if a note runs long, make it its own section.
+
 [#when-to-use-each-type]
 === When to use each type
 
-* `note`: Use to add some supplementary information to a section or point that needs highlighting to draw the reader's attention.
-* `tip`: Use to add some guidance on how to carry out a step or how to act on some advice contained within the section.
-* `important`: This admonition type is not used often in CircleCI docs. Consider whether one of the other options is a better fit before using.
-* `caution`: Use to make the reader aware they need to be careful when acting on some advice.
-* `warning`: Use to indicate that there are dangers or consequences associated with some information or steps.
+* `tip`: A step has an optional shortcut or efficiency hint.
+* `note`: You have an important point that does not fit neatly into the flow. Also use a note when a feature is in beta or subject to change.
+* `important`: Key details could lead to extra work if missed. Use this type sparingly.
+* `caution`: A setting or action might have unintended consequences, or there is a security concern the reader must be aware of.
+* `warning`: An action cannot be undone, such as data loss or a security breach.
+
+[#when-not-to-use-an-admonition]
+=== When not to use an admonition
+
+* A procedure to follow to avoid future issues is a best practice. Put it in the main text.
+* A known limitation that affects what the reader can expect belongs in a limitations section.
 
 [#admonition-syntax]
 === Admonition syntax

@@ -9,17 +9,22 @@ Reviews CircleCI documentation pages for quality, clarity, and adherence to styl
 
 **What it checks:**
 - Tone and audience appropriateness
-- "Why" and "how" coverage
+- Purpose ("why" and "how", and the opening value statement)
 - Heading clarity and structure
-- Code example self-containment
-- Information architecture
+- Code examples: self-contained, with current image and orb versions
+- Information architecture and admonition use
 - Section introductions
 - Consistency (internal and with related docs)
-- Repetition and flow
-- Value proposition
+- Repetition
+- Flow and structure, including Prerequisites on how-to pages
 - Partial and example reuse (hand-written content that should use, or become, a shared partial or example)
 
 **Output:** Saves a markdown report to the repository root as `content-review-[page-name].md`
+
+### contributor-pr-review
+Reviews a contributor's pull request that adds a new page or updates existing content. Checks CI results, the PR as a whole, new-page requirements (template, nav, xrefs, images) and changed sections of updated pages, and lists technical claims that need engineering review. Uses the content-review dimensions and `AGENTS.md` rules instead of repeating them.
+
+**Output:** Saves a markdown report to the repository root as `pr-review-[number].md`. It never posts to GitHub.
 
 ### vale-linter
 Runs the Vale prose linter on CircleCI documentation files to identify and fix style errors, then creates pull requests for review.
@@ -53,6 +58,7 @@ If you're actively developing skills, symlink them so changes sync automatically
 ```bash
 # From the repository root
 ln -s "$(pwd)/skills/content-review" ~/.claude/skills/content-review
+ln -s "$(pwd)/skills/contributor-pr-review" ~/.claude/skills/contributor-pr-review
 ln -s "$(pwd)/skills/vale-linter" ~/.claude/skills/vale-linter
 ln -s "$(pwd)/skills/partials" ~/.claude/skills/partials
 ln -s "$(pwd)/skills/kapa-docs-review" ~/.claude/skills/kapa-docs-review
@@ -75,11 +81,22 @@ Once installed, Claude Code will automatically trigger skills when relevant, or 
 ```
 
 The skill will:
-1. Analyze the page across 11 quality dimensions
+1. Analyze the page across its quality dimensions
 2. Check 3-5 related pages for consistency
 3. Flag hand-written content that should use, or become, a shared partial or example (see the partials skill below)
 4. Generate a prioritized report
 5. Save the report as `content-review-[page-name].md` in the repo root
+
+### contributor-pr-review
+
+**Automatic triggering:**
+- "Review PR 1234"
+- "Is this contributor's docs PR ready to merge?"
+
+**Explicit invocation:**
+```
+/contributor-pr-review 1234
+```
 
 ### vale-linter
 
@@ -152,4 +169,4 @@ When creating or modifying skills:
 
 - [Claude Code Documentation](https://docs.anthropic.com/claude/docs/claude-code)
 - [Model Context Protocol (MCP)](https://modelcontextprotocol.io/)
-- CircleCI Documentation Style Guide: `AGENTS.md` in this repository
+- CircleCI Documentation Style Guide: `AGENTS.md` in this repository (agents) and `docs/contributors/modules/docs-style/` (humans). Keep them in step.

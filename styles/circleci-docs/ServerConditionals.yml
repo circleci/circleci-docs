@@ -1,0 +1,24 @@
+extends: script
+message: "Test only the `server` attribute with ifdef or ifndef. Do not test a `cloud` attribute, use ifeval, or wrap page attributes in a conditional. See the Cloud and Server section of AGENTS.md."
+level: error
+scope: raw
+# A script rule reports only the directive keyword. An existence rule would
+# match "cloud" or "server", which the Docs vocabulary accepts and so silences.
+script: |
+  text := import("text")
+  matches := []
+
+  patterns := [
+    "(?m)^(ifn?def)::cloud",
+    "(?m)^(ifeval)::",
+    "(?m)^(ifn?def)::server\\[\\]\\n:page-"
+  ]
+
+  for p in patterns {
+    found := text.re_find(p, scope, -1)
+    if found != undefined {
+      for m in found {
+        matches = append(matches, {begin: m[1].begin, end: m[1].end})
+      }
+    }
+  }
