@@ -6,117 +6,59 @@ description: >
   for style compliance, evaluate page quality, or wants feedback on docs pages. Also trigger when
   the user mentions content quality, readability issues, or asks "how does this page look" or
   "is this page good." Even if they just reference a docs file path and ask for a review or
-  feedback, use this skill.
+  feedback, use this skill. For a contributor's pull request, use contributor-pr-review instead.
 ---
 
-# CircleCI Documentation Content Review Skill
+# CircleCI Documentation Content Review
 
-You are a documentation quality reviewer for CircleCI. Your role is to analyze documentation pages and provide a narrative-style report with prioritized, actionable recommendations.
+You review CircleCI documentation pages and write a narrative report with prioritized, actionable recommendations. `AGENTS.md` is the source of truth for style rules. This skill says what to check and how to report it. It does not restate the rules.
 
 ## Input
 
-The user will provide a file path to a CircleCI documentation page (an `.adoc` file in the `docs/` directory).
+A path to an `.adoc` file under `docs/`.
 
-## Your Process
+## Process
 
-### Step 1: Read Required Context
+### 1. Read context
 
-1. **Read the target documentation page** - the file the user specified
-2. **Read AGENTS.md** - located at `/Users/rosieyohannan/github/circleci-docs/AGENTS.md` for complete style guidelines
-3. **Identify the page type and audience** - check the `:page-platform:` attribute:
-   - If it contains "Server" and the content is clearly for system administrators, this is a **Server Admin page** (written for system administrators)
-   - Otherwise, it's a **general documentation page** (written for junior engineers)
+1. Read the target page.
+2. Read `AGENTS.md` in the repository root.
+3. Set the audience from `:page-audience:`. `admin` means system administrators (professional, technical tone). Anything else means a junior engineer (friendly, authoritative tone).
 
-### Step 2: Find Related Documentation
+### 2. Find related pages
 
-To check for consistency across the documentation set, identify 3-5 related pages:
+Find 3-5 related pages: grep for key terms, follow the page's xrefs, and prefer the same module. Read them. Note how they name the same concepts, whether explanations conflict, and which example patterns they use.
 
-**How to find related pages:**
-- Use the page's subject matter to search for related content
-- Look for pages that cover related features, similar workflows, or connected concepts
-- Use Grep to search for key terms from the page you're reviewing
-- Check pages cross-referenced from the target page (xrefs)
-- Prioritize pages in the same module or component
+### 3. Review across 10 dimensions
 
-Read these related pages to understand:
-- How similar concepts are explained elsewhere
-- Terminology used for the same features
-- Patterns in structure and examples
-- Whether explanations conflict or align
+1. **Tone and audience**: Tone and technical depth match the audience.
+2. **Purpose**: The first paragraph says why to read the page and what problem it solves. The page covers both why (value, when to use) and how (steps).
+3. **Headings**: Headings describe their section, run in a logical sequence, and skip no levels. Flag vague ones such as "Overview" or "Details".
+4. **Code examples**:
+   - Each block is self-contained and working. Key explanation is in comments inside the block, because an agent may retrieve only the block.
+   - Pinned versions are current. Run `node scripts/check-code-versions.js <file>` and report what it finds. It is advisory: an example may pin an older version on purpose, and a lookup it cannot complete is unverified, not current.
+5. **Information architecture and admonitions**:
+   - Essential information is in the main text, not in an admonition or a tab. Agents often miss both.
+   - Check every admonition against the Admonitions section of `AGENTS.md`. Flag the wrong type, long ones that should be a section, best practices or limitations that should not be an admonition, and overuse.
+6. **Section introductions**: Each major section opens with context that stands alone.
+7. **Consistency**:
+   - Internal terminology and patterns are consistent, and they match the related pages.
+8. **Repetition**: Flag repeated explanations that serve no purpose.
+9. **Flow and structure**: The order makes sense and transitions are clear. A how-to page has a Prerequisites section before the first step.
+10. **Partial and example reuse**:
+    - Search `docs/guides/modules/ROOT/partials/` and `docs/guides/modules/ROOT/examples/` (Grep or Glob) rather than guessing.
+    - Flag hand-written prose or config that an existing partial or example already covers, and say which one should replace it.
+    - Flag generic, reusable content as a candidate for a new partial or example, especially if it appears on another page.
+    - Only surface the opportunity. Hand extraction and replacement to `skills/partials/SKILL.md`.
 
-### Step 3: Conduct the Review
+Do not flag these, because they are correct:
 
-Evaluate the page across these 11 dimensions:
+- Title case in xref link text pointing at a sentence-case heading. Vale requires it.
+- Anything Vale or `check-metadata` already enforces, such as xref case, the configuration file name, Cloud and Server directive mistakes, and page attributes. Read their output instead. Focus on content quality.
 
-#### 1. **Tone & Audience**
-- **General pages**: Should have a friendly, authoritative tone suitable for a junior engineer
-- **Server Admin pages**: Should have a professional, technical tone suitable for system administrators
-- Flag where content diverges from these expectations
-- Check if technical depth matches the target audience
+### 4. Write and save the report
 
-#### 2. **Why & How**
-- **First paragraph**: Must answer "why" - why should someone read this page? What problem does it solve?
-- **Full page**: Must cover both "why" (purpose, value, when to use) and "how" (implementation, steps)
-- Flag if either is missing or unclear
-
-#### 3. **Headings**
-- Headings are navigation signals for humans and agents
-- Check that all headings clearly describe the section content
-- Headings should follow a logical sequence that tells a story
-- Flag vague headings like "Overview" or "Details" without context
-- Check for proper heading hierarchy (no skipped levels)
-
-#### 4. **Code Examples**
-- Code examples should be self-contained - an agent retrieving just the code block should understand it
-- Key information should be in comments within the code block, not just in surrounding text
-- Flag code blocks where descriptions only exist outside the block
-- Check that examples are complete and working (not fragments)
-
-#### 5. **Information Architecture**
-- Key information should NOT be buried in sidebars (NOTE, TIP, CAUTION boxes) or tabs
-- Agents often don't see these elements
-- Flag critical information that should be in the main text but is in a sidebar/tab
-- Warnings and tips are OK for supplementary info, not essential content
-
-#### 6. **Section Introductions**
-- Each major section should have an introduction that stands alone
-- If an agent retrieves just one section, it should have context
-- Flag sections that jump straight into details without context
-- Check that introductions explain what the section covers and why it matters
-
-#### 7. **Consistency**
-- **Internal consistency**: Check the page uses consistent terminology, patterns, and style
-- **External consistency**: Compare against the 3-5 related pages you found
-  - Do they use the same terms for the same concepts?
-  - Are explanations aligned or conflicting?
-  - Do code examples follow similar patterns?
-- Flag terminology mismatches, conflicting explanations, or divergent patterns
-
-#### 8. **Repetition**
-- Flag content that repeats unnecessarily
-- Some repetition is acceptable for clarity, but redundant sections waste reader time
-- Check if the same explanation appears multiple times without purpose
-
-#### 9. **Flow & Structure**
-- Evaluate if the page organization makes sense
-- Check if readers could lose their way due to confusing structure
-- Flag abrupt transitions, missing connective text, or illogical ordering
-- Consider if prerequisites are explained before they're needed
-
-#### 10. **Value Proposition**
-- First paragraph must clearly state the use case and value
-- Reader (human or agent) should know immediately if this page is relevant
-- Flag if the opening is vague, overly technical, or doesn't answer "why read this"
-
-#### 11. **Partial and Example Reuse**
-- Check hand-written prose (nav steps, notes, tips, FAQs, resource tables) against `docs/guides/modules/ROOT/partials/`. Flag it if an existing partial already covers the same content and should replace it.
-- Check hand-written YAML or config blocks against `docs/guides/modules/ROOT/examples/`. Flag it if an existing example already covers the same snippet and should replace it.
-- Flag hand-written prose or code that looks generic or reusable (not page-specific) as a candidate for a **new** partial or example, especially if you find the same or near-identical content on another page during Step 2.
-- Do not perform the search, extraction, or replacement yourself. Follow `skills/partials/SKILL.md` for that workflow; this review only surfaces the opportunity.
-
-### Step 4: Generate and Save the Report
-
-Generate a narrative-style report with this structure:
+Use this structure:
 
 ```markdown
 # Content Review: [Page Title]
@@ -126,122 +68,36 @@ Generate a narrative-style report with this structure:
 **Review Date:** [today's date]
 
 ## Executive Summary
-
-[2-3 sentences summarizing the overall quality and the most important findings]
+[2-3 sentences: overall quality and the most important findings]
 
 ## Priority Recommendations
-
-[List the top 3-5 most important issues to fix, in order of priority. For each:]
-
-### [Priority level]: [Issue title]
-
-**Category:** [Which of the 11 categories this relates to]
-
-**Issue:** [Clear description of the problem]
-
-**Impact:** [Why this matters - how it affects readers or agents]
-
-**Recommendation:** [Specific, actionable advice on how to fix it]
-
-**Example:** [If helpful, show a before/after or point to specific line numbers]
-
----
+### [Priority]: [Issue title]
+**Category:** [dimension]
+**Issue:** [what is wrong, quoting text or line numbers]
+**Impact:** [effect on readers or agents]
+**Recommendation:** [specific fix]
 
 ## Detailed Findings
-
-[Go through each of the 11 categories. For each category, either:]
-- ✅ **[Category Name]**: [Brief note on why this passes]
-- ⚠️ **[Category Name]**: [Detailed findings of issues]
-
-[Keep this section focused on issues not already covered in Priority Recommendations]
-
----
+[One line per dimension: ✅ passes, or ⚠️ findings not already covered above]
 
 ## Consistency Check
-
-**Related pages reviewed:**
-- [List the 3-5 related pages you checked]
-
-**Findings:**
-[Describe any consistency issues or note that terminology/patterns align well]
-
----
+**Related pages reviewed:** [3-5 pages]
+**Findings:** [issues, or note that they align]
 
 ## Positive Highlights
-
-[Call out 2-3 things the page does particularly well. This helps writers understand what to preserve while making improvements.]
-
----
+[2-3 things to preserve]
 
 ## Overall Assessment
-
-[Final paragraph with overall quality rating and encouragement or next steps]
+[Final paragraph and next steps]
 ```
 
-### Report Writing Guidelines
+**Priorities:**
 
-**Tone:**
-- Be constructive and specific, not harsh
-- Prioritize issues by impact, not by category
-- Celebrate what works well
-- Make recommendations actionable - tell them what to do, not just what's wrong
+- **Critical**: Breaks comprehension or accessibility (missing "why", code without context, essential information buried).
+- **High**: Significant usability problems (poor headings, confusing flow, major inconsistencies, a how-to with no Prerequisites, outdated image or orb versions that break the example).
+- **Medium**: Reduces quality (minor inconsistencies, repetition, wrong admonition type, an existing partial or example that should replace hand-written content).
+- **Low**: Nice to have (content that could become a new partial or example).
 
-**Priority Levels:**
-- **Critical**: Issues that break comprehension or accessibility (missing "why", code without context, buried essential info)
-- **High**: Issues that significantly impact usability (poor headings, confusing flow, major inconsistencies)
-- **Medium**: Issues that reduce quality (minor inconsistencies, unnecessary repetition, weak value proposition, a partial/example that should replace hand-written content)
-- **Low**: Nice-to-have improvements (hand-written content that is a good candidate for a *new* partial or example, but nothing is broken today)
+Be constructive and specific. Recommend, do not rewrite. If there are no related pages, say so and still complete the other dimensions.
 
-**Specificity:**
-- Reference specific headings, paragraphs, or line numbers where possible
-- Quote problematic text when helpful
-- Suggest concrete alternatives
-
-### Step 5: Save the Report
-
-After generating the report, save it to a file in the repository root directory:
-
-**File naming convention:**
-- Extract the page filename (without `.adoc` extension) from the path
-- Prepend with `content-review-`
-- Use `.md` extension
-- Example: `docs/guides/modules/test/pages/rerun-failed-tests.adoc` → `content-review-rerun-failed-tests.md`
-
-**File location:**
-- Save to `/Users/rosieyohannan/github/circleci-docs/` (the repository root)
-
-**After saving:**
-- Inform the user where the report has been saved
-- Provide the full file path for easy reference
-
-## Example Usage
-
-User: "Review docs/guides/modules/getting-started/pages/hello-world.adoc"
-
-You:
-1. Read the target page
-2. Read AGENTS.md
-3. Check :page-platform: to determine audience
-4. Find 3-5 related getting-started pages using Grep/Glob
-5. Read those related pages
-6. Analyze all 11 dimensions
-7. Generate the narrative report with prioritized recommendations
-8. Save the report as `content-review-hello-world.md` in the repository root
-9. Inform the user where the report has been saved
-
-## Important Notes
-
-- Focus on substance over style - prioritize comprehension issues over minor formatting
-- Consider both human and AI agent readability
-- Remember that agents often retrieve just one section or code block, so each should be self-contained
-- Use the full context from AGENTS.md - it contains detailed style rules beyond what's summarized here
-- If you can't find related pages, note that in the consistency section but still complete the other 10 categories (Partial and Example Reuse does not depend on finding related pages)
-- Always read the actual related pages - don't guess at consistency without evidence
-- For the Partial and Example Reuse check, actually search `docs/guides/modules/ROOT/partials/` and `docs/guides/modules/ROOT/examples/` (Glob/Grep) rather than guessing whether something already exists
-
-## What This Skill Is NOT
-
-- This is not a Vale linter replacement - focus on content quality, not grammar/style nitpicks
-- This is not a full copyedit - identify patterns and priorities, not every minor issue
-- This is not a rewrite - provide recommendations, not rewritten content
-- This is not the partials skill - it flags reuse and extraction opportunities but does not search categories, create partials/examples, or edit other pages. Hand that off to `skills/partials/SKILL.md`
+Save the report to the repository root as `content-review-<page-filename-without-extension>.md`, then tell the user the full path.

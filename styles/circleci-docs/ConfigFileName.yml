@@ -1,0 +1,16 @@
+extends: script
+message: "A CircleCI configuration file can have any name. Write 'CircleCI configuration file, commonly stored as `.circleci/config.yml`' instead of saying it must have this name."
+level: warning
+scope: raw
+# A script rule reports only the leading phrase. The Docs vocabulary accepts
+# `.circleci/config.yml`, so an existence rule matching it would be silenced.
+script: |
+  text := import("text")
+  matches := []
+
+  found := text.re_find("(?i)\\b((?:must be|named|called)(?:\\s+(?:named|called))?)\\s+`?\\.circleci/config\\.yml", scope, -1)
+  if found != undefined {
+    for m in found {
+      matches = append(matches, {begin: m[1].begin, end: m[1].end})
+    }
+  }
