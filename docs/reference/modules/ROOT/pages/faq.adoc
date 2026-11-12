@@ -21,8 +21,8 @@ This page answers frequently asked questions about the following CircleCI topics
 | <<migration>>
 | <<pipelines>>
 
-| <<architecture>>
 | <<workflows>>
+|
 
 | <<orbs>>
 | <<dynamic-configuration>>
@@ -41,11 +41,6 @@ include::guides:ROOT:partial$faq/general-faq-snip.adoc[]
 == Migration
 
 include::guides:ROOT:partial$faq/migration-faq-snip.adoc[]
-
-[#architecture]
-== Architecture
-
-include::guides:ROOT:partial$faq/architecture-faq-snip.adoc[]
 
 [#orbs]
 == Orbs
