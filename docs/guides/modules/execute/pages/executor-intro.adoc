@@ -126,7 +126,7 @@ ifndef::server[]
 [#macos]
 == macOS
 
-To access the macOS execution environment, use the `macos` executor and specify an image using the `xcode` key. For a full list of macOS images, see the link:https://circleci.com/developer/machine/image/macos[CircleCI Developer Hub].
+To access the macOS execution environment, use the `macos` executor and specify an image using the `xcode` key. For a full list of macOS images, see the link:https://circleci.com/developer/machine/image/xcode[CircleCI Developer Hub].
 
 NOTE: If you want to run a macOS build on CircleCI Server, you will need to use xref:runner:ROOT:runner-overview.adoc[Self-hosted Runner].
 
