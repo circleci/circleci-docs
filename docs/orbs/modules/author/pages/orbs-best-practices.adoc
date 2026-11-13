@@ -209,11 +209,11 @@ steps:
 [#choose-between-a-command-and-a-job]
 ==== Choose between a command and a job
 
-The answer might be both, but it depends on the task you want to accomplish.
+Use a command, a job, or both, depending on the task.
 
-An orb xref:use:orb-concepts.adoc#commands[command] can be used by the user, or by the orb developer, to perform an action within a job. The command has no knowledge of the job it is in, because the user can use it however they wish. A command may be useful, for example, to automatically install a CLI application, or to install and authenticate it.
+An orb xref:use:orb-concepts.adoc#commands[Command] can be used by the user, or by the orb developer, to perform an action within a job. The command has no knowledge of the job it is in, because the user can use it however they wish. A command may be useful, for example, to automatically install a CLI application, or to install and authenticate it.
 
-A xref:use:orb-concepts.adoc#jobs[job] defines a collection of steps and commands within a specific execution environment. A job is highly opinionated, because it generally chooses the execution platform to run on and which steps to run. Jobs can automate tasks such as deployments. A deployment job might:
+A xref:use:orb-concepts.adoc#jobs[Job] defines a collection of steps and commands within a specific execution environment. A job is highly opinionated, because it generally chooses the execution platform to run on and which steps to run. Jobs can automate tasks such as deployments. A deployment job might:
 
 * Select a known execution platform, such as Python.
 * Check out the user's code.
@@ -376,7 +376,7 @@ steps:
 [#require-the-user-to-add-an-environment-variable]
 ==== Require the user to add an environment variable
 
-Create a parameter for the environment variable name, even if it is a statically named environment variable the user must not change. Then, assign it the correct default value. In the parameter description, tell the user if the value must not be changed. Either way, consider instructing the user on how they can obtain their API key.
+Create a parameter for the environment variable name, even if it is a statically named environment variable the user must not change. Then, assign it the correct default value. In the parameter description, tell the user if the value must not be changed. Consider instructing the user on how they can obtain their API key.
 
 Consider validating required environment variables. See <<commands,Commands>> for more information.
 
