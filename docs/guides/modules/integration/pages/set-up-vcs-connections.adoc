@@ -134,7 +134,10 @@ NOTE: The Cursor Origin integration is in beta.
 --
 ====
 
-== Can multiple CircleCI organizations connect to the same GitHub organization?
+[#one-github-organization-per-circleci-organization]
+== One GitHub organization per CircleCI organization
+
+A CircleCI organization connects to only one GitHub organization or personal account. For example, a `github` type organization maps to one GitHub organization.
 
 A GitHub organization can only be connected via CircleCI GitHub App to a single CircleCI organization.
 
@@ -142,7 +145,3 @@ If you attempt to connect your CircleCI organization to a GitHub organization th
 
 .GitHub settings showing the CircleCI App integration settings page.
 image::guides:ROOT:github-app-configuration-page.png[Create a project]
-
-== Can one CircleCI organization connect to more than one GitHub organization?
-
-No. A CircleCI organization connects to only one GitHub organization or personal account. For example, a `github` type organization maps to one GitHub organization.
