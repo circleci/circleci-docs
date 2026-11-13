@@ -149,8 +149,11 @@ Runner jobs count toward your organization's self-hosted runner concurrency limi
 === Machine runner jobs
 
 * Machine runner jobs cannot use CircleCI convenience images or custom Docker images. The job uses the tools installed on the runner host. Ask your admin to add any tools your jobs need, or install them in a job step.
-* Pre-installing tools on the host is the most secure approach, but you must reconfigure the host when your job's dependencies change. Letting jobs install their own tools is more flexible, but jobs then need enough privileges to install them, or must install them in a non-overlapping location such as the working directory.
-* Files from earlier jobs can remain on the host, depending on how your admin configures the runner. Put cleanup steps at the start of a job so it does not depend on what a previous job left behind. A machine runner can give each job a unique working directory and clean it up afterwards, but this is optional, and nothing restricts a job from placing files outside its working directory. Caches that persist on the host can reduce build times, but they trade off reproducibility, can fill the disk over time, and can lead to higher billable usage.
+* Pre-installing tools on the host is the most secure approach, but you must reconfigure the host when your job's dependencies change.
+* Letting jobs install their own tools is more flexible. Jobs then need enough privileges to install tools, or must install them in a non-overlapping location such as the working directory.
+* Files from earlier jobs can remain on the host, depending on how your admin configures the runner. Put cleanup steps at the start of a job so it does not depend on what a previous job left behind.
+* A machine runner can give each job a unique working directory and clean it up afterwards, but this is optional. Nothing restricts a job from placing files outside its working directory.
+* Caches that persist on the host can reduce build times. They trade off reproducibility, can fill the disk over time, and can lead to higher billable usage.
 
 [#container-runner-jobs]
 === Container runner jobs
@@ -172,7 +175,7 @@ For the current list, see the xref:runner:ROOT:runner-overview.adoc#limitations[
 [#circleci-commands-in-runner-jobs]
 === CircleCI commands in runner jobs
 
-In a runner job, `circleci` is an alias of `circleci-agent`, the agent that runs your job. Commands such as test splitting and `circleci-agent step halt` work as they do on CircleCI-hosted compute. To use the full CircleCI CLI in a runner job, install it on the runner host or include it in your image. If a step fails with `circleci: command not found`, see xref:runner:ROOT:troubleshoot-self-hosted-runner.adoc#circleci-command-not-found[Troubleshoot self-hosted runner].
+In a runner job, `circleci` is an alias of `circleci-agent`, the agent that runs your job. Commands such as test splitting and `circleci-agent step halt` work as they do on CircleCI-hosted compute. To use the full CircleCI CLI in a runner job, install it on the runner host or include it in your image. If a step fails with `circleci: command not found`, see xref:runner:ROOT:troubleshoot-self-hosted-runner.adoc#circleci-command-not-found[Troubleshoot Self-Hosted Runner].
 
 [#ssh-reruns]
 === Rerun jobs with SSH

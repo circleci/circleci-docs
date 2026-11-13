@@ -111,7 +111,7 @@ You can check the logs for any of the previous runs using the command `kubectl l
 
 - **Network connectivity issue:** Check the network connectivity of the container agent, especially if the issue is intermittent. The issue can be seen when the container agent has lost network connectivity after claiming the tasks.
 
-We suggest connecting to the pod using the command `kubectl exec --stdin --tty -n circleci < full pod name > -- /bin/sh` and then running a ping test for an extended period of time. We also recommend checking the required connectivity. See xref:runner:ROOT:runner-overview.adoc#network-requirements[Network requirements] for the connectivity a self-hosted runner needs.
+We suggest connecting to the pod using the command `kubectl exec --stdin --tty -n circleci < full pod name > -- /bin/sh` and then running a ping test for an extended period of time. We also recommend checking the required connectivity. See xref:runner:ROOT:runner-overview.adoc#network-requirements[Network Requirements] for the connectivity a self-hosted runner needs.
 
 - **Resources exhaustion:** Check if your pods are reaching their resources limits in the cluster, as the pod could end the job to free up resources. We recommend setting resource limits either within link:https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/[Your `values.yaml`] or within xref:runner:ROOT:container-runner.adoc#resource-class-configuration-custom-pod[Resource Class Configuration].
 
@@ -216,7 +216,7 @@ Verify that all resource class names in your `.circleci/config.yml` match what i
 If `unclaimed_task_count` is greater than `0`, cancel those tasks to free up concurrency for other resource classes.
 
 [#circleci-command-not-found]
-=== The circleci command is not found
+=== CircleCI command not found error
 
 This error appears when a test splitting job step runs `circleci` on a self-hosted runner that does not have the CircleCI CLI installed.
 

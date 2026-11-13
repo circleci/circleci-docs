@@ -63,9 +63,10 @@ A self-hosted runner that has not contacted CircleCI in 12 hours does not show o
 
 To check from the host itself, run:
 
-```bash
-ps aux | pgrep -f circleci-launch-agent
-```
+[source,console]
+----
+$ ps aux | pgrep -f circleci-launch-agent
+----
 
 If the command returns more than two processes, the machine runner is executing a task. The `grep` process counts as one, and the `circleci-launch-agent` process counts as another.
 

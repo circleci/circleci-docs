@@ -42,7 +42,6 @@ image::runner-overview-diagram.png[CircleCI's machine runner architecture]
 
 Once a self-hosted runner is installed, the runner polls `circleci.com` for work, runs jobs, and returns status, logs, and artifacts to CircleCI.
 
-[#network-requirements]
 == Network requirements
 
 A self-hosted runner needs outbound HTTPS connections to `runner.circleci.com` and `circleci-binary-releases.s3.amazonaws.com` to receive and execute jobs. No inbound connectivity is required.

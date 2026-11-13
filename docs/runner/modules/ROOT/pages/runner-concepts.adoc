@@ -23,10 +23,9 @@ Optionally, you can give your resource class a description.
 
 Every resource class has one or more **resource class tokens**. CircleCI uses the token to authenticate that the resource class is valid. A resource class token can only claim tasks.
 
-[#tasks]
 == Tasks
 
-A task is the smallest unit of work on CircleCI. A job with xref:guides:optimize:parallelism-faster-jobs.adoc[parallelism] of one is one task. A job with parallelism of _n_, where _n_ is greater than one, creates _n_ tasks.
+A task is the smallest unit of work on CircleCI. A job with xref:guides:optimize:parallelism-faster-jobs.adoc[Parallelism] of one is one task. A job with parallelism of _n_, where _n_ is greater than one, creates _n_ tasks.
 
 NOTE: If you are already using xref:orbs:use:orb-intro.adoc[Orbs], you have an existing namespace. Your self-hosted runner namespace will be the same one you are using for orbs. If you need to change your namespace, https://support.circleci.com/hc/en-us[Contact Support].
 
@@ -68,44 +67,45 @@ Resource classes cannot be used by jobs that are not associated with the organiz
 
 NOTE: Organizations are, by default, limited to claiming only one namespace. This policy is designed to limit name-squatting and namespace noise. If you need to change your namespace, https://support.circleci.com/hc/en-us[contact support].
 
-[#manage-resource-classes-and-tokens]
 == Manage resource classes and tokens
 
 Organization admins in your VCS provider can create and delete resource classes. Any organization user in your VCS provider that the resource class is associated with can view the resource class list with the CLI.
 
 Use the xref:guides:toolkit:circleci-cli.adoc[CircleCI CLI] to manage resource classes and their tokens.
 
-[#delete-a-resource-class]
 === Delete a resource class
 
-Deleting a resource class is permanent. Without `--force`, the command prompts for confirmation and fails while the resource class has tokens. With `--force`, the command skips the prompt and deletes the tokens too, so runners that use them can no longer claim jobs.
+Deleting a resource class is permanent. Without `--force`, the command prompts for confirmation and fails while the resource class has tokens. With `--force`, the command skips the prompt and deletes the tokens too, so runners that use them cannot claim jobs.
 
-```bash
-circleci runner resource-class delete <resource-class> --force
-```
+[source,console]
+----
+$ circleci runner resource-class delete <resource-class> --force
+----
 
 [#create-a-token]
 === Create an additional token
 
 The CLI shows the token value once, when you create the token. You cannot retrieve it afterwards.
 
-```bash
-circleci runner token create <resource-class> --nickname <nickname>
-```
+[source,console]
+----
+$ circleci runner token create <resource-class> --nickname <nickname>
+----
 
-[#delete-a-token]
 === Delete a token
 
-Deleting a token is permanent. It does not delete the resource class. Runners that use the token can no longer claim jobs, but running jobs continue.
+Deleting a token is permanent. It does not delete the resource class. Runners that use the token cannot claim jobs, but running jobs continue.
 
 List the tokens and their IDs:
 
-```bash
-circleci runner token list <resource-class>
-```
+[source,console]
+----
+$ circleci runner token list <resource-class>
+----
 
 Delete the token. Add `--force` to skip the confirmation prompt:
 
-```bash
-circleci runner token delete <token-id>
-```
+[source,console]
+----
+$ circleci runner token delete <token-id>
+----

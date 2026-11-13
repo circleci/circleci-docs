@@ -399,7 +399,6 @@ Additional instructions can be found in our link:https://support.circleci.com/hc
 
 Refer to the link:https://github.com/CircleCI-Public/container-runner-helm-chart[container runner Helm chart]. You can find a full link:https://github.com/circleci-public/container-runner-helm-chart#values[chart values reference] section in the README.
 
-[#concurrent-tasks]
 == Concurrent tasks
 
 Container runner claims and schedules work up to your runner concurrency limit. By default, container runner allows 20 tasks to be scheduled and running concurrently. If your runner concurrency allows more, change the limit with the `agent.maxConcurrentTasks` Helm parameter. The organization's runner concurrency limit is shared with any `machine` self-hosted runners. To find your limit, ask your point of contact at CircleCI, or submit a link:https://support.circleci.com/hc/en-us[support ticket].
@@ -527,14 +526,14 @@ Container runner jobs are eligible for xref:guides:optimize:persist-data.adoc#ma
 
 The same plan-based offerings for self-hosted runner link:https://circleci.com/pricing/#comparison-table[concurrency limits] apply to the container runner. Final pricing and plan availability will be announced closer to the general availability of the offering.
 
-[#architectures]
 == Architectures
 
 Container runner supports amd64 and arm64 Linux, both for container runner itself and for the pods that execute tasks. It supports jobs that use either amd64 or arm64 Docker images, and Kubernetes clusters that use a mixture of amd64 and arm64 nodes.
 
 When you use images built for a specific architecture, configure the resource class to target a node with that CPU architecture. Kubernetes adds node labels automatically that you can use in the resource class pod specification. For more information, see the link:https://kubernetes.io/docs/reference/labels-annotations-taints/[Kubernetes documentation].
 
-```yaml
+[source,yaml]
+----
 agent:
    resourceClasses:
       <amd64 image resource class>:
@@ -551,7 +550,8 @@ agent:
 
       <multiarchitecture image resource class>: # note no nodeSelector is defined for the multiarchitecture image resource class
          token: <multiarchitecture resource class token>
-```
+----
+
 
 [#building-container-images]
 == Building container images
@@ -638,6 +638,6 @@ To apply a custom entrypoint to all jobs using a resource class, configure it in
 == Limitations
 
 * Any known xref:runner-overview.adoc#limitations[Limitation] for the existing self-hosted runner will continue to be a limitation of container agent.
-* Only Kubernetes container environments are supported at this time. Kubernetes and Helm are required, and any Kubernetes provider can be used. Container runner must run within the cluster that it deploys pods to. To run a job in a container without Kubernetes, use xref:install-machine-runner-3-on-docker.adoc[machine runner with Docker installed].
+* Only Kubernetes container environments are supported at this time. Kubernetes and Helm are required, and any Kubernetes provider can be used. Container runner must run within the cluster that it deploys pods to. To run a job in a container without Kubernetes, use xref:install-machine-runner-3-on-docker.adoc[Machine Runner With Docker Installed].
 * xref:guides:execute:building-docker-images.adoc[`setup_remote_docker`] as a command is not supported with container runner.  See <<building-container-images>>.
 * `aws_auth.oidc_role_arn` is not supported on the container runner. You can set up AWS authentication using the `aws_auth` field. More information can be found in the xref:reference:ROOT:configuration-reference.adoc#oidc[Configuration Reference].
