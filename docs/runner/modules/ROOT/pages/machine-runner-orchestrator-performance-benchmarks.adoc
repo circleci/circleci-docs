@@ -586,4 +586,3 @@ Refer to xref:troubleshoot-self-hosted-runner.adoc[Troubleshoot Self-Hosted Runn
 * xref:machine-runner-orchestrator.adoc[Machine Runner Orchestrator Overview]
 * xref:container-runner-performance-benchmarks.adoc[Container Runner Performance Benchmarks]
 * xref:runner-concepts.adoc[Self-Hosted Runner Concepts]
-* xref:runner-faqs.adoc[Self-Hosted Runner FAQ]
