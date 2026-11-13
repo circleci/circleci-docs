@@ -121,11 +121,11 @@ Your sign-in method and VCS provider together determine what kind of CircleCI or
 +
 Set up integrations from menu:Org[VCS Connections]. For steps, see the xref:integration:set-up-vcs-connections.adoc[Set Up VCS Connections] page. You can also set up VCS repository integrations when _creating a project_. You authenticate with your VCS provider as part of that setup. For steps see the xref:create-project.adoc[Create a Project] page.
 * If you sign up or sign in with a **GitHub** social login, CircleCI creates a matching organization for you automatically.
-* If you sign up or sign in with **Bitbucket Cloud**, CircleCI creates a matching organization for you automatically. Every team member joining your org authenticates with Bitbucket _during_ signup, not later.
+* If you sign up or sign in with **Bitbucket Cloud**, CircleCI creates a matching organization for you automatically.
 
 NOTE: GitLab does not offer a social login option. To build GitLab projects, sign up with email and password, then connect GitLab from menu:Org[VCS Connections].
 
-You cannot use these sign-in methods interchangeably for the same account. For example, using a social login after you already have an email and password account creates a new, separate account connected to your VCS provider.
+Whichever way you sign up, you can connect GitHub and Bitbucket Cloud to the same user account from menu:User Settings[Account Integrations]. After that, you can log in with either connected provider and reach the same account. A social login for a provider that is not connected to your user account creates a new, separate account. For details, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#user-accounts[User Accounts] section of the Users, Organizations, and Integrations Guide.
 
 For the full picture of organization types and VCS integrations and how they affect project creation, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
 

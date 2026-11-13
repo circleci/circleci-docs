@@ -9,15 +9,20 @@
 
 This guide explains the concepts of user, organization, and integration in CircleCI. After these concepts are covered, you can find out about the features available to you depending on your organization and pipeline type.
 
+[#user-accounts]
 == User accounts
 
 When you log in to CircleCI you are logging in to your _user account_.
 
 ifndef::server[]
-You can log in to CircleCI using one of the following methods. These methods cannot be used together. For example, if you have an email/password account and then use a social login, this will create a new account connected to your VCS provider:
+You can log in to CircleCI using one of the following methods:
 
 * Email and password. Required for GitLab and Cursor Origin projects. After signing up, connect GitLab from menu:Org[VCS Connections].
 * Social login (GitHub, Bitbucket). GitLab does not offer social login.
+
+Whichever method you use, you can connect GitHub and Bitbucket Cloud to your user account from menu:User Settings[Account Integrations]. Connecting a provider creates your `github` or `bitbucket` organizations. After you connect a provider, logging in with that provider's social login takes you to the same user account. For steps, see the xref:getting-started:create-an-organization.adoc[Create an Organization] page.
+
+A social login for a provider that is not connected to any CircleCI user account creates a new, separate user account. You can connect a GitHub account through the GitHub OAuth app to only one CircleCI user account. To move a GitHub or Bitbucket Cloud connection to another user account, first disconnect it from menu:User Settings[Account Integrations]. Then log in to the other user account and connect it there.
 
 As a CircleCI _user_ you can create and access _organizations_. You can access zero, one, or many organizations. You can create new organizations and/or join an existing organization.
 endif::server[]
@@ -39,7 +44,7 @@ The following table describes user authorization for the different VCS providers
 
 |GitHub OAuth app
 |Displayed in menu:User Settings[Account Integrations], managed in GitHub at link:https://github.com/settings/applications[GitHub settings].
-|Can exist alongside GitHub App authorization.
+|Can exist alongside GitHub App authorization and Bitbucket Cloud OAuth.
 
 |GitHub App
 |If you are not "authorized" you will see a button in the top bar of the web app that prompts you to authorize. Managed in GitHub at link:https://github.com/settings/apps/authorizations[GitHub settings]. Not displayed in menu:User Settings[Account Integrations].
@@ -47,11 +52,11 @@ The following table describes user authorization for the different VCS providers
 
 |Bitbucket Cloud OAuth
 |Displayed in menu:User Settings[Account Integrations], managed in Bitbucket at link:https://bitbucket.org/account/settings/app-authorizations/[Bitbucket settings].
-|Mutually exclusive with other VCS authorization
+|Can exist alongside GitHub OAuth app authorization.
 
 |GitLab
 |Managed in GitLab at link:https://gitlab.com/-/user_settings/applications[GitLab settings]. Not displayed in menu:User Settings[Account Integrations].
-|Mutually exclusive with other VCS authorizations except GitHub App.
+|Connected per organization, in `circleci` type organizations only.
 
 |Cursor Origin
 |Not applicable. Cursor Origin requires no user-level authorization.
