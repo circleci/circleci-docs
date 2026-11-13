@@ -89,6 +89,8 @@ Many open source projects accept PRs from forked repositories. Building these PR
 
 By default, CircleCI does not build PRs from forked repositories. To change this setting, go to the menu:Project Settings[Advanced] of your project and set the *Build forked pull requests* option to _On_.
 
+You can also trigger pipelines for PRs from forked repositories with the CircleCI link:https://circleci.com/docs/api/v2/[API v2]. For more information, see the link:https://support.circleci.com/hc/en-us/articles/360049841151-Trigger-pipelines-on-forked-pull-requests-with-CircleCI-API-v2[Trigger pipelines on forked pull requests with CircleCI API v2] support article.
+
 Sometimes a user submits a pull request to your repository from a fork, but no pipeline is triggered. This usually happens because the user is following a project fork on their personal account rather than the project itself. As a result, jobs trigger under the user's personal account instead of the organization account. To resolve this issue, have the user unfollow their fork of the project on CircleCI and instead follow the source project. This causes their jobs to run under the organization when they submit pull requests.
 
 [#pass-secrets-to-builds-from-forked-pull-requests]

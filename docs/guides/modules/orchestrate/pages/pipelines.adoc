@@ -239,10 +239,6 @@ The CircleCI VS Code extension is available to download on the link:https://mark
 
 include::ROOT:partial$troubleshoot/pipelines-troubleshoot-snip.adoc[]
 
-== FAQs
-
-include::ROOT:partial$faq/pipelines-faq-snip.adoc[]
-
 [#next-steps]
 == Next steps
 
