@@ -73,12 +73,12 @@ NOTE: Organizations are, by default, limited to claiming only one namespace. Thi
 
 Organization admins in your VCS provider can create and delete resource classes. Any organization user in your VCS provider that the resource class is associated with can view the resource class list with the CLI.
 
-Use the xref:guides:toolkit:local-cli.adoc[CircleCI CLI] to manage resource classes and their tokens.
+Use the xref:guides:toolkit:circleci-cli.adoc[CircleCI CLI] to manage resource classes and their tokens.
 
 [#delete-a-resource-class]
 === Delete a resource class
 
-Deleting a resource class permanently deletes the resource class and its tokens. You cannot undo this action.
+Deleting a resource class is permanent. Without `--force`, the command prompts for confirmation and fails while the resource class has tokens. With `--force`, the command skips the prompt and deletes the tokens too, so runners that use them can no longer claim jobs.
 
 ```bash
 circleci runner resource-class delete <resource-class> --force
@@ -87,23 +87,25 @@ circleci runner resource-class delete <resource-class> --force
 [#create-a-token]
 === Create an additional token
 
+The CLI shows the token value once, when you create the token. You cannot retrieve it afterwards.
+
 ```bash
-circleci runner token create <resource-class-name> <nickname>
+circleci runner token create <resource-class> --nickname <nickname>
 ```
 
 [#delete-a-token]
 === Delete a token
 
-Deleting a token permanently deletes the token, but not the resource class. You cannot undo this action.
+Deleting a token is permanent. It does not delete the resource class. Runners that use the token can no longer claim jobs, but running jobs continue.
 
-List the tokens and their identifiers:
+List the tokens and their IDs:
 
 ```bash
-circleci runner token list <resource-class-name>
+circleci runner token list <resource-class>
 ```
 
-Delete the token:
+Delete the token. Add `--force` to skip the confirmation prompt:
 
 ```bash
-circleci runner token delete <token-identifier>
+circleci runner token delete <token-id>
 ```

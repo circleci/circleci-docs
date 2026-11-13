@@ -220,6 +220,6 @@ If `unclaimed_task_count` is greater than `0`, cancel those tasks to free up con
 
 This error appears when a test splitting job step runs `circleci` on a self-hosted runner that does not have the CircleCI CLI installed.
 
-On self-hosted runners, `circleci-agent` is used for all commands in which you may use either `circleci-agent` or `circleci` on CircleCI Cloud, such as test splitting and step halt commands. `circleci` is an alias of `circleci-agent`. It is not the xref:guides:toolkit:local-cli.adoc[Local CircleCI CLI].
+On self-hosted runners, `circleci-agent` is used for all commands in which you may use either `circleci-agent` or `circleci` on CircleCI Cloud, such as test splitting and step halt commands. `circleci` is an alias of `circleci-agent`. It is not the xref:guides:toolkit:circleci-cli.adoc[Local CircleCI CLI].
 
 To use the local CircleCI CLI in your self-hosted runner jobs, install it. The CLI can proxy test commands to `circleci-agent`. For machine runner, install it on the host. For container runner, include it in your Docker image.
