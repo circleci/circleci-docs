@@ -39,6 +39,8 @@ workflows:
 [#resource-class-configuration-custom-pod]
 == Resource class configuration and custom task pod configuration
 
+You can use as many resource classes as you need with a container runner deployment. At least one resource class is required to run a job.
+
 Container runner supports claiming and running tasks from multiple resource classes concurrently, as well as customization of the Kubernetes resources created to run tasks for a particular resource class. Configuration is provided by a map object in the Helm chart `values.yaml`.
 
 Each resource class supports the following parameters:
@@ -397,6 +399,13 @@ Additional instructions can be found in our link:https://support.circleci.com/hc
 
 Refer to the link:https://github.com/CircleCI-Public/container-runner-helm-chart[container runner Helm chart]. You can find a full link:https://github.com/circleci-public/container-runner-helm-chart#values[chart values reference] section in the README.
 
+[#concurrent-tasks]
+== Concurrent tasks
+
+Container runner claims and schedules work up to your runner concurrency limit. By default, container runner allows 20 tasks to be scheduled and running concurrently. If your runner concurrency allows more, change the limit with the `agent.maxConcurrentTasks` Helm parameter. The organization's runner concurrency limit is shared with any `machine` self-hosted runners. To find your limit, ask your point of contact at CircleCI, or submit a link:https://support.circleci.com/hc/en-us[support ticket].
+
+The `agent.maxConcurrentTasks` parameter applies to each agent individually. Deploying multiple container runners to a single Kubernetes cluster is not recommended.
+
 [#container-permissions]
 == Kubernetes permissions
 
@@ -457,6 +466,8 @@ In environments that block outbound access to Docker Hub, mirror the CircleCI ru
 
 See xref:container-runner-installation.adoc#private-container-registry[Using a Private Container Registry] for a full example and verification steps.
 
+To authorize pulling images from Amazon ECR, associate an IAM role with the service account that container runner uses. Follow the link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[AWS documentation]. If an image in a job configuration specifies AWS credentials, those credentials are used instead of the IAM role attached to the container runner service account.
+
 Set the orchestrator init container image under `orchestrator.image`. Set the logging sidecar image under `logging.image`. Both accept the same fields as `agent.image` (`registry`, `repository`, `tag`, and optional `digest`). Refer to the link:https://github.com/CircleCI-Public/container-runner-helm-chart/blob/main/values.yaml[Helm Chart values.yaml] for defaults.
 
 [#logging-containers]
@@ -515,6 +526,32 @@ The first resource class has a node selector to ensure it is scheduled to nodes 
 Container runner jobs are eligible for xref:guides:optimize:persist-data.adoc#managing-network-and-storage-usage[Runner Network Egress]. These charges follow the existing pricing model for self-hosted runners. They align with CircleCI's network and storage billing roll-out. If there are questions, reach out to your point of contact at CircleCI.
 
 The same plan-based offerings for self-hosted runner link:https://circleci.com/pricing/#comparison-table[concurrency limits] apply to the container runner. Final pricing and plan availability will be announced closer to the general availability of the offering.
+
+[#architectures]
+== Architectures
+
+Container runner supports amd64 and arm64 Linux, both for container runner itself and for the pods that execute tasks. It supports jobs that use either amd64 or arm64 Docker images, and Kubernetes clusters that use a mixture of amd64 and arm64 nodes.
+
+When you use images built for a specific architecture, configure the resource class to target a node with that CPU architecture. Kubernetes adds node labels automatically that you can use in the resource class pod specification. For more information, see the link:https://kubernetes.io/docs/reference/labels-annotations-taints/[Kubernetes documentation].
+
+```yaml
+agent:
+   resourceClasses:
+      <amd64 image resource class>:
+         token: <amd64 resource class token>
+         spec:
+            nodeSelector: # nodeSelector will cause this resource class to only create pods on nodes with the specified labels and values
+               kubernetes.io/arch=amd64
+
+      <arm64 image resource class>:
+         token: <arm64 resource class token>
+         spec:
+            nodeSelector:
+               kubernetes.io/arch=arm64
+
+      <multiarchitecture image resource class>: # note no nodeSelector is defined for the multiarchitecture image resource class
+         token: <multiarchitecture resource class token>
+```
 
 [#building-container-images]
 == Building container images
@@ -601,11 +638,6 @@ To apply a custom entrypoint to all jobs using a resource class, configure it in
 == Limitations
 
 * Any known xref:runner-overview.adoc#limitations[Limitation] for the existing self-hosted runner will continue to be a limitation of container agent.
-* Only Kubernetes container environments are supported at this time.
+* Only Kubernetes container environments are supported at this time. Kubernetes and Helm are required, and any Kubernetes provider can be used. Container runner must run within the cluster that it deploys pods to. To run a job in a container without Kubernetes, use xref:install-machine-runner-3-on-docker.adoc[machine runner with Docker installed].
 * xref:guides:execute:building-docker-images.adoc[`setup_remote_docker`] as a command is not supported with container runner.  See <<building-container-images>>.
 * `aws_auth.oidc_role_arn` is not supported on the container runner. You can set up AWS authentication using the `aws_auth` field. More information can be found in the xref:reference:ROOT:configuration-reference.adoc#oidc[Configuration Reference].
-
-[#faqs]
-== FAQs
-
-Visit the <<runner-faqs#container-runner-specific-faqs,runner FAQ page>> to see commonly asked questions about container runner.

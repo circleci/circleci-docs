@@ -56,6 +56,19 @@ The `circleci runner fleet get` command and the API also show the agents attache
 
 The total agent count includes agents seen in the last 7 days. The active, idle, and disconnected counts leave out agents that have been silent for 10 minutes or more. A fleet can show a total of four agents with all three state counts at zero.
 
+A self-hosted runner that has not contacted CircleCI in 12 hours does not show on the inventory page of the link:https://app.circleci.com/[CircleCI web app].
+
+[#check-whether-a-host-is-running-a-job]
+== Check whether a machine runner host is running a job
+
+To check from the host itself, run:
+
+```bash
+ps aux | pgrep -f circleci-launch-agent
+```
+
+If the command returns more than two processes, the machine runner is executing a task. The `grep` process counts as one, and the `circleci-launch-agent` process counts as another.
+
 [#view-fleets-with-the-cli]
 == View fleets with the CLI
 

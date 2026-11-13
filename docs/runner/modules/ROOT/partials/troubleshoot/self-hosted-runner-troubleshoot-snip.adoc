@@ -111,7 +111,7 @@ You can check the logs for any of the previous runs using the command `kubectl l
 
 - **Network connectivity issue:** Check the network connectivity of the container agent, especially if the issue is intermittent. The issue can be seen when the container agent has lost network connectivity after claiming the tasks.
 
-We suggest connecting to the pod using the command `kubectl exec --stdin --tty -n circleci < full pod name > -- /bin/sh` and then running a ping test for an extended period of time. We also recommend checking the required connectivity. Our FAQ includes a section about the xref:runner:ROOT:runner-faqs.adoc#what-connectivity-is-required[Connectivity Required for CircleCI’s Self-Hosted Runners].
+We suggest connecting to the pod using the command `kubectl exec --stdin --tty -n circleci < full pod name > -- /bin/sh` and then running a ping test for an extended period of time. We also recommend checking the required connectivity. See xref:runner:ROOT:runner-overview.adoc#network-requirements[Network requirements] for the connectivity a self-hosted runner needs.
 
 - **Resources exhaustion:** Check if your pods are reaching their resources limits in the cluster, as the pod could end the job to free up resources. We recommend setting resource limits either within link:https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/[Your `values.yaml`] or within xref:runner:ROOT:container-runner.adoc#resource-class-configuration-custom-pod[Resource Class Configuration].
 
@@ -159,7 +159,7 @@ NOTE: When `KUBE_DISABLE_POD_DELETION_ON_TASK_CLEANUP` is set to true, then task
 [#inter-container-communication]
 === Inter-container communication fails
 
-Unlike the link:https://circleci.com/docs/reference/configuration-reference/#docker[Docker executor], container runner uses `localhost` for inter-container communication rather than container host names. See xref:runner:ROOT:runner-faqs.adoc#how-do-containers-communicate-on-container-runner[How Do Containers Within a Job Communicate With Each Other?] for details.
+On the link:https://circleci.com/docs/reference/configuration-reference/#docker[Docker executor], containers in the same task can reference each other by container name as a hostname. Container runner runs tasks as Kubernetes pods, where all containers in a job share a network namespace and communicate over `localhost` rather than by hostname. See the https://kubernetes.io/docs/concepts/services-networking/#the-kubernetes-network-model[Kubernetes network model] documentation for details.
 
 If your job references a service container by name (for example, `postgres` or `redis`), update those connections to use `localhost` instead.
 
@@ -214,3 +214,12 @@ Verify that all resource class names in your `.circleci/config.yml` match what i
  
  
 If `unclaimed_task_count` is greater than `0`, cancel those tasks to free up concurrency for other resource classes.
+
+[#circleci-command-not-found]
+=== The circleci command is not found
+
+This error appears when a test splitting job step runs `circleci` on a self-hosted runner that does not have the CircleCI CLI installed.
+
+On self-hosted runners, `circleci-agent` is used for all commands in which you may use either `circleci-agent` or `circleci` on CircleCI Cloud, such as test splitting and step halt commands. `circleci` is an alias of `circleci-agent`. It is not the xref:guides:toolkit:local-cli.adoc[Local CircleCI CLI].
+
+To use the local CircleCI CLI in your self-hosted runner jobs, install it. The CLI can proxy test commands to `circleci-agent`. For machine runner, install it on the host. For container runner, include it in your Docker image.

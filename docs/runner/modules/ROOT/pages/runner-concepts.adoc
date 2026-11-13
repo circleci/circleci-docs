@@ -21,6 +21,13 @@ Resource classes help you identify a pool of self-hosted runners, which allows y
 
 Optionally, you can give your resource class a description.
 
+Every resource class has one or more **resource class tokens**. CircleCI uses the token to authenticate that the resource class is valid. A resource class token can only claim tasks.
+
+[#tasks]
+== Tasks
+
+A task is the smallest unit of work on CircleCI. A job with xref:guides:optimize:parallelism-faster-jobs.adoc[parallelism] of one is one task. A job with parallelism of _n_, where _n_ is greater than one, creates _n_ tasks.
+
 NOTE: If you are already using xref:orbs:use:orb-intro.adoc[Orbs], you have an existing namespace. Your self-hosted runner namespace will be the same one you are using for orbs. If you need to change your namespace, https://support.circleci.com/hc/en-us[Contact Support].
 
 [#task-agent]
@@ -36,7 +43,11 @@ The container-agent gets installed with container runner. Container-agent polls 
 [#machine-runner-3]
 == Machine runner 3
 
-The machine runner 3 replaces launch-agent on cloud and server v4.4+, bringing improvements to network resiliency, installation, and the upgrade process. As with launch-agent, any user who is able to execute a job will be able to gain the same privileges as the task-agent. When machine runner is installed using the provided packages, it runs as the `circleci` user.
+The machine runner 3 replaces launch-agent on cloud and server v4.4+, bringing improvements to network resiliency, installation, and the upgrade process. As with launch-agent, any user who is able to execute a job will be able to gain the same privileges as the task-agent. When machine runner is installed using the provided packages, it runs as the `circleci` user. You choose the user that executes jobs when you install the runner, so make sure that user only has permissions you are comfortable letting jobs use.
+
+CAUTION: Allowing jobs to access a Docker daemon is equivalent to providing root access to the machine.
+
+A container runner also lets users run arbitrary code in your infrastructure. Follow security best practices to limit what that code can reach.
 
 [#self-hosted-runner-concurrency]
 == Self-hosted runner concurrency
@@ -46,11 +57,53 @@ CircleCI's self-hosted runners are limited by the total number of self-hosted ru
 [#public-repositories]
 == Public repositories
 
-CircleCI's self-hosted runners are xref:runner-faqs.adoc#can-jobs-on-forks-of-my-OSS-project-use-my-organizations-self-hosted-runners-if-the-fork-is-not-a-part-of-my-organization[Not Available] for use with public projects that have the **Build forked pull requests** setting enabled. This feature is not available for security reasons. A malicious actor may alter your machine or execute code on it by forking your repository, committing code, and opening a pull request. Untrusted jobs running on your self-hosted runner pose significant security risks for your machine and network environment, especially if your machine persists its environment between jobs. Some of the risks include:
+CircleCI's self-hosted runners are not available for use with public projects that have the **Build forked pull requests** setting enabled. This feature is not available for security reasons. A malicious actor may alter your machine or execute code on it by forking your repository, committing code, and opening a pull request. Untrusted jobs running on your self-hosted runner pose significant security risks for your machine and network environment, especially if your machine persists its environment between jobs. Some of the risks include:
 
 * Malicious programs running on the machine.
 * Escaping the machine's self-hosted runner sandbox.
 * Exposing access to the machine's network environment.
 * Persisting unwanted or dangerous data on the machine.
 
+Resource classes cannot be used by jobs that are not associated with the organization that owns them. Only forks of your open source project that are part of your organization can use the organization's self-hosted runners.
+
 NOTE: Organizations are, by default, limited to claiming only one namespace. This policy is designed to limit name-squatting and namespace noise. If you need to change your namespace, https://support.circleci.com/hc/en-us[contact support].
+
+[#manage-resource-classes-and-tokens]
+== Manage resource classes and tokens
+
+Organization admins in your VCS provider can create and delete resource classes. Any organization user in your VCS provider that the resource class is associated with can view the resource class list with the CLI.
+
+Use the xref:guides:toolkit:local-cli.adoc[CircleCI CLI] to manage resource classes and their tokens.
+
+[#delete-a-resource-class]
+=== Delete a resource class
+
+Deleting a resource class permanently deletes the resource class and its tokens. You cannot undo this action.
+
+```bash
+circleci runner resource-class delete <resource-class> --force
+```
+
+[#create-a-token]
+=== Create an additional token
+
+```bash
+circleci runner token create <resource-class-name> <nickname>
+```
+
+[#delete-a-token]
+=== Delete a token
+
+Deleting a token permanently deletes the token, but not the resource class. You cannot undo this action.
+
+List the tokens and their identifiers:
+
+```bash
+circleci runner token list <resource-class-name>
+```
+
+Delete the token:
+
+```bash
+circleci runner token delete <token-identifier>
+```
