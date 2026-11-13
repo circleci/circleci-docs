@@ -20,10 +20,9 @@ This page answers frequently asked questions about the following CircleCI topics
 | <<migration>>
 | <<pipelines>>
 
-| <<orbs>>
-
 | <<author-orbs>>
 | <<billing>>
+|
 |===
 --
 
@@ -36,11 +35,6 @@ include::guides:ROOT:partial$faq/general-faq-snip.adoc[]
 == Migration
 
 include::guides:ROOT:partial$faq/migration-faq-snip.adoc[]
-
-[#orbs]
-== Orbs
-
-include::guides:ROOT:partial$faq/orb-faq-snip.adoc[]
 
 [#author-orbs]
 == Author orbs
