@@ -314,4 +314,3 @@ Any changes to your inline orb take effect immediately in the next pipeline run.
 == See also
 
 * xref:use:orb-concepts.adoc#orb-types-comparison[Orb Types Comparison] for comparing inline orbs with URL and registry orbs.
-* xref:use:orbs-faq.adoc[Orbs FAQ] for common questions about orbs.

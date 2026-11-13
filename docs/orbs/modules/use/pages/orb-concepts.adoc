@@ -233,6 +233,8 @@ When you import a registry orb, you can pin it to a particular SemVer component.
 |===
 --
 
+Pinning the full version, for example `1.2.3`, is the most deterministic option and is recommended. Inline orbs do not have versions, and URL orbs use Git-based versioning (branches, tags, or commits) rather than semantic versioning.
+
 To avoid negatively impacting a user's CI process, orb authors must strictly adhere to SemVer versioning to ensure no breaking changes are introduced at the `minor` or `patch` update levels.
 
 NOTE: CircleCI does not currently support non-numeric semantic versioning elements. We suggest that you use either SemVer-style version strings in x.y.z format, or a development-style version string in dev:* format.
@@ -451,4 +453,3 @@ jobs:
 
 * Refer to xref:use:orb-intro.adoc[Orb Introduction] for a high-level overview of CircleCI orbs.
 * Refer to xref:author:orb-author.adoc[Introduction to Authoring Orbs] for creating registry orbs.
-* Refer to xref:use:orbs-faq.adoc[Orbs FAQs] for information on frequent issues encountered when using orbs.

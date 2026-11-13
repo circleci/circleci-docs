@@ -71,7 +71,7 @@ orbs:
 
 After the orb has been imported into the configuration file, the elements provided by the orb are available as `<orb-name>/<element>`. Orb elements can include jobs, commands, and executors. The parameters available for each element are listed in the orb registry in a table under each element.
 
-Most orbs include usage examples detailing common functionality. If you would like to contribute to an existing orb, or file an issue on the orb's repository, most orb authors include the git repository link.
+Most orbs include usage examples detailing common functionality. If you would like to contribute to an existing orb, or file an issue on the orb's repository, most orb authors include the git repository link. If the repository link is unavailable, contact support and CircleCI will attempt to contact the author. Alternatively, fork the orb and publish your own version.
 
 Orb elements can be used in the same way as xref:reference:ROOT:reusing-config.adoc[Reusable Configuration] elements. The Node example below shows how to use an orb's default executor, and an orb command.
 
@@ -290,4 +290,3 @@ The orbs page also includes your org's allow list URLs for URL orbs.
 * Refer to xref:use:orb-concepts.adoc[Orbs Concepts] for high-level information about CircleCI orbs.
 * Refer to xref:author:orb-author.adoc[Introduction to Authoring Orbs] for guidance on creating your own orbs.
 * Refer to xref:functions:ROOT:functions-intro.adoc[Functions Overview] for programs that set up tools, dependencies, and credentials inside your jobs. You can use functions and orbs in the same configuration.
-* Refer to xref:orbs-faq.adoc[Orbs FAQ] for information on known issues and questions that have been addressed when using CircleCI orbs.

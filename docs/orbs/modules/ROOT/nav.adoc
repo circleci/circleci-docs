@@ -2,7 +2,6 @@
 ** xref:use:orb-intro.adoc[Introduction to using orbs]
 ** xref:use:orb-concepts.adoc[Orb concepts]
 ** xref:use:managing-url-orbs-allow-lists.adoc[Managing URL orbs allow lists]
-** xref:use:orbs-faq.adoc[FAQ]
 * Author orbs
 ** xref:author:orb-author.adoc[Introduction to authoring orbs]
 ** xref:author:create-test-and-publish-a-registry-orb.adoc[Create a registry orb]

@@ -509,7 +509,10 @@
   new: /orbs/author/orbs-best-practices/
 
 - old: /orbs-faq/
-  new: /orbs/use/orbs-faq/
+  new: /orbs/use/orb-intro/
+
+- old: /orbs/use/orbs-faq/
+  new: /orbs/use/orb-intro/
 
 - old: /orchestration-cookbook/
   new: /guides/orchestrate/orchestration-cookbook/
