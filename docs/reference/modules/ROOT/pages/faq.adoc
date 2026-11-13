@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Find answers to frequently asked questions about CircleCI, covering migration, orbs, pipelines, workflows, billing and more.
+:page-description: Find answers to frequently asked questions about CircleCI, covering migration, orbs, self-hosted runner, billing and more.
 :experimental:
 
 This page answers frequently asked questions about the following CircleCI topics:
@@ -19,9 +19,6 @@ This page answers frequently asked questions about the following CircleCI topics
 
 | <<migration>>
 | <<pipelines>>
-
-| <<architecture>>
-| <<workflows>>
 
 | <<orbs>>
 
@@ -40,11 +37,6 @@ include::guides:ROOT:partial$faq/general-faq-snip.adoc[]
 
 include::guides:ROOT:partial$faq/migration-faq-snip.adoc[]
 
-[#architecture]
-== Architecture
-
-include::guides:ROOT:partial$faq/architecture-faq-snip.adoc[]
-
 [#orbs]
 == Orbs
 
@@ -59,11 +51,6 @@ include::guides:ROOT:partial$faq/orb-author-faq-snip.adoc[]
 == Pipelines
 
 include::guides:ROOT:partial$faq/pipelines-faq-snip.adoc[]
-
-[#workflows]
-== Workflows
-
-include::guides:ROOT:partial$faq/workflows-faq-snip.adoc[]
 
 [#billing]
 == Billing

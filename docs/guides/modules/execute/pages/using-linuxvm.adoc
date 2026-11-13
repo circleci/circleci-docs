@@ -148,6 +148,41 @@ endif::server[]
   docker_layer_caching: true    # default - false
 ----
 
+[#test-ipv6-traffic]
+== Test IPv6 traffic
+
+Use the machine executor to test local IPv6 traffic. CircleCI does not support IPv6 internet traffic, because not every cloud provider that CircleCI uses offers IPv6 support.
+
+Hosts running the machine executor have IPv6 addresses configured for the `eth0` and `lo` network interfaces.
+
+To test services with an IPv6 setup, you can also configure Docker to assign IPv6 addresses to containers. The following example enables IPv6 globally by configuring the Docker daemon:
+
+[,yaml]
+----
+jobs:
+  ipv6_tests:
+    machine:
+      image: ubuntu-2404:current
+    steps:
+      - checkout
+      - run:
+          name: enable ipv6
+          command: |
+            cat <<'EOF' | sudo tee /etc/docker/daemon.json
+            {
+              "ipv6": true,
+              "fixed-cidr-v6": "2001:db8:1::/64"
+            }
+            EOF
+            sudo service docker restart
+----
+
+Docker supports enabling IPv6 at different levels:
+
+* link:https://docs.docker.com/engine/userguide/networking/default_network/ipv6/[Globally, with the daemon config] as in the previous example.
+* link:https://docs.docker.com/engine/reference/commandline/network_create/[With the `docker network create` command].
+* link:https://docs.docker.com/compose/compose-file/#enable_ipv6[With `docker-compose`].
+
 ifndef::server[]
 [#using-machine-and-ip-ranges]
 == Using machine and IP ranges
