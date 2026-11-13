@@ -11,5 +11,4 @@
 ** xref:author:testing-orbs.adoc[Registry orb testing methodologies]
 ** xref:author:manual-orb-authoring-process.adoc[Registry orb authoring process (manual)]
 ** xref:author:orbs-best-practices.adoc[Best practices]
-** xref:author:orb-author-faq.adoc[FAQ]
 

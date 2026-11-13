@@ -141,6 +141,18 @@ circleci orb list <my-namespace> --private
 
 For more information on how to use the `circleci orb` command, see the CLI link:https://cli.circleci.com/reference/[documentation].
 
+[#unlisting-your-orb]
+=== Hide a registry orb from the orb registry
+
+You cannot delete a registry orb. You can hide it from the link:https://circleci.com/developer/orbs[Orb Registry] with the `circleci orb unlist` command. A hidden orb still exists and is discoverable through the API or CLI, but does not appear in Orb Registry results. Hiding an orb is useful when an orb is no longer maintained.
+
+[,shell]
+----
+circleci orb unlist <namespace>/<orb> <true|false> [flags]
+----
+
+The `circleci orb source` command does not work for private orbs, whether they are listed or hidden. Unless you documented the private orb name before you hid it, you cannot find the orb through the Orb Registry or the CircleCI CLI. If this happens, create a link:https://support.circleci.com/hc/en-us[support ticket].
+
 [#categorizing-your-orb]
 === Categorizing your orb
 
