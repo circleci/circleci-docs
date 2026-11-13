@@ -134,12 +134,14 @@ NOTE: The Cursor Origin integration is in beta.
 --
 ====
 
-== Can multiple CircleCI organizations connect to the same GitHub organization?
+[#one-github-organization-per-circleci-organization]
+== One GitHub organization per CircleCI organization
+
+A CircleCI organization connects to only one GitHub organization or personal account. For example, a `github` type organization maps to one GitHub organization.
 
 A GitHub organization can only be connected via CircleCI GitHub App to a single CircleCI organization.
 
-If you attempt to connect your CircleCI organization to a GitHub organization that already has the CircleCI GitHub App installed, you will be redirected to the GitHub App installation page. You will not be redirected back to CircleCI. This can be confusing because GitHub will show a successful installation. That installation, however, refers to the existing connection to a different CircleCI organization, not the one you just tried to create. You can confirm this by checking the "installed at" date at the top of the page. Unfortunately, GitHub doesn't indicate which CircleCI organization is already connected, so if you need help identifying the existing connection, you can submit a request link:https://forms.gle/dvcXN8ArByXqNNbJ7[by filling out this form].
+If you try to connect your CircleCI organization to a GitHub organization that already has the CircleCI GitHub App installed, GitHub opens the GitHub App installation page. It does not return you to CircleCI. GitHub shows a successful installation, but that installation is the existing connection to a different CircleCI organization, not the one you are setting up. To confirm this, check the "installed at" date at the top of the page. GitHub does not show which CircleCI organization holds the existing connection. If you need help identifying it, submit a request link:https://forms.gle/dvcXN8ArByXqNNbJ7[by filling out this form].
 
 .GitHub settings showing the CircleCI App integration settings page.
 image::guides:ROOT:github-app-configuration-page.png[Create a project]
-
