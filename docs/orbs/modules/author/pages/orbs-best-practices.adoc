@@ -146,8 +146,81 @@ fi
 $SUDO do_command
 ----
 
+[#choose-a-language-for-command-logic]
+==== Choose a language for command logic
+
+POSIX compliant Bash is the most portable and universal language. Bash is the recommended option when you intend to share your orb. Orbs do, however, come with the flexibility and freedom to run other programming languages or tools.
+
+*Bash*
+
+Bash is the preferred language as it is most commonly available among all available executors. Write Bash directly using the native xref:reference:ROOT:configuration-reference.adoc#run[Run] command. The default shell on macOS and Linux will be Bash.
+
+*Ruby*
+
+[,yaml]
+----
+steps:
+  - run:
+    name: Check Ruby shell
+    shell: ruby
+    command: puts 'hi'
+----
+
+*Node*
+
+[,yaml]
+----
+steps:
+  - run:
+    name: Check Node shell
+    shell: node
+    command: console.log('node')
+----
+
+*Python*
+
+[,yaml]
+----
+steps:
+  - run:
+    name: Check Python shell
+    shell: python3
+    command: print('python')
+----
+
+*Binary*
+
+This option is strongly discouraged wherever possible. Sometimes it may be necessary to fetch a remote binary file such as a CLI tool. Fetch these binaries from a package manager or host them in a VCS such as GitHub releases wherever possible. For example, installing Homebrew as a part of the link:https://circleci.com/developer/orbs/orb/circleci/aws-serverless#commands-install[AWS Serverless orb].
+
+[,yaml]
+----
+steps:
+  - run:
+    command: >
+      curl -fsSL
+      "https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh" | bash
+      /home/linuxbrew/.linuxbrew/bin/brew shellenv >> "$BASH_ENV"
+    name: Install Homebrew (for Linux)
+----
+
 [#jobs]
 === Jobs
+
+[#choose-between-a-command-and-a-job]
+==== Choose between a command and a job
+
+The answer might be both, but it depends on the task you want to accomplish.
+
+An orb xref:use:orb-concepts.adoc#commands[command] can be used by the user, or by the orb developer, to perform an action within a job. The command has no knowledge of the job it is in, because the user can use it however they wish. A command may be useful, for example, to automatically install a CLI application, or to install and authenticate it.
+
+A xref:use:orb-concepts.adoc#jobs[job] defines a collection of steps and commands within a specific execution environment. A job is highly opinionated, because it generally chooses the execution platform to run on and which steps to run. Jobs can automate tasks such as deployments. A deployment job might:
+
+* Select a known execution platform, such as Python.
+* Check out the user's code.
+* Install a CLI.
+* Run a deployment command.
+
+All without requiring any additional configuration from the user.
 
 [#consider-pass-through-parameters]
 ==== Consider "pass-through" parameters
@@ -299,6 +372,13 @@ steps:
       command: |
         API_KEY_VALUE=${!PARAM_API_KEY}
 ----
+
+[#require-the-user-to-add-an-environment-variable]
+==== Require the user to add an environment variable
+
+Create a parameter for the environment variable name, even if it is a statically named environment variable the user must not change. Then, assign it the correct default value. In the parameter description, tell the user if the value must not be changed. Either way, consider instructing the user on how they can obtain their API key.
+
+Consider validating required environment variables. See <<commands,Commands>> for more information.
 
 [#accepting-parameters-as-strings-or-environment-variables]
 ==== Accepting parameters as strings or environment variables

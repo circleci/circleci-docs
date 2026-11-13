@@ -491,7 +491,10 @@
   new: /orbs/author/orb-author/
 
 - old: /orb-author-faq/
-  new: /orbs/author/orb-author-faq/
+  new: /orbs/author/orbs-best-practices/
+
+- old: /orbs/author/orb-author-faq/
+  new: /orbs/author/orbs-best-practices/
 
 - old: /orb-author-validate-publish/
   new: /orbs/author/orb-author-validate-publish/
