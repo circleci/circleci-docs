@@ -152,7 +152,27 @@ The CLI respects standard terminal conventions:
 [#telemetry]
 == Telemetry
 
-The CLI collects usage data to help improve the tool. Telemetry is enabled by default. For each command invocation, the CLI records the command path and the flags passed, along with metadata including your CLI version, OS, and a stable per-install device ID. Telemetry is automatically disabled when `CI=true` is set in the environment.
+The CLI collects usage data so we can understand how it is used and improve it, including how people and AI coding agents set up and use features such as Smarter Testing. Telemetry is enabled by default. Telemetry is automatically disabled when `CI=true` is set in the environment.
+
+Usage data is sent to CircleCI through Segment and Amplitude, which process it on our behalf. It is kept for RETENTION PERIOD TO BE CONFIRMED.
+
+For each command invocation, the CLI records the following:
+
+* The command path. For extensions such as `circleci testsuite`, this includes the subcommand you ran.
+* The names of the flags you used, never their values.
+* The exit code.
+* The name of the AI coding agent that ran the command, if any.
+* Metadata: your CLI version, OS, a stable per-install device ID and, if you are signed in, your CircleCI user ID.
+
+When you use Smarter Testing (`circleci testsuite`), the CLI also records the following:
+
+* Which setup checks failed.
+* Test counts and timings.
+* The name of the AI coding agent that ran the command, if any.
+* The CircleCI project ID and the repository name, which includes your organization name (for example, `my-org/my-repo`).
+* Device and user IDs that link runs together.
+
+None of this data is used to train AI models, and it does not include the contents of your code.
 
 To disable telemetry permanently, run:
 
