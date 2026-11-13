@@ -596,7 +596,10 @@
   new: /runner/runner-concepts/
 
 - old: /runner-faqs/
-  new: /runner/runner-faqs/
+  new: /runner/runner-overview/
+
+- old: /runner/runner-faqs/
+  new: /runner/runner-overview/
 
 - old: /runner-feature-comparison-matrix/
   new: /runner/runner-feature-comparison-matrix/
