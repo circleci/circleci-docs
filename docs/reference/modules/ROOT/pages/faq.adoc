@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Find answers to frequently asked questions about CircleCI, covering migration, orbs, billing and more.
+:page-description: Find answers to frequently asked questions about CircleCI, covering, orbs, billing and more.
 :experimental:
 
 This page answers frequently asked questions about the following CircleCI topics:
@@ -16,13 +16,12 @@ This page answers frequently asked questions about the following CircleCI topics
 [cols=2*]
 |===
 | <<general>>
-
-| <<migration>>
 | <<pipelines>>
+
 
 | <<author-orbs>>
 | <<billing>>
-|
+
 |===
 --
 
@@ -31,10 +30,6 @@ This page answers frequently asked questions about the following CircleCI topics
 
 include::guides:ROOT:partial$faq/general-faq-snip.adoc[]
 
-[#migration]
-== Migration
-
-include::guides:ROOT:partial$faq/migration-faq-snip.adoc[]
 
 [#author-orbs]
 == Author orbs
