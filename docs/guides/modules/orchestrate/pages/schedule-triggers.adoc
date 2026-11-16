@@ -161,7 +161,7 @@ curl --request POST "https://circleci.com/api/v2/project/<project-slug>/schedule
 }'
 ----
 
-include::ROOT:partial$tips/find-project-slug.adoc[]
+To find your project slug, see xref:toolkit:how-to-find-ids.adoc#find-a-project-slug[Find a Project Slug].
 
 For additional information, refer to the **Schedule** section under the link:https://circleci.com/docs/api/v2/[API v2 Reference].
 --
