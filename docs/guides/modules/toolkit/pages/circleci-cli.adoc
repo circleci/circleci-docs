@@ -152,14 +152,16 @@ The CLI respects standard terminal conventions:
 [#telemetry]
 == Telemetry
 
-The CLI collects usage data so we can understand how it is used and improve it, including how people and AI coding agents set up and use features such as Smarter Testing. Telemetry is enabled by default. Telemetry is automatically disabled when `CI=true` is set in the environment.
+This section describes CLI v1. CLI v0 asks for your consent before it collects any telemetry.
 
-Usage data is sent to CircleCI through Segment and Amplitude, which process it on our behalf. It is kept for RETENTION PERIOD TO BE CONFIRMED.
+The CLI collects Usage Data so we can understand how the CLI is used and so we can improve it. We analyze how people and AI coding agents set up and use features such as Smarter Testing. We call the collection of Usage Data by the CLI "Telemetry," which is enabled by default. Telemetry can be disabled by setting `CI=true` in the environment.
+
+Usage Data is sent to CircleCI through Segment and Amplitude, which each process it on our behalf.
 
 For each command invocation, the CLI records the following:
 
 * The command path. For extensions such as `circleci testsuite`, this includes the subcommand you ran.
-* The names of the flags you used, never their values.
+* The names of the flags you used, but not their values.
 * The exit code.
 * The name of the AI coding agent that ran the command, if any.
 * Metadata: your CLI version, OS, a stable per-install device ID and, if you are signed in, your CircleCI user ID.
@@ -172,7 +174,7 @@ When you use Smarter Testing (`circleci testsuite`), the CLI also records the fo
 * The CircleCI project ID and the repository name, which includes your organization name (for example, `my-org/my-repo`).
 * Device and user IDs that link runs together.
 
-None of this data is used to train AI models, and it does not include the contents of your code.
+This Usage Data is used for internal business purposes only. Usage Data is not used to train AI models, and it does not include the contents of your code.
 
 To disable telemetry permanently, run:
 
