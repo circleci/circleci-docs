@@ -19,7 +19,11 @@ DLC caches the individual layers of any Docker images built during your CircleCI
 You can use DLC with both the `machine` executor and in a xref:execute:building-docker-images.adoc[Remote Docker Environment] (`setup_remote_docker`).
 
 ifndef::server[]
-DLC costs 200 credits per job run. For more information about DLC charges, see the xref:plans-pricing:credits.adoc#charge-for-docker-layer-caching[FAQ].
+DLC costs 200 credits per job run.
+
+To estimate your DLC cost, look at the jobs in your config file with DLC enabled, and the number of Docker images you are building in those jobs. A job that appears only once in a config file can run multiple times in a pipeline, for example, with parallelism enabled.
+
+DLC only benefits pipelines that build Docker images. If your pipeline does not include a job where Docker images are built, DLC provides no benefit.
 endif::server[]
 
 NOTE: DLC has a known issue with QEMU/binfmt multi-arch `buildx` builds. See <<known-issues,Known Issues>> before enabling it.

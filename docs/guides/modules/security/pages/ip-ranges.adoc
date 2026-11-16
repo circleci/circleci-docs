@@ -159,7 +159,9 @@ IP ranges usage is visible in the *Plan Usage* section of the CircleCI app:
 .IP ranges feature in Plan Usage
 image::guides:ROOT:ip-ranges.png[Screenshot showing the location of the IP ranges feature]
 
-On the *Resources* tab within the *Job Details* UI page, you can view approximations of network transfer for any Docker job, even those without the IP ranges feature enabled. This approximation can be used to predict the cost of enabling the IP ranges feature on a job without having to turn the feature on. You can also view whether or not the job has IP ranges enabled by viewing the IP Ranges badge.
+In addition to the *IP Ranges Usage* summary, you can select the *IP Ranges* tab to find more details about your data usage. In this tab, the IP ranges usage value represents the raw number of bytes in or out of the Docker container during execution of a job with IP ranges enabled. This number includes the job's overall network transfer _and_ any other bytes that go in or out of the Docker container.
+
+On the *Resources* tab within the *Job Details* UI page, you can view approximations of network transfer for any Docker job, even those without the IP ranges feature enabled. This approximation can be used to predict the cost of enabling the IP ranges feature on a job without having to turn the feature on. Convert the value to GB if it is not already in GB and multiply by 450 credits to predict the approximate cost. You can also view whether or not the job has IP ranges enabled by viewing the IP Ranges badge.
 
 .Approximate network transfer on the Resources tab
 image::guides:ROOT:resources-network-transfer.png[Screenshot showing the approximate network transfer]

@@ -45,6 +45,101 @@ Organizations on the Free Plan receive 30,000 credits per month for personal (no
 
 When your available credits reach 0, personal builds are blocked until your credits refill at the start of the next month. Open source builds are not subject to this block and continue to run even if your credit balance is exhausted.
 
+[#credit-expiry]
+== Credit expiry
+
+On the Performance Plan, credits roll over each month and expire one year after purchase. Unused credits are forfeited when the account subscription is canceled.
+
+[#when-credits-run-out]
+== When your credits run out
+
+What happens when your credit balance reaches 0 depends on your plan.
+
+[#performance-plan-refills]
+=== Performance plan
+
+When you reach 0 credits, CircleCI refills approximately 25% of your credit subscription, with a minimum refill of 25,000 credits. For example, if your monthly package size is 100,000 credits, you are automatically refilled 25,000 credits when you reach 0 remaining credits.
+
+If your account receives repeated refills, review your credit usage in the CircleCI web app by selecting menu:Plan[Plan Usage]. In most cases, increasing your credit package minimizes repeat refills. To manage your plan, select *Plan Overview*.
+
+[#scale-plan-auto-refill]
+=== Scale plan
+
+On the Scale plan, you can agree to use Credit Auto-Refill (CAR). When your usage reaches 20% of your credit purchase, you receive a notice that your credit is getting low. If your credit reaches 10% and you have not made another purchase, you receive a refill of either 25% (default) or 10% of your credit purchase.
+
+For example:
+
+. You buy 100M credits.
+. You get a notice at 20M credits.
+. CAR runs at 10M credits.
+
+A supplemental purchase interrupts CAR.
+
+If you decline CAR, you do not get a notice at 20%. If your credits deplete to 0, your service is interrupted until you make another purchase.
+
+[#fixed-date-credit-allocation]
+=== Fixed-date credit allocation
+
+Your order may include credits that are scheduled to be added to your account at set intervals, for example, on a semi-annual basis. In this case, your credit purchase is divided equally between credit allocations and provisioned at the pre-assigned, regular intervals described on your order.
+
+When your credit balance runs low and you have CAR enabled, CAR provides additional credits to keep your builds running until the next scheduled allocation arrives. CAR is billed separately from your order's credit allocation schedule.
+
+If CAR is not enabled, your builds are blocked when your credits are exhausted, and remain blocked until the next scheduled credit allocation interval date.
+
+For example:
+
+. Your order is for 2 years and includes 400M credits split across 4 semi-annual allocations of 100M credits each.
+. After nine months, you have used your available credits and your balance runs low before the next scheduled credit allocation interval date.
+.. If CAR is *enabled*, CAR provides credits until your next 100M credit allocation is provisioned on its scheduled date.
+.. If CAR is *not enabled*, builds are blocked until the next scheduled credit allocation interval date.
+
+Contact your account team if you have questions about how your order is configured.
+
+To view your credit allocation interval schedule and settings, select menu:Plan[Plan Overview] in the CircleCI web app.
+
+[#free-plan-out-of-credits]
+=== Free plan
+
+On the Free plan, jobs fail to run when you run out of credits. See <<free-plan-limits,Free plan limits>>.
+
+[#billing]
+== Billing
+
+You can pay for monthly pricing from inside the CircleCI web app.
+
+On the Performance plan, at the beginning of your billing cycle, you are charged for premium support tiers and your monthly credit allocation. Credit refills during the month, such as auto-refilling at approximately 25% when there are 0 credits remaining, are paid at the time of the refill.
+
+CircleCI charges your credit card on these dates:
+
+* The day you upgrade to a paid plan or change paid plans.
+* The monthly renewal date, if your team is on the monthly plan.
+* The annual renewal date, if your team is on the annual plan.
+* The last day of the month, if your team is on the annual plan and there is an outstanding balance from adding new users or using more credits.
+* Any time your team's credit balance drops below your preset limit on the Performance plan, when another credit purchase is processed.
+
+[#prepaid-billing]
+=== Prepaid billing
+
+Prepaid billing is a payment option for customers on the Performance plan. Prepaid billing allows you to purchase credits in bulk, pay upfront, and get discounted prices for credits based on volume purchased. Discounting starts at a purchase volume of 5 million credits.
+
+When you use prepaid billing:
+
+* Your credit card is charged immediately when you select prepaid billing. When you run out of credits, your credit package is automatically renewed at the purchase level you selected, and your credit card is charged again for the refill.
+* You still receive 30,000 credits and 5 free user seats every month.
+* If you switch from a monthly subscription, you keep access to any balance credits previously purchased, and the 12-month expiry date remains.
+
+To switch to prepaid billing:
+
+. Select *Plan* in the CircleCI web app.
+. Select the *Manage* tab.
+. Select *Set up and switch*.
+
+To change your upcoming prepaid billing refill:
+
+. Select *Plan* in the CircleCI web app.
+. Select the *Manage* tab.
+. Select the pencil icon in the *Credits* section to edit your auto refill rate.
+
 [#troubleshooting-job-is-queued]
 == Troubleshooting: Do I get charged if my job is "queued" or "preparing"?
 
@@ -55,9 +150,4 @@ If your jobs use the Docker executor and you find that they are "preparing" for 
 [#questions-and-comments]
 == Questions and comments
 
-Consider reading the section below on <<#billing-faqs,billing>>. For any further questions, do not hesitate to link:https://support.circleci.com/hc/en-us/requests/new[open a support ticket].
-
-[#billing-faqs]
-== FAQs
-
-include::ROOT:partial$faq/billing-faq-snip.adoc[]
+For any further questions, do not hesitate to link:https://support.circleci.com/hc/en-us/requests/new[open a support ticket].

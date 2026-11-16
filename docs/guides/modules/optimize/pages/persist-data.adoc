@@ -209,9 +209,13 @@ Storage charges apply when you retain artifacts, workspaces, and caches beyond t
 
 Storage usage is calculated once, at the moment an object is saved. Storage usage is not accrued day by day while it remains in storage. CircleCI multiplies the object's size by its configured retention period to get its total GB-days. This amount is added to your storage usage for the billing period in which it was saved.
 
-You can find out how much network and storage usage is available on your plan by visiting the features section of the link:https://circleci.com/pricing/[Pricing] page. If you would like more details about credit usage, and how to calculate your potential network and storage costs, visit the billing section on the xref:reference:ROOT:faq.adoc#calculate-monthly-storage-and-network-costs[FAQ] page.
+You can find out how much network and storage usage is available on your plan by visiting the features section of the link:https://circleci.com/pricing/[Pricing] page. 
+To calculate your monthly storage and network costs, select menu:Plan[Plan Usage] in the link:https://app.circleci.com/[CircleCI web app] and find your storage and network usage.
 
-For questions on data usage for the IP ranges feature, visit the xref:reference:ROOT:faq.adoc#calculate-monthly-IP-ranges-costs[FAQ] page.
+* *Storage*: Select the *Storage* tab to see if your organization has accrued any overages beyond the GB-monthly allotment. Multiply your overage (GB-Months/TB-Months) by 420 credits to estimate the total monthly cost. For example, 2 GB-Months overage x 420 credits = 840 credits ($0.50).
+* *Network*: Multiply your network overage GB/TB by 420 credits to estimate the total monthly cost. For example, 2 GB overage x 420 credits = 840 credits ($0.50).
+
+For data usage for the IP ranges feature, see xref:security:ip-ranges.adoc#pricing[IP ranges feature pricing].
 
 [#reducing-excess-use-of-network-egress-and-storage]
 === Reducing excess use of network egress and storage

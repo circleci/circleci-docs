@@ -58,6 +58,11 @@ Active users are tracked for billing purposes. On the Free and Performance Plans
 
 To find a list of your active users, log in to the CircleCI web app and navigate to menu:Plan[Plan Usage > Users].
 
+[#per-active-user-pricing]
+=== Per-active-user pricing
+
+Credit usage covers access to compute. CircleCI keeps usage costs low to encourage frequent job runs, which is the foundation of a good CI practice. Per-active-user fees cover access to platform features and job orchestration. This includes features like dependency caching, artifact caching, and workspaces, all of which speed up build times without incurring additional compute cost.
+
 [#why-registration-matters]
 == Why user registration matters
 

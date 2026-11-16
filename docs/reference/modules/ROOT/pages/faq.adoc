@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.7"
 :page-audience: developer
-:page-description: Find answers to frequently asked questions about CircleCI, covering, orbs, billing and more.
+:page-description: Find answers to frequently asked questions about CircleCI, covering general topics.
 :experimental:
 
 This page answers frequently asked questions about the following CircleCI topics:
@@ -16,7 +16,7 @@ This page answers frequently asked questions about the following CircleCI topics
 [cols=2*]
 |===
 | <<general>>
-| <<billing>>
+|
 |===
 --
 
@@ -24,10 +24,3 @@ This page answers frequently asked questions about the following CircleCI topics
 == General
 
 include::guides:ROOT:partial$faq/general-faq-snip.adoc[]
-
-[#billing]
-== Billing
-
-Visit our link:https://circleci.com/pricing/[Pricing page] to find details about CircleCI's plans.
-
-include::guides:ROOT:partial$faq/billing-faq-snip.adoc[]
