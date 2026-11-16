@@ -1,3 +1,28 @@
+= FAQ
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Find answers to frequently asked questions about CircleCI, covering general topics.
+:experimental:
+
+This page answers frequently asked questions about the following CircleCI topics:
+
+[.table]
+
+[.table-scroll]
+--
+[cols=2*]
+|===
+| <<general>>
+|
+|===
+--
+
+[#general]
+== General
+
 [#does-circleci-look-at-my-code]
 === Does CircleCI look at my code?
 

@@ -58,6 +58,18 @@ Other cloud service deployments can be scripted using SSH, or by installing the 
 * link:https://circleci.com/blog/automate-and-scale-your-ci-cd-with-circleci-orbs/[Automate and scale your CI/CD with CircleCI orbs]
 * link:https://circleci.com/blog/secure-ci-pipeline/[How to secure your CI pipeline]
 
+[#request-new-features]
+== Request new features
+
+To request a new feature, or to view features that have already been requested, visit CircleCI's link:https://circleci.canny.io/[Ideas] page. To request a feature, first select a category from the *Give Feedback* section.
+
+When viewing requested features, you can sort by *Trending*, *Top*, and *New*, as well as filter by the following:
+
+* *Under Review*: CircleCI is considering these feature requests.
+* *Planned*: CircleCI has planned to work on these feature requests in the future.
+* *In Progress*: CircleCI is currently working on these feature requests.
+* *Complete*: CircleCI has added these feature requests to its current offerings.
+
 [#next-steps]
 == Next steps
 

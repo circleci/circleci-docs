@@ -278,7 +278,10 @@
   new: /guides/execute/executor-intro/
 
 - old: /faq/
-  new: /reference/faq/
+  new: /guides/about-circleci/about-circleci/
+
+- old: /reference/faq/
+  new: /guides/about-circleci/about-circleci/
 
 - old: /first-steps/
   new: /guides/getting-started/first-steps/
