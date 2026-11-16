@@ -610,7 +610,7 @@ jobs:
 
 For the `data_points` keys, the provider defaults, and how the engine matches an incoming signal to a check, see the xref:guides:deploy:release-validation-reference.adoc[Release Validation Configuration Reference] page.
 
-Use the `no-op` type to configure a job that performs no actions and consumes no credits. Teams commonly use `no-op` to organize the order of operations within a workflow and make it easier to maintain. A `no-op` type job needs only the `type` key, and requires no further job configuration. For some examples of using `no-op` jobs, see the xref:guides:orchestrate:orchestration-cookbook.adoc#use-no-op-jobs-to-create-a-cleaner-workflow-graph[Orchestration Cookbook].
+Use the `no-op` type to configure a job that performs no actions and consumes no credits. Teams commonly use `no-op` to organize the order of operations within a workflow and make it easier to maintain. A `no-op` type job needs only the `type` key, and requires no further job configuration. For some examples of using `no-op` jobs, see the xref:guides:orchestrate:no-op-job-recipes.adoc#use-no-op-jobs-to-create-a-cleaner-workflow-graph[Orchestration Cookbook].
 
 **Example** of a job with a `no-op` type:
 
@@ -4131,7 +4131,7 @@ If a pipeline parameter has a name that does not follow these rules, CircleCI pe
 [#expression-examples]
 === Expression examples
 
-You can find usage examples on the xref:guides:orchestrate:orchestration-cookbook.adoc#[Orchestration Cookbook] page.
+You can find usage examples on the xref:guides:orchestrate:conditional-recipes.adoc[Conditional Recipes] page.
 
 '''
 

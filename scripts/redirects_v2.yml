@@ -521,7 +521,10 @@
   new: /orbs/use/orb-intro/
 
 - old: /orchestration-cookbook/
-  new: /guides/orchestrate/orchestration-cookbook/
+  new: /guides/orchestrate/trigger-recipes/
+
+- old: /guides/orchestrate/orchestration-cookbook/
+  new: /guides/orchestrate/trigger-recipes/
 
 - old: /oss/
   new: /guides/integration/oss/
