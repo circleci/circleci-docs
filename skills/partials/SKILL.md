@@ -180,7 +180,7 @@ Use this when writing or editing a page, even if the user did not say "partial" 
    - Code: config snippets, workflow `when` clauses, job groups, serial groups → search `examples/`
 3. For each chunk, search the matching tree by filename and content.
 4. Read every candidate. Prefer the **most specific** file:
-   - Finding a project slug → `tips/find-project-slug.adoc`, not the generic project-settings steps
+   - Finding a project slug → link to `toolkit:how-to-find-ids.adoc#find-a-project-slug` with an xref. There is no partial for it
    - Finding a project or org ID → `app-navigation/steps-to-project-id.adoc` or `steps-to-org-id.adoc` (these already include the settings steps)
    - Checking GitHub App vs OAuth → `tips/check-github-type.adoc`
    - Current workflow/job expressions → `expression-examples/`, not `logic-statement-examples/`
@@ -203,7 +203,7 @@ Common starting points (still verify by reading the file):
 | Check organization type | `partials/tips/check-org-type.adoc` |
 | Check GitHub App vs OAuth | `partials/tips/check-github-type.adoc` |
 | Find organization ID | `partials/notes/find-organization-id.adoc` |
-| Find project slug | `partials/tips/find-project-slug.adoc` |
+| Find project slug | No partial. Use `xref:toolkit:how-to-find-ids.adoc#find-a-project-slug[Find a Project Slug]` |
 | Resource class table | Matching file in `partials/execution-resources/` |
 | Pipeline values reference | `partials/pipelines-and-triggers/pipeline-values.adoc` |
 | Branch or boolean workflow `when` | Matching file in `examples/expression-examples/workflow-when/` |

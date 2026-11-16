@@ -35,7 +35,7 @@ curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
 }' https://circleci.com/api/v2/project/{project_slug}/pipeline
 ```
 
-include::ROOT:partial$tips/find-project-slug.adoc[]
+To find your project slug, see xref:toolkit:how-to-find-ids.adoc#find-a-project-slug[Find a Project Slug].
 
 Refer to the xref:toolkit:api-developers-guide.adoc#getting-started-with-the-api[Getting Started With the API] section of the API Developer's Guide for more guidance on making requests.
 

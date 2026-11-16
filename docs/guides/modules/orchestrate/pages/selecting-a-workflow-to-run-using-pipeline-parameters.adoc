@@ -75,7 +75,7 @@ curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
   -d '{ "parameters": { "action": report } }'
 ----
 
-include::ROOT:partial$tips/find-project-slug.adoc[]
+To find your project slug, see xref:toolkit:how-to-find-ids.adoc#find-a-project-slug[Find a Project Slug].
 
 [#next-steps]
 == Next steps
