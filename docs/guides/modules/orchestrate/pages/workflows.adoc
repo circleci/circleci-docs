@@ -266,7 +266,7 @@ Some things to keep in mind when using manual approval in a workflow:
 * When the workflow encounters a job with `type: approval`, the workflow pauses until action is taken to approve or cancel.
 * If approval is granted, the workflow continues to process jobs in the order defined in the configuration file.
 * If cancel is granted, the downstream jobs are not run.
-* Jobs downstream of an `approval` job can be restricted by adding a xref:security:contexts.adoc#approve-jobs-that-use-restricted-contexts[Restricted Context] to those downstream jobs.
+* Jobs downstream of an `approval` job can be restricted by adding a xref:security:contexts.adoc#approve-jobs-that-use-restricted-contexts[Restricted Context] to those downstream jobs. A restricted context on the approval job itself does not control who can approve it.
 
 The following screenshot demonstrates:
 

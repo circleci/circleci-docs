@@ -312,7 +312,9 @@ workflows:
             - test
 ----
 
-In this example, the jobs `test` and `deploy` are restricted. The `deploy` job only runs if the user who approves the `hold` job is a member of the security group assigned to the context _and_ `deploy-key-restricted-context`. When the workflow `build-test-deploy` runs, the jobs `build` and `test` run, then the `hold` job runs and presents a manual approval button in the CircleCI application. _Any_ member of the project can approve this job, but the `deploy` job fails as `unauthorized` if the approver is not part of the restricted context security group.
+In this example, the jobs `test` and `deploy` are restricted. The `deploy` job only runs if the user who approves the `hold` job is a member of the security group assigned to `deploy-key-restricted-context`. When the workflow `build-test-deploy` runs, the jobs `build` and `test` run, then the `hold` job runs and presents a manual approval button in the CircleCI application. _Any_ member of the project can approve this job, but the `deploy` job fails as `unauthorized` if the approver is not part of the restricted context security group.
+
+A restricted context on the approval job itself does not control who can approve it. CircleCI checks the context when the approval job becomes ready, before anyone can approve it. If the check fails, the approval job fails as `unauthorized` straight away and never presents an approval button. If the check passes, any member of the project can approve the job. To control who can approve, add the restricted context to the jobs downstream of the approval job.
 
 [#security-group-restrictions]
 == Security group restrictions
