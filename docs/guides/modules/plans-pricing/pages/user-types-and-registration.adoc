@@ -54,7 +54,12 @@ An *active user* is any user (registered or unregistered) who triggers the use o
 
 NOTE: If your project is open source you will *not* be considered an active user.
 
-Active users are tracked for billing purposes. On the Free and Performance Plans, the first five active users are included. Additional active users beyond this limit are charged at 25,000 credits per user per month.
+Active users are tracked for billing purposes. On the Free and Performance Plans, the first five active users are included. Additional active users beyond this limit are charged per user per month:
+
+* Free and Performance Plans: 25,000 credits.
+* Scale Plan: 40,000 credits.
+
+The number of included users on the Scale Plan is set in your order.
 
 To find a list of your active users, log in to the CircleCI web app and navigate to menu:Plan[Plan Usage > Users].
 
