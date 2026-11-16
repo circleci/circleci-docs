@@ -22,4 +22,3 @@
 ** xref:environment-cli-usage-guide.adoc[Environment CLI usage guide]
 ** xref:insights-glossary.adoc[Insights metrics glossary]
 ** xref:troubleshoot.adoc[Troubleshoot]
-** xref:faq.adoc[FAQ]
