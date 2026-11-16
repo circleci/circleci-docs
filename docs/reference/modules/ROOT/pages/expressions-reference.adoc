@@ -79,6 +79,8 @@ A variable is a name that CircleCI replaces with a value when it evaluates the e
 * A variable name starts with a letter. It can contain letters, digits, hyphens (`-`), and underscores (`_`).
 * Use periods (`.`) to separate segments, as in `pipeline.git.branch`. A name cannot start with a period, and cannot contain consecutive periods.
 
+This applies to pipeline parameters too. If a pipeline parameter has a name that does not follow these rules, CircleCI performs string replacement instead of evaluating an expression.
+
 Valid names include `foo`, `foo.bar`, and `fo19-bar.baz_12`. Invalid names include `14bar`, `_bar`, `-bar`, `.bar`, and `foo..bar`.
 
 Referring to a variable that does not exist is an error. A variable that exists but has no value, such as `pipeline.git.branch` on a tag build, is _undefined_. See <<undefined-values>>.

@@ -4109,18 +4109,7 @@ For the operators, literals, and precedence rules you can use in expressions, se
 [#valid-parameter-names]
 === Valid parameter names
 
-To use a pipeline parameter in an expression, the parameter name must follow these rules:
-
-* Start with a letter.
-* Can contain upper-case letters (`A`-`Z`) and lower-case letters (`a`-`z`).
-* Can contain digits (`0`-`9`).
-* Can contain hyphens (`-`), underscores (`_`), and periods (`.`).
-* Cannot contain consecutive periods (`..`).
-
-[NOTE]
-====
-If a pipeline parameter has a name that does not follow these rules, CircleCI performs string replacement instead of evaluating an expression.
-====
+To use a pipeline parameter in an expression, its name must follow the rules for variable names in the xref:expressions-reference.adoc#variables[Expressions Reference].
 
 [#expression-examples]
 === Expression examples
