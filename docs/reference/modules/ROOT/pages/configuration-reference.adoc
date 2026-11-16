@@ -2361,7 +2361,7 @@ During step execution, CircleCI replaces the templates above with runtime values
 
 While choosing suitable templates for your cache `key`, keep in mind the following:
 
-* Cache saving is not a free operation. See xref:guides:optimize:persist-data.adoc#how-to-calculate-an-approximation-of-network-and-storage-costs[How to calculate an approximation of network and storage costs].
+* Cache saving is not a free operation. See xref:guides:optimize:persist-data.adoc#how-to-calculate-an-approximation-of-network-and-storage-costs[How to Calculate an Approximation of Network and Storage Costs].
 * It takes time to upload the cache.
 * Best practice is to have a `key` that generates a cache only if something actually changed, and avoid regenerating it every time a job is run.
 * Because caches are immutable, start all your cache keys with a version prefix `+v1-...+`. This lets you regenerate all your caches by incrementing the version in this prefix.

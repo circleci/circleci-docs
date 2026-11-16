@@ -215,7 +215,7 @@ To calculate your monthly storage and network costs, select menu:Plan[Plan Usage
 * *Storage*: Select the *Storage* tab to see if your organization has accrued any overages beyond the GB-monthly allotment. Multiply your overage (GB-Months/TB-Months) by 420 credits to estimate the total monthly cost. For example, 2 GB-Months overage x 420 credits = 840 credits ($0.50).
 * *Network*: Multiply your network overage GB/TB by 420 credits to estimate the total monthly cost. For example, 2 GB overage x 420 credits = 840 credits ($0.50).
 
-For data usage for the IP ranges feature, see xref:security:ip-ranges.adoc#pricing[IP ranges feature pricing].
+For data usage for the IP ranges feature, see xref:security:ip-ranges.adoc#pricing[IP Ranges Feature Pricing].
 
 [#reducing-excess-use-of-network-egress-and-storage]
 === Reducing excess use of network egress and storage

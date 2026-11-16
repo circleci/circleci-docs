@@ -88,7 +88,7 @@ If CAR is not enabled, your builds are blocked when your credits are exhausted, 
 
 For example:
 
-. Your order is for 2 years and includes 400M credits split across 4 semi-annual allocations of 100M credits each.
+. Your order is for two years and includes 400M credits split across four semi-annual allocations of 100M credits each.
 . After nine months, you have used your available credits and your balance runs low before the next scheduled credit allocation interval date.
 .. If CAR is *enabled*, CAR provides credits until your next 100M credit allocation is provisioned on its scheduled date.
 .. If CAR is *not enabled*, builds are blocked until the next scheduled credit allocation interval date.
@@ -125,7 +125,7 @@ Prepaid billing is a payment option for customers on the Performance plan. Prepa
 When you use prepaid billing:
 
 * Your credit card is charged immediately when you select prepaid billing. When you run out of credits, your credit package is automatically renewed at the purchase level you selected, and your credit card is charged again for the refill.
-* You still receive 30,000 credits and 5 free user seats every month.
+* You still receive 30,000 credits and five free user seats every month.
 * If you switch from a monthly subscription, you keep access to any balance credits previously purchased, and the 12-month expiry date remains.
 
 To switch to prepaid billing:
