@@ -99,7 +99,7 @@ jobs:
       - checkout
 ----
 
-For operators and more examples, see xref:reference:ROOT:configuration-reference.adoc#using-expressions-in-your-configuration[Using Expressions in Your Configuration].
+For operators and more examples, see the xref:reference:ROOT:expressions-reference.adoc[Expressions Reference].
 
 [#config-templating-vs-dynamic-configuration]
 == How this differs from dynamic configuration
