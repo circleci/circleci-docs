@@ -18,10 +18,8 @@ This page answers frequently asked questions about the following CircleCI topics
 | <<general>>
 | <<pipelines>>
 
-
-| <<author-orbs>>
 | <<billing>>
-
+|
 |===
 --
 
@@ -30,11 +28,6 @@ This page answers frequently asked questions about the following CircleCI topics
 
 include::guides:ROOT:partial$faq/general-faq-snip.adoc[]
 
-
-[#author-orbs]
-== Author orbs
-
-include::guides:ROOT:partial$faq/orb-author-faq-snip.adoc[]
 
 [#pipelines]
 == Pipelines
