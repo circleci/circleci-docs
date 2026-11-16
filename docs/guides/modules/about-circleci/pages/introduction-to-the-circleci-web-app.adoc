@@ -359,7 +359,7 @@ In terms of network and storage, usage can be tricky to understand, so it is sug
 .Network Usage
 image::guides:ROOT:web_ui_plan_network.png[Network Usage]
 
-You can learn more about billing in the billing section of the xref:reference:ROOT:faq.adoc#billing[FAQ] page.
+You can learn more about billing in the xref:plans-pricing:credits.adoc#billing[Billing] section of the Using Credits page.
 
 === Usage controls
 
