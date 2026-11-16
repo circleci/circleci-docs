@@ -150,4 +150,4 @@ If your jobs use the Docker executor and you find that they are "preparing" for 
 [#questions-and-comments]
 == Questions and comments
 
-For any further questions, do not hesitate to link:https://support.circleci.com/hc/en-us/requests/new[open a support ticket].
+For any further questions, link:https://support.circleci.com/hc/en-us/requests/new[open a support ticket].
