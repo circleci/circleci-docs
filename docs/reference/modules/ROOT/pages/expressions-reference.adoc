@@ -1,0 +1,241 @@
+= Expressions reference
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Reference for the CircleCI expression syntax, including literals, operators, precedence, and how expressions are evaluated.
+:experimental:
+
+CircleCI expressions are small boolean and value expressions that CircleCI evaluates against a set of variables, such as pipeline values. Several CircleCI features accept expressions, and they all use the syntax described on this page.
+
+For example:
+
+[source]
+----
+pipeline.git.branch == "main" and not (pipeline.trigger_source starts-with "api")
+----
+
+CircleCI evaluates expressions with the open source link:https://github.com/CircleCI-Public/expr[`expr`] library.
+
+[#where-you-can-use-expressions]
+== Where you can use expressions
+
+The syntax is the same everywhere. What differs between features is where the expression is written, which variables are available, and when it is evaluated.
+
+[.table-scroll]
+--
+[cols="1,2,2", options="header"]
+|===
+| Feature | Variables available | More information
+
+| Job filters and workflow `when` or `unless` in config
+| Pipeline values and pipeline parameters. CircleCI evaluates the expression when it compiles the configuration, so environment variables are not available.
+| xref:configuration-reference.adoc#using-expressions-in-your-configuration[Using Expressions in Your Configuration]
+
+| Other fields in config, wrapped in `<< >>`
+| Pipeline values and pipeline parameters.
+| xref:configuration-reference.adoc#expressions-in-config-fields[Expressions in Configuration Fields]
+
+| Context expression restrictions
+| Pipeline values (except `pipeline.trigger_parameters.*`) and job values such as `job.ssh.enabled`. Pipeline parameters are not available.
+| xref:guides:security:contexts.adoc#expression-restrictions[Expression Restrictions]
+|===
+--
+
+[#literals]
+== Literals
+
+[#numbers]
+=== Numbers
+
+Numeric literals are whole integers. For example, `1` or `768`.
+
+[#strings]
+=== Strings
+
+Enclose string literals in double quotes (`" "`). Use `\` to escape an embedded quote or an embedded `\`.
+
+For example, `"the quick brown fox"` or `"You can embed \" and \\ characters"`.
+
+[#booleans]
+=== Booleans
+
+The boolean literals are `true` and `false`.
+
+[#patterns]
+=== Regular expression patterns
+
+Enclose regular expression patterns in forward slashes (`/ /`). Use `\` to escape an embedded `/` or `\`. For example, `/hello\s+world/`.
+
+* The pattern syntax is link:https://github.com/google/re2/wiki/syntax[re2], limited to ASCII and Latin-1 characters in the pattern. Special characters such as `.` can still match any Unicode character.
+* Capturing groups are allowed in a pattern, but you cannot use the captured values in an expression.
+
+[#variables]
+== Variables
+
+A variable is a name that CircleCI replaces with a value when it evaluates the expression, for example `pipeline.git.branch`.
+
+* A variable name starts with a letter. It can contain letters, digits, hyphens (`-`), and underscores (`_`).
+* Use periods (`.`) to separate segments, as in `pipeline.git.branch`. A name cannot start with a period, and cannot contain consecutive periods.
+
+Valid names include `foo`, `foo.bar`, and `fo19-bar.baz_12`. Invalid names include `14bar`, `_bar`, `-bar`, `.bar`, and `foo..bar`.
+
+Referring to a variable that does not exist is an error. A variable that exists but has no value, such as `pipeline.git.branch` on a tag build, is _undefined_. See <<undefined-values>>.
+
+The variables available to an expression depend on the feature. See <<where-you-can-use-expressions>>.
+
+[#operators]
+== Operators
+
+You can group sub-expressions with parentheses `(` and `)`.
+
+[.table-scroll]
+--
+[cols="1,1,2", options="header"]
+|===
+| Type | Operators | Description
+
+| Logical
+| `and`, `or`
+| Short-circuiting boolean operators.
+
+| Equality
+| `==`, `!=`
+| String, numeric, and boolean equality. If the operands are of different types, `==` evaluates to `false` and `!=` evaluates to `true`.
+
+| Comparison
+| `>=`, `>`, `<=`, `<`
+| Numeric comparison. It is an error to use a non-numeric operand.
+
+| Negation
+| `not`, `!`
+| Boolean negation. See <<precedence>> for how tightly `not` binds.
+
+| String
+| `starts-with`
+| String prefix equality. `"hello world" starts-with "hello"` evaluates to `true`. It is an error to use a non-string operand.
+
+| String
+| `contains`
+| Matches if the right operand is part of the left operand. `"hello world" contains "lo wo"` evaluates to `true`. Both operands must be strings.
+
+| String
+| `matches`
+| Regular expression match against the entire string. `"hello world" matches /hello.*/` evaluates to `true`. The left operand must be a string and the right operand must be a pattern.
+|===
+--
+
+`starts-with`, `contains`, and `matches` are written between their two operands, in the same way as `==`.
+
+[#precedence]
+== Precedence
+
+The following table shows operator precedence from weakest to strongest binding. All operators are left associative.
+
+[.table-scroll]
+--
+[cols="2,1", options="header"]
+|===
+| Operator | Associativity
+
+| `or`
+| left
+
+| `and`
+| left
+
+| `==`, `!=`, `starts-with`, `contains`, `matches`
+| left
+
+| `>=`, `>`, `<=`, `<`
+| left
+
+| `not`, `!`
+|
+|===
+--
+
+`not` binds very tightly. Use parentheses to apply `not` to a more complex expression. For example, with `foo` being `true` and `bar` being `false`:
+
+* `not foo and bar` evaluates to `false`.
+* `not (foo and bar)` evaluates to `true`.
+
+Avoid chaining operators other than `and` and `or`. Chained operators can cause type mismatches.
+
+[#evaluation]
+== Evaluation
+
+CircleCI evaluates an expression from its variables and operators, one step at a time. The result of each operator is used in place as evaluation continues.
+
+For example, take this expression:
+
+[source]
+----
+pipeline.git.branch == "main"
+and not job.ssh.enabled
+and not (pipeline.config_source starts-with "api")
+----
+
+With these values:
+
+* `pipeline.git.branch` is `"main"`.
+* `job.ssh.enabled` is `false`.
+* `pipeline.config_source` is `"api"`.
+
+The evaluation steps are as follows:
+
+. Look up `pipeline.git.branch`: `"main" == "main" and not job.ssh.enabled and not (pipeline.config_source starts-with "api")`
+. Evaluate `"main" == "main"`: `true and not job.ssh.enabled and not (pipeline.config_source starts-with "api")`
+. Look up `job.ssh.enabled`: `true and not false and not (pipeline.config_source starts-with "api")`
+. Evaluate `not false`: `true and true and not (pipeline.config_source starts-with "api")`
+. Evaluate `true and true`: `true and not (pipeline.config_source starts-with "api")`
+. Look up `pipeline.config_source`: `true and not ("api" starts-with "api")`
+. Evaluate `"api" starts-with "api"`: `true and not true`
+. Evaluate `not true`: `true and false`
+. Evaluate `true and false`: `false`
+
+The expression evaluates to `false`.
+
+[#undefined-values]
+=== Undefined values
+
+A variable that exists but has no value is _undefined_. An undefined value is not equal to anything, including itself.
+
+* If an equality or comparison operator has an undefined operand, the result is undefined. For example, when `foo` is undefined, `foo == foo`, `foo != 1`, `foo > 3`, and `"hello" starts-with foo` are all undefined.
+* In a logical operator, CircleCI treats an undefined operand as `false` but preserves the undefined value. This lets you provide a fallback:
+** `foo or 12` evaluates to `12`.
+** `12 or foo` evaluates to `12`.
+** `foo and "hello"` evaluates to undefined.
+** `not foo` evaluates to `true`.
+* If the final result of an expression is undefined, it is treated as `false`.
+
+[#grammar]
+== Grammar
+
+The following grammar describes the syntax in full:
+
+[source]
+----
+expression -> logic_or
+logic_or   -> logic_and ( "or" logic_and )*
+logic_and  -> equality ( "and" equality )*
+equality   -> comparison ( ( "==" | "!=" | BUILTIN ) comparison )*
+comparison -> unary ( ( ">=" | ">" | "<=" | "<" ) unary )*
+unary      -> "not" unary | primary
+primary    -> "true" | "false" | NUMBER | STRING | IDENTIFIER | PATTERN | "(" expression ")"
+----
+
+`BUILTIN` is one of `starts-with`, `contains`, or `matches`.
+
+[#errors]
+== Errors
+
+Evaluating an expression fails with an error in the following cases:
+
+* A variable does not exist.
+* An operand of a numeric comparison operator is not a number.
+* An operand of `starts-with` or `contains` is not a string.
+* The left operand of `matches` is not a string, or the right operand is not a pattern.
+
+What happens next depends on the feature. For example, a context expression restriction that fails to evaluate prevents the context from being used.

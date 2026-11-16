@@ -3653,11 +3653,7 @@ curl -X POST https://circleci.com/api/v2/project/circleci/<org-id>/<project-id>/
   }
 ----
 
-**Operators**
-
-The operators you can use for expression-based job filters are described in the following table. You can also group sub-expressions with parentheses `(`, `)` as in the examples above.
-
-include::guides:ROOT:partial$using-expressions/operators.adoc[]
+For the operators you can use in expression-based job filters, see the xref:expressions-reference.adoc#operators[Expressions Reference].
 
 '''
 
@@ -4025,7 +4021,7 @@ workflows:
 
 == Using expressions in your configuration
 
-CircleCI configuration supports expressions for dynamic value evaluation. Expressions can include pipeline values, pipeline parameters, and literals. They also support operators such as `and`, `or`, and comparison operators.
+CircleCI configuration supports expressions for dynamic value evaluation. Expressions can include pipeline values, pipeline parameters, and literals. They also support operators such as `and`, `or`, and comparison operators. For the full syntax, see the xref:expressions-reference.adoc[Expressions Reference].
 
 The job `filters`, and workflow `when` and `unless` fields accept expressions directly. For other fields wrap the expression in `<<` and `>>`.
 
@@ -4108,9 +4104,7 @@ parallelism: << pipeline.git.branch == "main" and 10 or 1 >>
 [#expression-operators]
 === Expression operators
 
-The operators you can use for expressions are described in the following table. You can also group sub-expressions with parentheses `(`, `)`.
-
-include::guides:ROOT:partial$using-expressions/operators.adoc[]
+For the operators, literals, and precedence rules you can use in expressions, see the xref:expressions-reference.adoc[Expressions Reference].
 
 [#valid-parameter-names]
 === Valid parameter names

@@ -122,7 +122,7 @@ Confirm the file still exists before inserting.
 | `orbs/` | Orb type definitions and comparison table |
 | `pipelines-and-triggers/` | Schedule triggers, custom webhooks, pipeline values |
 | `execution-resources/` | Executor resource class tables and related notices |
-| `using-expressions/` | Expression operators and env-var caveats |
+| `using-expressions/` | Expression env-var caveats |
 | `deploy/` | Deploy/release shared sections (supported versions, validation providers) |
 | `prerequisites/` | Shared prerequisite bullets (for example org admin) |
 | `shared-sections/` | Longer shared sections (API token, secrets masking, product features) |
