@@ -645,7 +645,7 @@ This example prevents the workflow `integration_tests` from running unless the `
 ----
 
 ifndef::server[]
-For more examples of using conditional logic in your workflows, see the xref:conditional-recipes.adoc[conditional recipes].
+For more examples of using conditional logic in your workflows, see the xref:conditional-recipes.adoc[Conditional Recipes].
 endif::server[]
 
 ifndef::server[]
