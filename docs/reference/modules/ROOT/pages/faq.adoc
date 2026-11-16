@@ -16,13 +16,10 @@ This page answers frequently asked questions about the following CircleCI topics
 [cols=2*]
 |===
 | <<general>>
-
 | <<migration>>
-| <<pipelines>>
 
-| <<author-orbs>>
+| <<pipelines>>
 | <<billing>>
-|
 |===
 --
 
@@ -35,11 +32,6 @@ include::guides:ROOT:partial$faq/general-faq-snip.adoc[]
 == Migration
 
 include::guides:ROOT:partial$faq/migration-faq-snip.adoc[]
-
-[#author-orbs]
-== Author orbs
-
-include::guides:ROOT:partial$faq/orb-author-faq-snip.adoc[]
 
 [#pipelines]
 == Pipelines
