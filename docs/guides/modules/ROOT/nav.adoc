@@ -43,6 +43,10 @@
 *** xref:orchestrate:pipeline-variables.adoc[Pipeline values and parameters]
 *** xref:orchestrate:config-templating.adoc[Config templating]
 *** xref:orchestrate:use-a-github-actions-workflow-file-as-your-pipeline-configuration.adoc[Use a GitHub Actions workflow file as your pipeline configuration]
+*** xref:orchestrate:set-up-multiple-configuration-files-for-a-project.adoc[Set up multiple configuration files for a project]
+*** xref:orchestrate:how-to-override-config.adoc[Override configuration]
+*** xref:orchestrate:using-shell-scripts.adoc[Using shell scripts]
+*** xref:orchestrate:migrate-from-deploy-to-run.adoc[Migrate from deploy to run]
 ** Trigger pipelines
 *** xref:orchestrate:triggers-overview.adoc[Trigger options]
 *** xref:orchestrate:set-up-triggers.adoc[Set up triggers]
@@ -65,15 +69,13 @@
 *** xref:orchestrate:notify-a-slack-channel-of-a-paused-workflow.adoc[Notify a Slack channel of a paused workflow]
 ** Share data
 *** xref:orchestrate:workspaces.adoc[Use workspaces to share data between jobs]
-** Advanced configuration
-*** xref:orchestrate:orchestration-cookbook.adoc[Orchestration cookbook]
+** Orchestration cookbook
+*** xref:orchestrate:trigger-recipes.adoc[Trigger and event recipes]
+*** xref:orchestrate:conditional-recipes.adoc[Conditional recipes]
+*** xref:orchestrate:no-op-job-recipes.adoc[No-op job recipes]
+** Dynamic configuration
 *** xref:orchestrate:dynamic-config.adoc[Dynamic configuration overview]
 *** xref:orchestrate:using-dynamic-configuration.adoc[Using dynamic configuration]
-*** xref:orchestrate:how-to-override-config.adoc[Override configuration]
-*** xref:orchestrate:set-up-multiple-configuration-files-for-a-project.adoc[Set up multiple configuration files for a project]
-*** xref:orchestrate:databases.adoc[Configure databases]
-*** xref:orchestrate:migrate-from-deploy-to-run.adoc[Migrate from deploy to run]
-*** xref:orchestrate:using-shell-scripts.adoc[Using shell scripts]
 
 * Execution environments
 ** Overview
@@ -87,6 +89,7 @@
 *** xref:execute:custom-images.adoc[Using custom-built Docker images]
 *** xref:execute:private-images.adoc[Docker authenticated pulls]
 *** xref:execute:building-docker-images.adoc[Running Docker commands]
+*** xref:orchestrate:databases.adoc[Configure databases]
 ** Linux VM
 *** xref:execute:using-linuxvm.adoc[Using the Linux VM execution environment]
 *** xref:execute:android-machine-image.adoc[Using Android images with the machine executor]

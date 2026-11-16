@@ -221,4 +221,4 @@ Your pipeline will trigger whenever a PR is opened or merged.
 
 == Next steps
 
-For more examples of using GitHub App trigger options, see the xref:orchestration-cookbook.adoc[Orchestration Cookbook].
+For more examples of using GitHub App trigger options, see the xref:trigger-recipes.adoc[trigger and event recipes].
