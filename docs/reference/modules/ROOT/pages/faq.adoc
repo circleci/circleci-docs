@@ -16,10 +16,7 @@ This page answers frequently asked questions about the following CircleCI topics
 [cols=2*]
 |===
 | <<general>>
-| <<pipelines>>
-
 | <<billing>>
-|
 |===
 --
 
@@ -27,12 +24,6 @@ This page answers frequently asked questions about the following CircleCI topics
 == General
 
 include::guides:ROOT:partial$faq/general-faq-snip.adoc[]
-
-
-[#pipelines]
-== Pipelines
-
-include::guides:ROOT:partial$faq/pipelines-faq-snip.adoc[]
 
 [#billing]
 == Billing
