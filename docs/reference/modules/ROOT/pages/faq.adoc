@@ -16,12 +16,12 @@ This page answers frequently asked questions about the following CircleCI topics
 [cols=2*]
 |===
 | <<general>>
-
 | <<pipelines>>
-| <<orbs>>
+
 
 | <<author-orbs>>
 | <<billing>>
+
 |===
 --
 
@@ -30,10 +30,6 @@ This page answers frequently asked questions about the following CircleCI topics
 
 include::guides:ROOT:partial$faq/general-faq-snip.adoc[]
 
-[#orbs]
-== Orbs
-
-include::guides:ROOT:partial$faq/orb-faq-snip.adoc[]
 
 [#author-orbs]
 == Author orbs
