@@ -47,8 +47,14 @@ image::guides:ROOT:rerun-job-with-ssh.png[Screenshot showing rerun job with SSH 
 +
 NOTE: After clicking btn:[Rerun Job With SSH], if your job does not populate the Enable SSH step, you have not added an SSH key to your cloudlink:job-ssh-keys[User Settings].
 +
+ifndef::server[]
+.Screenshot showing SSH connection details in the Enable SSH section
+image::guides:ROOT:rerun-job-connect-ssh-circleci-com.png[Screenshot showing the Enable SSH section with the command to connect to the job through ssh.circleci.com]
+endif::server[]
+ifdef::server[]
 .Screenshot showing SSH connection details in the Enable SSH section
 image::guides:ROOT:rerun-job-connect.png[Screenshot showing SSH connection details in the Enable SSH section]
+endif::server[]
 
 . Run the connection command given in the job output.
 +
