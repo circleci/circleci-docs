@@ -156,7 +156,7 @@ This section describes CLI v1. CLI v0 asks for your consent before it collects a
 
 The CLI collects Usage Data so we can understand how the CLI is used and so we can improve it. We analyze how people and AI coding agents set up and use features such as Smarter Testing. We call the collection of Usage Data by the CLI "Telemetry," which is enabled by default. Telemetry can be disabled by setting `CI=true` in the environment.
 
-Usage Data is sent to CircleCI through Segment and Amplitude, which each process it on our behalf.
+Usage Data is sent to CircleCI through Segment and Amplitude. Each processes Usage Data on our behalf.
 
 For each command invocation, the CLI records the following:
 
