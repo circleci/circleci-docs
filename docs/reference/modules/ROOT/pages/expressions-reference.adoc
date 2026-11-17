@@ -2,7 +2,7 @@
 :page-platform: Cloud, Server
 :page-vcs: all
 :page-plan: Free, Performance, Scale
-:page-server-min-version: "4.7"
+:page-server-min-version: "4.8"
 :page-audience: developer
 :page-description: Reference for the CircleCI expression syntax, including literals, operators, precedence, and how expressions are evaluated.
 :experimental:
@@ -38,8 +38,12 @@ What differs between features is where the expression is written, which variable
 | xref:configuration-reference.adoc#expressions-in-config-fields[Expressions in Configuration Fields]
 
 | Context expression restrictions
-| Pipeline values (except `pipeline.trigger_parameters.*`) and the job value `job.ssh.enabled`. Pipeline parameters are not available.
+| Pipeline values (except `pipeline.trigger_parameters.*`) and the job value `job.ssh.enabled`. Pipeline parameters (`pipeline.parameters.*`) are not available, because people who trigger a pipeline can set them, and trigger inputs must not decide whether a context is available.
 | xref:guides:security:contexts.adoc#expression-restrictions[Expression Restrictions]
+
+| Release validation `fail_when`
+| The fields that `data_points` extracts from the webhook payload, usually `criteria`. CircleCI converts values to lowercase before it evaluates the expression. The `in` operator and list literals are not supported. Use `criteria == "firing" or criteria == "pending"` instead of `criteria in ['firing', 'pending']`.
+| xref:guides:deploy:release-validation-reference.adoc[Release Validation Reference]
 |===
 --
 
@@ -132,7 +136,7 @@ You can group sub-expressions with parentheses `(` and `)`.
 | Numeric comparison. It is an error to use a non-numeric operand.
 
 | Negation
-| `not`, `!`
+| `not`
 | Boolean negation. `not` applies only to the single operand immediately after it. See <<precedence>>.
 
 | String
@@ -148,8 +152,6 @@ You can group sub-expressions with parentheses `(` and `)`.
 | Regular expression match against the entire string. `"hello world" matches /hello.*/` evaluates to `true`. The left operand must be a string and the right operand must be a pattern.
 |===
 --
-
-In YAML, a value that starts with `!` is read as a tag, so an unquoted `when: !(pipeline.git.branch == "main")` fails to parse. Quote the expression, as in `when: '!(pipeline.git.branch == "main")'`, or use `not`.
 
 [#precedence]
 == Precedence
@@ -174,7 +176,7 @@ The following table shows operator precedence from weakest to strongest binding.
 | `>=`, `>`, `<=`, `<`
 | left
 
-| `not`, `!`
+| `not`
 |
 |===
 --
