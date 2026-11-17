@@ -785,7 +785,7 @@ To resolve this error, use "Rerun workflow from failed" to rerun all tests.  "Re
 [#cypress-reruns-all-tests]
 === Cypress job reruns all tests
 
-If you use Cypress and your job uploads test results, but the failed test rerun still runs all tests instead of just the failed tests, the JUnit XML files may not have the proper metadata for the failed tests rerun. Use the link:https://www.npmjs.com/package/cypress-circleci-reporter[`cypress-circleci-reporter` package] to ensure the test results being uploaded have the proper JUnit XML format.
+If you use Cypress and your job uploads test results, the failed test rerun may still run all tests instead of just the failed tests. In that case, the JUnit XML files may not have the proper metadata for the failed tests rerun. Use the link:https://www.npmjs.com/package/cypress-circleci-reporter[`cypress-circleci-reporter` package] to ensure the test results being uploaded have the proper JUnit XML format.
 
 [#maven-surefire]
 === Maven surefire tests fail during setup
