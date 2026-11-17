@@ -16,7 +16,7 @@ For example:
 pipeline.git.branch == "main" and not (pipeline.trigger_source starts-with "api")
 ----
 
-CircleCI evaluates expressions with the open source link:https://github.com/CircleCI-Public/expr[`expr`] library.
+CircleCI evaluates expressions with the link:https://github.com/CircleCI-Public/expr[`expr`] library.
 
 [#where-you-can-use-expressions]
 == Where you can use expressions
@@ -34,7 +34,7 @@ What differs between features is where the expression is written, which variable
 | xref:configuration-reference.adoc#using-expressions-in-your-configuration[Using Expressions in Your Configuration]
 
 | Other fields in config, wrapped in `<< >>`
-| Pipeline values and pipeline parameters.
+| Pipeline values and pipeline parameters. Environment variables are not available, because CircleCI evaluates the expression when it compiles the configuration, before environment values exist.
 | xref:configuration-reference.adoc#expressions-in-config-fields[Expressions in Configuration Fields]
 
 | Context expression restrictions
@@ -74,7 +74,17 @@ Enclose regular expression patterns in forward slashes (`/ /`). Use `\` to escap
 [#variables]
 == Variables
 
-A variable is a name that CircleCI replaces with a value when it evaluates the expression, for example `pipeline.git.branch`.
+A variable is a name that CircleCI replaces with a value when it evaluates the expression. Expressions can use the following kinds of variable:
+
+* Pipeline values, such as `pipeline.git.branch`. See xref:guides:orchestrate:pipeline-variables.adoc#pipeline-values[Pipeline Values].
+* Pipeline parameters, referenced as `pipeline.parameters.<name>`. See xref:guides:orchestrate:pipeline-variables.adoc#pipeline-parameters-in-configuration[Pipeline Parameters].
+* Job values, such as `job.ssh.enabled`. These are available only in context expression restrictions.
+
+include::guides:ROOT:partial$using-expressions/env-vars-in-conditional-caveat.adoc[]
+
+Which of these are available depends on the feature. See <<where-you-can-use-expressions>>.
+
+Variable names follow these rules:
 
 * A variable name starts with a letter. It can contain letters, digits, hyphens (`-`), and underscores (`_`).
 * Use periods (`.`) to separate segments, as in `pipeline.git.branch`. A name cannot start with a period, and cannot contain consecutive periods.
@@ -96,8 +106,6 @@ Invalid names:
 * `foo..bar`: cannot contain consecutive periods.
 
 Referring to a variable that does not exist is an error. A variable that exists but has no value, such as `pipeline.git.branch` on a tag build, is _undefined_. See <<undefined-values>>.
-
-The variables available to an expression depend on the feature. See <<where-you-can-use-expressions>>.
 
 [#operators]
 == Operators
@@ -124,7 +132,7 @@ You can group sub-expressions with parentheses `(` and `)`.
 
 | Negation
 | `not`, `!`
-| Boolean negation. See <<precedence>> for how tightly `not` binds.
+| Boolean negation. `not` applies only to the single operand immediately after it. See <<precedence>>.
 
 | String
 | `starts-with`
@@ -168,12 +176,12 @@ The following table shows operator precedence from weakest to strongest binding.
 |===
 --
 
-`not` binds very tightly. Use parentheses to apply `not` to a more complex expression. For example, with `foo` being `true` and `bar` being `false`:
+`not` has the highest precedence, so CircleCI applies it before any other operator. It applies only to the single operand immediately after it. To negate a larger expression, put the expression in parentheses. For example, when `foo` is `true` and `bar` is `false`:
 
-* `not foo and bar` evaluates to `false`.
-* `not (foo and bar)` evaluates to `true`.
+* `not foo and bar` is read as `(not foo) and bar`, so it evaluates to `false`.
+* `not (foo and bar)` negates the whole parenthesized expression, so it evaluates to `true`.
 
-Avoid chaining operators other than `and` and `or`. Chained operators can cause type mismatches.
+Avoid chaining operators other than `and` and `or`. CircleCI evaluates chained operators from left to right, and the result of the first operator becomes an operand of the next. For example, `1 < 2 < 3` is read as `(1 < 2) < 3`. This compares the boolean `true` with the number `3`, which is an error.
 
 [#evaluation]
 == Evaluation
@@ -194,6 +202,18 @@ With these values:
 * `pipeline.git.branch` is `"main"`.
 * `job.ssh.enabled` is `false`.
 * `pipeline.config_source` is `"api"`.
+
+CircleCI evaluates the expression from the inside out, as shown in the following diagram. Each box shows an operator and the value it produces.
+
+.How CircleCI evaluates the example expression
+[mermaid]
+----
+flowchart BT
+    Branch["pipeline.git.branch == #quot;main#quot;<br/>true"] --> And1["and<br/>true"]
+    Ssh["not job.ssh.enabled<br/>true"] --> And1
+    And1 --> And2["and<br/>false"]
+    Api["not (pipeline.config_source<br/>starts-with #quot;api#quot;)<br/>false"] --> And2
+----
 
 The evaluation steps are as follows:
 
