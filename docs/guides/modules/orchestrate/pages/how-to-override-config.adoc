@@ -315,6 +315,14 @@ For each project using the centralized configuration, the platform team needs to
 * Ensure the organization has the CircleCI GitHub App or the CircleCI Origin app installed. One of these integrations is required to use a config source outside the project repository. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide] for more information.
 * Create a pipeline definition pointing to the central template configuration. This means setting up a pipeline in which the config source is outside the project repository. The config source will be the centralized, _template_ configuration managed by the platform team.
 
+[#limitations]
+== Limitations
+
+* Overriding workflow configuration elements, such as a job's `type`, `requires`, `context`, or `filters`, is not supported. These must be defined in the centralized workflow configuration.
+* Config overrides only support job overrides at this time. Overriding entire workflows is not supported.
+* Schedule triggers are not supported for GitLab projects, so they cannot be triggered from a centralized config.
+* The override mechanism works for GitHub OAuth projects, but there is no way to enforce a single config across multiple OAuth projects within the CircleCI platform. The "centralized" config would need to be duplicated in each project.
+
 [#transitioning-to-centralized-configs]
 == Transitioning to centralized configs
 Follow these steps to migrate existing projects to a centralized configuration model:
@@ -324,6 +332,8 @@ Follow these steps to migrate existing projects to a centralized configuration m
 . *Remove duplicate workflows:* Remove workflow definitions from individual project repositories as they are now defined in the central config.
 . *Remove duplicate job definitions:* Remove standard job definitions from project repositories, keeping only those that need customization.
 . *Implement overrides:* For jobs requiring customization, implement the override mechanism using the steps outlined above.
+
+CircleCI provides a link:https://github.com/CircleCI-Public/terraform-provider-circleci[Terraform provider] that can help automate the setup of projects with standardized configurations. This can be useful when implementing configuration overrides across multiple projects.
 
 [#troubleshooting]
 == Troubleshooting
@@ -370,27 +380,6 @@ If changes to your centralized configuration are not taking effect, check the fo
 * Check if you are using the correct branch reference in your pipeline definition.
 * Verify that your project uses a GitHub App or Cursor Origin pipeline.
 * Check for syntax errors in your configuration using the CircleCI CLI validator.
-
-[#frequently-asked-questions]
-== Frequently asked questions
-
-=== Can I override a job's workflow config?
-No, the current implementation does not support overriding workflow configuration elements, such as a job's `type`, `requires`, `context`, or `filters`. These must be defined in the centralized workflow configuration.
-
-=== Do I need GitHub App or Cursor Origin?
-GitHub App and Cursor Origin provide the best experience for centralized configuration management. Without one of these integrations, you would need to duplicate the centralized config across multiple repositories.
-
-=== Can I use this with legacy GitHub OAuth projects?
-The override mechanism will work for GitHub OAuth projects, but there is no way to enforce a single config across multiple OAuth projects within the CircleCI platform. The "centralized" config would need to be duplicated in each project.
-
-=== Are schedule triggers supported?
-Schedule triggers are not supported for GitLab projects, so they cannot be triggered from a centralized config.
-
-=== Can I override entire workflows?
-Config overrides only support job overrides at this time.
-
-=== How do I implement this with Terraform?
-CircleCI provides a link:https://github.com/CircleCI-Public/terraform-provider-circleci[Terraform provider] that can help automate the setup of projects with standardized configurations. This can be useful when implementing configuration overrides across multiple projects.
 
 [#conclusion]
 == Conclusion
