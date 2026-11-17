@@ -16,7 +16,7 @@ include::guides:ROOT:partial$notes/docker-auth.adoc[]
 
 * Install the CircleCI CLI so that you have access to the `circleci config process` command (optional). This command lets you see the expanded configuration with all reusable keys processed. Follow the xref:guides:toolkit:local-cli.adoc[Using the CircleCI CLI] documentation for installation instructions and tips.
 * CircleCI reusable configuration elements require a *`version: 2.1`* `.circleci/config.yml` file.
-* Command and executor names must start with a letter and can only contain lowercase letters (`a`-`z`), digits (`0`-`9`), underscores (`_`) and hyphens (`-`). Job names can also contain uppercase letters and spaces. Parameter names can also contain uppercase letters.
+* Command and executor names must start with a letter and can only contain lowercase letters (`a`-`z`), digits (`0`-`9`), underscores (`_`) and hyphens (`-`). Job names follow the same rules but can also contain uppercase letters and spaces. Parameter names do not have to follow these rules. To use a pipeline parameter in an expression, its name must follow the xref:configuration-reference.adoc#valid-parameter-names[Valid Parameter Names] rules.
 
 [#using-the-parameters-declaration]
 == Using the parameters declaration
