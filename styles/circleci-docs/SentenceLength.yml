@@ -3,5 +3,6 @@ message: "Write short sentences (less than 30 words)."
 extends: occurrence
 scope: sentence
 level: error
+link: https://circleci.com/docs/style/style-and-voice/#keep-sentences-readable
 max: 30
 token: \b(\w+)\b

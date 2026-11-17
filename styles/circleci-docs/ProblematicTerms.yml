@@ -1,6 +1,7 @@
 extends: substitution
 message: Use '%s' instead of '%s'.
 level: error
+link: https://circleci.com/docs/style/style-and-voice/#word-choices
 ignorecase: true
 # swap maps tokens in form of bad: good
 swap:
