@@ -38,7 +38,7 @@ What differs between features is where the expression is written, which variable
 | xref:configuration-reference.adoc#expressions-in-config-fields[Expressions in Configuration Fields]
 
 | Context expression restrictions
-| Pipeline values (except `pipeline.trigger_parameters.*`) and job values such as `job.ssh.enabled`. Pipeline parameters are not available.
+| Pipeline values (except `pipeline.trigger_parameters.*`) and the job value `job.ssh.enabled`. Pipeline parameters are not available.
 | xref:guides:security:contexts.adoc#expression-restrictions[Expression Restrictions]
 |===
 --
@@ -79,7 +79,7 @@ A variable is a name that CircleCI replaces with a value when it evaluates the e
 * Pipeline values, such as `pipeline.git.branch`. See xref:guides:orchestrate:pipeline-variables.adoc#pipeline-values[Pipeline Values].
 * Pipeline parameters, referenced as `pipeline.parameters.<name>`. See xref:guides:orchestrate:pipeline-variables.adoc#pipeline-parameters-in-configuration[Pipeline Parameters].
 * Element parameters, referenced as `parameters.<name>`. These are available in `<< >>` expressions inside the job that declares them. They are not available in job `filters`, which CircleCI evaluates at the workflow level.
-* Job values, such as `job.ssh.enabled`. These are available only in context expression restrictions, not in configuration.
+* The job value `job.ssh.enabled`, which is `true` if SSH is enabled for the job and `false` otherwise. It is the only job value, and it is available only in context expression restrictions, not in configuration.
 
 include::guides:ROOT:partial$using-expressions/env-vars-in-conditional-caveat.adoc[]
 
