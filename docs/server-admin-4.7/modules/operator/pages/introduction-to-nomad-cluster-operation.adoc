@@ -128,6 +128,16 @@ Use the commands in the section above in the script to do the following:
 . Terminate the instance.
 
 ifndef::pdf[]
+[#nomad-certificates]
+== Nomad certificates
+
+You have full control of the certificates, all the way down to mTLS for Nomad.
+
+[#health-status-polling]
+== Health status polling
+
+The polling time that checks for health status is not customizable. You cannot change or disable it.
+
 [#next-steps]
 == Next steps
 
