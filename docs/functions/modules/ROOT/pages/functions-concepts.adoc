@@ -176,4 +176,3 @@ Orbs and functions both help you reuse work across pipelines, and you can use bo
 
 * Refer to xref:functions-intro.adoc[Functions Overview] for a starting point on using functions.
 * Refer to xref:functions-catalog.adoc[Functions Catalog] for the full list of functions, with a link to each function's README.
-* Refer to xref:functions-faq.adoc[Functions FAQ] for answers to common questions about using functions.

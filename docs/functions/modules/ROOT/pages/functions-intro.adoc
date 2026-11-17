@@ -187,4 +187,3 @@ The xref:guides:toolkit:circleci-cli.adoc[CircleCI CLI] includes a `function` co
 
 * Refer to xref:functions-concepts.adoc[Functions Concepts] for high-level information about CircleCI functions.
 * Refer to xref:functions-catalog.adoc[Functions Catalog] for the full list of functions, with a link to each function's README.
-* Refer to xref:functions-faq.adoc[Functions FAQ] for answers to common questions about using functions.

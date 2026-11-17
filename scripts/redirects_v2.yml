@@ -1186,3 +1186,6 @@
 
 - old: /guides/integration/enable-checks/
   new: /guides/integration/status-updates/
+
+- old: /functions/functions-faq/
+  new: /functions/functions-concepts/
