@@ -58,12 +58,12 @@ jobs:
           background: true
 ----
 
-As an alternative, move to cloud-based platforms such as TestMu AI (Formerly LambdaTest), Sauce Labs, or BrowserStack. These cross browser testing clouds provide you with a ready-made infrastructure so you do not have to spend time configuring a Selenium environment.
+As an alternative, move to cloud-based platforms such as TestMu AI, Sauce Labs, or BrowserStack. These cross browser testing clouds provide you with a ready-made infrastructure so you do not have to spend time configuring a Selenium environment.
 
 [#lambdatest]
 == TestMu AI
 
-link:https://www.testmuai.com/[TestMu AI (Formerly LambdaTest)] runs Selenium tests on 3,000+ browser and operating system combinations in the cloud, so you do not need your own Selenium Grid. You can run tests in parallel to shorten test cycles.
+link:https://www.testmuai.com/[TestMu AI (formerly LambdaTest)] runs Selenium tests on 3,000+ browser and operating system combinations in the cloud, so you do not need your own Selenium Grid. You can run tests in parallel to shorten test cycles.
 
 To test pages that are only available inside your CircleCI build, such as a local development server, use the TestMu AI Tunnel. The tunnel opens a secure connection from your build container to the TestMu AI cloud, so remote browsers can reach your locally hosted pages.
 
@@ -85,8 +85,6 @@ workflows:
           steps:
             - <your-test-steps>
 ----
-
-For the full setup, see the link:https://www.testmuai.com/support/docs/circleci-integration-with-testmu/[TestMu AI CircleCI integration guide].
 
 [#sauce-labs]
 == Sauce Labs
