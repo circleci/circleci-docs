@@ -54,12 +54,23 @@ image::guides:ROOT:rerun-job-connect.png[Screenshot showing SSH connection detai
 +
 ifndef::server[]
 Follow the instructions to SSH into the running job, using the same SSH key that you use for GitHub or Bitbucket.
++
+For jobs on CircleCI-hosted compute, the command connects through `ssh.circleci.com` on the standard SSH port, 22. The username identifies your job. It is the job ID followed by the parallel run index, starting at `0`:
++
+[source,console]
+----
+$ ssh <job-id>-<index>@ssh.circleci.com
+----
++
+Jobs on self-hosted runners print an address and port for the runner instead, in the form `ssh -p <port> <address>`.
++
+NOTE: On CircleCI-hosted Windows jobs, the connection opens a PowerShell session. On self-hosted Windows runners, pass in the shell you want to use. The job output lists a command for each shell, for example `ssh -t -p <port> <address> -- powershell.exe`.
 endif::server[]
 ifdef::server[]
 Follow the instructions to SSH into the running job, using the same SSH key that you use for GitHub.
-endif::server[]
 +
 NOTE: If you are using the Windows executor, you will need to pass in the shell you want to use when using SSH. For example, to run  `powershell` in your build you would run: `ssh -p <remote_ip> -- powershell.exe`.
+endif::server[]
 
 The job VM will remain available for an SSH connection for *10 minutes after the pipeline finishes running* and then automatically shut down (or you can cancel it).
 ifndef::server[]
@@ -69,6 +80,46 @@ endif::server[]
 If your job has parallel steps, CircleCI launches more than one VM to perform them. You will see more than one 'Enable SSH' and 'Wait for SSH' section in the job output.
 
 NOTE: If you rerun a workflow containing a job that was previously rerun with SSH, the new job run will have SSH enabled. The job will have SSH enabled even if the SSH capability is link:https://support.circleci.com/hc/en-us/articles/13936711308827-Disable-re-run-job-with-SSH-[disabled at the project level].
+
+ifndef::server[]
+[#list-your-ssh-jobs]
+== List your SSH jobs
+
+To choose from the jobs you can connect to, run `ssh` without a username:
+
+[source,console]
+----
+$ ssh ssh.circleci.com
+----
+
+CircleCI lists the running jobs that your SSH key can reach. Select a job to connect to it. This option is available for jobs on CircleCI-hosted compute.
+
+[#copy-files-and-forward-ports]
+== Copy files and forward ports
+
+On CircleCI-hosted compute, use the username from the job output with `scp`, `sftp`, and `ssh -L`:
+
+* Copy a file from the job to your current directory:
++
+[source,console]
+----
+$ scp <job-id>-<index>@ssh.circleci.com:<path-to-file> .
+----
+* Open an SFTP session on the job:
++
+[source,console]
+----
+$ sftp <job-id>-<index>@ssh.circleci.com
+----
+* Forward a local port to a port in the job, for example to reach a service that listens on port 8080 in the job:
++
+[source,console]
+----
+$ ssh -L 8080:localhost:8080 <job-id>-<index>@ssh.circleci.com
+----
+
+Replace `<job-id>-<index>` with the username from the job output, and `<path-to-file>` with the path to the file in the job.
+endif::server[]
 
 [#debugging-permission-denied-publickey]
 == Debugging: "Permission denied"
@@ -171,10 +222,20 @@ debug1: Offering public key: ...
 
 . If it was not offered, you can specify it using the `-i` command-line argument to SSH. For example:
 +
+ifndef::server[]
+[source,console]
+----
+$ ssh -i /Users/me/.SSH/id_ed25519_github <job-id>-<index>@ssh.circleci.com
+----
++
+On a self-hosted runner, add `-i` to the address and port command from the job output instead.
+endif::server[]
+ifdef::server[]
 [source,console]
 ----
 $ ssh -i /Users/me/.SSH/id_ed25519_github -p 64784 54.224.97.243
 ----
+endif::server[]
 
 You can increase the verbosity level to get more detailed debugging information by using multiple `-v` flags. For example, use `-vv` for more details:
 
@@ -189,3 +250,19 @@ Or use `-vvv` for maximum verbosity:
 ----
 $ ssh -vvv git@github.com
 ----
+
+ifndef::server[]
+[#debugging-could-not-enable-ssh]
+== Debugging: "Could not enable SSH"
+
+On CircleCI-hosted compute, a job registers with `ssh.circleci.com` before it prints the connection command. If the job cannot register within 90 seconds, the *Enable SSH* step shows the following error:
+
+[source,shell]
+----
+Could not enable SSH: this job did not reach ssh.circleci.com within 1m30s.
+----
+
+Rerun the job with SSH. If the error persists, contact link:https://support.circleci.com/[CircleCI Support].
+
+If the job prints a connection command but you cannot connect, check that your network allows outbound connections to `ssh.circleci.com` on port 22.
+endif::server[]
