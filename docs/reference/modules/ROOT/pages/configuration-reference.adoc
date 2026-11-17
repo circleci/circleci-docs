@@ -4086,7 +4086,7 @@ When you need to include an expression within a larger string value, use `<< >>`
       echo "Running on << pipeline.git.branch or "unknown branch" >>"
 ----
 
-In this example, the `<< >>` delimiters mark `pipeline.git.branch or "unknown branch"` as an expression. If `pipeline.git.branch` is null (for example, when you trigger a run for a tag rather than a branch), the `or` operator provides the fallback value "unknown branch".
+In this example, the `<< >>` delimiters mark `pipeline.git.branch or "unknown branch"` as an expression. If `pipeline.git.branch` is null (for example, when you trigger a run for a tag rather than a branch), the `or` operator provides the fallback value "unknown branch". On CircleCI Server, `pipeline.git.branch` is an empty string for a tag run, so the `or` operator does not provide the fallback value.
 
 [#conditional-logic-example]
 === Conditional logic example
