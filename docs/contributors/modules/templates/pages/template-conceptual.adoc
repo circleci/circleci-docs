@@ -187,14 +187,6 @@ If there is troubleshooting information for the feature or task, list it here. U
 
 Place the solution or debugging steps here after the error description.
 
-== Frequently asked questions
-
-If there are any frequently asked questions about the feature or task, list them here. Use a question and answer format to make it easier to read.
-
-=== Question?
-
-Place the answer here after the question.
-
 == Next steps
 
 // Here you can inlude links to other pages in docs or the blog etc. where the reader should head next.
