@@ -273,16 +273,25 @@ jobs:
             sudo apt update
             sudo apt install mongodb-org
             mongo localhost --eval "db.serverStatus()"
+ifndef::server[]
+      - run:
+          name: Test
+          command: circleci testsuite run "ci tests"
+endif::server[]
+ifdef::server[]
       - run:
           name: Test
           command: npm test
+endif::server[]
       - run:
           name: Generate code coverage
           command: './node_modules/.bin/nyc report --reporter=text-lcov'
       # You can specify either a single file or a directory to store as artifacts
+ifdef::server[]
       - store_artifacts:
           path: test-results.xml
           destination: deliverable.xml
+endif::server[]
       - store_artifacts:
           path: coverage
           destination: coverage
@@ -296,6 +305,10 @@ workflows:
             - build
 ----
 
+ifndef::server[]
+include::ROOT:partial$shared-sections/testsuite-zero-config.adoc[]
+
+endif::server[]
 This example shows a sequential workflow with the `test` job configured to run only on the main branch. Refer to the xref:orchestrate:workflows.adoc[Workflows] document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 
 [#sample-configuration-with-fan-infan-out-workflow]
@@ -391,6 +404,12 @@ jobs:
         steps:
             - attach_workspace:
                   at: .
+ifndef::server[]
+            - run:
+                  name: Run tests
+                  command: circleci testsuite run "ci tests" # splits tests across the parallel nodes
+endif::server[]
+ifdef::server[]
             - run:
                   name: Run tests
                   command: |
@@ -399,6 +418,7 @@ jobs:
                   path: test-results
             - store_test_results:
                   path: test-results
+endif::server[]
 
     deploy-docker-image:
         machine:
@@ -443,6 +463,10 @@ workflows:
                       - test
 ----
 
+ifndef::server[]
+The `test` job runs with `parallelism: 2`, so `circleci testsuite run` splits the tests across two parallel nodes. It detects your test runner and uploads the test results, so the job needs no `store_test_results` step.
+
+endif::server[]
 NOTE: A job can only run when its dependencies are satisfied therefore it requires the dependencies of all upstream jobs. This means only the immediate upstream dependencies need to be specified in the `requires:` blocks.
 
 [#sample-configuration-with-multiple-executor-types]

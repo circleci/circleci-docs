@@ -18,9 +18,8 @@ Because the split is assigned before the tests run, it cannot account for fixed 
 
 Before using static test splitting, ensure you have completed the xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] guide and have:
 
-* Configured your `.circleci/test-suites.yml` with `discover` and `run` commands.
 * Verified your tests run successfully with the `testsuite` command.
-* Added a `store_test_results` step to your job, so CircleCI has the JUnit timing data it uses to split your tests. See xref:collect-test-data.adoc[Upload Test Results].
+* Uploaded your test results, so CircleCI has the JUnit timing data it uses to split your tests. A built-in test suite uploads them for you. Otherwise, set the xref:reference:ROOT:testsuite-configuration-reference.adoc#store-test-results[`store-test-results`] option or add a `store_test_results` step. See xref:collect-test-data.adoc[Upload Test Results].
 
 == 1. Set parallelism on your job
 
@@ -37,9 +36,6 @@ jobs:
       - run:
           name: Run tests
           command: circleci testsuite run "ci tests"
-      - store_test_results:
-          # Must match outputs.junit in test-suites.yml
-          path: test-reports
 ----
 
 == 2. Verify the split
