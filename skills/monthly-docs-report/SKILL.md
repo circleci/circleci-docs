@@ -5,7 +5,7 @@ description: Generate the monthly docs team report and publish it as a Linear Do
 
 # Monthly docs report
 
-Builds the monthly docs update, drafts it locally for the author to review, and publishes it as a Linear Document on the DOC team once the author approves it. Linear documents don't expire, and anyone in the company can open documents on the DOC team.
+Builds the monthly docs update, drafts it locally for the author to review, and publishes it as a Linear Document on the DOC team once the author approves it.
 
 ## Local files
 
@@ -61,7 +61,7 @@ From that list:
 - **Exclude dependency PRs.** Drop PRs by `renovate`, `dependabot`, `circleci-foundation-ops` (automated repo fixes) or any `[bot]` author, and titles that match `Update dependency|chore\(deps\)|fix\(deps\)|Bump |Update Node.js|Update cimg/|Update module|feat: (add|update) Xcode`. A human PR whose title starts with "Bump" but isn't a dependency update, such as a cache key fix, still counts.
 - **PRs merged:** the count after exclusions. Compare with the previous month.
 - **Contributors:** unique human authors.
-- **Credit by commits, not only by PR author.** On large PRs, check who wrote the commits with `gh api repos/circleci/circleci-docs/pulls/<n>/commits --paginate`. Credit everyone with a substantial share. In October 2026, a PR opened by a PM had 28 of its 42 commits from the docs team.
+- **Credit by commits, not only by PR author.** On large PRs, check who wrote the commits with `gh api repos/circleci/circleci-docs/pulls/<n>/commits --paginate`. Credit everyone with a substantial share.
 - **New pages:** files under `docs/**/pages/**/*.adoc` that a PR added. `gh pr list --json files` doesn't include file status, so use `gh api repos/circleci/circleci-docs/pulls/<n>/files --paginate` and keep files whose status is `added`. Use the page's `= Title` line as its name. Check that the path didn't exist on `main` before the month started. Moves, renames and pages that were renamed and then renamed back aren't new pages.
 - **Display names:** look up logins without a GitHub display name in `~/docs-reports/contributor-names.txt`. Ask the author about any that aren't there, and add their answers to the file.
 - **Reference updates:** PRs that touch `docs/reference/modules/ROOT/pages/configuration-reference.adoc`.
@@ -79,7 +79,7 @@ Search only the author's own messages. Their Slack user ID is in the Slack tool 
 filters: from:<@USER_ID> after:<day before START> before:<day after END>
 ```
 
-Page through every result with the cursor. Use `response_format: concise` and `include_context: false` to keep the volume manageable. October 2026 had about 360 messages, which took 19 pages.
+Page through every result with the cursor. Use `response_format: concise` and `include_context: false` to keep the volume manageable.
 
 Pull out:
 
@@ -113,7 +113,7 @@ Run these queries with `query_amplitude_data` and the typed `chart` parameter:
 1. **Top 11 pages:** `measured_as: event_totals`, `group_by` the event property `page`, `interval: month`, `groupByLimit: 11`. The 11th page is the replacement if one of the top 10 turns out to be a bot burst.
 2. **Page views and unique readers:** one query with `measured_as: formula` and the formula `TOTALS(A); UNIQUES(A)`, `interval: month`, covering this month and the previous one. Each month's interval value is that month's figure.
 
-**Check the top pages for bot bursts.** For each top page, run the same query with `interval: day` and a `where` filter on `page`, measuring both totals and uniques. If most of a page's views arrive within one to three days and views equal unique visitors, it's automated traffic that ran JavaScript. Leave it out of the top 10, take the next page instead, and add a one-line note under the table. In October 2026, `/2.0/hello-world-windows/` got 2,677 views this way on 9 to 11 October.
+**Check the top pages for bot bursts.** For each top page, run the same query with `interval: day` and a `where` filter on `page`, measuring both totals and uniques. If most of a page's views arrive within one to three days and views equal unique visitors, it's automated traffic that ran JavaScript. Leave it out of the top 10, take the next page instead, and add a one-line note under the table.
 
 How to describe these numbers: `dd_docs_page` only fires after the visitor accepts marketing cookies (`ui/src/partials/head-scripts.hbs`). It counts humans who loaded JavaScript and opted in, which is fewer than all human readers. The two concepts pages listed in `trackingExcludedPaths` in the same file are never tracked.
 
@@ -129,7 +129,7 @@ Report the top 10 docs pages by number of answers that cite them. Show ties as t
 
 ## 6. Grafana: who visits
 
-The Grafana traffic panel and the CloudWatch logs behind it are listed in `~/docs-reports/sources.txt`. The queries are in `~/docs-reports/docs-traffic-queries.txt`. Logs are kept for 90 days.
+The Grafana traffic panel and the CloudWatch logs behind it are listed in `~/docs-reports/sources.txt`. The queries are in `~/docs-reports/docs-traffic-queries.txt`.
 
 **Before asking for numbers, check the queries are current.** The old-Chrome cutoff in queries E, F and G needs raising about once a month. The queries file says how. If the author's panel is behind the file, ask them to paste in the changed queries.
 
@@ -138,7 +138,7 @@ Ask the author for two screenshots:
 1. **Monthly totals.** In the panel editor, add the transformation **Reduce**, set **Mode** to **Series to rows** and **Calculations** to **Total**, set the time picker's time zone to UTC, and set the range to the month. That gives one row per bucket. Without the transformation, the table shows one row per hour. If they saved this as a second panel, "Monthly totals", they only change the date range.
 2. **Who is in likely_human.** Run the DIAGNOSTIC query from the queries file over the month, in Explore or a separate panel, never in the totals panel. Its hits overlap `likely_human`, so it would double-count there.
 
-From the diagnostic, check how concentrated `likely_human` is. Real people spread across many browser versions. If a few user agents make up a large share of the bucket, find out why. Look especially for old browser versions, since Chrome updates itself about every four weeks. If any user agents should move to `suspected_scrapers`, update the queries file and ask the author to re-run the month before you report it. In October 2026, 25 user agents made 60% of the bucket, and Chrome 108 to 133 alone made 35%.
+From the diagnostic, check how concentrated `likely_human` is. Real people spread across many browser versions. If a few user agents make up a large share of the bucket, find out why. Look especially for old browser versions, since Chrome updates itself about every four weeks. If any user agents should move to `suspected_scrapers`, update the queries file and ask the author to re-run the month before you report it.
 
 Report each bucket's monthly total and its share of all page requests, plus the markdown request count. The markdown requests are also counted in the other buckets, so say so. Check that the bucket totals add up to the same total as last month's method. If they don't, a query overlaps or drops traffic.
 
@@ -170,10 +170,9 @@ Tell the author what's still missing or uncertain, then wait for their approval.
 Only after the author approves:
 
 1. Make a final copy of the markdown. In it, remove every `[slack]` marker and HTML comment, drop the H1 (the Linear document title replaces it), and turn every `#NNNNN` PR number into a link to `https://github.com/circleci/circleci-docs/pull/NNNNN`. Linear shows these links as PR cards.
-2. Keep sentences under 26 words. The author's prose check rejects longer ones when you save to Linear.
-3. Create the document with `save_document`, `team: DOC`, title `Docs update: <Month YYYY>`. Before creating, check with `list_documents` that no document with that title exists. If one does, update it with `id` instead.
-4. If the author has a Linear issue for this month's report, link the document from it.
-5. Give the author the document link and a one-line Slack post they can share, for example: `The <Month> docs update is up in Linear: <link>`.
+2. Create the document with `save_document`, `team: DOC`, title `Docs update: <Month YYYY>`. Before creating, check with `list_documents` that no document with that title exists. If one does, update it with `id` instead.
+3. If the author has a Linear issue for this month's report, link the document from it.
+4. Give the author the document link and a one-line Slack post they can share, for example: `The <Month> docs update is up in Linear: <link>`.
 
 ## Template
 
