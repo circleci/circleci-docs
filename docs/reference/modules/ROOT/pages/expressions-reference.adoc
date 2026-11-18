@@ -145,7 +145,7 @@ You can group sub-expressions with parentheses `(` and `)`.
 
 | String
 | `contains`
-| Matches if the right operand is part of the left operand. `"hello world" contains "lo wo"` evaluates to `true`. Both operands must be strings. CircleCI Server does not support `contains`.
+| Matches if the right operand is part of the left operand. `"hello world" contains "lo wo"` evaluates to `true`. Both operands must be strings. CircleCI Server 4.10 and earlier do not support `contains`.
 
 | String
 | `matches`
