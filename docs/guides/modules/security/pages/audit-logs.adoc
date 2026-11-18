@@ -299,6 +299,9 @@ Once configured, you can view and manage audit log streams. The following option
 .Audit log stream actions
 image::guides:ROOT:audit-log-stream-actions.png[Audit log stream actions]
 
+.Configuration details panel
+image::guides:ROOT:audit-log-stream-configuration-details.png[Configuration details panel showing the storage type, bucket name, bucket prefix, region, and role ARN of an audit log stream]
+
 
 === Limitations
 
