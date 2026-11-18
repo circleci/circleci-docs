@@ -13,6 +13,7 @@ These live in `~/docs-reports/`, outside this repo, because the repo is public:
 
 - `docs-traffic-queries.txt`: the CloudWatch queries behind the Grafana panel, the old-Chrome cutoff, and monthly housekeeping steps
 - `contributor-names.txt`: names to use for GitHub logins that have no display name
+- `sources.txt`: the Amplitude project, Grafana dashboard and CloudWatch log group the report reads
 - `traffic-history.csv`: one row of Grafana bucket totals per month, if it exists (DOC-370)
 - `YYYY-MM-docs-update.md`: each month's draft
 
@@ -105,7 +106,7 @@ Combine these with what the author said is planned. Summarize them as three to f
 
 ## 4. Amplitude: human readers
 
-Project `Production` (`141829`). Event `dd_docs_page`. Use UTC.
+Use the Amplitude project and event listed in `~/docs-reports/sources.txt`. Use UTC.
 
 Run these queries with `query_amplitude_data` and the typed `chart` parameter:
 
@@ -128,7 +129,7 @@ Report the top 10 docs pages by number of answers that cite them. Show ties as t
 
 ## 6. Grafana: who visits
 
-The panel "Track classification over time" (dashboard Docs Insights) reads the CloudWatch log group `/aws/cloudfront/function/docs-markdown-rewriter`. The queries are in `~/docs-reports/docs-traffic-queries.txt`. Logs are kept for 90 days.
+The Grafana traffic panel and the CloudWatch logs behind it are listed in `~/docs-reports/sources.txt`. The queries are in `~/docs-reports/docs-traffic-queries.txt`. Logs are kept for 90 days.
 
 **Before asking for numbers, check the queries are current.** The old-Chrome cutoff in queries E, F and G needs raising about once a month. The queries file says how. If the author's panel is behind the file, ask them to paste in the changed queries.
 
