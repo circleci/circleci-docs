@@ -367,6 +367,7 @@ stdin
 superset
 Sysbox
 systemd
+tap-xunit
 TCPRoute
 TeamCity
 [Tt]eardown

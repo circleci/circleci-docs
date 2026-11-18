@@ -79,9 +79,16 @@ jobs:
       - checkout
       - node/install-packages:
           pkg-manager: yarn
+ifndef::server[]
+      - run:
+          name: Run tests
+          command: circleci testsuite run "ci tests" --runner=jest # or vitest, mocha, cypress, playwright
+endif::server[]
+ifdef::server[]
       - run:
           command: yarn test
           name: Run tests
+endif::server[]
       - run:
           command: yarn build
           name: Build app
@@ -101,9 +108,16 @@ jobs:
       - checkout
       - node/install-packages:
           pkg-manager: npm
+ifndef::server[]
+      - run:
+          name: Run tests
+          command: circleci testsuite run "ci tests" --runner=jest # or vitest, mocha, cypress, playwright
+endif::server[]
+ifdef::server[]
       - run:
           command: npm run test
           name: Run tests
+endif::server[]
       - run:
           command: npm run build
           name: Build app
@@ -114,6 +128,10 @@ jobs:
 ----
 
 Because we are using the Node orb, this job will install your Node packages with automated caching and best practices applied. Note that it requires a lock file.
+
+ifndef::server[]
+include::ROOT:partial$shared-sections/testsuite-zero-config.adoc[]
+endif::server[]
 
 [#deploy-the-app]
 ==== b. Deploy the app
@@ -196,9 +214,16 @@ jobs:
       - checkout
       - node/install-packages:
           pkg-manager: yarn
+ifndef::server[]
+      - run:
+          name: Run tests
+          command: circleci testsuite run "ci tests" --runner=jest # or vitest, mocha, cypress, playwright
+endif::server[]
+ifdef::server[]
       - run:
           command: yarn test
           name: Run tests
+endif::server[]
       - run:
           command: yarn build
           name: Build app

@@ -1,5 +1,5 @@
 = Getting started with Smarter Testing
-:page-description: Set up circleci testsuite for Smarter Testing: configure test-suites.yml, validate it with the doctor command, and run your tests locally and in CI.
+:page-description: Set up circleci testsuite for Smarter Testing: detect your test runner with the doctor command, then run your tests locally and in CI.
 :page-platform: Cloud
 :page-vcs: all
 :page-plan: Free, Performance, Scale
@@ -13,12 +13,12 @@ This guide sets up `circleci testsuite`, the foundation that every Smarter Testi
 
 This guide walks you through the following steps:
 
-. Configure a `.circleci/test-suites.yml` file to discover and run your tests.
-. Validate and run your tests using the `testsuite` command.
+. Check your setup with the `doctor` command.
+. Run your tests with the `testsuite` command.
 
 == Before you begin
 
-You need a repository with an existing test suite. The following setup process guides you through configuring JUnit XML output and running tests.
+You need a repository with an existing test suite. Most projects need no configuration, because `circleci testsuite` detects your test runner from your project files.
 
 You can complete local steps (setup and run locally) without a CircleCI account. A CircleCI account with a project connected to your VCS is only required when you run tests in CI.
 
@@ -38,7 +38,9 @@ If your jobs already use the `circleci tests glob`, `circleci tests split`, or `
 
 == 1. Setup
 
-Use the `doctor` command to set up and validate your `test-suites.yml`. The CLI runs through a series of checks, executing tests and validating the output. If any results look incorrect, action items are provided to resolve them.
+`circleci testsuite` detects your test runner from your project files and uses a built-in test suite for it, so you do not need a configuration file. For how detection works, see xref:reference:ROOT:testsuite-configuration-reference.adoc#zero-config[Run Without a Configuration File].
+
+Use the `doctor` command to check your setup. The CLI runs through a series of checks, detecting your test runner, executing tests, and validating the output. If any results look incorrect, action items are provided to resolve them.
 
 [tabs]
 ====
@@ -103,7 +105,7 @@ CI::
 
 In your CircleCI configuration file, replace your existing test command with `circleci testsuite run "ci tests"`, the same command you used during setup. Keep all other job steps the same.
 
-Verify that `store_test_results` points to the directory that matches `outputs.junit` in your `test-suites.yml` file.
+A built-in test suite uploads your test results, so remove the `store_test_results` step for those results. If you defined the test suite in `.circleci/test-suites.yml`, either set the xref:reference:ROOT:testsuite-configuration-reference.adoc#store-test-results[`store-test-results`] option, or keep a `store_test_results` step that points to the directory of `outputs.junit`.
 
 [source,yaml]
 ----
@@ -115,13 +117,9 @@ jobs:
       - setup
       # Replace previous tests command e.g. vitest run --reporter=junit ...
       - run: circleci testsuite run "ci tests"
-      - store_test_results:
-          # This directory must match the directory of `outputs.junit` in your
-          # test-suites.yml
-          path: test-reports
 ----
 
-Commit both `.circleci/test-suites.yml` and `.circleci/config.yml` to your feature branch and push to your VCS.
+Commit `.circleci/config.yml`, and `.circleci/test-suites.yml` if you created one, to your feature branch and push to your VCS.
 --
 ====
 
@@ -131,13 +129,13 @@ Commit both `.circleci/test-suites.yml` and `.circleci/config.yml` to your featu
 After your pipeline runs, verify the test job behaves as expected before merging:
 
 . In the CircleCI web app, navigate to your pipeline and open the test job.
-. Check the *Tests* tab and confirm the number of test results matches what you see when running tests without the `testsuite` command. A difference in test results could indicate a misconfiguration in your `discover` command.
-. Compare the job duration to a recent run without the `testsuite` command. The runtime is expected to be similar. A significant difference may indicate a misconfiguration in your `test-suites.yml`.
+. Check the *Tests* tab and confirm the number of test results matches what you see when running tests without the `testsuite` command. A difference in test results could indicate that the test suite's `discover` command does not find all of your tests.
+. Compare the job duration to a recent run without the `testsuite` command. The runtime is expected to be similar. A significant difference may indicate a misconfiguration in your test suite.
 
 [#free-capabilities]
 == Free capabilities now available
 
-Now that your tests run with `circleci testsuite run`, the following free capabilities work with no extra configuration in `test-suites.yml`:
+Now that your tests run with `circleci testsuite run`, the following free capabilities work with no extra configuration:
 
 * *Rerun only failed tests*: when you rerun a workflow from failed, only the failed tests rerun. See xref:rerun-only-failed-tests.adoc[Rerun Only Failed Tests].
 * *Static test splitting*: when you set `parallelism` on your job, your tests split across the parallel nodes. See xref:use-static-test-splitting.adoc[Use Static Test Splitting].
@@ -154,10 +152,10 @@ If you are moving from the `circleci tests` commands, the following table shows 
 | Before: `circleci tests` | After: `circleci testsuite`
 
 | `circleci tests glob` lists your test files.
-| The `discover` command in `.circleci/test-suites.yml` lists your test atoms.
+| The test suite's `discover` command lists your test atoms. The built-in test suite finds the tests for your test runner. To list other files, set `discover` in `.circleci/test-suites.yml`.
 
 | `circleci tests run --command="..."` or `circleci tests split` passes the test files to your test runner.
-| The `run` command in `.circleci/test-suites.yml` runs your test runner, with the `<< test.atoms >>` placeholder in place of the file list.
+| The test suite's `run` command runs your test runner. In `.circleci/test-suites.yml`, the `<< test.atoms >>` placeholder takes the place of the file list.
 
 | `--split-by` and `--timings-type` choose how to split tests.
 | Static test splitting is built in, with no options to set. Set `parallelism` on the job, and `circleci testsuite run` splits by timing data from previous runs, or by name when no timing data is available.
@@ -166,7 +164,7 @@ If you are moving from the `circleci tests` commands, the following table shows 
 | Select *Rerun workflow from failed*. `circleci testsuite run` reruns only the failed tests.
 
 | The `store_test_results` path matches where your test runner writes JUnit XML.
-| The `store_test_results` path must match the directory of `outputs.junit` in `.circleci/test-suites.yml`.
+| A built-in test suite uploads test results, so remove the `store_test_results` step. For a test suite in `.circleci/test-suites.yml`, set `store-test-results: true`, or match the `store_test_results` path to the directory of `outputs.junit`.
 |===
 --
 

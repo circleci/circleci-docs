@@ -127,7 +127,7 @@ The selection rules can be extended to select tests beyond those identified in t
 
 Before enabling test impact analysis, ensure you have completed the xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] guide and have:
 
-* Configured your `.circleci/test-suites.yml` with `discover` and `run` commands.
+include::ROOT:partial$shared-sections/testsuite-define-suite-prerequisite.adoc[]
 * Verified your tests run successfully with the `testsuite` command.
 
 TIP: You can use the xref:guides:toolkit:circleci-agent-skills.adoc[CircleCI Agent Skills] to get Smarter Testing set up. Install the link:https://github.com/CircleCI-Public/skills[CircleCI Public Skills] plugin to your AI coding agent and ask your agent to get set up for Smarter Testing.
