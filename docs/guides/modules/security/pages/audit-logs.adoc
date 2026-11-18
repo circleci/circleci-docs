@@ -292,6 +292,7 @@ Once configured, you can view and manage audit log streams. The following option
 
 - Pause streaming: Use the toggle switch under **Actions** to temporarily disable log streaming. **Status** changes to **Disabled**.
 - Monitor delivery: Check the **Last delivery** field to verify recent successful deliveries.
+- View destination details: Select the details icon under **Actions** to open the **Configuration details** panel. The panel shows the storage type, bucket name, bucket prefix, region, endpoint, and role ARN of the stream. Fields that the stream does not use do not show. For example, an Amazon S3 stream has no endpoint.
 - Delete configuration: Select the trash icon under **Actions** to remove the streaming setup. In the popup warning, select btn:[Delete] to confirm.
 - Restart streaming: Toggle the switch to resume paused streams.
 
@@ -308,7 +309,7 @@ image::guides:ROOT:audit-log-stream-actions.png[Audit log stream actions]
 === Troubleshooting
 
 * **Configuration Issues**: Most problems relate to AWS IAM permissions or S3 bucket configuration.
-* **Connection Failures**: If **Status** shows **Disconnected**, verify AWS credentials and permissions before contacting support. Use the toggle switch to restart streaming after resolving issues.
+* **Connection Failures**: If **Status** shows **Disconnected**, verify AWS credentials and permissions before contacting support. To see the values that CircleCI uses, open the **Configuration details** panel and compare the role ARN, bucket name, and region with your AWS setup. Use the toggle switch to restart streaming after resolving issues.
 * **Missing Logs**: Ensure that your S3 bucket policies allow write access from CircleCI's service accounts.
 
 == Audit log events
