@@ -193,10 +193,12 @@ Welcome to the docs team's monthly update. It covers the main changes to the pub
 | New pages | N | N |
 | Page views (Amplitude) | N | N |
 | Unique readers (Amplitude) | N | N |
-| Page requests from likely humans (Grafana)* | N | N |
+| Page requests from humans (likely, Grafana)* | N | N |
 | Page requests from AI agents acting for a person (Grafana) | N | N |
+| Markdown page requests (Grafana) | N | N |
+| `llms.txt` requests (Grafana) | N | N |
 
-\* We're still improving how we tell people from automated traffic. The likely-human figure is too high, because agents and scrapers that copy a current browser are still counted in it. More under Readers below.
+\* We're still improving how we distinguish people from automated traffic. The likely-human figure is too high, because agents and scrapers that copy a current browser are still counted in it. More under Readers below.
 
 ## New pages
 
