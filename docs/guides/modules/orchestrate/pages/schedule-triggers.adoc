@@ -55,7 +55,7 @@ If your project has no scheduled workflows, and you would like to try out schedu
 
 [tabs]
 ====
-GitHub App, GitHub App Server, and Cursor Origin::
+GitHub App, GitHub Enterprise Server, and Cursor Origin::
 +
 --
 include::ROOT:partial$pipelines-and-triggers/find-pipeline-definition-id-api.adoc[]
@@ -174,10 +174,10 @@ Also see the xref:toolkit:api-developers-guide.adoc#getting-started-with-the-api
 
 To view your schedule triggers in the web app:
 
-* For GitHub App, GitHub App Server, and Cursor Origin pipelines, go to menu:Project Settings[Project Setup].
+* For GitHub App, GitHub Enterprise Server, and Cursor Origin pipelines, go to menu:Project Settings[Project Setup].
 * For GitHub OAuth and Bitbucket Cloud pipelines, go to menu:Project Settings[Triggers].
 
-You can also list your schedule triggers using the API. For GitHub App, GitHub App Server, and Cursor Origin pipelines, use API v3. Replace `<PROJECT_ID>` with your project ID:
+You can also list your schedule triggers using the API. For GitHub App, GitHub Enterprise Server, and Cursor Origin pipelines, use API v3. Replace `<PROJECT_ID>` with your project ID:
 
 [source,console]
 ----
@@ -214,7 +214,7 @@ Schedule triggers support the following pipeline types:
 
 * GitHub OAuth
 * GitHub App
-* GitHub App Server
+* GitHub Enterprise Server
 * Cursor Origin
 * Bitbucket Cloud
 
