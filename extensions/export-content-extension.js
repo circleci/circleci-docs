@@ -57,7 +57,10 @@ function collectPages(contentCatalog, siteUrl) {
   ];
 
   // Contributor guidance is for people writing docs, not for readers searching them.
-  const excludedComponents = ['contributors'];
+  // Services is internal field engineering content, also not for readers searching public docs.
+  // Functions is intentionally included — it was added to the playbook after this exclusion list
+  // was introduced and is correctly absent from the excluded set.
+  const excludedComponents = ['contributors', 'services'];
 
   contentCatalog.getComponents().forEach(({ name: comp, versions }) => {
     if (excludedComponents.includes(comp)) {
