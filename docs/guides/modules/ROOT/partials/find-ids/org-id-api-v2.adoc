@@ -1,4 +1,4 @@
-To list all organizations (collaborations) you have access to, each with an `id` field:
+To list all organizations (collaborations) you have access to:
 +
 [source,shell]
 ----

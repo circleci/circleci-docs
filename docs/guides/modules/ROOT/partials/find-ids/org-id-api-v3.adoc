@@ -1,4 +1,4 @@
-To list all organizations you belong to, each with an `id` field:
+To list all organizations you belong to:
 +
 [source,shell]
 ----
