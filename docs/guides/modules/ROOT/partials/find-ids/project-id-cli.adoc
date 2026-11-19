@@ -1,0 +1,13 @@
+To return the project ID for the current repository:
++
+[source,console]
+----
+$ circleci project get --json --jq '.id'
+----
++
+To look up a specific project by slug:
++
+[source,console]
+----
+$ circleci project list --slug gh/my-org/my-repo --json --jq '.[0].id'
+----

@@ -126,8 +126,8 @@ ok    policies    0.001s
 
 3/3 tests passed (0.001s)
 ----
-+
-include::ROOT:partial$notes/find-organization-id.adoc[]
+
+The `--owner-id` flag takes your organization ID. To find it, see xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
 
 [#writing-rego-policies-using-circleci-domain-specific-language]
 == Writing Rego policies using CircleCI domain-specific language

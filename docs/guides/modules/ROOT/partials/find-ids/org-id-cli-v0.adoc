@@ -1,0 +1,17 @@
+To list all organizations you belong to:
++
+[source,console]
+----
+$ circleci-v0 info org
+----
++
+The output is a table. The `ID` column holds the organization ID:
++
+[source,text]
+----
++---------------+--------+
+|      ID       |  NAME  |
++---------------+--------+
+| <your-org-id> | my-org |
++---------------+--------+
+----

@@ -1,0 +1,9 @@
+To list all organizations you belong to, each with an `id` field:
++
+[source,shell]
+----
+curl -g 'https://circleci.com/api/v3/orgs' \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
+----
++
+The response returns a list of organizations. The `id` field for each entry is the organization ID.

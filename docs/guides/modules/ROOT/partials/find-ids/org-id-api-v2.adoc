@@ -1,0 +1,18 @@
+To list all organizations (collaborations) you have access to, each with an `id` field:
++
+ifndef::server[]
+[source,shell]
+----
+curl 'https://circleci.com/api/v2/me/collaborations' \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
+----
+endif::server[]
+ifdef::server[]
+[source,shell]
+----
+curl 'https://circleci.com/api/v2/me/collaborations' \
+  --header "Circle-Token: $CIRCLE_TOKEN" | jq .
+----
+endif::server[]
++
+The response returns a list of collaborations. The `id` field for each entry is the organization ID.
