@@ -228,9 +228,10 @@ CircleCI keeps a record of each event it sends to a webhook. Use the record to c
 To view the deliveries of a webhook:
 
 include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
-. In the sidebar select *Webhooks*.
-. Select the webhook.
-. Select the *Deliveries* tab.
+. In the sidebar select **Webhooks**.
+. In the row of the webhook, select **View deliveries**.
+
+You can also select the name of the webhook to open its **Settings** tab, then select the **Deliveries** tab.
 
 The list shows the most recent deliveries first. CircleCI keeps deliveries for 14 days. While the tab is open, the list refreshes every 30 seconds. Use the refresh controls above the list to refresh it yourself or to turn off the automatic refresh.
 
