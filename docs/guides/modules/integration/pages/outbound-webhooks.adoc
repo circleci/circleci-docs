@@ -39,9 +39,7 @@ endif::server[]
 
 To configure webhooks within the CircleCI app:
 
-. In the cloudlink:webapp[CircleCI web app], select your organization.
-. Select **Projects** in the sidebar.
-. Find your project in the list, select the ellipsis icon:more[Ellipsis menu icon], and select **Project Settings**.
+include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 . In the sidebar select *Webhooks*.
 . Select *Add Webhook*.
 . Fill out the webhook form (the table below describes the fields and their intent).
