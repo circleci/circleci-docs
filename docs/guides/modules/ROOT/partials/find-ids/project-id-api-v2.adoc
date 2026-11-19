@@ -1,18 +1,9 @@
 To return details for a specific project, replace `<project-slug>` with your project slug (for example, `gh/my-org/my-repo`):
 +
-ifndef::server[]
 [source,shell]
 ----
 curl 'https://circleci.com/api/v2/project/<project-slug>' \
   --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
 ----
-endif::server[]
-ifdef::server[]
-[source,shell]
-----
-curl 'https://circleci.com/api/v2/project/<project-slug>' \
-  --header "Circle-Token: $CIRCLE_TOKEN" | jq .
-----
-endif::server[]
 +
 The response includes the project ID in the `id` field.
