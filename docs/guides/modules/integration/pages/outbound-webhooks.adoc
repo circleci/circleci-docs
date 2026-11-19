@@ -221,6 +221,76 @@ a| * "success"
 |===
 --
 
+ifndef::server[]
+[#view-deliveries]
+== View outbound webhook deliveries
+
+CircleCI keeps a record of each event it sends to a webhook. Use the record to check that your endpoint receives events, and to find out why an event was not delivered.
+
+To view the deliveries of a webhook:
+
+. In the cloudlink:webapp[CircleCI web app], select your organization.
+. Select **Projects** in the sidebar.
+. Find your project in the list, select the ellipsis icon:more[Ellipsis menu icon], and select **Project Settings**.
+. In the sidebar select *Webhooks*.
+. Select the webhook.
+. Select the *Deliveries* tab.
+
+The list shows the most recent deliveries first. CircleCI keeps deliveries for 14 days. While the tab is open, the list refreshes every 30 seconds. Use the refresh controls above the list to refresh it yourself or to turn off the automatic refresh.
+
+A delivery is one event sent to the webhook. When CircleCI retries an event, the retries belong to the same delivery. Test ping events show in the list with the event type *Ping*.
+
+[.table-scroll]
+--
+[cols="1,3", options="header"]
+|===
+| Column | Description
+
+| Time
+| When CircleCI sent the event.
+
+| Event type
+| The event, for example *Workflow Completed* or *Job Completed*.
+
+| Delivery
+a| The result of the delivery:
+
+* *Delivered*: The endpoint returned a 2xx response on the first attempt.
+* *Delivered with retries*: The endpoint returned a 2xx response after one or more retries. This can mean that the endpoint is slow or unstable.
+* *Not delivered*: Every attempt failed.
+
+| HTTP
+| The HTTP status code of the last attempt. A dash means the endpoint did not respond.
+
+| Attempts
+| The number of attempts, including retries.
+
+| Duration
+| How long the last attempt took.
+|===
+--
+
+To narrow the list, use the following filters:
+
+* *Delivery status*: Show all deliveries, or only the deliveries marked *Not delivered*.
+* *Event type*: Show one event type.
+* *Time range*: Show the last 24 hours, the last 7 days, or the last 14 days.
+
+[#delivery-details]
+=== View the details of a delivery
+
+Select a delivery in the list to open its details. The details show the same information as the list, along with the following:
+
+* The event ID.
+* A link to the workflow the event is about. Test ping events have no workflow.
+* For a delivery that was not delivered, the reason it failed, for example a timeout, a failed TLS certificate check, or the HTTP status code the endpoint returned.
+* The request payload CircleCI sent. Select *Copy JSON* to copy it.
+
+To find a specific delivery, enter its event ID in the *Search by event ID* field. The event ID is the `id` key in the webhook payload. For more information, see the xref:reference:ROOT:outbound-webhooks-reference.adoc#common-top-level-keys[Webhooks Reference].
+
+To list and view deliveries using the API, see the link:https://circleci.com/docs/api/v3/webhook-deliveries.md[Webhook Deliveries API v3 Reference].
+endif::server[]
+
 [#next-steps]
 == Next steps
 
