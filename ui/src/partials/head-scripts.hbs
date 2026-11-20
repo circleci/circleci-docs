@@ -22,12 +22,60 @@
     document.documentElement.style.colorScheme = resolvedTheme
   })()
 </script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+
+  gtag('consent', 'default', {
+    'ad_personalization': 'granted',
+    'ad_storage': 'granted',
+    'ad_user_data': 'granted',
+    'analytics_storage': 'granted',
+    'functionality_storage': 'granted',
+    'personalization_storage': 'granted',
+    'wait_for_update': 500
+  });
+
+  gtag('consent', 'default', {
+    'ad_personalization': 'denied',
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'analytics_storage': 'denied',
+    'functionality_storage': 'denied',
+    'personalization_storage': 'denied',
+    'wait_for_update': 500,
+    'region': [
+      'AT', 'BE', 'BG', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES',
+      'FI', 'FR', 'GB', 'GG', 'GR', 'HR', 'HU', 'IE', 'IM', 'IS',
+      'IT', 'JE', 'LI', 'LT', 'LU', 'LV', 'MT', 'NL', 'NO', 'PL',
+      'PT', 'RO', 'SE', 'SI', 'SK', 'BR', 'CA-QC', 'MX'
+    ]
+  });
+
+  gtag('set', 'ads_data_redaction', true);
+  gtag('set', 'url_passthrough', false);
+
+  // Cookiebot deletes declined cookies only when consent changes, and a 6sense
+  // script still on the page re-sets its first-party cookies right after
+  // (WBCT-1465). Clear them on every page load without marketing consent.
+  window.addEventListener('CookiebotOnConsentReady', function () {
+    if (window.Cookiebot.consent.marketing) return;
+    ['_gd_visitor', '_gd_session', '_gd_svisitor'].forEach(function (name) {
+      document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+    });
+  });
+</script>
 {{#with site.keys.cookiebot}}
     <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="{{this}}" data-blockingmode="auto" type="text/javascript"></script>
 {{/with}}
 {{#with site.keys.googleAnalytics}}
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{this}}"></script>
-    <script>function gtag(){dataLayer.push(arguments)};window.dataLayer=window.dataLayer||[];gtag('js',new Date());gtag('config','{{this}}')</script>
+    <script type="text/plain" data-cookieconsent="marketing">
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','{{this}}');
+    </script>
 {{/with}}
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
 {{#with site.keys.segmentWrite }}
@@ -66,7 +114,7 @@
     data-button-hide="true"
 ></script>
 <!-- Hotjar Tracking Code for www.circleci.com -->
-<script>
+<script type="text/plain" data-cookieconsent="statistics">
     (function(h,o,t,j,a,r){
         h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
         h._hjSettings={hjid:413720,hjsv:6};
@@ -77,7 +125,7 @@
     })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
 </script>
 <!-- Start of Reo Javascript -->
-<script type="text/javascript">
+<script type="text/plain" data-cookieconsent="marketing">
     !function(){var e,t,n;e="596def3e1965719",t=function(){Reo.init({clientID:"596def3e1965719"})},(n=document.createElement("script")).src="https://static.reo.dev/"+e+"/reo.js",n.defer=!0,n.onload=t,document.head.appendChild(n)}();
 </script>
 <!-- End of Reo Javascript -->
