@@ -72,7 +72,7 @@ image::guides:ROOT:authentication/mfa-display-recovery-code.png[Password and aut
 [#lost-factor-and-recovery-code]
 === If you lose your MFA factor and recovery code
 
-If you lose access to both your authenticator application and your recovery code, you cannot sign in to your account yourself. link:https://support.circleci.com/hc/en-us/requests/new[Contact CircleCI support] to find out how to move forward.
+If you lose access to both your authenticator application and your recovery code, you cannot sign in to your account yourself. link:https://support.circleci.com/hc/en-us/requests/new[Contact CircleCI Support] to find out how to move forward.
 
 [#faqs]
 == FAQs
