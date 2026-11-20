@@ -253,7 +253,7 @@ workflows:
 
 
 ifndef::server[]
-NOTE: Bitbucket repositories do *not* provide an API that allows CircleCI contexts to be restricted. Only `github` type organizations support security group restrictions, including GitHub App pipelines on `github` type organizations. To find out which organization type you have, refer to the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organizations[Users, Organizations, and Integrations Guide]. Restricting contexts for custom webhook triggers is not currently supported.
+NOTE: Bitbucket repositories do *not* provide an API that allows CircleCI contexts to be restricted, so `bitbucket` type organizations only support the `All members` security group. Security group restrictions are available for `github` type organizations, including GitHub App pipelines on `github` type organizations, and for `circleci` type (standalone) organizations. To find out which organization type you have, refer to the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organizations[Users, Organizations, and Integrations Guide]. Restricting contexts for custom webhook triggers is not currently supported.
 endif::server[]
 ifdef::server[]
 NOTE: Only `github` type organizations support security group restrictions.
@@ -269,7 +269,12 @@ CircleCI enables you to restrict contexts at run time in the following ways:
 
 Only organization administrators may add restrictions to new or existing contexts.
 
+ifndef::server[]
+In `github` type organizations, security groups are your organization's VCS teams. In `circleci` type organizations, security groups are the CircleCI groups in your organization. After a security group is added to a context, only members of that security group who are also CircleCI users may access the context and use the associated environment variables. The default security group is `All members`, and enables any member of the organization who uses CircleCI to use the context.
+endif::server[]
+ifdef::server[]
 Security groups are your organization's VCS teams. After a security group is added to a context, only members of that security group who are also CircleCI users may access the context and use the associated environment variables. The default security group is `All members`, and enables any member of the organization who uses CircleCI to use the context.
+endif::server[]
 
 Organization administrators have read/write access to all projects and have unrestricted access to all contexts.
 
@@ -327,7 +332,12 @@ A restricted context on the approval job itself does not control who can approve
 [#security-group-restrictions]
 == Security group restrictions
 
+ifndef::server[]
+NOTE: Restricting the use of contexts using security groups is available for `github` and `circleci` type organizations, and you must be an organization administrator. `bitbucket` type organizations only support the `All members` security group. For more information on organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organizations[Users, Organizations, and Integrations Guide].
+endif::server[]
+ifdef::server[]
 NOTE: Restricting the use of contexts using security groups is available for `github` type organizations only, and you must be an organization administrator. For more information on organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organizations[Users, Organizations, and Integrations Guide].
+endif::server[]
 
 ifndef::server[]
 A context security setting is available for `github` type organizations to require all newly-created contexts in the organization to be group-restricted. Contexts can still be created, but an administrator must assign at least one security group before the context will be available for use in workflows. This setting can be found in menu:Org[Security].
@@ -335,6 +345,14 @@ endif::server[]
 
 [#restrict-a-context-to-a-security-group-or-groups]
 === Restrict a context to a security group or groups
+
+ifndef::server[]
+In `github` type organizations, the security groups you can choose are your GitHub teams. In `circleci` type organizations, they are the groups you create on the *Groups* page in menu:Org[Groups]. This includes groups that xref:permissions-authentication:sso-group-mapping.adoc[SSO Group Mapping] keeps up to date. To create a group and add members, see xref:permissions-authentication:manage-groups.adoc[Manage Groups].
+
+In a `circleci` type organization, members of the group need the organization Admin or Contributor role to use a group-restricted context. A project-only role does not give access to a group-restricted context. For more information on roles, see xref:permissions-authentication:roles-and-permissions-overview.adoc[Roles and Permissions Overview].
+
+The group restriction narrows access only after you remove the `All members` security group from the context.
+endif::server[]
 
 [tabs%sync,sync-group-id=method]
 ====
@@ -353,7 +371,7 @@ include::ROOT:partial$find-ids/org-id-cli.adoc[]
 $ circleci context create <context-name> --org <org-id>
 ----
 
-. Next, find your security group ID. This step uses the API. Set up your API authentication by following the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide]. Then list your security groups, replacing `<org-id>`, and copy the `id` of the group (GitHub team) you want to restrict the context to:
+. Next, find your security group ID. This step uses the API. Set up your API authentication by following the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide]. Then list your security groups, replacing `<org-id>`, and copy the `id` of the group (GitHub team or CircleCI group) you want to restrict the context to:
 +
 [,shell]
 ----
@@ -368,7 +386,7 @@ curl -g "https://circleci.com/api/v3/groups?filter[org_id]=<org-id>" \
 $ circleci context restriction create <context-name> --type group --value <group-id> --org <org-id>
 ----
 +
-Only members of the specified GitHub team can now use the context in their workflows.
+Only members of the specified group can now use the context in their workflows.
 
 . Optionally, add environment variables to the context:
 +
@@ -406,7 +424,7 @@ curl -g "https://circleci.com/api/v3/contexts?filter[org_id]=<org-id>" \
 +
 TIP: Add `&filter[name]=<context-name>` to the URL to narrow the results. The filter matches any part of the name and ignores case.
 
-. Next, find your security group ID. List your security groups, replacing `<org-id>`, and copy the `id` of the group (GitHub team) you want to restrict the context to:
+. Next, find your security group ID. List your security groups, replacing `<org-id>`, and copy the `id` of the group (GitHub team or CircleCI group) you want to restrict the context to:
 +
 [,shell]
 ----
@@ -456,7 +474,7 @@ curl -g "https://circleci.com/api/v2/context?owner-id=<org-id>" \
   --header "Circle-Token: ${CIRCLE_TOKEN}" | jq .
 ----
 
-. Next, find your security group ID. List your security groups, replacing `<org-id>`, and copy the `id` of the group (GitHub team) you want to restrict the context to:
+. Next, find your security group ID. List your security groups, replacing `<org-id>`, and copy the `id` of the group (GitHub team or CircleCI group) you want to restrict the context to:
 +
 [,shell]
 ----
@@ -502,6 +520,10 @@ To make a context available _only_ to the administrators of the organization, yo
 === Add and remove users from teams and groups
 
 *GitHub OAuth app users:* CircleCI syncs GitHub team and LDAP groups every few hours. If a user is added or removed from a GitHub team or LDAP group, it can take up to a few hours to update CircleCI records. Access to the context will be removed at that point.
+
+ifndef::server[]
+*Standalone organization users:* Manage the members of a CircleCI group on the *Groups* page. If you use SSO group mapping, manage group membership in your identity provider. A change there applies at the user's next SSO sign-in. See xref:permissions-authentication:manage-groups.adoc[Manage Groups] and xref:permissions-authentication:sso-group-mapping.adoc[Set Up SSO Group Mapping with Okta].
+endif::server[]
 
 [#adding-and-removing-environment-variables-from-restricted-contexts]
 === Add and remove environment variables from restricted contexts
