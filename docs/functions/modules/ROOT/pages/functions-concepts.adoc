@@ -116,6 +116,27 @@ $ circleci function update go --version v0.7.0
 
 To list the functions your configuration declares and the versions they are pinned to, run `circleci function list --pinned`.
 
+[#update-functions-automatically]
+=== Update functions automatically
+
+link:https://docs.renovatebot.com/[Renovate] updates the functions in your configuration the same way it updates orbs and Docker images. Its link:https://docs.renovatebot.com/modules/manager/circleci/[CircleCI manager] reads the `functions` key and opens a pull request that moves each function to its latest release.
+
+Renovate looks up function releases on GitHub. A release reaches CircleCI a few minutes after it appears on GitHub, so delay updates with `minimumReleaseAge`:
+
+.A Renovate rule that waits an hour before updating functions
+[source,json]
+----
+{
+  "packageRules": [
+    {
+      "matchManagers": ["circleci"],
+      "matchDepTypes": ["function"],
+      "minimumReleaseAge": "1 hour"
+    }
+  ]
+}
+----
+
 [#configuration-validation]
 == Configuration validation
 
