@@ -1,6 +1,7 @@
 extends: capitalization
 message: "'%s' should be in sentence case"
 level: error
+link: https://github.com/circleci/circleci-docs/blob/main/AGENTS.md#headings
 scope: heading
 # $title, $sentence, $lower, $upper, or a pattern.
 match: $sentence

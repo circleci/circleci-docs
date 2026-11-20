@@ -3,6 +3,7 @@ extends: existence
 message: "Consider removing '%s'"
 ignorecase: true
 level: warning
+link: https://circleci.com/docs/style/style-and-voice/#word-choices
 tokens:
   - appear to be
   - arguably
