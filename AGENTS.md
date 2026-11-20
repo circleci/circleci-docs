@@ -18,6 +18,19 @@ One other file serves a different audience and must not be confused with this on
 
 The human-facing "find the right starting point" table lives as a section in `docs/guides/modules/getting-started/pages/getting-started.adoc` (Quickstart guide), not on a dedicated page.
 
+## Skills
+
+Skills are task instructions in `skills/<name>/SKILL.md`. Before you start docs work, check this table. If your task matches a row, read that `SKILL.md` and follow it. Claude Code loads these skills automatically from `.claude/skills/`. Other agents must open the file.
+
+| When you | Read first |
+|---|---|
+| Add, edit, or find shared content: partials, examples, repeated steps, notes, or snippets | `skills/partials/SKILL.md` |
+| Run Vale or fix Vale errors | `skills/vale-linter/SKILL.md` |
+
+Do not use anything in `skills/team/`. Those skills are for the docs team's internal workflows (reviews, reports, and the docs bot).
+
+When you add a contributor skill, add a row here and link it in `skills/README.md`.
+
 ## Git worktrees
 
 - **Local agents** (Claude Code CLI, Cursor Desktop): work in the main `circleci-docs` checkout. **Ask before creating a git worktree**, and create one only when asked. Worktrees accumulate quickly and are awkward to unwind mid-task.

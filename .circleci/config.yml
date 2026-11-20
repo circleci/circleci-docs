@@ -55,6 +55,9 @@ jobs:
       - run:
           name: Check page metadata against schema
           command: node scripts/check-metadata.js
+      - run:
+          name: Check skills are listed and linked
+          command: node scripts/check-skills.js
 
   build:
     executor: node_executor
