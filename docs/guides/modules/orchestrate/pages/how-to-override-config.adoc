@@ -319,7 +319,7 @@ For each project using the centralized configuration, the platform team needs to
 == Limitations
 
 * Overriding workflow configuration elements, such as a job's `type`, `requires`, `context`, or `filters`, is not supported. These must be defined in the centralized workflow configuration.
-* Config overrides only support job overrides at this time. Overriding entire workflows is not supported.
+* Config overrides only support job overrides. Overriding entire workflows is not supported.
 * Schedule triggers are not supported for GitLab projects, so they cannot be triggered from a centralized config.
 * The override mechanism works for GitHub OAuth projects, but there is no way to enforce a single config across multiple OAuth projects within the CircleCI platform. The "centralized" config would need to be duplicated in each project.
 
@@ -333,7 +333,7 @@ Follow these steps to migrate existing projects to a centralized configuration m
 . *Remove duplicate job definitions:* Remove standard job definitions from project repositories, keeping only those that need customization.
 . *Implement overrides:* For jobs requiring customization, implement the override mechanism using the steps outlined above.
 
-CircleCI provides a link:https://github.com/CircleCI-Public/terraform-provider-circleci[Terraform provider] that can help automate the setup of projects with standardized configurations. This can be useful when implementing configuration overrides across multiple projects.
+CircleCI provides a link:https://github.com/CircleCI-Public/terraform-provider-circleci[Terraform provider] that can help automate the setup of projects with standardized configurations.
 
 [#troubleshooting]
 == Troubleshooting

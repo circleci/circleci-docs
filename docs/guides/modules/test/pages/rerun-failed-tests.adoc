@@ -70,7 +70,7 @@ For a list of options for the `circleci tests run` command, see the xref:optimiz
 The next section provides a more detailed example of migrating from `circleci tests split` to `circleci tests run` to access the rerun failed tests feature.
 
 == Migrate from `circleci tests split` to `circleci tests run`
-This section is intended to show how to configure your pipelines to enable the use of the rerun failed tests feature. The following two sections show a _before_ and _after_ version of a job configured to run pytest tests. This shows how to get from an existing configuration using `circleci tests split` to using `circleci tests run`, which is a requirement for using the rerun failed tests feature. Your starting point may be different, you might not already be using `circleci tests split`, in which case you can refer to the _after_ example to see how to configure your job to use `circleci tests run`.
+This section is intended to show how to configure your pipelines to enable the use of the rerun failed tests feature. The following two sections show a _before_ and _after_ version of a job configured to run pytest tests. This shows how to get from an existing configuration using `circleci tests split` to using `circleci tests run`, which is a requirement for using the rerun failed tests feature. Your starting point may be different. You might not already be using `circleci tests split`. In that case, you can refer to the _after_ example to see how to configure your job to use `circleci tests run`.
 
 The example used in this section includes the use of xref:optimize:parallelism-faster-jobs.adoc[Intelligent Test Splitting] to optimize testing time. Test splitting and parallelism are not required to use the rerun failed tests feature.
 
@@ -174,7 +174,7 @@ The job reruns only tests that are from a `classname` of `file` that had at leas
 [#additional-examples]
 == Additional examples
 
-Rerun failed tests is test runner and test framework-agnostic. If you do not see your test framework on this page, you can still use the functionality as long as your job meets the xref:#prerequisites[Prerequisites]. You can use the methods described in the xref:collect-test-data.adoc[Upload Test Results] document to ensure that the job is uploading test results. Note that `classname` and `file` is not always present by default, so your job may require additional configuration.
+Rerun failed tests is test runner and test framework-agnostic. If you do not see your test framework on this page, you can still use the functionality as long as your job meets the xref:#prerequisites[Prerequisites]. You can use the methods described in the xref:collect-test-data.adoc[Upload Test Results] document to ensure that the job is uploading test results. The `classname` and `file` attributes are not always present by default, so your job may require additional configuration.
 
 From there, follow the xref:#quickstart[Quickstart] section to edit your test command to use `circleci tests run`.
 
@@ -605,7 +605,7 @@ You can specify the timing type for test splitting using the `--timings-type=` f
 [#timings-type-testname]
 === Split by test name
 
-To use `timings-type=testname`, the test runner or framework must be able to take in as *input* a list of *test names* (as opposed to *classnames* or *file names*). Most test frameworks (including RSpec) do not accept as input a list of test names. If the test framework accepts as input a list of test names, pipe the test names into `circleci tests run` instead of piping in test file or class names via `circleci tests glob`. This will enable CircleCI to find the historical test data for individual test names and split the test names into logical groups.
+To use `timings-type=testname`, the test runner or framework must be able to take in as *input* a list of *test names* (as opposed to *classnames* or *file names*). Most test frameworks (including RSpec) do not accept as input a list of test names. If the test framework accepts as input a list of test names, pipe the test names into `circleci tests run` instead of piping in test file or class names using `circleci tests glob`. This enables CircleCI to find the historical test data for individual test names and split the test names into logical groups.
 
 [#known-limitations]
 == Known limitations
@@ -716,7 +716,7 @@ A similar method can be used to ensure that the job following a re-run uses timi
 
 * Rerunning failed tests is available for workflows that are less than 15 days old.
 
-* The web UI does not show whether a job was rerun using "Rerun failed tests".
+* The web app does not show whether a job was rerun using "Rerun failed tests".
 
 [#troubleshooting]
 == Troubleshooting
