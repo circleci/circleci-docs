@@ -38,7 +38,7 @@ Find 3-5 related pages: grep for key terms, follow the page's xrefs, and prefer 
    - Each block is self-contained and working. Key explanation is in comments inside the block, because an agent may retrieve only the block.
    - Pinned versions are current, and resource classes, machine images, and Xcode versions exist. Run `node scripts/check-code-versions.js <file>` and report what it finds. It is advisory: an example may pin an older version or use a placeholder name on purpose, and a lookup it cannot complete is unverified, not current.
 5. **Information architecture and admonitions**:
-   - Essential information is in the main text, not in an admonition or a tab. Agents often miss both.
+   - Essential information is in the main text, not in an admonition, and each tab is complete on its own. See "Page structure" in `AGENTS.md`.
    - Check every admonition against the Admonitions section of `AGENTS.md`. Flag the wrong type, long ones that should be a section, best practices or limitations that should not be an admonition, and overuse.
 6. **Section introductions**: Each major section opens with context that stands alone.
 7. **Consistency**:

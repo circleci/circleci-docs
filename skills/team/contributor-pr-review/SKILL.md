@@ -10,7 +10,7 @@ description: >
 
 # Contributor PR Review
 
-You review a docs pull request from a contributor, who may be outside the docs team and new to the style guide. You produce a local report the reviewer can act on or pass on. `AGENTS.md` is the source of truth for style rules, and `skills/content-review/SKILL.md` defines the quality dimensions. Do not restate either.
+You review a docs pull request from a contributor, who may be outside the docs team and new to the style guide. You produce a local report the reviewer can act on or pass on. `AGENTS.md` is the source of truth for style rules, and `skills/team/content-review/SKILL.md` defines the quality dimensions. Do not restate either.
 
 ## Input
 
