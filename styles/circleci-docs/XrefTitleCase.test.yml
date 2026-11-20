@@ -1,0 +1,30 @@
+- name: flags lowercase link text
+  rule: XrefTitleCase.yml
+  format: adoc
+  input: See xref:config.adoc[configuration reference] for details.
+  contains: circleci-docs.XrefTitleCase
+- name: allows title case
+  rule: XrefTitleCase.yml
+  format: adoc
+  input: See xref:config.adoc[Configuration Reference] for details.
+  absent: circleci-docs.XrefTitleCase
+- name: allows lowercase articles and prepositions mid-title
+  rule: XrefTitleCase.yml
+  format: adoc
+  input: See xref:config.adoc[Introduction to the Orb Registry] for details.
+  absent: circleci-docs.XrefTitleCase
+- name: flags a capitalized preposition mid-title
+  rule: XrefTitleCase.yml
+  format: adoc
+  input: See xref:config.adoc[Introduction To Orbs] for details.
+  contains: circleci-docs.XrefTitleCase
+- name: ignores link text that starts with a code span
+  rule: XrefTitleCase.yml
+  format: adoc
+  input: See xref:config.adoc[`config.yml` reference] for details.
+  absent: circleci-docs.XrefTitleCase
+- name: ignores intentionally cased words
+  rule: XrefTitleCase.yml
+  format: adoc
+  input: See xref:ios.adoc[Test Apps on iOS] for details.
+  absent: circleci-docs.XrefTitleCase

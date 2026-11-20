@@ -56,6 +56,17 @@ jobs:
           name: Check page metadata against schema
           command: node scripts/check-metadata.js
 
+  test-vale-rules:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - checkout
+      - vale/install
+      - run:
+          name: Test Vale rules
+          command: vale test styles/circleci-docs
+
   build:
     executor: node_executor
     steps:
@@ -224,6 +235,8 @@ workflows:
           filters: pipeline.git.branch != "main"
 
       - check-metadata
+
+      - test-vale-rules
 
       - build:
           filters: pipeline.git.branch == "main"
