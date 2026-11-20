@@ -193,11 +193,24 @@ Set `:page-badge:` to `Beta`, `Preview`, or `Deprecated` to show a badge next to
 ### Subsection Badges
 Put `[badge="Beta"]` on the line above a heading (h2-h6) to badge it. Common badges: `Preview`, `Beta`, `Deprecated`, `Cloud only`, `Server v4+`. Badges do not appear in xref link text. For styling attributes, see xref:contributors:docs-style:title-badges.adoc#subsection-badges[Subsection Badges].
 
+### Page structure
+Readers and agents often reach a page, a section, or a single code block without the rest of the page. Structure content so each piece makes sense alone.
+
+- **Open with the why.** The first paragraph says what the page covers and why the reader would use it: the problem it solves or the use case. Cover both why (value, when to use it) and how (steps) on the page.
+- **Open each major section with context that stands alone.** One or two sentences say what the section covers and why it matters, before any detail or subheading.
+- **Put essential information in the main text.** Steps, prerequisites, limitations, and anything the reader must know to succeed do not go in an admonition. Agents and skimming readers often miss admonitions. Use an admonition only for supplementary information.
+- **Make each tab complete.** Use tabs for alternatives, such as one tab per VCS. Do not put information every reader needs in only one tab, and do not hide the only copy of a required step in a tab. Each tab holds the full steps for its option.
+- **Make code blocks self-contained.** Put the key explanation in comments inside the block, not only in the text around it. Show the full job or workflow, not fragments.
+- **Put a Prerequisites section before the first step** on a how-to page.
+- **Do not repeat an explanation** without a purpose. Link to it, or use a partial if it must appear in more than one place. See [Reusable Partials](#reusable-partials).
+- **Match tone to the audience in `:page-audience:`.** Pages for `admin` readers, such as Server administration, use a professional, technical tone. All other pages use a friendly, authoritative tone for a junior engineer.
+
 ### Headings
 - Write headings in **logical sequence** that tells a story
 - **Do not skip heading levels** (for example, h2 to h4)
 - Antora creates the `h1` from the page title, so use only `h2` and below in the body
 - Include at least an intro paragraph before subheadings
+- Do not use vague headings such as "Overview" or "Details". The heading says what the section contains
 - Headings are in **sentence case**. Only xref link text is title case, so an xref to a heading does not match the heading's capitalization
 - **Start headings with verbs** where possible:
   - **Good**: "Grooming cats"
