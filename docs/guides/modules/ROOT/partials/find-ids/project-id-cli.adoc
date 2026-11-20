@@ -5,9 +5,9 @@ To return the project ID for the current repository:
 $ circleci project get --json --jq '.id'
 ----
 +
-To look up a specific project by slug:
+To look up a specific project by slug, replace `<project-slug>` with your project slug. You can find the slug in menu:Project Settings[Overview].
 +
 [source,console]
 ----
-$ circleci project list --slug gh/my-org/my-repo --json --jq '.[0].id'
+$ circleci project list --slug <project-slug> --json --jq '.[0].id'
 ----
