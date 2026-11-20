@@ -24,7 +24,7 @@ Skills are task instructions in `skills/<name>/SKILL.md`. Before you start docs 
 
 | When you | Read first |
 |---|---|
-| Add, edit, or find shared content: partials, examples, repeated steps, notes, or snippets | `skills/partials/SKILL.md` |
+| Write or edit any `.adoc` page, or touch shared content: partials, examples, repeated steps, notes, or snippets | `skills/partials/SKILL.md` |
 | Run Vale or fix Vale errors | `skills/vale-linter/SKILL.md` |
 
 Do not use anything in `skills/team/`. Those skills are for the docs team's internal workflows (reviews, reports, and the docs bot).
@@ -46,6 +46,8 @@ See [Agent Environment Context](#agent-environment-context) for the two environm
 - `template-tutorial.adoc` - Learning-oriented tutorials
 
 All pages require standard attributes (`:page-platform:`, `:page-audience:`, `:page-description:`, `:experimental:`) at the top. See the "Working with the Docs Site" section for complete details on templates and page attributes.
+
+**Reuse before you write.** Follow `skills/partials/SKILL.md` while drafting. Check whether an existing partial or shared example already covers a step, note, or snippet you need, and include it instead of writing it again. If you write content that other pages will also need, propose a new partial. See [Reusable Partials](#reusable-partials).
 
 ## Voice and Style
 
@@ -693,3 +695,4 @@ head -10 docs/guides/modules/toolkit/pages/existing-page.adoc
 - Follow these guidelines for new content
 - When touching existing sections, update them to meet current standards
 - Help maintain consistency across the documentation
+- Follow `skills/partials/SKILL.md` on every edit: replace hand-written content that duplicates an existing partial or example with an include, and propose extracting content that now repeats across pages into a new partial. Ask before extracting, because a partial change affects every page that includes it.
