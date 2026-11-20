@@ -1,0 +1,26 @@
+# The project slug makes the group name unique to this project.
+# Pipelines in this project queue behind each other. Other projects are not affected.
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - checkout
+      - run: ./scripts/test.sh
+  deploy:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - checkout
+      - run: ./scripts/deploy.sh
+
+workflows:
+  main-workflow:
+    jobs:
+      - test
+      - deploy:
+          serial-group: << pipeline.project.slug >>/deploy
+          requires:
+            - test

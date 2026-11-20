@@ -1,0 +1,141 @@
+= Serial group recipes
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.9"
+:page-audience: developer
+:page-description: Recipes for using serial groups to run jobs one at a time across your organization, such as deployments, database migrations, and shared test resources.
+:experimental:
+
+These recipes show how to use serial groups to run jobs one at a time. For how serial groups work, the queueing rules, and how to release a group from the web app, see xref:controlling-serial-execution-across-your-organization.adoc[Controlling Serial Execution Across Your Organization].
+
+Each example is a complete configuration file that you can adapt. Replace the `./scripts/` commands with your own.
+
+== Run one deployment at a time across your organization
+
+=== Goal
+
+You may want to stop deployments to a shared environment from overlapping when several projects deploy to it.
+
+=== Steps
+
+. Add the `serial-group` key to the deploy job in every project that deploys to the environment. Use the same literal string in each project:
++
+[,yaml]
+----
+include::ROOT:example$orchestration-examples/serial-group-deploy-org-wide.yml[]
+----
+
+. Trigger a run in two of the projects at the same time. The second deploy job shows a _queued_ status until the first deploy job finishes.
+
+=== Notes
+
+* A serial group applies across your organization. Two jobs in different projects are in the same group when their `serial-group` values are identical.
+* Do not add `<< pipeline.project.slug >>` to the value. It gives each project its own group, so deployments from different projects no longer queue behind each other. To serialize within one project only, see <<run-one-deployment-at-a-time-for-each-project,Run one deployment at a time for each project>>.
+* The next job in the queue starts when a job finishes, whatever the job's final status.
+* A job that requires the deploy job runs only if the deploy job succeeded. Releasing the lock does not change this.
+* A job waits in the queue for up to five hours. After that, CircleCI cancels it.
+* If a newer pipeline in the same project is waiting or running in the group, a job from an older pipeline is skipped. To roll back to an earlier version, rerun a workflow from the earlier pipeline when no job in the group is waiting or running.
+
+== Run one deployment at a time for each project
+
+=== Goal
+
+You may want pipelines in one project to deploy one at a time, for example when several merges to `main` happen close together, without making other projects wait.
+
+=== Steps
+
+* Add the `serial-group` key to the deploy job and include the project slug in the value:
++
+[,yaml]
+----
+include::ROOT:example$orchestration-examples/serial-group-deploy-per-project.yml[]
+----
+
+=== Notes
+
+* The `<< pipeline.project.slug >>` pipeline value is different in every project, so each project has its own group.
+* The `/` in the project slug is a permitted character in a `serial-group` value.
+
+== Run one deployment at a time for each environment
+
+=== Goal
+
+You may want staging and production deployments to queue separately, so a slow production deployment does not hold up staging.
+
+=== Steps
+
+* Add a pipeline parameter for the environment and use it in the `serial-group` value. Each value of the parameter has its own group:
++
+[,yaml]
+----
+include::ROOT:example$orchestration-examples/serial-group-deploy-per-environment.yml[]
+----
+
+=== Notes
+
+* Use a parameter with a fixed set of values, such as an `enum`, so the group name is always valid. A `serial-group` value must be 512 characters or fewer and can contain only alphanumeric characters and `.`, `-`, `_`, and `/`.
+* To use a specific value, set the parameter when you trigger a run. See xref:triggers-overview.adoc[Trigger Options].
+
+== Run database migrations one at a time across services
+
+=== Goal
+
+You may want to stop two services from migrating the same database at the same time.
+
+=== Steps
+
+* In each service that shares the database, add the `serial-group` key to the migration job. Use the same literal string in every service. Jobs that depend on the migration, such as the deploy job, stay outside the group:
++
+[,yaml]
+----
+include::ROOT:example$orchestration-examples/serial-group-database-migrations.yml[]
+----
+
+=== Notes
+
+* The lock is released as soon as the `migrate` job finishes. The `deploy` job in this example is not part of the group, so another service can start its migration while this service deploys.
+* If a migration fails, CircleCI still releases the lock and the next migration in the queue starts. The `deploy` job does not run, because it requires `migrate` to succeed.
+* A newer pipeline in the same project takes priority over an older one. An older pipeline's migration job is skipped when a newer pipeline's job is waiting or running in the group.
+
+== Limit a shared test resource to one job at a time
+
+=== Goal
+
+You may want to give jobs exclusive use of a resource that can serve only one job at a time. Examples include a pool of physical devices or a test environment with limited capacity.
+
+=== Steps
+
+* Add the `serial-group` key to every job that uses the resource, in every project. Name the group after the resource:
++
+[,yaml]
+----
+include::ROOT:example$orchestration-examples/serial-group-shared-test-resource.yml[]
+----
+
+=== Notes
+
+* Use one group for each resource. Jobs that use different resources can run at the same time.
+* If a job holds the lock and is stuck, you can release the group from the web app. See xref:controlling-serial-execution-across-your-organization.adoc#release-a-serial-group[Release a Serial Group].
+
+== Run a set of jobs as one unit
+
+=== Goal
+
+You may want a sequence of jobs, such as a migration followed by a verification step, to finish before any other pipeline starts the same sequence.
+
+=== Steps
+
+. Define the jobs as a job group. Use `requires` inside the group to set the order of its jobs.
+
+. Add the `serial-group` key where you invoke the group in the workflow:
++
+[,yaml]
+----
+include::ROOT:example$orchestration-examples/serial-group-job-group-unit.yml[]
+----
+
+=== Notes
+
+* The lock is released when all jobs in the group have finished, not after the first job.
+* A job that requires the group, such as `notify` in this example, runs only if all of the group's leaf jobs succeeded. See xref:controlling-serial-execution-across-your-organization.adoc#how-job-group-expansion-works[How Job Group Expansion Works].
