@@ -15,7 +15,7 @@ To use the CircleCI API or view details about your pipelines, you will need API 
 In CircleCI you can create personal and project API tokens:
 
 ifndef::server[]
-*Personal API tokens*:: These tokens are used to interact with the CircleCI APIs (v1 and v2). Tokens created manually through the web app grant full read and write permissions. Manually-created tokens expire on a date you set when you create them. An expired token stops working, so you must replace it with a new token. Tokens created through the xref:oauth-dynamic-client-registration.adoc[OAuth 2.0 Dynamic Client Registration] flow are scoped to the access level (Read, Write, or Admin) chosen by the user during authorization.
+*Personal API tokens*:: These tokens are used to interact with the CircleCI APIs (v1 and v2). When you create a token manually through the web app, you choose a scope of Read, Write, or Admin. For details, see <<personal-api-token-scopes>>. Manually-created tokens expire on a date you set when you create them. An expired token stops working, so you must replace it with a new token. Tokens created through the xref:oauth-dynamic-client-registration.adoc[OAuth 2.0 Dynamic Client Registration] flow are scoped to the access level (Read, Write, or Admin) chosen by the user during authorization.
 endif::server[]
 ifdef::server[]
 *Personal API tokens*:: These tokens are used to interact with the CircleCI APIs (v1 and v2). Tokens created manually through the web app grant full read and write permissions.
@@ -34,6 +34,37 @@ include::guides:ROOT:partial$shared-sections/create-a-personal-api-token.adoc[]
 
 To delete a personal API token, click the X in the *Remove* column and confirm
 your deletion in the dialog window.
+
+ifndef::server[]
+[#personal-api-token-scopes]
+=== Personal API token scopes
+
+When you create a personal API token, you choose a scope that controls the access the token grants:
+
+[.table-scroll]
+--
+[cols="1,3", options="header"]
+|===
+| Scope
+| Permissions
+
+| Read
+| Read-only access to all resources you can read.
+
+| Write
+| Read and write access to all resources you can read and write.
+
+| Admin
+| Full access to all permissions you hold, which may include org management and billing settings for organizations where you are an admin.
+|===
+--
+
+A scope is a ceiling on the token, not a grant of new permissions. A token cannot grant more access than you already hold in CircleCI, based on your organization and project role. For example, if you have the _Viewer_ role and select Admin, the token is still limited to Viewer-level (read-only) actions. See the xref:permissions-authentication:roles-and-permissions-overview.adoc[Roles and Permissions Overview] page for role definitions.
+
+Use scoped tokens to issue narrowly-scoped access for CI integrations, scripts, or third-party tools that only need read or write access. Limiting a token to the access it needs reduces the impact if the token is leaked or compromised.
+
+Tokens created before scopes were introduced are unaffected and continue to operate with admin-level access. To start using scoped tokens, <<creating-a-personal-api-token,create a new personal API token>> and select the scope you want. You cannot change the scope of an existing token. To change it, delete the token and create a new one, as described in <<rotating-a-personal-api-token>>.
+endif::server[]
 
 [#creating-a-project-api-token]
 === Create a project API token
@@ -68,6 +99,9 @@ include::ROOT:partial$app-navigation/steps-to-user-settings.adoc[]
 . Select btn:[Create New Token].
 . In the *Token name* field, type a new name for the old token you are rotating. It can be the same name given to the old token.
 . Set an expiry date for the token.
+ifndef::server[]
+. Select the same scope used for the old token, or a different scope if the token's needs have changed.
+endif::server[]
 . Select btn:[Add API Token].
 . After the token appears, copy and paste it to another location. You will not be able to view the token again.
 
