@@ -55,8 +55,15 @@ jobs:
       - run:
           name: Check page metadata against schema
           command: node scripts/check-metadata.js
+
+  check-skills:
+    docker:
+      - image: cimg/node:24.22.2
+    resource_class: small
+    steps:
+      - checkout
       - run:
-          name: Check skills are listed and linked
+          name: Check contributor skills are listed and linked
           command: node scripts/check-skills.js
 
   build:
@@ -226,7 +233,11 @@ workflows:
           base_dir: docs
           filters: pipeline.git.branch != "main"
 
-      - check-metadata
+      - check-metadata:
+          filters: pipeline.git.branch != "main"
+
+      - check-skills:
+          filters: pipeline.git.branch != "main"
 
       - build:
           filters: pipeline.git.branch == "main"
