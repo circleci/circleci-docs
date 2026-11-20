@@ -4,7 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-server-min-version: "4.9"
 :page-audience: developer
-:page-description: Recipes for using serial groups to run jobs one at a time across your organization, such as deployments, database migrations and shared test resources.
+:page-description: Recipes for using serial groups to run jobs one at a time across your organization, such as deployments, database migrations, and shared test resources.
 :experimental:
 
 These recipes show how to use serial groups to run jobs one at a time. For how serial groups work, the queueing rules, and how to release a group from the web app, see xref:controlling-serial-execution-across-your-organization.adoc[Controlling Serial Execution Across Your Organization].
@@ -74,7 +74,7 @@ include::ROOT:example$orchestration-examples/serial-group-deploy-per-environment
 
 === Notes
 
-* Use a parameter with a fixed set of values, such as an `enum`, so the group name is always valid. A `serial-group` value must be 512 characters or fewer and can contain only alphanumeric characters and `.`, `-`, `_` and `/`.
+* Use a parameter with a fixed set of values, such as an `enum`, so the group name is always valid. A `serial-group` value must be 512 characters or fewer and can contain only alphanumeric characters and `.`, `-`, `_`, and `/`.
 * To use a specific value, set the parameter when you trigger a run. See xref:triggers-overview.adoc[Trigger Options].
 
 == Run database migrations one at a time across services
