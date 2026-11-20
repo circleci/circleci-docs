@@ -38,7 +38,7 @@ What differs between features is where the expression is written, which variable
 | xref:configuration-reference.adoc#expressions-in-config-fields[Expressions in Configuration Fields]
 
 | Context expression restrictions
-| Pipeline values (except `pipeline.trigger_parameters.*`) and the job value `job.ssh.enabled`. Pipeline parameters (`pipeline.parameters.*`) are not available, because people who trigger a pipeline can set them, and trigger inputs must not decide whether a context is available.
+| Pipeline values (except `pipeline.trigger_parameters.*`) and the job value `job.ssh.enabled`. Pipeline parameters (`pipeline.parameters.*`) are not available, because people who trigger a pipeline can set them, and trigger inputs must not decide whether a context is available. Trigger parameters (`pipeline.trigger_parameters.*`) are not available because they are deprecated and tightly coupled to the VCS.
 | xref:guides:security:contexts.adoc#expression-restrictions[Expression Restrictions]
 
 | Release validation `fail_when`
@@ -110,7 +110,7 @@ Invalid names:
 * `.bar`: cannot start with a period.
 * `foo..bar`: cannot contain consecutive periods.
 
-Referring to a variable that does not exist is an error. On CircleCI Cloud, a variable that exists but has no value, such as `pipeline.git.branch` on a tag build, is _undefined_. See <<undefined-values>>.
+Referring to a variable that does not exist is an error. A variable that exists but has no value, such as `pipeline.git.branch` on a tag build, is _undefined_ in GitHub App projects and an empty string in GitHub OAuth projects. See <<undefined-values>>.
 
 [#operators]
 == Operators
@@ -251,7 +251,7 @@ A variable that exists but has no value is _undefined_. An undefined value is no
 ** `not foo` evaluates to `true`.
 * If the final result of an expression is undefined, it is treated as `false`.
 
-On CircleCI Server, a variable that has no value is an empty string, not undefined. An empty string counts as `true`, so the rules above do not apply. For example, on a tag build `pipeline.git.branch or "none"` evaluates to the empty string, not to `"none"`.
+In GitHub OAuth projects, a variable that has no value is an empty string, not undefined. This applies on CircleCI Cloud and CircleCI Server. An empty string counts as `true`, so the rules above do not apply. For example, on a tag build `pipeline.git.branch or "none"` evaluates to the empty string, not to `"none"`.
 
 [#errors]
 == Errors
