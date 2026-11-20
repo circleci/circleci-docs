@@ -1,0 +1,9 @@
+To list projects in your organization, replace `<your-org-id>` with your organization ID:
++
+[source,shell]
+----
+curl -g 'https://circleci.com/api/v3/projects?filter[org_id]=<your-org-id>' \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
+----
++
+The response returns a list of projects. The `id` field for each entry is the project ID.

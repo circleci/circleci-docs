@@ -1,0 +1,9 @@
+To return details for a specific project, replace `<project-slug>` with your project slug. You can find the slug in menu:Project Settings[Overview]:
++
+[source,shell]
+----
+curl 'https://circleci.com/api/v2/project/<project-slug>' \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
+----
++
+The response includes the project ID in the `id` field.

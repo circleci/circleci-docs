@@ -44,7 +44,9 @@ ifndef::server[]
 CLI v1::
 +
 --
-. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-cli.adoc[]
 
 . Create a context. Replace `<org-id>`:
 +
@@ -71,7 +73,9 @@ CLI v0::
 --
 CLI v1 is not supported on CircleCI Server. Install CLI v0 as described in xref:toolkit:circleci-cli.adoc#install-cli-v0-for-circleci-server[Install the CLI for CircleCI Server].
 
-. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-cli-v0.adoc[]
 
 . Create a context. Replace `<org-id>`:
 +
@@ -107,7 +111,9 @@ API v3::
 +
 --
 . Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
-. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-api-v3.adoc[]
 . Create a context with the link:https://circleci.com/docs/api/v3/contexts.md[Create a Context] endpoint. Replace `<org-id>` and `<context-name>`:
 +
 [,shell]
@@ -156,7 +162,9 @@ API v2::
 include::ROOT:partial$notes/server-api-examples.adoc[]
 
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
-. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-api-v2.adoc[]
 . Create a context with the link:https://circleci.com/docs/api/v2/#operation/createContext[Create a New Context] endpoint. Replace `<org-id>` and `<context-name>`:
 +
 [,shell]
@@ -334,7 +342,9 @@ ifndef::server[]
 CLI v1::
 +
 --
-. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-cli.adoc[]
 
 . Create a new context or use an existing one. To create a new context, replace `<org-id>`:
 +
@@ -383,7 +393,9 @@ API v3::
 +
 --
 . Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
-. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-api-v3.adoc[]
 . Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
 +
 [,shell]
@@ -433,7 +445,9 @@ API v2::
 include::ROOT:partial$notes/server-api-examples.adoc[]
 
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
-. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-api-v2.adoc[]
 . Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
 +
 [,shell]
@@ -517,7 +531,12 @@ ifndef::server[]
 CLI v1::
 +
 --
-. Get your organization ID and the ID of the project you want to restrict access to. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID] and xref:toolkit:how-to-find-ids.adoc#find-a-project-id[Find a Project ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-cli.adoc[]
+. Get the ID of the project you want to restrict access to.
++
+include::ROOT:partial$find-ids/project-id-cli.adoc[]
 
 . Add a project restriction to the context. Replace `<org-id>` and `<project-id>`:
 +
@@ -552,7 +571,12 @@ API v3::
 +
 --
 . Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
-. Get your organization ID and the ID of the project you want to restrict access to. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID] and xref:toolkit:how-to-find-ids.adoc#find-a-project-id[Find a Project ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-api-v3.adoc[]
+. Get the ID of the project you want to restrict access to.
++
+include::ROOT:partial$find-ids/project-id-api-v3.adoc[]
 . Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
 +
 [,shell]
@@ -594,7 +618,12 @@ API v2::
 include::ROOT:partial$notes/server-api-examples.adoc[]
 
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
-. Get your organization ID and the ID of the project you want to restrict access to. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID] and xref:toolkit:how-to-find-ids.adoc#find-a-project-id[Find a Project ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-api-v2.adoc[]
+. Get the ID of the project you want to restrict access to.
++
+include::ROOT:partial$find-ids/project-id-api-v2.adoc[]
 . Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
 +
 [,shell]
@@ -633,7 +662,9 @@ ifndef::server[]
 CLI v1::
 +
 --
-. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-cli.adoc[]
 
 . Next, find the restriction ID. Get the context details, replacing `<org-id>`, and copy the ID of the restriction you want to remove:
 +
@@ -662,7 +693,9 @@ API v3::
 +
 --
 . Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
-. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-api-v3.adoc[]
 . Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
 +
 [,shell]
@@ -698,7 +731,9 @@ API v2::
 include::ROOT:partial$notes/server-api-examples.adoc[]
 
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
-. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-api-v2.adoc[]
 . Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
 +
 [,shell]
@@ -769,7 +804,9 @@ ifndef::server[]
 CLI v1::
 +
 --
-. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-cli.adoc[]
 
 . Add an expression restriction to the context. Replace `<org-id>` with your organization ID and `<expression>` with a pipeline value expression such as `pipeline.git.branch == "main"`:
 +
@@ -792,7 +829,9 @@ API v3::
 +
 --
 . Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
-. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-api-v3.adoc[]
 . Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
 +
 [,shell]
@@ -834,7 +873,9 @@ API v2::
 include::ROOT:partial$notes/server-api-examples.adoc[]
 
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
-. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-api-v2.adoc[]
 . Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
 +
 [,shell]
@@ -1026,7 +1067,9 @@ ifndef::server[]
 CLI v1::
 +
 --
-. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-cli.adoc[]
 
 . Find the name of the context you want to delete. Replace `<org-id>`:
 +
@@ -1049,7 +1092,9 @@ CLI v0::
 --
 CLI v1 is not supported on CircleCI Server. Install CLI v0 as described in xref:toolkit:circleci-cli.adoc#install-cli-v0-for-circleci-server[Install the CLI for CircleCI Server].
 
-. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-cli-v0.adoc[]
 
 . Next, find your context name. List your contexts, replacing `<org-id>`, and copy the name of the context:
 +
@@ -1080,7 +1125,9 @@ API v3::
 +
 --
 . Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
-. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-api-v3.adoc[]
 . Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
 +
 [,shell]
@@ -1108,7 +1155,9 @@ API v2::
 include::ROOT:partial$notes/server-api-examples.adoc[]
 
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
-. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-api-v2.adoc[]
 . Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
 +
 [,shell]
@@ -1154,7 +1203,9 @@ ifndef::server[]
 CLI v1::
 +
 --
-. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-cli.adoc[]
 
 . If you have not already done so, find the right context name that will contain the new environment variable. Replace `<org-id>`:
 +
@@ -1177,7 +1228,9 @@ CLI v0::
 --
 CLI v1 is not supported on CircleCI Server. Install CLI v0 as described in xref:toolkit:circleci-cli.adoc#install-cli-v0-for-circleci-server[Install the CLI for CircleCI Server].
 
-. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-cli-v0.adoc[]
 
 . Next, find your context name. List your contexts, replacing `<org-id>`, and copy the name of the context you want to add the environment variable to:
 +
@@ -1207,7 +1260,9 @@ API v3::
 +
 --
 . Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
-. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-api-v3.adoc[]
 . Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
 +
 [,shell]
@@ -1240,7 +1295,9 @@ API v2::
 include::ROOT:partial$notes/server-api-examples.adoc[]
 
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
-. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-api-v2.adoc[]
 . Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
 +
 [,shell]
@@ -1276,7 +1333,9 @@ ifndef::server[]
 CLI v1::
 +
 --
-. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-cli.adoc[]
 
 . If you have not already done so, find the context name that contains the environment variable you wish to delete. Replace `<org-id>`:
 +
@@ -1306,7 +1365,9 @@ CLI v0::
 --
 CLI v1 is not supported on CircleCI Server. Install CLI v0 as described in xref:toolkit:circleci-cli.adoc#install-cli-v0-for-circleci-server[Install the CLI for CircleCI Server].
 
-. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-cli-v0.adoc[]
 
 . Next, find your context name. List your contexts, replacing `<org-id>`, and copy the name of the context that contains the environment variable you wish to delete:
 +
@@ -1343,7 +1404,9 @@ API v3::
 +
 --
 . Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
-. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-api-v3.adoc[]
 . Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
 +
 [,shell]
@@ -1371,7 +1434,9 @@ API v2::
 include::ROOT:partial$notes/server-api-examples.adoc[]
 
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
-. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-api-v2.adoc[]
 . Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
 +
 [,shell]
@@ -1407,7 +1472,9 @@ ifndef::server[]
 CLI v1::
 +
 --
-. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-cli.adoc[]
 
 . Find the context name that contains the variable you would like to rotate. Replace `<org-id>`:
 +
@@ -1437,7 +1504,9 @@ CLI v0::
 --
 CLI v1 is not supported on CircleCI Server. Install CLI v0 as described in xref:toolkit:circleci-cli.adoc#install-cli-v0-for-circleci-server[Install the CLI for CircleCI Server].
 
-. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-cli-v0.adoc[]
 
 . Next, find your context name. List your contexts, replacing `<org-id>`, and copy the name of the context that contains the variable you would like to rotate:
 +
@@ -1476,7 +1545,9 @@ API v3::
 The link:https://circleci.com/docs/api/v3/contexts.md[Set a Context Environment Variable] endpoint creates or updates a variable. Use it to rotate a secret without changing the variable name.
 
 . Set up your API authentication. Follow the steps in the xref:toolkit:api-v3-developers-guide.adoc#create-an-api-token[API V3 Developer's Guide].
-. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-api-v3.adoc[]
 . Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
 +
 [,shell]
@@ -1511,7 +1582,9 @@ include::ROOT:partial$notes/server-api-examples.adoc[]
 The link:https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Add or Update an Environment Variable] endpoint creates or updates a variable. Use it to rotate a secret without changing the variable name.
 
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
-. Get your organization ID. See xref:toolkit:how-to-find-ids.adoc#find-an-organization-id[Find an Organization ID].
+. Get your organization ID.
++
+include::ROOT:partial$find-ids/org-id-api-v2.adoc[]
 . Next, find your context ID. List your contexts, replacing `<org-id>`, and copy the `id` of the context:
 +
 [,shell]
