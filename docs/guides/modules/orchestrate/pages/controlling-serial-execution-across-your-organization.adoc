@@ -217,7 +217,7 @@ For a single job with a `serial-group` key (no job group), the same principle ap
 
 == Troubleshooting serial groups
 
-=== Job skipped unexpectedly?
+=== Job skipped unexpectedly
 
 If your job is skipped with a "not run" status, check the following:
 
@@ -225,7 +225,7 @@ If your job is skipped with a "not run" status, check the following:
 * Verify your pipeline number is not lower than a currently active pipeline using the same serial group.
 * Remember that the order protection mechanism automatically skips jobs from older pipelines to maintain queue integrity.
 
-=== Jobs not running sequentially?
+=== Jobs not running sequentially
 
 If jobs are running concurrently when you expected them to run in sequence, check the following:
 
@@ -234,7 +234,7 @@ If jobs are running concurrently when you expected them to run in sequence, chec
 . Verify that pipeline parameters are resolving to the expected values in your `serial-group` key.
 . Ensure your serial group value meets the character requirements (alphanumeric plus `.`, `-`, `_`, `/`).
 
-=== Jobs canceled after waiting?
+=== Jobs canceled after waiting
 
 If your jobs are being canceled after waiting in the queue, check the following:
 
@@ -242,7 +242,7 @@ If your jobs are being canceled after waiting in the queue, check the following:
 . Investigate if upstream dependencies in your workflow are failing or taking too long.
 . Look for deadlock situations where jobs are waiting for each other to complete.
 
-=== Deployment order appears incorrect?
+=== Deployment order appears incorrect
 
 If you are experiencing deployment order problems, check the following:
 
@@ -262,7 +262,7 @@ If your pipeline fails to compile after adding a job group, check for the follow
 * A workflow job uses `requires` to depend on an individual job inside a group, rather than on the group invocation.
 * A job inside a group uses `requires` to depend on a job that belongs to a different group.
 
-=== Failure-handling job not triggering for a job group?
+=== Failure-handling job not triggering for a job group
 
 pass:[<!-- vale off -->]
 
@@ -272,7 +272,7 @@ pass:[<!-- vale on -->]
 
 To react to a failure inside the group, add a failure-handling job inside the group definition itself.
 
-=== Still experiencing resource conflicts?
+=== Resource conflicts continue
 
 If you are still experiencing resource conflicts despite using serial groups, check the following:
 
