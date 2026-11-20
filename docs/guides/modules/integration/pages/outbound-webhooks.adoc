@@ -233,6 +233,9 @@ include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 
 You can also select the name of the webhook to open its **Settings** tab, then select the **Deliveries** tab.
 
+.The Deliveries tab of a webhook
+image::guides:ROOT:webhooks/webhook-deliveries.png[Screenshot showing the Deliveries tab of a webhook in project settings, with a list of recent deliveries]
+
 The list shows the most recent deliveries first. CircleCI keeps deliveries for 14 days. While the tab is open, the list refreshes every 30 seconds. Use the refresh controls above the list to refresh it yourself or to turn off the automatic refresh.
 
 A delivery is one event sent to the webhook. When CircleCI retries an event, the retries belong to the same delivery. Test ping events show in the list with the event type *Ping*.
@@ -269,9 +272,10 @@ a| The result of the delivery:
 
 To narrow the list, use the following filters:
 
-* *Delivery status*: Show all deliveries, or only the deliveries marked *Not delivered*.
-* *Event type*: Show one event type.
-* *Time range*: Show the last 24 hours, the last 7 days, or the last 14 days.
+* Use the toggle to show either *All* or just *Not delivered* webhooks.
+* Use the event type dropdown menu to choose between seeing all event types or just one.
+* Use the time range dropdown to show the last 24 hours, the last 7 days, or the last 14 days.
+* To find a specific delivery, enter its event ID in the *Search by event ID* field. The event ID is the `id` key in the webhook payload. For more information, see the xref:reference:ROOT:outbound-webhooks-reference.adoc#common-top-level-keys[Webhooks Reference].
 
 [#delivery-details]
 === View the details of a delivery
@@ -282,8 +286,6 @@ Select a delivery in the list to open its details. The details show the same inf
 * A link to the workflow the event is about. Test ping events have no workflow.
 * For a delivery that was not delivered, the reason it failed, for example a timeout, a failed TLS certificate check, or the HTTP status code the endpoint returned.
 * The request payload CircleCI sent. Select *Copy JSON* to copy it.
-
-To find a specific delivery, enter its event ID in the *Search by event ID* field. The event ID is the `id` key in the webhook payload. For more information, see the xref:reference:ROOT:outbound-webhooks-reference.adoc#common-top-level-keys[Webhooks Reference].
 
 To list and view deliveries using the API, see the link:https://circleci.com/docs/api/v3/webhook-deliveries.md[Webhook Deliveries API v3 Reference].
 endif::server[]
