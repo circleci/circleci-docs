@@ -761,9 +761,6 @@ jobs:
     working_directory: ~/my-app
     steps:
       - run: circleci testsuite run "ci tests"
-      - store_test_results:
-          # Must match outputs.junit in test-suites.yml
-          path: test-reports
 ----
 --
 Server::

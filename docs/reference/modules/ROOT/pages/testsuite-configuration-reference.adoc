@@ -17,6 +17,24 @@ To create that file and set the keys described here, follow the Smarter Testing 
 * xref:guides:test:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting] adds <<dynamic-test-splitting,`dynamic-test-splitting`>>.
 * xref:guides:test:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] adds <<max-auto-rerun,`max-auto-rerun`>> and <<auto-rerun-duration,`auto-rerun-duration`>>.
 
+[#zero-config]
+== Run without a configuration file
+
+The `.circleci/test-suites.yml` file is optional. When the file does not exist, or does not define the test suite you name, `circleci testsuite` detects your test runner and uses a built-in test suite for it. The `run`, `doctor`, and `list-tests` commands all detect the test runner. A built-in test suite has <<store-test-results,`store-test-results`>> enabled, so it uploads your test results without a `store_test_results` step.
+
+`circleci testsuite` detects the test runner from your project files, such as your dependency files and test runner configuration files. It checks the repository root and the directory where you run the command. The built-in test suite runs your test runner through the package manager that your lock file indicates.
+
+If `circleci testsuite` detects more than one test runner, the command fails. Choose a test runner with the `--runner` flag, for example `circleci testsuite run "ci tests" --runner=vitest`, or define the test suite in `.circleci/test-suites.yml`.
+
+To change the built-in test suite, write it to `.circleci/test-suites.yml` and edit it there:
+
+[source,console]
+----
+$ circleci testsuite generate "ci tests"
+----
+
+Add `--template=<runner>` to choose a test runner, for example `--template=pytest`. A test suite that `.circleci/test-suites.yml` defines replaces the built-in test suite, so it needs its own `discover` and `run` commands. The `generate` command writes both.
+
 '''
 
 [#name]
@@ -411,6 +429,39 @@ outputs:
 A map of option fields that configure how the test suite is run.
 
 include::guides:ROOT:partial$notes/smarter-testing-credit-charge.adoc[]
+
+'''
+
+[#store-test-results]
+=== *`store-test-results`*
+
+Upload the test suite's JUnit XML test results to CircleCI after the tests run, in place of a `store_test_results` step in your job. Use either this option or a `store_test_results` step for the same test results, not both.
+
+[.table-scroll]
+--
+[cols="1,1,1,2", options="header"]
+|===
+| Key | Required | Type | Description
+
+| `store-test-results`
+| N
+| Boolean
+| Upload the JUnit XML test results to CircleCI. The default is `false`.
+|===
+--
+
+*Example:*
+
+[%linenums,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+discover: npx vitest list --filesOnly
+run: npx vitest run --reporter=junit --outputFile="<< outputs.junit >>" --bail 0 << test.atoms >>
+options:
+  store-test-results: true
+----
 
 '''
 

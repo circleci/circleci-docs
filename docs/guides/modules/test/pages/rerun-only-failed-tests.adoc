@@ -12,7 +12,6 @@ Rerunning only failed tests is built in to `circleci testsuite run` and is free,
 
 Before rerunning only failed tests, ensure you have completed the xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] guide and have:
 
-* Configured your `.circleci/test-suites.yml` with `discover` and `run` commands.
 * Replaced your test command with `circleci testsuite run`.
 
 == Rerun a workflow from failed

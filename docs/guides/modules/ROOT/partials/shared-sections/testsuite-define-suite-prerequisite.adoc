@@ -1,0 +1,1 @@
+* Defined your test suite in `.circleci/test-suites.yml`. If `circleci testsuite` detects your test runner, run `circleci testsuite generate "ci tests"` to write the detected test suite to the file. See xref:reference:ROOT:testsuite-configuration-reference.adoc#zero-config[Run Without a Configuration File].

@@ -60,15 +60,15 @@ The phase of test impact analysis that runs only the test atoms affected by a co
 
 Test suite::
 // tag::test-suite[]
-A named configuration in the `.circleci/test-suites.yml` file that defines how Smarter Testing discovers, runs, and analyzes a set of test atoms. See the xref:reference:ROOT:testsuite-configuration-reference.adoc[Testsuite Configuration Reference].
+A named configuration that defines how Smarter Testing discovers, runs, and analyzes a set of test atoms. You define a test suite in the `.circleci/test-suites.yml` file, or `circleci testsuite` detects your test runner and uses a built-in test suite. See the xref:reference:ROOT:testsuite-configuration-reference.adoc[Testsuite Configuration Reference].
 // end::test-suite[]
 
 Test uploads::
 // tag::test-uploads[]
-A free Smarter Testing capability that uploads your JUnit XML test results to CircleCI with the `store_test_results` step. Uploaded results appear on the job's *Tests* tab, and on CircleCI Cloud they also feed Test Insights. See the xref:guides:test:collect-test-data.adoc[Upload Test Results] page.
+A free Smarter Testing capability that uploads your JUnit XML test results to CircleCI, either from `circleci testsuite run` or with the `store_test_results` step. Uploaded results appear on the job's *Tests* tab, and on CircleCI Cloud they also feed Test Insights. See the xref:guides:test:collect-test-data.adoc[Upload Test Results] page.
 // end::test-uploads[]
 
 Testsuite command::
 // tag::testsuite-command[]
-The `circleci testsuite` command that runs Smarter Testing, available in every CircleCI job and in the latest CircleCI CLI. Its subcommands include `doctor`, which checks your `test-suites.yml` setup, `run`, which runs a test suite, and `list-tests`, which lists the test atoms a run would select without running them. See the xref:guides:test:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] page.
+The `circleci testsuite` command that runs Smarter Testing, available in every CircleCI job and in the latest CircleCI CLI. Its subcommands include `doctor`, which checks your test suite setup, `run`, which runs a test suite, and `list-tests`, which lists the test atoms a run would select without running them. See the xref:guides:test:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] page.
 // end::testsuite-command[]
