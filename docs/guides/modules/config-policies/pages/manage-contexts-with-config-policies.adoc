@@ -82,7 +82,14 @@ Example output:
 }
 ----
 +
-include::ROOT:partial$notes/find-organization-id.adoc[]
+The `--owner-id` flag takes your organization ID.
++
+ifndef::server[]
+include::ROOT:partial$find-ids/org-id-cli.adoc[]
+endif::server[]
+ifdef::server[]
+include::ROOT:partial$find-ids/org-id-cli-v0.adoc[]
+endif::server[]
 
 * It is recommended to run through the xref:create-and-manage-config-policies.adoc#create-a-policy[Create a Policy] and xref:create-and-manage-config-policies.adoc#manage-policies-with-your-vcs[Manage Policies With Your VCS] guides first. Best practice is to use a repository within your organization to store and develop your policies. The xref:create-and-manage-config-policies.adoc#manage-policies-with-your-vcs[Manage Policies With Your VCS] guide walks through setting this up and setting up a pipeline for policy development.
 

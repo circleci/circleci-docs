@@ -1,0 +1,36 @@
+# Each value of deploy-target gets its own group.
+# A staging deploy never waits for a production deploy, and the reverse.
+version: 2.1
+
+parameters:
+  deploy-target:
+    type: enum
+    enum: ["staging", "production"]
+    default: "staging"
+
+jobs:
+  test:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - checkout
+      - run: ./scripts/test.sh
+  deploy:
+    parameters:
+      target:
+        type: string
+    docker:
+      - image: cimg/base:current
+    steps:
+      - checkout
+      - run: ./scripts/deploy.sh << parameters.target >>
+
+workflows:
+  main-workflow:
+    jobs:
+      - test
+      - deploy:
+          target: << pipeline.parameters.deploy-target >>
+          serial-group: deploy/<< pipeline.parameters.deploy-target >>
+          requires:
+            - test

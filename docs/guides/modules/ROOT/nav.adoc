@@ -73,6 +73,7 @@
 *** xref:orchestrate:trigger-recipes.adoc[Trigger and event recipes]
 *** xref:orchestrate:conditional-recipes.adoc[Conditional recipes]
 *** xref:orchestrate:no-op-job-recipes.adoc[No-op job recipes]
+*** xref:orchestrate:serial-group-recipes.adoc[Serial group recipes]
 ** Dynamic configuration
 *** xref:orchestrate:dynamic-config.adoc[Dynamic configuration overview]
 *** xref:orchestrate:using-dynamic-configuration.adoc[Using dynamic configuration]

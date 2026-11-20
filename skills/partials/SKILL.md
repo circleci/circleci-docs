@@ -112,9 +112,10 @@ Confirm the file still exists before inserting.
 
 | Directory | Use when the page needs |
 |---|---|
-| `app-navigation/` | Steps to project, org, user, or job settings, or to find IDs |
+| `app-navigation/` | Steps to project, org, user, or job settings, or to find IDs in the web app |
+| `find-ids/` | API v3, API v2, CLI, and CLI v0 methods for finding an org or project ID (`<id>-<method>.adoc`) |
 | `create-project/` | Shared Create Project / choose-a-repo / GitLab cleanup steps |
-| `notes/` | Reusable notes and warnings (Docker auth, feature support, org ID) |
+| `notes/` | Reusable notes and warnings (Docker auth, feature support) |
 | `tips/` | How to check org type, GitHub type, project slug, env vars vs contexts |
 | `faq/` | FAQ answers (`*-snip.adoc`). Usually included from FAQ pages |
 | `troubleshoot/` | Troubleshooting snippets (`*-snip.adoc`) |
@@ -181,7 +182,7 @@ Use this when writing or editing a page, even if the user did not say "partial" 
 3. For each chunk, search the matching tree by filename and content.
 4. Read every candidate. Prefer the **most specific** file:
    - Finding a project slug → link to `toolkit:how-to-find-ids.adoc#find-a-project-slug` with an xref. There is no partial for it
-   - Finding a project or org ID → `app-navigation/steps-to-project-id.adoc` or `steps-to-org-id.adoc` (these already include the settings steps)
+   - Finding a project or org ID → match the method of the procedure. Web app: `app-navigation/steps-to-project-id.adoc` or `steps-to-org-id.adoc` (these already include the settings steps). API or CLI: the matching `find-ids/` file, for example `find-ids/org-id-cli.adoc` in a CLI procedure. Do not send a CLI or API reader to the web app
    - Checking GitHub App vs OAuth → `tips/check-github-type.adoc`
    - Current workflow/job expressions → `expression-examples/`, not `logic-statement-examples/`
    - Job groups or serial groups → `orchestration-examples/`
@@ -202,7 +203,7 @@ Common starting points (still verify by reading the file):
 | Feature unsupported for some VCS / pipeline types | `partials/notes/standalone-unsupported.adoc` |
 | Check organization type | `partials/tips/check-org-type.adoc` |
 | Check GitHub App vs OAuth | `partials/tips/check-github-type.adoc` |
-| Find organization ID | `partials/notes/find-organization-id.adoc` |
+| Find organization or project ID | `partials/find-ids/` file for the procedure's method, or `app-navigation/steps-to-org-id.adoc` / `steps-to-project-id.adoc` for the web app |
 | Find project slug | No partial. Use `xref:toolkit:how-to-find-ids.adoc#find-a-project-slug[Find a Project Slug]` |
 | Resource class table | Matching file in `partials/execution-resources/` |
 | Pipeline values reference | `partials/pipelines-and-triggers/pipeline-values.adoc` |

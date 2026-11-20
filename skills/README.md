@@ -30,7 +30,7 @@ Reviews a contributor's pull request that adds a new page or updates existing co
 Runs the Vale prose linter on CircleCI documentation files to identify and fix style errors, then creates pull requests for review.
 
 ### monthly-docs-report
-A skill the CircleCI docs team use to create a newsletter each month to showcase notable additions and improvements.
+Builds the docs team's monthly update from GitHub, Slack, Linear, Amplitude, Kapa and the Grafana traffic panel. Drafts it locally, then publishes it as a Linear Document on the DOC team after the author approves it.
 
 ### partials
 Discovers, previews, and inserts reusable AsciiDoc partials and shared code examples with the correct `include::` syntax. Also proposes when new or existing content should become a shared partial or example, then creates it and replaces duplicates after confirmation. Use when writing or editing docs that need shared navigation steps, notes, FAQs, resource tables, config snippets, or other repeated content. Other docs-authoring skills should follow this skill instead of copying reusable content.
