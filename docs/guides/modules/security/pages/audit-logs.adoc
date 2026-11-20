@@ -78,7 +78,7 @@ Audit log streaming provides the following benefits to your organization:
 * Meet compliance requirements.
 * Integrate CircleCI audit data with your existing security monitoring infrastructure.
 
-=== Set up audit log streaming
+=== Set up audit log streaming to Amazon S3
 
 Before setting up audit log streaming, ensure you have the following:
 
@@ -171,21 +171,12 @@ Replace `<bucket-name>` with the name of your S3 bucket.
 
 . Go to the link:https://app.circleci.com/[CircleCI web app].
 . Navigate to menu:Org[Security].
-. Scroll down to the menu:Audit Logs[Streaming audit logs] section and select btn:[Stream audit logs].
-+
-.Stream audit logs section
-image::guides:ROOT:stream-audit-logs.png[Stream audit logs section]
-
+. Scroll down to the menu:Audit Logs[Streaming audit logs] section and select btn:[Set up streaming] and select Amazon S3.
 . Confirm that you have completed the prerequisites by selecting btn:[Continue].
-+
-.Confirm prerequisites completion
-image::guides:ROOT:confirm-prerequisites.png[Confirm prerequisites completion]
-
 . In the configuration dialog, specify the following fields:
 .. **Region**: The AWS region where you created your S3 bucket.
 .. **S3 Bucket Name**: The name of the S3 bucket to receive the streamed audit logs.
 .. **Role ARN**: The Amazon Resource Name (ARN) for the IAM role CircleCI uses to access your S3 bucket.
-
 +
 .Connect CircleCI to AWS
 image::guides:ROOT:connect-circleci-aws.png[Connect CircleCI to AWS]
@@ -194,7 +185,7 @@ image::guides:ROOT:connect-circleci-aws.png[Connect CircleCI to AWS]
 . When the connection to your S3 bucket is successfully validated, image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"] **Connected** appears under **Status**.
 +
 .S3 connection successful
-image::guides:ROOT:s3bucket-connected.png[S3 Connection successful]
+image::guides:ROOT:audit-log-stream-actions.png[S3 Connection successful shown in Actions column]
 
 Creating a streaming configuration pushes an empty file named `circleci_connectivity_test_<timestamp>` to the configured bucket. This verifies that the system has enough permissions to start the stream.
 
@@ -209,9 +200,6 @@ After setting up audit log streaming, follow these steps to validate the setup w
 
 
 === Stream to S3-compatible storage
-
-TIP: Select btn:[Other S3-compatible service] in the streaming dialog to connect to an S3-compatible endpoint.
-
 
 The setup steps vary by provider. Follow these high-level steps:
 
@@ -267,12 +255,9 @@ NOTE: Ensure your **AWS S3 compatible server's** network configuration allows ne
 ==== 3. Configure CircleCI to stream to your S3-compatible service
 
 . Go to the link:https://app.circleci.com/[CircleCI web app] and navigate to menu:Organization Settings[Security].
-. In menu:Audit Logs[Streaming audit logs], select btn:[Stream audit logs].
+. In menu:Audit Logs[Streaming audit logs], select btn:[Set up streaming].
 . Choose btn:[Other S3-compatible service].
 . Confirm that you have completed the prerequisites by selecting btn:[Continue].
-+
-.Set up S3-compatible storage for streaming
-image::guides:ROOT:setup-s3-compatible-audit-logs.png[Set up S3-compatible storage for streaming]
 . Fill out the fields as follows:
 .. **Region**: Optional. S3-compatible providers often default to `us-east-1` if not set.
 .. **S3 Bucket Name**: The exact name of the bucket you created.
