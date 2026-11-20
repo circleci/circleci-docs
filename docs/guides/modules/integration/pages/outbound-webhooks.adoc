@@ -43,6 +43,9 @@ include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 . In the sidebar select *Webhooks*.
 . Select *Add Webhook*.
 . Fill out the webhook form (the table below describes the fields and their intent).
++
+.The Add Webhook form
+image::guides:ROOT:webhooks/add-webhook.png[Screenshot showing the Add Webhook form in project settings]
 . If your receiving API or third party service is set up, select *Test Ping Event* to send a test event.
 +
 NOTE: The test ping event has an abbreviated payload for ease of testing. See full examples for xref:reference:ROOT:outbound-webhooks-reference.adoc#sample-webhook-payloads[Sample Webhook Payloads] section of the webhooks reference.
@@ -272,7 +275,7 @@ a| The result of the delivery:
 
 To narrow the list, use the following filters:
 
-* Use the toggle to show either *All* or just *Not delivered* webhooks.
+* Use the toggle to show either *All* events or just the events marked *Not delivered*.
 * Use the event type dropdown menu to choose between seeing all event types or just one.
 * Use the time range dropdown to show the last 24 hours, the last 7 days, or the last 14 days.
 * To find a specific delivery, enter its event ID in the *Search by event ID* field. The event ID is the `id` key in the webhook payload. For more information, see the xref:reference:ROOT:outbound-webhooks-reference.adoc#common-top-level-keys[Webhooks Reference].
