@@ -156,6 +156,10 @@ See the link:https://github.com/CircleCI-Public/circleci-demo-workflows/tree/fan
 
 Using flexible requires with the `requires` key, you can build complex dependency maps and fan in/out scenarios.
 
+ifdef::server[]
+Flexible job dependencies require CircleCI Server 4.8 or later.
+endif::server[]
+
 The following example is a configuration snippet of a workflow with four sequential jobs. Each job waits until the "required" job attains a specified status:
 
 [source,yaml]

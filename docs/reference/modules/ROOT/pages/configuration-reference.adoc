@@ -3403,6 +3403,8 @@ Possible types of `requires` items:
 * Map of job name to a list of statuses (a required job that must attain one of the specified statuses for the job to start).
 
 The possible *status* values are: `success`, `failed`, `canceled`, `unauthorized`, `not_run`, and `terminal`.
+
+On CircleCI Server, a map of job name to a status or list of statuses requires Server 4.8 or later.
 |===
 --
 
