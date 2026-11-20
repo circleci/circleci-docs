@@ -63,7 +63,7 @@ If your organization has child organizations:
 To use budget controls, you need:
 
 * A CircleCI Scale Plan.
-* Organization administrator permissions to create, edit, or delete budgets.
+include::ROOT:partial$prerequisites/organization-admin.adoc[]
 * Access to the Plans page to view budget status.
 
 == Setting up budget controls
