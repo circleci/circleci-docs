@@ -171,7 +171,7 @@ Replace `<bucket-name>` with the name of your S3 bucket.
 
 . Go to the link:https://app.circleci.com/[CircleCI web app].
 . Navigate to menu:Org[Security].
-. Scroll down to the menu:Audit Logs[Streaming audit logs] section and select btn:[Set up streaming] and select Amazon S3.
+. Scroll down to the menu:Audit Logs[Streaming audit logs] section and select btn:[Set up streaming], then select **Amazon S3**.
 . Confirm that you have completed the prerequisites by selecting btn:[Continue].
 . In the configuration dialog, specify the following fields:
 .. **Region**: The AWS region where you created your S3 bucket.
