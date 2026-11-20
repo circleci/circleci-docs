@@ -24,10 +24,10 @@ Skills are task instructions in `skills/<name>/SKILL.md`. Before you start docs 
 
 | When you | Read first |
 |---|---|
-| Write or edit any `.adoc` page, or touch shared content: partials, examples, repeated steps, notes, or snippets | `skills/partials/SKILL.md` |
+| Write or edit any `.adoc` page, or touch shared content such as partials, examples, or repeated steps | `skills/partials/SKILL.md` |
 | Run Vale or fix Vale errors | `skills/vale-linter/SKILL.md` |
 
-Do not use anything in `skills/team/`. Those skills are for the docs team's internal workflows (reviews, reports, and the docs bot).
+Ignore the skills in `skills/team/`. They are for the docs team's internal workflows (reviews, reports, and the docs bot).
 
 When you add a contributor skill, add a row here and link it in `skills/README.md`.
 
@@ -47,7 +47,7 @@ See [Agent Environment Context](#agent-environment-context) for the two environm
 
 All pages require standard attributes (`:page-platform:`, `:page-audience:`, `:page-description:`, `:experimental:`) at the top. See the "Working with the Docs Site" section for complete details on templates and page attributes.
 
-**Reuse before you write.** Follow `skills/partials/SKILL.md` while drafting. Check whether an existing partial or shared example already covers a step, note, or snippet you need, and include it instead of writing it again. If you write content that other pages will also need, propose a new partial. See [Reusable Partials](#reusable-partials).
+**Reuse before you write.** Follow `skills/partials/SKILL.md` while drafting. Check whether an existing partial or shared example already covers a step, note, or snippet you need, and include it instead of writing it again. If other pages need the content you write, propose a new partial. See [Reusable Partials](#reusable-partials).
 
 ## Voice and Style
 
@@ -199,7 +199,7 @@ Readers and agents often reach a page, a section, or a single code block without
 - **Open with the why.** The first paragraph says what the page covers and why the reader would use it: the problem it solves or the use case. Cover both why (value, when to use it) and how (steps) on the page.
 - **Open each major section with context that stands alone.** One or two sentences say what the section covers and why it matters, before any detail or subheading.
 - **Put essential information in the main text.** Steps, prerequisites, limitations, and anything the reader must know to succeed do not go in an admonition. Agents and skimming readers often miss admonitions. Use an admonition only for supplementary information.
-- **Make each tab complete.** Use tabs for alternatives, such as one tab per VCS. Do not put information every reader needs in only one tab, and do not hide the only copy of a required step in a tab. Each tab holds the full steps for its option.
+- **Make each tab complete.** Use tabs for alternatives, such as one tab per VCS. Each tab holds the full steps for its option. Required information never appears in only one tab.
 - **Make code blocks self-contained.** Put the key explanation in comments inside the block, not only in the text around it. Show the full job or workflow, not fragments.
 - **Put a Prerequisites section before the first step** on a how-to page.
 - **Do not repeat an explanation** without a purpose. Link to it, or use a partial if it must appear in more than one place. See [Reusable Partials](#reusable-partials).
@@ -708,4 +708,4 @@ head -10 docs/guides/modules/toolkit/pages/existing-page.adoc
 - Follow these guidelines for new content
 - When touching existing sections, update them to meet current standards
 - Help maintain consistency across the documentation
-- Follow `skills/partials/SKILL.md` on every edit: replace hand-written content that duplicates an existing partial or example with an include, and propose extracting content that now repeats across pages into a new partial. Ask before extracting, because a partial change affects every page that includes it.
+- Follow `skills/partials/SKILL.md` on every edit. Replace hand-written content that duplicates a partial or example with an include. Propose a new partial for content that now repeats across pages. Ask before extracting, because a partial change affects every page that includes it.
