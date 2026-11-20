@@ -210,6 +210,39 @@ The API response includes the following fields for automatic step reruns:
 * `auto_rerun_number`: The current rerun attempt number.
 * `max_auto_reruns`: The maximum number of reruns configured.
 
+[#additional-behavior]
+== Additional behavior
+
+[#faq-cost]
+ifndef::server[]
+=== Credit usage
+endif::server[]
+ifdef::server[]
+=== Resource usage
+endif::server[]
+
+ifndef::server[]
+Automatic reruns consume compute credits for each retry attempt. Only failed jobs are rerun, so successful jobs from the original workflow do not consume additional credits.
+endif::server[]
+ifdef::server[]
+Each retry attempt uses executor capacity. Only failed jobs are rerun, so successful jobs from the original workflow do not use additional capacity.
+endif::server[]
+
+[#faq-approval-jobs]
+=== Approval jobs
+
+Automatic reruns work with approval jobs.
+
+[#faq-contexts]
+=== Restricted contexts
+
+Automatic reruns use the same actor permissions as the original workflow, so they work with restricted contexts as long as the original workflow had the necessary permissions.
+
+[#faq-delay]
+=== Delay between reruns
+
+Automatic reruns start immediately after the workflow fails.
+
 [#limitations]
 == Limitations
 
@@ -285,46 +318,3 @@ workflows:
     jobs:
       - build
 ----
-
-[#frequently-asked-questions]
-== Frequently asked questions
-
-[#faq-cost]
-ifndef::server[]
-=== Do automatic reruns consume additional credits?
-endif::server[]
-ifdef::server[]
-=== Do automatic reruns consume additional resources?
-endif::server[]
-
-ifndef::server[]
-Yes, automatic reruns consume compute credits for each retry attempt. Only failed jobs are rerun, so successful jobs from the original workflow do not consume additional credits.
-endif::server[]
-ifdef::server[]
-Yes, each retry attempt uses executor capacity. Only failed jobs are rerun, so successful jobs from the original workflow do not use additional capacity.
-endif::server[]
-
-[#faq-manual-rerun]
-=== What happens if I manually rerun a workflow?
-
-If you manually rerun a workflow and it fails, no automatic reruns will be triggered for the manually rerun workflow.
-
-[#faq-approval-jobs]
-=== Do automatic reruns work with approval jobs?
-
-Yes.
-
-[#faq-contexts]
-=== Do automatic reruns work with restricted contexts?
-
-Yes, automatic reruns use the same actor permissions as the original workflow, so they work with restricted contexts as long as the original workflow had the necessary permissions.
-
-[#faq-delay]
-=== Can I add a delay between automatic reruns?
-
-Automatic reruns start immediately after the workflow fails.
-
-[#faq-step-level]
-=== Can I configure automatic reruns at the step level?
-
-Yes, you can configure automatic reruns at the step or workflow level.

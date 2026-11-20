@@ -92,24 +92,30 @@ You must update your configurations before the EOL date.
 
 *Test before EOL*:: Create a test branch with updated resource classes to validate performance and compatibility before the brownout period.
 
-== FAQ
+== Brownout details
 
-*Q: How long do brownouts typically last?*::
-A: Most brownouts last from 10 minutes to 24 hours, depending on the resource class and its usage across the platform.
+=== Brownout duration
 
-*Q: Does CircleCI notify me before a resource class brownout occurs?*::
-A: Yes, CircleCI sends email notifications to organizations whose projects use deprecated resource classes and posts announcements on the changelog.
+Most brownouts last from 10 minutes to 24 hours, depending on the resource class and its usage across the platform.
 
-*Q: What happens if I do not update my configuration before the EOL date?*::
-A: After the EOL date, deprecated resource classes are permanently removed. Any jobs attempting to use them fail until you update configurations.
+=== Brownout notifications
 
-*Q: How can I test my workflows with new resource classes before a brownout?*::
-A: Create a branch with updated configuration files, then push and test this branch before merging changes to your main branch.
+CircleCI sends email notifications to organizations whose projects use deprecated resource classes and posts announcements on the changelog.
 
-*Q: Are there any costs associated with updating to different resource classes?*::
-A: Different resource classes have different pricing, so switching resource classes may affect your compute costs. Review the link:https://circleci.com/pricing/price-list/[pricing documentation] and test thoroughly to understand the impact on both cost and performance.
+=== After the EOL date
 
-*Q: How do I know which resource class to migrate to?*::
-A: Deprecation announcements include recommended migration paths.
-+
+After the EOL date, deprecated resource classes are permanently removed. Any jobs attempting to use them fail until you update configurations.
+
+=== Test with new resource classes before a brownout
+
+Create a branch with updated configuration files, then push and test this branch before merging changes to your main branch.
+
+=== Cost of changing resource classes
+
+Different resource classes have different pricing, so switching resource classes may affect your compute costs. Review the link:https://circleci.com/pricing/price-list/[pricing documentation] and test thoroughly to understand the impact on both cost and performance.
+
+=== Choose a resource class to migrate to
+
+Deprecation announcements include recommended migration paths.
+
 Generally, you choose a resource class that matches or exceeds the compute capacity of your deprecated class.

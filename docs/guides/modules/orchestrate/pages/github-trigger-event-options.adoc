@@ -206,11 +206,9 @@ image::guides:ROOT:triggers/select-when-to-run.png[Set a trigger option for a pr
 
 To verify your trigger is set up correctly, trigger an event (open a PR) from your repository.
 
-== FAQs
+== Combine trigger options
 
-=== Can I combine multiple trigger options?
-
-No, different trigger event options cannot be combined in a single trigger. However, you can create multiple triggers for the same pipeline that listen for events from the same repository, with each trigger using a different trigger event option.
+Different trigger event options cannot be combined in a single trigger. However, you can create multiple triggers for the same pipeline that listen for events from the same repository, with each trigger using a different trigger event option.
 
 For example, by having the following:
 

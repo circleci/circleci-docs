@@ -856,22 +856,18 @@ Follow these steps to disconnect your CircleCI account from GitHub.
 
 Once disconnected, you will be redirected to the CircleCI login page. To reconnect your account, log in to CircleCI using your GitHub or Bitbucket social login credentials.
 
-== Frequently asked questions
-
-The following are common questions about managing your user account and organizations in CircleCI.
-
 ifndef::server[]
-=== How do I delete my user account?
+== Delete your user account
 
 For guidance on deleting your user account link:https://support.circleci.com/hc/en-us/articles/360037058873-How-Do-I-Delete-My-User-Account#h_01JMMX9C1BAM445WCFZF56QMEE[see this support article].
 
-=== How do I delete an organization from CircleCI?
+== Delete an organization
 
 See the xref:security:delete-organizations-and-projects.adoc[Delete Organizations and Projects] page for full instructions.
 endif::server[]
 
 [#enable-project-to-check-out-additional-private-repositories]
-=== How can I enable my project to check out additional private repositories?
+== Check out additional private repositories
 
 For `github` and `bitbucket` organizations, you can enable your project to check out additional private repositories by adding a _user_ key or additional SSH key to your project. See the <<create-a-user-key>> section of this page for instructions.
 

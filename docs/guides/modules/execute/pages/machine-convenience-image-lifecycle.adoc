@@ -68,27 +68,28 @@ machine:
 4. **Subscribe to deprecation notices**: Follow the CircleCI Discuss forum's link:https://discuss.circleci.com/c/announcements/39[Announcements] category for announcements.
 5. **Use the image updater tool**: CircleCI provides link:https://github.com/CircleCI-Public/image-updater[a tool] to help identify and update deprecated images.
 
-[#brownout-faq]
-== FAQ about CircleCI brownouts
-**Q: How long do brownouts typically last?**
+[#brownout-details]
+== Brownout details
 
-A: Most brownouts last from 10 minutes to 24 hours, depending on the image type and its usage across the platform.
+=== Brownout duration
 
-**Q: Will CircleCI notify me before a brownout occurs?**
+Most brownouts last from 10 minutes to 24 hours, depending on the image type and its usage across the platform.
 
-A: Yes, CircleCI sends email notifications to organizations whose projects use deprecated images and posts announcements on their Discuss forum.
+=== Brownout notifications
 
-**Q: What happens if I do not update my images before the EOL date?**
+CircleCI sends email notifications to organizations whose projects use deprecated images and posts announcements on their Discuss forum.
 
-A: After the EOL date, deprecated images will be permanently removed, and any jobs attempting to use them will fail until configurations are updated.
+=== After the EOL date
 
-**Q: How can I test my workflows with new images before a brownout?**
+After the EOL date, deprecated images are permanently removed, and any jobs attempting to use them fail until configurations are updated.
 
-A: Create a branch with updated configuration files, then push and test this branch before merging changes to your main branch.
+=== Test with new images before a brownout
 
-**Q: Are there any costs associated with updating to newer images?**
+Create a branch with updated configuration files, then push and test this branch before merging changes to your main branch.
 
-A: No additional cost is associated with using newer CircleCI images. Test thoroughly, as newer images may have updated software versions that could affect your workflows.
+=== Cost of updating images
+
+No additional cost is associated with using newer CircleCI images. Test thoroughly, as newer images may have updated software versions that could affect your workflows.
 
 [#additional-resources]
 == Additional resources

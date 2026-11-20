@@ -719,7 +719,7 @@
   new: /server-admin/latest/operator/expanding-internal-database-volumes/
 
 - old: /server/latest/operator/faq/
-  new: /server-admin/latest/operator/faq/
+  new: /server-admin/latest/operator/introduction-to-nomad-cluster-operation/
 
 - old: /server/latest/operator/introduction-to-nomad-cluster-operation/
   new: /server-admin/latest/operator/introduction-to-nomad-cluster-operation/
@@ -1186,3 +1186,9 @@
 
 - old: /guides/integration/enable-checks/
   new: /guides/integration/status-updates/
+
+- old: /functions/functions-faq/
+  new: /functions/functions-concepts/
+
+- old: /server-admin/latest/operator/faq/
+  new: /server-admin/latest/operator/introduction-to-nomad-cluster-operation/
