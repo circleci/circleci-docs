@@ -1,4 +1,4 @@
-To return details for a specific project, replace `<project-slug>` with your project slug (for example, `gh/my-org/my-repo`):
+To return details for a specific project, replace `<project-slug>` with your project slug. You can find the slug in menu:Project Settings[Overview]:
 +
 [source,shell]
 ----
