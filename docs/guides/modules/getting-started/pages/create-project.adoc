@@ -64,11 +64,9 @@ GitHub Enterprise Server::
 --
 include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
 
-. Choose a repo for your pipeline. CircleCI checks out the code from this repo when your pipeline runs.
+include::ROOT:partial$create-project/choose-a-repo.adoc[]
 +
-If you *already have a connection*, select your repo from the list. To connect an additional provider, select btn:[+ Add] and then choose its tile.
-+
-If you have *no connection* yet, select the **GitHub Enterprise Server** tile and input your Server URL and GitHub organization name. CircleCI redirects you to GitHub to install and authorise the CircleCI GitHub App. Granting access applies to any project in your organization, and you can update repo access at any time.
+Select the **GitHub Enterprise Server** tile and enter your Server URL and GitHub organization name. CircleCI redirects you to GitHub, where you install and authorise the CircleCI GitHub App.
 
 include::ROOT:partial$create-project/set-up-pipeline-and-finish.adoc[]
 --
