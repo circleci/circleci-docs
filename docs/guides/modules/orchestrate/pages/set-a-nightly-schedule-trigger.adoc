@@ -27,7 +27,7 @@ To set a schedule with the API, you will need your CircleCI personal API token. 
 
 [tabs]
 ====
-GitHub App, GitHub App Server, and Cursor Origin::
+GitHub App, GitHub Enterprise Server, and Cursor Origin::
 +
 --
 include::ROOT:partial$pipelines-and-triggers/find-pipeline-definition-id-api.adoc[]

@@ -872,7 +872,7 @@ ifndef::server[]
 | GitHub App (`github.com`)
 | `github.com/my-org/my-repo`
 
-| GitHub App Server (GitHub Enterprise)
+| GitHub Enterprise Server
 | `<your-github-hostname>/my-org/my-repo`
 
 | GitHub OAuth (`github.com`)
