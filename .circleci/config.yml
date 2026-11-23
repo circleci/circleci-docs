@@ -57,12 +57,10 @@ jobs:
           command: node scripts/check-metadata.js
 
   test-vale-rules:
-    docker:
-      - image: cimg/base:current
+    executor: vale/default
     resource_class: small
     steps:
       - checkout
-      - vale/install
       - run:
           name: Test Vale rules
           command: vale test styles/circleci-docs
