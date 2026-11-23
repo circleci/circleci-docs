@@ -15,6 +15,7 @@ Turn recent Kapa conversations into docs fixes with as little human reading as p
 ## Inputs
 
 - **Period.** Default: the last 7 days. Accept `--days N`, or `--since` and `--until` (ISO dates). For a period longer than 7 days, work one week at a time and merge the findings at the end, so no single step holds more than a week of conversations.
+- **Period bounds.** `since` and `until` are whole UTC days, and both are included: the period runs from `<since>T00:00:00Z` to `<until>T23:59:59Z`. Use these exact bounds for `get_project_activity`, `list_threads`, and the pair filter. Runs must not overlap. Before you pick a default period, find the latest `Kapa review: <since> to <until>` ticket in the Kapa review project. Start the new period the day after that ticket's `until`, and end it yesterday, so the last day is complete. With `--days N`, end yesterday and count back N days, but never start before the day after the previous `until`. If the user asks for a period that overlaps an earlier run, say which days overlap and ask before reviewing them again.
 - **Dry run.** If the user says "dry run" or "don't open PRs", do everything except create branches, commits, and PRs. List the fixes you would have made.
 - **PR cap.** Open at most 5 PRs per run unless told otherwise. List the remaining ready fixes in the report.
 
