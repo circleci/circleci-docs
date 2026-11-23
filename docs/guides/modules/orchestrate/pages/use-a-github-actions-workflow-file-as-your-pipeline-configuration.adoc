@@ -206,7 +206,7 @@ circleci pipeline run --definition-id <definition-id> --branch main --json
 circleci run watch <run-id> --failfast
 ----
 
-CAUTION: **The CLI cannot tear these down.** The CLI has no command to delete a project or a pipeline definition, and no command to delete or disable a trigger. Check your flags before you create anything, and remove unwanted pipelines and triggers in the web app.
+CAUTION: **The CLI cannot delete projects or pipeline definitions.** Check your flags before you create anything, and remove unwanted projects and pipelines in the web app. To pause a trigger, run `circleci project trigger update <trigger-id> --disable`. To remove one, run `circleci project trigger delete <trigger-id>`.
 --
 ====
 
