@@ -55,7 +55,7 @@ Builds the docs team's monthly update from GitHub, Slack, Linear, Amplitude, Kap
 Discovers, previews, and inserts reusable AsciiDoc partials and shared code examples with the correct `include::` syntax. Also proposes when new or existing content should become a shared partial or example, then creates it and replaces duplicates after confirmation. Use when writing or editing docs that need shared navigation steps, notes, FAQs, resource tables, config snippets, or other repeated content. Other docs-authoring skills should follow this skill instead of copying reusable content.
 
 ### kapa-docs-review (team)
-Reviews recent conversations with the CircleCI docs bot (Kapa) to find content gaps, wrong answers, and questions the bot could not answer. Opens docs fix PRs where the correct answer can be verified, and reports feature requests, support article issues, and anything unclear. Needs the Kapa MCP connected.
+Reviews recent conversations with the CircleCI docs bot (Kapa) to find content gaps, wrong answers, and questions the bot could not answer. Opens docs fix PRs where the correct answer can be verified, and reports feature requests, support article issues, and anything unclear. Adds each week to a shared findings board, built from `board.html`, where the docs team triages the findings. Needs the Kapa MCP connected.
 
 **Output:** A local report that stays outside the repository, because it contains customer details, and a redacted weekly Linear ticket. The Linear MCP must be connected. `SKILL.md` says where each one goes.
 
