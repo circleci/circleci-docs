@@ -911,4 +911,4 @@ See the xref:guides:orchestrate:workflows.adoc[Using Workflows] page for more in
 [#see-also]
 == See also
 
-* Follow our xref:guides:getting-started:getting-started.adoc[Quickstart] guide to walk through setting up a working pipeline.
+* Follow our xref:guides:getting-started:quickstart.adoc[Quickstart] guide to walk through setting up a working pipeline.

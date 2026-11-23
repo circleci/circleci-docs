@@ -1,0 +1,258 @@
+= Quickstart guide
+:page-platform: Cloud
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-audience: developer
+:page-description: Starting from a project with a passing run, break the build on purpose, debug it, and fix it, then explore the CircleCI features available on every plan.
+:page-show-readtime: true
+:experimental:
+
+This quickstart picks up where Create a Project leaves off. You start with a project that has a passing run, then break the build on purpose, use CircleCI's debugging tools to find the problem, and fix it. The guide ends with a tour of features to explore next. Each step has a web app tab and a CLI tab, so you can follow the one you prefer.
+
+== Prerequisites
+
+* A project with a passing pipeline run. If you do not have one yet, follow the xref:create-project.adoc[Create a Project] guide first, then return here.
+* To follow the CLI tabs, the xref:toolkit:circleci-cli.adoc[CircleCI CLI] installed and authenticated with `circleci auth login`.
+
+== 1. Explore your pipeline
+
+Your first run shows how CircleCI organizes work. A pipeline run contains workflows, workflows contain jobs, and jobs contain steps.
+
+[tabs%sync,sync-group-id=track]
+====
+Web app::
++
+--
+. In the link:https://app.circleci.com/[CircleCI web app], select **Projects** from the sidebar, then select your project.
+. Select the latest pipeline run.
+. Expand the workflow, then select a job to see the steps that ran.
+. Expand any step to read its output. You can search, share, or download the output.
+. Use the tabs along the top of the job page to see test results, timing data, artifacts, and resource usage.
+--
+CLI::
++
+--
+. In your project directory, link the project to the CLI so later commands resolve it automatically.
++
+[source,console]
+----
+$ circleci project link
+----
+. List your recent runs.
++
+[source,console]
+----
+$ circleci run list
+----
+. Open the interactive view of the latest run. Use the arrow keys and kbd:[Enter] to move from the run into its workflows, jobs, and steps. Use kbd:[q] to go back.
++
+[source,console]
+----
+$ circleci run get
+----
+--
+====
+
+== 2. Break your build
+
+The fastest way to learn the debugging tools is to use them on a failure you caused. Add a step that fails to one of the jobs in your CircleCI configuration file, commonly stored as `.circleci/config.yml`.
+
+. Under `steps` in any job, add the following `run` step. The command exits with an error because the file does not exist.
++
+[source,yaml]
+----
+      - run:
+          name: Break the build on purpose
+          command: cat missing-file.txt
+----
+. Commit the change and push it to your repository. The push triggers a new run.
+
+[tabs%sync,sync-group-id=track]
+====
+Web app::
++
+--
+In the web app, open your project. The new pipeline run appears at the top of the list. When the job fails, the status changes to **Failed**.
+--
+CLI::
++
+--
+Watch the run in your terminal. The command exits when the run finishes, and returns a nonzero exit code if the run fails.
+
+[source,console]
+----
+$ circleci run watch
+----
+--
+====
+
+== 3. Debug and fix the build
+
+CircleCI gives you several ways to find out why a job failed. Start with the output of the failed step, then use the other tools if the output is not enough.
+
+[tabs%sync,sync-group-id=track]
+====
+Web app::
++
+--
+. Open the failed job. CircleCI expands the step that failed and marks it with an error.
+. Read the step output. You see `cat: missing-file.txt: No such file or directory`.
+. Select **Explain This Error** on the failed step for a plain-language summary of the failure. Refer to xref:toolkit:intelligent-summaries.adoc[Explain This Error] for details.
+. For failures you cannot find from the output, select **Rerun** then **Rerun job with SSH** to open a shell in the job's environment. Refer to xref:execute:ssh-access-jobs.adoc[Debug Jobs With SSH Rerun] for details.
+--
+CLI::
++
+--
+. Open the latest run and drill into the failed job.
++
+[source,console]
+----
+$ circleci run get
+----
+. Select the failed step to read its output. You see `cat: missing-file.txt: No such file or directory`.
+. To get condensed output for every failed step in one command, add the `--failure-report` flag.
++
+[source,console]
+----
+$ circleci run get --no-interactive --failure-report
+----
+--
+====
+
+Now fix the problem.
+
+. Remove the `Break the build on purpose` step from your configuration file.
+. Optionally, check the file for errors before you push.
++
+[source,console]
+----
+$ circleci config validate
+----
+. Commit the change and push it to your repository.
+
+The next run passes. You have now gone from a failing build to a passing build using the tools you use every day.
+
+== 4. Explore more features
+
+The following features are available on every plan unless a label says otherwise. Each one links to its documentation and shows where to find it.
+
+=== Testing and debugging
+
+[.feature-list]
+* xref:test:smarter-testing-overview.adoc[Smarter Testing]
++
+[.plan-label]#Paid add-ons# Run your tests with `circleci testsuite`, which is free on every plan. Test impact analysis, dynamic test splitting, and auto-rerun are add-on capabilities with a credit charge.
++
+Find it: `.circleci/test-suites.yml` and the `circleci testsuite` command.
+
+* xref:execute:ssh-access-jobs.adoc[Rerun With SSH]
++
+Open a shell in a job's build environment to inspect files, processes, and permissions.
++
+Find it: **Rerun** menu on a job, then **Rerun job with SSH**.
+
+* xref:toolkit:chunk-setup-and-overview.adoc[Chunk]
++
+Let an AI agent investigate failing builds and propose fixes.
++
+Find it: **Chunk** at the bottom of the sidebar.
+
+=== Config and local tools
+
+[.feature-list]
+* xref:toolkit:circleci-cli.adoc[CircleCI CLI]
++
+Validate config, watch runs, and read job output from your terminal.
++
+Find it: run `circleci --help` in your terminal.
+
+* xref:toolkit:circleci-mcp-overview.adoc[CircleCI MCP]
++
+Connect an AI assistant to your pipelines so it can inspect runs and diagnose failures.
++
+Find it: run `circleci mcp <editor> enable` for your editor.
+
+* xref:orbs:use:orb-intro.adoc[Orbs]
++
+Reuse packaged, parameterized configuration for common tools and cloud services.
++
+Find it: the `orbs` key in your configuration file.
+
+* xref:functions:ROOT:functions-intro.adoc[Functions]
++
+Call versioned, tested programs as steps to set up tools, dependencies, and credentials.
++
+Find it: the `functions` key in your configuration file.
+
+=== Speed and visibility
+
+[.feature-list]
+* xref:optimize:caching.adoc[Caching]
++
+Reuse dependencies between runs to shorten your jobs.
++
+Find it: the `save_cache` and `restore_cache` steps in your configuration file.
+
+* xref:orchestrate:workflows.adoc[Workflows] and xref:optimize:parallelism-faster-jobs.adoc[Parallelism]
++
+Run jobs side by side, and split the work of one job across several executors.
++
+Find it: the `workflows` and `parallelism` keys in your configuration file.
+
+* xref:execute:resource-class-overview.adoc#view-resource-usage-per-job[Resource Usage]
++
+See the CPU and memory a job used, so you can choose the right resource class.
++
+Find it: **Resources** tab on a job.
+
+[#next-steps]
+== Next steps
+
+* xref:config-intro.adoc[Introduction to Configuration]
+* xref:reference:ROOT:concepts.adoc[CircleCI Concepts]
+* xref:invite-your-team.adoc[Invite Your Team]
+* xref:plans-pricing:plan-overview.adoc[CircleCI Plans Overview] for paid features, more compute, and higher concurrency
+* link:https://www.youtube.com/playlist?list=PL9GgS3TcDh8wqLRk-0mDz7purXh-sNu7r[CircleCI foundation videos]
+
+[#find-the-right-starting-point]
+=== Find the right starting point
+
+If your task does not match this guide, use this table to find the right page instead. Then follow links from that page.
+
+[.table-scroll]
+--
+[cols="1,2", options="header"]
+|===
+| What you want to do
+| Start here
+
+| Write or edit `.circleci/config.yml`
+| xref:reference:ROOT:concepts.adoc[Concepts], then xref:config-intro.adoc[Configuration Introduction], then the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference]
+
+| Trigger or schedule a pipeline
+| xref:orchestrate:triggers-overview.adoc[Trigger Options]. On Cloud, use xref:orchestrate:schedule-triggers.adoc[Schedule Triggers]. Server does not support Schedule Triggers; use a `triggers.schedule` block under the workflow instead.
+
+| Install a self-hosted runner
+| xref:runner:ROOT:runner-overview.adoc[Self-hosted Runner Overview]. Then install xref:runner:ROOT:install-machine-runner-3-on-linux.adoc[Machine Runner 3] on a VM (Server needs v4.4+), or xref:runner:ROOT:container-runner-installation.adoc[Container Runner] on Kubernetes.
+
+| Move from another CI tool
+| xref:migrate:migration-intro.adoc[Introduction to CircleCI Migration], then the matching migrate-from page.
+
+| Connect an AI assistant to CircleCI
+| Cloud only. xref:toolkit:circleci-mcp-overview.adoc[CircleCI MCP Overview] first. Then connect the xref:toolkit:connecting-to-the-circleci-mcp-server.adoc[Hosted MCP Server] or the xref:toolkit:connecting-to-the-circleci-cli-mcp.adoc[CLI MCP]. Use the xref:toolkit:connecting-to-a-docs-mcp-server.adoc[Docs MCP] only to search documentation.
+
+| Use or author orbs
+| xref:orbs:use:orb-intro.adoc[Introduction to Using Orbs]
+
+| Install or operate CircleCI Server
+| xref:server-admin:overview:circleci-server-overview.adoc[CircleCI Server Overview]. Server is a self-hosted CircleCI installation. It is not a self-hosted runner.
+
+| Call the CircleCI API
+| Cloud: link:https://circleci.com/docs/api/v3/[API v3 reference] and the link:https://circleci.com/fullopenapi.yaml[OpenAPI specification]. Server: xref:toolkit:api-intro.adoc[API Introduction] for API v1.1 and v2. API v3 is Cloud only.
+
+| Authenticate to the API or CLI
+| xref:toolkit:managing-api-tokens.adoc[Managing API Tokens]
+|===
+--
+
+TIP: Using an AI coding assistant? Point it at link:https://circleci.com/docs/AGENTS.md[circleci.com/docs/AGENTS.md] for current defaults, deprecated patterns, and the differences between Cloud and Server.
