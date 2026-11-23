@@ -1,0 +1,26 @@
+# Use the same serial-group string in every project that deploys to staging.
+# Only one deploy job with this value runs at a time across your organization.
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - checkout
+      - run: ./scripts/test.sh
+  deploy:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - checkout
+      - run: ./scripts/deploy.sh staging
+
+workflows:
+  main-workflow:
+    jobs:
+      - test
+      - deploy:
+          serial-group: deploy/staging
+          requires:
+            - test

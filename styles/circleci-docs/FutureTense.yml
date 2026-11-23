@@ -2,6 +2,7 @@ extends: existence
 message: "Possible future tense."
 ignorecase: true
 level: warning
+link: https://circleci.com/docs/style/style-and-voice/#write-about-dated-changes
 tokens:
   - will
   - '[\w][ll]'

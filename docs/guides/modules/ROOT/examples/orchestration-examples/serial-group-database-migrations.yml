@@ -1,0 +1,35 @@
+# Every service that migrates the shared database uses this same serial-group string.
+# Only one migrate job runs at a time. The deploy job is outside the group.
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - checkout
+      - run: ./scripts/test.sh
+  migrate:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - checkout
+      - run: ./scripts/migrate.sh
+  deploy:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - checkout
+      - run: ./scripts/deploy.sh
+
+workflows:
+  main-workflow:
+    jobs:
+      - test
+      - migrate:
+          serial-group: shared-db/migrations
+          requires:
+            - test
+      - deploy:
+          requires:
+            - migrate

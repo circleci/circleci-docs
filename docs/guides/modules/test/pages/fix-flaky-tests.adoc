@@ -239,7 +239,3 @@ If you get the following error inside a Chunk task, this indicates that your Ope
 [source,shell]
 Action required - agent execution error
 The agent ran into an error while executing this task. See our community forum for how to solve this error.
-
-== Frequently asked questions
-
-include::guides:ROOT:partial$faq/chunk.adoc[]

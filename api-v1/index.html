@@ -3,6 +3,50 @@
 <html>
   <head>
     <meta charset="utf-8">
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+
+  gtag('consent', 'default', {
+    'ad_personalization': 'granted',
+    'ad_storage': 'granted',
+    'ad_user_data': 'granted',
+    'analytics_storage': 'granted',
+    'functionality_storage': 'granted',
+    'personalization_storage': 'granted',
+    'wait_for_update': 500
+  });
+
+  gtag('consent', 'default', {
+    'ad_personalization': 'denied',
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'analytics_storage': 'denied',
+    'functionality_storage': 'denied',
+    'personalization_storage': 'denied',
+    'wait_for_update': 500,
+    'region': [
+      'AT', 'BE', 'BG', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES',
+      'FI', 'FR', 'GB', 'GG', 'GR', 'HR', 'HU', 'IE', 'IM', 'IS',
+      'IT', 'JE', 'LI', 'LT', 'LU', 'LV', 'MT', 'NL', 'NO', 'PL',
+      'PT', 'RO', 'SE', 'SI', 'SK', 'BR', 'CA-QC', 'MX'
+    ]
+  });
+
+  gtag('set', 'ads_data_redaction', true);
+  gtag('set', 'url_passthrough', false);
+
+  // Cookiebot deletes declined cookies only when consent changes, and a 6sense
+  // script still on the page re-sets its first-party cookies right after
+  // (WBCT-1465). Clear them on every page load without marketing consent.
+  window.addEventListener('CookiebotOnConsentReady', function () {
+    if (window.Cookiebot.consent.marketing) return;
+    ['_gd_visitor', '_gd_session', '_gd_svisitor'].forEach(function (name) {
+      document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+    });
+  });
+</script>
+    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="a28b71f3-4d2e-4eac-93bc-34929948dd7d" data-blockingmode="auto" type="text/javascript"></script>
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="The CircleCI API is a full-featured RESTful API that allows you to access all information and trigger all actions in CircleCI.">
@@ -1820,8 +1864,7 @@ h6 {
   <body class="index" data-languages="[&quot;shell&quot;]">
 
     <!-- Analytics Snippet: -->
-    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-W9HDVK" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-W9HDVK');</script>
+    <script type="text/plain" data-cookieconsent="marketing">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-W9HDVK');</script>
 
     <a href="#" id="nav-button">
       <span>

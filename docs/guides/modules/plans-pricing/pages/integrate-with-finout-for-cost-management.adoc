@@ -52,13 +52,19 @@ image::guides:ROOT:personal-api-tokens.png[screenshot showing where to find your
 
 == 2. Copy your organization ID
 
-The organization ID is a unique identifier for an organization. Follow these steps to find it in the CircleCI web app:
+The organization ID is a unique identifier for an organization. Use one of the following methods to find it.
 
-include::ROOT:partial$app-navigation/steps-to-org-settings.adoc[]
-. Note the value or select the btn:[Copy] icon next to the organization ID.
-
-.Organization ID available in organization settings
-image::guides:ROOT:org-id.png[screenshot showing where to find your organization ID]
+[tabs]
+====
+Web app::
++
+--
+include::ROOT:partial$app-navigation/steps-to-org-id.adoc[]
+--
+CLI::
++
+include::ROOT:partial$find-ids/org-id-cli.adoc[]
+====
 
 [#configure-integration]
 == 3. Configure the integration in Finout

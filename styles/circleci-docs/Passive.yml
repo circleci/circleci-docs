@@ -2,6 +2,7 @@ extends: existence
 message: "'%s' may be passive voice. Use active voice if you can."
 ignorecase: true
 level: suggestion
+link: https://circleci.com/docs/style/style-and-voice/#talk-confidently-and-directly
 raw:
   - \b(am|are|were|being|is|been|was|be)\b\s*
 tokens:

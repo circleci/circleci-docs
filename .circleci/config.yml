@@ -10,9 +10,9 @@ parameters:
     description: "Force UI bundle rebuild regardless of changes detected"
 
 orbs:
-  aws-cli: circleci/aws-cli@5.4.2
+  aws-cli: circleci/aws-cli@5.4.3
   vale: circleci/vale@1.2.1
-  go: circleci/go@4.0.3
+  go: circleci/go@4.0.4
 
 executors:
   node_executor:
@@ -64,6 +64,16 @@ jobs:
       - run:
           name: Test Vale rules
           command: vale test styles/circleci-docs
+
+  check-skills:
+    docker:
+      - image: cimg/node:24.22.2
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          name: Check contributor skills are listed and linked
+          command: node scripts/check-skills.js
 
   build:
     executor: node_executor
@@ -232,9 +242,14 @@ workflows:
           base_dir: docs
           filters: pipeline.git.branch != "main"
 
-      - check-metadata
+      - check-metadata:
+          filters: pipeline.git.branch != "main"
 
-      - test-vale-rules
+      - check-skills:
+          filters: pipeline.git.branch != "main"
+
+      - test-vale-rules:
+          filters: pipeline.git.branch != "main"
 
       - build:
           filters: pipeline.git.branch == "main"

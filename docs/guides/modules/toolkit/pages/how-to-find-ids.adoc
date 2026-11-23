@@ -149,17 +149,10 @@ include::guides:ROOT:partial$app-navigation/steps-to-org-id.adoc[]
 ifndef::server[]
 API v3::
 +
---
-To list all organizations you belong to, each with an `id` field:
-
-[source,shell]
-----
-curl -g 'https://circleci.com/api/v3/orgs' \
-  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
-----
-
-The response returns a list of organizations. The `id` field for each entry is the organization ID:
-
+include::guides:ROOT:partial$find-ids/org-id-api-v3.adoc[]
++
+Example response:
++
 [source,json]
 ----
 {
@@ -176,29 +169,13 @@ The response returns a list of organizations. The `id` field for each entry is t
   ]
 }
 ----
-
-To extract only the IDs:
-
-[source,shell]
-----
-curl -g 'https://circleci.com/api/v3/orgs' \
-  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq '.data[].id'
-----
---
 endif::server[]
 API v2::
 +
---
-To list all organizations (collaborations) you have access to, each with an `id` field:
-
-[source,shell]
-----
-curl 'https://circleci.com/api/v2/me/collaborations' \
-  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
-----
-
-The response returns a list of collaborations. The `id` field for each entry is the organization ID:
-
+include::guides:ROOT:partial$find-ids/org-id-api-v2.adoc[]
++
+Example response:
++
 [source,json]
 ----
 [
@@ -211,55 +188,15 @@ The response returns a list of collaborations. The `id` field for each entry is 
   }
 ]
 ----
---
 ifndef::server[]
 CLI::
 +
---
-To list all organizations you belong to:
-
-[source,console]
-----
-$ circleci org list --json
-----
-
-To extract only the IDs, append a `--jq` filter:
-
-[source,console]
-----
-$ circleci org list --json --jq '.[].id'
-----
---
+include::guides:ROOT:partial$find-ids/org-id-cli.adoc[]
 endif::server[]
 ifdef::server[]
 CLI v0::
 +
---
-To list all organizations you belong to:
-
-[source,console]
-----
-$ circleci-v0 info org
-----
-
-The output is a table. The `ID` column holds the organization ID:
-
-[source,text]
-----
-+---------------+--------+
-|      ID       |  NAME  |
-+---------------+--------+
-| <your-org-id> | my-org |
-+---------------+--------+
-----
-
-To extract only the IDs, add the `--json` flag and pipe the output to `jq`:
-
-[source,console]
-----
-$ circleci-v0 info org --json | jq '.[].id'
-----
---
+include::guides:ROOT:partial$find-ids/org-id-cli-v0.adoc[]
 endif::server[]
 ====
 
@@ -332,17 +269,10 @@ include::guides:ROOT:partial$app-navigation/steps-to-project-id.adoc[]
 ifndef::server[]
 API v3::
 +
---
-To list projects in your organization, replace `<your-org-id>` with your organization ID:
-
-[source,shell]
-----
-curl -g 'https://circleci.com/api/v3/projects?filter[org_id]=<your-org-id>' \
-  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
-----
-
-The response returns a list of projects. The `id` field for each entry is the project ID:
-
+include::guides:ROOT:partial$find-ids/project-id-api-v3.adoc[]
++
+Example response:
++
 [source,json]
 ----
 {
@@ -365,29 +295,21 @@ The response returns a list of projects. The `id` field for each entry is the pr
   ]
 }
 ----
-
++
 To look up a single project by its slug:
-
++
 [source,shell]
 ----
 curl -g 'https://circleci.com/api/v3/projects?filter[slug]=gh/my-org/my-repo' \
   --header "Authorization: Bearer $CIRCLE_TOKEN" | jq '.data[0].id'
 ----
---
 endif::server[]
 API v2::
 +
---
-To return details for a specific project, replace `<project-slug>` with your project slug (for example, `gh/my-org/my-repo`):
-
-[source,shell]
-----
-curl 'https://circleci.com/api/v2/project/<project-slug>' \
-  --header "Authorization: Bearer $CIRCLE_TOKEN" | jq .
-----
-
-The response includes the project ID in the `id` field:
-
+include::guides:ROOT:partial$find-ids/project-id-api-v2.adoc[]
++
+Example response:
++
 [source,json]
 ----
 {
@@ -397,25 +319,10 @@ The response includes the project ID in the `id` field:
   "organization_name": "my-org"
 }
 ----
---
 ifndef::server[]
 CLI::
 +
---
-To return the project ID for the current repository:
-
-[source,console]
-----
-$ circleci project get --json --jq '.id'
-----
-
-To look up a specific project by slug:
-
-[source,console]
-----
-$ circleci project list --slug gh/my-org/my-repo --json --jq '.[0].id'
-----
---
+include::guides:ROOT:partial$find-ids/project-id-cli.adoc[]
 endif::server[]
 ifdef::server[]
 CLI v0::

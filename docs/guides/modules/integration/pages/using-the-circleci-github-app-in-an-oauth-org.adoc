@@ -212,17 +212,17 @@ Dual integration provides the following benefits:
 
 == Troubleshooting
 
-=== Can I convert an OAuth pipeline to a GitHub App pipeline?
+=== Convert an OAuth pipeline to a GitHub App pipeline
 
 Pipelines cannot be directly converted.
 
 Instead, if you want to stop building through the OAuth integration, duplicate the OAuth pipeline as a GitHub App pipeline, then remove the OAuth GitHub trigger.
 
-=== Why can I not see the GitHub App options?
+=== GitHub App options are not visible
 
 Ensure the GitHub App is installed via menu:Org[VCS Connections]. Then select btn:[Add pipeline] on the menu:Project Settings[Project setup] page to create a new GitHub App pipeline.
 
-=== How do I prevent duplicate builds?
+=== Prevent duplicate builds
 
 Configure trigger events carefully or delete OAuth triggers when using GitHub App pipelines for the same repository.
 

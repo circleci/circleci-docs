@@ -1,6 +1,7 @@
 extends: script
 message: "Test only the `server` attribute with ifdef or ifndef. Do not test a `cloud` attribute, use ifeval, or wrap page attributes in a conditional. See the Cloud and Server section of AGENTS.md."
 level: error
+link: https://github.com/circleci/circleci-docs/blob/main/AGENTS.md#cloud-and-server-content
 scope: raw
 # A script rule reports only the directive keyword. An existence rule would
 # match "cloud" or "server", which the Docs vocabulary accepts and so silences.

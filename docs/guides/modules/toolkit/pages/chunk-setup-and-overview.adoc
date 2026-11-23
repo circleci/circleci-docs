@@ -125,6 +125,8 @@ CircleCI (Powered by Anthropic)::
 No additional setup is required. CircleCI provides the API key. Select **CircleCI (Powered by Anthropic)** from the dropdown and then select **Next**.
 
 Your free beta allowance includes 400,000 tokens per day. The token limit resets at 12:00 UTC.
+
+If you need more tokens, switch to a provider that requires your own API key, such as Anthropic, OpenAI, or Amazon Bedrock.
 --
 
 Anthropic::
@@ -190,6 +192,8 @@ Not all Claude models are available in all AWS regions. Check model-to-region av
 * `us-west-2` US West (Oregon).
 * `eu-west-1` Europe (Ireland).
 * `ap-southeast-1` Asia Pacific (Singapore).
+
+Chunk supports all Anthropic Claude models available on Amazon Bedrock. Other Bedrock providers such as Amazon Titan, Meta Llama, and Mistral are not supported. For the full list of supported model IDs, see the link:https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html[Supported foundation models in Amazon Bedrock, window=_blank] page in the AWS documentation.
 
 **Request model access**:
 
@@ -585,6 +589,13 @@ include::ROOT:partial$app-navigation/steps-to-user-settings.adoc[]
 . Scroll to the Chunk section.
 . Toggle off **Digest**.
 
+[#data-and-privacy]
+== Data and privacy
+
+CircleCI does not store your source code or use it for training purposes. Chunk processes your code temporarily to generate fixes but does not retain or share this information with model providers for training.
+
+Chunk's logs are stored by CircleCI for 90 days. The 90-day retention period applies to all organizations, regardless of your plan's standard data retention policy. After 90 days, logs are automatically deleted.
+
 == Troubleshooting
 
 === I cannot see the Chunk option in the sidebar
@@ -637,24 +648,6 @@ The IAM credentials attached to your AWS API key may lack the `bedrock:InvokeMod
 === High latency or timeouts when using Amazon Bedrock
 
 Consider using a different region prefix in your inference profile ID to route requests to a less congested region. See the <<provider-setup-details,Provider setup details>> section for guidance on supported regions.
-
-== Frequently asked questions
-
-=== Does CircleCI use my data to train AI models?
-
-No. CircleCI does not store your source code or use it for training purposes. Chunk processes your code temporarily to generate fixes but does not retain or share this information with model providers for training.
-
-=== How long are Chunk's logs stored?
-
-Chunk's logs are stored by CircleCI for 90 days. The 90-day retention period applies to all organizations, regardless of your plan's standard data retention policy. After 90 days, logs are automatically deleted.
-
-=== Can I use any Anthropic Claude model on Amazon Bedrock?
-
-Chunk supports all Anthropic Claude models available on Amazon Bedrock. Other Bedrock providers such as Amazon Titan, Meta Llama, and Mistral are not supported. For the full list of supported model IDs, see the link:https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html[Supported foundation models in Amazon Bedrock, window=_blank] page in the AWS documentation.
-
-=== What happens when I reach the 400,000 token daily limit for CircleCI (Powered by Anthropic)?
-
-The token limit resets at 12:00 UTC each day. If you need more tokens, switch to a provider that requires your own API key, such as Anthropic, OpenAI, or Amazon Bedrock.
 
 == Next steps
 

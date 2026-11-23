@@ -4,5 +4,6 @@ extends: existence
 ignorecase: true
 scope: raw
 level: error
+link: https://github.com/circleci/circleci-docs/blob/main/AGENTS.md#external-links
 raw:
   - '\[here\]\(.+\)'

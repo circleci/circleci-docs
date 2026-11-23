@@ -36,7 +36,9 @@ CircleCI creates a `github` organization when you log in using your _social_ Git
 
 . Navigate to your link:https://app.circleci.com/settings/user[User settings] page.
 . Select **Account Integrations** from the sidebar.
-. At the bottom of the page, select the link that reads `Received instructions from the CircleCI Support team to authorize a GitHub OAuth app?`.
+. Start the GitHub connection. What you select depends on how you logged in:
+** If you logged in with Bitbucket, select btn:[Connect] next to GitHub.
+** If you logged in with email and password, select the link at the bottom of the page that reads `Received instructions from the CircleCI Support team to authorize a GitHub OAuth app?`.
 . Follow the instructions to create a `github` organization.
 
 Once CircleCI creates your `github` organization, you can invite your team and set up projects:

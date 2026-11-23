@@ -14,10 +14,21 @@ This guide explains the concepts of user, organization, and integration in Circl
 When you log in to CircleCI you are logging in to your _user account_.
 
 ifndef::server[]
-You can log in to CircleCI using one of the following methods. These methods cannot be used together. For example, if you have an email/password account and then use a social login, this will create a new account connected to your VCS provider:
+You can log in to CircleCI using one of the following methods:
 
 * Email and password. Required for GitLab and Cursor Origin projects. After signing up, connect GitLab from menu:Org[VCS Connections].
 * Social login (GitHub, Bitbucket). GitLab does not offer social login.
+
+Whichever method you use, you can connect GitHub and Bitbucket Cloud to your user account from menu:User Settings[Account Integrations]. Connecting a provider creates your `github` or `bitbucket` organizations. After you connect a provider, logging in with that provider's social login takes you to the same user account. For steps, see the xref:getting-started:create-an-organization.adoc[Create an Organization] page.
+
+A social login for a provider that is not connected to any CircleCI user account creates a new, separate user account. You can connect a GitHub account through the GitHub OAuth app to only one CircleCI user account. To move a GitHub or Bitbucket Cloud connection to another user account, first disconnect it from menu:User Settings[Account Integrations]. Then log in to the other user account and connect it there.
+
+Only one GitHub account can authorize a CircleCI user account through the GitHub App, so you cannot use a different GitHub account for each of your CircleCI organizations. Connecting one GitHub account through the GitHub OAuth app and a different GitHub account through the GitHub App is possible, but not recommended. It causes confusing authorization errors.
+
+To avoid these problems:
+
+* Use the same GitHub account for the GitHub OAuth app and the GitHub App.
+* If you use more than one GitHub account, such as a work account and a personal account, use a separate CircleCI user account for each.
 
 As a CircleCI _user_ you can create and access _organizations_. You can access zero, one, or many organizations. You can create new organizations and/or join an existing organization.
 endif::server[]
@@ -39,19 +50,19 @@ The following table describes user authorization for the different VCS providers
 
 |GitHub OAuth app
 |Displayed in menu:User Settings[Account Integrations], managed in GitHub at link:https://github.com/settings/applications[GitHub settings].
-|Can exist alongside GitHub App authorization.
+|Can exist alongside GitHub App authorization and Bitbucket Cloud OAuth.
 
 |GitHub App
 |If you are not "authorized" you will see a button in the top bar of the web app that prompts you to authorize. Managed in GitHub at link:https://github.com/settings/apps/authorizations[GitHub settings]. Not displayed in menu:User Settings[Account Integrations].
-|Can exist alongside GitHub OAuth app authorization.
+|Can exist alongside GitHub OAuth app authorization. Use the same GitHub account for both.
 
 |Bitbucket Cloud OAuth
 |Displayed in menu:User Settings[Account Integrations], managed in Bitbucket at link:https://bitbucket.org/account/settings/app-authorizations/[Bitbucket settings].
-|Mutually exclusive with other VCS authorization
+|Can exist alongside GitHub OAuth app authorization.
 
 |GitLab
 |Managed in GitLab at link:https://gitlab.com/-/user_settings/applications[GitLab settings]. Not displayed in menu:User Settings[Account Integrations].
-|Mutually exclusive with other VCS authorizations except GitHub App.
+|Connected per organization, in `circleci` type organizations only.
 
 |Cursor Origin
 |Not applicable. Cursor Origin requires no user-level authorization.
@@ -856,22 +867,18 @@ Follow these steps to disconnect your CircleCI account from GitHub.
 
 Once disconnected, you will be redirected to the CircleCI login page. To reconnect your account, log in to CircleCI using your GitHub or Bitbucket social login credentials.
 
-== Frequently asked questions
-
-The following are common questions about managing your user account and organizations in CircleCI.
-
 ifndef::server[]
-=== How do I delete my user account?
+== Delete your user account
 
 For guidance on deleting your user account link:https://support.circleci.com/hc/en-us/articles/360037058873-How-Do-I-Delete-My-User-Account#h_01JMMX9C1BAM445WCFZF56QMEE[see this support article].
 
-=== How do I delete an organization from CircleCI?
+== Delete an organization
 
 See the xref:security:delete-organizations-and-projects.adoc[Delete Organizations and Projects] page for full instructions.
 endif::server[]
 
 [#enable-project-to-check-out-additional-private-repositories]
-=== How can I enable my project to check out additional private repositories?
+== Check out additional private repositories
 
 For `github` and `bitbucket` organizations, you can enable your project to check out additional private repositories by adding a _user_ key or additional SSH key to your project. See the <<create-a-user-key>> section of this page for instructions.
 

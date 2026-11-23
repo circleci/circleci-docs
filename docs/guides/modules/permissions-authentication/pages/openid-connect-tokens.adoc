@@ -106,7 +106,26 @@ Creating the identity provider is a one-time configuration to get set up.
 
 To create your identity provider you will need to know your link:https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID Provider], which is unique to your organization. The OpenID Provider URL is `\https://oidc.circleci.com/org/<organization_id>`, where `organization_id` is your unique organization identifier.
 
-include::ROOT:partial$notes/find-organization-id.adoc[]
+Use one of the following methods to find your organization ID.
+
+[tabs]
+====
+Web app::
++
+--
+include::ROOT:partial$app-navigation/steps-to-org-id.adoc[]
+--
+ifndef::server[]
+CLI::
++
+include::ROOT:partial$find-ids/org-id-cli.adoc[]
+endif::server[]
+ifdef::server[]
+CLI v0::
++
+include::ROOT:partial$find-ids/org-id-cli-v0.adoc[]
+endif::server[]
+====
 
 The default OpenID Connect ID tokens issued by CircleCI have a fixed audience (see `aud` in <<format-of-the-openid-connect-id-token,the table below>>). This audience is also the organization ID. To generate tokens with _custom_ audience claims, see the xref:oidc-tokens-with-custom-claims.adoc[OIDC Tokens With Custom Claims] page.
 

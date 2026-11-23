@@ -18,6 +18,19 @@ One other file serves a different audience and must not be confused with this on
 
 The human-facing "find the right starting point" table lives as a section in `docs/guides/modules/getting-started/pages/getting-started.adoc` (Quickstart guide), not on a dedicated page.
 
+## Skills
+
+Skills are task instructions in `skills/<name>/SKILL.md`. Before you start docs work, check this table. If your task matches a row, read that `SKILL.md` and follow it. Claude Code loads these skills automatically from `.claude/skills/`. Other agents must open the file.
+
+| When you | Read first |
+|---|---|
+| Write or edit any `.adoc` page, or touch shared content such as partials, examples, or repeated steps | `skills/partials/SKILL.md` |
+| Run Vale or fix Vale errors | `skills/vale-linter/SKILL.md` |
+
+Ignore the skills in `skills/team/`. They are for the docs team's internal workflows (reviews, reports, and the docs bot).
+
+When you add a contributor skill, add a row here and link it in `skills/README.md`.
+
 ## Git worktrees
 
 - **Local agents** (Claude Code CLI, Cursor Desktop): work in the main `circleci-docs` checkout. **Ask before creating a git worktree**, and create one only when asked. Worktrees accumulate quickly and are awkward to unwind mid-task.
@@ -33,6 +46,8 @@ See [Agent Environment Context](#agent-environment-context) for the two environm
 - `template-tutorial.adoc` - Learning-oriented tutorials
 
 All pages require standard attributes (`:page-platform:`, `:page-audience:`, `:page-description:`, `:experimental:`) at the top. See the "Working with the Docs Site" section for complete details on templates and page attributes.
+
+**Reuse before you write.** Follow `skills/partials/SKILL.md` while drafting. Check whether an existing partial or shared example already covers a step, note, or snippet you need, and include it instead of writing it again. If other pages need the content you write, propose a new partial. See [Reusable Partials](#reusable-partials).
 
 ## Voice and Style
 
@@ -178,11 +193,24 @@ Set `:page-badge:` to `Beta`, `Preview`, or `Deprecated` to show a badge next to
 ### Subsection Badges
 Put `[badge="Beta"]` on the line above a heading (h2-h6) to badge it. Common badges: `Preview`, `Beta`, `Deprecated`, `Cloud only`, `Server v4+`. Badges do not appear in xref link text. For styling attributes, see xref:contributors:docs-style:title-badges.adoc#subsection-badges[Subsection Badges].
 
+### Page structure
+Readers and agents often reach a page, a section, or a single code block without the rest of the page. Structure content so each piece makes sense alone.
+
+- **Open with the why.** The first paragraph says what the page covers and why the reader would use it: the problem it solves or the use case. Cover both why (value, when to use it) and how (steps) on the page.
+- **Open each major section with context that stands alone.** One or two sentences say what the section covers and why it matters, before any detail or subheading.
+- **Put essential information in the main text.** Steps, prerequisites, limitations, and anything the reader must know to succeed do not go in an admonition. Agents and skimming readers often miss admonitions. Use an admonition only for supplementary information.
+- **Make each tab complete.** Use tabs for alternatives, such as one tab per VCS. Each tab holds the full steps for its option. Required information never appears in only one tab.
+- **Make code blocks self-contained.** Put the key explanation in comments inside the block, not only in the text around it. Show the full job or workflow, not fragments.
+- **Put a Prerequisites section before the first step** on a how-to page.
+- **Do not repeat an explanation** without a purpose. Link to it, or use a partial if it must appear in more than one place. See [Reusable Partials](#reusable-partials).
+- **Match tone to the audience in `:page-audience:`.** Pages for `admin` readers, such as Server administration, use a professional, technical tone. All other pages use a friendly, authoritative tone for a junior engineer.
+
 ### Headings
 - Write headings in **logical sequence** that tells a story
 - **Do not skip heading levels** (for example, h2 to h4)
 - Antora creates the `h1` from the page title, so use only `h2` and below in the body
 - Include at least an intro paragraph before subheadings
+- Do not use vague headings such as "Overview" or "Details". The heading says what the section contains
 - Headings are in **sentence case**. Only xref link text is title case, so an xref to a heading does not match the heading's capitalization
 - **Start headings with verbs** where possible:
   - **Good**: "Grooming cats"
@@ -680,3 +708,4 @@ head -10 docs/guides/modules/toolkit/pages/existing-page.adoc
 - Follow these guidelines for new content
 - When touching existing sections, update them to meet current standards
 - Help maintain consistency across the documentation
+- Follow `skills/partials/SKILL.md` on every edit. Replace hand-written content that duplicates a partial or example with an include. Propose a new partial for content that now repeats across pages. Ask before extracting, because a partial change affects every page that includes it.

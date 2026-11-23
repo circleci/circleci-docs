@@ -1,0 +1,8 @@
+To list all organizations you belong to:
++
+[source,console]
+----
+$ circleci org list --json
+----
++
+The `id` field for each entry is the organization ID.

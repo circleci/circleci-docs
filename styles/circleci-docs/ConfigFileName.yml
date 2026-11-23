@@ -1,6 +1,7 @@
 extends: script
 message: "A CircleCI configuration file can have any name. Do not say it must have this name or assume the reader's file does. Write 'your CircleCI configuration file, commonly stored as `.circleci/config.yml`'."
 level: warning
+link: https://circleci.com/docs/style/style-and-voice/#talking-about-circleci
 scope: raw
 # A script rule reports only the leading phrase. The Docs vocabulary accepts
 # `.circleci/config.yml`, so an existence rule matching it would be silenced.
