@@ -661,7 +661,7 @@ In this example, the Bitbucket Cloud repository is `\https://bitbucket.org/you/t
 
 . Go to `\https://bitbucket.org/you/test-repo/admin/access-keys/`, and select **Add key**. Enter a label in the "Label" field, then copy and paste the public key you created in step 1. Select **Add SSH key**.
 
-. Go to your project settings in the CircleCI app, select **SSH Keys**, and **Add SSH key**. In the "Hostname" field, enter `bitbucket.com` and add the private key you created in step 1. Then select **Add SSH Key**.
+. Go to your project settings in the CircleCI app, select **SSH Keys**, and **Add SSH key**. In the "Hostname" field, enter `bitbucket.org` and add the private key you created in step 1. Then select **Add SSH Key**.
 
 . In your `.circleci/config.yml` file, add the fingerprint to a job using the `add_ssh_keys` key:
 +
