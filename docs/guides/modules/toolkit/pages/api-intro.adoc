@@ -11,8 +11,8 @@
 The CircleCI API enables you to interact with your pipelines, projects, and organizations programmatically. Use the API to retrieve detailed information about users, jobs, workflows, and pipelines. You can also trigger pipelines and manage resources. CircleCI currently supports three API versions, plus a separate API for self-hosted runners:
 
 * link:https://circleci.com/docs/api/v3/[API v3 Reference] (Current)
-* link:../../../api/v2/[API v2 Reference] (Legacy)
-* link:../../../api/v1/[API v1.1 Reference] (Legacy)
+* link:https://circleci.com/docs/api/v2/[API v2 Reference] (Legacy)
+* link:https://circleci.com/docs/api/v1/[API v1.1 Reference] (Legacy)
 * xref:reference:ROOT:runner-api.adoc[Runner API Reference] (Self-hosted runners)
 
 ifdef::server[]
@@ -131,5 +131,5 @@ ifndef::server[]
 * Review the xref:api-v3-developers-guide.adoc[API V3 Developers Guide] for a detailed walkthrough on using the current API version.
 endif::server[]
 * Review the xref:api-developers-guide.adoc[API V2 Developers Guide] for information on the legacy v2 API.
-* Explore the link:../../../api/v3/[API V3 Reference] for complete endpoint documentation.
+* Explore the link:https://circleci.com/docs/api/v3/[API V3 Reference] for complete endpoint documentation.
 * See the xref:reference:ROOT:runner-api.adoc[Runner API Reference] for self-hosted runner endpoints.
