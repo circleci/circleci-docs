@@ -44,7 +44,7 @@ These apply on both platforms, unless you are extending an existing integration 
 - Use API v2 and v1.1. API v3 is Cloud only. See the [API introduction](https://circleci.com/docs/guides/toolkit/api-intro/), the [API v2 reference](https://circleci.com/docs/api/v2/), and the [API v1.1 reference](https://circleci.com/docs/api/v1/).
 - Schedule pipelines with a `triggers.schedule` block under the workflow. Schedule Triggers are Cloud only.
 - Install [Machine Runner 3](https://circleci.com/docs/runner/install-machine-runner-3-on-linux/) on Server v4.4 and later. Earlier versions need launch agent.
-- Prefer GitHub Enterprise Server (Preview) over GitHub OAuth on Server, where it is available. See [VCS, Pipeline Types, and Feature Support](https://circleci.com/docs/guides/integration/version-control-system-integration-overview/).
+- Prefer GitHub App Server (Preview) over GitHub OAuth on Server, where it is available. See [VCS, Pipeline Types, and Feature Support](https://circleci.com/docs/guides/integration/version-control-system-integration-overview/).
 - Use CLI v0. CLI v1 is Cloud only. See [Get set up](#get-set-up) above for install instructions.
 - Use `circleci tests glob` and `circleci tests split` to split tests. `circleci tests run` is *not* supported on Server, even though it is part of the same command family. `circleci testsuite` is not available on Server either. See [Use the CircleCI CLI to Split Tests](https://circleci.com/docs/guides/optimize/use-the-circleci-cli-to-split-tests/#tests-split-examples).
 
