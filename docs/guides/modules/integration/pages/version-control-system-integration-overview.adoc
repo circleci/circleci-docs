@@ -18,7 +18,7 @@ CircleCI supports various pipeline types which map directly to the version contr
 * Bitbucket
 * Cursor Origin
 
-If your code is hosted on GitHub Enterprise Server, the pipeline type depends on which CircleCI product you use. CircleCI Cloud uses the GitHub App integration (Preview). CircleCI Server uses GitHub OAuth.
+If your code is hosted on GitHub Enterprise Server, the pipeline type depends on which CircleCI product you use. CircleCI Cloud uses the GitHub App integration (Preview). CircleCI Server uses GitHub OAuth. It also uses GitHub OAuth for code hosted on GitHub.com and GitHub Enterprise Cloud.
 
 This guide provides an overview of the VCS options, organization types, and pipeline types supported by CircleCI and the features available to each.
 
