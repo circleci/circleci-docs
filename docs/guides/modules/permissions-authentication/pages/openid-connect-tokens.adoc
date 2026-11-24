@@ -872,14 +872,14 @@ ifndef::server[]
 | GitHub App (`github.com`)
 | `github.com/my-org/my-repo`
 
-| GitHub App Server (GitHub Enterprise)
+| GitHub App (GitHub Enterprise Server)
 | `<your-github-hostname>/my-org/my-repo`
 
 | GitHub OAuth (`github.com`)
 | `github.com/my-org/my-repo`
 endif::server[]
 
-| GitHub OAuth on Server (GitHub Enterprise)
+| GitHub OAuth (CircleCI Server)
 | `<your-github-hostname>/my-org/my-repo`
 
 ifndef::server[]

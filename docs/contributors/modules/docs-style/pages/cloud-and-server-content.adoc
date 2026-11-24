@@ -109,7 +109,7 @@ If a page has `:page-platform: Cloud`, the Server build drops it. Wrap any xref 
 [#unsupported-features]
 === Features Server does not have
 
-The pipeline type table in the xref:guides:integration:version-control-system-integration-overview.adoc[version control systems overview] is the source of truth for what Server supports, using the *GitHub OAuth on Server* column. Hide anything that table marks as unsupported. Do not rely on memory.
+The pipeline type table in the xref:guides:integration:version-control-system-integration-overview.adoc[version control systems overview] is the source of truth for what Server supports, using the *GitHub OAuth (CircleCI Server)* column. Hide anything that table marks as unsupported. Do not rely on memory.
 
 [#hide-a-tab]
 === Hide a tab on Server
