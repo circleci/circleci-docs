@@ -466,6 +466,9 @@ according to OpenTelemetry semantic conventions. Possible values are
 |`cicd.pipeline.task.type` |build |The CircleCI job type. For tasks, this is
 always `build` as no other job types create tasks.
 
+|`cicd.worker.name` |`linux-runner-1` |The name of the self-hosted runner that
+claimed the task. Only present for self-hosted runner tasks.
+
 |`com.circleci.job.id` |cbf6a4ea-a078-4d72-8641-cb5ec149fc35 |The CircleCI
 job ID.
 
@@ -544,6 +547,17 @@ usage data is available and the value is greater than zero.
 over the network during the task. Only present for `build` jobs when usage
 data is available and the value is greater than zero.
 
+|`com.circleci.runner.type` |`machine` |The kind of self-hosted runner that
+claimed the task. Possible values are `machine`, `container`, `orchestrator`,
+and `other`. Only present for self-hosted runner tasks.
+
+|`com.circleci.runner.version` |3.5.0 |The version of the self-hosted runner
+that claimed the task. Only present for self-hosted runner tasks.
+
+|`com.circleci.task.claimed_at` |2026-11-20T10:30:15.123456Z |When the
+self-hosted runner claimed the task, as an ISO 8601 timestamp in UTC. Only
+present for self-hosted runner tasks.
+
 |`com.circleci.task.index` |0 |The zero-based index of this task within
 its parallel job.
 
@@ -565,6 +579,15 @@ CircleCI.
 |`error.type` |FAILED |The task result when it represents an error
 condition. Only present for results that map to a `failure` or `error`
 result.
+
+|`host.arch` |`amd64` |The CPU architecture of the self-hosted runner that
+claimed the task. Only present for self-hosted runner tasks.
+
+|`host.name` |`ip-10-0-1-2.ec2.internal` |The hostname of the self-hosted runner
+that claimed the task. Only present for self-hosted runner tasks.
+
+|`os.type` |`linux` |The operating system of the self-hosted runner that claimed
+the task. Only present for self-hosted runner tasks.
 
 |`service.name` |CircleCI Pipelines |Always `CircleCI Pipelines`.
 
