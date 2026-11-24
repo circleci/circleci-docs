@@ -66,7 +66,7 @@ include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from
 
 include::ROOT:partial$create-project/choose-a-repo.adoc[]
 +
-Select the **GitHub Enterprise Server** tile and enter your Server URL and GitHub organization name. CircleCI redirects you to GitHub, where you install and authorise the CircleCI GitHub App.
+Select the **GitHub Enterprise Server** tile and enter your Server URL and GitHub organization name. CircleCI redirects you to your GitHub Enterprise Server instance, where you install and authorise the CircleCI GitHub App.
 
 include::ROOT:partial$create-project/set-up-pipeline-and-finish.adoc[]
 --

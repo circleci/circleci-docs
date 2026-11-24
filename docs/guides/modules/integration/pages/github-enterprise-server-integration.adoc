@@ -38,12 +38,9 @@ The following functionality is available during Preview:
 
 The following features are not yet available for the GitHub Enterprise Server integration. These are planned for future releases:
 
-* Self-serve onboarding
 * GitHub Checks
 * Chunk
 * Rollback functionality
-
-Currently, onboarding to use the GitHub Enterprise Server integration is assisted by the CircleCI team.
 
 [#organization-type]
 == Organization type

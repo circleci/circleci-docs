@@ -7,18 +7,19 @@
 :page-description: An overview guide to the version control systems you can integrate with CircleCI and the features available to each pipeline type and organization type.
 :experimental:
 
-CircleCI supports various pipeline types which map directly to the version control system (VCS) in which your code is stored, and the method used by CircleCI to get your code. Pipeline types are indicated with badges in the CircleCI web app, and the options are as follows:
+CircleCI supports various pipeline types which map directly to the version control system (VCS) in which your code is stored, and the method used by CircleCI to get your code. Pipeline types are indicated with badges in the CircleCI Cloud web app, and the options are as follows:
 
 * GitHub App
 * GitHub Enterprise Server
 * GitHub OAuth
-* GitHub OAuth (CircleCI Server)
 * GitLab
 * GitLab self-managed
 * Bitbucket
 * Cursor Origin
 
-If your code is hosted on GitHub Enterprise Server, the pipeline type depends on which CircleCI product you use. On CircleCI Cloud, GitHub Enterprise Server pipelines use the GitHub App integration (Preview). CircleCI Server uses GitHub OAuth. It also uses GitHub OAuth for code hosted on GitHub.com and GitHub Enterprise Cloud.
+CircleCI Server has a single pipeline type, which uses GitHub OAuth and has no badge. It supports code hosted on GitHub.com, GitHub Enterprise Cloud, and GitHub Enterprise Server.
+
+If your code is hosted on GitHub Enterprise Server, the pipeline type depends on which CircleCI product you use. On CircleCI Cloud, GitHub Enterprise Server pipelines use the GitHub App integration (Preview). On CircleCI Server, the pipeline type uses GitHub OAuth.
 
 This guide provides an overview of the VCS options, organization types, and pipeline types supported by CircleCI and the features available to each.
 

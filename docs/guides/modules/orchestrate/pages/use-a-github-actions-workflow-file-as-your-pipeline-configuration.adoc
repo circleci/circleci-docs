@@ -1,6 +1,6 @@
 = Use a GitHub Actions workflow file as your pipeline configuration
 :page-platform: Cloud
-:page-vcs: github
+:page-vcs: github, github-enterprise
 :page-plan: Free, Performance, Scale
 :page-audience: developer
 :page-badge: Preview
@@ -798,7 +798,7 @@ Four differences can change how a workflow behaves:
 * **`github.event_name` can be empty.** CircleCI does not guess an event name it cannot translate, so a condition such as `if: github.event_name == 'push'` is false rather than wrongly true on those pipelines. Handle the empty value if your workflow branches on the trigger.
 * **`github.run_id` is a UUID, not a number.** CircleCI's pipeline ID is a UUID and has no numeric equivalent, so a workflow that does arithmetic on `github.run_id` does not work here.
 * **On a pull request, the refs describe the head branch.** GitHub sets `github.ref` to `refs/pull/<number>/merge` and `github.sha` to an ephemeral merge commit. CircleCI checks out the head branch instead, so `github.ref` is `refs/heads/<head-branch>` and `github.sha` is the head SHA. Use `github.event_name == 'pull_request'` with `github.base_ref` and `github.head_ref` rather than testing for `refs/pull/`.
-* **The GitHub URLs are always `github.com`.** GitHub Enterprise Server is not supported.
+* **The GitHub URLs are always `github.com`.**
 
 [#the-github-event-context]
 ==== Event payload values
