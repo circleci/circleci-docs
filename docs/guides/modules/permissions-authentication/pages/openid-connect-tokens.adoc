@@ -860,7 +860,7 @@ ifndef::server[]
 | `github.com/my-org/my-repo`
 endif::server[]
 
-| GitHub OAuth (CircleCI Server, GitHub Enterprise Server)
+| GitHub OAuth (CircleCI Server)
 | `<your-github-hostname>/my-org/my-repo`
 
 ifndef::server[]
