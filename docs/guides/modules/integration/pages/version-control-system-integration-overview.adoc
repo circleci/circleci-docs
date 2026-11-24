@@ -10,7 +10,7 @@
 CircleCI supports various pipeline types which map directly to the version control system (VCS) in which your code is stored, and the method used by CircleCI to get your code. Pipeline types are indicated with badges in the CircleCI web app, and the options are as follows:
 
 * GitHub App
-* GitHub App for GitHub Enterprise Server (CircleCI Cloud).
+* GitHub Enterprise Server
 * GitHub OAuth
 * GitHub OAuth (CircleCI Server)
 * GitLab
@@ -18,7 +18,7 @@ CircleCI supports various pipeline types which map directly to the version contr
 * Bitbucket
 * Cursor Origin
 
-If your code is hosted on GitHub Enterprise Server, the pipeline type depends on which CircleCI product you use. CircleCI Cloud uses the GitHub App integration (Preview). CircleCI Server uses GitHub OAuth. It also uses GitHub OAuth for code hosted on GitHub.com and GitHub Enterprise Cloud.
+If your code is hosted on GitHub Enterprise Server, the pipeline type depends on which CircleCI product you use. On CircleCI Cloud, GitHub Enterprise Server pipelines use the GitHub App integration (Preview). CircleCI Server uses GitHub OAuth. It also uses GitHub OAuth for code hosted on GitHub.com and GitHub Enterprise Cloud.
 
 This guide provides an overview of the VCS options, organization types, and pipeline types supported by CircleCI and the features available to each.
 
@@ -82,7 +82,7 @@ The table below is not a full list of CircleCI features. Only features where the
 --
 [.datatable,cols="10*", options="header"]
 |===
-| Feature | Category | GitHub App | GitHub App for GitHub Enterprise Server (CircleCI Cloud, Preview) | GitHub OAuth | GitLab.com | GitLab self-managed | Bitbucket Cloud | Cursor Origin (beta) | GitHub OAuth (CircleCI Server)
+| Feature | Category | GitHub App | GitHub Enterprise Server (CircleCI Cloud, Preview) | GitHub OAuth | GitLab.com | GitLab self-managed | Bitbucket Cloud | Cursor Origin (beta) | GitHub OAuth (CircleCI Server)
 
 | *The method used to check out your code when using the `checkout` step in your configuration file. See more in the xref:reference:ROOT:configuration-reference.adoc#checkout[Configuration Reference].*
 | Code checkout
