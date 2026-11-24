@@ -8,7 +8,7 @@
 :experimental:
 :icons: font
 
-NOTE: The GitHub Enterprise Server integration is currently in **Preview**. Access is provided on request and involves hands-on support from the CircleCI team. Some features are not yet available during Preview. To learn more or request access, contact your account team.
+NOTE: The GitHub Enterprise Server integration is currently in **Preview**. Some features are not yet available during Preview.
 
 [#overview]
 == Overview
@@ -64,4 +64,4 @@ GitHub Enterprise Server pipelines use `github_server` as the value for `pipelin
 [#getting-started]
 == Getting started
 
-During Preview, access to the GitHub Enterprise Server integration is provided on request. Contact your account team to learn more or get set up.
+You can connect your GitHub Enterprise Server instance yourself. Select the **GitHub Enterprise Server** option when you create a project. See the xref:getting-started:create-project.adoc[Create a Project] page for the steps.
