@@ -48,7 +48,7 @@ Choose steps to follow below, depending on where your code is stored:
 
 [tabs]
 ====
-GitHub App::
+GitHub::
 +
 --
 include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
