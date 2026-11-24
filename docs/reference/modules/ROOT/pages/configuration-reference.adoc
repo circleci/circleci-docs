@@ -159,6 +159,8 @@ Use the `functions` key to declare the xref:functions:ROOT:functions-intro.adoc[
 
 Call a function in a job's `steps` by its alias. A step named `<alias>` runs the function's default command, and `<alias>/<command>` runs another command. Pass flags under `with:`, without the leading `--`.
 
+To rerun a function step if it fails, add `max_auto_reruns` and `auto_rerun_delay` beside `with:`, as described in xref:guides:orchestrate:automatic-reruns.adoc#automatic-function-step-reruns[Automatic Function Step Reruns].
+
 *Example:*
 
 [,yaml]

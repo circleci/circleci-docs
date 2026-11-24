@@ -41,7 +41,7 @@ This section provides config examples to help you set up automatic reruns. The c
 
 To enable automatic reruns for a run step in a job, add the `max_auto_reruns` key to your step with a value between 1 and 5:
 
-NOTE: Automatic reruns are only supported for `run` steps, not special steps like `checkout` or `setup_remote_docker`. You must configure the `command` key for the step. You cannot use the short form run step configuration with automatic reruns.
+NOTE: Automatic reruns are only supported for `run` steps and function steps, not special steps like `checkout` or `setup_remote_docker`. You must configure the `command` key for the step. You cannot use the short form run step configuration with automatic reruns.
 
 .CircleCI config to automatically retry a step up to 3 times if it fails
 [source,yaml]
@@ -75,6 +75,46 @@ jobs:
           max_auto_reruns: 3
           auto_rerun_delay: 10s
 ----
+
+ifndef::server[]
+[#automatic-function-step-reruns]
+=== Automatic function step reruns
+
+A step that calls a xref:functions:ROOT:functions-intro.adoc[Function] accepts the same `max_auto_reruns` and `auto_rerun_delay` keys as a `run` step. Write both keys beside `with`, not under it:
+
+.CircleCI config to automatically retry a function step up to 3 times if it fails with a 5 second delay between attempts
+[source,yaml]
+----
+version: 2.1
+
+functions:
+  setup-go: github.com/circleci-functions/setup-go@v0.7.0
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - checkout
+      - setup-go:
+          # Rerun keys sit beside `with`, not under it
+          max_auto_reruns: 3
+          auto_rerun_delay: 5s
+          with:
+            version-file: go.mod
+----
+
+The keys follow the same rules as on a `run` step:
+
+* `max_auto_reruns` takes a value from 1 to 5.
+* `auto_rerun_delay` takes a value in seconds, for example `30s`, or in minutes, for example `5m`. The delay is at most 10 minutes.
+* `auto_rerun_delay` is only valid together with `max_auto_reruns`.
+* Either key can take its value from a parameter, for example `max_auto_reruns: << parameters.reruns >>`.
+
+Putting `max_auto_reruns` or `auto_rerun_delay` under `with` is a configuration error. The error says to put the key beside `with`.
+
+Each attempt runs the function again from the start, including the cache restores the function performs. Before a rerun, CircleCI drops the teardown steps that the failed attempt registered, such as the function's cache saves, so these steps run only once. The teardown steps from the final attempt still run, including when every attempt fails.
+endif::server[]
 
 === Automatic workflow reruns
 
@@ -252,7 +292,7 @@ Be aware of these limitations when using automatic workflow reruns:
 * Only the original workflow triggers automatic reruns. Manual reruns do not trigger automatic reruns.
 * Automatic reruns are disabled if the pipeline is older than 90 days.
 * Only _failed_ workflows trigger automatic reruns, not cancelled workflows.
-* Automatic step reruns are only supported for `run` steps, not special steps like `checkout` or `setup_remote_docker`.
+* Automatic step reruns are only supported for `run` steps and function steps, not special steps like `checkout` or `setup_remote_docker`.
 
 [#troubleshooting]
 == Troubleshooting
