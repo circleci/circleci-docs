@@ -364,7 +364,7 @@ It is also possible to use the `sudo` command if necessary to perform customizat
 [#testing-on-real-ios-devices]
 == Testing on real iOS devices
 
-The macOS executor gives your jobs access to iPhone and iPad simulators (see xref:execute:using-macos.adoc[Using the macOS execution environment]). To run your XCUITest suites on physical iPhones and iPads, call a real device cloud from your CircleCI job.
+The macOS executor gives your jobs access to iPhone and iPad simulators (see xref:execute:using-macos.adoc[Using the macOS Execution Environment]). To run your XCUITest suites on physical iPhone and iPad devices, call a real device cloud from your CircleCI job.
 
 [#testmu-ai]
 === TestMu AI
