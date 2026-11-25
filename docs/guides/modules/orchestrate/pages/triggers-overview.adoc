@@ -37,16 +37,10 @@ endif::server[]
 . Select *Pipelines* for your project. If you do not see your project listed, select *Projects* in the sidebar to get to a full list. You will now be on your project's pipelines page.
 
 . Select btn:[Trigger Pipeline].
-+
-.Screenshot showing the trigger pipeline button in the CircleCI web app
-image::guides:ROOT:trigger-pipeline-app.png[Screenshot showing location on trigger pipeline button in the CircleCI web app]
 
 . Select the pipeline you want to trigger from the dropdown menu.
 
 . Select your config source branch. This tells CircleCI where (repo and branch) to find your pipeline config.
-+
-.Screenshot showing the trigger pipeline modal
-image::guides:ROOT:trigger-pipeline-app-modal.png[Trigger a pipeline modal in the CircleCI web app]
 
 . If your code is integrated via the **GitHub App or Cursor Origin**, select your checkout source and branch. This tells CircleCI which code to check out when running a xref:reference:ROOT:configuration-reference.adoc#checkout[`checkout` step]. If your code is integrated via **GitHub OAuth or Bitbucket Cloud**, you can skip this step, the same location is used for both config and checkout source.
 

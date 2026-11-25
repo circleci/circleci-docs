@@ -30,9 +30,6 @@ include::ROOT:partial$tips/check-github-type-org.adoc[]
 
 If your CircleCI organization is integrated with GitHub only through the **GitHub App**, you will see trigger options when creating a project in the CircleCI web app. You have the option to change the trigger options for your first trigger when setting the project up. You can also set up additional triggers during project creation, or setup/edit later in your menu:Project settings[Project Setup].
 
-.Trigger options during project creation
-image::guides:ROOT:triggers/create-project-run-on.png[Create a project trigger and access trigger options]
-
 If your CircleCI org is integrated via **GitHub OAuth** (see tip above), you can configure new triggers and optionally remove the existing OAuth trigger through menu:Project settings[Project Setup].
 
 == Supported trigger options

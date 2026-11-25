@@ -355,9 +355,6 @@ $ git push origin v1.2.3
 . You will see a new pipeline running with the name you configured in step 3.
 . Select the running pipeline to view the workflow and jobs.
 . Verify that the library information is passed to your jobs by checking the job output.
-+
-.Example of the job output for a cross-repo trigger
-image::guides:ROOT:cross-repo-check-job.png[Cross-repo trigger output]
 
 If your pipeline does not trigger:
 
