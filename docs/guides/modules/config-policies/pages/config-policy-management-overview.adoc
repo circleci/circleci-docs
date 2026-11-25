@@ -259,6 +259,37 @@ docker_images := {image | walk(input, [path, value])  # walk the entire config t
 
 ----
 
+ifndef::server[]
+[#format-violation-messages]
+===== Format violation messages
+
+The CircleCI web app shows a set of markdown in the `reason` of a soft-failure or hard-failure message. Use it to link to a fix, mark up an image name, or list steps:
+
+* Links: `+[approved images](https://example.com/images)+`. Only `http` and `https` links work, and each link opens in a new tab.
+* Bare URLs: text that starts with `+http://+`, `+https://+`, or `+www.+` becomes a link.
+* Inline code: put backticks around the text.
+* Bold and italic: `+**text**+` and `+*text*+`.
+* Bullet lists: start a line with a `-` and a space.
+* Numbered lists: start a line with `1.` and a space. The list starts at the first number you type, and the next items count up from it, whatever numbers you type for them. A list right under a line of text must start at `1`. A message that starts with a number, a period, and a space becomes a list. An example is `2024.` and a space.
+* Line breaks: `+\n+` starts a new line, and a blank line (`+\n\n+`) starts a new paragraph.
+
+Other markdown, HTML, and email addresses show as you type them. To show a markdown character as typed, put a backslash before it, such as `+\*+`.
+
+If a reason ends in a list, end it with a blank line (`+\n\n+`). A hard failure joins the reasons of every failed rule into one message. Without the blank line, the next rule's reason joins the last list item.
+
+The following rule returns a reason with inline code and a bullet with a link:
+
+[source,go]
+----
+use_official_docker_image[image] = reason {
+  some image in docker_images
+  not startswith(image, "circleci")
+  not startswith(image, "cimg")
+  reason := sprintf("%s is not an approved Docker image. Use `cimg/*` images.\n- See [approved images](https://example.com/images)\n\n", [image])
+}
+----
+endif::server[]
+
 [#enforcement]
 ==== Enforcement
 
