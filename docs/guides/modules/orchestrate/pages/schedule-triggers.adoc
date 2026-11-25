@@ -125,7 +125,7 @@ All the following fields must be present. The API returns a `400` if any are mis
 - `config.ref`: The branch to use as the config source.
 - `checkout.ref`: The branch to check out.
 - `schedule.name`: A unique name for the schedule.
-- `schedule.cron_expression`: A 5-field cron expression. The API rejects a wildcard in the minute field, such as `* * * * *`. When listing multiple minute values using comma-separated syntax (such as `10,20,30`), each value must be at least five minutes apart.
+- `schedule.cron_expression`: A 5-field cron expression, or a 6-field expression that ends in a year to run once. Refer to <<run-a-schedule-trigger-once>>. The API rejects a wildcard in the minute field, such as `* * * * *`. When listing multiple minute values using comma-separated syntax (such as `10,20,30`), each value must be at least five minutes apart.
 - `schedule.attribution_actor`: Use `"current"` to attribute pipeline runs to the token owner, or `"system"` for the scheduling system. The API rejects user UUIDs.
 
 Optional fields:
@@ -169,6 +169,43 @@ For additional information, refer to the **Schedule** section under the link:htt
 
 Also see the xref:toolkit:api-developers-guide.adoc#getting-started-with-the-api[Getting Started With the API] section of the API Developer's Guide for more guidance on making requests.
 
+[#run-a-schedule-trigger-once]
+== Run a schedule trigger once
+
+To run a schedule trigger a single time, add a year as a sixth field to the cron expression for GitHub App, GitHub App Server, and Cursor Origin pipelines. The format is `minute hour day-of-month month day-of-week year`. For example, `30 14 2 12 * 2027` runs once at 14:30 UTC on 2 December 2027.
+
+The year must follow these rules:
+
+* Use a single 4-digit year. The year field does not accept a list, range, or step. It also does not accept `*` or `?`.
+* The expression must have a fire time after the current time in that year. The API rejects past dates and dates that do not exist, such as 31 February.
+* The year can be at most 100 years ahead.
+
+The API rejects a 6-field expression whose last field is not a year, such as a cron expression that starts with a seconds field. The rules for 5-field expressions also apply. For example, schedules must run at least 5 minutes apart and the minute field cannot be `*`.
+
+The start time can be offset by up to 10 minutes. This offset is the same for every schedule in the project. Refer to <<schedule-trigger-runs-late>>.
+
+After the run, the trigger stays in your list of schedule triggers and does not run again.
+
+To run a schedule trigger once in the web app:
+
+. Follow the steps in <<set-up-in-the-web-app>> to open the schedule trigger form.
+. Select **Run once** instead of **Repeat on a schedule**.
+. Choose a date and time. The picker uses your local time zone, and the form shows the equivalent time in UTC.
+. Select btn:[Save]. CircleCI writes the cron expression for you.
+
+To run a schedule trigger once using the API, set `cron_expression` to the year form in the request described in <<use-the-api>>. For example:
+
+[source,json]
+----
+"schedule": {
+  "name": "one-time-release-check",
+  "cron_expression": "30 14 2 12 * 2027",
+  "attribution_actor": "current"
+}
+----
+
+The `POST` and `PATCH` requests to `/api/v3/triggers` both accept this form. Run once is not available for GitHub OAuth and Bitbucket Cloud pipelines, which use the `timetable` field.
+
 [#view-your-schedule-triggers]
 == View your schedule triggers
 
@@ -206,6 +243,8 @@ If you have existing scheduled workflows you need to migrate to schedule trigger
 A schedule trigger does not always start a run at the exact scheduled time. CircleCI applies a random delay of up to 10 minutes to the scheduled time (this delay can be up to one hour for schedule triggers created before September 29, 2025). After the first run, the delay is constant for all subsequent runs.
 
 For example, with a schedule for 08:00 UTC, the trigger may start the first run at 08:07 UTC. Subsequent runs also start at 08:07 UTC.
+
+The same delay applies to a schedule trigger that runs once. Refer to <<run-a-schedule-trigger-once>>.
 
 [#cannot-add-schedule-trigger]
 === Cannot add a schedule trigger to a pipeline
