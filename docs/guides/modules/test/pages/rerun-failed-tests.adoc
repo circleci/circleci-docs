@@ -17,9 +17,6 @@ The *Rerun failed tests* option in the web app is deprecated. It appears only fo
 
 If a transient test failure arises in a pipeline, select **Rerun failed tests** to rerun a subset of tests (your failed tests) instead of rerunning the entire test suite. Rerun failed tests runs a new workflow, which appears within your original pipeline. The rerun is created from the _same_ commit as the failed workflow, not from subsequent commits.
 
-.Screenshot of the Rerun menu with the Rerun failed tests option highlighted
-image::guides:ROOT:rerun-failed-tests-option.png[Option to rerun failed tests from Rerun menu]
-
 Historically, when a testing job in a workflow had flaky tests, the only option to get to a successful workflow was to xref:orchestrate:workflows.adoc#rerunning-a-workflows-failed-jobs[Rerun Your Workflow From Failed]. Rerun from failed executes *all tests*, including tests that passed, which prolongs time-to-feedback and consumes credits unnecessarily. Having the option to rerun only failed tests is a more efficient way to rerun your testing workflows.
 
 Set up your test jobs to use `circleci tests run` to make the rerun failed tests available.
