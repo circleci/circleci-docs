@@ -1,0 +1,266 @@
+= Expressions reference
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.8"
+:page-audience: developer
+:page-description: Reference for the CircleCI expression syntax, including literals, operators, precedence, and how expressions are evaluated.
+:experimental:
+
+CircleCI expressions are small boolean and value expressions that CircleCI evaluates against a set of variables, such as pipeline values. Several CircleCI features accept expressions, and they all use the syntax described on this page.
+
+For example:
+
+[source,text]
+----
+pipeline.git.branch == "main" and not (pipeline.trigger.type starts-with "api")
+----
+
+CircleCI evaluates expressions with the link:https://github.com/CircleCI-Public/expr[`expr`] library.
+
+[#where-you-can-use-expressions]
+== Where you can use expressions
+
+What differs between features is where the expression is written, which variables are available, and when it is evaluated.
+
+[.table-scroll]
+--
+[cols="1,2,2", options="header"]
+|===
+| Feature | Variables available | More information
+
+| Job filters and workflow `when` or `unless` in config
+| Pipeline values and pipeline parameters.
+| xref:configuration-reference.adoc#using-expressions-in-your-configuration[Using Expressions in Your Configuration]
+
+| Other fields in config, wrapped in `<< >>`
+| Pipeline values and pipeline parameters.
+| xref:configuration-reference.adoc#expressions-in-config-fields[Expressions in Configuration Fields]
+
+| Context expression restrictions
+| Pipeline values (except `pipeline.trigger_parameters.*`) and the job value `job.ssh.enabled`. Pipeline parameters (`pipeline.parameters.*`) are not available, because people who trigger a pipeline run can set them, and trigger inputs must not decide whether a context is available. Trigger parameters (`pipeline.trigger_parameters.*`) are not available because they are deprecated and tightly coupled to the VCS.
+| xref:guides:security:contexts.adoc#expression-restrictions[Expression Restrictions]
+
+| Release validation `fail_when`
+| The fields that `data_points` extracts from the webhook payload, usually `criteria`. CircleCI converts values to lowercase before it evaluates the expression. The `in` operator and list literals are not supported. Use `criteria == "firing" or criteria == "pending"` instead of `criteria in ['firing', 'pending']`.
+| xref:guides:deploy:release-validation-reference.adoc[Release Validation Reference]
+|===
+--
+
+[#literals]
+== Literals
+
+Expressions support number, string, boolean, and regular expression pattern literals.
+
+[#numbers]
+=== Numbers
+
+Numeric literals are whole integers. For example, `1` or `768`.
+
+[#strings]
+=== Strings
+
+Enclose string literals in double quotes (`" "`). Use `\` to escape an embedded quote or an embedded `\`.
+
+For example, `"the quick brown fox"` or `"You can embed \" and \\ characters"`.
+
+[#booleans]
+=== Booleans
+
+The boolean literals are `true` and `false`.
+
+[#patterns]
+=== Regular expression patterns
+
+Enclose regular expression patterns in forward slashes (`/ /`). Use `\` to escape an embedded `/` or `\`. For example, `/hello\s+world/`.
+
+* The pattern syntax is link:https://github.com/google/re2/wiki/syntax[re2], limited to ASCII and Latin-1 characters in the pattern. Special characters such as `.` can still match any Unicode character.
+* Capturing groups are allowed in a pattern, but you cannot use the captured values in an expression.
+
+[#variables]
+== Variables
+
+A variable is a name that CircleCI replaces with a value when it evaluates the expression. Expressions can use the following kinds of variable:
+
+* Pipeline values, such as `pipeline.git.branch`. See xref:guides:orchestrate:pipeline-variables.adoc#pipeline-values[Pipeline Values].
+* Pipeline parameters, referenced as `pipeline.parameters.<name>`. See xref:guides:orchestrate:pipeline-variables.adoc#pipeline-parameters-in-configuration[Pipeline Parameters].
+* Element parameters, referenced as `parameters.<name>`. These are available in `<< >>` expressions inside the job that declares them. They are not available in job `filters`, which CircleCI evaluates at the workflow level.
+* The job value `job.ssh.enabled`, which is `true` if SSH is enabled for the job and `false` otherwise. It is the only job value, and it is available only in context expression restrictions, not in configuration.
+
+include::guides:ROOT:partial$using-expressions/env-vars-in-conditional-caveat.adoc[]
+
+Which of these are available depends on the feature. See <<where-you-can-use-expressions>>.
+
+Variable names follow these rules:
+
+* A variable name starts with a letter. It can contain letters, digits, hyphens (`-`), and underscores (`_`).
+* Use periods (`.`) to separate segments, as in `pipeline.git.branch`. A name cannot start with a period, and cannot contain consecutive periods.
+
+This applies to pipeline parameters too. If a pipeline parameter has a name that does not follow these rules, CircleCI performs string replacement instead of evaluating an expression.
+
+Valid names:
+
+* `foo`
+* `foo.bar`
+* `fo19-bar.baz_12`
+
+Invalid names:
+
+* `14bar`: must start with a letter.
+* `_bar`: must start with a letter.
+* `-bar`: must start with a letter.
+* `.bar`: cannot start with a period.
+* `foo..bar`: cannot contain consecutive periods.
+
+Referring to a variable that does not exist is an error. See <<undefined-values>> for variables that exist but have no value.
+
+[#operators]
+== Operators
+
+You can group sub-expressions with parentheses `(` and `)`.
+
+[.table-scroll]
+--
+[cols="1,1,2", options="header"]
+|===
+| Type | Operators | Description
+
+| Logical
+| `and`, `or`
+| Short-circuiting boolean operators.
+
+| Equality
+| `==`, `!=`
+| String, numeric, and boolean equality. If the operands are of different types, `==` evaluates to `false` and `!=` evaluates to `true`.
+
+| Comparison
+| `>=`, `>`, `<=`, `<`
+| Numeric comparison. It is an error to use a non-numeric operand.
+
+| Negation
+| `not`
+| Boolean negation. `not` applies only to the single operand immediately after it. See <<precedence>>.
+
+| String
+| `starts-with`
+| String prefix equality. `"hello world" starts-with "hello"` evaluates to `true`. It is an error to use a non-string operand.
+
+| String
+| `contains`
+| Matches if the right operand is part of the left operand. `"hello world" contains "lo wo"` evaluates to `true`. Both operands must be strings. CircleCI Server 4.10 and earlier do not support `contains`.
+
+| String
+| `matches`
+| Regular expression match against the entire string. `"hello world" matches /hello.*/` evaluates to `true`. The left operand must be a string and the right operand must be a pattern.
+|===
+--
+
+[#precedence]
+== Precedence
+
+The following table shows operator precedence from weakest to strongest binding. All operators are left associative.
+
+[.table-scroll]
+--
+[cols="2,1", options="header"]
+|===
+| Operator | Associativity
+
+| `or`
+| left
+
+| `and`
+| left
+
+| `==`, `!=`, `starts-with`, `contains`, `matches`
+| left
+
+| `>=`, `>`, `<=`, `<`
+| left
+
+| `not`
+|
+|===
+--
+
+`not` has the highest precedence, so CircleCI applies it before any other operator. To negate a larger expression, put the expression in parentheses. For example, when `foo` is `true` and `bar` is `false`:
+
+* `not foo and bar` is read as `(not foo) and bar`, so it evaluates to `false`.
+* `not (foo and bar)` negates the whole parenthesized expression, so it evaluates to `true`.
+
+Avoid chaining operators other than `and` and `or`. CircleCI evaluates chained operators from left to right, and the result of the first operator becomes an operand of the next. For example, `1 < 2 < 3` is read as `(1 < 2) < 3`. This compares the boolean `true` with the number `3`, which is an error.
+
+[#evaluation]
+== Evaluation
+
+For example, take this expression:
+
+[source,text]
+----
+pipeline.git.branch == "main"
+and not job.ssh.enabled
+and not (pipeline.trigger.type starts-with "api")
+----
+
+With these values:
+
+* `pipeline.git.branch` is `"main"`.
+* `job.ssh.enabled` is `false`.
+* `pipeline.trigger.type` is `"api"`.
+
+CircleCI evaluates the expression from the inside out, as shown in the following diagram. Each box shows an operator and the value it produces.
+
+.How CircleCI evaluates the example expression
+[mermaid]
+----
+flowchart BT
+    Branch["pipeline.git.branch == #quot;main#quot;<br/>true"] --> And1["and<br/>true"]
+    Ssh["not job.ssh.enabled<br/>true"] --> And1
+    And1 --> And2["and<br/>false"]
+    Api["not (pipeline.trigger.type<br/>starts-with #quot;api#quot;)<br/>false"] --> And2
+----
+
+The evaluation steps are as follows:
+
+. Look up `pipeline.git.branch`: `"main" == "main" and not job.ssh.enabled and not (pipeline.trigger.type starts-with "api")`
+. Evaluate `"main" == "main"`: `true and not job.ssh.enabled and not (pipeline.trigger.type starts-with "api")`
+. Look up `job.ssh.enabled`: `true and not false and not (pipeline.trigger.type starts-with "api")`
+. Evaluate `not false`: `true and true and not (pipeline.trigger.type starts-with "api")`
+. Evaluate `true and true`: `true and not (pipeline.trigger.type starts-with "api")`
+. Look up `pipeline.trigger.type`: `true and not ("api" starts-with "api")`
+. Evaluate `"api" starts-with "api"`: `true and not true`
+. Evaluate `not true`: `true and false`
+. Evaluate `true and false`: `false`
+
+The expression evaluates to `false`.
+
+[#undefined-values]
+=== Undefined values
+
+A variable that exists but has no value is _undefined_. An undefined value is not equal to anything, including itself.
+
+* If an equality or comparison operator has an undefined operand, the result is undefined. For example, when `foo` is undefined, each of the following is undefined:
+** `foo == foo`
+** `foo != 1`
+** `foo > 3`
+** `"hello" starts-with foo`
+* In a logical operator, CircleCI treats an undefined operand as `false` but preserves the undefined value. This lets you provide a fallback:
+** `foo or 12` evaluates to `12`.
+** `12 or foo` evaluates to `12`.
+** `foo and "hello"` evaluates to undefined.
+** `not foo` evaluates to `true`.
+* If the final result of an expression is undefined, it is treated as `false`.
+
+In GitHub OAuth projects, a variable that has no value is an empty string, not undefined. This applies on CircleCI Cloud and CircleCI Server. An empty string counts as `true`, so the rules above do not apply. For example, on a tag build `pipeline.git.branch or "none"` evaluates to the empty string, not to `"none"`.
+
+[#errors]
+== Errors
+
+Evaluating an expression fails with an error in the following cases:
+
+* A variable does not exist.
+* An operand of a numeric comparison operator is not a number.
+* An operand of `starts-with` or `contains` is not a string.
+* The left operand of `matches` is not a string, or the right operand is not a pattern.
+
+What happens next depends on the feature. For example, a context expression restriction that fails to evaluate prevents the context from being used.

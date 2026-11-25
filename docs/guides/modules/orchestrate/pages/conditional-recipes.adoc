@@ -7,7 +7,7 @@
 :page-description: Recipes for running workflows, jobs and steps conditionally using expressions, pipeline parameters and logic statements.
 :experimental:
 
-These recipes show how to run workflows, jobs and steps conditionally. For expression syntax, see the xref:reference:ROOT:configuration-reference.adoc#using-expressions-in-your-configuration[Using Expressions in Your Configuration].
+These recipes show how to run workflows, jobs and steps conditionally. For expression syntax, see the xref:reference:ROOT:expressions-reference.adoc[Expressions Reference].
 
 == Run a workflow only for specific branches
 
