@@ -44,7 +44,7 @@ jobs:
 ifndef::server[]
 This example runs your test command directly. On CircleCI Cloud, the recommended way to run tests is to replace that command with `circleci testsuite run`, which adds Smarter Testing capabilities such as test splitting and rerunning only failed tests. See <<choose-your-test-tooling,Choose your test tooling>>.
 
-For example, for a project that uses Vitest, the job runs `circleci testsuite run` in place of the test command:
+For example, the job runs `circleci testsuite run` in place of the test command:
 
 .`.circleci/config.yml` using Smarter Testing
 [,yaml]
@@ -60,22 +60,9 @@ jobs:
       - run:
           name: Run tests
           command: circleci testsuite run "ci tests"
-      - store_test_results:
-          # Must match outputs.junit in test-suites.yml
-          path: test-reports
 ----
 
-A `.circleci/test-suites.yml` file tells `circleci testsuite` how to discover and run your tests:
-
-.`.circleci/test-suites.yml`
-[,yaml]
-----
-name: ci tests
-discover: npx vitest list --filesOnly
-run: npx vitest run --reporter=junit --outputFile="<< outputs.junit >>" --silent --bail 0 << test.atoms >>
-outputs:
-  junit: test-reports/junit.xml
-----
+include::ROOT:partial$shared-sections/testsuite-zero-config.adoc[]
 
 endif::server[]
 ifdef::server[]

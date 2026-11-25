@@ -79,14 +79,25 @@ jobs:
       - checkout # checkout source code
       - python/install-packages:
           pkg-manager: pip
+ifndef::server[]
+      - run:
+          name: Run tests
+          command: circleci testsuite run "ci tests" --runner=pytest
+endif::server[]
+ifdef::server[]
       - run:
           name: Run tests
           command: python -m pytest
+endif::server[]
       - persist_to_workspace:
           root: ~/project
           paths:
             - .
 ----
+
+ifndef::server[]
+include::ROOT:partial$shared-sections/testsuite-zero-config.adoc[]
+endif::server[]
 
 [#deploy-the-app]
 ==== b. Deploy the app
@@ -169,9 +180,16 @@ jobs:
       - checkout
       - python/install-packages:
           pkg-manager: pip
+ifndef::server[]
+      - run:
+          name: Run tests
+          command: circleci testsuite run "ci tests" --runner=pytest
+endif::server[]
+ifdef::server[]
       - run:
           name: Run tests
           command: python -m pytest
+endif::server[]
       - persist_to_workspace:
           root: ~/project
           paths:
