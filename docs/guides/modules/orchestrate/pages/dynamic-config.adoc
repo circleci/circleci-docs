@@ -31,10 +31,7 @@ To enable dynamic configuration in CircleCI:
 . In the CircleCI web app, select **Projects** in the sidebar.
 . Select the ellipsis menu icon:more[Ellipsis menu icon] next to your project and select **Project Settings**.
 . From the sidebar, select *Advanced*.
-. Scroll to the *Enable dynamic config using setup workflows* setting, and toggle it to the "on" position, as shown below:
-+
-.Screenshot showing how to enable dynamic config in the UI
-image::guides:ROOT:dynamic-config-enable.png[Enable dynamic config in the UI]
+. Scroll to the *Enable dynamic config using setup workflows* setting, and toggle it to the "on" position.
 
 These steps make dynamic configuration features available for your project, but any _static_ `config.yml` you have previously set up will continue to work as normal.
 

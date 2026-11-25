@@ -187,12 +187,6 @@ A job must wait until all upstream jobs in the dependency graph have attained ei
 * The `release` job waits for the `deploy` job, and only runs if the `deploy` job is successful.
 * The `deploy` job waits for the `build` job, and only runs if the `build` job is successful.
 
-.Workflow execution when the `release` job is successful
-image::guides:ROOT:workflow-using-requires-example-1.png[Flexible Job Execution Workflow - Example 1]
-
-.Workflow execution when the `release` job fails:
-image::guides:ROOT:workflow-using-requires-example-2.png[Flexible Job Execution Workflow - Example 2]
-
 ==== Ignore the outcome of an upstream job
 
 You may want to configure job dependencies that ignore the status/outcome of an upstream job, for example running a job regardless of the status/outcome of an upstream job.

@@ -83,7 +83,16 @@ Notice how the `deploy` job needs to explicitly list all three test jobs in its 
 Here is the workflow graph for this config:
 
 .Workflow graph before adding no-op job
-image::guides:ROOT:orchestrate-and-trigger/clean-graph-before.png[Workflow graph showing snippet without `no-op` job]
+[mermaid]
+----
+flowchart LR
+    build --> test-unit
+    build --> test-integration
+    build --> test-e2e
+    test-unit --> deploy
+    test-integration --> deploy
+    test-e2e --> deploy
+----
 
 === Steps
 
@@ -147,7 +156,17 @@ workflows:
 The workflow graph will now look like this:
 
 .Workflow graph after adding no-op job
-image::guides:ROOT:orchestrate-and-trigger/clean-graph-after.png[Workflow graph showing snippet with `no-op` job]
+[mermaid]
+----
+flowchart LR
+    build --> test-unit
+    build --> test-integration
+    build --> test-e2e
+    test-unit --> test-coordinator
+    test-integration --> test-coordinator
+    test-e2e --> test-coordinator
+    test-coordinator --> deploy
+----
 
 === Notes
 
