@@ -1862,7 +1862,7 @@ Throughput can range from 125 to 1,000 MiB/s for gp3 volumes.
 
 | mongodb.image.tag
 | string
-| `"7.0.5967-e68a9d5"`
+| `"7.0.6287-c0318cf"`
 |
 
 | mongodb.internal
@@ -3163,7 +3163,7 @@ The secret must be named 'nomad-mtls', be in the same namespace, and have the ke
 
 | rabbitmq.image.tag
 | string
-| `"3.12.5969-e68a9d5"`
+| `"3.12.6283-c0318cf"`
 |
 
 | rabbitmq.internal
@@ -3283,7 +3283,7 @@ The secret must be named 'nomad-mtls', be in the same namespace, and have the ke
 
 | redis.image.tag
 | string
-| `"6.2.5966-e68a9d5"`
+| `"6.2.6286-c0318cf"`
 |
 
 | redis.master.extraEnvVars[0].name
