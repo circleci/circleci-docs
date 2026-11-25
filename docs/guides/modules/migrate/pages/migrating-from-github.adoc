@@ -243,7 +243,7 @@ jobs:
 2+a| Using conditional steps in the workflow. CircleCI offers the following:
 
 * xref:reference:ROOT:configuration-reference.adoc#the-when-attribute[The When Attribute] (for example, `on_success` [default], +
-`always`, `on_failure`).
+`always`, `on_fail`).
 * https://circleci.com/docs/configuration-reference/#the-when-step[Conditional steps] based on parameters.
 * https://circleci.com/docs/reusing-config/#using-the-parameters-declaration[Conditional jobs].
 * Conditional, parameterized xref:orchestrate:workflows.adoc#use-conditional-logic-in-workflows[Workflows].
