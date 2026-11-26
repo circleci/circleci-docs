@@ -198,8 +198,9 @@ Storage retention periods run independently of your billing cycle. When you save
 endif::server[]
 
 ifndef::server[]
+[#estimate-network-and-storage-costs]
 [#how-to-calculate-an-approximation-of-network-and-storage-costs]
-=== How to calculate an approximation of network and storage costs
+=== Estimate network and storage costs
 
 NOTE: For our monthly Performance Plan customers: billing for network egress and storage started to take effect on *May 1, 2022*, based on your billing date. CircleCI has added variables and controls to help you manage network and storage usage. Current usage can be found on the link:https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Plan Usage].
 
@@ -207,11 +208,85 @@ Network charges apply when an organization has runner network egress beyond the 
 
 Storage charges apply when you retain artifacts, workspaces, and caches beyond the included storage GB allotment.
 
-Storage usage is calculated once, at the moment an object is saved. Storage usage is not accrued day by day while it remains in storage. CircleCI multiplies the object's size by its configured retention period to get its total GB-days. This amount is added to your storage usage for the billing period in which it was saved.
+You can find out how much network and storage usage is available on your plan by visiting the features section of the link:https://circleci.com/pricing/#comparison-table[Pricing] page.
 
-You can find out how much network and storage usage is available on your plan by visiting the features section of the link:https://circleci.com/pricing/[Pricing] page. If you would like more details about credit usage, and how to calculate your potential network and storage costs, visit the billing section on the xref:reference:ROOT:faq.adoc#calculate-monthly-storage-and-network-costs[FAQ] page.
+[#how-storage-and-network-are-charged]
+==== How storage and network are charged
 
-For questions on data usage for the IP ranges feature, visit the xref:reference:ROOT:faq.adoc#calculate-monthly-IP-ranges-costs[FAQ] page.
+CircleCI charges network and storage usage for each usage record separately, then adds the results together.
+
+* *Free allotment*: Usage accumulates across the billing period. Charges start only once your total passes the allotment included in your plan.
+* *Rounding*: Each charge is rounded up to the next whole credit. A record that is over the allotment by only 1 byte is charged 1 credit.
+* *Storage*: Usage is calculated once, when an object is saved. CircleCI multiplies the object's size by its configured retention period to get its total GB-days. This amount is added to your storage usage for the billing period in which the object was saved. Usage is not accrued day by day while the object remains in storage.
+
+The rates are as follows:
+
+[.table-scroll]
+--
+[cols=4*, options="header"]
+|===
+| Resource
+| Unit
+| Rate
+| Notes
+
+| Network
+| GB
+| 420 credits per GB
+| Only traffic from CircleCI to self-hosted runners is charged.
+
+| Storage
+| GB-day
+| 14 credits per GB-day
+| Equivalent to 420 credits per GB-month, assuming a 30-day month.
+|===
+--
+
+The following examples show usage that is already over the free allotment:
+
+[.table-scroll]
+--
+[cols=4*, options="header"]
+|===
+| Usage
+| Calculation
+| Before rounding
+| Charged
+
+| Network: 1,000 bytes
+| 0.000001 GB x 420
+| 0.00042 credits
+| 1 credit
+
+| Network: 50,000,000 bytes
+| 0.05 GB x 420
+| 21 credits
+| 21 credits
+
+| Storage: 100,000,000 bytes retained for 10 days
+| 0.1 GB x 10 days = 1 GB-day, then 1 x 14
+| 14 credits
+| 14 credits
+
+| Storage: 100,000,000 bytes retained for 21 days
+| 0.1 GB x 21 days = 2.1 GB-days, then 2.1 x 14
+| 29.4 credits
+| 30 credits
+|===
+--
+
+[#why-usage-page-totals-do-not-match]
+==== Why Plan Usage totals do not match the charge
+
+The *Plan Usage* page shows the total usage for the billing period. It does not show individual usage records, so multiplying a total by the rate does not reproduce the credits charged. Totals differ from charges for these reasons:
+
+* Rounding is applied to each usage record, not to the total.
+* The free allotment is applied to accumulated usage, so the first records in a billing period are not charged.
+* The *Storage* tab divides GB-days by 30 to display GB-months.
+
+To estimate a monthly cost, multiply the overage shown on the *Plan Usage* page by the rate in the table above. Treat the result as an approximation of the charge, not an exact figure.
+
+For data usage for the IP ranges feature, see xref:security:ip-ranges.adoc#pricing[IP Ranges Feature Pricing].
 
 [#reducing-excess-use-of-network-egress-and-storage]
 === Reducing excess use of network egress and storage

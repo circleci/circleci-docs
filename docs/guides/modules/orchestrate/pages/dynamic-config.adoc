@@ -31,10 +31,7 @@ To enable dynamic configuration in CircleCI:
 . In the CircleCI web app, select **Projects** in the sidebar.
 . Select the ellipsis menu icon:more[Ellipsis menu icon] next to your project and select **Project Settings**.
 . From the sidebar, select *Advanced*.
-. Scroll to the *Enable dynamic config using setup workflows* setting, and toggle it to the "on" position, as shown below:
-+
-.Screenshot showing how to enable dynamic config in the UI
-image::guides:ROOT:dynamic-config-enable.png[Enable dynamic config in the UI]
+. Scroll to the *Enable dynamic config using setup workflows* setting, and toggle it to the "on" position.
 
 These steps make dynamic configuration features available for your project, but any _static_ `config.yml` you have previously set up will continue to work as normal.
 
@@ -61,6 +58,7 @@ Some constraints on continuing pipelines from a `setup: true` configuration are 
 ** Use logic conditions to ensure only one workflow is run for each pipeline.
 - A pipeline can only be continued once. A pipeline cannot be continued with another setup configuration. Workflow reruns will fail as part of this restriction. Rather than rerun a setup workflow you can trigger a new pipeline.
 - A pipeline can only be continued within six hours of its creation.
+- If you use a custom executor for the continuation step, it must have `curl` and `jq` installed.
 - You can declare a pipeline parameter with the same name and type in both the setup and continuation configuration files. If the default values differ, each configuration uses its own default.
 - You can set the value of a pipeline parameter declared in the continuation configuration to a value other than the default. To do so, specify the parameter's name and value when calling the `continue` job or command from the link:https://circleci.com/developer/orbs/orb/circleci/continuation[continuation orb] using the `parameters` parameter.
 - The `continue` job/command will fail with the error {"message":"Conflicting pipeline parameters."} when all three of these conditions occur:
@@ -127,6 +125,7 @@ This scenario is also referred to as _config splitting_.
 
 For an example of config splitting, see the xref:using-dynamic-configuration.adoc#pack-generate-validate[Dynamic Configuration] how-to guide.
 
+ifdef::server[]
 == Using dynamic configuration on CircleCI Server
 
 TIP: For more information on managing orbs in a server installation see the xref:server-admin:operator:managing-orbs.adoc[Managing Orbs] page.
@@ -164,11 +163,7 @@ workflows:
           base-revision: main
           circleci_domain: support-server-4.eks-dev.sphereci.com
 ----
-
-[#dynamic-config-faqs]
-== FAQs
-
-include::ROOT:partial$faq/dynamic-configuration-faq-snip.adoc[]
+endif::server[]
 
 [#what-to-read-next]
 == Next steps

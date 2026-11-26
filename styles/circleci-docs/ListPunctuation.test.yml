@@ -1,0 +1,36 @@
+- name: flags a long item with no end punctuation
+  rule: ListPunctuation.yml
+  format: adoc
+  input: |
+    * Use this option to cache your dependencies between runs
+  contains: circleci-docs.ListPunctuation
+- name: allows a long item that ends with a period
+  rule: ListPunctuation.yml
+  format: adoc
+  input: |
+    * Use this option to cache your dependencies between runs.
+  absent: circleci-docs.ListPunctuation
+- name: allows a short item
+  rule: ListPunctuation.yml
+  format: adoc
+  input: |
+    * Docker executor
+  absent: circleci-docs.ListPunctuation
+- name: allows an item that is only an xref
+  rule: ListPunctuation.yml
+  format: adoc
+  input: |
+    * xref:getting-started.adoc[Get started with the CircleCI platform today]
+  absent: circleci-docs.ListPunctuation
+- name: flags a long ordered item with no end punctuation
+  rule: ListPunctuation.yml
+  format: adoc
+  input: |
+    . Select the project you want to configure from the list
+  contains: circleci-docs.ListPunctuation
+- name: allows an item that ends in a code span
+  rule: ListPunctuation.yml
+  format: adoc
+  input: |
+    * Set the environment variable to `CIRCLE_BRANCH`
+  absent: circleci-docs.ListPunctuation

@@ -1,0 +1,3 @@
+. In the cloudlink:webapp[CircleCI web app,window=_blank], select your org from the org cards on your user homepage.
+. Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
+. Select the menu:Pipelines[] next to your project.

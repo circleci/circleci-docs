@@ -1,0 +1,33 @@
+= Reusing content
+:page-noindex: true
+:experimental:
+
+pass:[<!-- vale off -->]
+Reuse content that appears in more than one place, so that it stays consistent.
+
+== Partials
+
+Partials are AsciiDoc snippets that you include in many pages. They live in `docs/guides/modules/ROOT/partials/`.
+
+* Use a partial for repeated steps, standard notes, resource tables, FAQ entries, and troubleshooting steps.
+* Do not use a partial for content that appears once, or that needs different context on each page.
+
+[source,adoc]
+----
+\include::ROOT:partial$notes/docker-auth.adoc[]
+----
+
+== Examples
+
+Shared code snippets live in `docs/guides/modules/ROOT/examples/`. Include them inside a source block, and do not paste the snippet into the page.
+
+[source,adoc]
+-----
+[source,yaml]
+----
+\include::ROOT:example$orchestration-examples/job-group.yml[]
+----
+-----
+
+If you use Claude Code, the `partials` skill in `skills/partials/SKILL.md` finds, inserts, and extracts partials and examples for you.
+pass:[<!-- vale on -->]

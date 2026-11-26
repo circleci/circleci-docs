@@ -1,7 +1,2 @@
-ifndef::server[]
-. In the link:https://app.circleci.com[CircleCI web app, window=_blank], select your avatar at the top right corner in the web app.
-endif::server[]
-ifdef::server[]
-. In the CircleCI web app, select your avatar at the top right corner in the web app.
-endif::server[]
+. In the cloudlink:webapp[CircleCI web app,window=_blank], select your avatar at the top right corner in the web app.
 . Select **User Settings**.

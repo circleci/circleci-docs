@@ -1,0 +1,120 @@
+= Conditional recipes
+:page-platform: Cloud, Server
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
+:page-audience: developer
+:page-description: Recipes for running workflows, jobs and steps conditionally using expressions, pipeline parameters and logic statements.
+:experimental:
+
+These recipes show how to run workflows, jobs and steps conditionally. For expression syntax, see the xref:reference:ROOT:expressions-reference.adoc[Expressions Reference].
+
+== Run a workflow only for specific branches
+
+=== Goal
+You may want to configure a workflow that will only run when the pipeline is triggered on a specific branch.
+
+=== Steps
+
+* Update your CircleCI config to include a workflow that will only run for specific branches. You can configure the workflow using an expression.
++
+.The nightly-run-workflow only runs on the main and staging branches
+[,yaml]
+----
+include::ROOT:example$expression-examples/workflow-when/or-equal-dynamic.yml[]
+----
+
+=== Notes
+
+include::ROOT:partial$using-expressions/env-vars-in-conditional-caveat.adoc[]
+
+
+* You can also choose to prevent the workflow from running for specific branches using the `not` operator with `matches` for pattern matching:
++
+[,yaml]
+----
+include::ROOT:example$expression-examples/workflow-when/exclude-branch-dynamic.yml[]
+----
+
+include::ROOT:partial$tips/trigger-pipeline-with-parameters.adoc[]
+
+== Run a workflow depending on the value of a boolean parameter
+
+=== Goal
+You may want to configure a workflow that will only run when a boolean pipeline parameter is true.
+
+=== Steps
+
+. Update config to declare a pipeline parameter with a default value of `false`.
+
+. Update your workflow config to use a when statement so the workflow will only run when the pipeline parameter is true.
++
+[,yaml]
+----
+include::ROOT:example$expression-examples/workflow-when/boolean-dynamic-syntax.yml[]
+----
+
+=== Notes
+
+include::ROOT:partial$using-expressions/env-vars-in-conditional-caveat.adoc[]
+
+* You can also use the shorthand syntax to achieve the same result:
++
+[,yaml]
+----
+include::ROOT:example$expression-examples/workflow-when/boolean-short-syntax.yml[]
+----
+
+* You can create complex expressions that involve multiple parameters using `and`, `or`, and parentheses for grouping:
++
+[,yaml]
+----
+include::ROOT:example$expression-examples/workflow-when/boolean-complex.yml[]
+----
+
+include::ROOT:partial$tips/trigger-pipeline-with-parameters.adoc[]
+
+== Run a step based on a nested condition
+
+=== Goal
+
+You may want to configure a step that will run depending on the output of a nested condition using logic statement syntax.
+
+NOTE: Expressions are not supported for step-level `when` conditions. Use logic statement syntax for the `condition` field of xref:reference:ROOT:configuration-reference.adoc#the-when-step[The When Step]. For workflow-level conditions, you can use xref:reference:ROOT:configuration-reference.adoc#using-expressions-in-your-configuration[Expression Syntax] instead.
+
+=== Steps
+
+* Update your CircleCI config to use xref:reference:ROOT:configuration-reference.adoc#the-when-step[The When Step] with a nested logic statement.
++
+[,yaml]
+----
+include::ROOT:example$logic-statement-examples/step-when/when-step-nested.yml[]
+----
+
+=== Notes
+
+* Logic statements can be nested to a maximum depth of 100 levels.
+
+include::ROOT:partial$tips/trigger-pipeline-with-parameters.adoc[]
+
+== Run a job only on specific branches or when the value of a pipeline parameter is true
+
+=== Goal
+
+You may want to configure a job that only runs on specific branches or when the value of a pipeline parameter is `true`.
+
+=== Steps
+
+* Update your CircleCI config to include an xref:reference:ROOT:configuration-reference.adoc#expression-based-job-filters[Expression-Based Job Filter].
++
+[,yaml]
+----
+include::ROOT:example$expression-examples/job-filters/multiple-or.yml[]
+----
+
+=== Notes
+
+include::ROOT:partial$using-expressions/env-vars-in-conditional-caveat.adoc[]
+
+include::ROOT:partial$tips/trigger-pipeline-with-parameters.adoc[]
+

@@ -1,0 +1,403 @@
+<title>Kapa Findings</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600&display=swap">
+<style>
+/* Layout: a triage board. Run summary on top, section tabs, then one card per finding with docs-vs-other-side columns. */
+:root {
+  --bg: #f5f6f8;
+  --surface: #ffffff;
+  --ink: #1b2230;
+  --muted: #5b6577;
+  --line: #dde1e8;
+  --accent: #2f5bd3;
+  --accent-soft: #e6ecfb;
+  --eyes: #c2410c;
+  --decision: #7c3aed;
+  --confirm: #0f766e;
+  --feature: #a16207;
+  --unsure: #64748b;
+  --botonly: #475569;
+  --ok: #15803d;
+  --quote-bg: #f1f3f7;
+  --font-display: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11151c; --surface: #181e27; --ink: #e4e8ef; --muted: #98a2b3; --line: #2a3240;
+    --accent: #7ea2ff; --accent-soft: #1f2a44; --eyes: #fb923c; --decision: #b794f6; --confirm: #2dd4bf;
+    --feature: #facc15; --unsure: #94a3b8; --botonly: #a3b1c4; --ok: #4ade80; --quote-bg: #1f2630;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11151c; --surface: #181e27; --ink: #e4e8ef; --muted: #98a2b3; --line: #2a3240;
+  --accent: #7ea2ff; --accent-soft: #1f2a44; --eyes: #fb923c; --decision: #b794f6; --confirm: #2dd4bf;
+  --feature: #facc15; --unsure: #94a3b8; --botonly: #a3b1c4; --ok: #4ade80; --quote-bg: #1f2630;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 14px; line-height: 1.5;
+}
+.wrap {
+  max-width: 1080px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 64px;
+  display: grid; gap: 20px;
+}
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
+h1 { font-size: 28px; font-weight: 600; letter-spacing: -0.01em; }
+h3 { font-size: 17px; font-weight: 600; line-height: 1.3; }
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:focus-visible, button:focus-visible, select:focus-visible, textarea:focus-visible, input:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 2px;
+}
+.mono { font-family: var(--font-mono); font-size: 12.5px; }
+.muted { color: var(--muted); }
+
+header.top { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: end; justify-content: space-between; }
+.eyebrow { font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.run-pick { display: flex; gap: 8px; align-items: center; }
+select, input[type="search"], textarea {
+  font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px;
+}
+
+.run {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px;
+  display: grid; gap: 12px;
+}
+.run-stats { display: flex; flex-wrap: wrap; gap: 8px 28px; }
+.stat { display: grid; gap: 2px; min-width: 0; }
+.stat b { font-family: var(--font-display); font-size: 22px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.stat span { font-size: 12px; color: var(--muted); }
+.run-links { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; }
+
+.tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+.tab {
+  font: inherit; font-size: 13px; font-weight: 500; border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+  border-radius: 999px; padding: 5px 12px; cursor: pointer; display: inline-flex; gap: 6px; align-items: center;
+}
+.tab .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c, var(--muted)); }
+.tab .n { font-variant-numeric: tabular-nums; color: var(--muted); }
+.tab[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); }
+.filters { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+.filters label { display: inline-flex; gap: 6px; align-items: center; font-size: 13px; color: var(--muted); }
+.filters input[type="search"] { min-width: 0; width: 220px; max-width: 100%; }
+
+.list { display: grid; gap: 12px; }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--c, var(--muted));
+  border-radius: 8px; padding: 14px 16px; display: grid; gap: 10px; min-width: 0;
+}
+.card[data-status="resolved"], .card[data-status="wontfix"] { opacity: 0.62; }
+.card-head { display: flex; gap: 12px; justify-content: space-between; align-items: start; flex-wrap: wrap; }
+.card-head > div { min-width: 0; flex: 1 1 320px; display: grid; gap: 4px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-size: 11.5px; padding: 1px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); white-space: nowrap; }
+.chip.sec { color: var(--c); border-color: var(--c); font-weight: 600; }
+.chip.new { color: var(--ok); border-color: var(--ok); }
+.chip.repeat { color: var(--eyes); border-color: var(--eyes); }
+.summary { margin: 0; max-width: 72ch; }
+
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (max-width: 680px) { .compare { grid-template-columns: 1fr; } }
+.side { background: var(--quote-bg); border-radius: 6px; padding: 10px 12px; display: grid; gap: 8px; min-width: 0; align-content: start; }
+.side h4 { margin: 0; font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.ref { display: grid; gap: 2px; min-width: 0; }
+.ref q { quotes: "\201C" "\201D"; overflow-wrap: anywhere; }
+.ref .src { overflow-wrap: anywhere; }
+
+.links { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; }
+.links .lbl { color: var(--muted); }
+.links a { overflow-wrap: anywhere; }
+
+.sightings { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 12px; color: var(--muted); }
+.wk { font-family: var(--font-mono); font-size: 11.5px; padding: 1px 6px; border-radius: 4px; background: var(--quote-bg); color: var(--ink); }
+
+.triage { display: grid; grid-template-columns: auto 1fr; gap: 8px 12px; align-items: start; border-top: 1px solid var(--line); padding-top: 10px; }
+@media (max-width: 520px) { .triage { grid-template-columns: 1fr; } }
+.triage textarea { width: 100%; min-height: 34px; resize: vertical; }
+.saved { font-size: 12px; color: var(--ok); min-height: 1em; }
+
+.empty, .notice { background: var(--surface); border: 1px dashed var(--line); border-radius: 8px; padding: 24px; color: var(--muted); }
+.notice { border-style: solid; padding: 10px 14px; font-size: 13px; }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="eyebrow">Docs bot weekly review</div>
+      <h1>Kapa Findings</h1>
+    </div>
+    <div class="run-pick">
+      <label for="run-select" class="muted">Review week</label>
+      <select id="run-select" aria-label="Review week"></select>
+    </div>
+  </header>
+
+  <div id="notice" class="notice" hidden></div>
+
+  <section class="run" id="run" aria-live="polite">
+    <div class="muted">Loading the latest review…</div>
+  </section>
+
+  <nav class="tabs" id="tabs" aria-label="Sections"></nav>
+
+  <div class="filters">
+    <label for="status-filter">Status
+      <select id="status-filter">
+        <option value="active">Open and forwarded</option>
+        <option value="open">Open</option>
+        <option value="forwarded">Forwarded</option>
+        <option value="resolved">Resolved</option>
+        <option value="wontfix">Won't fix</option>
+        <option value="all">All</option>
+      </select>
+    </label>
+    <label for="owner-filter">Owner
+      <select id="owner-filter"><option value="">Anyone</option></select>
+    </label>
+    <label for="week-filter">Seen
+      <select id="week-filter">
+        <option value="selected">In the selected week</option>
+        <option value="any">Any week</option>
+        <option value="repeat">Repeats only</option>
+      </select>
+    </label>
+    <input type="search" id="search" placeholder="Search findings" aria-label="Search findings">
+  </div>
+
+  <main class="list" id="list">
+    <div class="empty">Findings appear here once the review data loads. Each weekly run of the kapa-docs-review skill adds or updates them.</div>
+  </main>
+</div>
+
+<script>
+(() => {
+  const KAPA = "https://app.kapa.ai/__KAPA_PROJECT_ID__/conversations/";
+  const GH = "https://github.com/circleci/circleci-docs/";
+  const SUPPORT = "https://support.circleci.com/hc/en-us/articles/";
+  const SECTIONS = [
+    { id: "eyes", label: "Needs your eyes", color: "var(--eyes)" },
+    { id: "decision", label: "Needs a decision", color: "var(--decision)" },
+    { id: "confirm", label: "Fixes to confirm", color: "var(--confirm)" },
+    { id: "feature", label: "Feature requests", color: "var(--feature)" },
+    { id: "unsure", label: "Unsure", color: "var(--unsure)" },
+    { id: "botonly", label: "Bot errors, docs right", color: "var(--botonly)" },
+  ];
+  const SEC = Object.fromEntries(SECTIONS.map(s => [s.id, s]));
+  const STATUS = [["open", "Open"], ["forwarded", "Forwarded"], ["resolved", "Resolved"], ["wontfix", "Won't fix"]];
+
+  const state = { findings: [], runs: [], run: null, tab: "eyes", status: "active", owner: "", week: "selected", q: "", canWrite: null };
+  try { const t = localStorage.getItem("kf-tab"); if (t && SEC[t]) state.tab = t; } catch (e) {}
+
+  const $ = id => document.getElementById(id);
+  function h(tag, attrs, ...kids) {
+    const el = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs || {})) {
+      if (v == null || v === false) continue;
+      if (k === "class") el.className = v;
+      else if (k === "style") el.style.cssText = v;
+      else if (k.startsWith("on")) el.addEventListener(k.slice(2), v);
+      else el.setAttribute(k, v === true ? "" : String(v));
+    }
+    for (const kid of kids.flat()) {
+      if (kid == null || kid === false) continue;
+      el.append(kid instanceof Node ? kid : document.createTextNode(String(kid)));
+    }
+    return el;
+  }
+  const link = (href, text, cls) => h("a", { href, target: "_blank", rel: "noopener", class: cls }, text);
+  const fileHref = r => GH + "blob/main/" + r.path + (r.line ? "#L" + String(r.line).split("-")[0] : "");
+  const shortPath = p => p.split("/").pop();
+  const status = f => f.status || "open";
+
+  function notice(msg) { const n = $("notice"); n.textContent = msg || ""; n.hidden = !msg; }
+
+  function renderRunSelect() {
+    const sel = $("run-select");
+    sel.replaceChildren(...state.runs.map(r => h("option", { value: r.id }, r.since + " to " + r.until)));
+    if (state.run) sel.value = state.run.id;
+  }
+
+  function renderRun() {
+    const r = state.run, box = $("run");
+    if (!r) { box.replaceChildren(h("div", { class: "muted" }, "No review runs yet. The next run of the review skill adds one.")); return; }
+    const t = r.tiers || {};
+    box.replaceChildren(
+      h("div", { class: "run-stats" },
+        h("div", { class: "stat" }, h("b", {}, r.pairs + " / " + r.expected), h("span", {}, "pairs reviewed / expected")),
+        h("div", { class: "stat" }, h("b", {}, t.act ?? "–"), h("span", {}, "Act")),
+        h("div", { class: "stat" }, h("b", {}, t.suspicious ?? "–"), h("span", {}, "Suspicious")),
+        h("div", { class: "stat" }, h("b", {}, t.fine ?? "–"), h("span", {}, "Fine")),
+        h("div", { class: "stat" }, h("b", {}, t.nonsense ?? "–"), h("span", {}, "Nonsense")),
+        r.sample ? h("div", { class: "stat" }, h("b", {}, r.sample.failed + " of " + r.sample.checked), h("span", {}, "Fine sample failed")) : null,
+      ),
+      h("div", { class: "run-links" },
+        r.ticket ? h("span", {}, h("span", { class: "muted" }, "Ticket "), link(r.ticketUrl, r.ticket)) : null,
+        (r.prs || []).length ? h("span", {}, h("span", { class: "muted" }, "PRs "),
+          ...r.prs.flatMap((p, i) => [i ? ", " : "", link(GH + "pull/" + p, "#" + p)])) : null,
+        r.topics ? h("span", { class: "muted" }, "Top topics: " + r.topics) : null,
+      ),
+    );
+  }
+
+  function seenIn(f, runId) { return (f.sightings || []).some(s => s.period === runId); }
+
+  function filtered(ignoreTab) {
+    const q = state.q.trim().toLowerCase();
+    return state.findings.filter(f => {
+      if (!ignoreTab && f.section !== state.tab) return false;
+      const st = status(f);
+      if (state.status === "active" ? !(st === "open" || st === "forwarded") : state.status !== "all" && st !== state.status) return false;
+      if (state.owner && f.owner !== state.owner) return false;
+      if (state.week === "selected" && state.run && !seenIn(f, state.run.id)) return false;
+      if (state.week === "repeat" && (f.sightings || []).length < 2) return false;
+      if (q && !JSON.stringify([f.title, f.summary, f.owner, f.category, f.docs, f.other]).toLowerCase().includes(q)) return false;
+      return true;
+    });
+  }
+
+  function renderTabs() {
+    const pool = filtered(true);
+    $("tabs").replaceChildren(...SECTIONS.map(s => h("button", {
+      class: "tab", type: "button", "aria-pressed": String(state.tab === s.id), style: "--c:" + s.color,
+      onclick: () => { state.tab = s.id; try { localStorage.setItem("kf-tab", s.id); } catch (e) {} render(); },
+    }, h("span", { class: "dot", "aria-hidden": "true" }), s.label, h("span", { class: "n" }, pool.filter(f => f.section === s.id).length))));
+  }
+
+  function renderOwners() {
+    const sel = $("owner-filter"), cur = sel.value;
+    const owners = [...new Set(state.findings.map(f => f.owner).filter(Boolean))].sort();
+    sel.replaceChildren(h("option", { value: "" }, "Anyone"), ...owners.map(o => h("option", { value: o }, o)));
+    sel.value = owners.includes(cur) ? cur : "";
+    state.owner = sel.value;
+  }
+
+  function refBlock(r) {
+    return h("div", { class: "ref" },
+      r.quote ? h("q", {}, r.quote) : null,
+      r.path ? h("span", { class: "src mono" }, link(fileHref(r), shortPath(r.path) + (r.line ? ":" + r.line : ""))) : null,
+      r.support ? h("span", { class: "src mono" }, link(SUPPORT + r.support, "Support article " + r.support)) : null,
+      r.label ? h("span", { class: "src muted" }, r.label) : null,
+    );
+  }
+
+  async function save(f, patch, savedEl) {
+    const db = await window.claude?.use?.("db");
+    if (!db) { savedEl.textContent = "Can't save here."; return; }
+    try {
+      await db.doc("findings/" + f.id).update({ ...patch, updatedAt: new Date().toISOString() });
+      savedEl.textContent = "Saved";
+      setTimeout(() => { if (savedEl.textContent === "Saved") savedEl.textContent = ""; }, 1800);
+    } catch (e) {
+      savedEl.textContent = e && e.code === "invalid_argument" ? "Only editors can change this." : "Not saved. Try again.";
+    }
+  }
+
+  function card(f) {
+    const sec = SEC[f.section] || SEC.unsure;
+    const sight = f.sightings || [];
+    const repeat = sight.length > 1;
+    const thisWeek = state.run && sight.find(s => s.period === state.run.id);
+    const threads = [...new Set(sight.flatMap(s => s.threads || []))];
+    const saved = h("span", { class: "saved", "aria-live": "polite" });
+    const readOnly = state.canWrite === false;
+
+    const statusSel = h("select", { id: "status-" + f.id, "aria-label": "Status", disabled: readOnly,
+      onchange: e => save(f, { status: e.target.value }, saved) },
+      ...STATUS.map(([v, l]) => h("option", { value: v }, l)));
+    statusSel.value = status(f);
+
+    let noteTimer;
+    const note = h("textarea", { id: "note-" + f.id, rows: "1", placeholder: readOnly ? "" : "Add a note, such as who you forwarded it to", "aria-label": "Note", readonly: readOnly,
+      oninput: e => { clearTimeout(noteTimer); const v = e.target.value; noteTimer = setTimeout(() => save(f, { note: v }, saved), 800); } });
+    note.value = f.note || "";
+
+    return h("article", { class: "card", style: "--c:" + sec.color, "data-status": status(f) },
+      h("div", { class: "card-head" },
+        h("div", {},
+          h("h3", {}, f.title),
+          h("div", { class: "chips" },
+            h("span", { class: "chip sec" }, sec.label),
+            f.category ? h("span", { class: "chip" }, f.category) : null,
+            f.owner ? h("span", { class: "chip" }, "Owner: " + f.owner) : null,
+            repeat ? h("span", { class: "chip repeat" }, "Seen " + sight.length + " weeks") : h("span", { class: "chip new" }, "New"),
+            thisWeek && thisWeek.pairs ? h("span", { class: "chip" }, thisWeek.pairs + (thisWeek.pairs === 1 ? " pair" : " pairs") + " this week") : null,
+          ),
+        ),
+      ),
+      f.summary ? h("p", { class: "summary" }, f.summary) : null,
+      (f.docs || []).length || (f.other || []).length ? h("div", { class: "compare" },
+        (f.docs || []).length ? h("div", { class: "side" }, h("h4", {}, "Docs say"), ...f.docs.map(refBlock)) : null,
+        (f.other || []).length ? h("div", { class: "side" }, h("h4", {}, f.otherLabel || "Other side"), ...f.other.map(refBlock)) : null,
+      ) : null,
+      h("div", { class: "links" },
+        threads.length ? h("span", {}, h("span", { class: "lbl" }, "Kapa threads "),
+          ...threads.flatMap((t, i) => [i ? " · " : "", link(KAPA + t, t.slice(0, 8), "mono")])) : null,
+        (f.prs || []).length ? h("span", {}, h("span", { class: "lbl" }, "PRs "),
+          ...f.prs.flatMap((p, i) => [i ? ", " : "", link(GH + "pull/" + p, "#" + p)])) : null,
+      ),
+      sight.length ? h("div", { class: "sightings" }, "Weeks seen", ...sight.map(s => h("span", { class: "wk", title: s.note || "" }, s.period))) : null,
+      h("div", { class: "triage" }, statusSel, h("div", {}, note, saved)),
+    );
+  }
+
+  function render() {
+    renderRun(); renderTabs();
+    const rows = filtered(false);
+    const list = $("list");
+    if (!state.findings.length) {
+      list.replaceChildren(h("div", { class: "empty" }, "No findings yet. Each weekly run of the kapa-docs-review skill adds or updates them here."));
+      return;
+    }
+    list.replaceChildren(...(rows.length ? rows.map(card)
+      : [h("div", { class: "empty" }, "Nothing in " + SEC[state.tab].label + " matches these filters.")]));
+  }
+
+  $("status-filter").addEventListener("change", e => { state.status = e.target.value; render(); });
+  $("owner-filter").addEventListener("change", e => { state.owner = e.target.value; render(); });
+  $("week-filter").addEventListener("change", e => { state.week = e.target.value; render(); });
+  $("search").addEventListener("input", e => { state.q = e.target.value; render(); });
+  $("run-select").addEventListener("change", e => { state.run = state.runs.find(r => r.id === e.target.value) || null; render(); });
+
+  async function start() {
+    const timer = setTimeout(() => notice("The review data can't be reached yet. It will appear when the connection returns."), 10000);
+    const db = await window.claude?.use?.("db");
+    if (!db) { clearTimeout(timer); notice("Sign in to claude.ai to see the review data."); $("run").replaceChildren(); return; }
+    const user = await window.claude.use("user");
+    if (user) { try { state.canWrite = await user.can("data.write"); } catch (e) {} }
+
+    let gotF = false, gotR = false;
+    const ready = () => { if (gotF && gotR) { clearTimeout(timer); notice(""); } };
+    db.collection("runs").onSnapshot(snap => {
+      state.runs = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => b.since.localeCompare(a.since));
+      if (!state.run || !state.runs.find(r => r.id === state.run.id)) state.run = state.runs[0] || null;
+      else state.run = state.runs.find(r => r.id === state.run.id);
+      if (!snap.metadata.fromCache) { gotR = true; ready(); }
+      renderRunSelect(); render();
+    }, () => { clearTimeout(timer); notice("The review runs couldn't be loaded."); });
+
+    db.collection("findings").onSnapshot(snap => {
+      const active = document.activeElement;
+      if (active && active.tagName === "TEXTAREA" && active.id.startsWith("note-")) {
+        // Keep the note being typed: update data, defer the redraw until blur.
+        state.findings = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        active.addEventListener("blur", () => render(), { once: true });
+      } else {
+        state.findings = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        renderOwners(); render();
+      }
+      if (!snap.metadata.fromCache) { gotF = true; ready(); }
+    }, () => { clearTimeout(timer); notice("The findings couldn't be loaded."); });
+  }
+
+  render();
+  start();
+})();
+</script>

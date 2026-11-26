@@ -1,6 +1,7 @@
 name: guides
 title: Guides
 version: ~
+display_version: Cloud
 nav:
 - modules/ROOT/nav.adoc
 start_page: getting-started:first-steps.adoc

@@ -1,0 +1,24 @@
+. To allow a job to access the environment variables stored in a context, add a `context` key to that job's entry in the xref:reference:ROOT:configuration-reference.adoc#workflows[`workflows`] section of the `.circleci/config.yml` file. For example, the following gives the `run-tests` job access to variables in the `org-global` and `my-context` contexts:
++
+[,yaml]
+----
+version: 2.1
+
+workflows:
+  my-workflow:
+    jobs:
+      - run-tests:
+          context:
+            - org-global
+            - my-context
+
+jobs:
+  run-tests:
+    docker:
+      - image: cimg/base:2020.01
+    steps:
+      - checkout
+      - run:
+          name: "echo environment variables from org-global context"
+          command: echo $MY_ENV_VAR
+----

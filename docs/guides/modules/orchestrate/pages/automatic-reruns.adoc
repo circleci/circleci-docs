@@ -29,6 +29,10 @@ Benefits of automatic reruns include:
 * Cost-effective retry strategy that only reruns failed jobs.
 * Configurable retry limits to prevent infinite loops.
 
+ifndef::server[]
+NOTE: This page covers `max_auto_reruns` in `.circleci/config.yml`, which retries failed steps and workflows. If you are using Smarter Testing and want to retry individual test atoms, see xref:guides:test:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests], which uses the separate `max-auto-rerun` option in `.circleci/test-suites.yml`.
+endif::server[]
+
 == Quickstart
 
 This section provides config examples to help you set up automatic reruns. The content following this quickstart section details how the feature works, along with some troubleshooting guidance and frequently asked questions.
@@ -37,7 +41,12 @@ This section provides config examples to help you set up automatic reruns. The c
 
 To enable automatic reruns for a run step in a job, add the `max_auto_reruns` key to your step with a value between 1 and 5:
 
+ifdef::server[]
 NOTE: Automatic reruns are only supported for `run` steps, not special steps like `checkout` or `setup_remote_docker`. You must configure the `command` key for the step. You cannot use the short form run step configuration with automatic reruns.
+endif::server[]
+ifndef::server[]
+NOTE: Automatic reruns are only supported for `run` steps and function steps, not special steps like `checkout` or `setup_remote_docker`. For a `run` step, you must configure the `command` key. You cannot use the short form run step configuration with automatic reruns.
+endif::server[]
 
 .CircleCI config to automatically retry a step up to 3 times if it fails
 [source,yaml]
@@ -72,6 +81,38 @@ jobs:
           auto_rerun_delay: 10s
 ----
 
+ifndef::server[]
+[#automatic-function-step-reruns]
+=== Automatic function step reruns
+
+A step that calls a xref:functions:ROOT:functions-intro.adoc[Function] accepts the same `max_auto_reruns` and `auto_rerun_delay` keys as a `run` step. Write both keys beside `with`, not under it:
+
+.CircleCI config to automatically retry a function step up to 3 times if it fails with a 5 second delay between attempts
+[source,yaml]
+----
+version: 2.1
+
+functions:
+  setup-go: github.com/circleci-functions/setup-go@v0.7.0
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - checkout
+      - setup-go:
+          max_auto_reruns: 3
+          auto_rerun_delay: 5s
+          with:
+            version-file: go.mod
+----
+
+The keys follow the same rules as on a `run` step. Either key can take its value from a parameter, for example `max_auto_reruns: << parameters.reruns >>`. Putting either key under `with` is a configuration error.
+
+Each attempt runs the function again from the start, including the cache restores the function performs. Before a rerun, CircleCI drops the teardown steps that the failed attempt registered, such as the function's cache saves, so these steps run only once. The teardown steps from the final attempt still run, including when every attempt fails.
+endif::server[]
+
 === Automatic workflow reruns
 
 To enable automatic reruns for a workflow, add the `max_auto_reruns` key to your workflow with a value between 1 and 5:
@@ -93,6 +134,7 @@ workflows:
             - test
 ----
 
+ifndef::server[]
 You can combine automatic reruns with workflow conditions. The following example shows how to configure automatic reruns for a workflow that is not triggered by a schedule trigger:
 
 .Combining automatic reruns with workflow conditions
@@ -108,6 +150,7 @@ workflows:
       - build
       - test
 ----
+endif::server[]
 
 [#how-automatic-reruns-work]
 == How automatic reruns work
@@ -173,6 +216,10 @@ You can get information about automatic reruns via the CircleCI APIs.
 
 ==== Automatic workflow reruns
 
+ifdef::server[]
+include::ROOT:partial$notes/server-api-examples.adoc[]
+endif::server[]
+
 You can retrieve information about *automatic workflow reruns* using the link:https://circleci.com/docs/api/v2/index.html#tag/Workflow/operation/getWorkflowById[CircleCI API v2]:
 
 [source,bash]
@@ -200,6 +247,39 @@ The API response includes the following fields for automatic step reruns:
 * `auto_rerun_number`: The current rerun attempt number.
 * `max_auto_reruns`: The maximum number of reruns configured.
 
+[#additional-behavior]
+== Additional behavior
+
+[#faq-cost]
+ifndef::server[]
+=== Credit usage
+endif::server[]
+ifdef::server[]
+=== Resource usage
+endif::server[]
+
+ifndef::server[]
+Automatic reruns consume compute credits for each retry attempt. Only failed jobs are rerun, so successful jobs from the original workflow do not consume additional credits.
+endif::server[]
+ifdef::server[]
+Each retry attempt uses executor capacity. Only failed jobs are rerun, so successful jobs from the original workflow do not use additional capacity.
+endif::server[]
+
+[#faq-approval-jobs]
+=== Approval jobs
+
+Automatic reruns work with approval jobs.
+
+[#faq-contexts]
+=== Restricted contexts
+
+Automatic reruns use the same actor permissions as the original workflow, so they work with restricted contexts as long as the original workflow had the necessary permissions.
+
+[#faq-delay]
+=== Delay between reruns
+
+Automatic reruns start immediately after the workflow fails.
+
 [#limitations]
 == Limitations
 
@@ -209,7 +289,12 @@ Be aware of these limitations when using automatic workflow reruns:
 * Only the original workflow triggers automatic reruns. Manual reruns do not trigger automatic reruns.
 * Automatic reruns are disabled if the pipeline is older than 90 days.
 * Only _failed_ workflows trigger automatic reruns, not cancelled workflows.
+ifdef::server[]
 * Automatic step reruns are only supported for `run` steps, not special steps like `checkout` or `setup_remote_docker`.
+endif::server[]
+ifndef::server[]
+* Automatic step reruns are only supported for `run` steps and function steps, not special steps like `checkout` or `setup_remote_docker`.
+endif::server[]
 
 [#troubleshooting]
 == Troubleshooting
@@ -240,7 +325,12 @@ workflows:
 [#excessive-reruns]
 === Excessive rerun attempts
 
+ifndef::server[]
 To prevent unnecessary reruns and credit consumption:
+endif::server[]
+ifdef::server[]
+To prevent unnecessary reruns:
+endif::server[]
 
 * Set conservative `max_auto_reruns` values based on your failure patterns.
 * Investigate recurring failures to address root causes.
@@ -270,36 +360,3 @@ workflows:
     jobs:
       - build
 ----
-
-[#frequently-asked-questions]
-== Frequently asked questions
-
-[#faq-cost]
-=== Do automatic reruns consume additional credits?
-
-Yes, automatic reruns consume compute credits for each retry attempt. Only failed jobs are rerun, so successful jobs from the original workflow do not consume additional credits.
-
-[#faq-manual-rerun]
-=== What happens if I manually rerun a workflow?
-
-If you manually rerun a workflow and it fails, no automatic reruns will be triggered for the manually rerun workflow.
-
-[#faq-approval-jobs]
-=== Do automatic reruns work with approval jobs?
-
-Yes.
-
-[#faq-contexts]
-=== Do automatic reruns work with restricted contexts?
-
-Yes, automatic reruns use the same actor permissions as the original workflow, so they work with restricted contexts as long as the original workflow had the necessary permissions.
-
-[#faq-delay]
-=== Can I add a delay between automatic reruns?
-
-Automatic reruns start immediately after the workflow fails.
-
-[#faq-step-level]
-=== Can I configure automatic reruns at the step level?
-
-Yes, you can configure automatic reruns at the step or workflow level.

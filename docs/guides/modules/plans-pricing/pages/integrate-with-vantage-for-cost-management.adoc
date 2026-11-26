@@ -51,13 +51,19 @@ image::guides:ROOT:personal-api-tokens.png[screenshot showing where to find your
 
 == 2. Copy your organization ID
 
-The organization ID is a unique identifier for an organization. Follow these steps to find it in the CircleCI web app:
+The organization ID is a unique identifier for an organization. Use one of the following methods to find it.
 
-include::ROOT:partial$app-navigation/steps-to-org-settings.adoc[]
-. Note the value or select the btn:[Copy] icon next to the organization ID.
-
-.Organization ID available in organization settings
-image::guides:ROOT:org-id.png[screenshot showing where to find your organization ID]
+[tabs]
+====
+Web app::
++
+--
+include::ROOT:partial$app-navigation/steps-to-org-id.adoc[]
+--
+CLI::
++
+include::ROOT:partial$find-ids/org-id-cli.adoc[]
+====
 
 [#configure-integration]
 == 3. Configure the integration in Vantage
@@ -79,9 +85,6 @@ Connect your CircleCI organization to Vantage using your personal API token and 
 . Monitor the import status on the integrations page.
 
 Vantage begins importing your CircleCI usage data. The initial import includes the last six months of historical data.
-
-.Vantage CircleCI integration settings
-image::guides:ROOT:vantage-integration.png[screenshot showing the Vantage CircleCI integration settings]
 
 If you encounter any issues getting set up, see Vantage's link:https://docs.vantage.sh/vantage_account#integration-status[integration configuration docs for troubleshooting steps].
 

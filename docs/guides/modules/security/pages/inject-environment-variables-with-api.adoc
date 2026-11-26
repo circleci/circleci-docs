@@ -15,7 +15,7 @@ include::ROOT:partial$notes/server-api-examples.adoc[]
 Pipeline parameters can be used to pass variables using the CircleCI API v2.
 
 A pipeline can be triggered with specific parameter values using the API v2
-endpoint to link:../../../api/#tag/Pipeline/operation/triggerPipeline[trigger a pipeline].
+endpoint to link:https://circleci.com/docs/api/#tag/Pipeline/operation/triggerPipeline[trigger a pipeline].
 This can be done by passing a `parameters` key in the JSON packet of the `POST` body.
 
 The example below triggers a pipeline with parameter values for `workingdir` and `image-tag`.
@@ -35,7 +35,7 @@ curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
 }' https://circleci.com/api/v2/project/{project_slug}/pipeline
 ```
 
-include::ROOT:partial$tips/find-project-slug.adoc[]
+To find your project slug, see xref:toolkit:how-to-find-ids.adoc#find-a-project-slug[Find a Project Slug].
 
 Refer to the xref:toolkit:api-developers-guide.adoc#getting-started-with-the-api[Getting Started With the API] section of the API Developer's Guide for more guidance on making requests.
 
@@ -77,7 +77,7 @@ export param1="value1"
 export param2="500"
 ```
 
-A POST API call with an empty body will start a new run of the named branch. Refer to the link:../../../api/v1/#trigger-a-new-job-with-a-branch[Trigger a new job with a branch] section of the API v1 documentation for details.
+A POST API call with an empty body will start a new run of the named branch. Refer to the link:https://circleci.com/docs/api/v1/#trigger-a-new-job-with-a-branch[Trigger a new job with a branch] section of the API v1 documentation for details.
 
 [#best-practices-for-using-build-parameters-with-api-v1]
 === Best practices for using build parameters with API v1

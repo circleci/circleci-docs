@@ -1,12 +1,14 @@
-= Deployment and deploy management overview
+= Deployment overview
 :page-aliases: deploys-overview.adoc, deploy:deploy-to-amazon-sagemaker.adoc
-:page-platform: Cloud
+:page-platform: Cloud, Server
 :page-vcs: all
 :page-plan: Free, Performance, Scale
+:page-server-min-version: "4.7"
 :page-audience: developer
 :page-description: Get an overview of deploying to any target with CircleCI and managing deployments with deploy markers, rollbacks, Smart Deployments, and the release agent.
 :experimental:
 
+ifndef::server[]
 With CircleCI you can deploy to any target and manage your deployments in the CircleCI web app.
 
 Track deployments using deploy markers. Deploy and rollback to a stable version using preconfigured deploy and rollback pipelines.
@@ -14,6 +16,10 @@ Track deployments using deploy markers. Deploy and rollback to a stable version 
 *Smart Deployments* is the CircleCI continuous validation feature. It validates each release against the monitoring tools you already run, and rolls back automatically when a signal fails. Smart Deployments needs no Kubernetes cluster and no agent installed. See the xref:smart-deployments-overview.adoc[Smart Deployments Overview] page.
 
 If you deploy to Kubernetes and want cluster-native controls or progressive delivery with Argo Rollouts, you can use the CircleCI release agent instead. For more information, see the xref:release-agent-overview.adoc[Release Agent Overview] guide.
+endif::server[]
+ifdef::server[]
+With CircleCI you can deploy to any target.
+endif::server[]
 
 == Introduction
 
@@ -25,7 +31,9 @@ Once a software application has been developed and tested, it needs to be deploy
 
 Customize your configuration to match your requirements, whether you need a fully automated process or one that requires manual approval.
 
+ifndef::server[]
 Set up deploy markers to track deployments in the CircleCI web app and rollback to previous versions as required. Add release validation to check the health of each release before you let it stand.
+endif::server[]
 
 == The basics of deployment
 
@@ -35,7 +43,9 @@ The following list outlines the core components you need to get a deployment set
 +
 TIP: Use the *how-to guides* in this section (select how-to guides from the left-hand navigation) to manage common deployment use cases.
 
+ifndef::server[]
 * *Deploy markers*: Add deploy markers to log, view, and rollback your deployments. Deploy markers are configured as steps in your deployment job to **view a list of deployments** in the CircleCI web app. See the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide to learn more.
+endif::server[]
 
 * **Deployment parameters**: You may need to add environment variables and SSH keys to fulfill your deployment steps.
 Environment variables can be:
@@ -49,7 +59,9 @@ Environment variables can be:
 +
 This job will create a manual approval button visible in the CircleCI web app workflows map.
 
+ifndef::server[]
 * *IP-based restrictions*: If you need to restrict connections, consider enabling xref:security:ip-ranges.adoc[IP Ranges] for your deployment job.
+endif::server[]
 
 === Using orbs to simplify deployment
 
@@ -96,6 +108,7 @@ Visit the link:https://circleci.com/developer/images?imageType=docker[CircleCI D
 - link:https://circleci.com/developer/images/image/cimg/azure[`cimg/azure`]
 - link:https://circleci.com/developer/images/image/cimg/gcp[`cimg/gcp`]
 
+ifndef::server[]
 == Deployment tracking and management
 
 CircleCI provides deployment tracking and management through the features outlined in the following table and described in more detail in the sections below:
@@ -396,3 +409,4 @@ Deployment and release data in the deploys UI follows your plan's data retention
 --
 
 Once a deployment or release exceeds your plan's retention period, its historical record is automatically and permanently deleted. This does not affect the currently live version of any component; only historical deployment and release records are removed. For more information, see the link:https://support.circleci.com/hc/en-us/articles/5645222646939-Cloud-Data-Retention-Policy-and-Settings[Cloud Data Retention Policy and Settings] support article.
+endif::server[]

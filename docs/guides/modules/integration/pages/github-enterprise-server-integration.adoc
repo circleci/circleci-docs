@@ -8,7 +8,7 @@
 :experimental:
 :icons: font
 
-NOTE: The GitHub Enterprise Server integration is currently in **Preview**. Access is provided on request and involves hands-on support from the CircleCI team. Some features are not yet available during Preview. To learn more or request access, contact your account team.
+NOTE: The GitHub Enterprise Server integration is currently in **Preview**. Some features are not yet available during Preview.
 
 [#overview]
 == Overview
@@ -38,12 +38,9 @@ The following functionality is available during Preview:
 
 The following features are not yet available for the GitHub Enterprise Server integration. These are planned for future releases:
 
-* Self-serve onboarding
 * GitHub Checks
 * Chunk
 * Rollback functionality
-
-Currently, onboarding to use the GitHub Enterprise Server integration is assisted by the CircleCI team.
 
 [#organization-type]
 == Organization type
@@ -62,9 +59,9 @@ If your instance is behind a firewall or not accessible over the public internet
 [#pipeline-values]
 == Pipeline values
 
-GitHub App Server pipelines use `github_server` as the value for `pipeline.integration_source`. All other pipeline values available to GitHub App pipelines are also available to GitHub App Server pipelines. For a full reference, see xref:reference:ROOT:variables.adoc[Project Values and Variables].
+GitHub Enterprise Server pipelines use `github_server` as the value for `pipeline.integration_source`. All other pipeline values available to GitHub App pipelines are also available to GitHub Enterprise Server pipelines. For a full reference, see xref:reference:ROOT:variables.adoc[Project Values and Variables].
 
 [#getting-started]
 == Getting started
 
-During Preview, access to the GitHub Enterprise Server integration is provided on request. Contact your account team to learn more or get set up.
+You can connect your GitHub Enterprise Server instance yourself. Select the **GitHub Enterprise Server** option when you create a project. See the xref:getting-started:create-project.adoc[Create a Project] page for the steps.

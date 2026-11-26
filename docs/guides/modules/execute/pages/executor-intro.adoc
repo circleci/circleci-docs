@@ -10,11 +10,20 @@
 
 CircleCI offers several execution environments:
 
+ifndef::server[]
 * Docker (x86 or Arm)
+endif::server[]
+ifdef::server[]
+* Docker
+endif::server[]
 * Linux VM (virtual machine)
+ifndef::server[]
 * macOS
+endif::server[]
 * Windows
+ifndef::server[]
 * GPU
+endif::server[]
 * Arm VM
 
 Each job defined in your project configuration is run in a separate execution environment, either a Docker container or a virtual machine.
@@ -35,16 +44,25 @@ For example:
 
 * Jobs that require Docker images (`docker`) may use an image for Node.js, Python, etc. The xref:circleci-images.adoc[Pre-built CircleCI Docker Image] (convenience images) will help you get started. CircleCI convenience images are not a full operating system, so they generally make building your software more efficient.
 
+ifndef::server[]
 * Jobs that require a complete Linux virtual machine (VM) image (`machine`) may use an Ubuntu version supported by the xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[List of Available Machine Images].
+endif::server[]
+ifdef::server[]
+* Jobs that require a complete Linux virtual machine (VM) image (`machine`) use an image that your system administrator manages.
+endif::server[]
 
+ifndef::server[]
 * Jobs that require a macOS VM image (`macos`) may use an Xcode version. A full list is available on the xref:using-macos.adoc#supported-xcode-versions[Using macOS] page.
 
+endif::server[]
 === Resource class
 
 When you configure an executor it is recommended that you also specify a resource class to specify compute resource size (CPU and RAM).
 
 * For an overview of resource classes, see the xref:resource-class-overview.adoc[Resource Class Overview] page.
+ifndef::server[]
 * For an overview of available resource classes per Plan, see the link:https://circleci.com/pricing/[Pricing page].
+endif::server[]
 
 [#docker]
 == Docker
@@ -71,7 +89,7 @@ Find out more about the Docker execution environment on the xref:using-docker.ad
 
 To access the Linux VM execution environment, use the `machine` executor and specify a Linux image. For a full list of `machine` images, see the link:https://circleci.com/developer/images?imageType=machine[CircleCI Developer Hub].
 
-[tabs]
+[tabs%sync,sync-group-id=platform]
 ====
 Cloud::
 +
@@ -94,7 +112,8 @@ Server::
 ----
 jobs:
   build: # name of your job
-    machine: true # executor type
+    machine:
+      image: default # executor type
     steps:
       # Commands run in a Linux virtual machine environment
 ----
@@ -103,10 +122,11 @@ jobs:
 
 Find out more about the Linux VM execution environment on the xref:using-linuxvm.adoc[Using Linux Virtual Machines] page.
 
+ifndef::server[]
 [#macos]
 == macOS
 
-To access the macOS execution environment, use the `macos` executor and specify an image using the `xcode` key. For a full list of macOS images, see the link:https://circleci.com/developer/machine/image/macos[CircleCI Developer Hub].
+To access the macOS execution environment, use the `macos` executor and specify an image using the `xcode` key. For a full list of macOS images, see the link:https://circleci.com/developer/machine/image/xcode[CircleCI Developer Hub].
 
 NOTE: If you want to run a macOS build on CircleCI Server, you will need to use xref:runner:ROOT:runner-overview.adoc[Self-hosted Runner].
 
@@ -124,6 +144,7 @@ jobs:
 
 Find out more about the macOS execution environment on the xref:using-macos.adoc[Using macOS] page.
 
+endif::server[]
 [#windows]
 == Windows
 
@@ -134,7 +155,7 @@ To access the Windows execution environment, you can either:
 
 For a full list of `machine` images, see the link:https://circleci.com/developer/images?imageType=machine[CircleCI Developer Hub].
 
-[tabs]
+[tabs%sync,sync-group-id=platform]
 ====
 Cloud with orb::
 +
@@ -196,6 +217,7 @@ jobs:
 
 Find out more about the Windows execution environment on the xref:using-windows.adoc[Using the Windows Execution Environment] page. See link:https://circleci.com/developer/orbs/orb/circleci/windows[the Windows orb page on the developer hub] for the list of options available in the Windows orb.
 
+ifndef::server[]
 [#gpu]
 == GPU
 
@@ -263,12 +285,13 @@ jobs:
 
 Find out more about the GPU execution environment on the xref:using-gpu.adoc[Using the GPU Execution Environment] page.
 
+endif::server[]
 [#arm]
 == Arm VM
 
 To access the Arm VM execution environment, use the `machine` executor as detailed below, and specify either the `arm.medium` or the `arm.large` resource class. For a full list of `machine` images, see the link:https://circleci.com/developer/images?imageType=machine[CircleCI Developer Hub].
 
-[tabs]
+[tabs%sync,sync-group-id=platform]
 ====
 Cloud::
 +
@@ -302,9 +325,11 @@ workflows:
       - build-large
 ----
 --
-Server on AWS::
+Server::
 +
 --
+Arm resources on CircleCI Server are only available on installations that use AWS EC2.
+
 [,yml]
 ----
 # .circleci/config.yml
@@ -336,7 +361,10 @@ workflows:
 --
 ====
 
-Find out more about the Arm VM execution environment on the xref:using-arm.adoc[Using the Arm VM Execution Environment] page. You can also use xref:using-docker.adoc#arm[Arm on Docker].
+Find out more about the Arm VM execution environment on the xref:using-arm.adoc[Using the Arm VM Execution Environment] page.
+ifndef::server[]
+You can also use xref:using-docker.adoc#arm[Arm on Docker].
+endif::server[]
 
 [#self-hosted-runner]
 == Self-hosted runner

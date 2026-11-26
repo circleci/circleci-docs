@@ -1,5 +1,6 @@
 * About CircleCI
 ** xref:about-circleci:about-circleci.adoc[CircleCI overview]
+** xref:about-circleci:about-cloud-and-server-docs.adoc[About Cloud and Server docs]
 ** xref:about-circleci:benefits-of-circleci.adoc[Benefits of CircleCI]
 ** xref:about-circleci:introduction-to-the-circleci-web-app.adoc[Intro to the CircleCI web app]
 ** xref:about-circleci:open-source.adoc[Open source acknowledgements]
@@ -42,6 +43,10 @@
 *** xref:orchestrate:pipeline-variables.adoc[Pipeline values and parameters]
 *** xref:orchestrate:config-templating.adoc[Config templating]
 *** xref:orchestrate:use-a-github-actions-workflow-file-as-your-pipeline-configuration.adoc[Use a GitHub Actions workflow file as your pipeline configuration]
+*** xref:orchestrate:set-up-multiple-configuration-files-for-a-project.adoc[Set up multiple configuration files for a project]
+*** xref:orchestrate:how-to-override-config.adoc[Override configuration]
+*** xref:orchestrate:using-shell-scripts.adoc[Using shell scripts]
+*** xref:orchestrate:migrate-from-deploy-to-run.adoc[Migrate from deploy to run]
 ** Trigger pipelines
 *** xref:orchestrate:triggers-overview.adoc[Trigger options]
 *** xref:orchestrate:set-up-triggers.adoc[Set up triggers]
@@ -64,15 +69,14 @@
 *** xref:orchestrate:notify-a-slack-channel-of-a-paused-workflow.adoc[Notify a Slack channel of a paused workflow]
 ** Share data
 *** xref:orchestrate:workspaces.adoc[Use workspaces to share data between jobs]
-** Advanced configuration
-*** xref:orchestrate:orchestration-cookbook.adoc[Orchestration cookbook]
+** Orchestration cookbook
+*** xref:orchestrate:trigger-recipes.adoc[Trigger and event recipes]
+*** xref:orchestrate:conditional-recipes.adoc[Conditional recipes]
+*** xref:orchestrate:no-op-job-recipes.adoc[No-op job recipes]
+*** xref:orchestrate:serial-group-recipes.adoc[Serial group recipes]
+** Dynamic configuration
 *** xref:orchestrate:dynamic-config.adoc[Dynamic configuration overview]
 *** xref:orchestrate:using-dynamic-configuration.adoc[Using dynamic configuration]
-*** xref:orchestrate:how-to-override-config.adoc[Override configuration]
-*** xref:orchestrate:set-up-multiple-configuration-files-for-a-project.adoc[Set up multiple configuration files for a project]
-*** xref:orchestrate:databases.adoc[Configure databases]
-*** xref:orchestrate:migrate-from-deploy-to-run.adoc[Migrate from deploy to run]
-*** xref:orchestrate:using-shell-scripts.adoc[Using shell scripts]
 
 * Execution environments
 ** Overview
@@ -86,6 +90,7 @@
 *** xref:execute:custom-images.adoc[Using custom-built Docker images]
 *** xref:execute:private-images.adoc[Docker authenticated pulls]
 *** xref:execute:building-docker-images.adoc[Running Docker commands]
+*** xref:orchestrate:databases.adoc[Configure databases]
 ** Linux VM
 *** xref:execute:using-linuxvm.adoc[Using the Linux VM execution environment]
 *** xref:execute:android-machine-image.adoc[Using Android images with the machine executor]
@@ -148,9 +153,8 @@
 *** xref:test:automate-llm-evaluation-testing-with-the-circleci-evals-orb.adoc[Automate LLM evaluation testing with the CircleCI Evals orb]
 
 * Deploy with CircleCI
-** Deployment management
-*** xref:deploy:deployment-overview.adoc[Overview]
-*** xref:deploy:configure-deploy-markers.adoc[Configure deploy markers]
+** xref:deploy:deployment-overview.adoc[Overview]
+** xref:deploy:configure-deploy-markers.adoc[Configure deploy markers]
 ** Smart Deployments
 *** xref:deploy:smart-deployments-overview.adoc[Smart Deployments overview]
 *** xref:deploy:set-up-smart-deployments.adoc[Set up Smart Deployments]
@@ -277,6 +281,7 @@
 *** xref:integration:github-enterprise-server-integration.adoc[GitHub Enterprise Server integration]
 *** xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth org]
 *** xref:integration:status-updates.adoc[Status updates overview]
+*** xref:integration:pull-request-build-settings.adoc[Pull request build settings]
 *** xref:integration:oss.adoc[Build open source projects]
 
 ** Webhooks and events
@@ -331,6 +336,7 @@
 *** xref:toolkit:api-intro.adoc[APIs overview]
 *** xref:toolkit:api-v3-developers-guide.adoc[API v3 developers guide]
 *** xref:toolkit:api-developers-guide.adoc[API v2 developers guide]
+*** xref:toolkit:api-v1-migration-guide.adoc[Migrate from API v1/v1.1 to API v3 or v2]
 *** xref:toolkit:managing-api-tokens.adoc[Managing API tokens]
 *** xref:toolkit:oauth-dynamic-client-registration.adoc[OAuth 2.0 API access with Dynamic Client Registration]
 ** IDE tools

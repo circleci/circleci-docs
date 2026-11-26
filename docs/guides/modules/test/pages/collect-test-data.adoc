@@ -41,7 +41,7 @@ The `path` key is an absolute or relative path to your `working_directory`. It c
 CAUTION: Make sure that your `path` value is not a hidden folder. For example, `.my_hidden_directory` would be an invalid format.
 
 ifndef::server[]
-If you use Smarter Testing, the `path` must match the directory of `outputs.junit` in your `.circleci/test-suites.yml` file. See xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing].
+If you use Smarter Testing with a built-in test suite, `circleci testsuite run` uploads your test results, so you do not need a `store_test_results` step. For a test suite that `.circleci/test-suites.yml` defines, set the xref:reference:ROOT:testsuite-configuration-reference.adoc#store-test-results[`store-test-results`] option, or set the `path` to the directory of `outputs.junit`, or the `outputs.junit-directory` path. See xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing].
 endif::server[]
 
 To look at the raw XML files, for example when debugging your test uploads, you can also store test results as artifacts with the `store_artifacts` step. See the xref:optimize:artifacts.adoc[Storing Build Artifacts] page.
@@ -50,7 +50,9 @@ ifndef::server[]
 [#test-insights]
 == Test Insights
 
+ifndef::server[]
 include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab or GitHub App]
+endif::server[]
 
 See the xref:insights:insights-tests.adoc[Test Insights] page for information on using the Insights feature to gather information about your tests.
 This includes flaky test detection, viewing tests that failed most often, slowest tests, and an overall performance summary.
@@ -701,7 +703,7 @@ jobs:
 Use link:https://github.com/ruedigergad/test2junit[test2junit] to convert Clojure test output to XML format. For more details, refer to the link:https://github.com/kimh/circleci-build-recipies/tree/clojure-test-metadata-with-test2junit[sample project].
 
 [#ctest-for-c-cxx-tests]
-=== CTest for C/C{pp} Tests
+=== CTest for C/C{pp} tests
 
 CTest provides a link:https://cmake.org/cmake/help/latest/manual/ctest.1.html#cmdoption-ctest-output-junit[`--output-junit`] flag to additionally store test results to XML format. To use this feature, you will need CMake >=3.21. The XML file is stored relative to the build directory.
 

@@ -191,8 +191,6 @@ https://circleci.com/api/v3/deploy/hooks/<org-id>/validate
 
 Replace `<org-id>` with your organization ID. The URL is the same for every webhook secret in your organization. You can also copy the full URL, with your organization ID already filled in, from your organization deploy settings.
 
-include::guides:ROOT:partial$notes/find-organization-id.adoc[]
-
 === 5.2. Create a webhook secret
 
 CircleCI authenticates validation webhooks with a bearer token. To create one, follow these steps:

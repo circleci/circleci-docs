@@ -21,7 +21,7 @@ Before starting onboarding or project setup, install CLI v1, then enable the CLI
 
 There is no self-serve signup. Accounts and orgs are provisioned by the Server administrator — direct the human to them, or to the [CircleCI Server overview](https://circleci.com/docs/server-admin/latest/overview/circleci-server-overview/).
 
-CLI v1 does not work against a Server host. Install CLI v0 instead — it installs as a separate `circleci-v0` binary, so it can coexist with a CLI v1 `circleci` install. See [Install CLI v0 for CircleCI Server](https://circleci.com/docs/guides/toolkit/circleci-cli/#install-cli-v0-for-circleci-server) for install methods and `circleci-v0 setup`.
+CLI v1 does not work against a Server host. Install CLI v0 instead — it installs as a separate `circleci-v0` binary, so it can coexist with a CLI v1 `circleci` install. See [Install CLI v0 for CircleCI Server](https://circleci.com/docs/guides/server/toolkit/circleci-cli/#install-cli-v0-for-circleci-server) for install methods and `circleci-v0 setup`.
 
 ## Follow current defaults
 
@@ -37,14 +37,14 @@ These apply on both platforms, unless you are extending an existing integration 
 - Install [Machine Runner 3](https://circleci.com/docs/runner/install-machine-runner-3-on-linux/) for machine runners. Do not install launch agent.
 - Prefer the GitHub App integration over GitHub OAuth. Feature availability differs — see [VCS, Pipeline Types, and Feature Support](https://circleci.com/docs/guides/integration/version-control-system-integration-overview/).
 - Use CLI v1 ([cli.circleci.com](https://cli.circleci.com/)). See the [CircleCI CLI guide](https://circleci.com/docs/guides/toolkit/circleci-cli/).
-- Prefer `circleci testsuite` (Smarter Testing) for running and splitting tests. The legacy `circleci tests` commands still work but are not preferred. See [Getting Started With Smarter Testing](https://circleci.com/docs/guides/test/getting-started-with-smarter-testing/).
+- Prefer `circleci testsuite` (Smarter Testing) for running and splitting tests. It detects common test runners, so `.circleci/test-suites.yml` is optional. The legacy `circleci tests` commands still work but are not preferred. See [Getting Started With Smarter Testing](https://circleci.com/docs/guides/test/getting-started-with-smarter-testing/).
 
 ### Server
 
 - Use API v2 and v1.1. API v3 is Cloud only. See the [API introduction](https://circleci.com/docs/guides/toolkit/api-intro/), the [API v2 reference](https://circleci.com/docs/api/v2/), and the [API v1.1 reference](https://circleci.com/docs/api/v1/).
 - Schedule pipelines with a `triggers.schedule` block under the workflow. Schedule Triggers are Cloud only.
 - Install [Machine Runner 3](https://circleci.com/docs/runner/install-machine-runner-3-on-linux/) on Server v4.4 and later. Earlier versions need launch agent.
-- Prefer GitHub App Server (Preview) over GitHub OAuth on Server, where it is available. See [VCS, Pipeline Types, and Feature Support](https://circleci.com/docs/guides/integration/version-control-system-integration-overview/).
+- Use GitHub OAuth. It supports code hosted on GitHub.com, GitHub Enterprise Cloud, and GitHub Enterprise Server. The GitHub App integration is Cloud only. See [VCS, Pipeline Types, and Feature Support](https://circleci.com/docs/guides/integration/version-control-system-integration-overview/).
 - Use CLI v0. CLI v1 is Cloud only. See [Get set up](#get-set-up) above for install instructions.
 - Use `circleci tests glob` and `circleci tests split` to split tests. `circleci tests run` is *not* supported on Server, even though it is part of the same command family. `circleci testsuite` is not available on Server either. See [Use the CircleCI CLI to Split Tests](https://circleci.com/docs/guides/optimize/use-the-circleci-cli-to-split-tests/#tests-split-examples).
 
@@ -63,6 +63,7 @@ These apply on both platforms, unless you are extending an existing integration 
 
 Do not add these to new configuration or integrations, on either platform:
 
+- **v1 and v1.1 trigger and rerun endpoints.** Nine endpoints are removed on 1 February 2027: `POST /api/v1.1/project/:vcs-type/:username/:repo/`, `/retry`, `/ssh`, `/build`, and `/tree/:branch`, plus the v1 equivalents of all except `/build`. On Cloud, use `POST /api/v2/project/:provider/:org/:project/pipeline/run` to trigger. It takes a `definition_id`, `config`, and `checkout`. On Server, use `POST /api/v2/project/:provider/:org/:project/pipeline` with a `branch` or `tag`. On both, use `POST /api/v2/workflow/:id/rerun` to rerun. The v3 equivalents are Cloud only. See the [API v1 migration guide](https://circleci.com/docs/guides/toolkit/api-v1-migration-guide/).
 - The `deploy` step. Use `run`. If the job uses `parallelism` greater than one, split test and deploy into two jobs. See [Migrate From Deploy to Run](https://circleci.com/docs/guides/orchestrate/migrate-from-deploy-to-run/).
 - Launch agent, also called machine runner 1.x. Use [Migrate From Launch Agent to Machine Runner 3](https://circleci.com/docs/runner/migrate-from-launch-agent-to-machine-runner-3-on-linux/). Server needs v4.4+ first; earlier Server versions must stay on launch agent until upgrading.
 - `version: 2` configuration. Use `version: 2.1`.

@@ -1,0 +1,21 @@
+- name: flags triggering a pipeline
+  rule: PipelineRuns.yml
+  format: adoc
+  input: Trigger a pipeline from the API.
+  contains: circleci-docs.PipelineRuns
+- name: flags a pipeline that runs
+  rule: PipelineRuns.yml
+  format: adoc
+  input: The pipeline is triggered by a push.
+  contains: circleci-docs.PipelineRuns
+- name: allows triggering a pipeline run
+  about: A pipeline noun phrase such as "pipeline run" is correct.
+  rule: PipelineRuns.yml
+  format: adoc
+  input: Trigger a pipeline run from the API.
+  absent: circleci-docs.PipelineRuns
+- name: allows workflows that run
+  rule: PipelineRuns.yml
+  format: adoc
+  input: The workflow runs after the build job.
+  absent: circleci-docs.PipelineRuns

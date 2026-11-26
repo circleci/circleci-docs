@@ -10,14 +10,11 @@
 
 ifndef::server[]
 The link:https://cli.circleci.com/[CircleCI command line interface (CLI)] brings CircleCI's tooling to your terminal.
-
-[NOTE]
-====
-*Using CircleCI Server?* CLI v1 is not supported for CircleCI Server. Install CLI v0 instead. See <<install-cli-v0-for-circleci-server,Install CLI v0 for CircleCI Server>>.
-====
 endif::server[]
 ifdef::server[]
 The CircleCI command line interface (CLI) brings CircleCI's tooling to your terminal.
+
+NOTE: CLI v1 is not supported for CircleCI Server. Install CLI v0 instead. See <<install-cli-v0-for-circleci-server,Install CLI v0 for CircleCI Server>>.
 endif::server[]
 
 ifndef::server[]
@@ -155,7 +152,29 @@ The CLI respects standard terminal conventions:
 [#telemetry]
 == Telemetry
 
-The CLI collects usage data to help improve the tool. Telemetry is enabled by default. For each command invocation, the CLI records the command path and the flags passed, along with metadata including your CLI version, OS, and a stable per-install device ID. Telemetry is automatically disabled when `CI=true` is set in the environment.
+This section describes CLI v1. CLI v0 asks for your consent before it collects any telemetry.
+
+The CLI collects Usage Data so we can understand how the CLI is used and so we can improve it. We analyze how people and AI coding agents set up and use features such as Smarter Testing. We call the collection of Usage Data by the CLI "Telemetry," which is enabled by default. Telemetry can be disabled by setting `CI=true` in the environment.
+
+Usage Data is sent to CircleCI through Segment and Amplitude. Each processes Usage Data on our behalf.
+
+For each command invocation, the CLI records the following:
+
+* The command path. For extensions such as `circleci testsuite`, this includes the subcommand you ran.
+* The names of the flags you used, but not their values.
+* The exit code.
+* The name of the AI coding agent that ran the command, if any.
+* Metadata: your CLI version, OS, a stable per-install device ID and, if you are signed in, your CircleCI user ID.
+
+When you use Smarter Testing (`circleci testsuite`), the CLI also records the following:
+
+* Which setup checks failed.
+* Test counts and timings.
+* The name of the AI coding agent that ran the command, if any.
+* The CircleCI project ID and the repository name, which includes your organization name (for example, `my-org/my-repo`).
+* Device and user IDs that link runs together.
+
+This Usage Data is used for internal business purposes only. Usage Data is not used to train AI models, and it does not include the contents of your code.
 
 To disable telemetry permanently, run:
 
@@ -229,14 +248,10 @@ ifndef::server[]
 The Chunk CLI:: A developer tool that brings AI-powered code review and remote validation to your local workflow. The `chunk` CLI works with AI coding agents such as Claude Code, Cursor, and VS Code Copilot.
 endif::server[]
 
+ifdef::server[]
 == Install CLI v0 for CircleCI Server
 
-ifndef::server[]
-CLI v1 works with CircleCI Cloud only. If you use CircleCI Server, install CLI v0 instead using one of the following methods.
-endif::server[]
-ifdef::server[]
 Install CLI v0 using one of the following methods.
-endif::server[]
 
 === What you can do with CLI v0
 
@@ -370,6 +385,7 @@ CLI v0 does not have a hosted reference site. Add `--help` to any `circleci-v0` 
 circleci-v0 --help
 circleci-v0 config --help
 ----
+endif::server[]
 
 == Next steps
 

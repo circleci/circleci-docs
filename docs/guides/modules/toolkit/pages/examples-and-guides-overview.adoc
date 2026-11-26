@@ -9,7 +9,9 @@
 
 This page provides a collection of examples to help you learn how to build, test, and deploy applications written in the most common programming languages, frameworks, and platforms on CircleCI.
 
+ifndef::server[]
 If you are new to CircleCI, we recommend going through our xref:getting-started:getting-started.adoc[Quickstart Guide] for getting your first successful pipeline.
+endif::server[]
 
 For basic examples of adding pipeline jobs in a specific execution environment such as a Docker container or Linux VM, review our xref:getting-started:hello-world.adoc[Hello World] document.
 

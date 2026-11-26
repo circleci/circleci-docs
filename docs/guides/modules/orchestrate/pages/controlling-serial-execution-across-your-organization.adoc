@@ -77,12 +77,12 @@ When using serial groups in your CircleCI configuration, sequential group start 
 
 Serial group jobs are displayed in the CircleCI web app in workflow graphs with the following visual elements:
 
-* A job in a serial group is preceded by a block with a key icon to show the start of the serial group. A serial group end block follows the job.
+* A job in a serial group is preceded by a block with a key icon (icon:key[Key icon]) to show the start of the serial group. A serial group end block follows the job.
 +
 TIP: Hover over the serial group start block to view additional information about the serial group status and the `serial-group` key.
 +
 .Screenshot showing a job in a serial group waiting for approval
-image::guides:ROOT:serial-groups/lock-block-tooltip.png[A block with a key icon indicated the job is part of a serial group]
+image::guides:ROOT:serial-groups/lock-block-tooltip.png[A block with a key icon indicating the job is part of a serial group]
 
 * Waiting jobs display a _queued_ status.
 +
@@ -108,14 +108,12 @@ Each method is described in the following sections:
 
 You can manually release a serial group from the CircleCI web app to allow queuing jobs to start. To release a serial group is to allow the next job in the queue to start. The job you release from the queue will continue to run. To release a serial group, follow these steps:
 
-. In the link:https://app.circleci.com/home[CircleCI web app], select your org.
+. In the cloudlink:webapp[CircleCI web app], select your org.
 . Select *Pipelines* in the sidebar and locate your pipeline with a serial group in action.
 . Select the workflow name to view the workflow graph.
-. Select the serial group start block (with the key icon). A modal appears with information on the consequences of releasing the group. If you are happy to release the group, select btn:[Release serial group].
-+
-.Screenshot showing the serial group release modal
-image::guides:ROOT:serial-groups/serial-group-release-modal.png[Serial group release modal]
+. Select the serial group start block (icon:key[Key icon]). A modal appears with information on the consequences of releasing the group. If you are happy to release the group, select btn:[Release serial group].
 
+ifndef::server[]
 ****
 *New Pipelines View (Beta)*
 
@@ -143,12 +141,13 @@ If you are not sure which job currently holds the serial group lock, you can fin
 image::guides:ROOT:serial-groups/serial-group-view-job.png[View job button in the new pipelines UI side panel]
 . From that job's side panel, select btn:[Release serial group].
 ****
+endif::server[]
 
 ==== Cancel a workflow with a serial group job
 
 You can cancel an entire workflow that contains serial group jobs. Canceling a workflow will cancel all of its jobs, and the next job in the serial group in the org will start:
 
-. In the link:https://app.circleci.com/home[CircleCI web app], select your org.
+. In the cloudlink:webapp[CircleCI web app], select your org.
 . Select *Pipelines* in the sidebar and locate your pipeline with a serial group in action.
 . Select the "Cancel Workflow" button to the right of the pipeline (icon:cancel[Cancel icon]).
 . Confirm the cancellation when prompted.
@@ -215,7 +214,7 @@ For a single job with a `serial-group` key (no job group), the same principle ap
 
 == Troubleshooting serial groups
 
-=== Job skipped unexpectedly?
+=== Job skipped unexpectedly
 
 If your job is skipped with a "not run" status, check the following:
 
@@ -223,7 +222,7 @@ If your job is skipped with a "not run" status, check the following:
 * Verify your pipeline number is not lower than a currently active pipeline using the same serial group.
 * Remember that the order protection mechanism automatically skips jobs from older pipelines to maintain queue integrity.
 
-=== Jobs not running sequentially?
+=== Jobs not running sequentially
 
 If jobs are running concurrently when you expected them to run in sequence, check the following:
 
@@ -232,7 +231,7 @@ If jobs are running concurrently when you expected them to run in sequence, chec
 . Verify that pipeline parameters are resolving to the expected values in your `serial-group` key.
 . Ensure your serial group value meets the character requirements (alphanumeric plus `.`, `-`, `_`, `/`).
 
-=== Jobs canceled after waiting?
+=== Jobs canceled after waiting
 
 If your jobs are being canceled after waiting in the queue, check the following:
 
@@ -240,7 +239,7 @@ If your jobs are being canceled after waiting in the queue, check the following:
 . Investigate if upstream dependencies in your workflow are failing or taking too long.
 . Look for deadlock situations where jobs are waiting for each other to complete.
 
-=== Deployment order appears incorrect?
+=== Deployment order appears incorrect
 
 If you are experiencing deployment order problems, check the following:
 
@@ -260,7 +259,7 @@ If your pipeline fails to compile after adding a job group, check for the follow
 * A workflow job uses `requires` to depend on an individual job inside a group, rather than on the group invocation.
 * A job inside a group uses `requires` to depend on a job that belongs to a different group.
 
-=== Failure-handling job not triggering for a job group?
+=== Failure-handling job not triggering for a job group
 
 pass:[<!-- vale off -->]
 
@@ -270,7 +269,7 @@ pass:[<!-- vale on -->]
 
 To react to a failure inside the group, add a failure-handling job inside the group definition itself.
 
-=== Still experiencing resource conflicts?
+=== Resource conflicts continue
 
 If you are still experiencing resource conflicts despite using serial groups, check the following:
 

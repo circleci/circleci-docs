@@ -17,8 +17,6 @@ Create a new bucket in Object Store named `circleci-data`.
 
 NOTE: This bucket can be given a different name, but references to it will need to be updated in the Helm `values.yaml` file.
 
-image::guides:ROOT:s3-object-store/created_buckets.png[Buckets created in Object Store]
-
 [#copy-build-agent]
 == 2. Copy the CircleCI build agent
 Follow the steps in this section to copy the pinned CircleCI build agent into Object Store within your air-gapped environment.
@@ -72,9 +70,6 @@ $CIRCLE_AGENT_VERSION/
 └── checksums.txt
 ----
 
-image::guides:ROOT:s3-object-store/checksum.png[Uploading `checksums.txt` into the release directory]
-
-
 [#create-new-subdirs]
 === f. Create two new subdirectories in the release directory
 Within the release directory (step d), create two new nested subdirectories, first `linux`, and then within it, `amd64`.
@@ -87,10 +82,6 @@ $CIRCLE_AGENT_VERSION/
 └── linux/
     └── amd64/
 ----
-
-image::guides:ROOT:s3-object-store/create_linux_dir.png[Creating a Linux dir]
-
-image::guides:ROOT:s3-object-store/create_amd_dir.png[Creating an AMD dir]
 
 [#copy-build-agent-bin]
 === g. Copy the downloaded `circleci-agent` file
@@ -105,8 +96,6 @@ CIRCLE_AGENT_VERSION/
     └── amd64/
         └── circleci-agent
 ----
-
-image::guides:ROOT:s3-object-store/upload_cci_agent.png[Uploading the CircleCI agent]
 
 [#copy-other-agents]
 == 3. Copy other agents
@@ -168,9 +157,6 @@ machine-provisioner/
             └── agent
 ----
 
-image::guides:ROOT:s3-object-store/provisioner_agent.png[Docker/Machine Agents]
-
-
 [#copy-other-miscellaneous-files]
 == 4. Copy other miscellaneous files
 Follow the steps in this section to copy the required files into Object Store within your air-gapped environment.
@@ -187,13 +173,34 @@ curl -O https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/canary.
 
 Copy this `canary.txt` file to the root directory of the `circleci-data` bucket.
 
-
-image::guides:ROOT:s3-object-store/canary.png[Docker/Machine Agents]
-
 == 5. S3 bucket data tree
-After uploading all required binaries and files, S3 bucket structure will be as below -
+After uploading all required binaries and files, the S3 bucket structure will be as follows:
 
-image::guides:ROOT:s3-object-store/dir_tree.png[Docker/Machine Agents]
+[source,text]
+----
+circleci-data/
+├── release.txt
+├── canary.txt
+├── $CIRCLE_AGENT_VERSION/
+│   ├── checksums.txt
+│   └── linux/
+│       └── amd64/
+│           └── circleci-agent
+├── docker-provisioner/
+│   ├── release.txt
+│   └── $DOCKER_AGENT_VERSION/
+│       ├── checksums.txt
+│       └── linux/
+│           └── amd64/
+│               └── agent
+└── machine-provisioner/
+    ├── release.txt
+    └── $MACHINE_AGENT_VERSION/
+        ├── checksums.txt
+        └── linux/
+            └── amd64/
+                └── agent
+----
 
 
 [#next-steps]

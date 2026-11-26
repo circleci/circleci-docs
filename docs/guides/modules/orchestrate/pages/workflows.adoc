@@ -156,6 +156,10 @@ See the link:https://github.com/CircleCI-Public/circleci-demo-workflows/tree/fan
 
 Using flexible requires with the `requires` key, you can build complex dependency maps and fan in/out scenarios.
 
+ifdef::server[]
+Flexible job dependencies require CircleCI Server 4.8 or later.
+endif::server[]
+
 The following example is a configuration snippet of a workflow with four sequential jobs. Each job waits until the "required" job attains a specified status:
 
 [source,yaml]
@@ -182,12 +186,6 @@ A job must wait until all upstream jobs in the dependency graph have attained ei
 * The `rollback` job waits for the `release` job, and only runs if the `release` job fails or is canceled.
 * The `release` job waits for the `deploy` job, and only runs if the `deploy` job is successful.
 * The `deploy` job waits for the `build` job, and only runs if the `build` job is successful.
-
-.Workflow execution when the `release` job is successful
-image::guides:ROOT:workflow-using-requires-example-1.png[Flexible Job Execution Workflow - Example 1]
-
-.Workflow execution when the `release` job fails:
-image::guides:ROOT:workflow-using-requires-example-2.png[Flexible Job Execution Workflow - Example 2]
 
 ==== Ignore the outcome of an upstream job
 
@@ -266,7 +264,7 @@ Some things to keep in mind when using manual approval in a workflow:
 * When the workflow encounters a job with `type: approval`, the workflow pauses until action is taken to approve or cancel.
 * If approval is granted, the workflow continues to process jobs in the order defined in the configuration file.
 * If cancel is granted, the downstream jobs are not run.
-* Jobs downstream of an `approval` job can be restricted by adding a xref:security:contexts.adoc#approve-jobs-that-use-restricted-contexts[Restricted Context] to those downstream jobs.
+* Jobs downstream of an `approval` job can be restricted by adding a xref:security:contexts.adoc#approve-jobs-that-use-restricted-contexts[Restricted Context] to those downstream jobs. A restricted context on the approval job itself does not control who can approve it.
 
 The following screenshot demonstrates:
 
@@ -347,6 +345,10 @@ curl --request POST \
 
 To identify the user who approved a job, you can use the CircleCI web app or the API.
 
+ifdef::server[]
+include::ROOT:partial$notes/server-api-examples.adoc[]
+endif::server[]
+
 [tabs]
 ====
 CircleCI web app::
@@ -359,6 +361,7 @@ CircleCI web app::
 API::
 +
 --
+
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
 . You need the workflow ID so you can use the link:https://circleci.com/docs/api/v2/index.html#operation/listWorkflowJobs[get a workflow's jobs] endpoint to get the user ID. You can get the workflow ID using xref:reference:ROOT:variables.adoc[Pipeline Values or Environment Variables], or by receiving xref:integration:outbound-webhooks.adoc[Webhooks] or link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/listWorkflowsByPipelineId[polling the API].
 +
@@ -421,6 +424,10 @@ TIP: You can find detailed instructions in link:https://support.circleci.com/hc/
 
 To Cancel a job, follow these steps:
 
+ifdef::server[]
+include::ROOT:partial$notes/server-api-examples.adoc[]
+endif::server[]
+
 [tabs]
 ====
 CircleCI web app::
@@ -432,6 +439,7 @@ CircleCI web app::
 API::
 +
 --
+
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
 . You need your job ID (which is the job ID for the job requiring approval) to make the API POST request. Depending on your use case, you might be configuring an approval job in a pipeline, or using an external service to approve a job. You can get the required parameters using xref:reference:ROOT:variables.adoc[Pipeline Values or Environment Variables], or by receiving xref:integration:outbound-webhooks.adoc[Webhooks] or polling the API. To cancel a job, use the link:https://circleci.com/docs/api/v2/index.html#operation/cancelJobByJobID[cancel a job] endpoint, for example:
 +
@@ -451,13 +459,17 @@ In this example, the purpose of the `hold` job is to wait for approval to begin 
 [#scheduling-a-workflow]
 == Scheduling a workflow
 
+ifndef::server[]
 IMPORTANT: For new scheduled pipelines, use xref:schedule-triggers.adoc[Schedule Triggers] instead of scheduled workflows. Schedule triggers offer improved control. Scheduled workflows are documented here for reference and for teams that cannot yet migrate to schedule triggers. See the xref:migrate-scheduled-workflows-to-schedule-triggers.adoc[Migration Guide] to move to schedule triggers.
+endif::server[]
 
 Scheduled workflows allow you to run jobs at specific times rather than on every pipeline trigger. Running a workflow for every commit for every branch can be inefficient and expensive. Scheduling is useful for resource-intensive jobs, nightly builds, or generating reports on a regular cadence, without triggering on every code change. A scheduled workflow runs on a schedule only. A scheduled workflow will **not** be run on commits to your code.
 
 By default, a workflow runs on every push, or based on the event rules you have set up for your trigger (menu:Project settings[Triggers] or menu:Project settings[Project Setup]). To trigger a workflow on a schedule, add the `triggers` key to the workflow and specify a `schedule` including cron syntax and branch filters. Scheduled workflows use the `cron` syntax to represent Coordinated Universal Time (UTC). See <<nightly-example>> for an basic example.
 
+ifndef::server[]
 Scheduled workflows are *not* available for GitHub App or GitLab pipelines.
+endif::server[]
 
 [#nightly-example]
 === Example: Build every night
@@ -544,11 +556,18 @@ For a full configuration example, see the link:https://github.com/CircleCI-Publi
 
 === Scheduling and dynamic configuration
 
+ifndef::server[]
 Scheduled workflows do not support xref:dynamic-config.adoc[Dynamic Configuration]. If you use dynamic configuration you will need to use xref:schedule-triggers.adoc[Schedule Triggers]. More information can be found in this link:https://support.circleci.com/hc/en-us/articles/360060833331-Support-for-Scheduled-Workflows-in-Dynamic-Configurations-Setup-Workflows[support article].
+endif::server[]
+ifdef::server[]
+Scheduled workflows do not support xref:dynamic-config.adoc[Dynamic Configuration].
+endif::server[]
 
+ifndef::server[]
 === Scheduled workflows and billing
 
 When you schedule a workflow, the workflow will be counted as an individual active user. For more information, see the xref:plans-pricing:user-types-and-registration.adoc#active-users[User Types and Registration] guide.
+endif::server[]
 
 [#using-job-contexts-to-share-environment-variables]
 == Using contexts to share and secure environment variables
@@ -623,8 +642,11 @@ This example prevents the workflow `integration_tests` from running unless the `
 }
 ----
 
-For more examples of using conditional logic in your workflows, see the xref:orchestration-cookbook.adoc[Orchestration Cookbook].
+ifndef::server[]
+For more examples of using conditional logic in your workflows, see the xref:conditional-recipes.adoc[Conditional Recipes].
+endif::server[]
 
+ifndef::server[]
 ****
 If you want to conditionally run workflows based on trigger event types, consider splitting your workflows into separate YAML files and leveraging GitHub trigger event options.
 
@@ -633,6 +655,7 @@ For further details see the following guides:
 * xref:set-up-multiple-configuration-files-for-a-project.adoc[Set Up Multiple Configuration Files for a Project].
 * xref:github-trigger-event-options.adoc[GitHub Trigger Event Options].
 ****
+endif::server[]
 
 [#using-filters-in-your-workflows]
 == Using filters in your workflows
@@ -837,7 +860,7 @@ The steps detailed in this section show how to manually rerun only a workflow's 
 
 To rerun only a workflow's failed jobs, follow these steps:
 
-. In the link:https://app.circleci.com/home/[CircleCI web app] select your organization.
+. In the cloudlink:webapp[CircleCI web app], select your organization.
 . Select **Pipelines** in the sidebar.
 . Use the filters to find your project and pipeline.
 . Find the row in the pipeline view for the workflow you would like to rerun from failed and select the *Rerun from failed* icon. This option is also available in the workflow view using the rerun dropdown menu, which you can access by clicking on the workflow name or badge.
@@ -870,6 +893,7 @@ Individual workflows in a pipeline have a hard limit of 100 reruns. This limit i
 
 The following state diagram shows the possible states and transitions of a workflow:
 
+ifndef::server[]
 .CircleCI Cloud workflow states
 [mermaid]
 ----
@@ -903,7 +927,9 @@ stateDiagram-v2
     unauthorized --> [*]
 
 ----
+endif::server[]
 
+ifdef::server[]
 .CircleCI Server workflow states
 [mermaid]
 ----
@@ -939,6 +965,7 @@ stateDiagram-v2
     not_run --> [*]
 
 ----
+endif::server[]
 
 Workflows may have one of the following states:
 
@@ -1004,7 +1031,7 @@ If you have a working configuration with a single job named `build` and you then
 [#workflow-and-subsequent-jobs-do-not-trigger]
 === Workflow and subsequent jobs do not trigger
 
-If you do not see your workflows running, check for configuration errors that may be preventing the workflow from starting. Navigate to your link:https://app.circleci.com/pipelines/[project's pipelines] and find your workflow name to locate the failure.
+If you do not see your workflows running, check for configuration errors that may be preventing the workflow from starting. Navigate to your project's pipelines in the cloudlink:webapp[CircleCI web app] and find your workflow name to locate the failure.
 
 [#rerunning-workflows-fails]
 === Rerunning workflows fails
@@ -1018,13 +1045,9 @@ NOTE: You cannot rerun jobs and workflows that are >= 90 days.
 
 If you have workflows configured on a protected branch and the status check never completes, check the `ci/circleci` status key. `ci/circleci` is related to a deprecated check and must be deselected.
 
-.Uncheck GitHub Status Keys
-image::guides:ROOT:github_branches_status.png[Uncheck GitHub Status Keys]
-
 Go to menu:Settings[Branches] in GitHub and select btn:[Edit] on the protected branch to deselect the settings, for example: `\https://github.com/your-org/project/settings/branches`.
 
 [#see-also]
 == See also
 
-* See the xref:reference:ROOT:faq.adoc#workflows[Workflows] section of the FAQ.
 * For workflow configuration examples, see the link:https://github.com/CircleCI-Public/circleci-demo-workflows[CircleCI Demo Workflows] page on GitHub.

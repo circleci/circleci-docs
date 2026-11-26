@@ -278,7 +278,10 @@
   new: /guides/execute/executor-intro/
 
 - old: /faq/
-  new: /reference/faq/
+  new: /guides/about-circleci/about-circleci/
+
+- old: /reference/faq/
+  new: /guides/about-circleci/about-circleci/
 
 - old: /first-steps/
   new: /guides/getting-started/first-steps/
@@ -491,7 +494,10 @@
   new: /orbs/author/orb-author/
 
 - old: /orb-author-faq/
-  new: /orbs/author/orb-author-faq/
+  new: /orbs/author/orb-author/
+
+- old: /orbs/author/orb-author-faq/
+  new: /orbs/author/orb-author/
 
 - old: /orb-author-validate-publish/
   new: /orbs/author/orb-author-validate-publish/
@@ -509,10 +515,16 @@
   new: /orbs/author/orbs-best-practices/
 
 - old: /orbs-faq/
-  new: /orbs/use/orbs-faq/
+  new: /orbs/use/orb-intro/
+
+- old: /orbs/use/orbs-faq/
+  new: /orbs/use/orb-intro/
 
 - old: /orchestration-cookbook/
-  new: /guides/orchestrate/orchestration-cookbook/
+  new: /guides/orchestrate/trigger-recipes/
+
+- old: /guides/orchestrate/orchestration-cookbook/
+  new: /guides/orchestrate/trigger-recipes/
 
 - old: /oss/
   new: /guides/integration/oss/
@@ -596,7 +608,10 @@
   new: /runner/runner-concepts/
 
 - old: /runner-faqs/
-  new: /runner/runner-faqs/
+  new: /runner/runner-overview/
+
+- old: /runner/runner-faqs/
+  new: /runner/runner-overview/
 
 - old: /runner-feature-comparison-matrix/
   new: /runner/runner-feature-comparison-matrix/
@@ -704,7 +719,7 @@
   new: /server-admin/latest/operator/expanding-internal-database-volumes/
 
 - old: /server/latest/operator/faq/
-  new: /server-admin/latest/operator/faq/
+  new: /server-admin/latest/operator/introduction-to-nomad-cluster-operation/
 
 - old: /server/latest/operator/introduction-to-nomad-cluster-operation/
   new: /server-admin/latest/operator/introduction-to-nomad-cluster-operation/
@@ -1171,3 +1186,9 @@
 
 - old: /guides/integration/enable-checks/
   new: /guides/integration/status-updates/
+
+- old: /functions/functions-faq/
+  new: /functions/functions-concepts/
+
+- old: /server-admin/latest/operator/faq/
+  new: /server-admin/latest/operator/introduction-to-nomad-cluster-operation/

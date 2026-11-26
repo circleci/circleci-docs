@@ -52,13 +52,19 @@ image::guides:ROOT:personal-api-tokens.png[screenshot showing where to find your
 
 == 2. Copy your organization ID
 
-The organization ID is a unique identifier for an organization. Follow these steps to find it in the CircleCI web app:
+The organization ID is a unique identifier for an organization. Use one of the following methods to find it.
 
-include::ROOT:partial$app-navigation/steps-to-org-settings.adoc[]
-. Note the value or select the btn:[Copy] icon next to the organization ID.
-
-.Organization ID available in organization settings
-image::guides:ROOT:org-id.png[screenshot showing where to find your organization ID]
+[tabs]
+====
+Web app::
++
+--
+include::ROOT:partial$app-navigation/steps-to-org-id.adoc[]
+--
+CLI::
++
+include::ROOT:partial$find-ids/org-id-cli.adoc[]
+====
 
 [#configure-integration]
 == 3. Configure the integration in Finout
@@ -77,9 +83,6 @@ Connect your CircleCI organization to Finout using your personal API token and o
 
 . Select **Next**.
 
-.Finout CircleCI integration settings
-image::guides:ROOT:finout-integration.png[screenshot showing the Finout CircleCI integration settings]
-
 == 4. Configure credit pricing
 
 Configure your CircleCI credit pricing to ensure accurate cost calculations. Finout calculates costs based on your usage data and the configured price per credit. Configure ongoing and historical pricing, as follows:
@@ -97,8 +100,6 @@ Configure your CircleCI credit pricing to ensure accurate cost calculations. Fin
 * Enter the **Effective Until** date (leave blank if this is your current pricing).
 * Repeat for each historical pricing period (up to 13 months is recommended for comprehensive historical analysis).
 . Select **Next**.
-
-image::guides:ROOT:finout-credit-pricing.png[screenshot showing the Finout credit pricing configuration]
 
 Finout begins importing your CircleCI usage data. You will receive an email notification when the data sync is complete. The initial import can include up to 13 months of historical data based on your configured pricing periods.
 

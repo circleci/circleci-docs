@@ -20,9 +20,11 @@ module.exports = ({ data: { root } }) => {
     'runner',
     'server-admin',
     'orbs',
+    'functions',
     'services',
-    'contributors',
   ]
+  // Linked from the page footer instead of the component nav
+  const footerComponents = ['contributors']
 
   for (let i = 0; i < components.length; i++) {
     const component = components[i]
@@ -37,7 +39,7 @@ module.exports = ({ data: { root } }) => {
     if (item.selected) {
       selected = item.label
     }
-    navList.push(item)
+    if (!footerComponents.includes(name)) navList.push(item)
   }
 
   // Sort navList based on the order in componentsOrder

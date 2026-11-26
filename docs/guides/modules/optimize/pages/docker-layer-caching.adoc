@@ -19,7 +19,11 @@ DLC caches the individual layers of any Docker images built during your CircleCI
 You can use DLC with both the `machine` executor and in a xref:execute:building-docker-images.adoc[Remote Docker Environment] (`setup_remote_docker`).
 
 ifndef::server[]
-DLC costs 200 credits per job run. For more information about DLC charges, see the xref:plans-pricing:credits.adoc#charge-for-docker-layer-caching[FAQ].
+DLC costs 200 credits per job run.
+
+To estimate your DLC cost, look at the jobs in your config file with DLC enabled, and the number of Docker images you are building in those jobs. A job that appears only once in a config file can run multiple times in a pipeline, for example, with parallelism enabled.
+
+DLC only benefits pipelines that build Docker images. If your pipeline does not include a job where Docker images are built, DLC provides no benefit.
 endif::server[]
 
 NOTE: DLC has a known issue with QEMU/binfmt multi-arch `buildx` builds. See <<known-issues,Known Issues>> before enabling it.
@@ -167,19 +171,29 @@ include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 [#purge-dlc-cli]
 === CLI
 
+ifndef::server[]
 Use the xref:toolkit:how-to-use-the-circleci-local-cli.adoc[CircleCI CLI] `dlc purge` sub-command to purge DLC for a project:
 
-[,shell]
+[source,console]
 ----
-circleci dlc purge <vcs-type> <org-id> <project-id>
+$ circleci dlc purge --project <project-slug>
 ----
 
-The full `<vcs-type> <org-id> <project-id>` section of the subcommand is your project slug. You can find and copy the project slug from your project settings:
+Replace `<project-slug>` with your project slug, for example `gh/my-org/my-repo`. If you omit `--project`, the command uses the project for the git remote of your current directory. You can find and copy the project slug from your project settings:
 
 .The project slug available in project settings
 image::guides:ROOT:project-settings-overview.png[Screenshot showing where to find the project slug]
 
 For full details on the `dlc purge` sub-command, refer to the link:https://cli.circleci.com/reference/[CLI reference].
+endif::server[]
+ifdef::server[]
+CircleCI Server uses the legacy CircleCI CLI. Use the `project dlc purge` sub-command to purge DLC for a project:
+
+[source,console]
+----
+$ circleci project dlc purge <vcs-type> <org-name> <project-name>
+----
+endif::server[]
 
 
 

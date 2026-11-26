@@ -25,7 +25,6 @@
 
 * Self-hosted runner reference
 ** xref:reference:ROOT:runner-api.adoc[Self-hosted runner API]
-** xref:runner-faqs.adoc[Self-hosted runner FAQ]
 ** xref:troubleshoot-self-hosted-runner.adoc[Troubleshoot self-hosted runner]
 ** xref:runner-scaling.adoc[Scaling self-hosted runner]
 ifndef::server[]

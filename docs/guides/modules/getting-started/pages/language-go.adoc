@@ -68,7 +68,13 @@ A common ask from developers who are getting started with CircleCI is to perform
 [#build-and-test-the-app]
 ==== a. Build and test the app
 
-For this step, we use commands that come preconfigured in the Go link:https://circleci.com/developer/orbs/orb/circleci/go[orb]. The `go/mod-download` command downloads Go modules and caches them automatically. Tests are run using the `go/test` command.
+For this step, we use commands that come preconfigured in the Go link:https://circleci.com/developer/orbs/orb/circleci/go[orb]. The `go/mod-download` command downloads Go modules and caches them automatically.
+ifndef::server[]
+The `circleci testsuite run` command runs the tests and adds Smarter Testing capabilities such as test splitting and rerunning only failed tests.
+endif::server[]
+ifdef::server[]
+Tests are run using the `go/test` command.
+endif::server[]
 
 [,yaml]
 ----
@@ -80,14 +86,25 @@ jobs:
     steps:
       - checkout # checkout source code
       - go/mod-download # Download and cache Go modules
+ifndef::server[]
+      - run:
+          name: Run tests
+          command: circleci testsuite run "ci tests" --runner=gotestsum
+endif::server[]
+ifdef::server[]
       - go/test: # Runs 'go test ./...' but includes extensive parameterization for finer tuning.
           covermode: atomic
           failfast: true
           race: true
+endif::server[]
       - persist_to_workspace:
           root: ~/project
           paths: .
 ----
+
+ifndef::server[]
+include::ROOT:partial$shared-sections/testsuite-zero-config.adoc[]
+endif::server[]
 
 [#deploy-the-app]
 ==== b. Deploy the app
@@ -171,10 +188,17 @@ jobs:
     steps:
       - checkout # checkout source code
       - go/mod-download # Download and cache Go modules
+ifndef::server[]
+      - run:
+          name: Run tests
+          command: circleci testsuite run "ci tests" --runner=gotestsum
+endif::server[]
+ifdef::server[]
       - go/test: # Runs 'go test ./...' but includes extensive parameterization for finer tuning.
           covermode: atomic
           failfast: true
           race: true
+endif::server[]
       - persist_to_workspace:
           root: ~/project
           paths: .
@@ -200,6 +224,8 @@ workflows:
 [#see-also-new]
 == See also
 
-* xref:test:rerun-failed-tests.adoc#configure-a-job-running-go-tests[Test Splitting and Rerun Failed Tests for Go]
+ifndef::server[]
+* xref:test:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing]
+endif::server[]
 * link:https://circleci.com/blog/continuous-integration-for-go-applications/[Continuous integration for Go applications]
 * xref:optimize:parallelism-faster-jobs.adoc[Parallelism and Test Splitting]

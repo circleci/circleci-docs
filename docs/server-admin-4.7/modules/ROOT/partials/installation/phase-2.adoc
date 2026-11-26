@@ -923,7 +923,7 @@ WARNING: If your Tink keyset is somehow lost, you will need to generate a new ke
 
 === o. Setting up OIDC (optional)
 
-CircleCI Server optionally supports xref:guides:permissions-authentication:openid-connect-tokens.adoc[OpenID Connect Tokens] (OIDC) in jobs.
+CircleCI Server optionally supports xref:server@guides:permissions-authentication:openid-connect-tokens.adoc[OpenID Connect Tokens] (OIDC) in jobs.
 
 This feature is not enabled by default and requires a few additional steps to set up, as follows:
 

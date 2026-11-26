@@ -33,6 +33,8 @@ content:
   - url: .
     start_path: docs/orbs
   - url: .
+    start_path: docs/functions
+  - url: .
     start_path: docs/server-admin-4.10
   - url: .
     start_path: docs/server-admin-4.9
@@ -64,8 +66,8 @@ asciidoc:
     serverversion46: 4.6.6
     serverversion47: 4.7.15
     serverversion48: 4.8.12
-    serverversion49: 4.9.6
-    serverversion410: 4.10.1
+    serverversion49: 4.9.8
+    serverversion410: 4.10.3
     terraformversion: 0.15.4
     dockerversion: v28
     kubectlversion: 1.19
@@ -79,6 +81,7 @@ asciidoc:
   extensions:
   - '@asciidoctor/tabs'
   - ./extensions/theme-icon-extension.js
+  - ./extensions/cloud-link-extension.js
   - ./extensions/subsection-badge-extension.js
   - ./extensions/page-availability-extension.js
 urls:
@@ -142,9 +145,7 @@ antora:
     # the Antora Atlas extension (https://gitlab.com/antora/antora-atlas-extension)
     # so its links to pages it doesn't contain resolve to the live site. Atlas
     # was alpha software when this note was written, so check its status first.
-    # Server build is off while the Server conversion is unfinished (DOC-281).
-    # Set to true to build it and show the version switcher again.
-    enabled: false
+    enabled: true
     serverversion: '4.10'
     # Earliest Server version the docs cover. Pages available from it get no
     # "Server version" sidebar line.
@@ -153,4 +154,4 @@ antora:
     # The build fails when more xrefs than this point to pages the Server build
     # drops. Lower it as they get wrapped in ifndef::server[] (the list is in
     # extensions/.temp/guides-server-unlinked.md after a build).
-    maxunlinkedxrefs: 132
+    maxunlinkedxrefs: 15

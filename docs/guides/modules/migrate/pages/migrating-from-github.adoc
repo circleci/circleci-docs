@@ -8,8 +8,6 @@
 
 This document provides an overview of how to migrate from GitHub Actions to CircleCI.
 
-TIP: The link:https://circleci.com/developer/tools/configTranslator[CircleCI configuration translator] provides a way to convert your GitHub Actions or GitLab config into a CircleCI `config.yml` file. The configuration translator is currently in open preview.
-
 TIP: **Not ready to convert your workflows?** A GitHub App pipeline can run an existing GitHub Actions workflow file as it is, without any conversion to CircleCI syntax. A subset of GitHub Actions features is available. See the xref:orchestrate:use-a-github-actions-workflow-file-as-your-pipeline-configuration.adoc[Use a GitHub Actions Workflow File as Your Pipeline Configuration] page.
 
 [#concepts]
@@ -245,7 +243,7 @@ jobs:
 2+a| Using conditional steps in the workflow. CircleCI offers the following:
 
 * xref:reference:ROOT:configuration-reference.adoc#the-when-attribute[The When Attribute] (for example, `on_success` [default], +
-`always`, `on_failure`).
+`always`, `on_fail`).
 * https://circleci.com/docs/configuration-reference/#the-when-step[Conditional steps] based on parameters.
 * https://circleci.com/docs/reusing-config/#using-the-parameters-declaration[Conditional jobs].
 * Conditional, parameterized xref:orchestrate:workflows.adoc#use-conditional-logic-in-workflows[Workflows].

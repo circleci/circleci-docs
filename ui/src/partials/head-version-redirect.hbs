@@ -1,0 +1,20 @@
+{{#with (server-version-url)}}
+    <script>
+// Sends readers who last chose Server in the version switcher to the Server
+// version of this page, but only when they come into the guides from another
+// part of the docs site. Links from inside the guides, from other sites, and
+// typed or bookmarked URLs are left alone. The choice is saved by 05-dropdown.js.
+(function () {
+  try {
+    if (localStorage.getItem('docs-guides-version') !== 'server' || !document.referrer) return
+    var from = new URL(document.referrer)
+    var path = location.pathname
+    var guides = path.indexOf('/guides/')
+    if (from.origin !== location.origin || guides < 0) return
+    var site = path.slice(0, guides + 1)
+    if (from.pathname.indexOf(site) !== 0 || from.pathname.indexOf(path.slice(0, guides + 8)) === 0) return
+    location.replace('{{{relativize this}}}' + location.hash)
+  } catch (e) {}
+})()
+    </script>
+{{/with}}

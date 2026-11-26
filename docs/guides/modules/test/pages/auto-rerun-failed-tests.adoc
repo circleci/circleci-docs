@@ -80,11 +80,13 @@ flowchart LR
 
 Before enabling auto rerun failed tests, ensure you have completed the xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] guide and have:
 
-* Configured your `.circleci/test-suites.yml` with `discover` and `run` commands.
+include::ROOT:partial$shared-sections/testsuite-define-suite-prerequisite.adoc[]
 * Verified your tests run successfully with the `testsuite` command.
 * Correctly configured JUnit XML output in `.circleci/test-suites.yml`.
 
 TIP: You can use the xref:guides:toolkit:circleci-agent-skills.adoc[CircleCI Agent Skills] to get Smarter Testing set up. Install the link:https://github.com/CircleCI-Public/skills[CircleCI Public Skills] plugin to your AI coding agent and ask your agent to get set up for Smarter Testing.
+
+NOTE: This page covers `max-auto-rerun` in `.circleci/test-suites.yml`, which retries individual failed test atoms as part of Smarter Testing. If you want to retry entire steps or workflows, see xref:guides:orchestrate:automatic-reruns.adoc[Automatic Reruns], which uses the separate `max_auto_reruns` key in `.circleci/config.yml`.
 
 == 1. Enable auto rerun failed tests in your `.circleci/test-suites.yml` file
 

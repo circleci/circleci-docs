@@ -57,7 +57,14 @@ Example output:
 }
 ----
 +
-include::ROOT:partial$notes/find-organization-id.adoc[]
+The `--owner-id` flag takes your organization ID.
++
+ifndef::server[]
+include::ROOT:partial$find-ids/org-id-cli.adoc[]
+endif::server[]
+ifdef::server[]
+include::ROOT:partial$find-ids/org-id-cli-v0.adoc[]
+endif::server[]
 
 [#create-your-policy]
 == 1. Create your policy

@@ -10,7 +10,7 @@ orbs:
 executors:
   node_executor:
     docker:
-      - image: cimg/node:24.21.0
+      - image: cimg/node:24.22.3
     working_directory: ~/project
 
 jobs:

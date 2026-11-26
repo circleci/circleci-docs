@@ -1,0 +1,16 @@
+- name: flags a sentence over 30 words
+  rule: SentenceLength.yml
+  format: adoc
+  input: This sentence keeps going and going with far too many words for any reader to follow comfortably, because it never stops adding clauses, qualifiers, and extra detail that nobody really needs.
+  contains: circleci-docs.SentenceLength
+- name: allows a sentence of exactly 30 words
+  about: The limit is "less than 30", enforced as max 30, so 30 words passes.
+  rule: SentenceLength.yml
+  format: adoc
+  input: This sentence keeps going and going with far too many words for any reader to follow comfortably, because it never stops adding clauses, qualifiers, and extra detail that nobody needs.
+  absent: circleci-docs.SentenceLength
+- name: allows a short sentence
+  rule: SentenceLength.yml
+  format: adoc
+  input: This sentence is short.
+  absent: circleci-docs.SentenceLength

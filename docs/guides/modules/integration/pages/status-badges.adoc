@@ -178,12 +178,7 @@ NOTE: To create a status badge for a private project, create an API token scoped
 [![CircleCI](https://circleci.com/<VCS>/<ORG_NAME>/<PROJECT_NAME>.svg?style=svg&circle-token=<YOUR_STATUS_API_TOKEN>)](<LINK>)
 ----
 
-ifndef::server[]
-To create a status API token, go to the link:https://app.circleci.com/[CircleCI web app], navigate to a specific project, go to menu:Project Settings[API Permissions], and create a token scoped to `status`.
-endif::server[]
-ifdef::server[]
-To create a status API token, go to the CircleCI web app, navigate to a specific project, go to menu:Project Settings[API Permissions], and create a token scoped to `status`.
-endif::server[]
+To create a status API token, go to the cloudlink:webapp[CircleCI web app], navigate to a specific project, go to menu:Project Settings[API Permissions], and create a token scoped to `status`.
 
 [#badge-styles]
 == Badge styles

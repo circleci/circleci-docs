@@ -56,7 +56,18 @@ function collectPages(contentCatalog, siteUrl) {
     'server-4.9',
   ];
 
+  // Contributor guidance is for people writing docs, not for readers searching them.
+  // Services is internal field engineering content, also not for readers searching public docs.
+  // Functions is intentionally included — it was added to the playbook after this exclusion list
+  // was introduced and is correctly absent from the excluded set.
+  const excludedComponents = ['contributors', 'services'];
+
   contentCatalog.getComponents().forEach(({ name: comp, versions }) => {
+    if (excludedComponents.includes(comp)) {
+      console.log(`Skipping Algolia indexing for the ${comp} component`);
+      return;
+    }
+
     versions.forEach(({ version }) => {
       // The guides Server build (guides-versions-extension.js) repeats the
       // Cloud guides with small differences, so it stays out of search. Server

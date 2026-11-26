@@ -12,7 +12,7 @@ CircleCI offers credit-based usage plans that let you pay only for what you use,
 [#how-credits-work]
 == How credits work
 
-Credits are the unit of compute consumption in CircleCI. They are consumed by the second at varying rates per minute depending on the machine type and resource class used for a given job. Larger, more powerful machine types consume credits at a higher rate.
+Credits are the unit of compute consumption in CircleCI. They are consumed by the second at varying rates per minute depending on the machine type and resource class used for a given job. Larger, more powerful machine types consume credits at a higher rate. CircleCI rounds usage up to the nearest second, and then up to the nearest credit. A container used for under one minute is not charged for a full minute.
 
 This model gives you precise control over your spending. For example, your team might:
 
@@ -62,7 +62,29 @@ In addition to everything in the Free plan, the Performance plan includes:
 
 For current network and storage allowances, refer to the link:https://circleci.com/pricing/[Pricing] page.
 
-NOTE: For details on canceling a Performance plan, refer to the xref:reference:ROOT:faq.adoc#cancel-performance-plan[Cancel Performance Plan FAQ].
+[#cancel-performance-plan]
+=== Cancel a Performance plan
+
+You must be an org admin in your CircleCI organization to cancel your Performance plan subscription. Your role depends on your VCS:
+
+* GitHub: your account has the "Owner" role in your GitHub organization.
+* Bitbucket Cloud: your account has "Admin" permissions in your Bitbucket repository.
+* GitLab: the CircleCI web app shows your account as "Org Admin" under menu:Org[People].
+
+To cancel your subscription:
+
+. In the link:https://app.circleci.com/[CircleCI web app], select **Plan** on the left sidebar and then open the **Billing** tab.
+. At the bottom of the page, select "Looking to cancel your plan?".
+. Select **Cancel**. Follow the prompts to complete the cancellation.
+
+After you cancel:
+
+* You keep access to the Performance plan settings in the CircleCI web app and can use credits until the end of your current billing cycle.
+* When the cycle ends, your org moves to the <<free-plan,Free plan>>, where you can use up to 30,000 credits per month.
+* You forfeit credits that you do not use by the end of the billing cycle, and they are not eligible for refunds.
+* You lose access to billing statements after the end of the current billing cycle, so download them before then.
+
+To reactivate the Performance plan after you cancel, upgrade from the **Plan > Overview** page in the CircleCI web app.
 
 [#scale-plan]
 == Scale plan
@@ -81,7 +103,7 @@ In addition to everything in the Performance plan, the Scale plan includes:
 * *Audit log streaming*: Stream audit log events to your own storage. Refer to the xref:security:audit-logs.adoc[Audit Logs] page for details.
 * *Budget controls*: Set and monitor spending budgets for your organization. Refer to the xref:manage-budgets.adoc[Manage Budgets] page for details.
 * *Site-to-site connectivity* (preview): Connect CircleCI to your private network over a dedicated link. Refer to the xref:security:site-to-site-connectivity.adoc[Site-to-Site Connectivity] page for details.
-* *Premium support*: Expanded SLAs, an account team, training and onboarding options, and available support package add-ons.
+* *Premium support*: Expanded SLAs, an account team, training and onboarding options, and available support package add-ons. A 24 x 7 coverage support plan lowers the response time from the support team to as low as 30 minutes. For more information, see the link:https://support.circleci.com/hc/en-us/articles/4415357235995-Support-Plans-Priority-Response[Support Plans Priority Response] support article.
 * *Plan sharing*: Share your plan with child organizations so they can build under your account.
 
 For current network and storage allowances, refer to the link:https://circleci.com/pricing/[Pricing] page.
@@ -129,6 +151,15 @@ include::ROOT:partial$shared-sections/features-of-circleci.adoc[]
 To set up a Free or Performance plan, go to menu:Plan[Plan Overview] in the link:https://app.circleci.com/[CircleCI web app] and select the plan that fits your needs.
 
 To set up a Scale or Server plan, link:https://circleci.com/talk-to-us/[contact us].
+
+[#share-and-transfer-plans]
+== Share and transfer plans
+
+To share plans across organizations and bill them centrally, select menu:Plan[Share & Transfer] in the CircleCI web app.
+
+On the Scale plan, you can share your plan with free organizations for which you have admin access by selecting *Add Shared Organization*. All organizations you have shared your plan with are listed on the Share & Transfer page. Child organizations bill all credits and other usage to the parent organization.
+
+On non-free plans, you can transfer your plan to another free organization for which you have admin access by selecting *Transfer Plan*. When you transfer a paid plan to another organization, your organization is downgraded to the Free plan.
 
 [#managing-credit-usage]
 == Managing credit usage

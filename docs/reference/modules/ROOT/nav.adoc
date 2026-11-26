@@ -1,5 +1,6 @@
 * Configuration
 ** xref:configuration-reference.adoc[Configuration reference]
+** xref:expressions-reference.adoc[Expressions reference]
 ** xref:reusing-config.adoc[Reusable configuration reference]
 ** xref:variables.adoc[Project values and variables]
 ** xref:testsuite-configuration-reference.adoc[Testsuite configuration reference]
@@ -22,4 +23,3 @@
 ** xref:environment-cli-usage-guide.adoc[Environment CLI usage guide]
 ** xref:insights-glossary.adoc[Insights metrics glossary]
 ** xref:troubleshoot.adoc[Troubleshoot]
-** xref:faq.adoc[FAQ]

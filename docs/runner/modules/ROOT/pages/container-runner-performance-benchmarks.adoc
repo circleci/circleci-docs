@@ -692,4 +692,3 @@ Refer to the xref:troubleshoot-self-hosted-runner.adoc#container-runner[Troubles
 
 - xref:container-runner.adoc[Container Runner Reference Guide]
 - xref:runner-concepts.adoc[Runner Concepts]
-- xref:runner-faqs.adoc[Self-Hosted Runner FAQ]

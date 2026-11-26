@@ -72,7 +72,14 @@ Example output:
 }
 ----
 +
-include::ROOT:partial$notes/find-organization-id.adoc[]
+The `--owner-id` flag takes your organization ID.
++
+ifndef::server[]
+include::ROOT:partial$find-ids/org-id-cli.adoc[]
+endif::server[]
+ifdef::server[]
+include::ROOT:partial$find-ids/org-id-cli-v0.adoc[]
+endif::server[]
 
 [#manage-policies-with-your-vcs]
 == Manage policies with your VCS
@@ -101,7 +108,7 @@ You can do this using a context. For more information about setting up and using
 . Select **Add Environment Variable**. Enter `CIRCLECI_CLI_TOKEN` for the name, and your personal API token string for the value. For more information, see the xref:toolkit:circleci-cli.adoc[Installing the CircleCI CLI] page. Then click **Add Environment Variable** again to complete.
 . Select **Add Environment Variable** and enter `ORG_ID` for the environment variable name, and your organization ID for the value.
 +
-include::ROOT:partial$notes/find-organization-id.adoc[]
+Your organization ID is on the *Overview* page of your organization settings.
 
 [set-up-a-config-policy-management-ci-pipeline]
 === Set up a config policies CI/CD pipeline

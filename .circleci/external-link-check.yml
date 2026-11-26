@@ -14,13 +14,12 @@ version: 2.1
 #   this pipeline only runs on the schedule.
 
 orbs:
-  go: circleci/go@3.0.4
-  cloudsmith: https://raw.githubusercontent.com/circleci/backplane-cicd/main/orbs/cloudsmith.yml
+  go: circleci/go@4.0.4
 
 executors:
   node_executor:
     docker:
-      - image: cimg/node:24.21.0
+      - image: cimg/node:24.22.3
     resource_class: medium+.gen2
     working_directory: ~/project
 
@@ -35,7 +34,7 @@ jobs:
           name: Install Node dependencies
           command: npm ci
       - go/install:
-          version: "1.25.0"
+          version: "1.26.10"
       - run:
           name: Build the documentation site
           command: NODE_OPTIONS="--max-old-space-size=4096" npm run build:docs

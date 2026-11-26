@@ -18,7 +18,7 @@ You can view an example tutorial for scaling machine runners with AWS Autoscalin
 [#container-runner]
 == Container runner
 
-If you use the container runner on Kubernetes, it will automatically spin up more pods as more work enters the queue.  Those pods are ephemeral and will be torn down after the job is done executing.  While pods will scale with the work automatically, CircleCI will _not_ scale the underlying compute for your Kubernetes cluster.
+If you use the container runner on Kubernetes, it will automatically spin up more pods as more work enters the queue.  Those pods are ephemeral and will be torn down after the job is done executing.  While pods will scale with the work automatically, CircleCI will _not_ scale the underlying compute for your Kubernetes cluster. Container runner schedules work only if there are available resources in the cluster. Use the endpoints in <<scaling-data>> as a signal for cluster scaling.
 
 [#scaling-data]
 == Scaling data

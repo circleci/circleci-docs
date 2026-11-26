@@ -346,7 +346,10 @@ jobs:
           key: bazel-disk-cache-v1-{{ .Branch }}-{{ checksum "WORKSPACE" }}
 ----
 
-NOTE: Because caches are immutable per key, this pattern only captures whichever run first writes the cache for a given `WORKSPACE` checksum. Later runs restore that same snapshot rather than growing it further. See <<clearing-cache>> if you need to force a fresh capture. Bazel's own remote cache does not have this limitation — entries accumulate continuously as builds run. CircleCI can host that remote cache for you automatically; see xref:build-tool-cache.adoc[Build Tool Cache].
+NOTE: Because caches are immutable per key, this pattern only captures whichever run first writes the cache for a given `WORKSPACE` checksum. Later runs restore that same snapshot rather than growing it further. See <<clearing-cache>> if you need to force a fresh capture. Bazel's own remote cache does not have this limitation — entries accumulate continuously as builds run.
+ifndef::server[]
+CircleCI can host that remote cache for you automatically; see xref:build-tool-cache.adoc[Build Tool Cache].
+endif::server[]
 
 [#bundler-ruby]
 === Bundler (Ruby)
@@ -406,7 +409,10 @@ jobs:
 
 NOTE: If you use Gradle dependency locking, replace `build.gradle` with the path to your lock file (for example, `gradle/dependency-locks/compileClasspath.lockfile`). Using a lock file produces a more precise cache key.
 
-NOTE: This pattern caches only what Gradle downloads. Gradle also maintains a separate *build cache* that stores task outputs (compiled classes, test results, and so on) so it can skip redoing work. Most teams never turn this on in CI. CircleCI can host that build cache for you automatically; see xref:build-tool-cache.adoc[Build Tool Cache].
+NOTE: This pattern caches only what Gradle downloads. Gradle also maintains a separate *build cache* that stores task outputs (compiled classes, test results, and so on) so it can skip redoing work. Most teams never turn this on in CI.
+ifndef::server[]
+CircleCI can host that build cache for you automatically; see xref:build-tool-cache.adoc[Build Tool Cache].
+endif::server[]
 
 [#maven-java-and-leiningen-clojure]
 === Maven (Java) and Leiningen (Clojure)
@@ -464,7 +470,10 @@ jobs:
           key: turbo-cache-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
 ----
 
-NOTE: Because caches are immutable per key, this pattern only captures whichever run first writes the cache for a given `package-lock.json` checksum. Later runs restore that same snapshot rather than growing it further. See <<clearing-cache>> if you need to force a fresh capture. Turborepo's own remote cache does not have this limitation — entries accumulate continuously as tasks run. CircleCI can host that remote cache for you automatically; see xref:build-tool-cache.adoc[Build Tool Cache].
+NOTE: Because caches are immutable per key, this pattern only captures whichever run first writes the cache for a given `package-lock.json` checksum. Later runs restore that same snapshot rather than growing it further. See <<clearing-cache>> if you need to force a fresh capture. Turborepo's own remote cache does not have this limitation — entries accumulate continuously as tasks run.
+ifndef::server[]
+CircleCI can host that remote cache for you automatically; see xref:build-tool-cache.adoc[Build Tool Cache].
+endif::server[]
 
 [#npm-node]
 === npm (Node)
