@@ -7,7 +7,7 @@
 :page-show-readtime: true
 :experimental:
 
-This quickstart picks up where Create a Project leaves off. You start with a project that has a passing run, then break the build on purpose, use CircleCI's debugging tools to find the problem, and fix it. The guide ends with a tour of features to explore next. Each step has a web app tab and a CLI tab, so you can follow the one you prefer.pass:[<!-- vale circleci-docs.ImageTitles = NO -->]
+Follow this guide to get a guided tour of some CircleCI features. We start with a project building on CircleCI, then break the build, use CircleCI's debugging tools to find the problem, and fix it. The guide ends with a tour of features to explore next. Each step has a web app tab and a CLI tab, so you can follow the one you prefer. If you need to get a project set up first, see xref:create-project.adoc[Create a Project].pass:[<!-- vale circleci-docs.ImageTitles = NO -->]
 
 == Prerequisites
 
@@ -24,19 +24,19 @@ Web app::
 +
 --
 [.steps-with-thumbs]
-. In the link:https://app.circleci.com/[CircleCI web app], select **Projects** from the sidebar, then select your project.
+. In the link:https://app.circleci.com/[CircleCI web app], select *Pipelines* from the sidebar. Use the *Project* filter to make sure you are looking at pipelines for your chosen project.
 +
-image::guides:ROOT:pipelines-dashboard.png[The Projects page in the CircleCI web app]
-. Select the latest pipeline run.
+image::guides:ROOT:pipelines-dashboard.png[The Pipelines page in the CircleCI web app]
+. Select a workflow by name to view the workflow graph.
 +
-image::guides:ROOT:pipelines-dashboard.png[A pipeline run in the CircleCI web app]
-. Expand the workflow, then select a job to see the steps that ran.
+image::guides:ROOT:pipelines-dashboard.png[A workflow graph in the CircleCI web app]
+. Select a job to see the steps that ran.
 +
-image::guides:ROOT:pipelines-dashboard.png[An expanded workflow with its jobs]
+image::guides:ROOT:pipelines-dashboard.png[A job selected in the workflow graph]
 . Expand any step to read its output. You can search, share, or download the output.
 +
 image::guides:ROOT:pipelines-dashboard.png[Step output on the job page]
-. Use the tabs along the top of the job page to see test results, timing data, artifacts, and resource usage.
+. Use the tabs along the top of the job page to see test results, Smarter Testing usage (once set up), timing data, artifacts, and resource usage.
 +
 image::guides:ROOT:pipelines-dashboard.png[The tabs along the top of the job page]
 --
