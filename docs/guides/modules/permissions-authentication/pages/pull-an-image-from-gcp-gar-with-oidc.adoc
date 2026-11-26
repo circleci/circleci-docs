@@ -92,7 +92,7 @@ To resolve this, update the `google.subject` attribute mapping in your GCP Workl
 
 [source,plaintext]
 ----
-google.subject=assertion.org_id + "/" + assertion.sub.extract('/user/{user_id}/')
+google.subject=assertion.aud + "/" + assertion.sub.extract('/user/{user_id}/')
 ----
 
 This produces a value like `<org_uuid>/<user_uuid>` (73 bytes), which is well within the limit and works consistently across all trigger types.
@@ -101,7 +101,7 @@ The CircleCI OIDC V3 token's `sub` claim is longer still, because it also includ
 
 [source,plaintext]
 ----
-google.subject=assertion.org_id + "/" + assertion.sub.extract(':user:{user_id}:')
+google.subject=assertion.aud + "/" + assertion.sub.extract(':user:{user_id}:')
 ----
 
 If your IAM conditions reference `google.subject`, update them to match the new format. To preserve the full `sub` for use in conditions, add it as a custom attribute:

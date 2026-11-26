@@ -104,7 +104,7 @@ NOTE: You cannot use a built-in environment variable to define another environme
 | String
 | An OpenID Connect token signed by CircleCI which includes details about the current job. The value is empty when the pipeline has no checkout source.
 | [.circle-green]#**Yes**#
-| [.circle-red]#**NO**#
+| [.circle-green]#**Yes**# from v4.9.9 and v4.10.4
 
 | `CIRCLE_ORGANIZATION_ID`
 | GitHub, Bitbucket, GitLab, Cursor Origin
