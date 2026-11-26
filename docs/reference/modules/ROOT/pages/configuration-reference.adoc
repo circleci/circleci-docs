@@ -4108,7 +4108,7 @@ For the operators, literals, and precedence rules you can use in expressions, se
 [#valid-parameter-names]
 === Valid parameter names
 
-To use a pipeline parameter in an expression, its name must follow the rules for variable names in the xref:expressions-reference.adoc#variables[Expressions Reference].
+To use a pipeline parameter in an expression, its name must follow the rules for names in the xref:expressions-reference.adoc#variables[Expressions Reference].
 
 [#expression-examples]
 === Expression examples

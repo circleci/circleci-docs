@@ -1,0 +1,15 @@
+- name: flags link text that is only inline code
+  rule: LinkTextBackticks.yml
+  format: adoc
+  input: CircleCI uses the link:https://github.com/CircleCI-Public/expr[`expr`] library.
+  contains: circleci-docs.LinkTextBackticks
+- name: flags xref text that is only inline code
+  rule: LinkTextBackticks.yml
+  format: adoc
+  input: See xref:configuration-reference.adoc#parameters[`parameters`] for details.
+  contains: circleci-docs.LinkTextBackticks
+- name: allows code in the surrounding text
+  rule: LinkTextBackticks.yml
+  format: adoc
+  input: CircleCI uses the `expr` link:https://github.com/CircleCI-Public/expr[library].
+  absent: circleci-docs.LinkTextBackticks

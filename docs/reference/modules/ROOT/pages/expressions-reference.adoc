@@ -7,7 +7,7 @@
 :page-description: Reference for the CircleCI expression syntax, including literals, operators, precedence, and how expressions are evaluated.
 :experimental:
 
-CircleCI expressions are small boolean and value expressions that CircleCI evaluates against a set of variables, such as pipeline values. Several CircleCI features accept expressions, and they all use the syntax described on this page.
+CircleCI expressions are small boolean and value expressions that CircleCI evaluates against variables and values, such as pipeline values. Several CircleCI features accept expressions, and they all use the syntax described on this page.
 
 For example:
 
@@ -16,18 +16,18 @@ For example:
 pipeline.git.branch == "main" and not (pipeline.trigger.type starts-with "api")
 ----
 
-CircleCI evaluates expressions with the link:https://github.com/CircleCI-Public/expr[`expr`] library.
+CircleCI evaluates expressions with the `expr` link:https://github.com/CircleCI-Public/expr[library].
 
 [#where-you-can-use-expressions]
 == Where you can use expressions
 
-What differs between features is where the expression is written, which variables are available, and when it is evaluated.
+Expressions can be used with various CircleCI features. The following table lists the features for which expressions are supported and the variables and values available.
 
 [.table-scroll]
 --
 [cols="1,2,2", options="header"]
 |===
-| Feature | Variables available | More information
+| Feature | Variables and values available | More information
 
 | Job filters and workflow `when` or `unless` in config
 | Pipeline values and pipeline parameters.
@@ -38,7 +38,7 @@ What differs between features is where the expression is written, which variable
 | xref:configuration-reference.adoc#expressions-in-config-fields[Expressions in Configuration Fields]
 
 | Context expression restrictions
-| Pipeline values (except `pipeline.trigger_parameters.*`) and the job value `job.ssh.enabled`. Pipeline parameters (`pipeline.parameters.*`) are not available, because people who trigger a pipeline run can set them, and trigger inputs must not decide whether a context is available. Trigger parameters (`pipeline.trigger_parameters.*`) are not available because they are deprecated and tightly coupled to the VCS.
+| Pipeline values (except the deprecated `pipeline.trigger_parameters.*`) and the job value `job.ssh.enabled`. Pipeline parameters (`pipeline.parameters.*`) are not available, because they are set when a pipeline run is triggered, and trigger inputs must not decide whether a context is available.
 | xref:guides:security:contexts.adoc#expression-restrictions[Expression Restrictions]
 
 | Release validation `fail_when`
@@ -78,9 +78,9 @@ Enclose regular expression patterns in forward slashes (`/ /`). Use `\` to escap
 * Capturing groups are allowed in a pattern, but you cannot use the captured values in an expression.
 
 [#variables]
-== Variables
+== Variables and values
 
-A variable is a name that CircleCI replaces with a value when it evaluates the expression. Expressions can use the following kinds of variable:
+A variable is a name that CircleCI replaces with a value when it evaluates the expression. Expressions can use the following values and variables:
 
 * Pipeline values, such as `pipeline.git.branch`. See xref:guides:orchestrate:pipeline-variables.adoc#pipeline-values[Pipeline Values].
 * Pipeline parameters, referenced as `pipeline.parameters.<name>`. See xref:guides:orchestrate:pipeline-variables.adoc#pipeline-parameters-in-configuration[Pipeline Parameters].
@@ -91,9 +91,9 @@ include::guides:ROOT:partial$using-expressions/env-vars-in-conditional-caveat.ad
 
 Which of these are available depends on the feature. See <<where-you-can-use-expressions>>.
 
-Variable names follow these rules:
+Names follow these rules:
 
-* A variable name starts with a letter. It can contain letters, digits, hyphens (`-`), and underscores (`_`).
+* A name starts with a letter. It can contain letters, digits, hyphens (`-`), and underscores (`_`).
 * Use periods (`.`) to separate segments, as in `pipeline.git.branch`. A name cannot start with a period, and cannot contain consecutive periods.
 
 This applies to pipeline parameters too. If a pipeline parameter has a name that does not follow these rules, CircleCI performs string replacement instead of evaluating an expression.
@@ -112,7 +112,7 @@ Invalid names:
 * `.bar`: cannot start with a period.
 * `foo..bar`: cannot contain consecutive periods.
 
-Referring to a variable that does not exist is an error. See <<undefined-values>> for variables that exist but have no value.
+Referring to a variable or value that does not exist is an error. See <<undefined-values>> for variables and values that exist but have no value.
 
 [#operators]
 == Operators
@@ -237,7 +237,7 @@ The expression evaluates to `false`.
 [#undefined-values]
 === Undefined values
 
-A variable that exists but has no value is _undefined_. An undefined value is not equal to anything, including itself.
+A variable or value that exists but has no value is _undefined_. An undefined value is not equal to anything, including itself.
 
 * If an equality or comparison operator has an undefined operand, the result is undefined. For example, when `foo` is undefined, each of the following is undefined:
 ** `foo == foo`
@@ -251,14 +251,14 @@ A variable that exists but has no value is _undefined_. An undefined value is no
 ** `not foo` evaluates to `true`.
 * If the final result of an expression is undefined, it is treated as `false`.
 
-In GitHub OAuth projects, a variable that has no value is an empty string, not undefined. This applies on CircleCI Cloud and CircleCI Server. An empty string counts as `true`, so the rules above do not apply. For example, on a tag build `pipeline.git.branch or "none"` evaluates to the empty string, not to `"none"`.
+In GitHub OAuth projects, a variable or value that has no value is an empty string, not undefined. This applies on CircleCI Cloud and CircleCI Server. An empty string counts as `true`, so the rules above do not apply. For example, on a tag build `pipeline.git.branch or "none"` evaluates to the empty string, not to `"none"`.
 
 [#errors]
 == Errors
 
 Evaluating an expression fails with an error in the following cases:
 
-* A variable does not exist.
+* A variable or value does not exist.
 * An operand of a numeric comparison operator is not a number.
 * An operand of `starts-with` or `contains` is not a string.
 * The left operand of `matches` is not a string, or the right operand is not a pattern.
