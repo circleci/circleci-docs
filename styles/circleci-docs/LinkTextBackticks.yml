@@ -1,0 +1,9 @@
+---
+extends: existence
+message: "Don't make link text only inline code. It doesn't look like a link on the built site. Put the code in the surrounding text and link a plain word."
+link: https://github.com/circleci/circleci-docs/blob/main/AGENTS.md#external-links
+level: warning
+scope: raw
+nonword: true
+tokens:
+  - '(?:link|xref):[^\s\[]+\[`[^\]`]+`\]'
