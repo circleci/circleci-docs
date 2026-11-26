@@ -155,14 +155,14 @@ The next run passes. You have now gone from a failing build to a passing build u
 
 == 4. Explore more features
 
-The following features are available on every plan unless a label says otherwise. Each one links to its documentation and shows where to find it.
+The following features are available on every plan unless the description says otherwise. Each one links to its documentation and shows where to find it.
 
 === Testing and debugging
 
 [.feature-list]
 * xref:test:smarter-testing-overview.adoc[Smarter Testing]
 +
-[.plan-label]#Paid add-ons# Run your tests with `circleci testsuite`, which is free on every plan. Test impact analysis, dynamic test splitting, and auto-rerun are add-on capabilities with a credit charge.
+Run your tests with `circleci testsuite`, which is free on every plan. Test impact analysis, dynamic test splitting, and auto-rerun are paid add-on capabilities with a credit charge.
 +
 Find it: `.circleci/test-suites.yml` and the `circleci testsuite` command.
 

@@ -1790,20 +1790,6 @@ html[data-theme="dark"] .doc .paragraph.link-card a:hover {
   font-weight: 500;
 }
 
-/* Plan label, same look as the platform badge. */
-.doc .feature-list .plan-label {
-  display: inline-block;
-  margin-right: 0.5rem;
-  padding: 0.25rem 0.375rem;
-  border: 1px solid currentColor;
-  border-radius: 999px;
-  font-family: Roboto, sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-  line-height: 1;
-  vertical-align: middle;
-}
-
 /* Steps with thumbnails: an ordered list where each step can carry a screenshot thumbnail on the right.
    Usage: [.steps-with-thumbs] on an olist. Attach the screenshot to a step with + and an image:: block.
    Steps without an image still lay out correctly. The image modal enlarges a thumbnail on click.
