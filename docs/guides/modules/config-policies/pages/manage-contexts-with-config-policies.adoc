@@ -192,10 +192,7 @@ NOTE: If you would like to write tests for your policy, check out the xref:test-
 
 [#conclusion-1]
 === Conclusion
-Once you have pushed your new `allow_contexts.rego` policy, any pipeline trigger for the specified project that accesses blocked contexts will fail. Developers will be notified on the dashboard as shown below.
-
-.Dashboard showing context policy failure
-image::guides:ROOT:config-policies/context-fail.png[Dashboard page]
+Once you have pushed your new `allow_contexts.rego` policy, any pipeline trigger for the specified project that accesses blocked contexts will fail. Developers will be notified on the dashboard.
 
 [#use-sets-and-variables]
 === Use sets and variables
@@ -357,10 +354,7 @@ NOTE: If you would like to write tests for your policy, check out the xref:test-
 
 [#conclusion-2]
 === Conclusion
-Once you have pushed your new `block_contexts.rego` policy, any pipeline trigger for the specified project that accesses blocked contexts will fail. Developers will be notified on the dashboard as shown below.
-
-.Dashboard showing context block policy failure
-image::guides:ROOT:config-policies/context-fail-2.png[Dashboard page showing fail]
+Once you have pushed your new `block_contexts.rego` policy, any pipeline trigger for the specified project that accesses blocked contexts will fail. Developers will be notified on the dashboard.
 
 [#define-the-contexts-reserved-by-a-project]
 == Define the contexts reserved by a project

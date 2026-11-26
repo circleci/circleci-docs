@@ -18,8 +18,6 @@ All CircleCI organizations can request audit logs. You need to be an organizatio
 . Scroll down to the **Audit Logs** section.
 . Select the date range and then select btn:[Request audit logs].
 
-image::guides:ROOT:request-audit-log.png[Request audit logs]
-
 The earliest start date is one year ago from the current day, and the latest end date is the current day. The available data depends on the retention period set per organization, so the returned data range may be less than the requested time frame.
 
 NOTE: In some situations, the internal system may generate duplicate events in the audit logs. The `id` field of the downloaded logs is unique per event and identifies duplicate entries.
@@ -49,10 +47,6 @@ Successful requests can be either of the following:
 Once your request is successfully processed, select btn:[Download logs] to download the audit log as a CSV file. Successful requests are available to download for 30 days.
 
 NOTE: Audit log fields with nested data contain JSON blobs.
-
-.Audit log requests
-image::guides:ROOT:audit-log-request.png[Audit log requests]
-
 
 === Frequency limits
 

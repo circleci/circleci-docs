@@ -65,12 +65,7 @@ NOTE: To do this, you must have the _Organization Admin_ role.
 [#assign-a-project-role]
 == Assign a project role
 
-.Project roles setup page
-image::guides:ROOT:gl-ga/gitlab-project-settings-project-roles.png[Project roles setup page]
-
 include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
-
-[start=4]
 . In the sidebar menu, select **People** .
 +
 TIP: If you do not see the **People** option, your project is integrated using either xref:integration:github-integration.adoc[GitHub OAuth] or xref:integration:bitbucket-integration.adoc[Bitbucket Cloud] and project roles are not supported.
