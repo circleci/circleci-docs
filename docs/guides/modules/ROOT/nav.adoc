@@ -196,6 +196,7 @@
 *** xref:optimize:persist-data.adoc[Persisting data overview]
 *** xref:optimize:caching.adoc[Caching dependencies]
 *** xref:optimize:build-tool-cache.adoc[Build tool cache]
+*** xref:optimize:incremental-bazel-builds.adoc[Run incremental Bazel builds]
 *** xref:optimize:artifacts.adoc[Store build artifacts]
 ** Speed
 *** xref:optimize:concurrency.adoc[Concurrency]
