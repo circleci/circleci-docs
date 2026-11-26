@@ -26,19 +26,19 @@ Web app::
 [.steps-with-thumbs]
 . In the link:https://app.circleci.com/[CircleCI web app], select *Pipelines* from the sidebar. Use the *Project* filter to make sure you are looking at pipelines for your chosen project.
 +
-image::guides:ROOT:pipelines-dashboard.png[The Pipelines page in the CircleCI web app]
+image::quickstart-pipelines-page.png[The Pipelines page in the CircleCI web app]
 . Select a workflow by name to view the workflow graph.
 +
-image::guides:ROOT:pipelines-dashboard.png[A workflow graph in the CircleCI web app]
+image::quickstart-workflow-graph.png[A workflow graph in the CircleCI web app]
 . Select a job to see the steps that ran.
 +
-image::guides:ROOT:pipelines-dashboard.png[A job selected in the workflow graph]
+image::quickstart-job-steps.png[The steps that ran in a job]
 . Expand any step to read its output. You can search, share, or download the output.
 +
-image::guides:ROOT:pipelines-dashboard.png[Step output on the job page]
+image::quickstart-step-output.png[An expanded step showing its output]
 . Use the tabs along the top of the job page to see test results, Smarter Testing usage (once set up), timing data, artifacts, and resource usage.
 +
-image::guides:ROOT:pipelines-dashboard.png[The tabs along the top of the job page]
+image::quickstart-job-tabs.png[The tabs along the top of the job page]
 --
 CLI::
 +
@@ -86,7 +86,7 @@ Web app::
 [.steps-with-thumbs]
 . In the web app, open your project. The new pipeline run appears at the top of the list. When the job fails, the status changes to **Failed**.
 +
-image::guides:ROOT:pipelines-dashboard.png[A failed pipeline run in the CircleCI web app]
+image::quickstart-failed-pipeline.png[A failed pipeline run in the CircleCI web app]
 --
 CLI::
 +
@@ -112,16 +112,16 @@ Web app::
 [.steps-with-thumbs]
 . Open the failed job. CircleCI expands the step that failed and marks it with an error.
 +
-image::guides:ROOT:pipelines-dashboard.png[The failed job with the failed step expanded]
+image::quickstart-failed-step.png[The failed job with the failed step expanded]
 . Read the step output. You see `cat: missing-file.txt: No such file or directory`.
 +
-image::guides:ROOT:pipelines-dashboard.png[The output of the failed step]
-. Select **Explain This Error** on the failed step for a plain-language summary of the failure. Refer to xref:toolkit:intelligent-summaries.adoc[Explain This Error] for details.
+image::quickstart-failed-step.png[The output of the failed step]
+. Select **Explain error** on the failed step for a plain-language summary of the failure. Refer to xref:toolkit:intelligent-summaries.adoc[Explain This Error] for details.
 +
-image::guides:ROOT:pipelines-dashboard.png[The Explain This Error button on a failed step]
+image::quickstart-failed-step.png[The Explain error button on a failed step]
 . For failures you cannot find from the output, select **Rerun** then **Rerun job with SSH** to open a shell in the job's environment. Refer to xref:execute:ssh-access-jobs.adoc[Debug Jobs With SSH Rerun] for details.
 +
-image::guides:ROOT:pipelines-dashboard.png[The Rerun menu with the Rerun job with SSH option]
+image::quickstart-rerun-ssh.png[The Rerun menu with the Rerun job with SSH option]
 --
 CLI::
 +
