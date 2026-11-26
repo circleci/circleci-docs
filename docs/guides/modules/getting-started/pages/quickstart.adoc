@@ -229,51 +229,11 @@ Find it: **Resources** tab on a job.
 [#next-steps]
 == Next steps
 
+* xref:find-the-right-starting-point.adoc[Find the Right Starting Point] if your task does not match this guide
 * xref:config-intro.adoc[Introduction to Configuration]
 * xref:reference:ROOT:concepts.adoc[CircleCI Concepts]
 * xref:invite-your-team.adoc[Invite Your Team]
 * xref:plans-pricing:plan-overview.adoc[CircleCI Plans Overview] for paid features, more compute, and higher concurrency
 * link:https://www.youtube.com/playlist?list=PL9GgS3TcDh8wqLRk-0mDz7purXh-sNu7r[CircleCI foundation videos]
-
-[#find-the-right-starting-point]
-=== Find the right starting point
-
-If your task does not match this guide, use this table to find the right page instead. Then follow links from that page.
-
-[.table-scroll]
---
-[cols="1,2", options="header"]
-|===
-| What you want to do
-| Start here
-
-| Write or edit `.circleci/config.yml`
-| xref:reference:ROOT:concepts.adoc[Concepts], then xref:config-intro.adoc[Configuration Introduction], then the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference]
-
-| Trigger or schedule a pipeline
-| xref:orchestrate:triggers-overview.adoc[Trigger Options]. On Cloud, use xref:orchestrate:schedule-triggers.adoc[Schedule Triggers]. Server does not support Schedule Triggers; use a `triggers.schedule` block under the workflow instead.
-
-| Install a self-hosted runner
-| xref:runner:ROOT:runner-overview.adoc[Self-hosted Runner Overview]. Then install xref:runner:ROOT:install-machine-runner-3-on-linux.adoc[Machine Runner 3] on a VM (Server needs v4.4+), or xref:runner:ROOT:container-runner-installation.adoc[Container Runner] on Kubernetes.
-
-| Move from another CI tool
-| xref:migrate:migration-intro.adoc[Introduction to CircleCI Migration], then the matching migrate-from page.
-
-| Connect an AI assistant to CircleCI
-| Cloud only. xref:toolkit:circleci-mcp-overview.adoc[CircleCI MCP Overview] first. Then connect the xref:toolkit:connecting-to-the-circleci-mcp-server.adoc[Hosted MCP Server] or the xref:toolkit:connecting-to-the-circleci-cli-mcp.adoc[CLI MCP]. Use the xref:toolkit:connecting-to-a-docs-mcp-server.adoc[Docs MCP] only to search documentation.
-
-| Use or author orbs
-| xref:orbs:use:orb-intro.adoc[Introduction to Using Orbs]
-
-| Install or operate CircleCI Server
-| xref:server-admin:overview:circleci-server-overview.adoc[CircleCI Server Overview]. Server is a self-hosted CircleCI installation. It is not a self-hosted runner.
-
-| Call the CircleCI API
-| Cloud: link:https://circleci.com/docs/api/v3/[API v3 reference] and the link:https://circleci.com/fullopenapi.yaml[OpenAPI specification]. Server: xref:toolkit:api-intro.adoc[API Introduction] for API v1.1 and v2. API v3 is Cloud only.
-
-| Authenticate to the API or CLI
-| xref:toolkit:managing-api-tokens.adoc[Managing API Tokens]
-|===
---
 
 TIP: Using an AI coding assistant? Point it at link:https://circleci.com/docs/AGENTS.md[circleci.com/docs/AGENTS.md] for current defaults, deprecated patterns, and the differences between Cloud and Server.
