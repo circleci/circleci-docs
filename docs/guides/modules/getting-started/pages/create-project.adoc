@@ -162,6 +162,25 @@ For guidance on creating a `config.yml` file, see the following pages:
 * xref:reference:ROOT:configuration-reference.adoc[Configuration Reference]
 ****
 --
+Forgejo::
++
+--
+include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
+
+include::ROOT:partial$create-project/choose-a-repo.adoc[]
++
+Select the **Forgejo** tile and enter your Forgejo instance URL. Complete setup by creating a CircleCI bot user, a connection integration, a checkout integration, and request headers (if your instance needs extra headers on every request).
+
+. Set up the trigger for your pipeline. CircleCI creates one Forgejo trigger to get you started. The default is **All pushes**.
++
+You set up one trigger during project creation. You can configure additional triggers once your project is created. See the xref:orchestrate:set-up-triggers.adoc[Set Up Triggers] page for more information.
+
+. If your repo does not already contain a CircleCI config file, CircleCI provides an AI prompt for you to use with your preferred agent. The agent generates a config and commits it to your repo on a new branch. If you do already have a CircleCI config file in your repo, it will be displayed. Once you have your config, select btn:[Review].
+
+. Next, review everything you have just set up. Then, if you have not already, commit your config to your repo to start your pipeline run.
+
+Once your project is created you will land on your pipelines page.
+--
 ====
 
 CircleCI uses the specified config file to run your pipeline. You can see the output on the pipelines page. To make changes to your pipeline, edit the config file in your repository.

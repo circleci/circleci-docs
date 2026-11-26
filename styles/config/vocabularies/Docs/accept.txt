@@ -158,6 +158,7 @@ Fastlane
 [Ff]ilename
 [Ff]ilepath
 Finout
+Forgejo
 framebuffer
 frameit
 [Ff]ree
