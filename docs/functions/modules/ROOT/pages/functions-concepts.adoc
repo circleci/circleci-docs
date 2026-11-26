@@ -75,6 +75,18 @@ workflows:
 
 To see a function's commands and flags, read its README in the xref:functions-catalog.adoc[Functions Catalog] or run `circleci function get <name>`.
 
+[#function-step-keys]
+=== Function step keys
+
+A function step takes the following keys:
+
+* `id`: An identifier for the step.
+* `with`: The flags to pass to the command, as described in <<flags>>.
+* `max_auto_reruns`: The number of times to rerun the step if it fails.
+* `auto_rerun_delay`: The time to wait before each rerun.
+
+For the rules and an example, see xref:guides:orchestrate:automatic-reruns.adoc#automatic-function-step-reruns[Automatic Function Step Reruns].
+
 [#aliases]
 == Aliases
 
