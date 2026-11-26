@@ -1803,3 +1803,69 @@ html[data-theme="dark"] .doc .paragraph.link-card a:hover {
   line-height: 1;
   vertical-align: middle;
 }
+
+/* Steps with thumbnails: an ordered list where each step can carry a screenshot thumbnail on the right.
+   Usage: [.steps-with-thumbs] on an olist. Attach the screenshot to a step with + and an image:: block.
+   Steps without an image still lay out correctly. The image modal enlarges a thumbnail on click.
+   Thumbnails have alt text only, no caption, because the numbered step is the caption. */
+.doc .olist.steps-with-thumbs > ol {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 0.8rem;
+  counter-reset: step;
+}
+
+.doc .olist.steps-with-thumbs > ol > li {
+  counter-increment: step;
+  display: grid;
+  grid-template-columns: 1.2rem minmax(0, 1fr);
+  column-gap: 0;
+  hyphens: none;
+}
+
+.doc .olist.steps-with-thumbs > ol > li + li {
+  margin-top: 1.5rem;
+}
+
+.doc .olist.steps-with-thumbs > ol > li::before {
+  content: counter(step) ".";
+  grid-column: 1;
+  font-variant-numeric: tabular-nums; /* matches native list markers */
+}
+
+.doc .olist.steps-with-thumbs > ol > li > * {
+  grid-column: 2;
+  margin-top: 0.5rem;
+}
+
+.doc .olist.steps-with-thumbs > ol > li > p:first-of-type {
+  margin-top: 0;
+}
+
+.doc .olist.steps-with-thumbs .imageblock {
+  margin-top: 0.75rem;
+}
+
+.doc .olist.steps-with-thumbs .imageblock img {
+  border: 1px solid var(--color-vapor);
+  border-radius: 0.5rem;
+}
+
+html[data-theme="dark"] .doc .olist.steps-with-thumbs .imageblock img {
+  border-color: var(--dark-border-primary);
+}
+
+@media (min-width: 768px) {
+  .doc .olist.steps-with-thumbs > ol > li {
+    grid-template-columns: 1.2rem minmax(0, 1fr) 240px;
+    column-gap: 0;
+  }
+
+  .doc .olist.steps-with-thumbs > ol > li > .imageblock {
+    grid-column: 3;
+    grid-row: 1 / span 10;
+    align-self: start;
+    margin-top: 0;
+    margin-left: 1rem;
+  }
+}
