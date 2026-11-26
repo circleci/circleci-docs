@@ -26,7 +26,7 @@ For upgrade steps see the xref:installation:upgrade-server.adoc#[Upgrade Server 
 
 == Release 4.10.4
 
-For full details of this release see the link:https://circleci.com/changelog/server-release-4-10-4/[changelog].
+For full details of this release see the link:https://circleci.com/changelog/server-release-4-10-4/[Server 4.10.4 Changelog].
 
 == Release 4.10.3
 
