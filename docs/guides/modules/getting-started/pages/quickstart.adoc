@@ -110,12 +110,9 @@ Web app::
 +
 --
 [.steps-with-thumbs]
-. Open the failed job. CircleCI expands the step that failed and marks it with an error.
+. Open the failed job. CircleCI expands the step that failed and marks it with an error. Read the step output. You see `cat: missing-file.txt: No such file or directory`.
 +
-image::quickstart-failed-step.png[The failed job with the failed step expanded]
-. Read the step output. You see `cat: missing-file.txt: No such file or directory`.
-+
-image::quickstart-failed-step.png[The output of the failed step]
+image::quickstart-failed-step.png[The failed job with the failed step expanded, showing its output]
 . Select **Explain error** on the failed step for a plain-language summary of the failure. Refer to xref:toolkit:intelligent-summaries.adoc[Explain This Error] for details.
 +
 image::quickstart-failed-step.png[The Explain error button on a failed step]
