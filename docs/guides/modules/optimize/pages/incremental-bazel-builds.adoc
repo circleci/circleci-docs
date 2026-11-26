@@ -33,7 +33,7 @@ You can follow along using the link:https://github.com/circleci-public/circleci-
 
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
 * link:https://github.com/bazelbuild/bazelisk[Bazelisk] installed locally. On macOS, run `brew install bazelisk`. Bazelisk provides the `bazel` command.
-* The xref:guides:toolkit:circleci-cli.adoc[CircleCI CLI] installed and authenticated.
+* The xref:guides:toolkit:circleci-cli.adoc[CircleCI CLI] installed and authenticated. To authenticate, run `circleci auth login`.
 
 [#1-explore-the-demo-project]
 == 1. Explore the demo project
@@ -65,6 +65,8 @@ $ cd circleci-demo-bazel
 $ bazel build //...
 $ bazel test //...
 ----
++
+The first build downloads Bazel and its dependencies, so it can take a minute or more. Bazel also prints a long warning about implicit `__init__.py` creation. The warning comes from the Python rules, not from your setup. You can ignore it. The build is successful when both commands finish without errors and `bazel test` reports `2 tests pass`.
 
 [#2-set-up-the-project-on-circleci]
 == 2. Set up the project on CircleCI
@@ -94,11 +96,12 @@ Both the build job and the test jobs use `with_tool_cache`. The build job stores
 For more on how the pieces work, see xref:orchestrate:dynamic-config.adoc[Dynamic Configuration] and xref:build-tool-cache.adoc[Build Tool Cache].
 
 [#4-run-a-pipeline-on-main]
-== 4. Trigger a run on main
+== 4. Check the run on main
 
 The setup workflow compares each branch with a snapshot of the dependency graph from `main`, so a successful run on `main` must exist first.
 
-. Trigger a run on `main` by pushing a commit, or by selecting **Rerun** on an existing run.
+. Check whether a run on `main` already started. Following a project can start one.
+. If there is no run, trigger one by pushing a commit to `main`, or by selecting **Rerun** on an existing run.
 . Wait for both stages of the pipeline to pass: the `setup` workflow, then the generated `build-and-test` job.
 
 To check the status from your terminal, run:
@@ -107,6 +110,8 @@ To check the status from your terminal, run:
 ----
 $ circleci run list --project gh/<your-username>/circleci-demo-bazel --branch main --limit 1
 ----
+
+The `ci` workflow of this run takes about 30 seconds.
 
 [#5-change-only-lib-math]
 == 5. Change only lib/math
@@ -155,8 +160,21 @@ $ circleci run watch <run-id>
 //lib/math:math.py
 //lib/math:math_test
 ----
++
+`//app/goodbye` and `//lib/strings` are absent, because neither depends on `lib/math`. The list includes `//lib/math:math.py`, which is a source file and not a target that Bazel can build.
 
-`//app/goodbye` and `//lib/strings` are absent, because neither depends on `lib/math`.
+. Open the `Generate continuation config` step. It filters the list to build rules and tests, so `//lib/math:math.py` no longer appears:
++
+[source,text]
+----
+Affected rule targets (3):
+  //app/hello:hello
+  //lib/math:math
+  //lib/math:math_test
+
+Test targets (1):
+  //lib/math:math_test
+----
 
 . Open the generated `ci` workflow. It contains a `build-affected` job and a `test-lib-math-math-test` job. The test job requires the build job:
 +
@@ -167,11 +185,34 @@ workflows:
     jobs:
       - build-affected
       - test-lib-math-math-test:
-          requires: [build-affected]
+          requires:
+            - build-affected
 ----
 
-[#7-change-only-lib-strings]
-== 7. Change only lib/strings
+[#7-confirm-the-cache-is-working]
+== 7. Confirm the cache is working
+
+The build and test jobs wrap their Bazel commands in `with_tool_cache`. You can confirm that Bazel used the cache from the job output.
+
+. Open the `build-affected` job. The `Start cache server` step lists each request that Bazel made to the cache, and ends with a summary of hits and misses.
+. In the `Build affected targets` step, find the line that reports remote cache hits:
++
+[source,text]
+----
+INFO: 23 processes: 2 remote cache hit, 21 internal.
+----
+
+. Open the `test-lib-math-math-test` job and find the same line. In the `Test //lib/math:math_test` step, Bazel reports the result as `remote-cache`:
++
+[source,text]
+----
+[12 / 13] 1 / 1 tests; Testing //lib/math:math_test; 1s remote-cache, processwrapper-sandbox
+----
+
+The exact numbers differ in your run. A nonzero count of remote cache hits means that Bazel reused outputs from the cache instead of rebuilding them.
+
+[#8-change-only-lib-strings]
+== 8. Change only lib/strings
 
 Now check the reverse case. Both apps depend on `lib/strings`, so a change there affects more targets.
 
@@ -194,7 +235,7 @@ $ git commit -m "demo: change lib/strings only"
 $ git push -u origin demo/strings-only
 ----
 
-When the run completes, `app/hello` and `app/goodbye` both appear in the affected targets. `lib/math` and `lib/math:math_test` are absent.
+When the run completes, open the `Compute affected targets` step of the `setup` job. `//app/hello:hello` and `//app/goodbye:goodbye` both appear in the affected targets, with `//lib/strings:strings` and `//lib/strings:strings_test`. Nothing from `lib/math` is present.
 
 [#conclusion]
 == Conclusion
