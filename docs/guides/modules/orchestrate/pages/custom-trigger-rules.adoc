@@ -1,0 +1,266 @@
+= Custom trigger rules
+:page-platform: Cloud
+:page-vcs: github, github-enterprise, cursor-origin
+:page-audience: developer
+:page-content-type: how-to, reference
+:page-description: Write custom trigger rules to control which repository events trigger a run, and create them with the API v3 Triggers endpoints.
+:experimental:
+
+When a preset trigger option, such as "PR opened", does not match the events you want, write a custom trigger rule. A rule is a boolean expression that CircleCI checks against each incoming repository event. The event triggers a run only when the expression is true.
+
+Create custom trigger rules with the link:https://circleci.com/docs/api/v3#tag/triggers[API v3 Triggers Reference]. For the presets, see xref:orchestrate:github-trigger-event-options.adoc[GitHub Trigger Event Options] and xref:orchestrate:cursor-origin-trigger-event-options.adoc[Cursor Origin Trigger Event Options].
+
+== Prerequisites
+
+* A CircleCI organization with a GitHub App, GitHub Server, or Cursor Origin integration.
+* A pipeline definition ID. See the xref:toolkit:how-to-find-ids.adoc[How to Find IDs] guide.
+* The ID and full name of the repository the trigger listens to.
+* A CircleCI personal API token in the `CIRCLE_TOKEN` environment variable. See xref:toolkit:managing-api-tokens.adoc[Managing API Tokens].
+
+== Understand how rules work
+
+Each VCS trigger holds one rule for each event type. Each rule has three properties:
+
+* `event_type`: The repository event the rule applies to.
+* `rule`: The expression to check. See <<write-a-rule>>.
+* `event_ref`: Which ref from the event the run uses.
+
+[.table-scroll]
+--
+[cols=3*, options="header"]
+|===
+| `event_type`
+| Valid `event_ref`
+| Providers
+
+| `push`
+| `push_ref`
+| GitHub, Cursor Origin
+
+| `pull_request`
+| `pr_head_ref`, `pr_base_ref`
+| GitHub, Cursor Origin
+
+| `issue_comment`
+| `pr_head_ref`, `pr_base_ref`
+| GitHub
+
+| `pull_request_review_comment`
+| `pr_head_ref`, `pr_base_ref`
+| GitHub
+|===
+--
+
+Use `pr_head_ref` to run on the pull request branch. Use `pr_base_ref` to run on the target branch, for example after a merge.
+
+CircleCI rejects a trigger with a `400` error when a rule has one of these problems:
+
+* The expression is longer than 500 characters.
+* The expression references a field that is not available for its event type.
+* A `pull_request`, `issue_comment`, or `pull_request_review_comment` rule does not reference `event.action`.
+* The `rule` is empty and the event type is not `push`. A `push` rule can be empty, and then it matches every push.
+
+CircleCI never triggers a run for branch or tag deletions.
+
+== Write a rule
+
+Rules use the expression language from the link:https://github.com/CircleCI-Public/expr[CircleCI-Public/expr] repository. See its README for the operators, literals, and grammar.
+
+Fields are dot-separated paths on `event`, for example `event.action` or `event.pull_request.draft`.
+
+.Example rules
+[source,text]
+----
+# Push: default branch only (event_type: push)
+event.branch == event.repository.default_branch
+
+# Push: release branches (event_type: push)
+event.branch matches /release\/.*/
+
+# Pull request: opened and not a draft (event_type: pull_request)
+event.action == "opened" and event.pull_request.draft == false
+
+# Pull request: merged on GitHub (event_type: pull_request, event_ref: pr_base_ref)
+event.action == "closed" and event.pull_request.merged == true
+
+# Pull request: not from a bot, GitHub only (event_type: pull_request)
+event.action == "opened" and event.pull_request.user.type != "Bot"
+
+# Comment: starts with a phrase (event_type: issue_comment)
+event.action == "created" and event.comment.body starts-with "/run-ci"
+----
+
+== Reference event fields
+
+A rule can reference only the fields listed for its event type.
+
+[.table-scroll]
+--
+[cols="2,5,2", options="header"]
+|===
+| Event type
+| Fields
+| Providers
+
+| `push`
+a|
+* `event.branch`
+* `event.tag`
+* `event.repository.default_branch`
+| GitHub, Cursor Origin
+
+| `push`
+a|
+* `event.sender.login`
+* `event.head_commit.message`
+| GitHub
+
+| `pull_request`
+a|
+* `event.action`
+* `event.repository.default_branch`
+* `event.pull_request.title`
+* `event.pull_request.draft` (boolean)
+* `event.pull_request.head.ref`
+* `event.pull_request.base.ref`
+* `event.pull_request.user.login`
+| GitHub, Cursor Origin
+
+| `pull_request`
+a|
+* `event.pull_request.merged` (boolean)
+* `event.pull_request.user.type`
+* `event.pull_request.stack.position` (number)
+* `event.pull_request.stack.size` (number)
+* `event.pull_request.stack.base.ref`
+* `event.label.name`
+* `event.requested_reviewer.login`
+* `event.requested_team.name`
+* `event.sender.login`
+| GitHub
+
+| `issue_comment`, `pull_request_review_comment`
+a|
+* `event.action`
+* `event.comment.body`
+* `event.sender.login`
+* `event.repository.default_branch`
+| GitHub
+
+| `pull_request_review_comment`
+a|
+* `event.pull_request.stack.position`
+* `event.pull_request.stack.size`
+* `event.pull_request.stack.base.ref`
+| GitHub
+|===
+--
+
+Fields are strings unless noted. The `event.action` values are:
+
+* GitHub: The `action` from the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request[pull request webhook event]. Common values are `opened`, `synchronize`, `labeled`, `ready_for_review`, and `closed`.
+* Cursor Origin: `created`, `published`, `head_ref.pushed`, `base_ref.updated`, `merged`, `closed`, or `reopened`.
+
+To list the fields for a provider from the API, see <<discover-event-types-and-presets>>.
+
+== Create a trigger with custom rules
+
+Send a `POST` request to `/api/v3/triggers` with the rules in `event.filter.rules`.
+
+* Omit `event.filter.preset`. If you set `preset`, CircleCI ignores `rules`.
+* Set `vcs.provider` to one of:
+** `github_app`
+** `github_server`
+** `origin`
+* For `origin`, `repo_full_name` is required.
+* Replace the values in `< >` with your own.
+
+[source,shell]
+----
+curl --request POST https://circleci.com/api/v3/triggers \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "data": {
+      "attributes": {
+        "is_disabled": false,
+        "event": {
+          "type": "vcs",
+          "vcs": {
+            "provider": "github_app",
+            "repo_id": "<repository-id>",
+            "repo_full_name": "<org>/<repository>"
+          },
+          "filter": {
+            "rules": [
+              {
+                "event_type": "push",
+                "event_ref": "push_ref",
+                "rule": "event.branch == event.repository.default_branch"
+              },
+              {
+                "event_type": "pull_request",
+                "event_ref": "pr_head_ref",
+                "rule": "event.action == \"opened\" and event.pull_request.draft == false"
+              }
+            ]
+          }
+        }
+      },
+      "references": {
+        "pipeline": {"id": "<pipeline-definition-id>"}
+      }
+    }
+  }'
+----
+
+The `201` response returns the trigger with its `rules`.
+
+== Update, read, and delete a trigger
+
+Use these endpoints to manage a trigger after you create it.
+
+* Update: `POST /api/v3/triggers/<trigger-id>/update` with a new `event.filter.rules` array. The new rules replace all existing rules.
+* Disable: send `{"is_disabled": true}` to the update endpoint.
+* Read: `GET /api/v3/triggers/<trigger-id>`.
+* List: `GET /api/v3/triggers?filter[project_id]=<project-id>`. You can also filter by `filter[pipeline_id]`. Supply at least one of the two filters.
+* Delete: `DELETE /api/v3/triggers/<trigger-id>`.
+
+.Replace a trigger's rules
+[source,shell]
+----
+curl --request POST https://circleci.com/api/v3/triggers/<trigger-id>/update \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "event": {
+      "filter": {
+        "rules": [
+          {
+            "event_type": "pull_request",
+            "event_ref": "pr_base_ref",
+            "rule": "event.action == \"closed\" and event.pull_request.merged == true"
+          }
+        ]
+      }
+    }
+  }'
+----
+
+== Discover event types and presets
+
+Use these endpoints to see what a provider supports before you write a rule. Both require `filter[provider]`.
+
+* `GET /api/v3/provider/event-types`: The event types a custom rule can name, with the fields each can reference.
+* `GET /api/v3/provider/event-presets`: Each preset and the rules it stands for. Use these rules as a starting point.
+
+[source,shell]
+----
+curl --globoff "https://circleci.com/api/v3/provider/event-presets?filter[provider]=github_app" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN"
+----
+
+== Next steps
+
+* xref:orchestrate:trigger-recipes.adoc[Trigger and Event Recipes]
+* xref:orchestrate:set-up-triggers.adoc[Set Up Triggers]
