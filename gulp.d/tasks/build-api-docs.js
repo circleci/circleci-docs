@@ -242,7 +242,6 @@ function buildApiV2(callback) {
               '--config redocly.yaml',
               '--template custom-template.hbs',
               '--title "CircleCI API v2 Documentation"',
-              '--disableGoogleFont=false',
             ].join(' ')
 
             exec(buildCommand, (err, stdout, stderr) => {
