@@ -20,7 +20,7 @@ For upgrade steps see the xref:installation:upgrade-server.adoc#[Upgrade Server 
 
 == Release 4.9.9
 
-For full details of this release see the link:https://circleci.com/changelog/server-release-4-9-9/[changelog].
+For full details of this release see the link:https://circleci.com/changelog/server-release-4-9-9/[Server 4.9.9 Changelog].
 
 == Release 4.9.8
 
