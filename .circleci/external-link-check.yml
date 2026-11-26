@@ -28,6 +28,8 @@ jobs:
     executor: node_executor
     steps:
       - checkout
+      - cloudsmith/configure:
+          npm: true
       - run:
           name: Install Node dependencies
           command: npm ci
