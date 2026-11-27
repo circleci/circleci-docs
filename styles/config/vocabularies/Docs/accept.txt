@@ -203,6 +203,7 @@ inlines
 invocated
 iOS
 IP
+IVR
 Java
 JavaScript
 Jenkins
@@ -436,6 +437,7 @@ x86
 \bX Server\b
 Xcode
 XCTest
+XCUITest
 [XML|xml]
 XQuartz
 Xvfb

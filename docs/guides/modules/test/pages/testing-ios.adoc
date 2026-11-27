@@ -361,6 +361,101 @@ steps:
 
 It is also possible to use the `sudo` command if necessary to perform customizations outside of Homebrew.
 
+[#testing-on-real-ios-devices]
+== Testing on real iOS devices
+
+The macOS executor gives your jobs access to iPhone and iPad simulators (see xref:execute:using-macos.adoc[Using the macOS Execution Environment]). To run your XCUITest suites on physical iPhone and iPad devices, call a real device cloud from your CircleCI job.
+
+[#testmu-ai]
+=== TestMu AI
+
+link:https://www.testmuai.com/[TestMu AI (Formerly LambdaTest)] is an Agentic AI Quality Engineering platform that assures AI deployments across the enterprise and the real world. It runs agentic testing for web and mobile apps on 3,000+ browsers and 50,000+ real devices, and for chat, voice, IVR, video, and image agents.
+
+You can run XCUITest suites on real iOS devices in the TestMu AI Real Device Cloud. Your job uploads the app and the XCUITest test runner as `.ipa` files, starts a build on the devices you choose and waits for the results. TestMu AI then returns a JUnit report, so the results show on the *Tests* tab in CircleCI. The job runs in a Docker container, so it does not need a macOS executor.
+
+Add your TestMu AI username and access key to your project as the `LT_USERNAME` and `LT_ACCESS_KEY` environment variables. The `DEVICE` value is a regular expression, so `iPhone.*` runs the suite on any available iPhone.
+
+The following example uses the sample app and test suite from the link:https://github.com/LambdaTest/hyperexecute-xcui-sample[`hyperexecute-xcui-sample` GitHub repository]. To test your own app, build both `.ipa` files in a macOS job and pass them to this job with a workspace.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  xcuitest-real-devices:
+    docker:
+      - image: cimg/base:current
+    environment:
+      APP_IPA_URL: https://raw.githubusercontent.com/LambdaTest/hyperexecute-xcui-sample/main/LambdaUiKitIOS.ipa
+      TEST_IPA_URL: https://raw.githubusercontent.com/LambdaTest/hyperexecute-xcui-sample/main/ProverbialTest.ipa
+      DEVICE: "iPhone.*"
+    steps:
+      - run:
+          name: Get the app and the XCUITest suite
+          command: |
+            curl -fsSL -o app.ipa "$APP_IPA_URL"
+            curl -fsSL -o tests.ipa "$TEST_IPA_URL"
+      - run:
+          name: Upload the app and the test suite to TestMu AI
+          command: |
+            upload() {
+              curl -fsS -u "$LT_USERNAME:$LT_ACCESS_KEY" -X POST "https://manual-api.lambdatest.com/app/uploadFramework" \
+                -F "appFile=@$1" -F "type=xcuit-ios" | jq -r '.app_id'
+            }
+            APP_ID=$(upload app.ipa)
+            TEST_SUITE_ID=$(upload tests.ipa)
+            case "$APP_ID$TEST_SUITE_ID" in lt://*lt://*) ;; *) echo "Upload failed"; exit 1 ;; esac
+            echo "App: $APP_ID, test suite: $TEST_SUITE_ID"
+            echo "export APP_ID=$APP_ID TEST_SUITE_ID=$TEST_SUITE_ID" >> "$BASH_ENV"
+      - run:
+          name: Run the tests on a real iPhone
+          command: |
+            BODY=$(jq -n --arg app "$APP_ID" --arg suite "$TEST_SUITE_ID" --arg device "$DEVICE" \
+              --arg build "CircleCI $CIRCLE_PROJECT_REPONAME #$CIRCLE_BUILD_NUM" \
+              '{app: $app, testSuite: $suite, device: [$device], video: true, devicelog: true, build: $build}')
+            BUILD_ID=$(curl -fsS -u "$LT_USERNAME:$LT_ACCESS_KEY" -X POST "https://mobile-api.lambdatest.com/framework/v1/xcui/build" \
+              -H "Content-Type: application/json" -d "$BODY" | jq -r '.buildId[0] // empty')
+            [ -n "$BUILD_ID" ] || { echo "Could not start the build"; exit 1; }
+            echo "TestMu AI build: $BUILD_ID"
+            echo "export BUILD_ID=$BUILD_ID" >> "$BASH_ENV"
+      - run:
+          name: Wait for the results
+          no_output_timeout: 30m
+          command: |
+            for i in $(seq 1 60); do
+              sleep 30
+              RESULT=$(curl -fsS -u "$LT_USERNAME:$LT_ACCESS_KEY" \
+                "https://mobile-api.lambdatest.com/mobile-automation/api/v1/framework/builds/$BUILD_ID?include_session=true&limit=100&offset=0") || continue
+              TOTAL=$(echo "$RESULT" | jq '(.data.sessions // []) | length')
+              RUNNING=$(echo "$RESULT" | jq '[(.data.sessions // [])[] | select((.status // "") | test("queued|running|initiated|pending"; "i"))] | length')
+              echo "$(date +%T) tests: $TOTAL, still running: $RUNNING"
+              if [ "$TOTAL" -gt 0 ] && [ "$RUNNING" -eq 0 ]; then
+                echo "$RESULT" | jq -r '.data.sessions[] | "\(.status)  \(.class_name)/\(.test_name)"'
+                NOT_PASSED=$(echo "$RESULT" | jq '[.data.sessions[] | select(.status != "passed")] | length')
+                [ "$NOT_PASSED" -eq 0 ] && exit 0
+                echo "$NOT_PASSED test(s) did not pass"
+                exit 1
+              fi
+            done
+            echo "Timed out waiting for build $BUILD_ID"
+            exit 1
+      - run:
+          name: Download the JUnit report
+          when: always
+          command: |
+            [ -n "$BUILD_ID" ] || exit 0
+            mkdir -p test-results
+            curl -fsS -u "$LT_USERNAME:$LT_ACCESS_KEY" -o test-results/xcuitest.xml \
+              "https://mobile-api.lambdatest.com/mobile-automation/api/v1/framework/builds/$BUILD_ID/report?encoder=false"
+      - store_test_results:
+          path: test-results
+
+workflows:
+  xcuitest:
+    jobs:
+      - xcuitest-real-devices
+----
+
 [#configuring-deployment]
 == Configuring deployment
 
