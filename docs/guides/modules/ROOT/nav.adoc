@@ -226,6 +226,7 @@
 ** SSO authentication
 *** xref:permissions-authentication:sso-overview.adoc[SSO overview]
 *** xref:permissions-authentication:set-up-sso.adoc[SSO setup]
+*** xref:permissions-authentication:share-an-sso-connection.adoc[Share an SSO connection across organizations]
 *** xref:permissions-authentication:sso-group-mapping.adoc[Set up SSO group mapping with Okta]
 *** xref:permissions-authentication:sign-in-to-an-sso-enabled-organization.adoc[Sign in to an SSO-enabled org]
 ** Multi-factor authentication (MFA)

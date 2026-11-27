@@ -1,12 +1,12 @@
 = Sign in to an SSO-enabled organization
 :page-platform: Cloud
 :page-vcs: all
-:page-plan: Scale
+:page-plan: Performance, Scale
 :page-audience: developer
 :page-description: Join an SSO-enabled CircleCI organization and authenticate with your Identity Provider to access its projects as an SSO user.
 :experimental:
 
-NOTE: SAML single sign-on for CircleCI is available for Scale Plan customers. See xref:sso-overview.adoc#prerequisites-and-limitations[Prerequisites and Limitations]
+NOTE: SAML single sign-on for CircleCI is available on the Performance and Scale plans. See xref:sso-overview.adoc#prerequisites-and-limitations[Prerequisites and Limitations]
 for further details.
 [#join-an-organization]
 == Join an organization

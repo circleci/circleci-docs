@@ -1,12 +1,12 @@
 = Single sign-on (SSO) overview
 :page-platform: Cloud
 :page-vcs: all
-:page-plan: Scale
+:page-plan: Performance, Scale
 :page-audience: developer
-:page-description: An introduction to SAML single sign-on (SSO) for CircleCI: how it works, its benefits, personal API tokens with SSO, and current limitations.
+:page-description: An introduction to SAML single sign-on (SSO) for CircleCI. How it works, its benefits, personal API tokens with SSO, and current limitations.
 :experimental:
 
-NOTE: SAML single sign-on for CircleCI is available for Scale Plan customers. See xref:sso-overview.adoc#prerequisites-and-limitations[Prerequisites and Limitations]
+NOTE: SAML single sign-on for CircleCI is available on the Performance and Scale plans. See xref:sso-overview.adoc#prerequisites-and-limitations[Prerequisites and Limitations]
 for further details.
 Single sign-on (SSO) for CircleCI allows organization administrators to control access for their CircleCI organization using an Identity Provider (IdP).
 
@@ -36,6 +36,10 @@ Using SSO for authentication can result in improved security and user experience
 
 **For a member of an organization using SSO for authentication:** The process of authentication to access applications is simplified. Rather than authenticating separately for each application, SAML SSO enables the user to confirm their identity _once_ with an IdP. This authentication is then communicated to all applications (such as CircleCI) that the user has access to. The user may then access these applications for the duration of their session.
 
+== Share an SSO connection across organizations
+
+Suppose you run several CircleCI organizations that authenticate against the same identity provider. You can configure SSO once and share that connection with other organizations you administer, rather than setting up a separate connection for each. For how to share a connection and how to use one shared with your organization, see the xref:share-an-sso-connection.adoc[Share an SSO Connection Across Organizations] page.
+
 == Personal API tokens with SSO
 
 When your organization uses SSO, Personal API tokens require SSO authentication to access your organization's resources.
@@ -50,7 +54,7 @@ To use Personal API tokens with SSO-protected resources:
 
 **Important notes:**
 
-* The SSO authentication option for tokens is only available when you are actively signed in via SSO.
+* The SSO column is always available. It lists all the SSO-enabled organizations you belong to.
 * SSO authentication is only required for tokens you intend to use with SSO-enabled organization resources.
 * Tokens without SSO authentication still work with non-SSO protected resources.
 
@@ -67,4 +71,5 @@ SSO for CircleCI currently has the following limitations:
 [#next-steps]
 == Next steps
 * xref:set-up-sso.adoc[Set Up SAML SSO]
+* xref:share-an-sso-connection.adoc[Share an SSO Connection Across Organizations]
 * xref:sign-in-to-an-sso-enabled-organization.adoc[Sign in to an SSO-Enabled Organization]
