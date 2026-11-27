@@ -162,66 +162,49 @@ The following features are available on every plan unless the description says o
 
 === Testing and debugging
 
-[.feature-list]
-* xref:test:smarter-testing-overview.adoc[Smarter Testing]
-+
+xref:test:smarter-testing-overview.adoc[Smarter Testing]::
 Spend less time waiting on tests. Run your tests with `circleci testsuite`, which is free on every plan. Test impact analysis, dynamic test splitting, and auto-rerun are paid add-on capabilities with a credit charge.
 
-* xref:execute:ssh-access-jobs.adoc[Rerun With SSH]
-+
+xref:execute:ssh-access-jobs.adoc[Rerun With SSH]::
 Open a shell in a job's build environment to inspect files, processes, and permissions, so you can debug a failure where it happened.
 
-* xref:toolkit:chunk-setup-and-overview.adoc[Chunk]
-+
+xref:toolkit:chunk-setup-and-overview.adoc[Chunk]::
 Let an AI agent investigate failing builds and propose fixes, so you spend less time reading logs.
 
 === Config and local tools
 
-[.feature-list]
-* xref:toolkit:circleci-cli.adoc[CircleCI CLI]
-+
+xref:toolkit:circleci-cli.adoc[CircleCI CLI]::
 Validate config, watch runs, and read job output from your terminal, so you can stay in your workflow.
 
-* xref:toolkit:circleci-mcp-overview.adoc[CircleCI MCP]
-+
+xref:toolkit:circleci-mcp-overview.adoc[CircleCI MCP]::
 Connect an AI assistant to your pipelines so it can inspect runs and diagnose failures without you copying logs.
 
-* xref:orbs:use:orb-intro.adoc[Orbs]
-+
+xref:orbs:use:orb-intro.adoc[Orbs]::
 Reuse packaged, parameterized configuration for common tools and cloud services, so you write less configuration.
 
-* xref:functions:ROOT:functions-intro.adoc[Functions]
-+
+xref:functions:ROOT:functions-intro.adoc[Functions]::
 Call versioned, tested programs as steps to set up tools, dependencies, and credentials. You do not rewrite the same setup in every configuration.
 
 === Speed and visibility
 
-[.feature-list]
-* xref:optimize:caching.adoc[Caching]
-+
+xref:optimize:caching.adoc[Caching]::
 Reuse dependencies between runs to shorten your jobs.
 
-* xref:orchestrate:workflows.adoc[Workflows] and xref:optimize:parallelism-faster-jobs.adoc[Parallelism]
-+
+xref:orchestrate:workflows.adoc[Workflows] and xref:optimize:parallelism-faster-jobs.adoc[Parallelism]::
 Run jobs side by side, and split the work of one job across several executors, so pipelines finish sooner.
 
-* xref:execute:resource-class-overview.adoc#view-resource-usage-per-job[Resource Usage]
-+
+xref:execute:resource-class-overview.adoc#view-resource-usage-per-job[Resource Usage]::
 See the CPU and memory a job used, so you can choose the right resource class.
 
-* xref:insights:insights.adoc[Insights]
-+
+xref:insights:insights.adoc[Insights]::
 See success rates, pipeline duration, and credit usage over time, so you can spot trends.
 
 === Deploy and secure
 
-[.feature-list]
-* xref:deploy:deployment-overview.adoc[Deploys]
-+
+xref:deploy:deployment-overview.adoc[Deploys]::
 Deploy to any target, track deployments with deploy markers, and roll back to a stable version from the CircleCI web app.
 
-* xref:security:contexts.adoc[Contexts]
-+
+xref:security:contexts.adoc[Contexts]::
 Store secrets and environment variables once and share them across projects, so credentials stay out of your configuration.
 
 [#next-steps]
