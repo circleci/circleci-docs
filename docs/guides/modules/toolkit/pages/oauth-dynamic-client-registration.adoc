@@ -240,7 +240,7 @@ These access levels are a ceiling on the token, not a grant of new permissions. 
 * A user with the _Contributor_ role who selects Admin receives a token limited to Contributor-level actions. Org management and billing actions still require the _Organization Admin_ role.
 * Only a user with the _Organization Admin_ role (or the _Project Admin_ role, for project-scoped actions) receives the full Admin permissions described above.
 +
-NOTE: Personal API tokens created manually through the web app always carry the user's full permissions. Tokens created through this OAuth flow are scoped to the access level the user selects during authorization.
+NOTE: Personal API tokens created manually through the web app use the same Read, Write, and Admin access levels described here. You choose the access level when you create the token. Tokens created through this OAuth flow are scoped to the access level the user selects during authorization. For how to create a token manually, see the xref:managing-api-tokens.adoc#creating-a-personal-api-token[Managing API Tokens] page.
 
 . If you belong to SSO-enabled organizations, an SSO organizations section appears below the access level selector, listing each org individually:
 +

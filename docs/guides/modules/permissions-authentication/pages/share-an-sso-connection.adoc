@@ -1,0 +1,99 @@
+= Share an SSO connection across organizations
+:page-platform: Cloud
+:page-vcs: all
+:page-plan: Performance, Scale
+:page-audience: developer
+:page-content-type: how-to
+:page-description: Share one SAML SSO connection across multiple CircleCI organizations, so a single identity provider governs sign-in for every organization that uses it.
+:experimental:
+
+Enterprise customers often run several CircleCI organizations that all authenticate against the same identity provider (IdP). Instead of configuring a separate SSO connection for each organization, you can configure SSO once and share that connection with other organizations you administer. This gives you one source of truth for identity, removes duplicate setup, and keeps access control consistent across your organizations.
+
+This page explains how to share an SSO connection from a source organization and how to use a connection that has been shared with your organization. For first-time SSO setup, see the xref:set-up-sso.adoc[Set Up SSO] page. For a conceptual introduction to SSO, see the xref:sso-overview.adoc[SSO Overview] page.
+
+== Source and target organizations
+
+Shared SSO involves two roles:
+
+Source organization:: The organization that owns the SSO connection, including the IdP configuration and the verified domain. A source organization shares its connection with one or more target organizations.
+Target organization:: An organization that uses a connection shared from a source organization. A target organization does not configure the IdP for the shared connection. It controls whether to enforce SSO and manages its own group mappings and session timeout. A target organization can also keep its own SSO connection, but it enforces one connection at a time, either its own or the shared one.
+
+A single source organization can share its connection with up to five target organizations.
+
+== Prerequisites
+
+* You have the _Organization Admin_ role in each organization you want to share from or to. For information on roles, see the xref:roles-and-permissions-overview.adoc[Roles and Permissions Overview] page.
+* The source organization is on the Performance or Scale plan.
+* The source organization has a ready SSO connection. A connection is ready once it is set up and marked as **Connected**. You can share a connection only when it is ready. To set one up, see the xref:set-up-sso.adoc[Set Up SSO] page.
+* A target organization can receive a connection from only one source, so it cannot already be a target of another shared connection. A target organization can keep its own SSO connection as well. It enforces one connection at a time, either its own or the shared one.
+
+== Share your SSO connection with another organization
+
+Share your connection from the source organization, the organization that owns the SSO connection.
+
+. In the link:https://app.circleci.com/home/[CircleCI web app], select the source organization.
+. Select **Org** in the sidebar.
+. Select **Single sign-on (SSO)** from the sidebar.
+. In the sharing section, select the organization you want to share the connection with. The list shows the organizations you administer that can receive the connection. An organization that is already a target of another shared connection does not appear.
+. Confirm to share the connection. The target organization appears in the list of organizations your connection is shared with.
+
+Sharing a connection makes it available to the target organization. It does not enforce SSO for that organization. An admin of the target organization chooses whether to enforce SSO, as described in <<use-a-shared-sso-connection>>.
+
+[#stop-sharing-an-sso-connection]
+=== Stop sharing an SSO connection
+
+. In the link:https://app.circleci.com/home/[CircleCI web app], select the source organization.
+. Select **Org** in the sidebar.
+. Select **Single sign-on (SSO)** from the sidebar.
+. In the list of organizations your connection is shared with, remove the organization you no longer want to share with.
+
+CAUTION: Suppose the target organization enforces SSO through the shared connection and has no connection of its own. Removing the share then leaves that organization with no enforced SSO. It reverts to the standard authentication methods, such as email and password or social login with GitHub or Bitbucket. Confirm with the target organization's admin before you remove the share.
+
+[#use-a-shared-sso-connection]
+== Use an SSO connection shared with your organization
+
+When a source organization shares its connection with your organization, your organization becomes a target. On your organization's **Single sign-on (SSO)** settings page, the shared connection appears with the source organization's domain, so you can confirm which connection you are using. Your organization controls how it uses the shared connection.
+
+=== Enforce SSO through a shared connection
+
+. In the link:https://app.circleci.com/home/[CircleCI web app], select your organization.
+. Select **Org** in the sidebar.
+. Select **Single sign-on (SSO)** from the sidebar.
+. On the shared connection, toggle **Enforce SSO for all users** on.
+
+You can enforce SSO only when the source connection is ready. If the source organization's connection is not ready, the enforce toggle is unavailable and the page shows the source connection's state so you can see why. Ask the source organization's admin to finish or fix their connection, then enforce SSO.
+
+If your organization also has its own SSO connection, enforcing the shared connection enforces it in place of your own. Your organization enforces one connection at a time, so turning on enforcement for one connection turns it off for the other.
+
+=== Manage group mappings and session timeout for a shared connection
+
+The IdP configuration belongs to the source organization, but group mappings and the session timeout are per organization. Your organization maps the IdP's groups to your own CircleCI groups and sets its own session timeout, independently of the source organization and of any other target organization.
+
+. In the link:https://app.circleci.com/home/[CircleCI web app], select your organization.
+. Select **Org** in the sidebar.
+. Select **Single sign-on (SSO)** from the sidebar.
+. In the group mappings section for the shared connection, add, change, or remove mappings between the IdP's group names and your CircleCI groups. Set your session timeout in the same settings.
+
+Your group mappings apply when a user signs in through the shared connection and SSO is enforced for your organization. For how group mappings work and how to configure the IdP group attribute, see the xref:sso-group-mapping.adoc[Set Up SSO Group Mapping With Okta] page. The IdP steps on that page are carried out once by the source organization. As a target organization, you complete only the CircleCI group mapping steps.
+
+[#stop-using-a-shared-sso-connection]
+=== Stop using a shared connection
+
+You can stop using a shared connection in any of these ways, from your organization's **Single sign-on (SSO)** settings page:
+
+* To turn off SSO for your organization, toggle **Enforce SSO for all users** off on the shared connection. Your organization reverts to the standard authentication methods, such as email and password or social login with GitHub or Bitbucket.
+* To switch to your own connection instead, set up your own SSO connection and enforce it. Enforcing your own connection turns off enforcement of the shared connection. To set one up, see the xref:set-up-sso.adoc[Set Up SSO] page.
+* To remove the shared connection from your organization, remove it on the shared connection. Your organization no longer has access to it.
+
+Either organization can remove the shared connection. A target organization removes it from its own **Single sign-on (SSO)** settings page, and the source organization removes it as described in <<stop-sharing-an-sso-connection>>.
+
+== What happens if the source connection stops working
+
+Suppose the source organization's connection stops being ready while your organization enforces SSO through it. Your organization stays enforced, and SSO sign-in fails until the source connection is fixed. The source organization's admin fixes the connection to restore sign-in. Your organization's **Single sign-on (SSO)** settings page shows the source connection's state so you can see why sign-in is failing.
+
+== Next steps
+
+* xref:sso-overview.adoc[SSO Overview]
+* xref:set-up-sso.adoc[Set Up SSO]
+* xref:sso-group-mapping.adoc[Set Up SSO Group Mapping With Okta]
+* xref:sign-in-to-an-sso-enabled-organization.adoc[Sign in to an SSO-Enabled Organization]

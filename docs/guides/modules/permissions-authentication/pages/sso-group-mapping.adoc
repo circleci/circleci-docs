@@ -1,7 +1,7 @@
 = Set up SSO group mapping with Okta
 :page-platform: Cloud
 :page-vcs: all
-:page-plan: Scale
+:page-plan: Performance, Scale
 :page-audience: developer
 :page-description: Follow this guide to set up SSO (Single sign-on) group mapping with Okta and CircleCI.
 :experimental:
@@ -10,6 +10,8 @@ SSO Group Mapping automatically assigns users from your identity provider (IdP) 
 This feature enables you to manage both groups and their members directly within your identity provider, streamlining user administration across your organization.
 
 NOTE: Once SSO Group Mapping is configured, your IdP will have complete control over group management. Any group assignments created manually within CircleCI will be overwritten when users authenticate via SSO. All group management must be performed through your identity provider.
+
+If your organization uses an SSO connection shared from another organization, you manage your own group mappings for that connection, but the source organization configures the IdP. Complete only the CircleCI steps in the <<configure-circleci>> section. For more information, see the xref:share-an-sso-connection.adoc[Share an SSO Connection Across Organizations] page.
 
 == Prerequisites
 
@@ -31,6 +33,7 @@ First, you will need to configure your Okta settings. Follow the steps below, or
 . Add a group attribute statement with the name 'groups'.
 . Use the filter to limit which groups will sync to CircleCI. Use the regex value `.*` to capture all groups.
 
+[#configure-circleci]
 === 2. Configure CircleCI
 
 . In the link:https://app.circleci.com/home/[CircleCI web app], select your organization.
