@@ -58,7 +58,7 @@ $ circleci project link
 ----
 $ circleci run list
 ----
-. Open the interactive view of the latest run. Use the arrow keys and kbd:[Enter] to move from the run into its workflows, jobs, and steps. Use kbd:[q] to go back.
+. Open the interactive view of the latest run. Use the arrow keys and kbd:[Enter] to move from the run into its workflows, jobs, and steps. Use kbd:[Esc] to go back. When you select a job, the list also offers a job report and a full job report that includes step output. You can also view failed tests, resource usage, and artifacts. The interactive view covers the same information as the web app.
 +
 [source,console]
 ----
