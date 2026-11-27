@@ -94,7 +94,7 @@ image::quickstart-failed-pipeline.png[A failed pipeline run in the CircleCI web 
 CLI::
 +
 --
-Watch the run in your terminal. The command exits when the run finishes, and returns a nonzero exit code if the run fails.
+Watch the run in your terminal. The view updates live with the status of each workflow and job. Use kbd:[q] to quit the view. The command exits when the run finishes, and returns a nonzero exit code if the run fails. A failed run also prints suggested commands for reading the failed steps.
 
 [source,console]
 ----
