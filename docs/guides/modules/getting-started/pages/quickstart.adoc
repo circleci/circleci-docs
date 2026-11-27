@@ -119,7 +119,7 @@ image::quickstart-failed-step.png[The failed job with the failed step expanded, 
 . Select **Explain error** on the failed step for a plain-language summary of the failure. Refer to xref:toolkit:intelligent-summaries.adoc[Explain This Error] for details.
 +
 image::quickstart-explain-error.png[The Error Analysis panel opened by the Explain error button]
-. If your organization has Chunk set up, select **Fix Job** in the job header to have Chunk investigate the failure and propose a fix. Refer to xref:toolkit:chunk-setup-and-overview.adoc[Chunk Overview and Setup] for details.
+. Chunk is available for GitHub projects only. If your organization has Chunk set up, select **Fix Job** in the job header to have Chunk investigate the failure and propose a fix. Refer to xref:toolkit:chunk-setup-and-overview.adoc[Chunk Overview and Setup] for details.
 . For failures you cannot find from the output, select **Rerun** then **Rerun job with SSH** to open a shell in the job's environment. Refer to xref:execute:ssh-access-jobs.adoc[Debug Jobs With SSH Rerun] for details.
 +
 image::quickstart-rerun-ssh.png[The Rerun menu with the Rerun job with SSH option]
