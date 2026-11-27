@@ -6,9 +6,9 @@
 :page-description: Starting from a project with a passing run, break the build on purpose, debug it, and fix it, then explore the CircleCI features available on every plan.
 :experimental:
 
-CircleCI is a continuous integration and delivery platform. It automates building, testing, and deploying your code. You describe that work in a configuration file. When something happens, such as a push to your repository, CircleCI runs the jobs in that file in an environment you choose. Docker containers are a common choice. CircleCI then reports the results.
+CircleCI is a CI/CD (continuous integration and delivery) platform for building, testing, and deploying your code. You describe work in a configuration file. Then set up triggers to run that work on events such as a push to your repository. CircleCI builds, tests, and deploys your code in an environment you choose, then reports the results.
 
-Follow this guide to get a guided tour of some CircleCI features. We start with a project building on CircleCI, then break the build, use CircleCI's debugging tools to find the problem, and fix it. The guide ends with a tour of features to explore next. Each step has a web app tab and a CLI tab, so you can follow the one you prefer. If you need to get a project set up first, see xref:create-project.adoc[Create a Project].pass:[<!-- vale circleci-docs.ImageTitles = NO -->]
+Follow this guide for a tour of some CircleCI features. We start with a project building on CircleCI, then break the build, use CircleCI's debugging tools to find the problem, and fix it. The guide ends with a tour of features to explore next. Each step has a web app tab and a CLI tab, so you can follow the one you prefer. If you need to get a project set up first, see xref:create-project.adoc[Create a Project].pass:[<!-- vale circleci-docs.ImageTitles = NO -->]
 
 Just looking around? You do not need an account to read this guide. The screenshots show what CircleCI looks like in practice. Select a thumbnail to enlarge it.
 
