@@ -2,6 +2,7 @@
 . Select cloudlink:personal-api-tokens[Personal API Tokens].
 . Select btn:[Create New Token] button.
 . In the *Token name* field, type a memorable name for the token.
+. Choose an access level for the token: *Read*, *Write*, or *Admin*. The access level cannot exceed your own permissions in CircleCI. For what each level grants, see the xref:managing-api-tokens.adoc#overview[Managing API Tokens] overview.
 . Set an expiry date for the token. You must choose a date no more than one year in the future.
 . Select btn:[Add API Token] button.
 . After the token appears, copy and paste it to another location. You will not be able to view the token again.
