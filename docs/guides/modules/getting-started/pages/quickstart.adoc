@@ -46,7 +46,7 @@ image::quickstart-job-tabs.png[The tabs along the top of the job page]
 CLI::
 +
 --
-. In your project directory, link the project to the CLI so later commands resolve it automatically.
+. In your project directory, link the project to the CLI so later commands resolve it automatically. You must link the project if your organization slug starts with `circleci/`. Otherwise the CLI derives the project from your git remote.
 +
 [source,console]
 ----
