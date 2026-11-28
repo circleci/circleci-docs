@@ -14,7 +14,7 @@ In this how-to guide, you will learn how to automatically deploy your Android ap
 To complete this tutorial, you will need the following:
 
 - An Android project, built using link:https://gradle.org/[Gradle].
-- Your Android project set up in CircleCI. If this is your first time setting up a project in CircleCI, refer to our xref:getting-started:getting-started.adoc[Quickstart Guide] for a walkthrough.
+- Your Android project set up in CircleCI. If this is your first time setting up a project in CircleCI, refer to our xref:getting-started:quickstart.adoc[Quickstart Guide] for a walkthrough.
 - Fastlane installed and granted access to Google Play Store using credentials from your Google Developers service account. You may follow the instructions to install, set up, and configure Fastlane supply in the link:https://docs.fastlane.tools/getting-started/android/setup/[Fastlane Android setup documentation].
 
 NOTE: In the Fastlane setup, you will download a credentials file from your Google Developers service account. This tutorial assumes that you have saved this file in the `fastlane` folder as `api.json`.

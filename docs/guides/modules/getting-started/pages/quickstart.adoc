@@ -1,0 +1,220 @@
+= Quickstart guide
+:page-platform: Cloud
+:page-vcs: all
+:page-plan: Free, Performance, Scale
+:page-audience: developer
+:page-description: Starting from a project with a passing run, break the build on purpose, debug it, and fix it, then explore the CircleCI features available on every plan.
+:experimental:
+
+CircleCI is a CI/CD (continuous integration and delivery) platform for building, testing, and deploying your code. You describe work in a configuration file. Then set up triggers to run that work on events such as a push to your repository. CircleCI builds, tests, and deploys your code in an environment you choose, then reports the results.
+
+Follow this guide for a tour of some CircleCI features. We start with a project building on CircleCI, then break the build, use CircleCI's debugging tools to find the problem, and fix it. The guide ends with a tour of features to explore next. Each step has a web app tab and a CLI tab, so you can follow the one you prefer. If you need to get a project set up first, see xref:create-project.adoc[Create a Project].pass:[<!-- vale circleci-docs.ImageTitles = NO -->]
+
+Just looking around? You do not need an account to read this guide. The screenshots show what CircleCI looks like in practice. Select a thumbnail to enlarge it.
+
+== Prerequisites
+
+* A project with a passing pipeline run. If you do not have one yet, follow the xref:create-project.adoc[Create a Project] guide first, then return here.
+* To follow the CLI tabs, the xref:toolkit:circleci-cli.adoc[CircleCI CLI] installed and authenticated with `circleci auth login`.
+
+== 1. Explore your pipeline
+
+Your first run shows how CircleCI organizes work. A pipeline run contains workflows, workflows contain jobs, and jobs contain steps.
+
+[tabs%sync,sync-group-id=track]
+====
+Web app::
++
+--
+[.steps-with-thumbs]
+. In the link:https://app.circleci.com/[CircleCI web app], select *Pipelines* from the sidebar. Use the *Project* filter to make sure you are looking at pipelines for your chosen project.
++
+image::quickstart-pipelines-page.png[The Pipelines page in the CircleCI web app]
+. Select a workflow by name to view the workflow graph.
++
+image::quickstart-workflow-graph.png[A workflow graph in the CircleCI web app]
+. Select a job to see the steps that ran.
++
+image::quickstart-job-steps.png[The steps that ran in a job]
+. Expand any step to read its output. You can search, share, or download the output.
++
+image::quickstart-step-output.png[An expanded step showing its output]
+. Use the tabs along the top of the job page to see test results, Smarter Testing usage (once set up), timing data, artifacts, and resource usage.
++
+image::quickstart-job-tabs.png[The tabs along the top of the job page]
+--
+CLI::
++
+--
+. In your project directory, link the project to the CLI so later commands resolve it automatically. You must link the project if your organization slug starts with `circleci/`. Otherwise the CLI derives the project from your git remote.
++
+[source,console]
+----
+$ circleci project link
+----
+. List your recent runs.
++
+[source,console]
+----
+$ circleci run list
+----
+. Open the interactive view of the latest run. Use the arrow keys and kbd:[Enter] to move from the run into its workflows, jobs, and steps. Use kbd:[Esc] to go back. When you select a job, the list also offers a job report and a full job report that includes step output. You can also view failed tests, resource usage, and artifacts. The interactive view covers the same information as the web app.
++
+[source,console]
+----
+$ circleci run get
+----
+--
+====
+
+== 2. Break your build
+
+The fastest way to learn the debugging tools is to use them on a failure you caused. Add a step that fails to one of the jobs in your CircleCI configuration file, commonly stored as `.circleci/config.yml`.
+
+. Under `steps` in any job, add the following `run` step. The command exits with an error because the file does not exist.
++
+[source,yaml]
+----
+      - run:
+          name: Break the build on purpose
+          command: cat missing-file.txt
+----
+. Commit the change and push it to your repository. The push triggers a new run.
+
+[tabs%sync,sync-group-id=track]
+====
+Web app::
++
+--
+[.steps-with-thumbs]
+. In the web app, open your project. The new pipeline run appears at the top of the list. When the job fails, the status changes to **Failed**.
++
+image::quickstart-failed-pipeline.png[A failed pipeline run in the CircleCI web app]
+--
+CLI::
++
+--
+Watch the run in your terminal. The view updates live with the status of each workflow and job. Use kbd:[q] to quit the view. The command exits when the run finishes, and returns a nonzero exit code if the run fails. A failed run also prints suggested commands for reading the failed steps.
+
+[source,console]
+----
+$ circleci run watch
+----
+--
+====
+
+== 3. Debug and fix the build
+
+CircleCI gives you several ways to find out why a job failed. Start with the output of the failed step, then use the other tools if the output is not enough.
+
+[tabs%sync,sync-group-id=track]
+====
+Web app::
++
+--
+[.steps-with-thumbs]
+. Open the failed job. CircleCI expands the step that failed and marks it with an error. Read the step output. You see `cat: missing-file.txt: No such file or directory`.
++
+image::quickstart-failed-step.png[The failed job with the failed step expanded, showing its output]
+. Select **Explain error** on the failed step for a plain-language summary of the failure. Refer to xref:toolkit:intelligent-summaries.adoc[Explain This Error] for details.
++
+image::quickstart-explain-error.png[The Error Analysis panel opened by the Explain error button]
+. Chunk is available for GitHub projects only. If your organization has Chunk set up, select **Fix Job** in the job header to have Chunk investigate the failure and propose a fix. Refer to xref:toolkit:chunk-setup-and-overview.adoc[Chunk Overview and Setup] for details.
+. For failures you cannot find from the output, select **Rerun** then **Rerun job with SSH** to open a shell in the job's environment. Refer to xref:execute:ssh-access-jobs.adoc[Debug Jobs With SSH Rerun] for details.
++
+image::quickstart-rerun-ssh.png[The Rerun menu with the Rerun job with SSH option]
+--
+CLI::
++
+--
+. Open the latest run and drill into the failed job.
++
+[source,console]
+----
+$ circleci run get
+----
+. Select the failed step to read its output. You see `cat: missing-file.txt: No such file or directory`.
+. To get condensed output for every failed step in one command, add the `--failure-report` flag.
++
+[source,console]
+----
+$ circleci run get --no-interactive --failure-report
+----
+--
+====
+
+Now fix the problem.
+
+. Remove the `Break the build on purpose` step from your configuration file.
+. Optionally, check the file for errors before you push.
++
+[source,console]
+----
+$ circleci config validate
+----
+. Commit the change and push it to your repository.
+
+The next run passes. You have now gone from a failing build to a passing build using the tools you use every day.
+
+== 4. Explore more features
+
+The following features are available on every plan unless the description says otherwise. Each one links to its documentation.
+
+=== Testing and debugging
+
+xref:test:smarter-testing-overview.adoc[Smarter Testing]::
+Spend less time waiting on tests. Run your tests with `circleci testsuite`, which is free on every plan. Test impact analysis, dynamic test splitting, and auto-rerun are paid add-on capabilities with a credit charge.
+
+xref:execute:ssh-access-jobs.adoc[Rerun With SSH]::
+Open a shell in a job's build environment to inspect files, processes, and permissions, so you can debug a failure where it happened.
+
+xref:toolkit:chunk-setup-and-overview.adoc[Chunk]::
+Let an AI agent investigate failing builds and propose fixes, so you spend less time reading logs.
+
+=== Config and local tools
+
+xref:toolkit:circleci-cli.adoc[CircleCI CLI]::
+Validate config, watch runs, and read job output from your terminal, so you can stay in your workflow.
+
+xref:toolkit:circleci-mcp-overview.adoc[CircleCI MCP]::
+Connect an AI assistant to your pipelines so it can inspect runs and diagnose failures without you copying logs.
+
+xref:orbs:use:orb-intro.adoc[Orbs]::
+Reuse packaged, parameterized configuration for common tools and cloud services, so you write less configuration.
+
+xref:functions:ROOT:functions-intro.adoc[Functions]::
+Call versioned, tested programs as steps to set up tools, dependencies, and credentials. You do not rewrite the same setup in every configuration.
+
+=== Speed and visibility
+
+xref:optimize:caching.adoc[Caching]::
+Reuse dependencies between runs to shorten your jobs.
+
+xref:orchestrate:workflows.adoc[Workflows] and xref:optimize:parallelism-faster-jobs.adoc[Parallelism]::
+Run jobs side by side, and split the work of one job across several executors, so pipelines finish sooner.
+
+xref:execute:resource-class-overview.adoc#view-resource-usage-per-job[Resource Usage]::
+See the CPU and memory a job used, so you can choose the right resource class.
+
+xref:insights:insights.adoc[Insights]::
+See success rates, pipeline duration, and credit usage over time, so you can spot trends.
+
+=== Deploy and secure
+
+xref:deploy:deployment-overview.adoc[Deploys]::
+Deploy to any target, track deployments with deploy markers, and roll back to a stable version from the CircleCI web app.
+
+xref:security:contexts.adoc[Contexts]::
+Store secrets and environment variables once and share them across projects, so credentials stay out of your configuration.
+
+[#next-steps]
+== Next steps
+
+* xref:find-the-right-starting-point.adoc[Find the Right Starting Point] if your task does not match this guide
+* xref:config-intro.adoc[Introduction to Configuration]
+* xref:reference:ROOT:concepts.adoc[CircleCI Concepts]
+* xref:invite-your-team.adoc[Invite Your Team]
+* xref:plans-pricing:plan-overview.adoc[CircleCI Plans Overview] for paid features, more compute, and higher concurrency
+* link:https://www.youtube.com/playlist?list=PL9GgS3TcDh8wqLRk-0mDz7purXh-sNu7r[CircleCI foundation videos]
+
+TIP: Using an AI coding assistant? Point it at link:https://circleci.com/docs/AGENTS.md[circleci.com/docs/AGENTS.md] for current defaults, deprecated patterns, and the differences between Cloud and Server.

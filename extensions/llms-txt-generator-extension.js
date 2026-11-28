@@ -89,7 +89,7 @@ function addToSitemap (siteCatalog, playbook) {
  */
 function generateDocsOrientation (siteUrl) {
   const origin = getOrigin(siteUrl)
-  const guide = `${siteUrl}/guides/getting-started/getting-started/`
+  const guide = `${siteUrl}/guides/getting-started/quickstart/`
   const agentsMd = `${siteUrl}/AGENTS.md`
 
   return `## How to use these docs

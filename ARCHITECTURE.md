@@ -93,7 +93,7 @@ Navigation is defined in `nav.adoc` files using AsciiDoc cross-references:
 
 ```asciidoc
 * xref:index.adoc[Introduction]
-** xref:getting-started.adoc[Getting Started]
+** xref:quickstart.adoc[Quickstart]
 *** xref:installation.adoc[Installation]
 ```
 

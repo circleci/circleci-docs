@@ -364,7 +364,7 @@ html[data-theme="dark"] [data-dropdown-button] svg {
 }
 
 /* Home page guide card icons - set color for inline SVGs to inherit */
-html[data-theme="dark"] .landing-page a[href*="/guides/getting-started/getting-started/"] svg,
+html[data-theme="dark"] .landing-page a[href*="/guides/getting-started/quickstart/"] svg,
 html[data-theme="dark"] .landing-page a[href*="/guides/getting-started/hello-world/"] svg,
 html[data-theme="dark"] .landing-page a[href*="/guides/getting-started/slack-orb-tutorial/"] svg {
   color: var(--dark-text-muted);

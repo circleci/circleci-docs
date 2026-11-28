@@ -5,7 +5,7 @@
   new: /guides/test/testing-ios/
 
 - old: /2.0/getting-started/
-  new: /guides/getting-started/getting-started/
+  new: /guides/getting-started/quickstart/
 
 - old: /release/manage-releases/
   new: /guides/deploy/manage-releases/
@@ -290,7 +290,7 @@
   new: /guides/toolkit/get-started-with-the-vs-code-extension/
 
 - old: /getting-started/
-  new: /guides/getting-started/getting-started/
+  new: /guides/getting-started/quickstart/
 
 - old: /github-apps-integration/
   new: /guides/integration/github-apps-integration/
@@ -1192,3 +1192,6 @@
 
 - old: /server-admin/latest/operator/faq/
   new: /server-admin/latest/operator/introduction-to-nomad-cluster-operation/
+
+- old: /guides/getting-started/getting-started/
+  new: /guides/getting-started/quickstart/

@@ -11,7 +11,8 @@
 *** xref:getting-started:create-an-organization.adoc[Create an organization]
 *** xref:getting-started:invite-your-team.adoc[Invite your team]
 *** xref:getting-started:create-project.adoc[Create a project]
-*** xref:getting-started:getting-started.adoc[Quickstart guide]
+*** xref:getting-started:quickstart.adoc[Quickstart guide]
+*** xref:getting-started:find-the-right-starting-point.adoc[Find the right starting point]
 ** How-to guides
 *** xref:getting-started:hello-world.adoc[Hello World]
 *** xref:getting-started:introduction-to-yaml-configurations.adoc[Intro to YAML configuration]

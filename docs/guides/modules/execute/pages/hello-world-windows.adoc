@@ -10,7 +10,7 @@
 
 This document describes how to get started with continuous integration on *Windows execution environments* on CircleCI.
 ifndef::server[]
-If this is your first time setting up CircleCI, we recommend checking out the xref:getting-started:getting-started.adoc[Getting Started Guide].
+If this is your first time setting up CircleCI, we recommend checking out the xref:getting-started:quickstart.adoc[Getting Started Guide].
 endif::server[]
 
 ifndef::server[]

@@ -48,7 +48,7 @@ git push enterprise --mirror
 
 If you need to export other Azure DevOps artifacts, you can download most of the data into Excel spreadsheets. Follow the Azure DevOps documentation on link:https://learn.microsoft.com/en-us/azure/devops/organizations/projects/save-project-data?view=azure-devops[saving project data].
 
-Once you have imported your code into GitHub, Bitbucket, or GitLab, you can start creating a project in CircleCI using the xref:getting-started:getting-started.adoc[Getting Started] guide.
+Once you have imported your code into GitHub, Bitbucket, or GitLab, you can start creating a project in CircleCI using the xref:getting-started:quickstart.adoc[Getting Started] guide.
 
 [#build-configuration]
 == Build configuration

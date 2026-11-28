@@ -16,7 +16,7 @@ One other file serves a different audience and must not be confused with this on
 
 - `docs/agent-guide.md` is published verbatim as `AGENTS.md` at the site root (`https://circleci.com/docs/AGENTS.md`), for AI agents and humans using the CircleCI product. It carries current defaults, deprecated patterns, and Cloud/Server differences. Update it, not this file, when you change API versioning, MCP offerings, runner install paths, or a deprecated pattern.
 
-The human-facing "find the right starting point" table lives as a section in `docs/guides/modules/getting-started/pages/getting-started.adoc` (Quickstart guide), not on a dedicated page.
+The human-facing "find the right starting point" table lives on its own page, `docs/guides/modules/getting-started/pages/find-the-right-starting-point.adoc`.
 
 ## Skills
 
