@@ -4,6 +4,7 @@
 :page-plan: Free, Performance, Scale
 :page-audience: developer
 :page-description: Find the right CircleCI docs page for common tasks, such as writing configuration, triggering pipelines, installing runners, migrating, and using the API.
+:experimental:
 
 Use this table to find the right page for your task. Then follow links from that page.
 
